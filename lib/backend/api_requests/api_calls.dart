@@ -1625,7 +1625,7 @@ class AddaddressCall {
         'dial_code': dialCode,
         'device_id': deviceId,
         'image': image,
-        'platfomr': platform,
+        'platform': platform,
       },
       bodyType: BodyType.MULTIPART,
       returnBody: true,

@@ -44,6 +44,8 @@ class DashboardScreenModel extends FlutterFlowModel<DashboardScreenWidget> {
   CarouselSliderController? carouselController;
   int carouselCurrentIndex = 0;
 
+  // Stores action output result for [Custom Action - generateReferralLink] action in Image widget.
+  String? refCodew;
   // Model for productsListView component.
   late ProductsListViewModel productsListViewModel2;
   // Model for orderAgainListView component.
@@ -52,6 +54,8 @@ class DashboardScreenModel extends FlutterFlowModel<DashboardScreenWidget> {
   CarouselSliderController? carouselsecondController;
   int carouselsecondCurrentIndex = 1;
 
+  // Stores action output result for [Custom Action - generateReferralLink] action in Image widget.
+  String? refCoder;
   // Model for productsListView component.
   late ProductsListViewModel productsListViewModel4;
   // Model for brandWidget component.

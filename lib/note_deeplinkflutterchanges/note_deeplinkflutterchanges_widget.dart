@@ -160,6 +160,26 @@ class _NoteDeeplinkflutterchangesWidgetState
                               FlutterFlowTheme.of(context).bodyMedium.fontStyle,
                         ),
                   ),
+                  Text(
+                    '//Splash screen change added in initstate \n\nlate String imageVersion;\n  imageVersion = DateTime.now().millisecondsSinceEpoch.toString();\n\n//Replace gif image code\n\nClipRRect(\n                borderRadius: BorderRadius.circular(8.0),\n                child: Image.network(\n                  \'https://quickart.b-cdn.net/images/app-home-loadernew.gif?v=\$imageVersion\',\n                  width: MediaQuery.sizeOf(context).width,\n                  height: MediaQuery.sizeOf(context).height,\n                  fit: BoxFit.fill,\n                  errorBuilder: (context, error, stackTrace) {\n                    return Image.network(\n                      \'https://quickart.b-cdn.net/images/app-home-loaderne.gif?v=\$imageVersion\',\n                      width: MediaQuery.sizeOf(context).width,\n                      height: MediaQuery.sizeOf(context).height,\n                      fit: BoxFit.fill,\n                    );\n                  },\n                  loadingBuilder: (context, child, loadingProgress) {\n                    if (loadingProgress == null) return child;\n                    return child; // removes loader delay\n                  },\n                ),\n              )',
+                    style: FlutterFlowTheme.of(context).bodyMedium.override(
+                          font: GoogleFonts.readexPro(
+                            fontWeight: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .fontWeight,
+                            fontStyle: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .fontStyle,
+                          ),
+                          color: Color(0xFFA153DB),
+                          letterSpacing: 0.0,
+                          fontWeight: FlutterFlowTheme.of(context)
+                              .bodyMedium
+                              .fontWeight,
+                          fontStyle:
+                              FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                        ),
+                  ),
                 ],
               ),
             ),

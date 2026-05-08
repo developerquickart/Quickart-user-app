@@ -73,7 +73,7 @@ class _IntroScreenWidgetState extends State<IntroScreenWidget> {
                               ClipRRect(
                                 borderRadius: BorderRadius.circular(0.0),
                                 child: Image.asset(
-                                  'assets/images/Fresh_Farm_Delight.png',
+                                  'assets/images/Flash_screen_1.png',
                                   width: double.infinity,
                                   height:
                                       MediaQuery.sizeOf(context).height * 1.0,
@@ -154,7 +154,7 @@ class _IntroScreenWidgetState extends State<IntroScreenWidget> {
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.circular(8.0),
                                     child: Image.asset(
-                                      'assets/images/Fresh_Picks.png',
+                                      'assets/images/Flash_screen_2.png',
                                       width: double.infinity,
                                       height:
                                           MediaQuery.sizeOf(context).height *
@@ -237,7 +237,7 @@ class _IntroScreenWidgetState extends State<IntroScreenWidget> {
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(8.0),
                                   child: Image.asset(
-                                    'assets/images/Fresh_organic_vegetables.png',
+                                    'assets/images/Flash_screen_3.png',
                                     width: double.infinity,
                                     height:
                                         MediaQuery.sizeOf(context).height * 1.0,
@@ -317,7 +317,7 @@ class _IntroScreenWidgetState extends State<IntroScreenWidget> {
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(8.0),
                                   child: Image.asset(
-                                    'assets/images/Fresh_Picks-Meat.png',
+                                    'assets/images/Flash_screen_4.png',
                                     width: double.infinity,
                                     height:
                                         MediaQuery.sizeOf(context).height * 1.0,

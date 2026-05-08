@@ -137,7 +137,7 @@ class _QuickartsplashScreenWidgetState
                 logFirebaseEvent('QuickartsplashScreen_wait__delay');
                 await Future.delayed(
                   Duration(
-                    milliseconds: 3000,
+                    milliseconds: 4000,
                   ),
                 );
                 logFirebaseEvent('QuickartsplashScreen_navigate_to');
@@ -185,7 +185,7 @@ class _QuickartsplashScreenWidgetState
                 logFirebaseEvent('QuickartsplashScreen_wait__delay');
                 await Future.delayed(
                   Duration(
-                    milliseconds: 3000,
+                    milliseconds: 4000,
                   ),
                 );
                 logFirebaseEvent('QuickartsplashScreen_navigate_to');
@@ -256,7 +256,7 @@ class _QuickartsplashScreenWidgetState
                 logFirebaseEvent('QuickartsplashScreen_wait__delay');
                 await Future.delayed(
                   Duration(
-                    milliseconds: 3000,
+                    milliseconds: 4000,
                   ),
                 );
                 logFirebaseEvent('QuickartsplashScreen_navigate_to');
@@ -286,7 +286,7 @@ class _QuickartsplashScreenWidgetState
                 logFirebaseEvent('QuickartsplashScreen_wait__delay');
                 await Future.delayed(
                   Duration(
-                    milliseconds: 3000,
+                    milliseconds: 4000,
                   ),
                 );
                 logFirebaseEvent('QuickartsplashScreen_navigate_to');
@@ -396,7 +396,7 @@ class _QuickartsplashScreenWidgetState
                 logFirebaseEvent('QuickartsplashScreen_wait__delay');
                 await Future.delayed(
                   Duration(
-                    milliseconds: 3000,
+                    milliseconds: 4000,
                   ),
                 );
                 logFirebaseEvent('QuickartsplashScreen_navigate_to');
@@ -449,7 +449,7 @@ class _QuickartsplashScreenWidgetState
                 logFirebaseEvent('QuickartsplashScreen_wait__delay');
                 await Future.delayed(
                   Duration(
-                    milliseconds: 3000,
+                    milliseconds: 4000,
                   ),
                 );
                 logFirebaseEvent('QuickartsplashScreen_navigate_to');
@@ -520,7 +520,7 @@ class _QuickartsplashScreenWidgetState
                 logFirebaseEvent('QuickartsplashScreen_wait__delay');
                 await Future.delayed(
                   Duration(
-                    milliseconds: 3000,
+                    milliseconds: 4000,
                   ),
                 );
                 logFirebaseEvent('QuickartsplashScreen_navigate_to');
@@ -550,7 +550,7 @@ class _QuickartsplashScreenWidgetState
                 logFirebaseEvent('QuickartsplashScreen_wait__delay');
                 await Future.delayed(
                   Duration(
-                    milliseconds: 3000,
+                    milliseconds: 4000,
                   ),
                 );
                 logFirebaseEvent('QuickartsplashScreen_navigate_to');

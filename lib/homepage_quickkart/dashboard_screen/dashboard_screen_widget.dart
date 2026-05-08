@@ -1392,6 +1392,26 @@ class _DashboardScreenWidgetState extends State<DashboardScreenWidget> {
                                                                         .usserType !=
                                                                     'guest') {
                                                                   logFirebaseEvent(
+                                                                      'Image_custom_action');
+                                                                  _model.refCodew =
+                                                                      await actions
+                                                                          .generateReferralLink(
+                                                                    getJsonField(
+                                                                      FFAppState()
+                                                                          .appInfo,
+                                                                      r'''$.referral_code''',
+                                                                    ).toString(),
+                                                                  );
+                                                                  logFirebaseEvent(
+                                                                      'Image_wait__delay');
+                                                                  await Future
+                                                                      .delayed(
+                                                                    Duration(
+                                                                      milliseconds:
+                                                                          1000,
+                                                                    ),
+                                                                  );
+                                                                  logFirebaseEvent(
                                                                       'Image_share');
                                                                   await Share
                                                                       .share(
@@ -1399,14 +1419,21 @@ class _DashboardScreenWidgetState extends State<DashboardScreenWidget> {
                                                                       FFAppState()
                                                                           .appInfo,
                                                                       r'''$.referral_message''',
-                                                                    ).toString()}  https://www.quickart.ae/SignUpScreen?refCode=${getJsonField(
-                                                                      FFAppState()
-                                                                          .appInfo,
-                                                                      r'''$.referral_code''',
-                                                                    ).toString()}',
+                                                                    ).toString()}  ${_model.refCodew}',
                                                                     sharePositionOrigin:
                                                                         getWidgetBoundingBox(
                                                                             context),
+                                                                  );
+                                                                  logFirebaseEvent(
+                                                                      'Image_google_analytics_event');
+                                                                  logFirebaseEvent(
+                                                                    'Share',
+                                                                    parameters: {
+                                                                      'Screen Name':
+                                                                          'Profile',
+                                                                      'Share To':
+                                                                          'Refer a Friend',
+                                                                    },
                                                                   );
                                                                 } else {
                                                                   logFirebaseEvent(
@@ -1487,6 +1514,9 @@ class _DashboardScreenWidgetState extends State<DashboardScreenWidget> {
                                                                 logFirebaseEvent(
                                                                     'SearchByBannerAnalytics');
                                                               }
+
+                                                              safeSetState(
+                                                                  () {});
                                                             },
                                                             child: ClipRRect(
                                                               borderRadius:
@@ -3328,6 +3358,26 @@ class _DashboardScreenWidgetState extends State<DashboardScreenWidget> {
                                                                           .usserType !=
                                                                       'guest') {
                                                                     logFirebaseEvent(
+                                                                        'Image_custom_action');
+                                                                    _model.refCoder =
+                                                                        await actions
+                                                                            .generateReferralLink(
+                                                                      getJsonField(
+                                                                        FFAppState()
+                                                                            .appInfo,
+                                                                        r'''$.referral_code''',
+                                                                      ).toString(),
+                                                                    );
+                                                                    logFirebaseEvent(
+                                                                        'Image_wait__delay');
+                                                                    await Future
+                                                                        .delayed(
+                                                                      Duration(
+                                                                        milliseconds:
+                                                                            1000,
+                                                                      ),
+                                                                    );
+                                                                    logFirebaseEvent(
                                                                         'Image_share');
                                                                     await Share
                                                                         .share(
@@ -3335,14 +3385,21 @@ class _DashboardScreenWidgetState extends State<DashboardScreenWidget> {
                                                                         FFAppState()
                                                                             .appInfo,
                                                                         r'''$.referral_message''',
-                                                                      ).toString()}  https://www.quickart.ae/SignUpScreen?refCode=${getJsonField(
-                                                                        FFAppState()
-                                                                            .appInfo,
-                                                                        r'''$.referral_code''',
-                                                                      ).toString()}',
+                                                                      ).toString()}  ${_model.refCoder}',
                                                                       sharePositionOrigin:
                                                                           getWidgetBoundingBox(
                                                                               context),
+                                                                    );
+                                                                    logFirebaseEvent(
+                                                                        'Image_google_analytics_event');
+                                                                    logFirebaseEvent(
+                                                                      'Share',
+                                                                      parameters: {
+                                                                        'Screen Name':
+                                                                            'Profile',
+                                                                        'Share To':
+                                                                            'Refer a Friend',
+                                                                      },
                                                                     );
                                                                   } else {
                                                                     logFirebaseEvent(
@@ -3423,6 +3480,9 @@ class _DashboardScreenWidgetState extends State<DashboardScreenWidget> {
                                                                   logFirebaseEvent(
                                                                       'SearchResultFromDashboardAnalytics');
                                                                 }
+
+                                                                safeSetState(
+                                                                    () {});
                                                               },
                                                               child: ClipRRect(
                                                                 borderRadius:
