@@ -284,6 +284,14 @@ class _DashboardScreenWidgetState extends State<DashboardScreenWidget> {
             FFAppState().update(() {});
           }
         }
+
+        logFirebaseEvent('DashboardScreen_custom_action');
+        _model.refCodew = await actions.generateReferralLink(
+          getJsonField(
+            FFAppState().appInfo,
+            r'''$.referral_code''',
+          ).toString(),
+        );
       } else {
         logFirebaseEvent('DashboardScreen_show_snack_bar');
         ScaffoldMessenger.of(context).showSnackBar(
@@ -1392,26 +1400,6 @@ class _DashboardScreenWidgetState extends State<DashboardScreenWidget> {
                                                                         .usserType !=
                                                                     'guest') {
                                                                   logFirebaseEvent(
-                                                                      'Image_custom_action');
-                                                                  _model.refCodew =
-                                                                      await actions
-                                                                          .generateReferralLink(
-                                                                    getJsonField(
-                                                                      FFAppState()
-                                                                          .appInfo,
-                                                                      r'''$.referral_code''',
-                                                                    ).toString(),
-                                                                  );
-                                                                  logFirebaseEvent(
-                                                                      'Image_wait__delay');
-                                                                  await Future
-                                                                      .delayed(
-                                                                    Duration(
-                                                                      milliseconds:
-                                                                          1000,
-                                                                    ),
-                                                                  );
-                                                                  logFirebaseEvent(
                                                                       'Image_share');
                                                                   await Share
                                                                       .share(
@@ -1514,9 +1502,6 @@ class _DashboardScreenWidgetState extends State<DashboardScreenWidget> {
                                                                 logFirebaseEvent(
                                                                     'SearchByBannerAnalytics');
                                                               }
-
-                                                              safeSetState(
-                                                                  () {});
                                                             },
                                                             child: ClipRRect(
                                                               borderRadius:
@@ -3358,26 +3343,6 @@ class _DashboardScreenWidgetState extends State<DashboardScreenWidget> {
                                                                           .usserType !=
                                                                       'guest') {
                                                                     logFirebaseEvent(
-                                                                        'Image_custom_action');
-                                                                    _model.refCoder =
-                                                                        await actions
-                                                                            .generateReferralLink(
-                                                                      getJsonField(
-                                                                        FFAppState()
-                                                                            .appInfo,
-                                                                        r'''$.referral_code''',
-                                                                      ).toString(),
-                                                                    );
-                                                                    logFirebaseEvent(
-                                                                        'Image_wait__delay');
-                                                                    await Future
-                                                                        .delayed(
-                                                                      Duration(
-                                                                        milliseconds:
-                                                                            1000,
-                                                                      ),
-                                                                    );
-                                                                    logFirebaseEvent(
                                                                         'Image_share');
                                                                     await Share
                                                                         .share(
@@ -3385,7 +3350,7 @@ class _DashboardScreenWidgetState extends State<DashboardScreenWidget> {
                                                                         FFAppState()
                                                                             .appInfo,
                                                                         r'''$.referral_message''',
-                                                                      ).toString()}  ${_model.refCoder}',
+                                                                      ).toString()}  ${_model.refCodew}',
                                                                       sharePositionOrigin:
                                                                           getWidgetBoundingBox(
                                                                               context),
@@ -3480,9 +3445,6 @@ class _DashboardScreenWidgetState extends State<DashboardScreenWidget> {
                                                                   logFirebaseEvent(
                                                                       'SearchResultFromDashboardAnalytics');
                                                                 }
-
-                                                                safeSetState(
-                                                                    () {});
                                                               },
                                                               child: ClipRRect(
                                                                 borderRadius:
