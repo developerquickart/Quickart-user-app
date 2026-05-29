@@ -121,7 +121,7 @@ class _NoteAndroidNotesWidgetState extends State<NoteAndroidNotesWidget> {
                     padding:
                         EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
                     child: Text(
-                      'Base URL demo:\nhttps://quickart2.democheck.in/nodejsapp/\nBase url live\nhttps://quickart5.quickart.ae/nodejsapp/\nhttps://quickart6.quickart.ae/nodejsapp/\nhttps://supaapioriginal-production.up.railway.app/testnodejsapp\nhttps://api.quickart.ae/testnodejsapp/\nhttps://demoapi.quickart.ae/testnodejsapp/\n',
+                      'Base URL demo:\n\nhttps://api.quickart.ae/testnodejsapp/\nhttps://demoapi.quickart.ae/testnodejsapp/\n',
                       style: FlutterFlowTheme.of(context).bodyMedium.override(
                             font: GoogleFonts.readexPro(
                               fontWeight: FontWeight.w600,
@@ -209,7 +209,7 @@ class _NoteAndroidNotesWidgetState extends State<NoteAndroidNotesWidget> {
                     padding:
                         EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
                     child: Text(
-                      'Appsflyer changes file....\nandroid/app/proguard-rules.pro\n-keep class org.xmlpull.v1.** { *; }\n-keep class com.appsflyer.** { *; }\n-keep class com.appsflyer.internal.** { *; }\n-dontwarn com.appsflyer.**\n-dontwarn com.appsflyer.internal.**\nandroid/app/build.gradle\ndependencies {\n    implementation \'androidx.multidex:multidex:2.0.1\'\n}\n  defaultConfig {\n   multiDexEnabled true\n}',
+                      '',
                       style: FlutterFlowTheme.of(context).bodyMedium.override(
                             font: GoogleFonts.readexPro(
                               fontWeight: FontWeight.w600,

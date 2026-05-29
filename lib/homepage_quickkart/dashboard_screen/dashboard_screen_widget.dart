@@ -817,8 +817,17 @@ class _DashboardScreenWidgetState extends State<DashboardScreenWidget> {
                                                             },
                                                             child: Icon(
                                                               FFIcons.kwallet,
-                                                              color: FFAppConstants
-                                                                  .yellowColor,
+                                                              color:
+                                                                  colorFromCssString(
+                                                                getJsonField(
+                                                                  dashboardScreenOneAPIResponse
+                                                                      .jsonBody,
+                                                                  r'''$.oneapi_bg_first_image.bg_image_color''',
+                                                                ).toString(),
+                                                                defaultColor:
+                                                                    Colors
+                                                                        .black,
+                                                              ),
                                                               size: 25.0,
                                                             ),
                                                           ),
@@ -858,8 +867,16 @@ class _DashboardScreenWidgetState extends State<DashboardScreenWidget> {
                                                           child: Icon(
                                                             Icons
                                                                 .notifications_sharp,
-                                                            color: FFAppConstants
-                                                                .yellowColor,
+                                                            color:
+                                                                colorFromCssString(
+                                                              getJsonField(
+                                                                dashboardScreenOneAPIResponse
+                                                                    .jsonBody,
+                                                                r'''$.oneapi_bg_first_image.bg_image_color''',
+                                                              ).toString(),
+                                                              defaultColor:
+                                                                  Colors.black,
+                                                            ),
                                                             size: 30.0,
                                                           ),
                                                         ),
