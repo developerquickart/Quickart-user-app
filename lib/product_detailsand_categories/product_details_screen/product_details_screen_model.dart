@@ -34,6 +34,10 @@ class ProductDetailsScreenModel
 
   int status = 1;
 
+  int? selectedVariantIndx = 0;
+
+  dynamic weekModelJson;
+
   ///  State fields for stateful widgets in this page.
 
   // Stores action output result for [Backend Call - API (seosource)] action in product_details_screen widget.
@@ -55,8 +59,6 @@ class ProductDetailsScreenModel
   bool? connectivityResultf;
   // Stores action output result for [Backend Call - API (addremwishlist)] action in Icon widget.
   ApiCallResponse? apiResultj2l;
-  // Stores action output result for [Backend Call - API (totaldeliveries)] action in Container widget.
-  ApiCallResponse? apiResultWeek;
   // Stores action output result for [Backend Call - API (totaldeliveries)] action in Container widget.
   ApiCallResponse? apiResultWeek1;
   // Stores action output result for [Custom Action - checkInternetConnection] action in Container widget.

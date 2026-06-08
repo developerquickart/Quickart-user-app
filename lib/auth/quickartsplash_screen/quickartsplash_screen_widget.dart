@@ -690,7 +690,7 @@ class _QuickartsplashScreenWidgetState
                   fadeInDuration: Duration(milliseconds: 500),
                   fadeOutDuration: Duration(milliseconds: 500),
                   imageUrl:
-                      'https://quickart.b-cdn.net/images/app-home-loaderne.gif',
+                      'https://quickart.b-cdn.net/images/app-home-splash-screeneid.gif',
                   width: MediaQuery.sizeOf(context).width * 1.0,
                   height: MediaQuery.sizeOf(context).height * 1.0,
                   fit: BoxFit.fill,

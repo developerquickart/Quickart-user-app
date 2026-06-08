@@ -2219,3 +2219,25 @@ bool checkTotalAndOrderType(
 
   return true;
 }
+
+int getItemByIndex(
+  dynamic listData,
+  int? selectedIndex,
+  bool isSub,
+) {
+  print("G1----->listData---->${listData.length}.   &.  $selectedIndex  ");
+  print("G1----->listData---->${listData}");
+  if (listData == null ||
+      selectedIndex == null ||
+      selectedIndex >= listData.length) {
+    return 0;
+  }
+
+  final item = listData[selectedIndex] as Map<String, dynamic>;
+
+  if (isSub) {
+    return int.tryParse(item['subcartQty'].toString()) ?? 0;
+  }
+
+  return int.tryParse(item['cart_qty'].toString()) ?? 0;
+}
