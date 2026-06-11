@@ -38,6 +38,10 @@ class ProductDetailsScreenModel
 
   dynamic weekModelJson;
 
+  dynamic selectedVariantDataJson;
+
+  bool isLoaderIndicator = false;
+
   ///  State fields for stateful widgets in this page.
 
   // Stores action output result for [Backend Call - API (seosource)] action in product_details_screen widget.
@@ -65,10 +69,6 @@ class ProductDetailsScreenModel
   bool? connectivtyResultC1;
   // Stores action output result for [Backend Call - API (Add to Cart)] action in Container widget.
   ApiCallResponse? apiResultAddCart;
-  // Stores action output result for [Custom Action - checkInternetConnection] action in Container widget.
-  bool? connectivtyResultC11;
-  // Stores action output result for [Backend Call - API (Add to Cart)] action in Container widget.
-  ApiCallResponse? apiResultAddCart1;
   // Stores action output result for [Custom Action - checkInternetConnection] action in IconButton widget.
   bool? connnectivtyfavourites;
   // Stores action output result for [Backend Call - API (addnotifyme)] action in IconButton widget.

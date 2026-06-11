@@ -2220,13 +2220,13 @@ bool checkTotalAndOrderType(
   return true;
 }
 
-int getItemByIndex(
+int getItemQtyByIndex(
   dynamic listData,
   int? selectedIndex,
   bool isSub,
 ) {
-  print("G1----->listData---->${listData.length}.   &.  $selectedIndex  ");
-  print("G1----->listData---->${listData}");
+  // print("G1----->listData---->${listData.length}.   &.  $selectedIndex  ");
+  // print("G1----->listData---->${listData}");
   if (listData == null ||
       selectedIndex == null ||
       selectedIndex >= listData.length) {
@@ -2236,8 +2236,48 @@ int getItemByIndex(
   final item = listData[selectedIndex] as Map<String, dynamic>;
 
   if (isSub) {
+    // print("G1----->subcartQty---->${item['subcartQty'].toString()}");
+
     return int.tryParse(item['subcartQty'].toString()) ?? 0;
+  } else {
+    // print("G1----->cart_qty---->${item['cart_qty'].toString()}");
   }
 
   return int.tryParse(item['cart_qty'].toString()) ?? 0;
+}
+
+dynamic getItemByIndex(
+  dynamic listData,
+  int? selectedIndex,
+) {
+  // print("G1----->listData---->${listData.length}.   &.  $selectedIndex  ");
+  // print("G1----->listData---->${listData}");
+  if (listData == null ||
+      selectedIndex == null ||
+      selectedIndex >= listData.length) {
+    return 0;
+  }
+
+  final item = listData[selectedIndex] as Map<String, dynamic>;
+  print("G1----->item---->${item}");
+  return item;
+}
+
+String getGrandPrizeMessage(
+  double cartTotal,
+  int minimumAmount,
+  String addMsg,
+  String successMsg,
+) {
+  if (cartTotal >= minimumAmount) {
+    return successMsg;
+  }
+
+  double remainingAmount =
+      double.parse((minimumAmount - cartTotal).toStringAsFixed(2));
+
+  print(
+      "G1---remainingAmount--->$remainingAmount = $minimumAmount - $cartTotal");
+
+  return "Add AED ${remainingAmount.toStringAsFixed(2)} $addMsg";
 }

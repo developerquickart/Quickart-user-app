@@ -143,7 +143,7 @@ class _FreshFoodScreenWidgetState extends State<FreshFoodScreenWidget> {
                                           ..complete(QuickartGroup
                                               .additionalCatSearchCall
                                               .call(
-                                            storeid: FFAppState().storeID,
+                                            storeid: '7',
                                             userid: FFAppState().userID,
                                             byName: 'Fresh Food',
                                             minPrice: FFAppState().minPrice,

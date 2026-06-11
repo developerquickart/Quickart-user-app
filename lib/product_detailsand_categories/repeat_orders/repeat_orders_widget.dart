@@ -757,7 +757,7 @@ class _RepeatOrdersWidgetState extends State<RepeatOrdersWidget> {
                                                                                 borderRadius: BorderRadius.circular(8.0),
                                                                               ),
                                                                               child: Container(
-                                                                                width: MediaQuery.sizeOf(context).width < 370.0 ? 120.0 : 140.0,
+                                                                                width: MediaQuery.sizeOf(context).width < 370.0 ? 125.0 : 145.0,
                                                                                 decoration: BoxDecoration(
                                                                                   borderRadius: BorderRadius.circular(8.0),
                                                                                 ),
@@ -814,12 +814,15 @@ class _RepeatOrdersWidgetState extends State<RepeatOrdersWidget> {
                                                                                                 width: double.infinity,
                                                                                                 height: 35.0,
                                                                                                 decoration: BoxDecoration(
-                                                                                                  color: FFAppConstants.darkGreen,
+                                                                                                  color: FFAppConstants.yellowColor,
                                                                                                   borderRadius: BorderRadius.only(
                                                                                                     topLeft: Radius.circular(8.0),
                                                                                                     topRight: Radius.circular(8.0),
                                                                                                     bottomLeft: Radius.circular(8.0),
                                                                                                     bottomRight: Radius.circular(8.0),
+                                                                                                  ),
+                                                                                                  border: Border.all(
+                                                                                                    color: FFAppConstants.yellowDDC66C,
                                                                                                   ),
                                                                                                 ),
                                                                                                 child: Align(
@@ -831,8 +834,8 @@ class _RepeatOrdersWidgetState extends State<RepeatOrdersWidget> {
                                                                                                             fontWeight: FontWeight.w600,
                                                                                                             fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
                                                                                                           ),
-                                                                                                          color: FFAppConstants.whiteColor,
-                                                                                                          fontSize: MediaQuery.sizeOf(context).width < 375.0 ? 8.0 : 10.0,
+                                                                                                          color: FFAppConstants.blackColor0A0A0A,
+                                                                                                          fontSize: MediaQuery.sizeOf(context).width < 375.0 ? 8.0 : 11.0,
                                                                                                           letterSpacing: 0.0,
                                                                                                           fontWeight: FontWeight.w600,
                                                                                                           fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
@@ -922,7 +925,7 @@ class _RepeatOrdersWidgetState extends State<RepeatOrdersWidget> {
                                                                                               child: Container(
                                                                                                 height: 30.0,
                                                                                                 decoration: BoxDecoration(
-                                                                                                  color: FFAppConstants.darkGreen,
+                                                                                                  color: FFAppConstants.yellowColor,
                                                                                                   borderRadius: BorderRadius.only(
                                                                                                     topLeft: Radius.circular(8.0),
                                                                                                     topRight: Radius.circular(8.0),
@@ -930,7 +933,7 @@ class _RepeatOrdersWidgetState extends State<RepeatOrdersWidget> {
                                                                                                     bottomRight: Radius.circular(8.0),
                                                                                                   ),
                                                                                                   border: Border.all(
-                                                                                                    color: FFAppConstants.darkGreen,
+                                                                                                    color: FFAppConstants.yellowDDC66C,
                                                                                                     width: 1.0,
                                                                                                   ),
                                                                                                 ),
@@ -951,8 +954,8 @@ class _RepeatOrdersWidgetState extends State<RepeatOrdersWidget> {
                                                                                                                     fontWeight: FontWeight.w600,
                                                                                                                     fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
                                                                                                                   ),
-                                                                                                                  color: FFAppConstants.whiteColor,
-                                                                                                                  fontSize: MediaQuery.sizeOf(context).width < 375.0 ? 8.0 : 10.0,
+                                                                                                                  color: FFAppConstants.blackColor0A0A0A,
+                                                                                                                  fontSize: MediaQuery.sizeOf(context).width < 375.0 ? 8.0 : 11.0,
                                                                                                                   letterSpacing: 0.0,
                                                                                                                   fontWeight: FontWeight.w600,
                                                                                                                   fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
@@ -990,8 +993,8 @@ class _RepeatOrdersWidgetState extends State<RepeatOrdersWidget> {
                                                                                                                     fontWeight: FontWeight.w600,
                                                                                                                     fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
                                                                                                                   ),
-                                                                                                                  color: FFAppConstants.whiteColor,
-                                                                                                                  fontSize: MediaQuery.sizeOf(context).width < 375.0 ? 8.0 : 10.0,
+                                                                                                                  color: FFAppConstants.blackColor0A0A0A,
+                                                                                                                  fontSize: MediaQuery.sizeOf(context).width < 375.0 ? 8.0 : 11.0,
                                                                                                                   letterSpacing: 0.0,
                                                                                                                   fontWeight: FontWeight.w600,
                                                                                                                   fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
@@ -1030,150 +1033,128 @@ class _RepeatOrdersWidgetState extends State<RepeatOrdersWidget> {
                                                                                           repeatListItem,
                                                                                           r'''$.total_cart_qty''',
                                                                                         )) {
-                                                                                      return Padding(
-                                                                                        padding: EdgeInsetsDirectional.fromSTEB(0.0, 3.0, 0.0, 3.0),
-                                                                                        child: FFButtonWidget(
-                                                                                          onPressed: () async {
-                                                                                            logFirebaseEvent('REPEAT_ORDERS_PAGE_ADD_BTN_ON_TAP');
-                                                                                            if (functions.checkVariantFeatureCondition(repeatListItem) == true) {
-                                                                                              logFirebaseEvent('Button_bottom_sheet');
-                                                                                              await showModalBottomSheet(
-                                                                                                isScrollControlled: true,
-                                                                                                backgroundColor: Colors.transparent,
-                                                                                                useSafeArea: true,
-                                                                                                context: context,
-                                                                                                builder: (context) {
-                                                                                                  return GestureDetector(
-                                                                                                    onTap: () {
-                                                                                                      FocusScope.of(context).unfocus();
-                                                                                                      FocusManager.instance.primaryFocus?.unfocus();
-                                                                                                    },
-                                                                                                    child: Padding(
-                                                                                                      padding: MediaQuery.viewInsetsOf(context),
-                                                                                                      child: VarientBotttomSheetWidget(
-                                                                                                        productModel: repeatListItem,
-                                                                                                        cartType: 'daily',
-                                                                                                      ),
+                                                                                      return FFButtonWidget(
+                                                                                        onPressed: () async {
+                                                                                          logFirebaseEvent('REPEAT_ORDERS_PAGE_ADD_BTN_ON_TAP');
+                                                                                          if (functions.checkVariantFeatureCondition(repeatListItem) == true) {
+                                                                                            logFirebaseEvent('Button_bottom_sheet');
+                                                                                            await showModalBottomSheet(
+                                                                                              isScrollControlled: true,
+                                                                                              backgroundColor: Colors.transparent,
+                                                                                              useSafeArea: true,
+                                                                                              context: context,
+                                                                                              builder: (context) {
+                                                                                                return GestureDetector(
+                                                                                                  onTap: () {
+                                                                                                    FocusScope.of(context).unfocus();
+                                                                                                    FocusManager.instance.primaryFocus?.unfocus();
+                                                                                                  },
+                                                                                                  child: Padding(
+                                                                                                    padding: MediaQuery.viewInsetsOf(context),
+                                                                                                    child: VarientBotttomSheetWidget(
+                                                                                                      productModel: repeatListItem,
+                                                                                                      cartType: 'daily',
+                                                                                                    ),
+                                                                                                  ),
+                                                                                                );
+                                                                                              },
+                                                                                            ).then((value) => safeSetState(() {}));
+
+                                                                                            logFirebaseEvent('Button_refresh_database_request');
+                                                                                            safeSetState(() => _model.apiRequestCompleter = null);
+                                                                                            await _model.waitForApiRequestCompleted(maxWait: 500);
+                                                                                          } else {
+                                                                                            logFirebaseEvent('Button_custom_action');
+                                                                                            _model.connectivityResultAddCart = await actions.checkInternetConnection();
+                                                                                            if (_model.connectivityResultAddCart == true) {
+                                                                                              logFirebaseEvent('Button_haptic_feedback');
+                                                                                              HapticFeedback.mediumImpact();
+                                                                                              logFirebaseEvent('Button_backend_call');
+                                                                                              _model.apiResultAddToCart = await QuickartGroup.addToCartCall.call(
+                                                                                                userid: FFAppState().userID,
+                                                                                                storeid: FFAppState().storeID,
+                                                                                                varientid: getJsonField(
+                                                                                                  repeatListItem,
+                                                                                                  r'''$.varient_id''',
+                                                                                                ).toString(),
+                                                                                                deviceid: FFAppState().deviceID,
+                                                                                                qty: '1',
+                                                                                                itemPrice: getJsonField(
+                                                                                                  repeatListItem,
+                                                                                                  r'''$.price''',
+                                                                                                ).toString(),
+                                                                                                itemName: getJsonField(
+                                                                                                  repeatListItem,
+                                                                                                  r'''$.product_name''',
+                                                                                                ).toString(),
+                                                                                                platform: isiOS ? 'ios' : 'android',
+                                                                                              );
+
+                                                                                              if ((_model.apiResultAddToCart?.succeeded ?? true)) {
+                                                                                                if (FFAppConstants.checkStatus ==
+                                                                                                    getJsonField(
+                                                                                                      (_model.apiResultAddToCart?.jsonBody ?? ''),
+                                                                                                      r'''$.status''',
+                                                                                                    ).toString()) {
+                                                                                                  logFirebaseEvent('Button_refresh_database_request');
+                                                                                                  safeSetState(() => _model.apiRequestCompleter = null);
+                                                                                                  await _model.waitForApiRequestCompleted(maxWait: 2000);
+                                                                                                  logFirebaseEvent('Button_update_app_state');
+                                                                                                  FFAppState().isCartShow = false;
+                                                                                                  FFAppState().cartTotalCount = QuickartGroup.addToCartCall.totalItems(
+                                                                                                    (_model.apiResultAddToCart?.jsonBody ?? ''),
+                                                                                                  )!;
+                                                                                                  FFAppState().cartSavingPrice = functions.stringToDouble(QuickartGroup.addToCartCall
+                                                                                                      .savingPrice(
+                                                                                                        (_model.apiResultAddToCart?.jsonBody ?? ''),
+                                                                                                      )!
+                                                                                                      .toString());
+                                                                                                  FFAppState().cartTotalPrice = functions.stringToDouble(QuickartGroup.addToCartCall
+                                                                                                      .totalPrice(
+                                                                                                        (_model.apiResultAddToCart?.jsonBody ?? ''),
+                                                                                                      )!
+                                                                                                      .toString());
+                                                                                                  FFAppState().update(() {});
+                                                                                                  logFirebaseEvent('Button_custom_action');
+                                                                                                  await actions.facebookEventClass(
+                                                                                                    getJsonField(
+                                                                                                      repeatListItem,
+                                                                                                      r'''$.varient_id''',
+                                                                                                    ).toString(),
+                                                                                                    getJsonField(
+                                                                                                      repeatListItem,
+                                                                                                      r'''$.product_name''',
+                                                                                                    ).toString(),
+                                                                                                    'product',
+                                                                                                    functions.stringToDouble(getJsonField(
+                                                                                                      repeatListItem,
+                                                                                                      r'''$.price''',
+                                                                                                    ).toString()),
+                                                                                                    getJsonField(
+                                                                                                          repeatListItem,
+                                                                                                          r'''$.cart_qty''',
+                                                                                                        ) +
+                                                                                                        1,
+                                                                                                    functions.stringToDouble(getJsonField(
+                                                                                                      repeatListItem,
+                                                                                                      r'''$.mrp''',
+                                                                                                    ).toString()),
+                                                                                                    'add',
+                                                                                                    FFAppState().emptyJson,
+                                                                                                    ' ',
+                                                                                                    ' ',
+                                                                                                    ' ',
+                                                                                                    ' ',
+                                                                                                    ' ',
+                                                                                                  );
+                                                                                                  logFirebaseEvent('Button_google_analytics_event');
+                                                                                                  logFirebaseEvent('AddToCartButtonAnalytics');
+                                                                                                  logFirebaseEvent('Button_wait__delay');
+                                                                                                  await Future.delayed(
+                                                                                                    Duration(
+                                                                                                      milliseconds: 500,
                                                                                                     ),
                                                                                                   );
-                                                                                                },
-                                                                                              ).then((value) => safeSetState(() {}));
-
-                                                                                              logFirebaseEvent('Button_refresh_database_request');
-                                                                                              safeSetState(() => _model.apiRequestCompleter = null);
-                                                                                              await _model.waitForApiRequestCompleted(maxWait: 500);
-                                                                                            } else {
-                                                                                              logFirebaseEvent('Button_custom_action');
-                                                                                              _model.connectivityResultAddCart = await actions.checkInternetConnection();
-                                                                                              if (_model.connectivityResultAddCart == true) {
-                                                                                                logFirebaseEvent('Button_haptic_feedback');
-                                                                                                HapticFeedback.mediumImpact();
-                                                                                                logFirebaseEvent('Button_backend_call');
-                                                                                                _model.apiResultAddToCart = await QuickartGroup.addToCartCall.call(
-                                                                                                  userid: FFAppState().userID,
-                                                                                                  storeid: FFAppState().storeID,
-                                                                                                  varientid: getJsonField(
-                                                                                                    repeatListItem,
-                                                                                                    r'''$.varient_id''',
-                                                                                                  ).toString(),
-                                                                                                  deviceid: FFAppState().deviceID,
-                                                                                                  qty: '1',
-                                                                                                  itemPrice: getJsonField(
-                                                                                                    repeatListItem,
-                                                                                                    r'''$.price''',
-                                                                                                  ).toString(),
-                                                                                                  itemName: getJsonField(
-                                                                                                    repeatListItem,
-                                                                                                    r'''$.product_name''',
-                                                                                                  ).toString(),
-                                                                                                  platform: isiOS ? 'ios' : 'android',
-                                                                                                );
-
-                                                                                                if ((_model.apiResultAddToCart?.succeeded ?? true)) {
-                                                                                                  if (FFAppConstants.checkStatus ==
-                                                                                                      getJsonField(
-                                                                                                        (_model.apiResultAddToCart?.jsonBody ?? ''),
-                                                                                                        r'''$.status''',
-                                                                                                      ).toString()) {
-                                                                                                    logFirebaseEvent('Button_refresh_database_request');
-                                                                                                    safeSetState(() => _model.apiRequestCompleter = null);
-                                                                                                    await _model.waitForApiRequestCompleted(maxWait: 2000);
-                                                                                                    logFirebaseEvent('Button_update_app_state');
-                                                                                                    FFAppState().isCartShow = false;
-                                                                                                    FFAppState().cartTotalCount = QuickartGroup.addToCartCall.totalItems(
-                                                                                                      (_model.apiResultAddToCart?.jsonBody ?? ''),
-                                                                                                    )!;
-                                                                                                    FFAppState().cartSavingPrice = functions.stringToDouble(QuickartGroup.addToCartCall
-                                                                                                        .savingPrice(
-                                                                                                          (_model.apiResultAddToCart?.jsonBody ?? ''),
-                                                                                                        )!
-                                                                                                        .toString());
-                                                                                                    FFAppState().cartTotalPrice = functions.stringToDouble(QuickartGroup.addToCartCall
-                                                                                                        .totalPrice(
-                                                                                                          (_model.apiResultAddToCart?.jsonBody ?? ''),
-                                                                                                        )!
-                                                                                                        .toString());
-                                                                                                    FFAppState().update(() {});
-                                                                                                    logFirebaseEvent('Button_custom_action');
-                                                                                                    await actions.facebookEventClass(
-                                                                                                      getJsonField(
-                                                                                                        repeatListItem,
-                                                                                                        r'''$.varient_id''',
-                                                                                                      ).toString(),
-                                                                                                      getJsonField(
-                                                                                                        repeatListItem,
-                                                                                                        r'''$.product_name''',
-                                                                                                      ).toString(),
-                                                                                                      'product',
-                                                                                                      functions.stringToDouble(getJsonField(
-                                                                                                        repeatListItem,
-                                                                                                        r'''$.price''',
-                                                                                                      ).toString()),
-                                                                                                      getJsonField(
-                                                                                                            repeatListItem,
-                                                                                                            r'''$.cart_qty''',
-                                                                                                          ) +
-                                                                                                          1,
-                                                                                                      functions.stringToDouble(getJsonField(
-                                                                                                        repeatListItem,
-                                                                                                        r'''$.mrp''',
-                                                                                                      ).toString()),
-                                                                                                      'add',
-                                                                                                      FFAppState().emptyJson,
-                                                                                                      ' ',
-                                                                                                      ' ',
-                                                                                                      ' ',
-                                                                                                      ' ',
-                                                                                                      ' ',
-                                                                                                    );
-                                                                                                    logFirebaseEvent('Button_google_analytics_event');
-                                                                                                    logFirebaseEvent('AddToCartButtonAnalytics');
-                                                                                                    logFirebaseEvent('Button_wait__delay');
-                                                                                                    await Future.delayed(
-                                                                                                      Duration(
-                                                                                                        milliseconds: 500,
-                                                                                                      ),
-                                                                                                    );
-                                                                                                  } else {
-                                                                                                    logFirebaseEvent('Button_show_snack_bar');
-                                                                                                    ScaffoldMessenger.of(context).showSnackBar(
-                                                                                                      SnackBar(
-                                                                                                        content: Text(
-                                                                                                          getJsonField(
-                                                                                                            (_model.apiResultAddToCart?.jsonBody ?? ''),
-                                                                                                            r'''$.message''',
-                                                                                                          ).toString(),
-                                                                                                          style: GoogleFonts.montserrat(
-                                                                                                            color: FFAppConstants.indigoColor,
-                                                                                                            fontWeight: FontWeight.w500,
-                                                                                                            fontSize: 12.0,
-                                                                                                          ),
-                                                                                                        ),
-                                                                                                        duration: Duration(milliseconds: 4000),
-                                                                                                        backgroundColor: FFAppConstants.primaryPurpleE4D8F5,
-                                                                                                      ),
-                                                                                                    );
-                                                                                                  }
                                                                                                 } else {
                                                                                                   logFirebaseEvent('Button_show_snack_bar');
                                                                                                   ScaffoldMessenger.of(context).showSnackBar(
@@ -1199,9 +1180,13 @@ class _RepeatOrdersWidgetState extends State<RepeatOrdersWidget> {
                                                                                                 ScaffoldMessenger.of(context).showSnackBar(
                                                                                                   SnackBar(
                                                                                                     content: Text(
-                                                                                                      FFAppConstants.internetString,
+                                                                                                      getJsonField(
+                                                                                                        (_model.apiResultAddToCart?.jsonBody ?? ''),
+                                                                                                        r'''$.message''',
+                                                                                                      ).toString(),
                                                                                                       style: GoogleFonts.montserrat(
                                                                                                         color: FFAppConstants.indigoColor,
+                                                                                                        fontWeight: FontWeight.w500,
                                                                                                         fontSize: 12.0,
                                                                                                       ),
                                                                                                     ),
@@ -1210,33 +1195,48 @@ class _RepeatOrdersWidgetState extends State<RepeatOrdersWidget> {
                                                                                                   ),
                                                                                                 );
                                                                                               }
-                                                                                            }
-
-                                                                                            safeSetState(() {});
-                                                                                          },
-                                                                                          text: 'ADD',
-                                                                                          options: FFButtonOptions(
-                                                                                            width: 80.0,
-                                                                                            height: 30.0,
-                                                                                            padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                                                                                            iconPadding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                                                                                            color: FFAppConstants.calculatorColor,
-                                                                                            textStyle: FlutterFlowTheme.of(context).titleSmall.override(
-                                                                                                  font: GoogleFonts.montserrat(
-                                                                                                    fontWeight: FontWeight.w600,
-                                                                                                    fontStyle: FlutterFlowTheme.of(context).titleSmall.fontStyle,
+                                                                                            } else {
+                                                                                              logFirebaseEvent('Button_show_snack_bar');
+                                                                                              ScaffoldMessenger.of(context).showSnackBar(
+                                                                                                SnackBar(
+                                                                                                  content: Text(
+                                                                                                    FFAppConstants.internetString,
+                                                                                                    style: GoogleFonts.montserrat(
+                                                                                                      color: FFAppConstants.indigoColor,
+                                                                                                      fontSize: 12.0,
+                                                                                                    ),
                                                                                                   ),
-                                                                                                  color: FFAppConstants.whiteColor,
-                                                                                                  fontSize: 12.0,
-                                                                                                  letterSpacing: 0.0,
+                                                                                                  duration: Duration(milliseconds: 4000),
+                                                                                                  backgroundColor: FFAppConstants.primaryPurpleE4D8F5,
+                                                                                                ),
+                                                                                              );
+                                                                                            }
+                                                                                          }
+
+                                                                                          safeSetState(() {});
+                                                                                        },
+                                                                                        text: 'ADD',
+                                                                                        options: FFButtonOptions(
+                                                                                          width: 120.0,
+                                                                                          height: 30.0,
+                                                                                          padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                                                                                          iconPadding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                                                                                          color: FFAppConstants.calculatorColor,
+                                                                                          textStyle: FlutterFlowTheme.of(context).titleSmall.override(
+                                                                                                font: GoogleFonts.montserrat(
                                                                                                   fontWeight: FontWeight.w600,
                                                                                                   fontStyle: FlutterFlowTheme.of(context).titleSmall.fontStyle,
                                                                                                 ),
-                                                                                            borderSide: BorderSide(
-                                                                                              color: Colors.transparent,
-                                                                                            ),
-                                                                                            borderRadius: BorderRadius.circular(8.0),
+                                                                                                color: FFAppConstants.whiteColor,
+                                                                                                fontSize: 14.0,
+                                                                                                letterSpacing: 0.0,
+                                                                                                fontWeight: FontWeight.w600,
+                                                                                                fontStyle: FlutterFlowTheme.of(context).titleSmall.fontStyle,
+                                                                                              ),
+                                                                                          borderSide: BorderSide(
+                                                                                            color: Colors.transparent,
                                                                                           ),
+                                                                                          borderRadius: BorderRadius.circular(8.0),
                                                                                         ),
                                                                                       );
                                                                                     } else {

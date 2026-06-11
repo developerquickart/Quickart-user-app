@@ -85,19 +85,6 @@ class _LoginOnBoardScreenWidgetState extends State<LoginOnBoardScreenWidget> {
             ),
             child: Stack(
               children: [
-                Align(
-                  alignment: AlignmentDirectional(0.0, 1.0),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(8.0),
-                    child: Image.asset(
-                      'assets/images/2vqf7_',
-                      width: MediaQuery.sizeOf(context).width * 0.85,
-                      height: MediaQuery.sizeOf(context).height * 0.35,
-                      fit: BoxFit.cover,
-                      alignment: Alignment(0.0, 1.0),
-                    ),
-                  ),
-                ),
                 SingleChildScrollView(
                   child: Column(
                     mainAxisSize: MainAxisSize.max,

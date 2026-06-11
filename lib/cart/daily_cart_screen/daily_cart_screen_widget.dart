@@ -2345,7 +2345,7 @@ class _DailyCartScreenWidgetState extends State<DailyCartScreenWidget>
                                                                                                                                     width: MediaQuery.sizeOf(context).width < 370.0 ? 130.0 : 145.0,
                                                                                                                                     height: 30.0,
                                                                                                                                     decoration: BoxDecoration(
-                                                                                                                                      color: FFAppConstants.darkGreen,
+                                                                                                                                      color: FFAppConstants.yellowColor,
                                                                                                                                       borderRadius: BorderRadius.only(
                                                                                                                                         topLeft: Radius.circular(8.0),
                                                                                                                                         topRight: Radius.circular(8.0),
@@ -2353,7 +2353,7 @@ class _DailyCartScreenWidgetState extends State<DailyCartScreenWidget>
                                                                                                                                         bottomRight: Radius.circular(8.0),
                                                                                                                                       ),
                                                                                                                                       border: Border.all(
-                                                                                                                                        color: FFAppConstants.green86DF67,
+                                                                                                                                        color: FFAppConstants.yellowDDC66C,
                                                                                                                                         width: 1.0,
                                                                                                                                       ),
                                                                                                                                     ),
@@ -2374,7 +2374,7 @@ class _DailyCartScreenWidgetState extends State<DailyCartScreenWidget>
                                                                                                                                                         fontWeight: FontWeight.w600,
                                                                                                                                                         fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
                                                                                                                                                       ),
-                                                                                                                                                      color: FFAppConstants.whiteColor,
+                                                                                                                                                      color: FFAppConstants.blackColor0A0A0A,
                                                                                                                                                       fontSize: 10.0,
                                                                                                                                                       letterSpacing: 0.0,
                                                                                                                                                       fontWeight: FontWeight.w600,
@@ -2409,7 +2409,7 @@ class _DailyCartScreenWidgetState extends State<DailyCartScreenWidget>
                                                                                                                                                     fontWeight: FontWeight.w600,
                                                                                                                                                     fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
                                                                                                                                                   ),
-                                                                                                                                                  color: FFAppConstants.whiteColor,
+                                                                                                                                                  color: FFAppConstants.blackColor0A0A0A,
                                                                                                                                                   fontSize: 10.0,
                                                                                                                                                   letterSpacing: 0.0,
                                                                                                                                                   fontWeight: FontWeight.w600,
@@ -2438,7 +2438,7 @@ class _DailyCartScreenWidgetState extends State<DailyCartScreenWidget>
                                                                                                                                   width: 135.0,
                                                                                                                                   height: 30.0,
                                                                                                                                   decoration: BoxDecoration(
-                                                                                                                                    color: FFAppConstants.darkGreen,
+                                                                                                                                    color: FFAppConstants.yellowColor,
                                                                                                                                     borderRadius: BorderRadius.only(
                                                                                                                                       topLeft: Radius.circular(8.0),
                                                                                                                                       topRight: Radius.circular(8.0),
@@ -2446,7 +2446,7 @@ class _DailyCartScreenWidgetState extends State<DailyCartScreenWidget>
                                                                                                                                       bottomRight: Radius.circular(8.0),
                                                                                                                                     ),
                                                                                                                                     border: Border.all(
-                                                                                                                                      color: FFAppConstants.green86DF67,
+                                                                                                                                      color: FFAppConstants.yellowDDC66C,
                                                                                                                                       width: 1.0,
                                                                                                                                     ),
                                                                                                                                   ),
@@ -2463,7 +2463,7 @@ class _DailyCartScreenWidgetState extends State<DailyCartScreenWidget>
                                                                                                                                                   fontWeight: FontWeight.w600,
                                                                                                                                                   fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
                                                                                                                                                 ),
-                                                                                                                                                color: FFAppConstants.whiteColor,
+                                                                                                                                                color: FFAppConstants.blackColor0A0A0A,
                                                                                                                                                 fontSize: 10.0,
                                                                                                                                                 letterSpacing: 0.0,
                                                                                                                                                 fontWeight: FontWeight.w600,
@@ -4344,6 +4344,235 @@ class _DailyCartScreenWidgetState extends State<DailyCartScreenWidget>
                                                                     ),
                                                                   ),
                                                                 ],
+                                                              ),
+                                                              Padding(
+                                                                padding: EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        0.0,
+                                                                        10.0,
+                                                                        0.0,
+                                                                        10.0),
+                                                                child:
+                                                                    Container(
+                                                                  width: MediaQuery.sizeOf(
+                                                                              context)
+                                                                          .width *
+                                                                      1.0,
+                                                                  height:
+                                                                      valueOrDefault<
+                                                                          double>(
+                                                                    FFAppState().qtyZeroCheck !=
+                                                                            getJsonField(
+                                                                              dailyCartScreenShowspcatcartResponse.jsonBody,
+                                                                              r'''$.data.grand_price_cart_limit''',
+                                                                            )
+                                                                        ? 70.0
+                                                                        : 0.0,
+                                                                    50.0,
+                                                                  ),
+                                                                  decoration:
+                                                                      BoxDecoration(
+                                                                    color: Colors
+                                                                        .white,
+                                                                  ),
+                                                                  child: Align(
+                                                                    alignment:
+                                                                        AlignmentDirectional(
+                                                                            0.0,
+                                                                            0.0),
+                                                                    child:
+                                                                        Padding(
+                                                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                                                          13.0,
+                                                                          4.0,
+                                                                          13.0,
+                                                                          4.0),
+                                                                      child:
+                                                                          Container(
+                                                                        decoration:
+                                                                            BoxDecoration(
+                                                                          color:
+                                                                              Color(0xFFDBFEEF),
+                                                                          borderRadius:
+                                                                              BorderRadius.circular(8.0),
+                                                                        ),
+                                                                        child:
+                                                                            Align(
+                                                                          alignment: AlignmentDirectional(
+                                                                              0.0,
+                                                                              0.0),
+                                                                          child:
+                                                                              Padding(
+                                                                            padding: EdgeInsetsDirectional.fromSTEB(
+                                                                                10.0,
+                                                                                10.0,
+                                                                                10.0,
+                                                                                10.0),
+                                                                            child:
+                                                                                Text(
+                                                                              functions.getGrandPrizeMessage(
+                                                                                  functions.updateTotalAmount(
+                                                                                      FFAppState().isDeliveryPartnerTipSelected,
+                                                                                      FFAppState().couponDiscount.toString(),
+                                                                                      getJsonField(
+                                                                                        dailyCartScreenShowspcatcartResponse.jsonBody,
+                                                                                        r'''$.data.total_price''',
+                                                                                      ).toString(),
+                                                                                      getJsonField(
+                                                                                        dailyCartScreenShowspcatcartResponse.jsonBody,
+                                                                                        r'''$.data.referral_balance''',
+                                                                                      ).toString(),
+                                                                                      'false',
+                                                                                      _model.selectedPaymentMethod,
+                                                                                      functions.stringToDouble(functions
+                                                                                                  .updateTotalAmount(
+                                                                                                      FFAppState().isDeliveryPartnerTipSelected,
+                                                                                                      FFAppState().couponDiscount.toString(),
+                                                                                                      getJsonField(
+                                                                                                        dailyCartScreenShowspcatcartResponse.jsonBody,
+                                                                                                        r'''$.data.total_price''',
+                                                                                                      ).toString(),
+                                                                                                      functions
+                                                                                                          .checkWalletWithAction(
+                                                                                                              _model.isRefWalletCheckBoxSelected,
+                                                                                                              functions
+                                                                                                                  .updateTotalAmount(
+                                                                                                                      FFAppState().isDeliveryPartnerTipSelected,
+                                                                                                                      FFAppState().couponDiscount.toString(),
+                                                                                                                      getJsonField(
+                                                                                                                        dailyCartScreenShowspcatcartResponse.jsonBody,
+                                                                                                                        r'''$.data.total_price''',
+                                                                                                                      ).toString(),
+                                                                                                                      getJsonField(
+                                                                                                                        dailyCartScreenShowspcatcartResponse.jsonBody,
+                                                                                                                        r'''$.data.referral_balance''',
+                                                                                                                      ).toString(),
+                                                                                                                      'false',
+                                                                                                                      _model.selectedPaymentMethod,
+                                                                                                                      getJsonField(
+                                                                                                                        FFAppState().appInfo,
+                                                                                                                        r'''$.codcharges''',
+                                                                                                                      ).toString(),
+                                                                                                                      '',
+                                                                                                                      '')
+                                                                                                                  .toString(),
+                                                                                                              getJsonField(
+                                                                                                                dailyCartScreenShowspcatcartResponse.jsonBody,
+                                                                                                                r'''$.data.referral_balance''',
+                                                                                                              ).toString(),
+                                                                                                              getJsonField(
+                                                                                                                FFAppState().appInfo,
+                                                                                                                r'''$.wallet_deduction_percentage''',
+                                                                                                              ).toString())
+                                                                                                          .toString(),
+                                                                                                      _model.isRefWalletCheckBoxSelected,
+                                                                                                      _model.selectedPaymentMethod,
+                                                                                                      getJsonField(
+                                                                                                        FFAppState().appInfo,
+                                                                                                        r'''$.codcharges''',
+                                                                                                      ).toString(),
+                                                                                                      functions
+                                                                                                          .calculateFinalPayableForCashPayment(
+                                                                                                              functions
+                                                                                                                  .updateTotalAmount(
+                                                                                                                      FFAppState().isDeliveryPartnerTipSelected,
+                                                                                                                      FFAppState().couponDiscount.toString(),
+                                                                                                                      getJsonField(
+                                                                                                                        dailyCartScreenShowspcatcartResponse.jsonBody,
+                                                                                                                        r'''$.data.total_price''',
+                                                                                                                      ).toString(),
+                                                                                                                      getJsonField(
+                                                                                                                        dailyCartScreenShowspcatcartResponse.jsonBody,
+                                                                                                                        r'''$.data.wallet_balance''',
+                                                                                                                      ).toString(),
+                                                                                                                      'false',
+                                                                                                                      _model.selectedPaymentMethod,
+                                                                                                                      getJsonField(
+                                                                                                                        FFAppState().appInfo,
+                                                                                                                        r'''$.codcharges''',
+                                                                                                                      ).toString(),
+                                                                                                                      '',
+                                                                                                                      '')
+                                                                                                                  .toString(),
+                                                                                                              functions
+                                                                                                                  .checkWalletWithAction(
+                                                                                                                      _model.isRefWalletCheckBoxSelected,
+                                                                                                                      functions
+                                                                                                                          .updateTotalAmount(
+                                                                                                                              FFAppState().isDeliveryPartnerTipSelected,
+                                                                                                                              FFAppState().couponDiscount.toString(),
+                                                                                                                              getJsonField(
+                                                                                                                                dailyCartScreenShowspcatcartResponse.jsonBody,
+                                                                                                                                r'''$.data.total_price''',
+                                                                                                                              ).toString(),
+                                                                                                                              getJsonField(
+                                                                                                                                dailyCartScreenShowspcatcartResponse.jsonBody,
+                                                                                                                                r'''$.data.referral_balance''',
+                                                                                                                              ).toString(),
+                                                                                                                              'false',
+                                                                                                                              _model.selectedPaymentMethod,
+                                                                                                                              getJsonField(
+                                                                                                                                FFAppState().appInfo,
+                                                                                                                                r'''$.codcharges''',
+                                                                                                                              ).toString(),
+                                                                                                                              '',
+                                                                                                                              '')
+                                                                                                                          .toString(),
+                                                                                                                      getJsonField(
+                                                                                                                        dailyCartScreenShowspcatcartResponse.jsonBody,
+                                                                                                                        r'''$.data.referral_balance''',
+                                                                                                                      ).toString(),
+                                                                                                                      getJsonField(
+                                                                                                                        FFAppState().appInfo,
+                                                                                                                        r'''$.wallet_deduction_percentage''',
+                                                                                                                      ).toString())
+                                                                                                                  .toString(),
+                                                                                                              getJsonField(
+                                                                                                                dailyCartScreenShowspcatcartResponse.jsonBody,
+                                                                                                                r'''$.data.wallet_balance''',
+                                                                                                              ).toString(),
+                                                                                                              _model.isWalletCheckBoxSelected)
+                                                                                                          .toString(),
+                                                                                                      _model.isWalletCheckBoxSelected)
+                                                                                                  .toString()) >
+                                                                                              0.0
+                                                                                          ? getJsonField(
+                                                                                              FFAppState().appInfo,
+                                                                                              r'''$.codcharges''',
+                                                                                            ).toString()
+                                                                                          : '0',
+                                                                                      '0',
+                                                                                      'false')!,
+                                                                                  getJsonField(
+                                                                                    dailyCartScreenShowspcatcartResponse.jsonBody,
+                                                                                    r'''$.data.grand_price_cart_limit''',
+                                                                                  ),
+                                                                                  getJsonField(
+                                                                                    dailyCartScreenShowspcatcartResponse.jsonBody,
+                                                                                    r'''$.data.grand_price_text''',
+                                                                                  ).toString(),
+                                                                                  getJsonField(
+                                                                                    dailyCartScreenShowspcatcartResponse.jsonBody,
+                                                                                    r'''$.data.grand_price_text_limit_reached''',
+                                                                                  ).toString()),
+                                                                              textAlign: TextAlign.center,
+                                                                              style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                    font: GoogleFonts.montserrat(
+                                                                                      fontWeight: FontWeight.w600,
+                                                                                      fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                                    ),
+                                                                                    color: FFAppConstants.darkGreen,
+                                                                                    letterSpacing: 0.0,
+                                                                                    fontWeight: FontWeight.w600,
+                                                                                    fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                                  ),
+                                                                            ),
+                                                                          ),
+                                                                        ),
+                                                                      ),
+                                                                    ),
+                                                                  ),
+                                                                ),
                                                               ),
                                                               if ((getJsonField(
                                                                     dailyCartScreenShowspcatcartResponse
@@ -6234,18 +6463,13 @@ class _DailyCartScreenWidgetState extends State<DailyCartScreenWidget>
                                                                             0.0,
                                                                             5.0,
                                                                             0.0,
-                                                                            5.0),
+                                                                            0.0),
                                                                 child:
                                                                     Container(
                                                                   width: MediaQuery.sizeOf(
                                                                               context)
                                                                           .width *
                                                                       1.0,
-                                                                  height: FFAppState()
-                                                                              .usserType !=
-                                                                          'guest'
-                                                                      ? 290.0
-                                                                      : 210.0,
                                                                   decoration:
                                                                       BoxDecoration(
                                                                     color: FFAppConstants
@@ -8001,7 +8225,7 @@ class _DailyCartScreenWidgetState extends State<DailyCartScreenWidget>
                                                                                 0.0,
                                                                                 2.0,
                                                                                 0.0,
-                                                                                0.0),
+                                                                                5.0),
                                                                             child:
                                                                                 Row(
                                                                               mainAxisSize: MainAxisSize.max,
@@ -8633,7 +8857,7 @@ class _DailyCartScreenWidgetState extends State<DailyCartScreenWidget>
                                                                           Padding(
                                                                             padding: EdgeInsetsDirectional.fromSTEB(
                                                                                 10.0,
-                                                                                10.0,
+                                                                                5.0,
                                                                                 10.0,
                                                                                 5.0),
                                                                             child:
@@ -8746,7 +8970,7 @@ class _DailyCartScreenWidgetState extends State<DailyCartScreenWidget>
                                                                                   hoverColor: Colors.transparent,
                                                                                   highlightColor: Colors.transparent,
                                                                                   onTap: () async {
-                                                                                    logFirebaseEvent('DAILY_CART_SCREEN_Container_qt9g2i4b_ON_');
+                                                                                    logFirebaseEvent('DAILY_CART_SCREEN_Container_litixar0_ON_');
                                                                                     if (FFAppState().deliveryPartnerInstructionAvoid == 'Avoid calling customer') {
                                                                                       logFirebaseEvent('Container_update_app_state');
                                                                                       FFAppState().deliveryPartnerInstructionAvoid = ' ';
@@ -8810,7 +9034,7 @@ class _DailyCartScreenWidgetState extends State<DailyCartScreenWidget>
                                                                                     hoverColor: Colors.transparent,
                                                                                     highlightColor: Colors.transparent,
                                                                                     onTap: () async {
-                                                                                      logFirebaseEvent('DAILY_CART_SCREEN_Container_o9fs4o1x_ON_');
+                                                                                      logFirebaseEvent('DAILY_CART_SCREEN_Container_0i61xjrr_ON_');
                                                                                       if (FFAppState().deliveryPartnerInstructionBell == 'Don’t ring the bell') {
                                                                                         logFirebaseEvent('Container_update_app_state');
                                                                                         FFAppState().deliveryPartnerInstructionBell = '';
@@ -8875,7 +9099,7 @@ class _DailyCartScreenWidgetState extends State<DailyCartScreenWidget>
                                                                                     hoverColor: Colors.transparent,
                                                                                     highlightColor: Colors.transparent,
                                                                                     onTap: () async {
-                                                                                      logFirebaseEvent('DAILY_CART_SCREEN_Container_npi57z3r_ON_');
+                                                                                      logFirebaseEvent('DAILY_CART_SCREEN_Container_pk8s07r6_ON_');
                                                                                       if (FFAppState().deliveryPartnerInstructionDoor == ' Leave it at my door') {
                                                                                         logFirebaseEvent('Container_update_app_state');
                                                                                         FFAppState().deliveryPartnerInstructionDoor = '';
@@ -16871,10 +17095,6 @@ class _DailyCartScreenWidgetState extends State<DailyCartScreenWidget>
                                                                                           }
                                                                                         } else {
                                                                                           logFirebaseEvent('Container_alert_dialog');
-                                                                                          unawaited(
-                                                                                            () async {}(),
-                                                                                          );
-                                                                                          logFirebaseEvent('Container_alert_dialog');
                                                                                           await showDialog(
                                                                                             context: context,
                                                                                             builder: (dialogContext) {
@@ -16909,10 +17129,6 @@ class _DailyCartScreenWidgetState extends State<DailyCartScreenWidget>
                                                                                           safeSetState(() {});
                                                                                         }
                                                                                       } else {
-                                                                                        logFirebaseEvent('Container_alert_dialog');
-                                                                                        unawaited(
-                                                                                          () async {}(),
-                                                                                        );
                                                                                         logFirebaseEvent('Container_alert_dialog');
                                                                                         await showDialog(
                                                                                           context: context,
@@ -16954,10 +17170,6 @@ class _DailyCartScreenWidgetState extends State<DailyCartScreenWidget>
                                                                                         safeSetState(() {});
                                                                                       }
                                                                                     } else {
-                                                                                      logFirebaseEvent('Container_alert_dialog');
-                                                                                      unawaited(
-                                                                                        () async {}(),
-                                                                                      );
                                                                                       logFirebaseEvent('Container_alert_dialog');
                                                                                       await showDialog(
                                                                                         context: context,
@@ -17002,10 +17214,6 @@ class _DailyCartScreenWidgetState extends State<DailyCartScreenWidget>
                                                                                       safeSetState(() {});
                                                                                     }
                                                                                   } else {
-                                                                                    logFirebaseEvent('Container_alert_dialog');
-                                                                                    unawaited(
-                                                                                      () async {}(),
-                                                                                    );
                                                                                     logFirebaseEvent('Container_alert_dialog');
                                                                                     await showDialog(
                                                                                       context: context,

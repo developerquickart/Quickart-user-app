@@ -299,10 +299,6 @@ class _OtpScreenWidgetState extends State<OtpScreenWidget> {
                             ),
                             controller: _model.pinCodeController,
                             onChanged: (_) {},
-                            onCompleted: (_) async {
-                              logFirebaseEvent(
-                                  'OTP_SCREEN_PinCode_vdogrubf_ON_PINCODE_C');
-                            },
                             autovalidateMode:
                                 AutovalidateMode.onUserInteraction,
                             validator: _model.pinCodeControllerValidator

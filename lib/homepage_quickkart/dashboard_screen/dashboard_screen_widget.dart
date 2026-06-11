@@ -517,33 +517,17 @@ class _DashboardScreenWidgetState extends State<DashboardScreenWidget> {
                                                                       5.0,
                                                                       5.0,
                                                                       0.0),
-                                                          child: InkWell(
-                                                            splashColor: Colors
-                                                                .transparent,
-                                                            focusColor: Colors
-                                                                .transparent,
-                                                            hoverColor: Colors
-                                                                .transparent,
-                                                            highlightColor:
-                                                                Colors
-                                                                    .transparent,
-                                                            onTap: () async {
-                                                              logFirebaseEvent(
-                                                                  'DASHBOARD_SCREEN_Image_4n0hoim8_ON_TAP');
-                                                            },
-                                                            child: ClipRRect(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          8.0),
-                                                              child:
-                                                                  Image.asset(
-                                                                'assets/images/Quickart_Icon.png',
-                                                                width: 25.0,
-                                                                height: 25.0,
-                                                                fit: BoxFit
-                                                                    .contain,
-                                                              ),
+                                                          child: ClipRRect(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        8.0),
+                                                            child: Image.asset(
+                                                              'assets/images/Quickart_Icon.png',
+                                                              width: 25.0,
+                                                              height: 25.0,
+                                                              fit: BoxFit
+                                                                  .contain,
                                                             ),
                                                           ),
                                                         ),
@@ -822,7 +806,7 @@ class _DashboardScreenWidgetState extends State<DashboardScreenWidget> {
                                                                 getJsonField(
                                                                   dashboardScreenOneAPIResponse
                                                                       .jsonBody,
-                                                                  r'''$.oneapi_bg_first_image.bg_image_color''',
+                                                                  r'''$.oneapi_bg_first_image.bg_icon_color''',
                                                                 ).toString(),
                                                                 defaultColor:
                                                                     Colors
@@ -872,7 +856,7 @@ class _DashboardScreenWidgetState extends State<DashboardScreenWidget> {
                                                               getJsonField(
                                                                 dashboardScreenOneAPIResponse
                                                                     .jsonBody,
-                                                                r'''$.oneapi_bg_first_image.bg_image_color''',
+                                                                r'''$.oneapi_bg_first_image.bg_icon_color''',
                                                               ).toString(),
                                                               defaultColor:
                                                                   Colors.black,
@@ -1684,48 +1668,23 @@ class _DashboardScreenWidgetState extends State<DashboardScreenWidget> {
                                                 padding: EdgeInsetsDirectional
                                                     .fromSTEB(
                                                         0.0, 5.0, 0.0, 0.0),
-                                                child: InkWell(
-                                                  splashColor:
-                                                      Colors.transparent,
-                                                  focusColor:
-                                                      Colors.transparent,
-                                                  hoverColor:
-                                                      Colors.transparent,
-                                                  highlightColor:
-                                                      Colors.transparent,
-                                                  onTap: () async {
-                                                    logFirebaseEvent(
-                                                        'DASHBOARD_SCREEN_Text_p8lvroor_ON_TAP');
-                                                  },
-                                                  child: Text(
-                                                    functions.getArrayCount(
-                                                                getJsonField(
-                                                              dashboardScreenOneAPIResponse
-                                                                  .jsonBody,
-                                                              r'''$.activesub_ordlist''',
-                                                            )) ==
-                                                            '1'
-                                                        ? 'YOUR ACTIVE SUBSCRIPTION'
-                                                        : 'YOUR ACTIVE SUBSCRIPTION\'S',
-                                                    maxLines: 2,
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .bodyMedium
-                                                        .override(
-                                                          font: GoogleFonts
-                                                              .montserrat(
-                                                            fontWeight:
-                                                                FontWeight.bold,
-                                                            fontStyle:
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyMedium
-                                                                    .fontStyle,
-                                                          ),
-                                                          color: FFAppConstants
-                                                              .blackColor0A0A0A,
-                                                          fontSize: 17.0,
-                                                          letterSpacing: 0.0,
+                                                child: Text(
+                                                  functions.getArrayCount(
+                                                              getJsonField(
+                                                            dashboardScreenOneAPIResponse
+                                                                .jsonBody,
+                                                            r'''$.activesub_ordlist''',
+                                                          )) ==
+                                                          '1'
+                                                      ? 'YOUR ACTIVE SUBSCRIPTION'
+                                                      : 'YOUR ACTIVE SUBSCRIPTION\'S',
+                                                  maxLines: 2,
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodyMedium
+                                                      .override(
+                                                        font: GoogleFonts
+                                                            .montserrat(
                                                           fontWeight:
                                                               FontWeight.bold,
                                                           fontStyle:
@@ -1734,7 +1693,18 @@ class _DashboardScreenWidgetState extends State<DashboardScreenWidget> {
                                                                   .bodyMedium
                                                                   .fontStyle,
                                                         ),
-                                                  ),
+                                                        color: FFAppConstants
+                                                            .blackColor0A0A0A,
+                                                        fontSize: 17.0,
+                                                        letterSpacing: 0.0,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        fontStyle:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyMedium
+                                                                .fontStyle,
+                                                      ),
                                                 ),
                                               ),
                                             ),
@@ -4322,10 +4292,6 @@ class _DashboardScreenWidgetState extends State<DashboardScreenWidget> {
                                           _model.timerMilliseconds = value;
                                           _model.timerValue = displayTime;
                                           if (shouldUpdate) safeSetState(() {});
-                                        },
-                                        onEnded: () async {
-                                          logFirebaseEvent(
-                                              'DASHBOARD_SCREEN_Timer_zlk7axkq_ON_TIMER');
                                         },
                                         textAlign: TextAlign.start,
                                         style: FlutterFlowTheme.of(context)

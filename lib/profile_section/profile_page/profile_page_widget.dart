@@ -2440,109 +2440,87 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                                         decoration: BoxDecoration(
                                           color: Colors.white,
                                         ),
-                                        child: InkWell(
-                                          splashColor: Colors.transparent,
-                                          focusColor: Colors.transparent,
-                                          hoverColor: Colors.transparent,
-                                          highlightColor: Colors.transparent,
-                                          onTap: () async {
-                                            logFirebaseEvent(
-                                                'PROFILE_PAGE_PAGE_Column_bt6ictxa_ON_TAP');
-                                          },
-                                          child: Column(
-                                            mainAxisSize: MainAxisSize.max,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              Builder(
-                                                builder: (context) => Padding(
-                                                  padding: EdgeInsetsDirectional
-                                                      .fromSTEB(
-                                                          20.0, 0.0, 20.0, 0.0),
-                                                  child: InkWell(
-                                                    splashColor:
-                                                        Colors.transparent,
-                                                    focusColor:
-                                                        Colors.transparent,
-                                                    hoverColor:
-                                                        Colors.transparent,
-                                                    highlightColor:
-                                                        Colors.transparent,
-                                                    onTap: () async {
-                                                      logFirebaseEvent(
-                                                          'PROFILE_PAGE_PAGE_Row_l90g3oxk_ON_TAP');
-                                                      logFirebaseEvent(
-                                                          'Row_custom_action');
-                                                      _model.refCodeN =
-                                                          await actions
-                                                              .generateReferralLink(
-                                                        getJsonField(
-                                                          FFAppState().appInfo,
-                                                          r'''$.referral_code''',
-                                                        ).toString(),
-                                                      );
-                                                      logFirebaseEvent(
-                                                          'Row_wait__delay');
-                                                      await Future.delayed(
-                                                        Duration(
-                                                          milliseconds: 1000,
-                                                        ),
-                                                      );
-                                                      logFirebaseEvent(
-                                                          'Row_share');
-                                                      await Share.share(
-                                                        '${getJsonField(
-                                                          (_model.apiShowProfile
-                                                                  ?.jsonBody ??
-                                                              ''),
-                                                          r'''$.data.referral_message''',
-                                                        ).toString()}  ${_model.refCodeN}',
-                                                        sharePositionOrigin:
-                                                            getWidgetBoundingBox(
-                                                                context),
-                                                      );
-                                                      logFirebaseEvent(
-                                                          'Row_google_analytics_event');
-                                                      logFirebaseEvent(
-                                                        'Share',
-                                                        parameters: {
-                                                          'Screen Name':
-                                                              'Profile',
-                                                          'Share To':
-                                                              'Refer a Friend',
-                                                        },
-                                                      );
+                                        child: Column(
+                                          mainAxisSize: MainAxisSize.max,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Builder(
+                                              builder: (context) => Padding(
+                                                padding: EdgeInsetsDirectional
+                                                    .fromSTEB(
+                                                        20.0, 0.0, 20.0, 0.0),
+                                                child: InkWell(
+                                                  splashColor:
+                                                      Colors.transparent,
+                                                  focusColor:
+                                                      Colors.transparent,
+                                                  hoverColor:
+                                                      Colors.transparent,
+                                                  highlightColor:
+                                                      Colors.transparent,
+                                                  onTap: () async {
+                                                    logFirebaseEvent(
+                                                        'PROFILE_PAGE_PAGE_Row_l90g3oxk_ON_TAP');
+                                                    logFirebaseEvent(
+                                                        'Row_custom_action');
+                                                    _model.refCodeN =
+                                                        await actions
+                                                            .generateReferralLink(
+                                                      getJsonField(
+                                                        FFAppState().appInfo,
+                                                        r'''$.referral_code''',
+                                                      ).toString(),
+                                                    );
+                                                    logFirebaseEvent(
+                                                        'Row_wait__delay');
+                                                    await Future.delayed(
+                                                      Duration(
+                                                        milliseconds: 1000,
+                                                      ),
+                                                    );
+                                                    logFirebaseEvent(
+                                                        'Row_share');
+                                                    await Share.share(
+                                                      '${getJsonField(
+                                                        (_model.apiShowProfile
+                                                                ?.jsonBody ??
+                                                            ''),
+                                                        r'''$.data.referral_message''',
+                                                      ).toString()}  ${_model.refCodeN}',
+                                                      sharePositionOrigin:
+                                                          getWidgetBoundingBox(
+                                                              context),
+                                                    );
+                                                    logFirebaseEvent(
+                                                        'Row_google_analytics_event');
+                                                    logFirebaseEvent(
+                                                      'Share',
+                                                      parameters: {
+                                                        'Screen Name':
+                                                            'Profile',
+                                                        'Share To':
+                                                            'Refer a Friend',
+                                                      },
+                                                    );
 
-                                                      safeSetState(() {});
-                                                    },
-                                                    child: Row(
-                                                      mainAxisSize:
-                                                          MainAxisSize.max,
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .spaceBetween,
-                                                      children: [
-                                                        Text(
-                                                          'Refer with friends',
-                                                          style: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .bodyMedium
-                                                              .override(
-                                                                font: GoogleFonts
-                                                                    .montserrat(
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w500,
-                                                                  fontStyle: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodyMedium
-                                                                      .fontStyle,
-                                                                ),
-                                                                color: FFAppConstants
-                                                                    .blackColor666666,
-                                                                fontSize: 13.0,
-                                                                letterSpacing:
-                                                                    0.0,
+                                                    safeSetState(() {});
+                                                  },
+                                                  child: Row(
+                                                    mainAxisSize:
+                                                        MainAxisSize.max,
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceBetween,
+                                                    children: [
+                                                      Text(
+                                                        'Refer with friends',
+                                                        style: FlutterFlowTheme
+                                                                .of(context)
+                                                            .bodyMedium
+                                                            .override(
+                                                              font: GoogleFonts
+                                                                  .montserrat(
                                                                 fontWeight:
                                                                     FontWeight
                                                                         .w500,
@@ -2551,74 +2529,85 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                                                                     .bodyMedium
                                                                     .fontStyle,
                                                               ),
-                                                        ),
-                                                        Builder(
-                                                          builder: (context) =>
-                                                              FlutterFlowIconButton(
-                                                            borderColor: Colors
-                                                                .transparent,
-                                                            borderRadius: 20.0,
-                                                            borderWidth: 1.0,
-                                                            buttonSize: 28.0,
-                                                            icon: Icon(
-                                                              Icons
-                                                                  .arrow_forward_ios,
                                                               color: FFAppConstants
-                                                                  .blackColor0A0A0A,
-                                                              size: 16.0,
+                                                                  .blackColor666666,
+                                                              fontSize: 13.0,
+                                                              letterSpacing:
+                                                                  0.0,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w500,
+                                                              fontStyle:
+                                                                  FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMedium
+                                                                      .fontStyle,
                                                             ),
-                                                            onPressed:
-                                                                () async {
-                                                              logFirebaseEvent(
-                                                                  'PROFILE_arrow_forward_ios_ICN_ON_TAP');
-                                                              logFirebaseEvent(
-                                                                  'IconButton_custom_action');
-                                                              _model.refCodep =
-                                                                  await actions
-                                                                      .generateReferralLink(
-                                                                getJsonField(
-                                                                  FFAppState()
-                                                                      .appInfo,
-                                                                  r'''$.referral_code''',
-                                                                ).toString(),
-                                                              );
-                                                              logFirebaseEvent(
-                                                                  'IconButton_share');
-                                                              await Share.share(
-                                                                '${getJsonField(
-                                                                  (_model.apiShowProfile
-                                                                          ?.jsonBody ??
-                                                                      ''),
-                                                                  r'''$.data.referral_message''',
-                                                                ).toString()}  ${_model.refCodep}',
-                                                                sharePositionOrigin:
-                                                                    getWidgetBoundingBox(
-                                                                        context),
-                                                              );
-                                                              logFirebaseEvent(
-                                                                  'IconButton_google_analytics_event');
-                                                              logFirebaseEvent(
-                                                                'Share',
-                                                                parameters: {
-                                                                  'Screen Name':
-                                                                      'Profile',
-                                                                  'Share To':
-                                                                      'Refer a Friend',
-                                                                },
-                                                              );
-
-                                                              safeSetState(
-                                                                  () {});
-                                                            },
+                                                      ),
+                                                      Builder(
+                                                        builder: (context) =>
+                                                            FlutterFlowIconButton(
+                                                          borderColor: Colors
+                                                              .transparent,
+                                                          borderRadius: 20.0,
+                                                          borderWidth: 1.0,
+                                                          buttonSize: 28.0,
+                                                          icon: Icon(
+                                                            Icons
+                                                                .arrow_forward_ios,
+                                                            color: FFAppConstants
+                                                                .blackColor0A0A0A,
+                                                            size: 16.0,
                                                           ),
+                                                          onPressed: () async {
+                                                            logFirebaseEvent(
+                                                                'PROFILE_arrow_forward_ios_ICN_ON_TAP');
+                                                            logFirebaseEvent(
+                                                                'IconButton_custom_action');
+                                                            _model.refCodep =
+                                                                await actions
+                                                                    .generateReferralLink(
+                                                              getJsonField(
+                                                                FFAppState()
+                                                                    .appInfo,
+                                                                r'''$.referral_code''',
+                                                              ).toString(),
+                                                            );
+                                                            logFirebaseEvent(
+                                                                'IconButton_share');
+                                                            await Share.share(
+                                                              '${getJsonField(
+                                                                (_model.apiShowProfile
+                                                                        ?.jsonBody ??
+                                                                    ''),
+                                                                r'''$.data.referral_message''',
+                                                              ).toString()}  ${_model.refCodep}',
+                                                              sharePositionOrigin:
+                                                                  getWidgetBoundingBox(
+                                                                      context),
+                                                            );
+                                                            logFirebaseEvent(
+                                                                'IconButton_google_analytics_event');
+                                                            logFirebaseEvent(
+                                                              'Share',
+                                                              parameters: {
+                                                                'Screen Name':
+                                                                    'Profile',
+                                                                'Share To':
+                                                                    'Refer a Friend',
+                                                              },
+                                                            );
+
+                                                            safeSetState(() {});
+                                                          },
                                                         ),
-                                                      ],
-                                                    ),
+                                                      ),
+                                                    ],
                                                   ),
                                                 ),
                                               ),
-                                            ],
-                                          ),
+                                            ),
+                                          ],
                                         ),
                                       ),
                                     Container(

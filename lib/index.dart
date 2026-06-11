@@ -116,7 +116,3 @@ export '/address/google_maps_redirect_copy/google_maps_redirect_copy_widget.dart
     show GoogleMapsRedirectCopyWidget;
 export '/cart/total_pay_s_d_k_payment_screen/total_pay_s_d_k_payment_screen_widget.dart'
     show TotalPaySDKPaymentScreenWidget;
-export '/cart/daily_cart_screen_copy/daily_cart_screen_copy_widget.dart'
-    show DailyCartScreenCopyWidget;
-export '/cart/cart_subscription_screen_copy/cart_subscription_screen_copy_widget.dart'
-    show CartSubscriptionScreenCopyWidget;

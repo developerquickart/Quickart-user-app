@@ -1018,16 +1018,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               ParamType.String,
             ),
           ),
-        ),
-        FFRoute(
-          name: DailyCartScreenCopyWidget.routeName,
-          path: DailyCartScreenCopyWidget.routePath,
-          builder: (context, params) => DailyCartScreenCopyWidget(),
-        ),
-        FFRoute(
-          name: CartSubscriptionScreenCopyWidget.routeName,
-          path: CartSubscriptionScreenCopyWidget.routePath,
-          builder: (context, params) => CartSubscriptionScreenCopyWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
