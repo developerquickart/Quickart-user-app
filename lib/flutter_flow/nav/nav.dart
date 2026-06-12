@@ -989,11 +989,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           ),
         ),
         FFRoute(
-          name: GoogleMapsRedirectCopyWidget.routeName,
-          path: GoogleMapsRedirectCopyWidget.routePath,
-          builder: (context, params) => GoogleMapsRedirectCopyWidget(),
-        ),
-        FFRoute(
           name: TotalPaySDKPaymentScreenWidget.routeName,
           path: TotalPaySDKPaymentScreenWidget.routePath,
           builder: (context, params) => TotalPaySDKPaymentScreenWidget(

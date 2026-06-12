@@ -3386,7 +3386,7 @@ class _TrialProductCartScreenWidgetState
                                                                           color:
                                                                               FFAppConstants.neutralBlack3D3D3D,
                                                                           fontSize:
-                                                                              8.0,
+                                                                              10.0,
                                                                           letterSpacing:
                                                                               0.0,
                                                                           fontWeight:
@@ -3513,7 +3513,7 @@ class _TrialProductCartScreenWidgetState
                                                                             color:
                                                                                 FFAppConstants.neutralBlack3D3D3D,
                                                                             fontSize:
-                                                                                8.0,
+                                                                                10.0,
                                                                             letterSpacing:
                                                                                 0.0,
                                                                             fontWeight:
@@ -3640,7 +3640,7 @@ class _TrialProductCartScreenWidgetState
                                                                             color:
                                                                                 FFAppConstants.neutralBlack3D3D3D,
                                                                             fontSize:
-                                                                                8.0,
+                                                                                10.0,
                                                                             letterSpacing:
                                                                                 0.0,
                                                                             fontWeight:

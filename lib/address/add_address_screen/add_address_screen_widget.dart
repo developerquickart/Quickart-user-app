@@ -10,6 +10,7 @@ import '/custom_code/actions/index.dart' as actions;
 import '/custom_code/widgets/index.dart' as custom_widgets;
 import '/index.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -41,6 +42,20 @@ class _AddAddressScreenWidgetState extends State<AddAddressScreenWidget> {
 
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'AddAddressScreen'});
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      logFirebaseEvent('ADD_ADDRESS_SCREEN_AddAddressScreen_ON_I');
+      if (FFAppState().categoryName != 'addAddress') {
+        logFirebaseEvent('AddAddressScreen_navigate_to');
+
+        context.pushNamed(GoogleMapsRedirectWidget.routeName);
+
+        logFirebaseEvent('AddAddressScreen_update_app_state');
+        FFAppState().latLang = FFAppState().latLang;
+        safeSetState(() {});
+      }
+    });
+
     if (!isWeb) {
       _keyboardVisibilitySubscription =
           KeyboardVisibilityController().onChange.listen((bool visible) {

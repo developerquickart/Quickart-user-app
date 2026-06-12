@@ -43,6 +43,8 @@ class _GoogleMapsRedirectWidgetState extends State<GoogleMapsRedirectWidget> {
       logFirebaseEvent('GoogleMapsRedirect_update_app_state');
 
       safeSetState(() {});
+      logFirebaseEvent('GoogleMapsRedirect_rebuild_page');
+      safeSetState(() {});
     });
 
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));

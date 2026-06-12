@@ -401,7 +401,6 @@ final parametersBuilderMap =
           'title': getParameter<String>(data, 'title'),
         },
       ),
-  'GoogleMapsRedirectCopy': ParameterData.none(),
   'TotalPaySDKPaymentScreen': (data) async => ParameterData(
         allParams: {
           'checkoutUrl': getParameter<String>(data, 'checkoutUrl'),

@@ -636,8 +636,6 @@ class _VarientBotttomSheetWidgetState extends State<VarientBotttomSheetWidget> {
                                                                             5.0),
                                                                     child:
                                                                         Container(
-                                                                      width:
-                                                                          250.0,
                                                                       decoration:
                                                                           BoxDecoration(),
                                                                       child:
@@ -1047,7 +1045,7 @@ class _VarientBotttomSheetWidgetState extends State<VarientBotttomSheetWidget> {
                                                                                       },
                                                                                       text: 'ADD',
                                                                                       options: FFButtonOptions(
-                                                                                        width: 110.0,
+                                                                                        width: 100.0,
                                                                                         height: 30.0,
                                                                                         padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                                                                                         iconPadding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
@@ -1075,7 +1073,7 @@ class _VarientBotttomSheetWidgetState extends State<VarientBotttomSheetWidget> {
                                                                                   return Align(
                                                                                     alignment: AlignmentDirectional(1.0, 1.0),
                                                                                     child: Container(
-                                                                                      width: 110.0,
+                                                                                      width: 100.0,
                                                                                       height: 30.0,
                                                                                       decoration: BoxDecoration(
                                                                                         color: FlutterFlowTheme.of(context).secondaryBackground,
@@ -1403,7 +1401,7 @@ class _VarientBotttomSheetWidgetState extends State<VarientBotttomSheetWidget> {
                                                                                           Align(
                                                                                             alignment: AlignmentDirectional(0.0, 0.0),
                                                                                             child: Container(
-                                                                                              width: 40.0,
+                                                                                              width: 30.0,
                                                                                               height: 40.0,
                                                                                               decoration: BoxDecoration(
                                                                                                 color: FFAppConstants.whiteColor,
@@ -1924,7 +1922,7 @@ class _VarientBotttomSheetWidgetState extends State<VarientBotttomSheetWidget> {
                                                                                                 .length ==
                                                                                             0)))
                                                                                   Container(
-                                                                                    width: 130.0,
+                                                                                    width: 110.0,
                                                                                     height: 30.0,
                                                                                     decoration: BoxDecoration(
                                                                                       color: FFAppConstants.yellowColor,
@@ -1955,7 +1953,7 @@ class _VarientBotttomSheetWidgetState extends State<VarientBotttomSheetWidget> {
                                                                                                         fontStyle: FlutterFlowTheme.of(context).bodySmall.fontStyle,
                                                                                                       ),
                                                                                                       color: FFAppConstants.blackColor0A0A0A,
-                                                                                                      fontSize: 14.0,
+                                                                                                      fontSize: 12.0,
                                                                                                       letterSpacing: 0.0,
                                                                                                       fontWeight: FontWeight.w600,
                                                                                                       fontStyle: FlutterFlowTheme.of(context).bodySmall.fontStyle,
@@ -2033,7 +2031,7 @@ class _VarientBotttomSheetWidgetState extends State<VarientBotttomSheetWidget> {
                                                                                           );
                                                                                         },
                                                                                         child: Container(
-                                                                                          width: 130.0,
+                                                                                          width: 110.0,
                                                                                           height: 30.0,
                                                                                           decoration: BoxDecoration(
                                                                                             color: FFAppConstants.yellowColor,
@@ -2064,7 +2062,7 @@ class _VarientBotttomSheetWidgetState extends State<VarientBotttomSheetWidget> {
                                                                                                               fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
                                                                                                             ),
                                                                                                             color: FFAppConstants.blackColor0A0A0A,
-                                                                                                            fontSize: 14.0,
+                                                                                                            fontSize: 12.0,
                                                                                                             letterSpacing: 0.0,
                                                                                                             fontWeight: FontWeight.w600,
                                                                                                             fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
@@ -2294,7 +2292,7 @@ class _VarientBotttomSheetWidgetState extends State<VarientBotttomSheetWidget> {
                                                                                           safeSetState(() {});
                                                                                         },
                                                                                         child: Container(
-                                                                                          width: 130.0,
+                                                                                          width: 110.0,
                                                                                           height: 30.0,
                                                                                           decoration: BoxDecoration(
                                                                                             color: FFAppConstants.yellowColor,
@@ -2326,7 +2324,7 @@ class _VarientBotttomSheetWidgetState extends State<VarientBotttomSheetWidget> {
                                                                                                               fontStyle: FlutterFlowTheme.of(context).bodySmall.fontStyle,
                                                                                                             ),
                                                                                                             color: FFAppConstants.blackColor0A0A0A,
-                                                                                                            fontSize: 14.0,
+                                                                                                            fontSize: 12.0,
                                                                                                             letterSpacing: 0.0,
                                                                                                             fontWeight: FontWeight.w600,
                                                                                                             fontStyle: FlutterFlowTheme.of(context).bodySmall.fontStyle,
