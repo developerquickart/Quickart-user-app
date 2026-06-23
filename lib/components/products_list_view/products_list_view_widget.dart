@@ -152,6 +152,10 @@ class _ProductsListViewWidgetState extends State<ProductsListViewWidget> {
                     bottomLeft: Radius.circular(8.0),
                     bottomRight: Radius.circular(8.0),
                   ),
+                  border: Border.all(
+                    color: FFAppConstants.borderColor,
+                    width: 0.5,
+                  ),
                 ),
                 child: Stack(
                   children: [
@@ -2415,7 +2419,7 @@ class _ProductsListViewWidgetState extends State<ProductsListViewWidget> {
                                     alignment: AlignmentDirectional(0.0, 0.0),
                                     child: Padding(
                                       padding: EdgeInsetsDirectional.fromSTEB(
-                                          2.0, 0.0, 2.0, 0.0),
+                                          3.0, 0.0, 2.0, 0.0),
                                       child: RichText(
                                         textScaler:
                                             MediaQuery.of(context).textScaler,

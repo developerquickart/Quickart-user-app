@@ -25,6 +25,8 @@ class SubCategoriesScreenModel
 
   String subCatName = ' ';
 
+  int isFilterSelected = 0;
+
   ///  State fields for stateful widgets in this page.
 
   // Stores action output result for [Custom Action - checkInternetConnection] action in subCategoriesScreen widget.
@@ -35,6 +37,8 @@ class SubCategoriesScreenModel
   ApiCallResponse? apiResultCatProduct1;
   // Stores action output result for [Backend Call - API (seosource)] action in subCategoriesScreen widget.
   ApiCallResponse? apiResultSeoSource;
+  // Stores action output result for [Backend Call - API (catproduct)] action in Container widget.
+  ApiCallResponse? apiResultCartProductAll;
   // Stores action output result for [Backend Call - API (catproduct)] action in Container widget.
   ApiCallResponse? apiResultCartProduct;
   // Stores action output result for [Bottom Sheet - VarientBotttomSheet] action in Button widget.
@@ -125,6 +129,10 @@ class SubCategoriesScreenModel
   ApiCallResponse? addRemoveAPIResult111;
   // Stores action output result for [Backend Call - API (catproduct)] action in Icon2 widget.
   ApiCallResponse? apiResultCartProduct22;
+  // Stores action output result for [Bottom Sheet - FilterBottomSheet] action in IconButton widget.
+  int? selectedFilter;
+  // Stores action output result for [Backend Call - API (catproduct)] action in IconButton widget.
+  ApiCallResponse? apiResultCartProductFilter;
 
   @override
   void initState(BuildContext context) {}

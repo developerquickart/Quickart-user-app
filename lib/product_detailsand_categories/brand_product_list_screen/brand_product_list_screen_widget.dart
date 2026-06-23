@@ -505,8 +505,8 @@ class _BrandProductListScreenWidgetState
                                               ),
                                               border: Border.all(
                                                 color:
-                                                    FFAppConstants.whiteColor,
-                                                width: 1.0,
+                                                    FFAppConstants.borderColor,
+                                                width: 0.5,
                                               ),
                                             ),
                                             child: Stack(

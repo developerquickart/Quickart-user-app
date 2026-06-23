@@ -28,6 +28,7 @@ class _QuickartsplashScreenWidgetState
   late QuickartsplashScreenModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  LatLng? currentUserLocationValue;
 
   @override
   void initState() {
@@ -42,6 +43,8 @@ class _QuickartsplashScreenWidgetState
         return;
       }
       logFirebaseEvent('QUICKARTSPLASH_SCREEN_QuickartsplashScre');
+      currentUserLocationValue =
+          await getCurrentUserLocation(defaultLocation: LatLng(0.0, 0.0));
       logFirebaseEvent('QuickartsplashScreen_custom_action');
       _model.connectivityResultCopy = await actions.checkInternetConnection();
       logFirebaseEvent('QuickartsplashScreen_custom_action');
@@ -69,6 +72,9 @@ class _QuickartsplashScreenWidgetState
         await actions.getDeviceID();
         logFirebaseEvent('QuickartsplashScreen_custom_action');
         await actions.requestAppTracking();
+        logFirebaseEvent('QuickartsplashScreen_update_app_state');
+        FFAppState().latLang = currentUserLocationValue;
+        safeSetState(() {});
         if (isiOS) {
           logFirebaseEvent('QuickartsplashScreen_update_app_state');
           FFAppState().platform = 'ios';

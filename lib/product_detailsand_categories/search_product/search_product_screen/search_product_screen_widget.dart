@@ -1,6 +1,7 @@
 import '/backend/api_requests/api_calls.dart';
 import '/components/custom_alert_dailog/custom_alert_dailog_widget.dart';
 import '/components/empty_data_two_line_component/empty_data_two_line_component_widget.dart';
+import '/components/filter_bottom_sheet/filter_bottom_sheet_widget.dart';
 import '/components/varient_botttom_sheet/varient_botttom_sheet_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -109,9 +110,9 @@ class _SearchProductScreenWidgetState extends State<SearchProductScreenWidget> {
                     ),
                     Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 10.0, 0.0),
+                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 5.0, 0.0),
                       child: Container(
-                        width: MediaQuery.sizeOf(context).width * 0.83,
+                        width: MediaQuery.sizeOf(context).width * 0.73,
                         height: 50.0,
                         decoration: BoxDecoration(
                           color: FFAppConstants.whiteColor,
@@ -154,42 +155,41 @@ class _SearchProductScreenWidgetState extends State<SearchProductScreenWidget> {
                                       safeSetState(() {});
                                       logFirebaseEvent(
                                           'TextField_backend_call');
-                                      _model.searchProductAPIResponse =
-                                          await QuickartGroup
-                                              .searchbystoreproductCall
-                                              .call(
+                                      _model.searchProductAPIResponsefil =
+                                          await ProductsearchCall.call(
                                         userid: FFAppState().userID,
+                                        keyword: _model.textController.text,
                                         storeid: FFAppState().storeID,
-                                        keyword: widget.keywordPage == null ||
-                                                widget.keywordPage == ''
-                                            ? (_model.textController.text
-                                                .trimRight())
-                                            : widget.keywordPage,
-                                        minPrice: FFAppState().minPrice,
-                                        maxPrice: FFAppState().maxPrice,
-                                        byName: FFAppState().byName,
-                                        stock: FFAppState().stock,
-                                        minDiscount: FFAppState().minDiscount,
-                                        maxDiscount: FFAppState().maxDiscount,
-                                        sort: FFAppState().sort,
-                                        sortPrice: FFAppState().sortPrice,
-                                        sortName: FFAppState().sortName,
-                                        subCatId: 'null',
-                                        catId: 'null',
-                                        minRating: FFAppState().minRating,
-                                        maxRating: FFAppState().maxRating,
-                                        perpage: 200,
-                                        page: 1,
-                                        platform: isiOS ? 'ios' : 'android',
+                                        platform: FFAppState().platform,
+                                        sortPrice: () {
+                                          if (_model.selectedFilterSearch ==
+                                              1) {
+                                            return 'htol';
+                                          } else if (_model
+                                                  .selectedFilterSearch ==
+                                              2) {
+                                            return 'ltoh';
+                                          } else {
+                                            return FFAppState().sortPrice;
+                                          }
+                                        }(),
+                                        minDiscount:
+                                            _model.selectedFilterSearch == 3
+                                                ? '0.0'
+                                                : FFAppState().minDiscount,
+                                        maxDiscount:
+                                            _model.selectedFilterSearch == 3
+                                                ? '99.99'
+                                                : FFAppState().minDiscount,
                                       );
 
-                                      if ((_model.searchProductAPIResponse
+                                      if ((_model.searchProductAPIResponsefil
                                               ?.succeeded ??
                                           true)) {
                                         logFirebaseEvent(
                                             'TextField_update_page_state');
                                         _model.productModel1 = getJsonField(
-                                          (_model.searchProductAPIResponse
+                                          (_model.searchProductAPIResponsefil
                                                   ?.jsonBody ??
                                               ''),
                                           r'''$.data''',
@@ -210,7 +210,7 @@ class _SearchProductScreenWidgetState extends State<SearchProductScreenWidget> {
                                           'search product',
                                           0.0,
                                           (getJsonField(
-                                            (_model.searchProductAPIResponse
+                                            (_model.searchProductAPIResponsefil
                                                     ?.jsonBody ??
                                                 ''),
                                             r'''$.data''',
@@ -250,7 +250,7 @@ class _SearchProductScreenWidgetState extends State<SearchProductScreenWidget> {
                                           SnackBar(
                                             content: Text(
                                               getJsonField(
-                                                (_model.searchProductAPIResponse
+                                                (_model.searchProductAPIResponsefil
                                                         ?.jsonBody ??
                                                     ''),
                                                 r'''$.message''',
@@ -385,6 +385,159 @@ class _SearchProductScreenWidgetState extends State<SearchProductScreenWidget> {
                               ),
                             ],
                           ),
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(5.0, 10.0, 10.0, 0.0),
+                      child: InkWell(
+                        splashColor: Colors.transparent,
+                        focusColor: Colors.transparent,
+                        hoverColor: Colors.transparent,
+                        highlightColor: Colors.transparent,
+                        onTap: () async {
+                          logFirebaseEvent(
+                              'SEARCH_PRODUCT_SCREEN_Icon_k5sbb0ll_ON_T');
+                          logFirebaseEvent('Icon_bottom_sheet');
+                          await showModalBottomSheet(
+                            isScrollControlled: true,
+                            backgroundColor: Colors.transparent,
+                            enableDrag: false,
+                            context: context,
+                            builder: (context) {
+                              return GestureDetector(
+                                onTap: () {
+                                  FocusScope.of(context).unfocus();
+                                  FocusManager.instance.primaryFocus?.unfocus();
+                                },
+                                child: Padding(
+                                  padding: MediaQuery.viewInsetsOf(context),
+                                  child: FilterBottomSheetWidget(
+                                    isSelectedFilter: _model.isFilterSelected,
+                                  ),
+                                ),
+                              );
+                            },
+                          ).then((value) => safeSetState(
+                              () => _model.selectedFilterSearch = value));
+
+                          logFirebaseEvent('Icon_update_page_state');
+                          _model.isFilterSelected =
+                              _model.selectedFilterSearch!;
+                          safeSetState(() {});
+                          logFirebaseEvent('Icon_update_app_state');
+                          FFAppState().searchLoader = false;
+                          safeSetState(() {});
+                          logFirebaseEvent('Icon_backend_call');
+                          _model.searchProductAPIResponsefilter =
+                              await ProductsearchCall.call(
+                            userid: FFAppState().userID,
+                            keyword: _model.textController.text,
+                            storeid: FFAppState().storeID,
+                            platform: FFAppState().platform,
+                            sortPrice: () {
+                              if (_model.selectedFilterSearch == 1) {
+                                return 'htol';
+                              } else if (_model.selectedFilterSearch == 2) {
+                                return 'ltoh';
+                              } else {
+                                return FFAppState().sortPrice;
+                              }
+                            }(),
+                            minDiscount: _model.selectedFilterSearch == 3
+                                ? '0.0'
+                                : FFAppState().maxDiscount,
+                            maxDiscount: _model.selectedFilterSearch == 3
+                                ? '99.99'
+                                : FFAppState().maxDiscount,
+                          );
+
+                          if ((_model
+                                  .searchProductAPIResponsefilter?.succeeded ??
+                              true)) {
+                            logFirebaseEvent('Icon_update_page_state');
+                            _model.productModel1 = getJsonField(
+                              (_model.searchProductAPIResponsefilter
+                                      ?.jsonBody ??
+                                  ''),
+                              r'''$.data''',
+                            );
+                            logFirebaseEvent('Icon_update_app_state');
+                            FFAppState().searchLoader = true;
+                            safeSetState(() {});
+                            logFirebaseEvent('Icon_custom_action');
+                            await actions.facebookEventClass(
+                              '0',
+                              widget.keywordPage == null ||
+                                      widget.keywordPage == ''
+                                  ? (_model.textController.text.trimRight())
+                                  : widget.keywordPage!,
+                              'search product',
+                              0.0,
+                              (getJsonField(
+                                (_model.searchProductAPIResponsefilter
+                                        ?.jsonBody ??
+                                    ''),
+                                r'''$.data''',
+                              )
+                                          .toList()
+                                          .map<ProductCountStruct?>(
+                                              ProductCountStruct.maybeFromMap)
+                                          .toList()
+                                      as Iterable<ProductCountStruct?>)
+                                  .withoutNulls
+                                  .length,
+                              0.0,
+                              'search',
+                              FFAppState().emptyJson,
+                              ' ',
+                              ' ',
+                              ' ',
+                              ' ',
+                              ' ',
+                            );
+                            logFirebaseEvent('Icon_google_analytics_event');
+                            logFirebaseEvent(
+                              'SearchScreenAnalytics',
+                              parameters: {
+                                'Keyword': FFAppState().keyword,
+                                'apiName': 'searchbystoreproduct',
+                              },
+                            );
+                          } else {
+                            logFirebaseEvent('Icon_show_snack_bar');
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(
+                                  getJsonField(
+                                    (_model.searchProductAPIResponsefilter
+                                            ?.jsonBody ??
+                                        ''),
+                                    r'''$.message''',
+                                  ).toString(),
+                                  style: GoogleFonts.montserrat(
+                                    color: FFAppConstants.blackColor0A0A0A,
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 12.0,
+                                  ),
+                                ),
+                                duration: Duration(milliseconds: 4000),
+                                backgroundColor:
+                                    FFAppConstants.NeutralBlack50Color,
+                              ),
+                            );
+                            logFirebaseEvent('Icon_update_app_state');
+                            FFAppState().searchLoader = true;
+                            safeSetState(() {});
+                          }
+
+                          safeSetState(() {});
+                        },
+                        child: Icon(
+                          Icons.filter_alt,
+                          color: FFAppConstants.appBarIconandTitleColor,
+                          size: 26.0,
                         ),
                       ),
                     ),
@@ -554,8 +707,8 @@ class _SearchProductScreenWidgetState extends State<SearchProductScreenWidget> {
                                                     ),
                                                     border: Border.all(
                                                       color: FFAppConstants
-                                                          .whiteColor,
-                                                      width: 1.0,
+                                                          .borderColor,
+                                                      width: 0.5,
                                                     ),
                                                   ),
                                                   child: Stack(

@@ -149,6 +149,10 @@ class _ProductGVWidgetState extends State<ProductGVWidget> {
                     bottomLeft: Radius.circular(8.0),
                     bottomRight: Radius.circular(8.0),
                   ),
+                  border: Border.all(
+                    color: FFAppConstants.borderColor,
+                    width: 0.5,
+                  ),
                 ),
                 child: Stack(
                   children: [

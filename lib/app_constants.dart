@@ -138,4 +138,5 @@ abstract class FFAppConstants {
   static const String orderStatusPaymentFailed = 'Payment_failed';
   static const String cancelOrdertext =
       'Are you sure you want to cancel this order?';
+  static const Color borderColor = Color(4292667864);
 }

@@ -7,6 +7,10 @@ import 'fresh_food_screen_widget.dart' show FreshFoodScreenWidget;
 import 'package:flutter/material.dart';
 
 class FreshFoodScreenModel extends FlutterFlowModel<FreshFoodScreenWidget> {
+  ///  Local state fields for this page.
+
+  int isFilterSelected = 0;
+
   ///  State fields for stateful widgets in this page.
 
   Completer<ApiCallResponse>? apiRequestCompleter;
@@ -38,6 +42,8 @@ class FreshFoodScreenModel extends FlutterFlowModel<FreshFoodScreenWidget> {
   ApiCallResponse? addRemoveAPIResult;
   // Model for bottomnavBar component.
   late BottomnavBarModel bottomnavBarModel;
+  // Stores action output result for [Bottom Sheet - FilterBottomSheet] action in Icon widget.
+  int? selectedFilter;
 
   @override
   void initState(BuildContext context) {

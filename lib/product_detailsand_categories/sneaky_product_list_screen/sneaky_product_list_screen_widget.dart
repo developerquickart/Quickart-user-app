@@ -1,6 +1,7 @@
 import '/backend/api_requests/api_calls.dart';
 import '/components/custom_alert_dailog/custom_alert_dailog_widget.dart';
 import '/components/empty_data_two_line_component/empty_data_two_line_component_widget.dart';
+import '/components/filter_bottom_sheet/filter_bottom_sheet_widget.dart';
 import '/components/varient_botttom_sheet/varient_botttom_sheet_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -138,22 +139,82 @@ class _SneakyProductListScreenWidgetState
               }
             },
           ),
-          title: Text(
-            'Neighbour\'s Choice',
-            textAlign: TextAlign.start,
-            style: FlutterFlowTheme.of(context).headlineMedium.override(
-                  font: GoogleFonts.montserrat(
-                    fontWeight: FontWeight.w600,
-                    fontStyle:
-                        FlutterFlowTheme.of(context).headlineMedium.fontStyle,
-                  ),
-                  color: FFAppConstants.appBarIconandTitleColor,
-                  fontSize: FFAppConstants.appBartitleFont.toDouble(),
-                  letterSpacing: 0.0,
-                  fontWeight: FontWeight.w600,
-                  fontStyle:
-                      FlutterFlowTheme.of(context).headlineMedium.fontStyle,
+          title: Row(
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              Container(
+                width: MediaQuery.sizeOf(context).width * 0.66,
+                decoration: BoxDecoration(),
+                child: Text(
+                  'Neighbour\'s Choice',
+                  textAlign: TextAlign.start,
+                  style: FlutterFlowTheme.of(context).headlineMedium.override(
+                        font: GoogleFonts.montserrat(
+                          fontWeight: FontWeight.w600,
+                          fontStyle: FlutterFlowTheme.of(context)
+                              .headlineMedium
+                              .fontStyle,
+                        ),
+                        color: FFAppConstants.appBarIconandTitleColor,
+                        fontSize: FFAppConstants.appBartitleFont.toDouble(),
+                        letterSpacing: 0.0,
+                        fontWeight: FontWeight.w600,
+                        fontStyle: FlutterFlowTheme.of(context)
+                            .headlineMedium
+                            .fontStyle,
+                      ),
                 ),
+              ),
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(5.0, 10.0, 10.0, 0.0),
+                child: InkWell(
+                  splashColor: Colors.transparent,
+                  focusColor: Colors.transparent,
+                  hoverColor: Colors.transparent,
+                  highlightColor: Colors.transparent,
+                  onTap: () async {
+                    logFirebaseEvent(
+                        'SNEAKY_PRODUCT_LIST_SCREEN_Icon_gd4jymgk');
+                    logFirebaseEvent('Icon_bottom_sheet');
+                    await showModalBottomSheet(
+                      isScrollControlled: true,
+                      backgroundColor: Colors.transparent,
+                      enableDrag: false,
+                      context: context,
+                      builder: (context) {
+                        return GestureDetector(
+                          onTap: () {
+                            FocusScope.of(context).unfocus();
+                            FocusManager.instance.primaryFocus?.unfocus();
+                          },
+                          child: Padding(
+                            padding: MediaQuery.viewInsetsOf(context),
+                            child: FilterBottomSheetWidget(
+                              isSelectedFilter: _model.isFilterSelected,
+                            ),
+                          ),
+                        );
+                      },
+                    ).then((value) =>
+                        safeSetState(() => _model.selectedFilter = value));
+
+                    logFirebaseEvent('Icon_update_page_state');
+                    _model.isFilterSelected = _model.selectedFilter!;
+                    safeSetState(() {});
+                    logFirebaseEvent('Icon_refresh_database_request');
+                    safeSetState(() => _model.apiRequestCompleter = null);
+                    await _model.waitForApiRequestCompleted();
+
+                    safeSetState(() {});
+                  },
+                  child: Icon(
+                    Icons.filter_alt,
+                    color: FFAppConstants.appBarIconandTitleColor,
+                    size: 26.0,
+                  ),
+                ),
+              ),
+            ],
           ),
           actions: [],
           centerTitle: false,
@@ -198,6 +259,21 @@ class _SneakyProductListScreenWidgetState
                                   deviceid: FFAppState().deviceID,
                                   userid: FFAppState().userID,
                                   platform: isiOS ? 'ios' : 'android',
+                                  minPrice: _model.isFilterSelected == 3
+                                      ? '0.0'
+                                      : FFAppState().minDiscount,
+                                  maxPrice: _model.isFilterSelected == 3
+                                      ? '99.99'
+                                      : FFAppState().maxDiscount,
+                                  sortPrice: () {
+                                    if (_model.isFilterSelected == 1) {
+                                      return 'htol';
+                                    } else if (_model.isFilterSelected == 2) {
+                                      return 'ltoh';
+                                    } else {
+                                      return FFAppState().sortPrice;
+                                    }
+                                  }(),
                                 )))
                               .future,
                           builder: (context, snapshot) {
@@ -255,7 +331,7 @@ class _SneakyProductListScreenWidgetState
                                         SliverGridDelegateWithFixedCrossAxisCount(
                                       crossAxisCount: 2,
                                       crossAxisSpacing: 5.0,
-                                      mainAxisSpacing: 2.0,
+                                      mainAxisSpacing: 5.0,
                                       childAspectRatio: 0.67,
                                     ),
                                     scrollDirection: Axis.vertical,
@@ -340,8 +416,8 @@ class _SneakyProductListScreenWidgetState
                                               bottomRight: Radius.circular(8.0),
                                             ),
                                             border: Border.all(
-                                              color: FFAppConstants.whiteColor,
-                                              width: 1.0,
+                                              color: FFAppConstants.borderColor,
+                                              width: 0.5,
                                             ),
                                           ),
                                           child: Stack(

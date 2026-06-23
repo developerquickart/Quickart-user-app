@@ -278,8 +278,8 @@ class _FavouritesScreenWidgetState extends State<FavouritesScreenWidget> {
                                               bottomRight: Radius.circular(8.0),
                                             ),
                                             border: Border.all(
-                                              color: FFAppConstants.whiteColor,
-                                              width: 1.0,
+                                              color: FFAppConstants.borderColor,
+                                              width: 0.5,
                                             ),
                                           ),
                                           child: Stack(

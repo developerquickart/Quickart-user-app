@@ -15,6 +15,8 @@ class SearchbyPopupBannerModel
 
   int? isPageUpdated = 0;
 
+  int isFilterSelected = 0;
+
   ///  State fields for stateful widgets in this page.
 
   // Stores action output result for [Backend Call - API (seosource)] action in searchbyPopupBanner widget.
@@ -56,6 +58,9 @@ class SearchbyPopupBannerModel
   );
   FlutterFlowTimerController timerController =
       FlutterFlowTimerController(StopWatchTimer(mode: StopWatchMode.countDown));
+
+  // Stores action output result for [Bottom Sheet - FilterBottomSheet] action in Icon widget.
+  int? selectedFilter;
 
   @override
   void initState(BuildContext context) {}

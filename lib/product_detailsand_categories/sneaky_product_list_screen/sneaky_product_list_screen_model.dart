@@ -10,6 +10,10 @@ import 'package:flutter/material.dart';
 
 class SneakyProductListScreenModel
     extends FlutterFlowModel<SneakyProductListScreenWidget> {
+  ///  Local state fields for this page.
+
+  int isFilterSelected = 0;
+
   ///  State fields for stateful widgets in this page.
 
   Completer<ApiCallResponse>? apiRequestCompleter;
@@ -49,6 +53,9 @@ class SneakyProductListScreenModel
   );
   FlutterFlowTimerController timerController =
       FlutterFlowTimerController(StopWatchTimer(mode: StopWatchMode.countDown));
+
+  // Stores action output result for [Bottom Sheet - FilterBottomSheet] action in Icon widget.
+  int? selectedFilter;
 
   @override
   void initState(BuildContext context) {}

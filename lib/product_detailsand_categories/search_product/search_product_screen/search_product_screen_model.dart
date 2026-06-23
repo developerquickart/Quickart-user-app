@@ -10,14 +10,20 @@ class SearchProductScreenModel
 
   dynamic productModel1;
 
+  int isFilterSelected = 0;
+
   ///  State fields for stateful widgets in this page.
 
   // State field(s) for TextField widget.
   FocusNode? textFieldFocusNode;
   TextEditingController? textController;
   String? Function(BuildContext, String?)? textControllerValidator;
-  // Stores action output result for [Backend Call - API (searchbystoreproduct)] action in TextField widget.
-  ApiCallResponse? searchProductAPIResponse;
+  // Stores action output result for [Backend Call - API (productsearch)] action in TextField widget.
+  ApiCallResponse? searchProductAPIResponsefil;
+  // Stores action output result for [Bottom Sheet - FilterBottomSheet] action in Icon widget.
+  int? selectedFilterSearch;
+  // Stores action output result for [Backend Call - API (productsearch)] action in Icon widget.
+  ApiCallResponse? searchProductAPIResponsefilter;
   // Stores action output result for [Bottom Sheet - VarientBotttomSheet] action in Button widget.
   dynamic returnJson7;
   // Stores action output result for [Custom Action - checkInternetConnection] action in Button widget.

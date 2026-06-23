@@ -1277,6 +1277,9 @@ class RepeatordersCall {
     String? storeid = '',
     String? deviceID = '',
     String? platform = '',
+    String? sortPrice = '',
+    String? minDiscount = '',
+    String? maxDiscount = '',
   }) async {
     final baseUrl = QuickartGroup.getBaseUrl();
 
@@ -1285,7 +1288,10 @@ class RepeatordersCall {
   "user_id": "${userid}",
   "store_id": "${storeid}",
   "device_id": "${deviceID}",
-  "platform": "${platform}"
+  "platform": "${platform}",
+  "min_discount": "${minDiscount}",
+  "max_discount": "${maxDiscount}",
+  "sortprice": "${sortPrice}"
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'repeatorders',
@@ -2044,6 +2050,9 @@ class SneakyproductlistCall {
     String? deviceid = '',
     String? userid = '',
     String? platform = '',
+    String? sortPrice = '',
+    String? minPrice = '',
+    String? maxPrice = '',
   }) async {
     final baseUrl = QuickartGroup.getBaseUrl();
 
@@ -2054,7 +2063,10 @@ class SneakyproductlistCall {
   "store_id": "${storeid}",
   "device_id": "${deviceid}",
   "user_id": "${userid}",
-  "platform": "${platform}"
+  "platform": "${platform}",
+  "min_discount": "${minPrice}",
+  "max_discount": "${maxPrice}",
+  "sortprice": "${sortPrice}"
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'sneakyproductlist',
@@ -3119,7 +3131,7 @@ class PaymentCall {
   "user_id": "${userid}",
   "bank_id": 0,
   "si_sub_ref_no": "${siNO}",
-  "store_id": "${storeid}",
+  "store_id": "7",
   "payment_method": "${paymentMethod}",
   "payment_status": "success",
   "wallet": "${walllet}",
@@ -3323,7 +3335,7 @@ class SubpaymentCall {
   "address_id": "${addressid}",
   "bank_id": 0,
   "si_sub_ref_no": "${siNo}",
-  "store_id": "${storeid}",
+  "store_id": "7",
   "payment_method": "${paymentMethod}",
   "payment_status": "success",
   "wallet": "${wallet}",
@@ -4215,6 +4227,9 @@ class OccasionalcatsearchCall {
     int? pageCount,
     String? byName = '',
     String? platform = '',
+    String? sortPrice = '',
+    String? minDiscount = '',
+    String? maxDiscount = '',
   }) async {
     final baseUrl = QuickartGroup.getBaseUrl();
 
@@ -4226,11 +4241,11 @@ class OccasionalcatsearchCall {
   "min_price": "null",
   "max_price": "null",
   "stock": "null",
-  "min_discount": "null",
-  "max_discount": "null",
+  "min_discount": "${escapeStringForJson(minDiscount)}",
+  "max_discount": "${escapeStringForJson(maxDiscount)}",
   "sort": "null",
   "sortname": "null",
-  "sortprice": "null",
+  "sortprice": "${escapeStringForJson(sortPrice)}",
   "cat_id": "null",
   "sub_cat_id": "null",
   "cattype": "occasional",
@@ -5203,6 +5218,61 @@ class SpentbywalletCall {
 
 /// End Quickart Group Code
 
+/// Start Quickart Zone Group Code
+
+class QuickartZoneGroup {
+  static String getBaseUrl() => 'https://fipunwrfngwnoaersvlb.supabase.co/';
+  static Map<String, String> headers = {};
+  static GetZoneIDCall getZoneIDCall = GetZoneIDCall();
+}
+
+class GetZoneIDCall {
+  Future<ApiCallResponse> call({
+    double? lat,
+    double? lng,
+    String? userid = '',
+  }) async {
+    final baseUrl = QuickartZoneGroup.getBaseUrl();
+
+    final ffApiRequestBody = '''
+{
+  "lat": "${lat}",
+  "lng": "${lng}",
+  "user_id": "${escapeStringForJson(userid)}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'getZoneID',
+      apiUrl: '${baseUrl}functions/v1/resolve-zone',
+      callType: ApiCallType.POST,
+      headers: {},
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  String? message(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.message''',
+      ));
+  dynamic data(dynamic response) => getJsonField(
+        response,
+        r'''$.data''',
+      );
+  int? status(dynamic response) => castToType<int>(getJsonField(
+        response,
+        r'''$.status''',
+      ));
+}
+
+/// End Quickart Zone Group Code
+
 class NearbySearchGoogleMapsCall {
   static Future<ApiCallResponse> call({
     String? latlng = '27.8247427:-82.75040159999999',
@@ -5296,6 +5366,9 @@ class ProductsearchCall {
     String? keyword = '',
     String? storeid = '',
     String? platform = '',
+    String? sortPrice = '',
+    String? minDiscount = '',
+    String? maxDiscount = '',
   }) async {
     final ffApiRequestBody = '''
 {
@@ -5306,11 +5379,11 @@ class ProductsearchCall {
   "min_price": "null",
   "max_price": "null",
   "stock": "null",
-  "min_discount": "null",
-  "max_discount": "null",
+  "min_discount": "${escapeStringForJson(minDiscount)}",
+  "max_discount": "${escapeStringForJson(maxDiscount)}",
   "sort": "null",
   "sortname": "null",
-  "sortprice": "null",
+  "sortprice": "${escapeStringForJson(sortPrice)}",
   "cat_id": "null",
   "sub_cat_id": "null",
   "device_id": "",
@@ -5323,7 +5396,7 @@ class ProductsearchCall {
     return ApiManager.instance.makeApiCall(
       callName: 'productsearch',
       apiUrl:
-          'https://ckxrmeapgvkllpxjgheg.supabase.co/functions/v1/product-search',
+          'https://kqnbbiyijarwsoymqtup.supabase.co/functions/v1/product-search',
       callType: ApiCallType.POST,
       headers: {},
       params: {},

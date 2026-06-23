@@ -121,7 +121,7 @@ class _NoteAndroidNotesWidgetState extends State<NoteAndroidNotesWidget> {
                     padding:
                         EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
                     child: Text(
-                      'Base URL demo:\n\nhttps://api.quickart.ae/testnodejsapp/\nhttps://demoapi.quickart.ae/testnodejsapp/\n',
+                      'Base URL demo:\n\nhttps://api.quickart.ae/testnodejsapp/\nhttps://demoapi.quickart.ae/testnodejsapp/\nhttps://zoneapi-production.up.railway.app/testnodejsapp/\n',
                       style: FlutterFlowTheme.of(context).bodyMedium.override(
                             font: GoogleFonts.readexPro(
                               fontWeight: FontWeight.w600,
@@ -253,7 +253,7 @@ class _NoteAndroidNotesWidgetState extends State<NoteAndroidNotesWidget> {
                     padding:
                         EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
                     child: Text(
-                      'Add codein bellow of   title: \'QuicKart\', \n// 🔑 TEXT SCALE HANDLING (ADD THIS)\n\n    builder: (context, child) {\n\n      final mediaQuery = MediaQuery.of(context);\n\n\n\n      return MediaQuery(\n\n        data: mediaQuery.copyWith(\n\n          // iOS text size restriction\n\n          textScaleFactor: Platform.isIOS\n\n              ? mediaQuery.textScaleFactor.clamp(1.0, 1.2) // ✅ recommended\n\n              : mediaQuery.textScaleFactor,\n\n        ),\n\n        child: child!,\n\n      );\n\n    },',
+                      'Add codein bellow of   title: \'QuicKart\', \n// 🔑 TEXT SCALE HANDLING (ADD THIS)\n\n    builder: (context, child) {\n      final mediaQuery = MediaQuery.of(context);\n\n      return MediaQuery(\n        data: mediaQuery.copyWith(\n          textScaleFactor: 1.0,\n        ),\n        child: child!,\n      );\n    },',
                       style: FlutterFlowTheme.of(context).bodyMedium.override(
                             font: GoogleFonts.readexPro(
                               fontWeight: FontWeight.w600,

@@ -1,6 +1,7 @@
 import '/backend/api_requests/api_calls.dart';
 import '/components/custom_alert_dailog/custom_alert_dailog_widget.dart';
 import '/components/empty_data_two_line_component/empty_data_two_line_component_widget.dart';
+import '/components/filter_bottom_sheet/filter_bottom_sheet_widget.dart';
 import '/components/varient_botttom_sheet/varient_botttom_sheet_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -13,6 +14,7 @@ import '/flutter_flow/custom_functions.dart' as functions;
 import '/index.dart';
 import 'dart:async';
 import 'package:stop_watch_timer/stop_watch_timer.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -188,25 +190,88 @@ class _AdditionalCatScreenWidgetState extends State<AdditionalCatScreenWidget> {
               }
             },
           ),
-          title: Text(
-            widget.name != null && widget.name != ''
-                ? ((String var1) {
-                    return var1.replaceAll(RegExp('_'), ' ');
-                  }(widget.name!))
-                : FFAppState().categoryName,
-            style: FlutterFlowTheme.of(context).headlineMedium.override(
-                  font: GoogleFonts.montserrat(
-                    fontWeight: FontWeight.w600,
-                    fontStyle:
-                        FlutterFlowTheme.of(context).headlineMedium.fontStyle,
-                  ),
-                  color: FFAppConstants.appBarIconandTitleColor,
-                  fontSize: FFAppConstants.appBartitleFont.toDouble(),
-                  letterSpacing: 0.0,
-                  fontWeight: FontWeight.w600,
-                  fontStyle:
-                      FlutterFlowTheme.of(context).headlineMedium.fontStyle,
+          title: Row(
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              Container(
+                width: MediaQuery.sizeOf(context).width * 0.66,
+                decoration: BoxDecoration(),
+                child: AutoSizeText(
+                  widget.name != null && widget.name != ''
+                      ? ((String var1) {
+                          return var1.replaceAll(RegExp('_'), ' ');
+                        }(widget.name!))
+                      : FFAppState().categoryName,
+                  maxLines: 2,
+                  minFontSize: 12.0,
+                  style: FlutterFlowTheme.of(context).headlineMedium.override(
+                        font: GoogleFonts.montserrat(
+                          fontWeight: FontWeight.w600,
+                          fontStyle: FlutterFlowTheme.of(context)
+                              .headlineMedium
+                              .fontStyle,
+                        ),
+                        color: FFAppConstants.appBarIconandTitleColor,
+                        fontSize: FFAppConstants.appBartitleFont.toDouble(),
+                        letterSpacing: 0.0,
+                        fontWeight: FontWeight.w600,
+                        fontStyle: FlutterFlowTheme.of(context)
+                            .headlineMedium
+                            .fontStyle,
+                      ),
+                  overflow: TextOverflow.ellipsis,
                 ),
+              ),
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(5.0, 10.0, 10.0, 0.0),
+                child: InkWell(
+                  splashColor: Colors.transparent,
+                  focusColor: Colors.transparent,
+                  hoverColor: Colors.transparent,
+                  highlightColor: Colors.transparent,
+                  onTap: () async {
+                    logFirebaseEvent(
+                        'ADDITIONAL_CAT_SCREEN_Icon_a8itdf76_ON_T');
+                    logFirebaseEvent('Icon_bottom_sheet');
+                    await showModalBottomSheet(
+                      isScrollControlled: true,
+                      backgroundColor: Colors.transparent,
+                      enableDrag: false,
+                      context: context,
+                      builder: (context) {
+                        return GestureDetector(
+                          onTap: () {
+                            FocusScope.of(context).unfocus();
+                            FocusManager.instance.primaryFocus?.unfocus();
+                          },
+                          child: Padding(
+                            padding: MediaQuery.viewInsetsOf(context),
+                            child: FilterBottomSheetWidget(
+                              isSelectedFilter: _model.isFilterSelected,
+                            ),
+                          ),
+                        );
+                      },
+                    ).then((value) =>
+                        safeSetState(() => _model.selectedFilter = value));
+
+                    logFirebaseEvent('Icon_update_page_state');
+                    _model.isFilterSelected = _model.selectedFilter!;
+                    safeSetState(() {});
+                    logFirebaseEvent('Icon_refresh_database_request');
+                    safeSetState(() => _model.apiRequestCompleter = null);
+                    await _model.waitForApiRequestCompleted();
+
+                    safeSetState(() {});
+                  },
+                  child: Icon(
+                    Icons.filter_alt,
+                    color: FFAppConstants.appBarIconandTitleColor,
+                    size: 26.0,
+                  ),
+                ),
+              ),
+            ],
           ),
           actions: [],
           centerTitle: false,
@@ -252,11 +317,23 @@ class _AdditionalCatScreenWidgetState extends State<AdditionalCatScreenWidget> {
                                   minPrice: FFAppState().minPrice,
                                   maxPrice: FFAppState().maxPrice,
                                   stock: FFAppState().stock,
-                                  minDiscount: FFAppState().minDiscount,
-                                  maxDiscount: FFAppState().maxDiscount,
+                                  minDiscount: _model.isFilterSelected == 3
+                                      ? '0'
+                                      : FFAppState().minDiscount,
+                                  maxDiscount: _model.isFilterSelected == 3
+                                      ? '99.99'
+                                      : FFAppState().maxDiscount,
                                   sort: FFAppState().sort,
                                   sortName: FFAppState().sortName,
-                                  sortPrice: FFAppState().sortPrice,
+                                  sortPrice: () {
+                                    if (_model.isFilterSelected == 1) {
+                                      return 'htol';
+                                    } else if (_model.isFilterSelected == 2) {
+                                      return 'ltoh';
+                                    } else {
+                                      return FFAppState().sortPrice;
+                                    }
+                                  }(),
                                   catId: 'null',
                                   subCatId: 'null',
                                   page: FFAppState().page,
@@ -404,8 +481,8 @@ class _AdditionalCatScreenWidgetState extends State<AdditionalCatScreenWidget> {
                                               bottomRight: Radius.circular(8.0),
                                             ),
                                             border: Border.all(
-                                              color: FFAppConstants.whiteColor,
-                                              width: 1.0,
+                                              color: FFAppConstants.borderColor,
+                                              width: 0.5,
                                             ),
                                           ),
                                           child: Stack(

@@ -115,7 +115,6 @@ Color? setbackgroundColorSubcategories(
   var color;
   // print("G1----->$catid &&.   $selectedCatID");
   if (catid == selectedCatID && varientID == selectedVarientID) {
-    // color = Color(0xffD6EADC);
     color = Color(0xffedffed);
   } else {
     color = Color(0xFFFFFFFF);

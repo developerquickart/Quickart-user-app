@@ -14,6 +14,8 @@ class SearchbyBannerModel extends FlutterFlowModel<SearchbyBannerWidget> {
 
   int? isPageUpdated = 0;
 
+  int isFilterSelected = 0;
+
   ///  State fields for stateful widgets in this page.
 
   // Stores action output result for [Backend Call - API (seosource)] action in searchbyBanner widget.
@@ -55,6 +57,9 @@ class SearchbyBannerModel extends FlutterFlowModel<SearchbyBannerWidget> {
   );
   FlutterFlowTimerController timerController =
       FlutterFlowTimerController(StopWatchTimer(mode: StopWatchMode.countDown));
+
+  // Stores action output result for [Bottom Sheet - FilterBottomSheet] action in Icon widget.
+  int? selectedFilter;
 
   @override
   void initState(BuildContext context) {}

@@ -35,6 +35,8 @@ class RepeatOrdersModel extends FlutterFlowModel<RepeatOrdersWidget> {
 
   String isAutoRenew = 'no';
 
+  int isFilterSelected = 0;
+
   ///  State fields for stateful widgets in this page.
 
   Completer<ApiCallResponse>? apiRequestCompleter;
@@ -67,6 +69,8 @@ class RepeatOrdersModel extends FlutterFlowModel<RepeatOrdersWidget> {
   bool? connectivityResult;
   // Stores action output result for [Backend Call - API (addtosubcart)] action in Button widget.
   ApiCallResponse? apiResultco2;
+  // Stores action output result for [Bottom Sheet - FilterBottomSheet] action in Icon widget.
+  int? selectedFilter;
 
   @override
   void initState(BuildContext context) {

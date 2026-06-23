@@ -11,6 +11,8 @@ class TrendingProductsScreenModel
 
   dynamic productListJ;
 
+  int isFilterSelected = 0;
+
   ///  State fields for stateful widgets in this page.
 
   // Stores action output result for [Backend Call - API (seosource)] action in TrendingProductsScreen widget.
@@ -42,6 +44,8 @@ class TrendingProductsScreenModel
   bool? connectivityResult1;
   // Stores action output result for [Backend Call - API (addremwishlist)] action in Icon2 widget.
   ApiCallResponse? addRemoveAPIResult;
+  // Stores action output result for [Bottom Sheet - FilterBottomSheet] action in Icon widget.
+  int? selectedFilter;
 
   @override
   void initState(BuildContext context) {}

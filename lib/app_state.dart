@@ -1742,6 +1742,12 @@ class FFAppState extends ChangeNotifier {
   void insertAtIndexInSpentAnlysis(int index, dynamic value) {
     spentAnlysis.insert(index, value);
   }
+
+  dynamic _zoneInfo;
+  dynamic get zoneInfo => _zoneInfo;
+  set zoneInfo(dynamic value) {
+    _zoneInfo = value;
+  }
 }
 
 void _safeInit(Function() initializeField) {

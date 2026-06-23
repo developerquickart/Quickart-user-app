@@ -531,80 +531,128 @@ class _DashboardScreenWidgetState extends State<DashboardScreenWidget> {
                                                             ),
                                                           ),
                                                         ),
-                                                        RichText(
-                                                          textScaler:
-                                                              MediaQuery.of(
-                                                                      context)
-                                                                  .textScaler,
-                                                          text: TextSpan(
-                                                            children: [
-                                                              TextSpan(
-                                                                text: 'Hi, ',
-                                                                style: FlutterFlowTheme.of(
+                                                        InkWell(
+                                                          splashColor: Colors
+                                                              .transparent,
+                                                          focusColor: Colors
+                                                              .transparent,
+                                                          hoverColor: Colors
+                                                              .transparent,
+                                                          highlightColor: Colors
+                                                              .transparent,
+                                                          onTap: () async {
+                                                            logFirebaseEvent(
+                                                                'DASHBOARD_SCREEN_RichText_6fjml2b0_ON_TA');
+                                                            logFirebaseEvent(
+                                                                'RichText_navigate_to');
+
+                                                            context.pushNamed(
+                                                                SearchbyPopupBannerWidget
+                                                                    .routeName);
+
+                                                            logFirebaseEvent(
+                                                                'RichText_update_app_state');
+                                                            FFAppState()
+                                                                    .isPopUpShow =
+                                                                false;
+                                                            FFAppState()
+                                                                    .categoryName =
+                                                                getJsonField(
+                                                              dashboardScreenOneAPIResponse
+                                                                  .jsonBody,
+                                                              r'''$.popup_banner.banner_name''',
+                                                            ).toString();
+                                                            FFAppState().catID =
+                                                                getJsonField(
+                                                              dashboardScreenOneAPIResponse
+                                                                  .jsonBody,
+                                                              r'''$.popup_banner.banner_id''',
+                                                            ).toString();
+                                                            safeSetState(() {});
+                                                          },
+                                                          child: RichText(
+                                                            textScaler:
+                                                                MediaQuery.of(
                                                                         context)
-                                                                    .bodyMedium
-                                                                    .override(
-                                                                      font: GoogleFonts
-                                                                          .montserrat(
+                                                                    .textScaler,
+                                                            text: TextSpan(
+                                                              children: [
+                                                                TextSpan(
+                                                                  text: 'Hi, ',
+                                                                  style: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMedium
+                                                                      .override(
+                                                                        font: GoogleFonts
+                                                                            .montserrat(
+                                                                          fontWeight:
+                                                                              FontWeight.w300,
+                                                                          fontStyle: FlutterFlowTheme.of(context)
+                                                                              .bodyMedium
+                                                                              .fontStyle,
+                                                                        ),
+                                                                        color:
+                                                                            colorFromCssString(
+                                                                          getJsonField(
+                                                                            dashboardScreenOneAPIResponse.jsonBody,
+                                                                            r'''$.oneapi_bg_first_image.bg_image_color''',
+                                                                          ).toString(),
+                                                                          defaultColor:
+                                                                              Colors.black,
+                                                                        ),
+                                                                        letterSpacing:
+                                                                            0.0,
                                                                         fontWeight:
                                                                             FontWeight.w300,
                                                                         fontStyle: FlutterFlowTheme.of(context)
                                                                             .bodyMedium
                                                                             .fontStyle,
                                                                       ),
-                                                                      color:
-                                                                          colorFromCssString(
-                                                                        getJsonField(
-                                                                          dashboardScreenOneAPIResponse
-                                                                              .jsonBody,
-                                                                          r'''$.oneapi_bg_first_image.bg_image_color''',
-                                                                        ).toString(),
-                                                                        defaultColor:
-                                                                            Colors.black,
-                                                                      ),
-                                                                      letterSpacing:
-                                                                          0.0,
+                                                                ),
+                                                                TextSpan(
+                                                                  text: functions
+                                                                      .extractFirstName(
+                                                                          FFAppState()
+                                                                              .userName)!,
+                                                                  style: GoogleFonts
+                                                                      .montserrat(
+                                                                    color:
+                                                                        colorFromCssString(
+                                                                      getJsonField(
+                                                                        dashboardScreenOneAPIResponse
+                                                                            .jsonBody,
+                                                                        r'''$.oneapi_bg_first_image.bg_image_color''',
+                                                                      ).toString(),
+                                                                      defaultColor:
+                                                                          Colors
+                                                                              .black,
+                                                                    ),
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w800,
+                                                                    fontSize:
+                                                                        16.0,
+                                                                  ),
+                                                                )
+                                                              ],
+                                                              style: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .bodyMedium
+                                                                  .override(
+                                                                    font: GoogleFonts
+                                                                        .montserrat(
                                                                       fontWeight:
                                                                           FontWeight
-                                                                              .w300,
+                                                                              .w800,
                                                                       fontStyle: FlutterFlowTheme.of(
                                                                               context)
                                                                           .bodyMedium
                                                                           .fontStyle,
                                                                     ),
-                                                              ),
-                                                              TextSpan(
-                                                                text: functions
-                                                                    .extractFirstName(
-                                                                        FFAppState()
-                                                                            .userName)!,
-                                                                style: GoogleFonts
-                                                                    .montserrat(
-                                                                  color:
-                                                                      colorFromCssString(
-                                                                    getJsonField(
-                                                                      dashboardScreenOneAPIResponse
-                                                                          .jsonBody,
-                                                                      r'''$.oneapi_bg_first_image.bg_image_color''',
-                                                                    ).toString(),
-                                                                    defaultColor:
-                                                                        Colors
-                                                                            .black,
-                                                                  ),
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w800,
-                                                                  fontSize:
-                                                                      16.0,
-                                                                ),
-                                                              )
-                                                            ],
-                                                            style: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .bodyMedium
-                                                                .override(
-                                                                  font: GoogleFonts
-                                                                      .montserrat(
+                                                                    color: Colors
+                                                                        .white,
+                                                                    letterSpacing:
+                                                                        0.0,
                                                                     fontWeight:
                                                                         FontWeight
                                                                             .w800,
@@ -613,18 +661,7 @@ class _DashboardScreenWidgetState extends State<DashboardScreenWidget> {
                                                                         .bodyMedium
                                                                         .fontStyle,
                                                                   ),
-                                                                  color: Colors
-                                                                      .white,
-                                                                  letterSpacing:
-                                                                      0.0,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w800,
-                                                                  fontStyle: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodyMedium
-                                                                      .fontStyle,
-                                                                ),
+                                                            ),
                                                           ),
                                                         ),
                                                       ],

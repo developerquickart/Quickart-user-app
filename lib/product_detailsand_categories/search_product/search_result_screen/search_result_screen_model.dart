@@ -9,10 +9,16 @@ import 'package:flutter/material.dart';
 
 class SearchResultScreenModel
     extends FlutterFlowModel<SearchResultScreenWidget> {
+  ///  Local state fields for this page.
+
+  int isFilterSelected = 0;
+
   ///  State fields for stateful widgets in this page.
 
   // Stores action output result for [Backend Call - API (seosource)] action in SearchResultScreen widget.
   ApiCallResponse? apiResultSeoSource;
+  // Stores action output result for [Bottom Sheet - FilterBottomSheet] action in Icon widget.
+  int? selectedFilter;
   Completer<ApiCallResponse>? apiRequestCompleter;
   // Stores action output result for [Custom Action - checkInternetConnection] action in Button widget.
   bool? internet;
