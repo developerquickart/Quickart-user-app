@@ -1394,7 +1394,7 @@ class _SubCategoriesScreenWidgetState extends State<SubCategoriesScreenWidget> {
                                                 height:
                                                     MediaQuery.sizeOf(context)
                                                             .height *
-                                                        0.87,
+                                                        0.83,
                                                 decoration: BoxDecoration(),
                                                 child: Builder(
                                                   builder: (context) {
@@ -3876,7 +3876,7 @@ class _SubCategoriesScreenWidgetState extends State<SubCategoriesScreenWidget> {
                                                 height:
                                                     MediaQuery.sizeOf(context)
                                                             .height *
-                                                        0.87,
+                                                        0.83,
                                                 decoration: BoxDecoration(),
                                                 child: Builder(
                                                   builder: (context) {

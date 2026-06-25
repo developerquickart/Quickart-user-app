@@ -49,10 +49,14 @@ class TrialProductCartScreenModel
   FormFieldController<String>? trialCartPaymentRadioButtonValueController;
   // Stores action output result for [Custom Action - checkInternetConnection] action in ApplePayContainer widget.
   bool? connectivityResult4;
+  // Stores action output result for [Custom Action - isVpnEnabled] action in ApplePayContainer widget.
+  bool? isVpnON;
   // Stores action output result for [Backend Call - API (trailpayment)] action in ApplePayContainer widget.
   ApiCallResponse? apiResultTrialPackPayment1;
   // Stores action output result for [Custom Action - checkInternetConnection] action in Container widget.
   bool? connectivityResult3;
+  // Stores action output result for [Custom Action - isVpnEnabled] action in Container widget.
+  bool? isVpnQP;
   // Stores action output result for [Backend Call - API (trailpayment)] action in Container widget.
   ApiCallResponse? apiResultTrialPackPayment;
   // Stores action output result for [Custom Action - checkInternetConnection] action in Container widget.
