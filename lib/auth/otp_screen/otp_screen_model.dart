@@ -40,6 +40,8 @@ class OtpScreenModel extends FlutterFlowModel<OtpScreenWidget> {
   bool? connectivityOtpResultbutton;
   // Stores action output result for [Backend Call - API (Verify OTP)] action in Button widget.
   ApiCallResponse? apiResultVerifyOTPbutton;
+  // Stores action output result for [Backend Call - API (getZoneID)] action in Button widget.
+  ApiCallResponse? getZoneIDResult;
   // Stores action output result for [Backend Call - API (appinfo)] action in Button widget.
   ApiCallResponse? apiResultzwxIOS1button;
   // Stores action output result for [Backend Call - API (appinfo)] action in Button widget.

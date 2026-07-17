@@ -339,6 +339,10 @@ class _AdditionalCatScreenWidgetState extends State<AdditionalCatScreenWidget> {
                                   page: FFAppState().page,
                                   perpage: 50,
                                   platform: isiOS ? 'ios' : 'android',
+                                  zoneid: getJsonField(
+                                    FFAppState().zoneInfo,
+                                    r'''$.zone_id''',
+                                  ).toString(),
                                 )))
                               .future,
                           builder: (context, snapshot) {

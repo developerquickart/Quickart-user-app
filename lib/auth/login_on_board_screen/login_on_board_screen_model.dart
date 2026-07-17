@@ -16,6 +16,8 @@ class LoginOnBoardScreenModel
   bool? internetCheck;
   // Stores action output result for [Backend Call - API (guestlogin)] action in Button widget.
   ApiCallResponse? apiResulte9m;
+  // Stores action output result for [Backend Call - API (getZoneID)] action in Button widget.
+  ApiCallResponse? getZoneIDResultGuest;
   // Stores action output result for [Backend Call - API (appinfo)] action in Button widget.
   ApiCallResponse? appinfoGuest;
 

@@ -5351,6 +5351,14 @@ class _ProductDetailsScreenWidgetState
                                                     FFAppState().isFriSelected,
                                                     FFAppState().isSatSelected),
                                             platform: isiOS ? 'ios' : 'android',
+                                            zoneID: getJsonField(
+                                              FFAppState().zoneInfo,
+                                              r'''$.zone_id''',
+                                            ).toString(),
+                                            variantID: getJsonField(
+                                              _model.selectedVariantDataJson,
+                                              r'''$.varient_id''',
+                                            ).toString(),
                                           );
 
                                           if ((_model.apiResultTimeSlot

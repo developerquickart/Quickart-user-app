@@ -1,5 +1,4 @@
 import '/backend/api_requests/api_calls.dart';
-import '/components/custom_alert_dailog/custom_alert_dailog_widget.dart';
 import '/components/custom_retry_alert/custom_retry_alert_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/custom_code/actions/index.dart' as actions;
@@ -10,24 +9,24 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
-import 'quickartsplash_screen_model.dart';
-export 'quickartsplash_screen_model.dart';
+import 'quickartsplash_screen_copy_model.dart';
+export 'quickartsplash_screen_copy_model.dart';
 
 ///
-class QuickartsplashScreenWidget extends StatefulWidget {
-  const QuickartsplashScreenWidget({super.key});
+class QuickartsplashScreenCopyWidget extends StatefulWidget {
+  const QuickartsplashScreenCopyWidget({super.key});
 
-  static String routeName = 'QuickartsplashScreen';
-  static String routePath = '/quickartsplashScreen';
+  static String routeName = 'QuickartsplashScreenCopy';
+  static String routePath = '/quickartsplashScreenCopy';
 
   @override
-  State<QuickartsplashScreenWidget> createState() =>
-      _QuickartsplashScreenWidgetState();
+  State<QuickartsplashScreenCopyWidget> createState() =>
+      _QuickartsplashScreenCopyWidgetState();
 }
 
-class _QuickartsplashScreenWidgetState
-    extends State<QuickartsplashScreenWidget> {
-  late QuickartsplashScreenModel _model;
+class _QuickartsplashScreenCopyWidgetState
+    extends State<QuickartsplashScreenCopyWidget> {
+  late QuickartsplashScreenCopyModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
   LatLng? currentUserLocationValue;
@@ -35,19 +34,16 @@ class _QuickartsplashScreenWidgetState
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => QuickartsplashScreenModel());
+    _model = createModel(context, () => QuickartsplashScreenCopyModel());
 
     logFirebaseEvent('screen_view',
-        parameters: {'screen_name': 'QuickartsplashScreen'});
+        parameters: {'screen_name': 'QuickartsplashScreenCopy'});
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      if (RootPageContext.isInactiveRootPage(context)) {
-        return;
-      }
-      logFirebaseEvent('QUICKARTSPLASH_SCREEN_QuickartsplashScre');
+      logFirebaseEvent('QUICKARTSPLASH_SCREEN_COPY_Quickartsplas');
       currentUserLocationValue =
           await getCurrentUserLocation(defaultLocation: LatLng(0.0, 0.0));
-      logFirebaseEvent('QuickartsplashScreen_custom_action');
+      logFirebaseEvent('QuickartsplashScreenCopy_custom_action');
       await actions.saveLoginData(
         '0',
         false,
@@ -59,66 +55,69 @@ class _QuickartsplashScreenWidgetState
         ' ',
         ' ',
       );
-      logFirebaseEvent('QuickartsplashScreen_custom_action');
+      logFirebaseEvent('QuickartsplashScreenCopy_custom_action');
       _model.connectivityResultCopy = await actions.checkInternetConnection();
-      logFirebaseEvent('QuickartsplashScreen_custom_action');
+      logFirebaseEvent('QuickartsplashScreenCopy_custom_action');
       _model.fcmTokenNew = await actions.getFcmToken();
-      logFirebaseEvent('QuickartsplashScreen_custom_action');
-      await actions.getDeviceID();
-      logFirebaseEvent('QuickartsplashScreen_custom_action');
-      await actions.requestAppTracking();
       if (_model.connectivityResultCopy == true) {
-        if (FFAppState().isUserLogin == true) {
-          logFirebaseEvent('QuickartsplashScreen_backend_call');
-          _model.getZoneIDResult = await QuickartZoneGroup.getZoneIDCall.call(
-            lat: functions
-                .getCurrentLatitudeLogitude(currentUserLocationValue!, 'lat')
-                .toString(),
-            lng: functions
-                .getCurrentLatitudeLogitude(currentUserLocationValue!, 'lng')
-                .toString(),
-            userid: FFAppState().userID,
-          );
+        logFirebaseEvent('QuickartsplashScreenCopy_custom_action');
+        await actions.getDeviceID();
+        logFirebaseEvent('QuickartsplashScreenCopy_custom_action');
+        await actions.requestAppTracking();
+        logFirebaseEvent('QuickartsplashScreenCopy_backend_call');
+        _model.getZoneIDResult = await QuickartZoneGroup.getZoneIDCall.call(
+          lat: functions
+              .getCurrentLatitudeLogitude(currentUserLocationValue!, 'lat')
+              .toString(),
+          lng: functions
+              .getCurrentLatitudeLogitude(currentUserLocationValue!, 'lng')
+              .toString(),
+          userid: FFAppState().userID,
+        );
 
-          if (!(_model.getZoneIDResult?.succeeded ?? true)) {
-            logFirebaseEvent('QuickartsplashScreen_alert_dialog');
-            await showDialog(
-              context: context,
-              builder: (dialogContext) {
-                return Dialog(
-                  elevation: 0,
-                  insetPadding: EdgeInsets.zero,
-                  backgroundColor: Colors.transparent,
-                  alignment: AlignmentDirectional(0.0, 0.0)
-                      .resolve(Directionality.of(context)),
-                  child: GestureDetector(
-                    onTap: () {
-                      FocusScope.of(dialogContext).unfocus();
-                      FocusManager.instance.primaryFocus?.unfocus();
-                    },
-                    child: CustomAlertDailogWidget(
-                      des: 'Something went wrong. Please try again',
-                      height: 150.0,
-                      title: ' ',
-                    ),
+        if ((_model.getZoneIDResult?.succeeded ?? true)) {
+          logFirebaseEvent('QuickartsplashScreenCopy_update_app_stat');
+          FFAppState().zoneInfo = getJsonField(
+            (_model.getZoneIDResult?.jsonBody ?? ''),
+            r'''$.data''',
+          );
+          safeSetState(() {});
+        } else {
+          logFirebaseEvent('QuickartsplashScreenCopy_alert_dialog');
+          await showDialog(
+            context: context,
+            builder: (dialogContext) {
+              return Dialog(
+                elevation: 0,
+                insetPadding: EdgeInsets.zero,
+                backgroundColor: Colors.transparent,
+                alignment: AlignmentDirectional(0.0, 0.0)
+                    .resolve(Directionality.of(context)),
+                child: GestureDetector(
+                  onTap: () {
+                    FocusScope.of(dialogContext).unfocus();
+                    FocusManager.instance.primaryFocus?.unfocus();
+                  },
+                  child: CustomRetryAlertWidget(
+                    height: 130.0,
+                    des: 'Something went wrong. Please try again',
                   ),
-                );
-              },
-            );
-          }
-          if (isiOS) {
-            logFirebaseEvent('QuickartsplashScreen_update_app_state');
-            FFAppState().platform = 'ios';
-            FFAppState().fcmToken =
-                _model.fcmTokenNew != null && _model.fcmTokenNew != ''
-                    ? _model.fcmTokenNew!
-                    : ' ';
-            FFAppState().zoneInfo = getJsonField(
-              (_model.getZoneIDResult?.jsonBody ?? ''),
-              r'''$.data''',
-            );
-            safeSetState(() {});
-            logFirebaseEvent('QuickartsplashScreen_backend_call');
+                ),
+              );
+            },
+          );
+        }
+
+        if (isiOS) {
+          logFirebaseEvent('QuickartsplashScreenCopy_update_app_stat');
+          FFAppState().platform = 'ios';
+          FFAppState().fcmToken =
+              _model.fcmTokenNew != null && _model.fcmTokenNew != ''
+                  ? _model.fcmTokenNew!
+                  : ' ';
+          safeSetState(() {});
+          if (FFAppState().isUserLogin == true) {
+            logFirebaseEvent('QuickartsplashScreenCopy_backend_call');
             _model.apiResultzwxIOS = await QuickartGroup.appinfoCall.call(
               userid: FFAppState().userID,
               stroreid: FFAppState().storeID,
@@ -133,28 +132,7 @@ class _QuickartsplashScreenWidgetState
                     (_model.apiResultzwxIOS?.jsonBody ?? ''),
                     r'''$.data.version''',
                   ).toString()) {
-                logFirebaseEvent('QuickartsplashScreen_custom_action');
-                await actions.saveLoginData(
-                  '0',
-                  true,
-                  'yes',
-                  '7',
-                  getJsonField(
-                    (_model.apiResultzwxIOS?.jsonBody ?? ''),
-                    r'''$.data''',
-                  ),
-                  getJsonField(
-                    (_model.apiResultzwxIOS?.jsonBody ?? ''),
-                    r'''$.data.userwallet''',
-                  ).toString(),
-                  getJsonField(
-                    (_model.apiResultzwxIOS?.jsonBody ?? ''),
-                    r'''$.oneapi_bg_first_image.home_bg_image''',
-                  ).toString(),
-                  '0',
-                  '0',
-                );
-                logFirebaseEvent('QuickartsplashScreen_update_app_state');
+                logFirebaseEvent('QuickartsplashScreenCopy_update_app_stat');
                 FFAppState().appInfo = getJsonField(
                   (_model.apiResultzwxIOS?.jsonBody ?? ''),
                   r'''$.data''',
@@ -173,45 +151,8 @@ class _QuickartsplashScreenWidgetState
                   r'''$.trailpackimage''',
                 ).toString();
                 FFAppState().isPopUpShow = true;
-                FFAppState().platform = 'ios';
-                FFAppState().fcmToken =
-                    _model.fcmTokenNew != null && _model.fcmTokenNew != ''
-                        ? _model.fcmTokenNew!
-                        : ' ';
                 FFAppState().update(() {});
-                logFirebaseEvent('QuickartsplashScreen_wait__delay');
-                await Future.delayed(
-                  Duration(
-                    milliseconds: 4000,
-                  ),
-                );
-                logFirebaseEvent('QuickartsplashScreen_navigate_to');
-
-                context.goNamed(DashboardScreenWidget.routeName);
-              } else {
-                logFirebaseEvent('QuickartsplashScreen_update_app_state');
-                FFAppState().appInfo = getJsonField(
-                  (_model.apiResultzwxIOS?.jsonBody ?? ''),
-                  r'''$.data''',
-                );
-                FFAppState().updateContainer = false;
-                FFAppState().userWalletstr = getJsonField(
-                  (_model.apiResultzwxIOS?.jsonBody ?? ''),
-                  r'''$.data.userwallet''',
-                ).toString();
-                FFAppState().dashboardBanner = getJsonField(
-                  (_model.apiResultzwxIOS?.jsonBody ?? ''),
-                  r'''$.oneapi_bg_first_image''',
-                ).toString();
-                FFAppState().trialPackBannerImage = '';
-                FFAppState().isPopUpShow = true;
-                FFAppState().platform = 'ios';
-                FFAppState().fcmToken =
-                    _model.fcmTokenNew != null && _model.fcmTokenNew != ''
-                        ? _model.fcmTokenNew!
-                        : ' ';
-                FFAppState().update(() {});
-                logFirebaseEvent('QuickartsplashScreen_custom_action');
+                logFirebaseEvent('QuickartsplashScreenCopy_custom_action');
                 await actions.saveLoginData(
                   '0',
                   true,
@@ -232,18 +173,66 @@ class _QuickartsplashScreenWidgetState
                   '0',
                   '0',
                 );
-                logFirebaseEvent('QuickartsplashScreen_wait__delay');
+                logFirebaseEvent('QuickartsplashScreenCopy_wait__delay');
                 await Future.delayed(
                   Duration(
                     milliseconds: 4000,
                   ),
                 );
-                logFirebaseEvent('QuickartsplashScreen_navigate_to');
+                logFirebaseEvent('QuickartsplashScreenCopy_navigate_to');
+
+                context.goNamed(DashboardScreenWidget.routeName);
+              } else {
+                logFirebaseEvent('QuickartsplashScreenCopy_update_app_stat');
+                FFAppState().appInfo = getJsonField(
+                  (_model.apiResultzwxIOS?.jsonBody ?? ''),
+                  r'''$.data''',
+                );
+                FFAppState().updateContainer = false;
+                FFAppState().userWalletstr = getJsonField(
+                  (_model.apiResultzwxIOS?.jsonBody ?? ''),
+                  r'''$.data.userwallet''',
+                ).toString();
+                FFAppState().dashboardBanner = getJsonField(
+                  (_model.apiResultzwxIOS?.jsonBody ?? ''),
+                  r'''$.oneapi_bg_first_image''',
+                ).toString();
+                FFAppState().trialPackBannerImage = '';
+                FFAppState().isPopUpShow = true;
+                FFAppState().update(() {});
+                logFirebaseEvent('QuickartsplashScreenCopy_custom_action');
+                await actions.saveLoginData(
+                  '0',
+                  true,
+                  'yes',
+                  '7',
+                  getJsonField(
+                    (_model.apiResultzwxIOS?.jsonBody ?? ''),
+                    r'''$.data''',
+                  ),
+                  getJsonField(
+                    (_model.apiResultzwxIOS?.jsonBody ?? ''),
+                    r'''$.data.userwallet''',
+                  ).toString(),
+                  getJsonField(
+                    (_model.apiResultzwxIOS?.jsonBody ?? ''),
+                    r'''$.oneapi_bg_first_image.home_bg_image''',
+                  ).toString(),
+                  '0',
+                  '0',
+                );
+                logFirebaseEvent('QuickartsplashScreenCopy_wait__delay');
+                await Future.delayed(
+                  Duration(
+                    milliseconds: 4000,
+                  ),
+                );
+                logFirebaseEvent('QuickartsplashScreenCopy_navigate_to');
 
                 context.goNamed(DashboardScreenWidget.routeName);
               }
             } else {
-              logFirebaseEvent('QuickartsplashScreen_alert_dialog');
+              logFirebaseEvent('QuickartsplashScreenCopy_alert_dialog');
               await showDialog(
                 context: context,
                 builder: (dialogContext) {
@@ -268,141 +257,83 @@ class _QuickartsplashScreenWidgetState
               );
             }
           } else {
-            logFirebaseEvent('QuickartsplashScreen_update_app_state');
-            FFAppState().platform = 'android';
-            FFAppState().fcmToken =
-                _model.fcmTokenNew != null && _model.fcmTokenNew != ''
-                    ? _model.fcmTokenNew!
-                    : ' ';
-            FFAppState().zoneInfo = getJsonField(
-              (_model.getZoneIDResult?.jsonBody ?? ''),
-              r'''$.data''',
-            );
-            safeSetState(() {});
-            logFirebaseEvent('QuickartsplashScreen_backend_call');
-            _model.apiResultAppInfo3 = await QuickartGroup.appinfoCall.call(
+            logFirebaseEvent('QuickartsplashScreenCopy_backend_call');
+            _model.apiResultso1IOS = await QuickartGroup.appinfoCall.call(
               userid: FFAppState().userID,
               stroreid: FFAppState().storeID,
-              platform: FFAppState().platform,
+              platform: 'ios',
+              fcmToken: _model.fcmTokenNew,
               deviceid: FFAppState().deviceID,
-              fcmToken: FFAppState().fcmToken,
             );
 
-            if ((_model.apiResultAppInfo3?.succeeded ?? true)) {
-              if (FFAppConstants.appVersionAndroid !=
+            if ((_model.apiResultso1IOS?.succeeded ?? true)) {
+              if (FFAppConstants.appVersioniOS !=
                   getJsonField(
-                    (_model.apiResultAppInfo3?.jsonBody ?? ''),
+                    (_model.apiResultso1IOS?.jsonBody ?? ''),
                     r'''$.data.version''',
                   ).toString()) {
-                logFirebaseEvent('QuickartsplashScreen_update_app_state');
+                logFirebaseEvent('QuickartsplashScreenCopy_update_app_stat');
                 FFAppState().appInfo = getJsonField(
-                  (_model.apiResultAppInfo3?.jsonBody ?? ''),
+                  (_model.apiResultso1IOS?.jsonBody ?? ''),
                   r'''$.data''',
                 );
                 FFAppState().updateContainer = true;
                 FFAppState().userWalletstr = getJsonField(
-                  (_model.apiResultAppInfo3?.jsonBody ?? ''),
+                  (_model.apiResultso1IOS?.jsonBody ?? ''),
                   r'''$.data.userwallet''',
                 ).toString();
                 FFAppState().dashboardBanner = getJsonField(
-                  (_model.apiResultAppInfo3?.jsonBody ?? ''),
-                  r'''$.oneapi_bg_first_image.home_bg_image''',
-                ).toString();
-                FFAppState().trialPackBannerImage = getJsonField(
-                  (_model.apiResultAppInfo3?.jsonBody ?? ''),
-                  r'''$.trailpackimage''',
-                ).toString();
-                FFAppState().isPopUpShow = true;
-                FFAppState().update(() {});
-                logFirebaseEvent('QuickartsplashScreen_custom_action');
-                await actions.saveLoginData(
-                  '0',
-                  true,
-                  'yes',
-                  '7',
-                  getJsonField(
-                    (_model.apiResultAppInfo3?.jsonBody ?? ''),
-                    r'''$.data''',
-                  ),
-                  getJsonField(
-                    (_model.apiResultAppInfo3?.jsonBody ?? ''),
-                    r'''$.data.userwallet''',
-                  ).toString(),
-                  getJsonField(
-                    (_model.apiResultAppInfo3?.jsonBody ?? ''),
-                    r'''$.oneapi_bg_first_image.home_bg_image''',
-                  ).toString(),
-                  getJsonField(
-                    (_model.apiResultAppInfo3?.jsonBody ?? ''),
-                    r'''$.trailpackimage''',
-                  ).toString(),
-                  '0',
-                );
-                logFirebaseEvent('QuickartsplashScreen_wait__delay');
-                await Future.delayed(
-                  Duration(
-                    milliseconds: 4000,
-                  ),
-                );
-                logFirebaseEvent('QuickartsplashScreen_navigate_to');
-
-                context.goNamed(DashboardScreenWidget.routeName);
-              } else {
-                logFirebaseEvent('QuickartsplashScreen_update_app_state');
-                FFAppState().appInfo = QuickartGroup.appinfoCall.data(
-                  (_model.apiResultAppInfo3?.jsonBody ?? ''),
-                );
-                FFAppState().updateContainer = false;
-                FFAppState().userWalletstr = getJsonField(
-                  (_model.apiResultAppInfo3?.jsonBody ?? ''),
-                  r'''$.data.userwallet''',
-                ).toString();
-                FFAppState().dashboardBanner = getJsonField(
-                  (_model.apiResultAppInfo3?.jsonBody ?? ''),
+                  (_model.apiResultso1IOS?.jsonBody ?? ''),
                   r'''$.oneapi_bg_first_image''',
                 ).toString();
                 FFAppState().trialPackBannerImage = getJsonField(
-                  (_model.apiResultAppInfo3?.jsonBody ?? ''),
+                  (_model.apiResultso1IOS?.jsonBody ?? ''),
                   r'''$.trailpackimage''',
                 ).toString();
                 FFAppState().isPopUpShow = true;
                 FFAppState().update(() {});
-                logFirebaseEvent('QuickartsplashScreen_custom_action');
-                await actions.saveLoginData(
-                  '0',
-                  true,
-                  'yes',
-                  '7',
-                  getJsonField(
-                    (_model.apiResultAppInfo3?.jsonBody ?? ''),
-                    r'''$.data''',
-                  ),
-                  getJsonField(
-                    (_model.apiResultAppInfo3?.jsonBody ?? ''),
-                    r'''$.data.userwallet''',
-                  ).toString(),
-                  getJsonField(
-                    (_model.apiResultAppInfo3?.jsonBody ?? ''),
-                    r'''$.oneapi_bg_first_image.home_bg_image''',
-                  ).toString(),
-                  getJsonField(
-                    (_model.apiResultAppInfo3?.jsonBody ?? ''),
-                    r'''$.trailpackimage''',
-                  ).toString(),
-                  '0',
-                );
-                logFirebaseEvent('QuickartsplashScreen_wait__delay');
+                logFirebaseEvent('QuickartsplashScreenCopy_wait__delay');
                 await Future.delayed(
                   Duration(
                     milliseconds: 4000,
                   ),
                 );
-                logFirebaseEvent('QuickartsplashScreen_navigate_to');
+                logFirebaseEvent('QuickartsplashScreenCopy_navigate_to');
 
-                context.goNamed(DashboardScreenWidget.routeName);
+                context.goNamed(IntroScreenWidget.routeName);
+              } else {
+                logFirebaseEvent('QuickartsplashScreenCopy_update_app_stat');
+                FFAppState().appInfo = getJsonField(
+                  (_model.apiResultso1IOS?.jsonBody ?? ''),
+                  r'''$.data''',
+                );
+                FFAppState().updateContainer = false;
+                FFAppState().userWalletstr = getJsonField(
+                  (_model.apiResultso1IOS?.jsonBody ?? ''),
+                  r'''$.data.userwallet''',
+                ).toString();
+                FFAppState().dashboardBanner = getJsonField(
+                  (_model.apiResultso1IOS?.jsonBody ?? ''),
+                  r'''$.oneapi_bg_first_image''',
+                ).toString();
+                FFAppState().trialPackBannerImage = getJsonField(
+                  (_model.apiResultso1IOS?.jsonBody ?? ''),
+                  r'''$.trailpackimage''',
+                ).toString();
+                FFAppState().isPopUpShow = true;
+                FFAppState().update(() {});
+                logFirebaseEvent('QuickartsplashScreenCopy_wait__delay');
+                await Future.delayed(
+                  Duration(
+                    milliseconds: 4000,
+                  ),
+                );
+                logFirebaseEvent('QuickartsplashScreenCopy_navigate_to');
+
+                context.goNamed(IntroScreenWidget.routeName);
               }
             } else {
-              logFirebaseEvent('QuickartsplashScreen_alert_dialog');
+              logFirebaseEvent('QuickartsplashScreenCopy_alert_dialog');
               await showDialog(
                 context: context,
                 builder: (dialogContext) {
@@ -428,111 +359,272 @@ class _QuickartsplashScreenWidgetState
             }
           }
         } else {
-          logFirebaseEvent('QuickartsplashScreen_backend_call');
-          _model.apiResultAppInfo4 = await QuickartGroup.appinfoCall.call(
-            userid: FFAppState().userID,
-            stroreid: FFAppState().storeID,
-            platform: isiOS == true ? 'ios' : 'android',
-            deviceid: FFAppState().deviceID,
-            fcmToken: FFAppState().fcmToken,
-          );
-
-          if ((_model.apiResultAppInfo4?.succeeded ?? true)) {
-            if (FFAppConstants.appVersionAndroid !=
-                getJsonField(
-                  (_model.apiResultAppInfo4?.jsonBody ?? ''),
-                  r'''$.data.version''',
-                ).toString()) {
-              logFirebaseEvent('QuickartsplashScreen_update_app_state');
-              FFAppState().appInfo = getJsonField(
-                (_model.apiResultAppInfo4?.jsonBody ?? ''),
-                r'''$.data''',
-              );
-              FFAppState().updateContainer = true;
-              FFAppState().userWalletstr = getJsonField(
-                (_model.apiResultAppInfo4?.jsonBody ?? ''),
-                r'''$.data.userwallet''',
-              ).toString();
-              FFAppState().dashboardBanner = getJsonField(
-                (_model.apiResultAppInfo4?.jsonBody ?? ''),
-                r'''$.oneapi_bg_first_image''',
-              ).toString();
-              FFAppState().trialPackBannerImage = getJsonField(
-                (_model.apiResultAppInfo4?.jsonBody ?? ''),
-                r'''$.trailpackimage''',
-              ).toString();
-              FFAppState().isPopUpShow = true;
-              FFAppState().platform = isiOS == true ? 'ios' : 'android';
-              FFAppState().update(() {});
-              logFirebaseEvent('QuickartsplashScreen_wait__delay');
-              await Future.delayed(
-                Duration(
-                  milliseconds: 4000,
-                ),
-              );
-              logFirebaseEvent('QuickartsplashScreen_navigate_to');
-
-              context.goNamed(IntroScreenWidget.routeName);
-            } else {
-              logFirebaseEvent('QuickartsplashScreen_update_app_state');
-              FFAppState().appInfo = getJsonField(
-                (_model.apiResultAppInfo4?.jsonBody ?? ''),
-                r'''$.data''',
-              );
-              FFAppState().updateContainer = false;
-              FFAppState().userWalletstr = getJsonField(
-                (_model.apiResultAppInfo4?.jsonBody ?? ''),
-                r'''$.data.userwallet''',
-              ).toString();
-              FFAppState().dashboardBanner = getJsonField(
-                (_model.apiResultAppInfo4?.jsonBody ?? ''),
-                r'''$.oneapi_bg_first_image''',
-              ).toString();
-              FFAppState().trialPackBannerImage = getJsonField(
-                (_model.apiResultAppInfo4?.jsonBody ?? ''),
-                r'''$.trailpackimage''',
-              ).toString();
-              FFAppState().isPopUpShow = true;
-              FFAppState().platform = isiOS == true ? 'ios' : 'android';
-              FFAppState().update(() {});
-              logFirebaseEvent('QuickartsplashScreen_wait__delay');
-              await Future.delayed(
-                Duration(
-                  milliseconds: 4000,
-                ),
-              );
-              logFirebaseEvent('QuickartsplashScreen_navigate_to');
-
-              context.goNamed(IntroScreenWidget.routeName);
-            }
+          if (isAndroid) {
+            logFirebaseEvent('QuickartsplashScreenCopy_update_app_stat');
+            FFAppState().platform = 'android';
+            FFAppState().fcmToken = _model.fcmTokenNew!;
+            safeSetState(() {});
           } else {
-            logFirebaseEvent('QuickartsplashScreen_alert_dialog');
-            await showDialog(
-              context: context,
-              builder: (dialogContext) {
-                return Dialog(
-                  elevation: 0,
-                  insetPadding: EdgeInsets.zero,
-                  backgroundColor: Colors.transparent,
-                  alignment: AlignmentDirectional(0.0, 0.0)
-                      .resolve(Directionality.of(context)),
-                  child: GestureDetector(
-                    onTap: () {
-                      FocusScope.of(dialogContext).unfocus();
-                      FocusManager.instance.primaryFocus?.unfocus();
-                    },
-                    child: CustomRetryAlertWidget(
-                      height: 130.0,
-                      des: 'Something went wrong. Please try again',
-                    ),
+            logFirebaseEvent('QuickartsplashScreenCopy_update_app_stat');
+            FFAppState().platform = 'web';
+            FFAppState().fcmToken = _model.fcmTokenNew!;
+            safeSetState(() {});
+          }
+
+          if ((FFAppState().isUserLogin == true) &&
+              (FFAppState().userID != '')) {
+            logFirebaseEvent('QuickartsplashScreenCopy_backend_call');
+            _model.apiResultAppInfo3 = await QuickartGroup.appinfoCall.call(
+              userid: FFAppState().userID,
+              stroreid: FFAppState().storeID,
+              platform: FFAppState().platform,
+              deviceid: FFAppState().deviceID,
+              fcmToken: FFAppState().fcmToken,
+            );
+
+            if ((_model.apiResultAppInfo3?.succeeded ?? true)) {
+              if (FFAppConstants.appVersionAndroid !=
+                  getJsonField(
+                    (_model.apiResultAppInfo3?.jsonBody ?? ''),
+                    r'''$.data.version''',
+                  ).toString()) {
+                logFirebaseEvent('QuickartsplashScreenCopy_update_app_stat');
+                FFAppState().appInfo = getJsonField(
+                  (_model.apiResultAppInfo3?.jsonBody ?? ''),
+                  r'''$.data''',
+                );
+                FFAppState().updateContainer = true;
+                FFAppState().userWalletstr = getJsonField(
+                  (_model.apiResultAppInfo3?.jsonBody ?? ''),
+                  r'''$.data.userwallet''',
+                ).toString();
+                FFAppState().dashboardBanner = getJsonField(
+                  (_model.apiResultAppInfo3?.jsonBody ?? ''),
+                  r'''$.oneapi_bg_first_image.home_bg_image''',
+                ).toString();
+                FFAppState().trialPackBannerImage = getJsonField(
+                  (_model.apiResultAppInfo3?.jsonBody ?? ''),
+                  r'''$.trailpackimage''',
+                ).toString();
+                FFAppState().isPopUpShow = true;
+                FFAppState().update(() {});
+                logFirebaseEvent('QuickartsplashScreenCopy_custom_action');
+                await actions.saveLoginData(
+                  '0',
+                  true,
+                  'yes',
+                  '7',
+                  getJsonField(
+                    (_model.apiResultAppInfo3?.jsonBody ?? ''),
+                    r'''$.data''',
+                  ),
+                  getJsonField(
+                    (_model.apiResultAppInfo3?.jsonBody ?? ''),
+                    r'''$.data.userwallet''',
+                  ).toString(),
+                  getJsonField(
+                    (_model.apiResultAppInfo3?.jsonBody ?? ''),
+                    r'''$.oneapi_bg_first_image.home_bg_image''',
+                  ).toString(),
+                  getJsonField(
+                    (_model.apiResultAppInfo3?.jsonBody ?? ''),
+                    r'''$.trailpackimage''',
+                  ).toString(),
+                  '0',
+                );
+                logFirebaseEvent('QuickartsplashScreenCopy_wait__delay');
+                await Future.delayed(
+                  Duration(
+                    milliseconds: 4000,
                   ),
                 );
-              },
+                logFirebaseEvent('QuickartsplashScreenCopy_navigate_to');
+
+                context.goNamed(DashboardScreenWidget.routeName);
+              } else {
+                logFirebaseEvent('QuickartsplashScreenCopy_update_app_stat');
+                FFAppState().appInfo = QuickartGroup.appinfoCall.data(
+                  (_model.apiResultAppInfo3?.jsonBody ?? ''),
+                );
+                FFAppState().updateContainer = false;
+                FFAppState().userWalletstr = getJsonField(
+                  (_model.apiResultAppInfo3?.jsonBody ?? ''),
+                  r'''$.data.userwallet''',
+                ).toString();
+                FFAppState().dashboardBanner = getJsonField(
+                  (_model.apiResultAppInfo3?.jsonBody ?? ''),
+                  r'''$.oneapi_bg_first_image''',
+                ).toString();
+                FFAppState().trialPackBannerImage = getJsonField(
+                  (_model.apiResultAppInfo3?.jsonBody ?? ''),
+                  r'''$.trailpackimage''',
+                ).toString();
+                FFAppState().isPopUpShow = true;
+                FFAppState().update(() {});
+                logFirebaseEvent('QuickartsplashScreenCopy_custom_action');
+                await actions.saveLoginData(
+                  '0',
+                  true,
+                  'yes',
+                  '7',
+                  getJsonField(
+                    (_model.apiResultAppInfo3?.jsonBody ?? ''),
+                    r'''$.data''',
+                  ),
+                  getJsonField(
+                    (_model.apiResultAppInfo3?.jsonBody ?? ''),
+                    r'''$.data.userwallet''',
+                  ).toString(),
+                  getJsonField(
+                    (_model.apiResultAppInfo3?.jsonBody ?? ''),
+                    r'''$.oneapi_bg_first_image.home_bg_image''',
+                  ).toString(),
+                  getJsonField(
+                    (_model.apiResultAppInfo3?.jsonBody ?? ''),
+                    r'''$.trailpackimage''',
+                  ).toString(),
+                  '0',
+                );
+                logFirebaseEvent('QuickartsplashScreenCopy_wait__delay');
+                await Future.delayed(
+                  Duration(
+                    milliseconds: 4000,
+                  ),
+                );
+                logFirebaseEvent('QuickartsplashScreenCopy_navigate_to');
+
+                context.goNamed(DashboardScreenWidget.routeName);
+              }
+            } else {
+              logFirebaseEvent('QuickartsplashScreenCopy_alert_dialog');
+              await showDialog(
+                context: context,
+                builder: (dialogContext) {
+                  return Dialog(
+                    elevation: 0,
+                    insetPadding: EdgeInsets.zero,
+                    backgroundColor: Colors.transparent,
+                    alignment: AlignmentDirectional(0.0, 0.0)
+                        .resolve(Directionality.of(context)),
+                    child: GestureDetector(
+                      onTap: () {
+                        FocusScope.of(dialogContext).unfocus();
+                        FocusManager.instance.primaryFocus?.unfocus();
+                      },
+                      child: CustomRetryAlertWidget(
+                        height: 130.0,
+                        des: 'Something went wrong. Please try again',
+                      ),
+                    ),
+                  );
+                },
+              );
+            }
+          } else {
+            logFirebaseEvent('QuickartsplashScreenCopy_backend_call');
+            _model.apiResultAppInfo4 = await QuickartGroup.appinfoCall.call(
+              userid: FFAppState().userID,
+              stroreid: FFAppState().storeID,
+              platform: FFAppState().platform,
+              deviceid: FFAppState().deviceID,
+              fcmToken: FFAppState().fcmToken,
             );
+
+            if ((_model.apiResultAppInfo4?.succeeded ?? true)) {
+              if (FFAppConstants.appVersionAndroid !=
+                  getJsonField(
+                    (_model.apiResultAppInfo4?.jsonBody ?? ''),
+                    r'''$.data.version''',
+                  ).toString()) {
+                logFirebaseEvent('QuickartsplashScreenCopy_update_app_stat');
+                FFAppState().appInfo = getJsonField(
+                  (_model.apiResultAppInfo4?.jsonBody ?? ''),
+                  r'''$.data''',
+                );
+                FFAppState().updateContainer = true;
+                FFAppState().userWalletstr = getJsonField(
+                  (_model.apiResultAppInfo4?.jsonBody ?? ''),
+                  r'''$.data.userwallet''',
+                ).toString();
+                FFAppState().dashboardBanner = getJsonField(
+                  (_model.apiResultAppInfo4?.jsonBody ?? ''),
+                  r'''$.oneapi_bg_first_image''',
+                ).toString();
+                FFAppState().trialPackBannerImage = getJsonField(
+                  (_model.apiResultAppInfo4?.jsonBody ?? ''),
+                  r'''$.trailpackimage''',
+                ).toString();
+                FFAppState().isPopUpShow = true;
+                FFAppState().update(() {});
+                logFirebaseEvent('QuickartsplashScreenCopy_wait__delay');
+                await Future.delayed(
+                  Duration(
+                    milliseconds: 4000,
+                  ),
+                );
+                logFirebaseEvent('QuickartsplashScreenCopy_navigate_to');
+
+                context.goNamed(IntroScreenWidget.routeName);
+              } else {
+                logFirebaseEvent('QuickartsplashScreenCopy_update_app_stat');
+                FFAppState().appInfo = getJsonField(
+                  (_model.apiResultAppInfo4?.jsonBody ?? ''),
+                  r'''$.data''',
+                );
+                FFAppState().updateContainer = false;
+                FFAppState().userWalletstr = getJsonField(
+                  (_model.apiResultAppInfo4?.jsonBody ?? ''),
+                  r'''$.data.userwallet''',
+                ).toString();
+                FFAppState().dashboardBanner = getJsonField(
+                  (_model.apiResultAppInfo4?.jsonBody ?? ''),
+                  r'''$.oneapi_bg_first_image''',
+                ).toString();
+                FFAppState().trialPackBannerImage = getJsonField(
+                  (_model.apiResultAppInfo4?.jsonBody ?? ''),
+                  r'''$.trailpackimage''',
+                ).toString();
+                FFAppState().isPopUpShow = true;
+                FFAppState().update(() {});
+                logFirebaseEvent('QuickartsplashScreenCopy_wait__delay');
+                await Future.delayed(
+                  Duration(
+                    milliseconds: 4000,
+                  ),
+                );
+                logFirebaseEvent('QuickartsplashScreenCopy_navigate_to');
+
+                context.goNamed(IntroScreenWidget.routeName);
+              }
+            } else {
+              logFirebaseEvent('QuickartsplashScreenCopy_alert_dialog');
+              await showDialog(
+                context: context,
+                builder: (dialogContext) {
+                  return Dialog(
+                    elevation: 0,
+                    insetPadding: EdgeInsets.zero,
+                    backgroundColor: Colors.transparent,
+                    alignment: AlignmentDirectional(0.0, 0.0)
+                        .resolve(Directionality.of(context)),
+                    child: GestureDetector(
+                      onTap: () {
+                        FocusScope.of(dialogContext).unfocus();
+                        FocusManager.instance.primaryFocus?.unfocus();
+                      },
+                      child: CustomRetryAlertWidget(
+                        height: 130.0,
+                        des: 'Something went wrong. Please try again',
+                      ),
+                    ),
+                  );
+                },
+              );
+            }
           }
         }
       } else {
-        logFirebaseEvent('QuickartsplashScreen_alert_dialog');
+        logFirebaseEvent('QuickartsplashScreenCopy_alert_dialog');
         await showDialog(
           context: context,
           builder: (dialogContext) {

@@ -248,6 +248,10 @@ class _CartSubscriptionScreenWidgetState
                                   userid: FFAppState().userID,
                                   deviceid: FFAppState().deviceID,
                                   platform: isiOS ? 'ios' : 'android',
+                                  zoneID: getJsonField(
+                                    FFAppState().zoneInfo,
+                                    r'''$.zone_id''',
+                                  ).toString(),
                                 )))
                           .future,
                       builder: (context, snapshot) {
@@ -11824,6 +11828,13 @@ class _CartSubscriptionScreenWidgetState
                                               FFAppState().isThuSelected,
                                               FFAppState().isFriSelected,
                                               FFAppState().isSatSelected),
+                                          platform: FFAppState().platform,
+                                          zoneID: getJsonField(
+                                            FFAppState().zoneInfo,
+                                            r'''$.zone_id''',
+                                          ).toString(),
+                                          variantID:
+                                              FFAppState().varientID.toString(),
                                         );
 
                                         if ((_model

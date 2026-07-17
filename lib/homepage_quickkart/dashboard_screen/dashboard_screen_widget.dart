@@ -335,6 +335,10 @@ class _DashboardScreenWidgetState extends State<DashboardScreenWidget> {
               userID: FFAppState().userID,
               deviceID: FFAppState().deviceID,
               platform: isiOS ? 'ios' : 'android',
+              zoneID: getJsonField(
+                FFAppState().zoneInfo,
+                r'''$.zone_id''',
+              ).toString(),
             )))
           .future,
       builder: (context, snapshot) {
@@ -409,44 +413,6 @@ class _DashboardScreenWidgetState extends State<DashboardScreenWidget> {
                                                             .height *
                                                         1.065,
                                                 fit: BoxFit.cover,
-                                              ),
-                                            ),
-                                            ClipRRect(
-                                              borderRadius:
-                                                  BorderRadius.circular(0.0),
-                                              child: CachedNetworkImage(
-                                                fadeInDuration:
-                                                    Duration(milliseconds: 50),
-                                                fadeOutDuration:
-                                                    Duration(milliseconds: 50),
-                                                imageUrl: getJsonField(
-                                                  dashboardScreenOneAPIResponse
-                                                      .jsonBody,
-                                                  r'''$.oneapi_bg_first_image.home_bg_image''',
-                                                ).toString(),
-                                                width:
-                                                    MediaQuery.sizeOf(context)
-                                                            .width *
-                                                        1.0,
-                                                height:
-                                                    MediaQuery.sizeOf(context)
-                                                            .height *
-                                                        1.065,
-                                                fit: BoxFit.cover,
-                                                errorWidget: (context, error,
-                                                        stackTrace) =>
-                                                    Image.asset(
-                                                  'assets/images/error_image.png',
-                                                  width:
-                                                      MediaQuery.sizeOf(context)
-                                                              .width *
-                                                          1.0,
-                                                  height:
-                                                      MediaQuery.sizeOf(context)
-                                                              .height *
-                                                          1.065,
-                                                  fit: BoxFit.cover,
-                                                ),
                                               ),
                                             ),
                                             Container(
@@ -1060,65 +1026,46 @@ class _DashboardScreenWidgetState extends State<DashboardScreenWidget> {
                                                                   10.0,
                                                                   0.0,
                                                                   0.0),
-                                                      child: Row(
-                                                        mainAxisSize:
-                                                            MainAxisSize.max,
-                                                        children: [
-                                                          Padding(
-                                                            padding:
-                                                                EdgeInsetsDirectional
-                                                                    .fromSTEB(
-                                                                        13.0,
-                                                                        0.0,
-                                                                        0.0,
-                                                                        0.0),
-                                                            child: InkWell(
-                                                              splashColor: Colors
-                                                                  .transparent,
-                                                              focusColor: Colors
-                                                                  .transparent,
-                                                              hoverColor: Colors
-                                                                  .transparent,
-                                                              highlightColor:
-                                                                  Colors
-                                                                      .transparent,
-                                                              onTap: () async {
-                                                                logFirebaseEvent(
-                                                                    'DASHBOARD_SCREEN_Icon_7juhrwuo_ON_TAP');
-                                                                logFirebaseEvent(
-                                                                    'Icon_update_app_state');
-                                                                FFAppState()
-                                                                    .categoryName = '';
-                                                                safeSetState(
-                                                                    () {});
-                                                              },
-                                                              child: Icon(
-                                                                Icons.house,
-                                                                color:
-                                                                    colorFromCssString(
-                                                                  getJsonField(
-                                                                    dashboardScreenOneAPIResponse
-                                                                        .jsonBody,
-                                                                    r'''$.oneapi_bg_first_image.bg_image_color''',
-                                                                  ).toString(),
-                                                                  defaultColor:
-                                                                      Colors
-                                                                          .black,
-                                                                ),
-                                                                size: 20.0,
-                                                              ),
-                                                            ),
-                                                          ),
-                                                          Align(
-                                                            alignment:
-                                                                AlignmentDirectional(
-                                                                    -1.0, 0.0),
-                                                            child: Padding(
+                                                      child: InkWell(
+                                                        splashColor:
+                                                            Colors.transparent,
+                                                        focusColor:
+                                                            Colors.transparent,
+                                                        hoverColor:
+                                                            Colors.transparent,
+                                                        highlightColor:
+                                                            Colors.transparent,
+                                                        onTap: () async {
+                                                          logFirebaseEvent(
+                                                              'DASHBOARD_SCREEN_Row_omcsafy2_ON_TAP');
+                                                          logFirebaseEvent(
+                                                              'Row_navigate_to');
+
+                                                          context.pushNamed(
+                                                              AddressListScreenWidget
+                                                                  .routeName);
+
+                                                          logFirebaseEvent(
+                                                              'Row_update_app_state');
+                                                          FFAppState()
+                                                                  .screenName =
+                                                              'dashboard';
+                                                          safeSetState(() {});
+                                                          logFirebaseEvent(
+                                                              'Row_google_analytics_event');
+                                                          logFirebaseEvent(
+                                                              'AddressListScreenFromDashboardAnalytics');
+                                                        },
+                                                        child: Row(
+                                                          mainAxisSize:
+                                                              MainAxisSize.max,
+                                                          children: [
+                                                            Padding(
                                                               padding:
                                                                   EdgeInsetsDirectional
                                                                       .fromSTEB(
-                                                                          5.0,
-                                                                          2.0,
+                                                                          13.0,
+                                                                          0.0,
                                                                           0.0,
                                                                           0.0),
                                                               child: InkWell(
@@ -1134,31 +1081,61 @@ class _DashboardScreenWidgetState extends State<DashboardScreenWidget> {
                                                                 onTap:
                                                                     () async {
                                                                   logFirebaseEvent(
-                                                                      'DASHBOARD_SCREEN_Text_0c4x2k90_ON_TAP');
+                                                                      'DASHBOARD_SCREEN_Icon_7juhrwuo_ON_TAP');
                                                                   logFirebaseEvent(
-                                                                      'Text_navigate_to');
-
-                                                                  context.pushNamed(
-                                                                      AddressListScreenWidget
-                                                                          .routeName);
-
-                                                                  logFirebaseEvent(
-                                                                      'Text_google_analytics_event');
-                                                                  logFirebaseEvent(
-                                                                      'AddressListScreenFromDashboardAnalytics');
+                                                                      'Icon_update_app_state');
+                                                                  FFAppState()
+                                                                      .categoryName = '';
+                                                                  safeSetState(
+                                                                      () {});
                                                                 },
-                                                                child: Text(
-                                                                  valueOrDefault<
-                                                                      String>(
-                                                                    FFAppState()
-                                                                        .selectedAddress,
-                                                                    'Dubai',
-                                                                  ).maybeHandleOverflow(
-                                                                    maxChars:
-                                                                        25,
-                                                                    replacement:
-                                                                        '…',
+                                                                child: Icon(
+                                                                  Icons.house,
+                                                                  color:
+                                                                      colorFromCssString(
+                                                                    getJsonField(
+                                                                      dashboardScreenOneAPIResponse
+                                                                          .jsonBody,
+                                                                      r'''$.oneapi_bg_first_image.bg_image_color''',
+                                                                    ).toString(),
+                                                                    defaultColor:
+                                                                        Colors
+                                                                            .black,
                                                                   ),
+                                                                  size: 20.0,
+                                                                ),
+                                                              ),
+                                                            ),
+                                                            Align(
+                                                              alignment:
+                                                                  AlignmentDirectional(
+                                                                      -1.0,
+                                                                      0.0),
+                                                              child: Padding(
+                                                                padding:
+                                                                    EdgeInsetsDirectional
+                                                                        .fromSTEB(
+                                                                            5.0,
+                                                                            2.0,
+                                                                            0.0,
+                                                                            0.0),
+                                                                child: Text(
+                                                                  getJsonField(
+                                                                            FFAppState().zoneInfo,
+                                                                            r'''$.address''',
+                                                                          ) !=
+                                                                          null
+                                                                      ? getJsonField(
+                                                                          FFAppState()
+                                                                              .zoneInfo,
+                                                                          r'''$.address.house_no''',
+                                                                        ).toString()
+                                                                      : ''.maybeHandleOverflow(
+                                                                          maxChars:
+                                                                              25,
+                                                                          replacement:
+                                                                              '…',
+                                                                        ),
                                                                   style: FlutterFlowTheme.of(
                                                                           context)
                                                                       .bodyMedium
@@ -1193,40 +1170,14 @@ class _DashboardScreenWidgetState extends State<DashboardScreenWidget> {
                                                                 ),
                                                               ),
                                                             ),
-                                                          ),
-                                                          Padding(
-                                                            padding:
-                                                                EdgeInsetsDirectional
-                                                                    .fromSTEB(
-                                                                        5.0,
-                                                                        0.0,
-                                                                        0.0,
-                                                                        0.0),
-                                                            child: InkWell(
-                                                              splashColor: Colors
-                                                                  .transparent,
-                                                              focusColor: Colors
-                                                                  .transparent,
-                                                              hoverColor: Colors
-                                                                  .transparent,
-                                                              highlightColor:
-                                                                  Colors
-                                                                      .transparent,
-                                                              onTap: () async {
-                                                                logFirebaseEvent(
-                                                                    'DASHBOARD_SCREEN_Icon_7pfuwx6l_ON_TAP');
-                                                                logFirebaseEvent(
-                                                                    'Icon_navigate_to');
-
-                                                                context.pushNamed(
-                                                                    AddressListScreenWidget
-                                                                        .routeName);
-
-                                                                logFirebaseEvent(
-                                                                    'Icon_google_analytics_event');
-                                                                logFirebaseEvent(
-                                                                    'AddressListScreenFromDashboardAnalytics');
-                                                              },
+                                                            Padding(
+                                                              padding:
+                                                                  EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          5.0,
+                                                                          0.0,
+                                                                          0.0,
+                                                                          0.0),
                                                               child: Icon(
                                                                 Icons
                                                                     .keyboard_arrow_down_rounded,
@@ -1244,8 +1195,8 @@ class _DashboardScreenWidgetState extends State<DashboardScreenWidget> {
                                                                 size: 20.0,
                                                               ),
                                                             ),
-                                                          ),
-                                                        ],
+                                                          ],
+                                                        ),
                                                       ),
                                                     ),
                                                     Padding(
@@ -6026,6 +5977,299 @@ class _DashboardScreenWidgetState extends State<DashboardScreenWidget> {
                                 ],
                               ),
                             ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  if (FFAppState().zoneInfo == null)
+                    Container(
+                      width: MediaQuery.sizeOf(context).width * 1.0,
+                      height: MediaQuery.sizeOf(context).height * 1.0,
+                      decoration: BoxDecoration(
+                        color: Color(0x3E14181B),
+                      ),
+                      child: Align(
+                        alignment: AlignmentDirectional(0.0, 1.0),
+                        child: Container(
+                          width: MediaQuery.sizeOf(context).width * 1.0,
+                          height: MediaQuery.sizeOf(context).height * 0.7,
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                              fit: BoxFit.contain,
+                              image: Image.asset(
+                                'assets/images/Screenshot_2026-07-02_at_3.57.07_PM.png',
+                              ).image,
+                            ),
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(50.0),
+                              topRight: Radius.circular(50.0),
+                            ),
+                          ),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              Stack(
+                                children: [
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0.0, 30.0, 0.0, 0.0),
+                                    child: Container(
+                                      height:
+                                          MediaQuery.sizeOf(context).height *
+                                              0.4,
+                                      decoration: BoxDecoration(
+                                        color: FlutterFlowTheme.of(context)
+                                            .secondaryBackground,
+                                        borderRadius: BorderRadius.only(
+                                          topLeft: Radius.circular(50.0),
+                                          topRight: Radius.circular(50.0),
+                                        ),
+                                      ),
+                                      child: Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            20.0, 0.0, 20.0, 0.0),
+                                        child: Column(
+                                          mainAxisSize: MainAxisSize.max,
+                                          children: [
+                                            Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(
+                                                      0.0, 50.0, 0.0, 0.0),
+                                              child: Text(
+                                                'Where should we deliver?',
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          font: GoogleFonts
+                                                              .montserrat(
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                            fontStyle:
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyMedium
+                                                                    .fontStyle,
+                                                          ),
+                                                          color: FFAppConstants
+                                                              .blackColor0A0A0A,
+                                                          fontSize: 21.0,
+                                                          letterSpacing: 0.0,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          fontStyle:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodyMedium
+                                                                  .fontStyle,
+                                                        ),
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(
+                                                      0.0, 20.0, 0.0, 0.0),
+                                              child: Text(
+                                                'Set your area once so we can show the right products, prices, and delivery options for you.',
+                                                textAlign: TextAlign.center,
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          font: GoogleFonts
+                                                              .montserrat(
+                                                            fontWeight:
+                                                                FontWeight.w500,
+                                                            fontStyle:
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyMedium
+                                                                    .fontStyle,
+                                                          ),
+                                                          color: FFAppConstants
+                                                              .blackColor0A0A0A,
+                                                          fontSize: 17.0,
+                                                          letterSpacing: 0.0,
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                          fontStyle:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodyMedium
+                                                                  .fontStyle,
+                                                        ),
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(
+                                                      0.0, 20.0, 0.0, 0.0),
+                                              child: FFButtonWidget(
+                                                onPressed: () async {
+                                                  logFirebaseEvent(
+                                                      'DASHBOARD_SCREEN_ADD_ADDRESS_TO_START_OR');
+                                                  logFirebaseEvent(
+                                                      'Button_navigate_to');
+
+                                                  context.pushNamed(
+                                                      AddressListScreenWidget
+                                                          .routeName);
+
+                                                  logFirebaseEvent(
+                                                      'Button_update_app_state');
+                                                  FFAppState().screenName =
+                                                      'dashbaord';
+                                                  safeSetState(() {});
+                                                  logFirebaseEvent(
+                                                      'Button_google_analytics_event');
+                                                  logFirebaseEvent(
+                                                      'AddressListScreenFromDashboardAnalytics');
+                                                },
+                                                text:
+                                                    'Add  Address to Start Ordering',
+                                                options: FFButtonOptions(
+                                                  width:
+                                                      MediaQuery.sizeOf(context)
+                                                              .width *
+                                                          0.8,
+                                                  height: 45.0,
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                          16.0, 0.0, 16.0, 0.0),
+                                                  iconPadding:
+                                                      EdgeInsetsDirectional
+                                                          .fromSTEB(0.0, 0.0,
+                                                              0.0, 0.0),
+                                                  color: FFAppConstants
+                                                      .indigoColor,
+                                                  textStyle: FlutterFlowTheme
+                                                          .of(context)
+                                                      .titleSmall
+                                                      .override(
+                                                        font: GoogleFonts
+                                                            .montserrat(
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          fontStyle:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .titleSmall
+                                                                  .fontStyle,
+                                                        ),
+                                                        color: Colors.white,
+                                                        letterSpacing: 0.0,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        fontStyle:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .titleSmall
+                                                                .fontStyle,
+                                                      ),
+                                                  elevation: 2.0,
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          24.0),
+                                                ),
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(
+                                                      0.0, 20.0, 0.0, 0.0),
+                                              child: FFButtonWidget(
+                                                onPressed: () async {
+                                                  logFirebaseEvent(
+                                                      'DASHBOARD_SCREEN_CHOOSE_ON_MAP_BTN_ON_TA');
+                                                  logFirebaseEvent(
+                                                      'Button_navigate_to');
+
+                                                  context.pushNamed(
+                                                      AddressListScreenWidget
+                                                          .routeName);
+
+                                                  logFirebaseEvent(
+                                                      'Button_update_app_state');
+                                                  FFAppState().screenName =
+                                                      'dashbaord';
+                                                  safeSetState(() {});
+                                                  logFirebaseEvent(
+                                                      'Button_google_analytics_event');
+                                                  logFirebaseEvent(
+                                                      'AddressListScreenFromDashboardAnalytics');
+                                                },
+                                                text: 'Choose on map',
+                                                icon: Icon(
+                                                  Icons.location_on,
+                                                  size: 24.0,
+                                                ),
+                                                options: FFButtonOptions(
+                                                  width:
+                                                      MediaQuery.sizeOf(context)
+                                                              .width *
+                                                          0.8,
+                                                  height: 45.0,
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                          16.0, 0.0, 16.0, 0.0),
+                                                  iconPadding:
+                                                      EdgeInsetsDirectional
+                                                          .fromSTEB(0.0, 0.0,
+                                                              0.0, 0.0),
+                                                  color:
+                                                      FFAppConstants.darkGreen,
+                                                  textStyle: FlutterFlowTheme
+                                                          .of(context)
+                                                      .titleSmall
+                                                      .override(
+                                                        font: GoogleFonts
+                                                            .montserrat(
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          fontStyle:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .titleSmall
+                                                                  .fontStyle,
+                                                        ),
+                                                        color: Colors.white,
+                                                        letterSpacing: 0.0,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        fontStyle:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .titleSmall
+                                                                .fontStyle,
+                                                      ),
+                                                  elevation: 2.0,
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          24.0),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Align(
+                                    alignment: AlignmentDirectional(0.0, -1.0),
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(8.0),
+                                      child: Image.asset(
+                                        'assets/images/q2.png',
+                                        width: 50.0,
+                                        height: 50.0,
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
                           ),
                         ),
                       ),

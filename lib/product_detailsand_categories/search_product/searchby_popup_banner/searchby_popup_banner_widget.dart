@@ -337,6 +337,10 @@ class _SearchbyPopupBannerWidgetState extends State<SearchbyPopupBannerWidget> {
                                       page: FFAppState().page,
                                       pagePer: FFAppState().pageCount,
                                       platform: isiOS ? 'ios' : 'android',
+                                      zoneID: getJsonField(
+                                        FFAppState().zoneInfo,
+                                        r'''$.zone_id''',
+                                      ).toString(),
                                     )))
                                   .future,
                               builder: (context, snapshot) {

@@ -187,6 +187,10 @@ class _TrialPackcategoriesWidgetState extends State<TrialPackcategoriesWidget> {
                             ..complete(QuickartGroup.trialproductlistCall.call(
                               userId: FFAppState().userID,
                               platform: isiOS ? 'ios' : 'android',
+                              zoneID: getJsonField(
+                                FFAppState().zoneInfo,
+                                r'''$.zone_id''',
+                              ).toString(),
                             )))
                           .future,
                       builder: (context, snapshot) {

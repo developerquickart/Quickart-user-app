@@ -35,7 +35,12 @@ class _CachedImageState extends State<CachedImage> {
       imageUrl: widget.imageUrl,
       placeholder: (context, url) =>
           const Center(child: CircularProgressIndicator()),
-      //errorWidget: (context, url, error) => const Icon(Icons.error),
+      errorWidget: (context, url, error) => Image.asset(
+        'assets/images/bg-banner.jpg',
+        width: widget.width,
+        height: widget.height,
+        fit: BoxFit.cover,
+      ),
       width: widget.width,
       height: widget.height,
       fit: BoxFit.cover,

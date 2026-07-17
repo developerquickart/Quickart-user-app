@@ -436,6 +436,10 @@ class _SearchResultScreenWidgetState extends State<SearchResultScreenWidget> {
                                       maxDiscount: _model.isFilterSelected == 3
                                           ? '99.99'
                                           : FFAppState().maxDiscount,
+                                      zoneId: getJsonField(
+                                        FFAppState().zoneInfo,
+                                        r'''$.zone_id''',
+                                      ).toString(),
                                     )))
                               .future,
                           builder: (context, snapshot) {

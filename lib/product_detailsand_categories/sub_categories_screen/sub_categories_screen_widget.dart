@@ -83,6 +83,10 @@ class _SubCategoriesScreenWidgetState extends State<SubCategoriesScreenWidget> {
               ? FFAppState().catID
               : widget.catid,
           platform: isiOS ? 'ios' : 'android',
+          zoneID: getJsonField(
+            FFAppState().zoneInfo,
+            r'''$.zone_id''',
+          ).toString(),
         );
 
         if ((_model.apiResultSubcatID?.succeeded ?? true)) {
@@ -138,6 +142,10 @@ class _SubCategoriesScreenWidgetState extends State<SubCategoriesScreenWidget> {
                 ? 'all'
                 : widget.subcatid,
             platform: isiOS ? 'ios' : 'android',
+            zoneID: getJsonField(
+              FFAppState().zoneInfo,
+              r'''$.zone_id''',
+            ).toString(),
           );
 
           if ((_model.apiResultCatProduct1?.succeeded ?? true)) {
@@ -453,6 +461,10 @@ class _SubCategoriesScreenWidgetState extends State<SubCategoriesScreenWidget> {
                     }(),
                     subCatID: _model.selectedSubCatID,
                     platform: isiOS ? 'ios' : 'android',
+                    zoneID: getJsonField(
+                      FFAppState().zoneInfo,
+                      r'''$.zone_id''',
+                    ).toString(),
                   );
 
                   if ((_model.apiResultCartProductFilter?.succeeded ?? true)) {
@@ -607,6 +619,10 @@ class _SubCategoriesScreenWidgetState extends State<SubCategoriesScreenWidget> {
                                                       platform: isiOS
                                                           ? 'ios'
                                                           : 'android',
+                                                      zoneID: getJsonField(
+                                                        FFAppState().zoneInfo,
+                                                        r'''$.zone_id''',
+                                                      ).toString(),
                                                     );
 
                                                     if ((_model
@@ -1008,6 +1024,12 @@ class _SubCategoriesScreenWidgetState extends State<SubCategoriesScreenWidget> {
                                                               platform: isiOS
                                                                   ? 'ios'
                                                                   : 'android',
+                                                              zoneID:
+                                                                  getJsonField(
+                                                                FFAppState()
+                                                                    .zoneInfo,
+                                                                r'''$.zone_id''',
+                                                              ).toString(),
                                                             );
 
                                                             if ((_model

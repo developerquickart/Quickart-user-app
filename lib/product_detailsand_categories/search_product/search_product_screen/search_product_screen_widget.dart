@@ -181,6 +181,10 @@ class _SearchProductScreenWidgetState extends State<SearchProductScreenWidget> {
                                             _model.selectedFilterSearch == 3
                                                 ? '99.99'
                                                 : FFAppState().minDiscount,
+                                        zoneId: getJsonField(
+                                          FFAppState().zoneInfo,
+                                          r'''$.zone_id''',
+                                        ).toString(),
                                       );
 
                                       if ((_model.searchProductAPIResponsefil

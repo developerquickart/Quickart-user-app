@@ -334,6 +334,10 @@ class _OccasionalCategoryWidgetState extends State<OccasionalCategoryWidget> {
                                       maxDiscount: _model.isFilterSelected == 3
                                           ? '99.00'
                                           : FFAppState().maxDiscount,
+                                      zoneID: getJsonField(
+                                        FFAppState().zoneInfo,
+                                        r'''$.zone_id''',
+                                      ).toString(),
                                     )))
                                   .future,
                               builder: (context, snapshot) {

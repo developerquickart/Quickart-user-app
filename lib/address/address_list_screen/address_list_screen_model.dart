@@ -13,6 +13,10 @@ class AddressListScreenModel extends FlutterFlowModel<AddressListScreenWidget> {
 
   ///  State fields for stateful widgets in this page.
 
+  // Stores action output result for [Backend Call - API (getZoneID)] action in Container widget.
+  ApiCallResponse? getZone;
+  // Stores action output result for [Backend Call - API (updateselectedaddress)] action in Container widget.
+  ApiCallResponse? updateZoneIDResult;
   // Stores action output result for [Custom Action - checkInternetConnection] action in IconButton widget.
   bool? connectivityResult;
   // Stores action output result for [Backend Call - API (removeaddress)] action in IconButton widget.

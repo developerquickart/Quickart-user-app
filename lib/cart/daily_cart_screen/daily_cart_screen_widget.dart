@@ -169,6 +169,10 @@ class _DailyCartScreenWidgetState extends State<DailyCartScreenWidget>
               userid: FFAppState().userID,
               deviceid: FFAppState().deviceID,
               platform: isiOS ? 'ios' : 'android',
+              zoneID: getJsonField(
+                FFAppState().zoneInfo,
+                r'''$.zone_id''',
+              ).toString(),
             )))
           .future,
       builder: (context, snapshot) {
@@ -18191,6 +18195,12 @@ class _DailyCartScreenWidgetState extends State<DailyCartScreenWidget>
                                                               platform: isiOS
                                                                   ? 'ios'
                                                                   : 'android',
+                                                              zoneID:
+                                                                  getJsonField(
+                                                                FFAppState()
+                                                                    .zoneInfo,
+                                                                r'''$.zone_id''',
+                                                              ).toString(),
                                                             ),
                                                             builder: (context,
                                                                 snapshot) {

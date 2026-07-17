@@ -306,6 +306,10 @@ class _TopDealsScreenWidgetState extends State<TopDealsScreenWidget> {
                                     page: FFAppState().page,
                                     perpage: 50,
                                     platform: FFAppState().platform,
+                                    zoneid: getJsonField(
+                                      FFAppState().zoneInfo,
+                                      r'''$.zone_id''',
+                                    ).toString(),
                                   )))
                                 .future,
                             builder: (context, snapshot) {

@@ -410,6 +410,7 @@ final parametersBuilderMap =
           'mrp': getParameter<String>(data, 'mrp'),
         },
       ),
+  'QuickartsplashScreenCopy': ParameterData.none(),
 };
 
 Map<String, dynamic> getInitialParameterData(Map<String, dynamic> data) {

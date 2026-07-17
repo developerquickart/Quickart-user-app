@@ -165,6 +165,10 @@ class _FeaturedCategoryWidgetState extends State<FeaturedCategoryWidget> {
                   ? '99.99'
                   : FFAppState().maxDiscount,
               platform: isiOS ? 'ios' : 'android',
+              zoneID: getJsonField(
+                FFAppState().zoneInfo,
+                r'''$.zone_id''',
+              ).toString(),
             )))
           .future,
       builder: (context, snapshot) {
@@ -348,7 +352,12 @@ class _FeaturedCategoryWidgetState extends State<FeaturedCategoryWidget> {
                                       Completer<ApiCallResponse>()
                                         ..complete(QuickartGroup
                                             .featurecategoryCall
-                                            .call()))
+                                            .call(
+                                          zoneID: getJsonField(
+                                            FFAppState().zoneInfo,
+                                            r'''$.zone_id''',
+                                          ).toString(),
+                                        )))
                                   .future,
                               builder: (context, snapshot) {
                                 // Customize what your widget looks like when it's loading.

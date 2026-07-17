@@ -75,6 +75,10 @@ class _SearchScreenWidgetState extends State<SearchScreenWidget> {
               userid: FFAppState().userID,
               storeid: FFAppState().storeID,
               platform: isiOS ? 'ios' : 'android',
+              zoneID: getJsonField(
+                FFAppState().zoneInfo,
+                r'''$.zone_id''',
+              ).toString(),
             )))
           .future,
       builder: (context, snapshot) {

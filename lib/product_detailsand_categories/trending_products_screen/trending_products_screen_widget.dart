@@ -300,6 +300,10 @@ class _TrendingProductsScreenWidgetState
                                     page: 1,
                                     pageper: 100,
                                     platform: isiOS ? 'ios' : 'android',
+                                    zoneid: getJsonField(
+                                      FFAppState().zoneInfo,
+                                      r'''$.zone_id''',
+                                    ).toString(),
                                   )))
                                 .future,
                             builder: (context, snapshot) {

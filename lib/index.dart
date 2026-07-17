@@ -114,3 +114,5 @@ export '/product_detailsand_categories/search_product/searchby_popup_banner/sear
 export '/web_view_app/web_view_app_widget.dart' show WebViewAppWidget;
 export '/cart/total_pay_s_d_k_payment_screen/total_pay_s_d_k_payment_screen_widget.dart'
     show TotalPaySDKPaymentScreenWidget;
+export '/auth/quickartsplash_screen_copy/quickartsplash_screen_copy_widget.dart'
+    show QuickartsplashScreenCopyWidget;

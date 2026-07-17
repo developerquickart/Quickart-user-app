@@ -1013,6 +1013,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               ParamType.String,
             ),
           ),
+        ),
+        FFRoute(
+          name: QuickartsplashScreenCopyWidget.routeName,
+          path: QuickartsplashScreenCopyWidget.routePath,
+          builder: (context, params) => QuickartsplashScreenCopyWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

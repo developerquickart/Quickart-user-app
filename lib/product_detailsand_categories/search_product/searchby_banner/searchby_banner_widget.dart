@@ -335,6 +335,10 @@ class _SearchbyBannerWidgetState extends State<SearchbyBannerWidget> {
                                           ? widget.type
                                           : FFAppState().orderType,
                                       platform: isiOS ? 'ios' : 'android',
+                                      zoneID: getJsonField(
+                                        FFAppState().zoneInfo,
+                                        r'''$.zone_id''',
+                                      ).toString(),
                                     )))
                                   .future,
                               builder: (context, snapshot) {

@@ -143,6 +143,28 @@ class _NoteAndroidNotesWidgetState extends State<NoteAndroidNotesWidget> {
                     padding:
                         EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
                     child: Text(
+                      'Base URL demo:\nproduct-search demo:--->https://zoneapi-production.up.railway.app/testnodejsapp/\n product-search zone :--->https://fipunwrfngwnoaersvlb.supabase.co/functions/v1/product-search',
+                      style: FlutterFlowTheme.of(context).bodyMedium.override(
+                            font: GoogleFonts.readexPro(
+                              fontWeight: FontWeight.w600,
+                              fontStyle: FlutterFlowTheme.of(context)
+                                  .bodyMedium
+                                  .fontStyle,
+                            ),
+                            color: FlutterFlowTheme.of(context).tertiary,
+                            fontSize: 18.0,
+                            letterSpacing: 0.0,
+                            fontWeight: FontWeight.w600,
+                            fontStyle: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .fontStyle,
+                          ),
+                    ),
+                  ),
+                  Padding(
+                    padding:
+                        EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
+                    child: Text(
                       'Uncoment line in   class initializeAppsflyer\n\nAppsflyerService().resetDeepLinkSession();',
                       style: FlutterFlowTheme.of(context).bodyMedium.override(
                             font: GoogleFonts.readexPro(

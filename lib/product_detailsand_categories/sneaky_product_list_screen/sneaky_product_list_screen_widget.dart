@@ -274,6 +274,10 @@ class _SneakyProductListScreenWidgetState
                                       return FFAppState().sortPrice;
                                     }
                                   }(),
+                                  zoneid: getJsonField(
+                                    FFAppState().zoneInfo,
+                                    r'''$.zone_id''',
+                                  ).toString(),
                                 )))
                               .future,
                           builder: (context, snapshot) {

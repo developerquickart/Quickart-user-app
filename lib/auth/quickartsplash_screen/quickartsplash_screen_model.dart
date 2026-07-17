@@ -12,10 +12,10 @@ class QuickartsplashScreenModel
   bool? connectivityResultCopy;
   // Stores action output result for [Custom Action - getFcmToken] action in QuickartsplashScreen widget.
   String? fcmTokenNew;
+  // Stores action output result for [Backend Call - API (getZoneID)] action in QuickartsplashScreen widget.
+  ApiCallResponse? getZoneIDResult;
   // Stores action output result for [Backend Call - API (appinfo)] action in QuickartsplashScreen widget.
   ApiCallResponse? apiResultzwxIOS;
-  // Stores action output result for [Backend Call - API (appinfo)] action in QuickartsplashScreen widget.
-  ApiCallResponse? apiResultso1IOS;
   // Stores action output result for [Backend Call - API (appinfo)] action in QuickartsplashScreen widget.
   ApiCallResponse? apiResultAppInfo3;
   // Stores action output result for [Backend Call - API (appinfo)] action in QuickartsplashScreen widget.
