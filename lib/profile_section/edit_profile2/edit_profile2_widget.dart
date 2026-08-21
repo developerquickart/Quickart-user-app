@@ -1081,10 +1081,6 @@ class _EditProfile2WidgetState extends State<EditProfile2Widget> {
                                 ),
                                 controller: _model.pinCodeController,
                                 onChanged: (_) {},
-                                onCompleted: (_) async {
-                                  logFirebaseEvent(
-                                      'EDIT_PROFILE2_PinCode_ll58d26n_ON_PINCOD');
-                                },
                                 autovalidateMode:
                                     AutovalidateMode.onUserInteraction,
                                 validator: _model.pinCodeControllerValidator

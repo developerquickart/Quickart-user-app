@@ -989,35 +989,19 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           ),
         ),
         FFRoute(
-          name: TotalPaySDKPaymentScreenWidget.routeName,
-          path: TotalPaySDKPaymentScreenWidget.routePath,
-          builder: (context, params) => TotalPaySDKPaymentScreenWidget(
-            checkoutUrl: params.getParam(
-              'checkoutUrl',
-              ParamType.String,
-            ),
-            cookies: params.getParam(
-              'cookies',
-              ParamType.String,
-            ),
-            successUrl: params.getParam(
-              'successUrl',
-              ParamType.String,
-            ),
-            cancelUrl: params.getParam(
-              'cancelUrl',
-              ParamType.String,
-            ),
-            mrp: params.getParam(
-              'mrp',
-              ParamType.String,
-            ),
-          ),
-        ),
-        FFRoute(
           name: QuickartsplashScreenCopyWidget.routeName,
           path: QuickartsplashScreenCopyWidget.routePath,
           builder: (context, params) => QuickartsplashScreenCopyWidget(),
+        ),
+        FFRoute(
+          name: DailyCartScreenCopyWidget.routeName,
+          path: DailyCartScreenCopyWidget.routePath,
+          builder: (context, params) => DailyCartScreenCopyWidget(),
+        ),
+        FFRoute(
+          name: CartSubscriptionScreenCopyWidget.routeName,
+          path: CartSubscriptionScreenCopyWidget.routePath,
+          builder: (context, params) => CartSubscriptionScreenCopyWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

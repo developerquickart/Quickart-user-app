@@ -143,6 +143,9 @@ class QuickartGroup {
   static SpentbywalletCall spentbywalletCall = SpentbywalletCall();
   static UpdateselectedaddressCall updateselectedaddressCall =
       UpdateselectedaddressCall();
+  static AddtosavesubcartCall addtosavesubcartCall = AddtosavesubcartCall();
+  static AddtosavecartCall addtosavecartCall = AddtosavecartCall();
+  static RemovesavecartCall removesavecartCall = RemovesavecartCall();
 }
 
 class LoginCall {
@@ -2515,6 +2518,7 @@ class CouponListCall {
     String? totalDelievery = '',
     String? cartId = '',
     String? platform = '',
+    String? zoneID = '',
   }) async {
     final baseUrl = QuickartGroup.getBaseUrl();
 
@@ -2524,7 +2528,8 @@ class CouponListCall {
   "store_id": "${storeId}",
   "total_delivery": "${totalDelievery}",
   "cart_id": "${cartId}",
-  "platform": "${platform}"
+  "platform": "${platform}",
+  "zone_id": "${zoneID}"
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'CouponList',
@@ -2867,9 +2872,16 @@ class CheckoutquickorderCall {
     String? orderInstruction = '',
     String? platform = '',
     String? totalrefwalletamt = '',
+    String? zoneID = '',
+    String? pricingType = '',
+    String? priceEffect = '',
+    dynamic zoneDeliveryAddonsJson,
+    dynamic zonePermanentChargesJson,
   }) async {
     final baseUrl = QuickartGroup.getBaseUrl();
 
+    final zoneDeliveryAddons = _serializeJson(zoneDeliveryAddonsJson);
+    final zonePermanentCharges = _serializeJson(zonePermanentChargesJson);
     final ffApiRequestBody = '''
 {
   "user_id": "${userid}",
@@ -2893,7 +2905,12 @@ class CheckoutquickorderCall {
   "totalwalletamt": ${totalwalletamt},
   "order_instruction": "${orderInstruction}",
   "platform": "${platform}",
-  "totalrefwalletamt": "${totalrefwalletamt}"
+  "totalrefwalletamt": "${totalrefwalletamt}",
+  "pricing_type": "${pricingType}",
+  "price_effect": "${priceEffect}",
+  "zone_delivery_addons": ${zoneDeliveryAddons},
+  "zone_id": "${zoneID}",
+  "zone_permanent_charges": ${zonePermanentCharges}
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'checkoutquickorder',
@@ -3178,9 +3195,16 @@ class PaymentCall {
     String? orderInstruction = '',
     String? platform = '',
     String? totalrefwalletamt = '',
+    String? zoneID = '',
+    String? pricingType = '',
+    String? priceEffect = '',
+    dynamic zoneDeliveryAddonsJson,
+    dynamic zonePermanentChargesJson,
   }) async {
     final baseUrl = QuickartGroup.getBaseUrl();
 
+    final zoneDeliveryAddons = _serializeJson(zoneDeliveryAddonsJson);
+    final zonePermanentCharges = _serializeJson(zonePermanentChargesJson);
     final ffApiRequestBody = '''
 {
   "address_id": "${addressid}",
@@ -3206,7 +3230,12 @@ class PaymentCall {
   "payment_type": "${paymentType}",
   "order_instruction": "${orderInstruction}",
   "platform": "${platform}",
-  "totalrefwalletamt": "${totalrefwalletamt}"
+  "totalrefwalletamt": "${totalrefwalletamt}",
+  "zone_id": "${zoneID}",
+  "pricing_type": "${pricingType}",
+  "price_effect": "${priceEffect}",
+  "zone_delivery_addons": ${zoneDeliveryAddons},
+  "zone_permanent_charges": ${zonePermanentCharges}
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'payment',
@@ -4378,14 +4407,16 @@ class TrialPackDetailsCall {
     String? trialId = '',
     String? userId = '',
     String? platform = '',
+    String? zoneID = '',
   }) async {
     final baseUrl = QuickartGroup.getBaseUrl();
 
     final ffApiRequestBody = '''
 {
-    "trail_id" : "${escapeStringForJson(trialId)}" ,
-    "user_id": "${escapeStringForJson(userId)}",
-    "platform": "${escapeStringForJson(platform)}"
+  "trail_id": "${escapeStringForJson(trialId)}",
+  "user_id": "${escapeStringForJson(userId)}",
+  "platform": "${escapeStringForJson(platform)}",
+  "zone_id": "${escapeStringForJson(zoneID)}"
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'trialPackDetails',
@@ -5341,12 +5372,151 @@ class UpdateselectedaddressCall {
       ));
 }
 
+class AddtosavesubcartCall {
+  Future<ApiCallResponse> call({
+    String? userID = '',
+    String? variantID = '',
+    String? orderCartID = '',
+    String? platform = '',
+  }) async {
+    final baseUrl = QuickartGroup.getBaseUrl();
+
+    final ffApiRequestBody = '''
+{
+  "user_id": "${escapeStringForJson(userID)}",
+  "varient_id": "${escapeStringForJson(variantID)}",
+  "order_cart_id": "${escapeStringForJson(orderCartID)}",
+  "platform": "${escapeStringForJson(platform)}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'addtosavesubcart',
+      apiUrl: '${baseUrl}api/add_to_save_subcart',
+      callType: ApiCallType.POST,
+      headers: {},
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  String? status(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.status''',
+      ));
+  String? message(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.message''',
+      ));
+  dynamic data(dynamic response) => getJsonField(
+        response,
+        r'''$.data''',
+      );
+}
+
+class AddtosavecartCall {
+  Future<ApiCallResponse> call({
+    String? userID = '',
+    String? variantID = '',
+    String? orderCartID = '',
+    String? platform = '',
+  }) async {
+    final baseUrl = QuickartGroup.getBaseUrl();
+
+    final ffApiRequestBody = '''
+{
+  "user_id": "${escapeStringForJson(userID)}",
+  "varient_id": "${escapeStringForJson(variantID)}",
+  "order_cart_id": "${escapeStringForJson(orderCartID)}",
+  "platform": "${escapeStringForJson(platform)}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'addtosavecart',
+      apiUrl: '${baseUrl}api/add_to_save_cart',
+      callType: ApiCallType.POST,
+      headers: {},
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  String? status(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.status''',
+      ));
+  String? message(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.message''',
+      ));
+  dynamic data(dynamic response) => getJsonField(
+        response,
+        r'''$.data''',
+      );
+}
+
+class RemovesavecartCall {
+  Future<ApiCallResponse> call({
+    String? userID = '',
+    String? variantID = '',
+    String? isSubscription = '',
+  }) async {
+    final baseUrl = QuickartGroup.getBaseUrl();
+
+    final ffApiRequestBody = '''
+{
+  "user_id": "${escapeStringForJson(userID)}",
+  "varient_id": "${escapeStringForJson(variantID)}",
+  "is_subscription": "${escapeStringForJson(isSubscription)}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'removesavecart',
+      apiUrl: '${baseUrl}api/remove_save_cart',
+      callType: ApiCallType.POST,
+      headers: {},
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  String? status(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.status''',
+      ));
+  String? message(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.message''',
+      ));
+  dynamic data(dynamic response) => getJsonField(
+        response,
+        r'''$.data''',
+      );
+}
+
 /// End Quickart Group Code
 
 /// Start Quickart Zone Group Code
 
 class QuickartZoneGroup {
-  static String getBaseUrl() => 'https://fipunwrfngwnoaersvlb.supabase.co/';
+  static String getBaseUrl() => 'https://pvtiycfiimwxnruqyvqq.supabase.co/';
   static Map<String, String> headers = {};
   static GetZoneIDCall getZoneIDCall = GetZoneIDCall();
 }

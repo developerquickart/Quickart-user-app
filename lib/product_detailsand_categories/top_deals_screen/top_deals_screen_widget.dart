@@ -279,7 +279,10 @@ class _TopDealsScreenWidgetState extends State<TopDealsScreenWidget> {
                                     ApiCallResponse>()
                                   ..complete(QuickartGroup.topsellingCall.call(
                                     userid: FFAppState().userID,
-                                    storeid: FFAppState().storeID,
+                                    storeid: getJsonField(
+                                      FFAppState().zoneInfo,
+                                      r'''$.store_id''',
+                                    ).toString(),
                                     byname: FFAppState().byName,
                                     minPrice: FFAppState().minPrice,
                                     maxPrice: FFAppState().maxPrice,
@@ -665,7 +668,10 @@ class _TopDealsScreenWidgetState extends State<TopDealsScreenWidget> {
                                                                                     _model.cartAdd = await QuickartGroup.addToCartCall.call(
                                                                                       userid: FFAppState().userID,
                                                                                       qty: '1',
-                                                                                      storeid: FFAppState().storeID,
+                                                                                      storeid: getJsonField(
+                                                                                        FFAppState().zoneInfo,
+                                                                                        r'''$.store_id''',
+                                                                                      ).toString(),
                                                                                       varientid: getJsonField(
                                                                                         productModelItem,
                                                                                         r'''$.varient_id''',
@@ -925,7 +931,10 @@ class _TopDealsScreenWidgetState extends State<TopDealsScreenWidget> {
                                                                                         logFirebaseEvent('Button_backend_call');
                                                                                         _model.addtoCartAPI1 = await QuickartGroup.addToCartCall.call(
                                                                                           userid: FFAppState().userID,
-                                                                                          storeid: FFAppState().storeID,
+                                                                                          storeid: getJsonField(
+                                                                                            FFAppState().zoneInfo,
+                                                                                            r'''$.store_id''',
+                                                                                          ).toString(),
                                                                                           deviceid: FFAppState().deviceID,
                                                                                           qty: functions.addRemoveQTY(
                                                                                               getJsonField(
@@ -1195,7 +1204,10 @@ class _TopDealsScreenWidgetState extends State<TopDealsScreenWidget> {
                                                                                                   r'''$.cart_qty''',
                                                                                                 ),
                                                                                                 'add'),
-                                                                                            storeid: FFAppState().storeID,
+                                                                                            storeid: getJsonField(
+                                                                                              FFAppState().zoneInfo,
+                                                                                              r'''$.store_id''',
+                                                                                            ).toString(),
                                                                                             varientid: getJsonField(
                                                                                               productModelItem,
                                                                                               r'''$.varient_id''',
@@ -2738,8 +2750,11 @@ class _TopDealsScreenWidgetState extends State<TopDealsScreenWidget> {
                                                                       FFAppState()
                                                                           .userID,
                                                                   storeID:
-                                                                      FFAppState()
-                                                                          .storeID,
+                                                                      getJsonField(
+                                                                    FFAppState()
+                                                                        .zoneInfo,
+                                                                    r'''$.store_id''',
+                                                                  ).toString(),
                                                                   varientID:
                                                                       getJsonField(
                                                                     productModelItem,
@@ -2945,8 +2960,11 @@ class _TopDealsScreenWidgetState extends State<TopDealsScreenWidget> {
                                                                       FFAppState()
                                                                           .userID,
                                                                   storeID:
-                                                                      FFAppState()
-                                                                          .storeID,
+                                                                      getJsonField(
+                                                                    FFAppState()
+                                                                        .zoneInfo,
+                                                                    r'''$.store_id''',
+                                                                  ).toString(),
                                                                   varientID:
                                                                       getJsonField(
                                                                     productModelItem,

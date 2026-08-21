@@ -6,7 +6,6 @@ import '/custom_code/actions/index.dart' as actions;
 import '/custom_code/widgets/index.dart' as custom_widgets;
 import '/flutter_flow/custom_functions.dart' as functions;
 import '/index.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
@@ -121,7 +120,10 @@ class _QuickartsplashScreenWidgetState
             logFirebaseEvent('QuickartsplashScreen_backend_call');
             _model.apiResultzwxIOS = await QuickartGroup.appinfoCall.call(
               userid: FFAppState().userID,
-              stroreid: FFAppState().storeID,
+              stroreid: getJsonField(
+                (_model.getZoneIDResult?.jsonBody ?? ''),
+                r'''$.data.store_id''',
+              ).toString(),
               platform: 'ios',
               fcmToken: _model.fcmTokenNew,
               deviceid: FFAppState().deviceID,
@@ -282,7 +284,10 @@ class _QuickartsplashScreenWidgetState
             logFirebaseEvent('QuickartsplashScreen_backend_call');
             _model.apiResultAppInfo3 = await QuickartGroup.appinfoCall.call(
               userid: FFAppState().userID,
-              stroreid: FFAppState().storeID,
+              stroreid: getJsonField(
+                (_model.getZoneIDResult?.jsonBody ?? ''),
+                r'''$.data.store_id''',
+              ).toString(),
               platform: FFAppState().platform,
               deviceid: FFAppState().deviceID,
               fcmToken: FFAppState().fcmToken,
@@ -633,11 +638,8 @@ class _QuickartsplashScreenWidgetState
               ),
               ClipRRect(
                 borderRadius: BorderRadius.circular(8.0),
-                child: CachedNetworkImage(
-                  fadeInDuration: Duration(milliseconds: 500),
-                  fadeOutDuration: Duration(milliseconds: 500),
-                  imageUrl:
-                      'https://quickart.b-cdn.net/images/app-home-splash-screeneid.gif',
+                child: Image.network(
+                  'https://quickart.b-cdn.net/images/app-home-splash-screeneid1.gif',
                   width: MediaQuery.sizeOf(context).width * 1.0,
                   height: MediaQuery.sizeOf(context).height * 1.0,
                   fit: BoxFit.fill,

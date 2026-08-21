@@ -307,7 +307,10 @@ class _OccasionalCategoryWidgetState extends State<OccasionalCategoryWidget> {
                                         .occasionalcatsearchCall
                                         .call(
                                       userid: FFAppState().userID,
-                                      storeid: FFAppState().storeID,
+                                      storeid: getJsonField(
+                                        FFAppState().zoneInfo,
+                                        r'''$.store_id''',
+                                      ).toString(),
                                       page: FFAppState().page,
                                       pageCount: FFAppState().pageCount,
                                       byName: widget.name != null &&
@@ -683,7 +686,10 @@ class _OccasionalCategoryWidgetState extends State<OccasionalCategoryWidget> {
                                                                                       _model.cartAdd = await QuickartGroup.addToCartCall.call(
                                                                                         userid: FFAppState().userID,
                                                                                         qty: '1',
-                                                                                        storeid: FFAppState().storeID,
+                                                                                        storeid: getJsonField(
+                                                                                          FFAppState().zoneInfo,
+                                                                                          r'''$.store_id''',
+                                                                                        ).toString(),
                                                                                         varientid: getJsonField(
                                                                                           productModel1Item,
                                                                                           r'''$.varient_id''',
@@ -939,7 +945,10 @@ class _OccasionalCategoryWidgetState extends State<OccasionalCategoryWidget> {
                                                                                           logFirebaseEvent('Button_backend_call');
                                                                                           _model.addtoCartAPI1 = await QuickartGroup.addToCartCall.call(
                                                                                             userid: FFAppState().userID,
-                                                                                            storeid: FFAppState().storeID,
+                                                                                            storeid: getJsonField(
+                                                                                              FFAppState().zoneInfo,
+                                                                                              r'''$.store_id''',
+                                                                                            ).toString(),
                                                                                             deviceid: FFAppState().deviceID,
                                                                                             qty: functions.addRemoveQTY(
                                                                                                 getJsonField(
@@ -1203,7 +1212,10 @@ class _OccasionalCategoryWidgetState extends State<OccasionalCategoryWidget> {
                                                                                                     r'''$.cart_qty''',
                                                                                                   ),
                                                                                                   'add'),
-                                                                                              storeid: FFAppState().storeID,
+                                                                                              storeid: getJsonField(
+                                                                                                FFAppState().zoneInfo,
+                                                                                                r'''$.store_id''',
+                                                                                              ).toString(),
                                                                                               varientid: getJsonField(
                                                                                                 productModel1Item,
                                                                                                 r'''$.varient_id''',
@@ -2692,7 +2704,11 @@ class _OccasionalCategoryWidgetState extends State<OccasionalCategoryWidget> {
                                                                         userid:
                                                                             FFAppState().userID,
                                                                         storeID:
-                                                                            FFAppState().storeID,
+                                                                            getJsonField(
+                                                                          FFAppState()
+                                                                              .zoneInfo,
+                                                                          r'''$.store_id''',
+                                                                        ).toString(),
                                                                         varientID:
                                                                             getJsonField(
                                                                           productModel1Item,
@@ -2883,8 +2899,11 @@ class _OccasionalCategoryWidgetState extends State<OccasionalCategoryWidget> {
                                                                     userid: FFAppState()
                                                                         .userID,
                                                                     storeID:
-                                                                        FFAppState()
-                                                                            .storeID,
+                                                                        getJsonField(
+                                                                      FFAppState()
+                                                                          .zoneInfo,
+                                                                      r'''$.store_id''',
+                                                                    ).toString(),
                                                                     varientID:
                                                                         getJsonField(
                                                                       productModel1Item,

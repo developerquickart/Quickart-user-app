@@ -145,7 +145,10 @@ class _ProductDetailsScreenWidgetState
     return FutureBuilder<ApiCallResponse>(
       future: (_model.apiRequestCompleter ??= Completer<ApiCallResponse>()
             ..complete(QuickartGroup.productDetailCall.call(
-              storeID: FFAppState().storeID,
+              storeID: getJsonField(
+                FFAppState().zoneInfo,
+                r'''$.store_id''',
+              ).toString(),
               userID: FFAppState().userID,
               productID: widget.id != null
                   ? valueOrDefault<String>(
@@ -852,8 +855,11 @@ class _ProductDetailsScreenWidgetState
                                                                     userid: FFAppState()
                                                                         .userID,
                                                                     storeID:
-                                                                        FFAppState()
-                                                                            .storeID,
+                                                                        getJsonField(
+                                                                      FFAppState()
+                                                                          .zoneInfo,
+                                                                      r'''$.store_id''',
+                                                                    ).toString(),
                                                                     varientID:
                                                                         getJsonField(
                                                                       productDetailsScreenProductDetailResponse
@@ -1050,8 +1056,11 @@ class _ProductDetailsScreenWidgetState
                                                                     userid: FFAppState()
                                                                         .userID,
                                                                     storeID:
-                                                                        FFAppState()
-                                                                            .storeID,
+                                                                        getJsonField(
+                                                                      FFAppState()
+                                                                          .zoneInfo,
+                                                                      r'''$.store_id''',
+                                                                    ).toString(),
                                                                     varientID:
                                                                         getJsonField(
                                                                       productDetailsScreenProductDetailResponse
@@ -2580,8 +2589,11 @@ class _ProductDetailsScreenWidgetState
                                                                     userid: FFAppState()
                                                                         .userID,
                                                                     storeid:
-                                                                        FFAppState()
-                                                                            .storeID,
+                                                                        getJsonField(
+                                                                      FFAppState()
+                                                                          .zoneInfo,
+                                                                      r'''$.store_id''',
+                                                                    ).toString(),
                                                                     varientid:
                                                                         getJsonField(
                                                                       _model
@@ -5337,7 +5349,10 @@ class _ProductDetailsScreenWidgetState
                                           _model.apiResultTimeSlot =
                                               await QuickartGroup.timeslotCall
                                                   .call(
-                                            storeID: FFAppState().storeID,
+                                            storeID: getJsonField(
+                                              FFAppState().zoneInfo,
+                                              r'''$.store_id''',
+                                            ).toString(),
                                             selectedDate: dateTimeFormat(
                                                 "yyyy-MM-dd",
                                                 _model.datePicked),
@@ -6168,8 +6183,11 @@ class _ProductDetailsScreenWidgetState
                                                           userid: FFAppState()
                                                               .userID,
                                                           qty: '1',
-                                                          storeid: FFAppState()
-                                                              .storeID,
+                                                          storeid: getJsonField(
+                                                            FFAppState()
+                                                                .zoneInfo,
+                                                            r'''$.store_id''',
+                                                          ).toString(),
                                                           varientid:
                                                               getJsonField(
                                                             _model

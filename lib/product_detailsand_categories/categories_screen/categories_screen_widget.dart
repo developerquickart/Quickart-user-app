@@ -175,7 +175,10 @@ class _CategoriesScreenWidgetState extends State<CategoriesScreenWidget> {
                               ..complete(QuickartGroup.cateeCall.call(
                                 latest: 'null',
                                 byname: 'null',
-                                storeID: '7',
+                                storeID: getJsonField(
+                                  FFAppState().zoneInfo,
+                                  r'''$.store_id''',
+                                ).toString(),
                                 platform: isiOS ? 'ios' : 'android',
                                 zoneID: getJsonField(
                                   FFAppState().zoneInfo,

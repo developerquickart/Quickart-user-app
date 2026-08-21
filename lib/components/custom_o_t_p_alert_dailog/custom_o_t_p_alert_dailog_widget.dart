@@ -297,7 +297,10 @@ class _CustomOTPAlertDailogWidgetState
                               _model.apiResultzwxIOS1button2 =
                                   await QuickartGroup.appinfoCall.call(
                                 userid: FFAppState().userID,
-                                stroreid: FFAppState().storeID,
+                                stroreid: getJsonField(
+                                  FFAppState().zoneInfo,
+                                  r'''$.store_id''',
+                                ).toString(),
                                 platform: 'ios',
                                 fcmToken: FFAppState().fcmToken,
                                 deviceid: FFAppState().deviceID,

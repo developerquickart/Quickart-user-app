@@ -231,7 +231,7 @@ class _NoteAndroidNotesWidgetState extends State<NoteAndroidNotesWidget> {
                     padding:
                         EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
                     child: Text(
-                      '',
+                      '**********Update main file***********\nvoid main() async {\n  print(\"G1---->splash load-0---->\${DateTime.now()}\");\n  WidgetsFlutterBinding.ensureInitialized();\n  GoRouter.optionURLReflectsImperativeAPIs = true;\n  usePathUrlStrategy();\n\n  final environmentValues = FFDevEnvironmentValues();\n  await environmentValues.initialize();\n\n  await initFirebase();\n\n  // Start initial custom actions code\n\n  // End initial custom actions code\n  analytics = FirebaseAnalytics.instance;\n  final appState = FFAppState(); // Initialize FFAppState\n  await appState.initializePersistedState();\n  await FirebaseAnalytics.instance.setAnalyticsCollectionEnabled(false);\n  if (!kIsWeb) {\n    FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;\n  }\n     actions.initializePushNotification();\n  // print(\"G1---->splash load-01---->\${DateTime.now()}\");\n//  GoogleFonts.config.allowRuntimeFetching = false;\n  runApp(ChangeNotifierProvider(\n    create: (context) => appState,\n    child: MyApp(),\n  ));\n  // Background initialization\n  // unawaited(_initializeBackgroundServices());\n}\n',
                       style: FlutterFlowTheme.of(context).bodyMedium.override(
                             font: GoogleFonts.readexPro(
                               fontWeight: FontWeight.w600,
@@ -314,64 +314,6 @@ class _NoteAndroidNotesWidgetState extends State<NoteAndroidNotesWidget> {
                                 .fontStyle,
                           ),
                     ),
-                  ),
-                  Text(
-                    '\nadd Package inb .yaml file   flutter_local_notifications: ^17.2.2',
-                    style: FlutterFlowTheme.of(context).bodyMedium.override(
-                          font: GoogleFonts.readexPro(
-                            fontWeight: FlutterFlowTheme.of(context)
-                                .bodyMedium
-                                .fontWeight,
-                            fontStyle: FlutterFlowTheme.of(context)
-                                .bodyMedium
-                                .fontStyle,
-                          ),
-                          letterSpacing: 0.0,
-                          fontWeight: FlutterFlowTheme.of(context)
-                              .bodyMedium
-                              .fontWeight,
-                          fontStyle:
-                              FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                        ),
-                  ),
-                  Text(
-                    '\nadd code .main file in  main()\n FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);\n  FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(\n      alert: true, badge: true, sound: true);\n\nAdd code in bottom of  main() clase\n\nFuture<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {\n  // Handle background messages\n  await Firebase.initializeApp();\n  print(\'Handling a background message: \${message.messageId}\');\n}\n',
-                    style: FlutterFlowTheme.of(context).bodyMedium.override(
-                          font: GoogleFonts.readexPro(
-                            fontWeight: FlutterFlowTheme.of(context)
-                                .bodyMedium
-                                .fontWeight,
-                            fontStyle: FlutterFlowTheme.of(context)
-                                .bodyMedium
-                                .fontStyle,
-                          ),
-                          letterSpacing: 0.0,
-                          fontWeight: FlutterFlowTheme.of(context)
-                              .bodyMedium
-                              .fontWeight,
-                          fontStyle:
-                              FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                        ),
-                  ),
-                  Text(
-                    'add code  initState\n    setPushNotification();\n\nadd code bellow of \n  setPushNotification() {\n    // Initialize Firebase Messaging\n    FirebaseMessaging.instance\n        .getInitialMessage()\n        .then((RemoteMessage? message) {\n      if (message != null) {\n        print(\'Notification on App Start: \${message.notification?.title}\');\n      }\n    });\n\n    FirebaseMessaging.onMessage.listen((RemoteMessage message) {\n      print(\'Notification clicked! Message data: \${message.data}\');\n\n      RemoteNotification? notification = message.notification;\n      if (notification != null) {\n        _showNotification(notification.title!, notification.body!);\n      }\n    });\n\n    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {\n      print(\'Notification clicked!111 Message data: \${message.data}\');\n    });\n\n    _requestNotificationPermission();\n    _initializeLocalNotificationPlugin();\n  }\n\n// Request permission for iOS\n  void _requestNotificationPermission() async {\n    NotificationSettings settings =\n        await FirebaseMessaging.instance.requestPermission(\n      alert: true,\n      badge: true,\n      sound: true,\n    );\n\n    if (settings.authorizationStatus == AuthorizationStatus.authorized) {\n      print(\'User granted permission\');\n    } else {\n      print(\'User declined or has not accepted permission\');\n    }\n  }\n\n  // Initialize Local Notifications\n  void _initializeLocalNotificationPlugin() {\n    DarwinInitializationSettings initializationSettingsIOS =\n        DarwinInitializationSettings(\n      requestAlertPermission: true,\n      requestBadgePermission: true,\n      requestSoundPermission: true,\n      onDidReceiveLocalNotification: (id, title, body, payload) async {\n        // Handle notification tapped event for iOS < 10.\n      },\n    );\n    const AndroidInitializationSettings initializationSettingsAndroid =\n        AndroidInitializationSettings(\'@mipmap/ic_launcher\');\n\n    final InitializationSettings initializationSettings =\n        InitializationSettings(\n      android: initializationSettingsAndroid,\n      iOS: initializationSettingsIOS,\n    );\n\n    flutterLocalNotificationsPlugin.initialize(\n      initializationSettings,\n    );\n  }\n\n  AndroidNotificationChannel channel = const AndroidNotificationChannel(\n      \'high_importance_channel\', \'High Importance Notifications\',\n      importance: Importance.high,\n      description: \'Channel Description\',\n      playSound: true);\n  // Show Notification\n  Future<void> _showNotification(String title, String body) async {\n    AndroidNotificationDetails androidPlatformChannelSpecifics =\n        AndroidNotificationDetails(\n      channel.id,\n      channel.name,\n      importance: Importance.max,\n      priority: Priority.high,\n    );\n\n    NotificationDetails platformChannelSpecifics =\n        NotificationDetails(android: androidPlatformChannelSpecifics);\n\n    await flutterLocalNotificationsPlugin.show(\n      0,\n      title,\n      body,\n      platformChannelSpecifics,\n      //   payload: \'Default_Sound\',\n    );\n  }\n\n\n   ',
-                    style: FlutterFlowTheme.of(context).bodyMedium.override(
-                          font: GoogleFonts.readexPro(
-                            fontWeight: FlutterFlowTheme.of(context)
-                                .bodyMedium
-                                .fontWeight,
-                            fontStyle: FlutterFlowTheme.of(context)
-                                .bodyMedium
-                                .fontStyle,
-                          ),
-                          color: FlutterFlowTheme.of(context).tertiary,
-                          letterSpacing: 0.0,
-                          fontWeight: FlutterFlowTheme.of(context)
-                              .bodyMedium
-                              .fontWeight,
-                          fontStyle:
-                              FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                        ),
                   ),
                   Text(
                     '1}Always Remove debug banner  add line main.dart in  material app\ndebugShowCheckedModeBanner: false,\n\n2}change android:launchMode=\"singleTop\" to \"singleTask\"\n\n3}deeplinking changes for subcategories screen\n\n\n',

@@ -197,7 +197,10 @@ class _RepeatOrdersWidgetState extends State<RepeatOrdersWidget> {
                             Completer<ApiCallResponse>()
                               ..complete(QuickartGroup.repeatordersCall.call(
                                 userid: FFAppState().userID,
-                                storeid: FFAppState().storeID,
+                                storeid: getJsonField(
+                                  FFAppState().zoneInfo,
+                                  r'''$.store_id''',
+                                ).toString(),
                                 deviceID: FFAppState().deviceID,
                                 platform: isiOS ? 'ios' : 'android',
                                 sortPrice: () {
@@ -1151,7 +1154,10 @@ class _RepeatOrdersWidgetState extends State<RepeatOrdersWidget> {
                                                                                               logFirebaseEvent('Button_backend_call');
                                                                                               _model.apiResultAddToCart = await QuickartGroup.addToCartCall.call(
                                                                                                 userid: FFAppState().userID,
-                                                                                                storeid: FFAppState().storeID,
+                                                                                                storeid: getJsonField(
+                                                                                                  FFAppState().zoneInfo,
+                                                                                                  r'''$.store_id''',
+                                                                                                ).toString(),
                                                                                                 varientid: getJsonField(
                                                                                                   repeatListItem,
                                                                                                   r'''$.varient_id''',
@@ -1379,7 +1385,10 @@ class _RepeatOrdersWidgetState extends State<RepeatOrdersWidget> {
                                                                                                           logFirebaseEvent('Button_backend_call');
                                                                                                           _model.addtoCartAPI1 = await QuickartGroup.addToCartCall.call(
                                                                                                             userid: FFAppState().userID,
-                                                                                                            storeid: FFAppState().storeID,
+                                                                                                            storeid: getJsonField(
+                                                                                                              FFAppState().zoneInfo,
+                                                                                                              r'''$.store_id''',
+                                                                                                            ).toString(),
                                                                                                             deviceid: FFAppState().deviceID,
                                                                                                             qty: functions.addRemoveQTY(
                                                                                                                 getJsonField(
@@ -1636,7 +1645,10 @@ class _RepeatOrdersWidgetState extends State<RepeatOrdersWidget> {
                                                                                                                     r'''$.cart_qty''',
                                                                                                                   ),
                                                                                                                   'add'),
-                                                                                                              storeid: FFAppState().storeID,
+                                                                                                              storeid: getJsonField(
+                                                                                                                FFAppState().zoneInfo,
+                                                                                                                r'''$.store_id''',
+                                                                                                              ).toString(),
                                                                                                               varientid: getJsonField(
                                                                                                                 repeatListItem,
                                                                                                                 r'''$.varient_id''',
@@ -4115,7 +4127,10 @@ class _RepeatOrdersWidgetState extends State<RepeatOrdersWidget> {
                                       logFirebaseEvent('Row_backend_call');
                                       _model.apiResultTimeSlotrepeatorder =
                                           await QuickartGroup.timeslotCall.call(
-                                        storeID: FFAppState().storeID,
+                                        storeID: getJsonField(
+                                          FFAppState().zoneInfo,
+                                          r'''$.store_id''',
+                                        ).toString(),
                                         selectedDate: dateTimeFormat(
                                             "yyyy-MM-dd", _model.datePicked),
                                         repeatedDays: functions.getRepeatdays(
@@ -4883,8 +4898,10 @@ class _RepeatOrdersWidgetState extends State<RepeatOrdersWidget> {
                                                           .call(
                                                     userid: FFAppState().userID,
                                                     qty: '1',
-                                                    storeid:
-                                                        FFAppState().storeID,
+                                                    storeid: getJsonField(
+                                                      FFAppState().zoneInfo,
+                                                      r'''$.store_id''',
+                                                    ).toString(),
                                                     varientid: FFAppState()
                                                         .varientID
                                                         .toString(),

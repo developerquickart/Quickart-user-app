@@ -235,7 +235,10 @@ class _AddressListScreenWidgetState extends State<AddressListScreenWidget> {
                   child: FutureBuilder<ApiCallResponse>(
                     future: QuickartGroup.showaddressCall.call(
                       userid: FFAppState().userID,
-                      storeid: FFAppState().storeID,
+                      storeid: getJsonField(
+                        FFAppState().zoneInfo,
+                        r'''$.zone_id''',
+                      ).toString(),
                       deviceId: FFAppState().deviceID,
                       platform: isiOS ? 'ios' : 'android',
                     ),
@@ -427,28 +430,6 @@ class _AddressListScreenWidgetState extends State<AddressListScreenWidget> {
                                                   context.goNamed(
                                                       DashboardScreenWidget
                                                           .routeName);
-
-                                                  logFirebaseEvent(
-                                                      'Container_show_snack_bar');
-                                                  ScaffoldMessenger.of(context)
-                                                      .showSnackBar(
-                                                    SnackBar(
-                                                      content: Text(
-                                                        'test  .......',
-                                                        style: TextStyle(
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .primaryText,
-                                                        ),
-                                                      ),
-                                                      duration: Duration(
-                                                          milliseconds: 4000),
-                                                      backgroundColor:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .secondary,
-                                                    ),
-                                                  );
                                                 } else {
                                                   logFirebaseEvent(
                                                       'Container_navigate_back');
@@ -1412,7 +1393,7 @@ class _AddressListScreenWidgetState extends State<AddressListScreenWidget> {
                                                     ),
                                                     color: FFAppConstants
                                                         .whiteColor,
-                                                    fontSize: 12.0,
+                                                    fontSize: 1.0,
                                                     letterSpacing: 0.0,
                                                     fontWeight: FontWeight.w600,
                                                     fontStyle:

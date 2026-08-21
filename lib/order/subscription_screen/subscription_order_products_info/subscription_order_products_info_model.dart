@@ -28,7 +28,7 @@ class SubscriptionOrderProductsInfoModel
 
   // Stores action output result for [Backend Call - API (subscriptionOrderPause)] action in Container widget.
   ApiCallResponse? apiResultOrderPause1;
-  Completer<ApiCallResponse>? apiRequestCompleter2;
+  Completer<ApiCallResponse>? apiRequestCompleter;
   // Stores action output result for [Backend Call - API (subscriptionOrderResume)] action in Button widget.
   ApiCallResponse? subscriptionOrderResumeAPI1;
 
@@ -39,7 +39,7 @@ class SubscriptionOrderProductsInfoModel
   void dispose() {}
 
   /// Additional helper methods.
-  Future waitForApiRequestCompleted2({
+  Future waitForApiRequestCompleted({
     double minWait = 0,
     double maxWait = double.infinity,
   }) async {
@@ -47,7 +47,7 @@ class SubscriptionOrderProductsInfoModel
     while (true) {
       await Future.delayed(Duration(milliseconds: 50));
       final timeElapsed = stopwatch.elapsedMilliseconds;
-      final requestComplete = apiRequestCompleter2?.isCompleted ?? false;
+      final requestComplete = apiRequestCompleter?.isCompleted ?? false;
       if (timeElapsed > maxWait || (requestComplete && timeElapsed > minWait)) {
         break;
       }

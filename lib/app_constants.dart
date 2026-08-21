@@ -141,4 +141,9 @@ abstract class FFAppConstants {
   static const Color borderColor = Color(4292667864);
   static const String vpnMSG =
       'VPN Detected\nPlease turn off your VPN connection before placing your order.';
+  static const String currancyAED = ' AED ';
+  static const Color redLightBG = Color(4294569453);
+  static const Color greenLightBG = Color(4293721584);
+  static const String trailMsg =
+      'You can purchase only one Trail Pack at a time.';
 }

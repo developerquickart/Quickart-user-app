@@ -7,7 +7,6 @@ import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -36,34 +35,6 @@ class _CouponsandOffersWidgetState extends State<CouponsandOffersWidget> {
 
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'CouponsandOffers'});
-    // On page load action.
-    SchedulerBinding.instance.addPostFrameCallback((_) async {
-      logFirebaseEvent('COUPONSAND_OFFERS_CouponsandOffers_ON_IN');
-      logFirebaseEvent('CouponsandOffers_custom_action');
-      _model.internetConnection = await actions.checkInternetConnection();
-      if (_model.internetConnection == true) {
-        logFirebaseEvent('CouponsandOffers_update_app_state');
-
-        safeSetState(() {});
-        logFirebaseEvent('CouponsandOffers_google_analytics_event');
-        logFirebaseEvent('CouponsAndOffersAnalytics');
-      } else {
-        logFirebaseEvent('CouponsandOffers_show_snack_bar');
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(
-              FFAppConstants.internetString,
-              style: TextStyle(
-                color: FlutterFlowTheme.of(context).primaryText,
-              ),
-            ),
-            duration: Duration(milliseconds: 4000),
-            backgroundColor: FlutterFlowTheme.of(context).secondary,
-          ),
-        );
-      }
-    });
-
     _model.textController ??= TextEditingController();
     _model.textFieldFocusNode ??= FocusNode();
 
@@ -270,7 +241,10 @@ class _CouponsandOffersWidgetState extends State<CouponsandOffersWidget> {
                                         .call(
                                       couponCode: _model.textController.text,
                                       userId: FFAppState().userID,
-                                      storeId: FFAppState().storeID,
+                                      storeId: getJsonField(
+                                        FFAppState().zoneInfo,
+                                        r'''$.store_id''',
+                                      ).toString(),
                                       orderType: FFAppState().couponType,
                                       platform: isiOS ? 'ios' : 'android',
                                     );
@@ -471,10 +445,17 @@ class _CouponsandOffersWidgetState extends State<CouponsandOffersWidget> {
                                     ApiCallResponse>()
                                   ..complete(QuickartGroup.couponListCall.call(
                                     userId: FFAppState().userID,
-                                    storeId: '7',
+                                    storeId: getJsonField(
+                                      FFAppState().zoneInfo,
+                                      r'''$.store_id''',
+                                    ).toString(),
                                     cartId: 'null',
                                     totalDelievery: '2',
                                     platform: isiOS ? 'ios' : 'android',
+                                    zoneID: getJsonField(
+                                      FFAppState().zoneInfo,
+                                      r'''$.zone_id''',
+                                    ).toString(),
                                   )))
                                 .future,
                             builder: (context, snapshot) {
@@ -750,7 +731,10 @@ class _CouponsandOffersWidgetState extends State<CouponsandOffersWidget> {
                                                                             .applyCouponCall
                                                                             .call(
                                                                           storeId:
-                                                                              FFAppState().storeID,
+                                                                              getJsonField(
+                                                                            FFAppState().zoneInfo,
+                                                                            r'''$.store_id''',
+                                                                          ).toString(),
                                                                           userId:
                                                                               FFAppState().userID,
                                                                           couponCode:

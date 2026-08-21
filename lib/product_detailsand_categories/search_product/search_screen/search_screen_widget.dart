@@ -73,7 +73,10 @@ class _SearchScreenWidgetState extends State<SearchScreenWidget> {
       future: (_model.apiRequestCompleter ??= Completer<ApiCallResponse>()
             ..complete(QuickartGroup.trendingrecentsearchCall.call(
               userid: FFAppState().userID,
-              storeid: FFAppState().storeID,
+              storeid: getJsonField(
+                FFAppState().zoneInfo,
+                r'''$.store_id''',
+              ).toString(),
               platform: isiOS ? 'ios' : 'android',
               zoneID: getJsonField(
                 FFAppState().zoneInfo,

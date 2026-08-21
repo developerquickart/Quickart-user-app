@@ -59,7 +59,7 @@ class _SubscriptionOrderProductsInfoWidgetState
     context.watch<FFAppState>();
 
     return FutureBuilder<ApiCallResponse>(
-      future: (_model.apiRequestCompleter2 ??= Completer<ApiCallResponse>()
+      future: (_model.apiRequestCompleter ??= Completer<ApiCallResponse>()
             ..complete(QuickartGroup.subscriptionMergedCall.call(
               groupId: FFAppState().cartID,
               platform: isiOS ? 'ios' : 'android',
@@ -523,10 +523,10 @@ class _SubscriptionOrderProductsInfoWidgetState
                                                                   logFirebaseEvent(
                                                                       'Container_refresh_database_request');
                                                                   safeSetState(() =>
-                                                                      _model.apiRequestCompleter2 =
+                                                                      _model.apiRequestCompleter =
                                                                           null);
                                                                   await _model
-                                                                      .waitForApiRequestCompleted2();
+                                                                      .waitForApiRequestCompleted();
                                                                   logFirebaseEvent(
                                                                       'Container_wait__delay');
                                                                   await Future
@@ -1602,9 +1602,9 @@ class _SubscriptionOrderProductsInfoWidgetState
                                             logFirebaseEvent(
                                                 'Button_refresh_database_request');
                                             safeSetState(() => _model
-                                                .apiRequestCompleter2 = null);
+                                                .apiRequestCompleter = null);
                                             await _model
-                                                .waitForApiRequestCompleted2();
+                                                .waitForApiRequestCompleted();
                                             logFirebaseEvent(
                                                 'Button_wait__delay');
                                             await Future.delayed(

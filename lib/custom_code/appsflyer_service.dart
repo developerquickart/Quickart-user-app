@@ -35,7 +35,7 @@ class AppsflyerService {
     final options = AppsFlyerOptions(
       afDevKey: "UcP5dBePhwjBa7aXRTbLD8",
       appId: "1624846848",
-      showDebug: true,
+      showDebug: false,
       timeToWaitForATTUserAuthorization: 15,
     );
 
@@ -111,14 +111,21 @@ class AppsflyerService {
       // if (_installDataReceived) return;
 
       // Start fallback timer (only once)
-      _deferredFallbackTimer ??= Timer(const Duration(seconds: 6), () {
+      if (Platform.isIOS) {
+        _deferredFallbackTimer ??= Timer(const Duration(seconds: 6), () {
+          if (_deepLinkHandled) return;
+
+          debugPrint("⚠️ Attribution timeout → fallback deep link");
+          _deepLinkHandled = true;
+          _navigate(deepLinkValue, params);
+        });
+      } else {
         if (_deepLinkHandled) return;
 
         debugPrint("⚠️ Attribution timeout → fallback deep link");
         _deepLinkHandled = true;
         _navigate(deepLinkValue, params);
-      });
-
+      }
       return;
     }
 
@@ -182,15 +189,15 @@ class AppsflyerService {
       final String? productName = params["name"]?.toString();
       final String? productId = params["id"]?.toString();
       targetRoute = "/brand-product-list?id=$productId&name=$productName&$utm";
-    } else if (deepLinkValue == "occasional-product-list") {
-      final String? productName = params["name"]?.toString();
-      targetRoute = "/occasional-product-list?name=$productName&$utm";
     } else if (deepLinkValue == "banner-product-list") {
       final String? productName = params["name"]?.toString();
       final String? banner = params["banner"]?.toString();
       final String? type = params["type"]?.toString();
       targetRoute =
           "/banner-product-list?name=$productName&banner=$banner&type=$type&$utm";
+    } else if (deepLinkValue == "occasional-product-list") {
+      final String? productName = params["name"]?.toString();
+      targetRoute = "/occasional-product-list?name=$productName&$utm";
     } else if (deepLinkValue == "search") {
       final String? productName = params["keyword"]?.toString();
       targetRoute = "/search?keyword=$productName&$utm";
@@ -268,4 +275,10 @@ class AppsflyerService {
   }
 
   AppsflyerSdk? get sdk => _sdk;
+  void navigateFromNotification(
+    String deepLink,
+    Map<String, dynamic> params,
+  ) {
+    _navigate(deepLink, params);
+  }
 }

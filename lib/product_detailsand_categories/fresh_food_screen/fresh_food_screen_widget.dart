@@ -194,7 +194,10 @@ class _FreshFoodScreenWidgetState extends State<FreshFoodScreenWidget> {
                                     ..complete(QuickartGroup
                                         .additionalCatSearchCall
                                         .call(
-                                      storeid: '7',
+                                      storeid: getJsonField(
+                                        FFAppState().zoneInfo,
+                                        r'''$.store_id''',
+                                      ).toString(),
                                       userid: FFAppState().userID,
                                       byName: 'Fresh Food',
                                       minPrice: FFAppState().minPrice,
@@ -571,7 +574,10 @@ class _FreshFoodScreenWidgetState extends State<FreshFoodScreenWidget> {
                                                                                     _model.cartAdd = await QuickartGroup.addToCartCall.call(
                                                                                       userid: FFAppState().userID,
                                                                                       qty: '1',
-                                                                                      storeid: FFAppState().storeID,
+                                                                                      storeid: getJsonField(
+                                                                                        FFAppState().zoneInfo,
+                                                                                        r'''$.store_id''',
+                                                                                      ).toString(),
                                                                                       varientid: getJsonField(
                                                                                         productModelItem,
                                                                                         r'''$.varient_id''',
@@ -830,7 +836,10 @@ class _FreshFoodScreenWidgetState extends State<FreshFoodScreenWidget> {
                                                                                             logFirebaseEvent('Button_backend_call');
                                                                                             _model.addtoCartAPI1 = await QuickartGroup.addToCartCall.call(
                                                                                               userid: FFAppState().userID,
-                                                                                              storeid: FFAppState().storeID,
+                                                                                              storeid: getJsonField(
+                                                                                                FFAppState().zoneInfo,
+                                                                                                r'''$.store_id''',
+                                                                                              ).toString(),
                                                                                               deviceid: FFAppState().deviceID,
                                                                                               qty: functions.addRemoveQTY(
                                                                                                   getJsonField(
@@ -1095,7 +1104,10 @@ class _FreshFoodScreenWidgetState extends State<FreshFoodScreenWidget> {
                                                                                                       r'''$.cart_qty''',
                                                                                                     ),
                                                                                                     'add'),
-                                                                                                storeid: FFAppState().storeID,
+                                                                                                storeid: getJsonField(
+                                                                                                  FFAppState().zoneInfo,
+                                                                                                  r'''$.store_id''',
+                                                                                                ).toString(),
                                                                                                 varientid: getJsonField(
                                                                                                   productModelItem,
                                                                                                   r'''$.varient_id''',
@@ -2570,8 +2582,11 @@ class _FreshFoodScreenWidgetState extends State<FreshFoodScreenWidget> {
                                                                     userid: FFAppState()
                                                                         .userID,
                                                                     storeID:
-                                                                        FFAppState()
-                                                                            .storeID,
+                                                                        getJsonField(
+                                                                      FFAppState()
+                                                                          .zoneInfo,
+                                                                      r'''$.store_id''',
+                                                                    ).toString(),
                                                                     varientID:
                                                                         getJsonField(
                                                                       productModelItem,
@@ -2772,8 +2787,11 @@ class _FreshFoodScreenWidgetState extends State<FreshFoodScreenWidget> {
                                                                     userid: FFAppState()
                                                                         .userID,
                                                                     storeID:
-                                                                        FFAppState()
-                                                                            .storeID,
+                                                                        getJsonField(
+                                                                      FFAppState()
+                                                                          .zoneInfo,
+                                                                      r'''$.store_id''',
+                                                                    ).toString(),
                                                                     varientID:
                                                                         getJsonField(
                                                                       productModelItem,

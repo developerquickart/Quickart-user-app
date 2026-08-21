@@ -401,16 +401,9 @@ final parametersBuilderMap =
           'title': getParameter<String>(data, 'title'),
         },
       ),
-  'TotalPaySDKPaymentScreen': (data) async => ParameterData(
-        allParams: {
-          'checkoutUrl': getParameter<String>(data, 'checkoutUrl'),
-          'cookies': getParameter<String>(data, 'cookies'),
-          'successUrl': getParameter<String>(data, 'successUrl'),
-          'cancelUrl': getParameter<String>(data, 'cancelUrl'),
-          'mrp': getParameter<String>(data, 'mrp'),
-        },
-      ),
   'QuickartsplashScreenCopy': ParameterData.none(),
+  'dailyCartScreenCopy': ParameterData.none(),
+  'cartSubscriptionScreenCopy': ParameterData.none(),
 };
 
 Map<String, dynamic> getInitialParameterData(Map<String, dynamic> data) {

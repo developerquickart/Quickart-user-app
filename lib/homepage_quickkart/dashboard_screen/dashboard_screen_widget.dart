@@ -211,7 +211,10 @@ class _DashboardScreenWidgetState extends State<DashboardScreenWidget> {
           logFirebaseEvent('DashboardScreen_backend_call');
           _model.apiResultso1IOS = await QuickartGroup.appinfoCall.call(
             userid: FFAppState().userID,
-            stroreid: FFAppState().storeID,
+            stroreid: getJsonField(
+              FFAppState().zoneInfo,
+              r'''$.store_id''',
+            ).toString(),
             platform: 'ios',
             fcmToken: FFAppState().fcmToken,
             deviceid: FFAppState().deviceID,
@@ -258,7 +261,10 @@ class _DashboardScreenWidgetState extends State<DashboardScreenWidget> {
           logFirebaseEvent('DashboardScreen_backend_call');
           _model.apiResultso = await QuickartGroup.appinfoCall.call(
             userid: FFAppState().userID,
-            stroreid: FFAppState().storeID,
+            stroreid: getJsonField(
+              FFAppState().zoneInfo,
+              r'''$.store_id''',
+            ).toString(),
             platform: 'ios',
             fcmToken: FFAppState().fcmToken,
             deviceid: FFAppState().deviceID,
@@ -331,7 +337,10 @@ class _DashboardScreenWidgetState extends State<DashboardScreenWidget> {
     return FutureBuilder<ApiCallResponse>(
       future: (_model.apiRequestCompleter ??= Completer<ApiCallResponse>()
             ..complete(QuickartGroup.oneAPICall.call(
-              storeID: '7',
+              storeID: getJsonField(
+                FFAppState().zoneInfo,
+                r'''$.store_id''',
+              ).toString(),
               userID: FFAppState().userID,
               deviceID: FFAppState().deviceID,
               platform: isiOS ? 'ios' : 'android',
@@ -497,128 +506,80 @@ class _DashboardScreenWidgetState extends State<DashboardScreenWidget> {
                                                             ),
                                                           ),
                                                         ),
-                                                        InkWell(
-                                                          splashColor: Colors
-                                                              .transparent,
-                                                          focusColor: Colors
-                                                              .transparent,
-                                                          hoverColor: Colors
-                                                              .transparent,
-                                                          highlightColor: Colors
-                                                              .transparent,
-                                                          onTap: () async {
-                                                            logFirebaseEvent(
-                                                                'DASHBOARD_SCREEN_RichText_6fjml2b0_ON_TA');
-                                                            logFirebaseEvent(
-                                                                'RichText_navigate_to');
-
-                                                            context.pushNamed(
-                                                                SearchbyPopupBannerWidget
-                                                                    .routeName);
-
-                                                            logFirebaseEvent(
-                                                                'RichText_update_app_state');
-                                                            FFAppState()
-                                                                    .isPopUpShow =
-                                                                false;
-                                                            FFAppState()
-                                                                    .categoryName =
-                                                                getJsonField(
-                                                              dashboardScreenOneAPIResponse
-                                                                  .jsonBody,
-                                                              r'''$.popup_banner.banner_name''',
-                                                            ).toString();
-                                                            FFAppState().catID =
-                                                                getJsonField(
-                                                              dashboardScreenOneAPIResponse
-                                                                  .jsonBody,
-                                                              r'''$.popup_banner.banner_id''',
-                                                            ).toString();
-                                                            safeSetState(() {});
-                                                          },
-                                                          child: RichText(
-                                                            textScaler:
-                                                                MediaQuery.of(
+                                                        RichText(
+                                                          textScaler:
+                                                              MediaQuery.of(
+                                                                      context)
+                                                                  .textScaler,
+                                                          text: TextSpan(
+                                                            children: [
+                                                              TextSpan(
+                                                                text: 'Hi, ',
+                                                                style: FlutterFlowTheme.of(
                                                                         context)
-                                                                    .textScaler,
-                                                            text: TextSpan(
-                                                              children: [
-                                                                TextSpan(
-                                                                  text: 'Hi, ',
-                                                                  style: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodyMedium
-                                                                      .override(
-                                                                        font: GoogleFonts
-                                                                            .montserrat(
-                                                                          fontWeight:
-                                                                              FontWeight.w300,
-                                                                          fontStyle: FlutterFlowTheme.of(context)
-                                                                              .bodyMedium
-                                                                              .fontStyle,
-                                                                        ),
-                                                                        color:
-                                                                            colorFromCssString(
-                                                                          getJsonField(
-                                                                            dashboardScreenOneAPIResponse.jsonBody,
-                                                                            r'''$.oneapi_bg_first_image.bg_image_color''',
-                                                                          ).toString(),
-                                                                          defaultColor:
-                                                                              Colors.black,
-                                                                        ),
-                                                                        letterSpacing:
-                                                                            0.0,
+                                                                    .bodyMedium
+                                                                    .override(
+                                                                      font: GoogleFonts
+                                                                          .montserrat(
                                                                         fontWeight:
                                                                             FontWeight.w300,
                                                                         fontStyle: FlutterFlowTheme.of(context)
                                                                             .bodyMedium
                                                                             .fontStyle,
                                                                       ),
-                                                                ),
-                                                                TextSpan(
-                                                                  text: functions
-                                                                      .extractFirstName(
-                                                                          FFAppState()
-                                                                              .userName)!,
-                                                                  style: GoogleFonts
-                                                                      .montserrat(
-                                                                    color:
-                                                                        colorFromCssString(
-                                                                      getJsonField(
-                                                                        dashboardScreenOneAPIResponse
-                                                                            .jsonBody,
-                                                                        r'''$.oneapi_bg_first_image.bg_image_color''',
-                                                                      ).toString(),
-                                                                      defaultColor:
-                                                                          Colors
-                                                                              .black,
-                                                                    ),
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w800,
-                                                                    fontSize:
-                                                                        16.0,
-                                                                  ),
-                                                                )
-                                                              ],
-                                                              style: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .bodyMedium
-                                                                  .override(
-                                                                    font: GoogleFonts
-                                                                        .montserrat(
+                                                                      color:
+                                                                          colorFromCssString(
+                                                                        getJsonField(
+                                                                          dashboardScreenOneAPIResponse
+                                                                              .jsonBody,
+                                                                          r'''$.oneapi_bg_first_image.bg_image_color''',
+                                                                        ).toString(),
+                                                                        defaultColor:
+                                                                            Colors.black,
+                                                                      ),
+                                                                      letterSpacing:
+                                                                          0.0,
                                                                       fontWeight:
                                                                           FontWeight
-                                                                              .w800,
+                                                                              .w300,
                                                                       fontStyle: FlutterFlowTheme.of(
                                                                               context)
                                                                           .bodyMedium
                                                                           .fontStyle,
                                                                     ),
-                                                                    color: Colors
-                                                                        .white,
-                                                                    letterSpacing:
-                                                                        0.0,
+                                                              ),
+                                                              TextSpan(
+                                                                text: functions
+                                                                    .extractFirstName(
+                                                                        FFAppState()
+                                                                            .userName)!,
+                                                                style: GoogleFonts
+                                                                    .montserrat(
+                                                                  color:
+                                                                      colorFromCssString(
+                                                                    getJsonField(
+                                                                      dashboardScreenOneAPIResponse
+                                                                          .jsonBody,
+                                                                      r'''$.oneapi_bg_first_image.bg_image_color''',
+                                                                    ).toString(),
+                                                                    defaultColor:
+                                                                        Colors
+                                                                            .black,
+                                                                  ),
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w800,
+                                                                  fontSize:
+                                                                      16.0,
+                                                                ),
+                                                              )
+                                                            ],
+                                                            style: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .bodyMedium
+                                                                .override(
+                                                                  font: GoogleFonts
+                                                                      .montserrat(
                                                                     fontWeight:
                                                                         FontWeight
                                                                             .w800,
@@ -627,7 +588,18 @@ class _DashboardScreenWidgetState extends State<DashboardScreenWidget> {
                                                                         .bodyMedium
                                                                         .fontStyle,
                                                                   ),
-                                                            ),
+                                                                  color: Colors
+                                                                      .white,
+                                                                  letterSpacing:
+                                                                      0.0,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w800,
+                                                                  fontStyle: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMedium
+                                                                      .fontStyle,
+                                                                ),
                                                           ),
                                                         ),
                                                       ],
@@ -5380,7 +5352,7 @@ class _DashboardScreenWidgetState extends State<DashboardScreenWidget> {
                           alignment: AlignmentDirectional(0.0, 1.0),
                           child: Container(
                             width: MediaQuery.sizeOf(context).width * 1.0,
-                            height: 450.0,
+                            height: 440.0,
                             decoration: BoxDecoration(
                               color: FFAppConstants.whiteColor,
                               borderRadius: BorderRadius.only(
@@ -5543,41 +5515,81 @@ class _DashboardScreenWidgetState extends State<DashboardScreenWidget> {
                                   ),
                                   Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 25.0, 0.0, 0.0),
-                                    child: InkWell(
-                                      splashColor: Colors.transparent,
-                                      focusColor: Colors.transparent,
-                                      hoverColor: Colors.transparent,
-                                      highlightColor: Colors.transparent,
-                                      onTap: () async {
-                                        logFirebaseEvent(
-                                            'DASHBOARD_SCREEN_Text_vdypy756_ON_TAP');
-                                        logFirebaseEvent(
-                                            'Text_update_app_state');
-                                        FFAppState().updateContainer = false;
-                                        safeSetState(() {});
-                                      },
-                                      child: Text(
-                                        'Update available',
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyMedium
-                                            .override(
-                                              font: GoogleFonts.montserrat(
-                                                fontWeight: FontWeight.w600,
-                                                fontStyle:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyMedium
-                                                        .fontStyle,
-                                              ),
-                                              fontSize: 20.0,
-                                              letterSpacing: 0.0,
-                                              fontWeight: FontWeight.w600,
-                                              fontStyle:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyMedium
-                                                      .fontStyle,
-                                            ),
-                                      ),
+                                        0.0, 20.0, 0.0, 0.0),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        InkWell(
+                                          splashColor: Colors.transparent,
+                                          focusColor: Colors.transparent,
+                                          hoverColor: Colors.transparent,
+                                          highlightColor: Colors.transparent,
+                                          onTap: () async {
+                                            logFirebaseEvent(
+                                                'DASHBOARD_SCREEN_Text_vdypy756_ON_TAP');
+                                            logFirebaseEvent(
+                                                'Text_update_app_state');
+                                            FFAppState().updateContainer =
+                                                false;
+                                            safeSetState(() {});
+                                          },
+                                          child: Text(
+                                            'Update available',
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyMedium
+                                                .override(
+                                                  font: GoogleFonts.montserrat(
+                                                    fontWeight: FontWeight.w600,
+                                                    fontStyle:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .bodyMedium
+                                                            .fontStyle,
+                                                  ),
+                                                  fontSize: 20.0,
+                                                  letterSpacing: 0.0,
+                                                  fontWeight: FontWeight.w600,
+                                                  fontStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyMedium
+                                                          .fontStyle,
+                                                ),
+                                          ),
+                                        ),
+                                        Align(
+                                          alignment:
+                                              AlignmentDirectional(0.0, 0.0),
+                                          child: Text(
+                                            'App version: ${isiOS ? FFAppConstants.appVersioniOS : FFAppConstants.appVersionAndroid}',
+                                            textAlign: TextAlign.start,
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyMedium
+                                                .override(
+                                                  font: GoogleFonts.montserrat(
+                                                    fontWeight: FontWeight.w500,
+                                                    fontStyle:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .bodyMedium
+                                                            .fontStyle,
+                                                  ),
+                                                  color: FFAppConstants
+                                                      .blackColor0A0A0A,
+                                                  fontSize: 14.0,
+                                                  letterSpacing: 0.0,
+                                                  fontWeight: FontWeight.w500,
+                                                  fontStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyMedium
+                                                          .fontStyle,
+                                                ),
+                                          ),
+                                        ),
+                                      ],
                                     ),
                                   ),
                                   Padding(
@@ -5626,185 +5638,73 @@ class _DashboardScreenWidgetState extends State<DashboardScreenWidget> {
                                             fit: BoxFit.cover,
                                           ),
                                         ),
-                                        Column(
-                                          mainAxisSize: MainAxisSize.max,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            RichText(
-                                              textScaler: MediaQuery.of(context)
-                                                  .textScaler,
-                                              text: TextSpan(
-                                                children: [
-                                                  TextSpan(
-                                                    text: 'Quickart: ',
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .bodyMedium
-                                                        .override(
-                                                          font: GoogleFonts
-                                                              .montserrat(
-                                                            fontWeight:
-                                                                FontWeight.w600,
-                                                            fontStyle:
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyMedium
-                                                                    .fontStyle,
-                                                          ),
-                                                          color: FFAppConstants
-                                                              .blackColor0A0A0A,
-                                                          fontSize: MediaQuery.sizeOf(
+                                        Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  3.0, 0.0, 0.0, 0.0),
+                                          child: Column(
+                                            mainAxisSize: MainAxisSize.max,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              RichText(
+                                                textScaler:
+                                                    MediaQuery.of(context)
+                                                        .textScaler,
+                                                text: TextSpan(
+                                                  children: [
+                                                    TextSpan(
+                                                      text: 'Quickart: ',
+                                                      style:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyMedium
+                                                              .override(
+                                                                font: GoogleFonts
+                                                                    .montserrat(
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w600,
+                                                                  fontStyle: FlutterFlowTheme.of(
                                                                           context)
-                                                                      .width <
-                                                                  370.0
-                                                              ? 14.0
-                                                              : 16.0,
-                                                          letterSpacing: 0.0,
-                                                          fontWeight:
-                                                              FontWeight.w600,
-                                                          fontStyle:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .bodyMedium
-                                                                  .fontStyle,
-                                                        ),
-                                                  ),
-                                                  TextSpan(
-                                                    text:
-                                                        'Freshness Delivered Daily',
-                                                    style: TextStyle(
-                                                      color: FFAppConstants
-                                                          .blackColor0A0A0A,
-                                                      fontWeight:
-                                                          FontWeight.w600,
-                                                      fontSize: MediaQuery.sizeOf(
-                                                                      context)
-                                                                  .width <
-                                                              370.0
-                                                          ? 12.0
-                                                          : 14.0,
+                                                                      .bodyMedium
+                                                                      .fontStyle,
+                                                                ),
+                                                                color: FFAppConstants
+                                                                    .blackColor0A0A0A,
+                                                                fontSize:
+                                                                    MediaQuery.sizeOf(context).width <
+                                                                            370.0
+                                                                        ? 14.0
+                                                                        : 16.0,
+                                                                letterSpacing:
+                                                                    0.0,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w600,
+                                                                fontStyle: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyMedium
+                                                                    .fontStyle,
+                                                              ),
                                                     ),
-                                                  )
-                                                ],
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyMedium
-                                                        .override(
-                                                          font: GoogleFonts
-                                                              .montserrat(
-                                                            fontWeight:
-                                                                FontWeight.w600,
-                                                            fontStyle:
-                                                                FlutterFlowTheme.of(
+                                                    TextSpan(
+                                                      text:
+                                                          'Freshness Delivered Daily',
+                                                      style: TextStyle(
+                                                        color: FFAppConstants
+                                                            .blackColor0A0A0A,
+                                                        fontWeight:
+                                                            FontWeight.w600,
+                                                        fontSize: MediaQuery.sizeOf(
                                                                         context)
-                                                                    .bodyMedium
-                                                                    .fontStyle,
-                                                          ),
-                                                          fontSize: 14.0,
-                                                          letterSpacing: 0.0,
-                                                          fontWeight:
-                                                              FontWeight.w600,
-                                                          fontStyle:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .bodyMedium
-                                                                  .fontStyle,
-                                                        ),
-                                              ),
-                                            ),
-                                            Row(
-                                              mainAxisSize: MainAxisSize.max,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                              children: [
-                                                Padding(
-                                                  padding: EdgeInsetsDirectional
-                                                      .fromSTEB(
-                                                          0.0, 0.0, 2.0, 0.0),
-                                                  child: Text(
-                                                    '5.0',
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .bodyMedium
-                                                        .override(
-                                                          font: GoogleFonts
-                                                              .readexPro(
-                                                            fontWeight:
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyMedium
-                                                                    .fontWeight,
-                                                            fontStyle:
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyMedium
-                                                                    .fontStyle,
-                                                          ),
-                                                          letterSpacing: 0.0,
-                                                          fontWeight:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .bodyMedium
-                                                                  .fontWeight,
-                                                          fontStyle:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .bodyMedium
-                                                                  .fontStyle,
-                                                        ),
-                                                  ),
-                                                ),
-                                                Padding(
-                                                  padding: EdgeInsetsDirectional
-                                                      .fromSTEB(
-                                                          0.0, 0.0, 10.0, 0.0),
-                                                  child: Icon(
-                                                    Icons.star_sharp,
-                                                    color: FFAppConstants
-                                                        .blackColor666666,
-                                                    size: 16.0,
-                                                  ),
-                                                ),
-                                                Padding(
-                                                  padding: EdgeInsetsDirectional
-                                                      .fromSTEB(
-                                                          0.0, 0.0, 10.0, 0.0),
-                                                  child: Text(
-                                                    '',
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .bodyMedium
-                                                        .override(
-                                                          font: GoogleFonts
-                                                              .montserrat(
-                                                            fontWeight:
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyMedium
-                                                                    .fontWeight,
-                                                            fontStyle:
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyMedium
-                                                                    .fontStyle,
-                                                          ),
-                                                          letterSpacing: 0.0,
-                                                          fontWeight:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .bodyMedium
-                                                                  .fontWeight,
-                                                          fontStyle:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .bodyMedium
-                                                                  .fontStyle,
-                                                        ),
-                                                  ),
-                                                ),
-                                                Text(
-                                                  'Rated for 3+',
+                                                                    .width <
+                                                                370.0
+                                                            ? 10.0
+                                                            : 12.0,
+                                                      ),
+                                                    )
+                                                  ],
                                                   style: FlutterFlowTheme.of(
                                                           context)
                                                       .bodyMedium
@@ -5812,6 +5712,135 @@ class _DashboardScreenWidgetState extends State<DashboardScreenWidget> {
                                                         font: GoogleFonts
                                                             .montserrat(
                                                           fontWeight:
+                                                              FontWeight.w600,
+                                                          fontStyle:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodyMedium
+                                                                  .fontStyle,
+                                                        ),
+                                                        fontSize: 14.0,
+                                                        letterSpacing: 0.0,
+                                                        fontWeight:
+                                                            FontWeight.w600,
+                                                        fontStyle:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyMedium
+                                                                .fontStyle,
+                                                      ),
+                                                ),
+                                              ),
+                                              Row(
+                                                mainAxisSize: MainAxisSize.max,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.start,
+                                                children: [
+                                                  Padding(
+                                                    padding:
+                                                        EdgeInsetsDirectional
+                                                            .fromSTEB(0.0, 0.0,
+                                                                2.0, 0.0),
+                                                    child: Text(
+                                                      '5.0',
+                                                      style:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyMedium
+                                                              .override(
+                                                                font: GoogleFonts
+                                                                    .readexPro(
+                                                                  fontWeight: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMedium
+                                                                      .fontWeight,
+                                                                  fontStyle: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMedium
+                                                                      .fontStyle,
+                                                                ),
+                                                                letterSpacing:
+                                                                    0.0,
+                                                                fontWeight: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyMedium
+                                                                    .fontWeight,
+                                                                fontStyle: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyMedium
+                                                                    .fontStyle,
+                                                              ),
+                                                    ),
+                                                  ),
+                                                  Padding(
+                                                    padding:
+                                                        EdgeInsetsDirectional
+                                                            .fromSTEB(0.0, 0.0,
+                                                                10.0, 0.0),
+                                                    child: Icon(
+                                                      Icons.star_sharp,
+                                                      color: FFAppConstants
+                                                          .blackColor666666,
+                                                      size: 16.0,
+                                                    ),
+                                                  ),
+                                                  Padding(
+                                                    padding:
+                                                        EdgeInsetsDirectional
+                                                            .fromSTEB(0.0, 0.0,
+                                                                10.0, 0.0),
+                                                    child: Text(
+                                                      '',
+                                                      style:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyMedium
+                                                              .override(
+                                                                font: GoogleFonts
+                                                                    .montserrat(
+                                                                  fontWeight: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMedium
+                                                                      .fontWeight,
+                                                                  fontStyle: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMedium
+                                                                      .fontStyle,
+                                                                ),
+                                                                letterSpacing:
+                                                                    0.0,
+                                                                fontWeight: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyMedium
+                                                                    .fontWeight,
+                                                                fontStyle: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyMedium
+                                                                    .fontStyle,
+                                                              ),
+                                                    ),
+                                                  ),
+                                                  Text(
+                                                    'Rated for 3+',
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          font: GoogleFonts
+                                                              .montserrat(
+                                                            fontWeight:
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyMedium
+                                                                    .fontWeight,
+                                                            fontStyle:
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyMedium
+                                                                    .fontStyle,
+                                                          ),
+                                                          letterSpacing: 0.0,
+                                                          fontWeight:
                                                               FlutterFlowTheme.of(
                                                                       context)
                                                                   .bodyMedium
@@ -5822,22 +5851,11 @@ class _DashboardScreenWidgetState extends State<DashboardScreenWidget> {
                                                                   .bodyMedium
                                                                   .fontStyle,
                                                         ),
-                                                        letterSpacing: 0.0,
-                                                        fontWeight:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyMedium
-                                                                .fontWeight,
-                                                        fontStyle:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyMedium
-                                                                .fontStyle,
-                                                      ),
-                                                ),
-                                              ],
-                                            ),
-                                          ],
+                                                  ),
+                                                ],
+                                              ),
+                                            ],
+                                          ),
                                         ),
                                       ],
                                     ),
@@ -5994,52 +6012,64 @@ class _DashboardScreenWidgetState extends State<DashboardScreenWidget> {
                           width: MediaQuery.sizeOf(context).width * 1.0,
                           height: MediaQuery.sizeOf(context).height * 0.7,
                           decoration: BoxDecoration(
-                            image: DecorationImage(
-                              fit: BoxFit.contain,
-                              image: Image.asset(
-                                'assets/images/Screenshot_2026-07-02_at_3.57.07_PM.png',
-                              ).image,
-                            ),
                             borderRadius: BorderRadius.only(
                               topLeft: Radius.circular(50.0),
                               topRight: Radius.circular(50.0),
                             ),
                           ),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.end,
+                          alignment: AlignmentDirectional(0.0, 1.0),
+                          child: Stack(
                             children: [
-                              Stack(
+                              Align(
+                                alignment: AlignmentDirectional(0.0, 1.0),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(50.0),
+                                  child: Image.asset(
+                                    'assets/images/6-new.png',
+                                    width:
+                                        MediaQuery.sizeOf(context).width * 1.0,
+                                    height: MediaQuery.sizeOf(context).height *
+                                        0.58,
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                              ),
+                              Column(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 30.0, 0.0, 0.0),
-                                    child: Container(
-                                      height:
-                                          MediaQuery.sizeOf(context).height *
-                                              0.4,
-                                      decoration: BoxDecoration(
-                                        color: FlutterFlowTheme.of(context)
-                                            .secondaryBackground,
-                                        borderRadius: BorderRadius.only(
-                                          topLeft: Radius.circular(50.0),
-                                          topRight: Radius.circular(50.0),
-                                        ),
-                                      ),
-                                      child: Padding(
+                                  Stack(
+                                    children: [
+                                      Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(
-                                            20.0, 0.0, 20.0, 0.0),
-                                        child: Column(
-                                          mainAxisSize: MainAxisSize.max,
-                                          children: [
-                                            Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(
-                                                      0.0, 50.0, 0.0, 0.0),
-                                              child: Text(
-                                                'Where should we deliver?',
-                                                style:
-                                                    FlutterFlowTheme.of(context)
+                                            0.0, 30.0, 0.0, 0.0),
+                                        child: Container(
+                                          height: MediaQuery.sizeOf(context)
+                                                  .height *
+                                              0.4,
+                                          decoration: BoxDecoration(
+                                            color: FlutterFlowTheme.of(context)
+                                                .secondaryBackground,
+                                            borderRadius: BorderRadius.only(
+                                              topLeft: Radius.circular(50.0),
+                                              topRight: Radius.circular(50.0),
+                                            ),
+                                          ),
+                                          child: Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    20.0, 0.0, 20.0, 0.0),
+                                            child: Column(
+                                              mainAxisSize: MainAxisSize.max,
+                                              children: [
+                                                Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                          0.0, 50.0, 0.0, 0.0),
+                                                  child: Text(
+                                                    'Where should we deliver?',
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
                                                         .bodyMedium
                                                         .override(
                                                           font: GoogleFonts
@@ -6064,17 +6094,17 @@ class _DashboardScreenWidgetState extends State<DashboardScreenWidget> {
                                                                   .bodyMedium
                                                                   .fontStyle,
                                                         ),
-                                              ),
-                                            ),
-                                            Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(
-                                                      0.0, 20.0, 0.0, 0.0),
-                                              child: Text(
-                                                'Set your area once so we can show the right products, prices, and delivery options for you.',
-                                                textAlign: TextAlign.center,
-                                                style:
-                                                    FlutterFlowTheme.of(context)
+                                                  ),
+                                                ),
+                                                Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                          0.0, 20.0, 0.0, 0.0),
+                                                  child: Text(
+                                                    'Set your area once so we can show the right products, prices, and delivery options for you.',
+                                                    textAlign: TextAlign.center,
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
                                                         .bodyMedium
                                                         .override(
                                                           font: GoogleFonts
@@ -6099,173 +6129,197 @@ class _DashboardScreenWidgetState extends State<DashboardScreenWidget> {
                                                                   .bodyMedium
                                                                   .fontStyle,
                                                         ),
-                                              ),
-                                            ),
-                                            Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(
-                                                      0.0, 20.0, 0.0, 0.0),
-                                              child: FFButtonWidget(
-                                                onPressed: () async {
-                                                  logFirebaseEvent(
-                                                      'DASHBOARD_SCREEN_ADD_ADDRESS_TO_START_OR');
-                                                  logFirebaseEvent(
-                                                      'Button_navigate_to');
-
-                                                  context.pushNamed(
-                                                      AddressListScreenWidget
-                                                          .routeName);
-
-                                                  logFirebaseEvent(
-                                                      'Button_update_app_state');
-                                                  FFAppState().screenName =
-                                                      'dashbaord';
-                                                  safeSetState(() {});
-                                                  logFirebaseEvent(
-                                                      'Button_google_analytics_event');
-                                                  logFirebaseEvent(
-                                                      'AddressListScreenFromDashboardAnalytics');
-                                                },
-                                                text:
-                                                    'Add  Address to Start Ordering',
-                                                options: FFButtonOptions(
-                                                  width:
-                                                      MediaQuery.sizeOf(context)
-                                                              .width *
-                                                          0.8,
-                                                  height: 45.0,
+                                                  ),
+                                                ),
+                                                Padding(
                                                   padding: EdgeInsetsDirectional
                                                       .fromSTEB(
-                                                          16.0, 0.0, 16.0, 0.0),
-                                                  iconPadding:
-                                                      EdgeInsetsDirectional
-                                                          .fromSTEB(0.0, 0.0,
-                                                              0.0, 0.0),
-                                                  color: FFAppConstants
-                                                      .indigoColor,
-                                                  textStyle: FlutterFlowTheme
-                                                          .of(context)
-                                                      .titleSmall
-                                                      .override(
-                                                        font: GoogleFonts
-                                                            .montserrat(
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          fontStyle:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .titleSmall
-                                                                  .fontStyle,
-                                                        ),
-                                                        color: Colors.white,
-                                                        letterSpacing: 0.0,
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        fontStyle:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .titleSmall
-                                                                .fontStyle,
-                                                      ),
-                                                  elevation: 2.0,
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          24.0),
-                                                ),
-                                              ),
-                                            ),
-                                            Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(
-                                                      0.0, 20.0, 0.0, 0.0),
-                                              child: FFButtonWidget(
-                                                onPressed: () async {
-                                                  logFirebaseEvent(
-                                                      'DASHBOARD_SCREEN_CHOOSE_ON_MAP_BTN_ON_TA');
-                                                  logFirebaseEvent(
-                                                      'Button_navigate_to');
+                                                          0.0, 20.0, 0.0, 0.0),
+                                                  child: FFButtonWidget(
+                                                    onPressed: () async {
+                                                      logFirebaseEvent(
+                                                          'DASHBOARD_SCREEN_ADD_ADDRESS_TO_START_OR');
+                                                      logFirebaseEvent(
+                                                          'Button_navigate_to');
 
-                                                  context.pushNamed(
-                                                      AddressListScreenWidget
-                                                          .routeName);
+                                                      context.pushNamed(
+                                                          AddressListScreenWidget
+                                                              .routeName);
 
-                                                  logFirebaseEvent(
-                                                      'Button_update_app_state');
-                                                  FFAppState().screenName =
-                                                      'dashbaord';
-                                                  safeSetState(() {});
-                                                  logFirebaseEvent(
-                                                      'Button_google_analytics_event');
-                                                  logFirebaseEvent(
-                                                      'AddressListScreenFromDashboardAnalytics');
-                                                },
-                                                text: 'Choose on map',
-                                                icon: Icon(
-                                                  Icons.location_on,
-                                                  size: 24.0,
-                                                ),
-                                                options: FFButtonOptions(
-                                                  width:
-                                                      MediaQuery.sizeOf(context)
+                                                      logFirebaseEvent(
+                                                          'Button_update_app_state');
+                                                      FFAppState().screenName =
+                                                          'dashbaord';
+                                                      safeSetState(() {});
+                                                      logFirebaseEvent(
+                                                          'Button_google_analytics_event');
+                                                      logFirebaseEvent(
+                                                          'AddressListScreenFromDashboardAnalytics');
+                                                    },
+                                                    text:
+                                                        'Add  Address to Start Ordering',
+                                                    options: FFButtonOptions(
+                                                      width: MediaQuery.sizeOf(
+                                                                  context)
                                                               .width *
                                                           0.8,
-                                                  height: 45.0,
+                                                      height: 45.0,
+                                                      padding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  16.0,
+                                                                  0.0,
+                                                                  16.0,
+                                                                  0.0),
+                                                      iconPadding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  0.0,
+                                                                  0.0,
+                                                                  0.0,
+                                                                  0.0),
+                                                      color: FFAppConstants
+                                                          .indigoColor,
+                                                      textStyle:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .titleSmall
+                                                              .override(
+                                                                font: GoogleFonts
+                                                                    .montserrat(
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
+                                                                  fontStyle: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .titleSmall
+                                                                      .fontStyle,
+                                                                ),
+                                                                color: Colors
+                                                                    .white,
+                                                                letterSpacing:
+                                                                    0.0,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold,
+                                                                fontStyle: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .titleSmall
+                                                                    .fontStyle,
+                                                              ),
+                                                      elevation: 2.0,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              24.0),
+                                                    ),
+                                                  ),
+                                                ),
+                                                Padding(
                                                   padding: EdgeInsetsDirectional
                                                       .fromSTEB(
-                                                          16.0, 0.0, 16.0, 0.0),
-                                                  iconPadding:
-                                                      EdgeInsetsDirectional
-                                                          .fromSTEB(0.0, 0.0,
-                                                              0.0, 0.0),
-                                                  color:
-                                                      FFAppConstants.darkGreen,
-                                                  textStyle: FlutterFlowTheme
-                                                          .of(context)
-                                                      .titleSmall
-                                                      .override(
-                                                        font: GoogleFonts
-                                                            .montserrat(
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          fontStyle:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .titleSmall
-                                                                  .fontStyle,
-                                                        ),
-                                                        color: Colors.white,
-                                                        letterSpacing: 0.0,
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        fontStyle:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .titleSmall
-                                                                .fontStyle,
-                                                      ),
-                                                  elevation: 2.0,
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          24.0),
+                                                          0.0, 20.0, 0.0, 0.0),
+                                                  child: FFButtonWidget(
+                                                    onPressed: () async {
+                                                      logFirebaseEvent(
+                                                          'DASHBOARD_SCREEN_CHOOSE_ON_MAP_BTN_ON_TA');
+                                                      logFirebaseEvent(
+                                                          'Button_navigate_to');
+
+                                                      context.pushNamed(
+                                                          AddressListScreenWidget
+                                                              .routeName);
+
+                                                      logFirebaseEvent(
+                                                          'Button_update_app_state');
+                                                      FFAppState().screenName =
+                                                          'dashbaord';
+                                                      safeSetState(() {});
+                                                      logFirebaseEvent(
+                                                          'Button_google_analytics_event');
+                                                      logFirebaseEvent(
+                                                          'AddressListScreenFromDashboardAnalytics');
+                                                    },
+                                                    text: 'Choose on map',
+                                                    icon: Icon(
+                                                      Icons.location_on,
+                                                      size: 24.0,
+                                                    ),
+                                                    options: FFButtonOptions(
+                                                      width: MediaQuery.sizeOf(
+                                                                  context)
+                                                              .width *
+                                                          0.8,
+                                                      height: 45.0,
+                                                      padding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  16.0,
+                                                                  0.0,
+                                                                  16.0,
+                                                                  0.0),
+                                                      iconPadding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  0.0,
+                                                                  0.0,
+                                                                  0.0,
+                                                                  0.0),
+                                                      color: FFAppConstants
+                                                          .darkGreen,
+                                                      textStyle:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .titleSmall
+                                                              .override(
+                                                                font: GoogleFonts
+                                                                    .montserrat(
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
+                                                                  fontStyle: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .titleSmall
+                                                                      .fontStyle,
+                                                                ),
+                                                                color: Colors
+                                                                    .white,
+                                                                letterSpacing:
+                                                                    0.0,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold,
+                                                                fontStyle: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .titleSmall
+                                                                    .fontStyle,
+                                                              ),
+                                                      elevation: 2.0,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              24.0),
+                                                    ),
+                                                  ),
                                                 ),
-                                              ),
+                                              ],
                                             ),
-                                          ],
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                  ),
-                                  Align(
-                                    alignment: AlignmentDirectional(0.0, -1.0),
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(8.0),
-                                      child: Image.asset(
-                                        'assets/images/q2.png',
-                                        width: 50.0,
-                                        height: 50.0,
-                                        fit: BoxFit.cover,
+                                      Align(
+                                        alignment:
+                                            AlignmentDirectional(0.0, -1.0),
+                                        child: ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(8.0),
+                                          child: Image.asset(
+                                            'assets/images/q2.png',
+                                            width: 50.0,
+                                            height: 50.0,
+                                            fit: BoxFit.cover,
+                                          ),
+                                        ),
                                       ),
-                                    ),
+                                    ],
                                   ),
                                 ],
                               ),
