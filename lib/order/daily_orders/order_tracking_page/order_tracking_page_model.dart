@@ -26,6 +26,10 @@ class OrderTrackingPageModel extends FlutterFlowModel<OrderTrackingPageWidget> {
 
   String checkDiscount1 = '0';
 
+  String surgeChange = 'surge_charge';
+
+  String discountTimeSlot = 'discount';
+
   ///  State fields for stateful widgets in this page.
 
   Completer<ApiCallResponse>? apiRequestCompleter;

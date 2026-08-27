@@ -174,6 +174,10 @@ class _DailyCartScreenWidgetState extends State<DailyCartScreenWidget>
                 FFAppState().zoneInfo,
                 r'''$.zone_id''',
               ).toString(),
+              storeId: getJsonField(
+                FFAppState().zoneInfo,
+                r'''$.store_id''',
+              ).toString(),
             )))
           .future,
       builder: (context, snapshot) {
@@ -1141,57 +1145,84 @@ class _DailyCartScreenWidgetState extends State<DailyCartScreenWidget>
                                                                                                       highlightColor: Colors.transparent,
                                                                                                       onTap: () async {
                                                                                                         logFirebaseEvent('DAILY_CART_SCREEN_Image_eoum9dw8_ON_TAP');
-                                                                                                        logFirebaseEvent('Image_navigate_to');
+                                                                                                        if (getJsonField(
+                                                                                                              productModelItem,
+                                                                                                              r'''$.trail_id''',
+                                                                                                            ) ==
+                                                                                                            null) {
+                                                                                                          logFirebaseEvent('Image_navigate_to');
 
-                                                                                                        context.pushNamed(ProductDetailsScreenWidget.routeName);
+                                                                                                          context.pushNamed(ProductDetailsScreenWidget.routeName);
 
-                                                                                                        logFirebaseEvent('Image_update_app_state');
-                                                                                                        FFAppState().productID = getJsonField(
-                                                                                                          productModelItem,
-                                                                                                          r'''$.product_id''',
-                                                                                                        ).toString();
-                                                                                                        FFAppState().storeID = FFAppState().storeID;
-                                                                                                        FFAppState().userID = FFAppState().userID;
-                                                                                                        FFAppState().productName = getJsonField(
-                                                                                                          productModelItem,
-                                                                                                          r'''$.product_name''',
-                                                                                                        ).toString();
-                                                                                                        safeSetState(() {});
-                                                                                                        logFirebaseEvent('Image_custom_action');
-                                                                                                        await actions.facebookEventClass(
-                                                                                                          getJsonField(
+                                                                                                          logFirebaseEvent('Image_update_app_state');
+                                                                                                          FFAppState().productID = getJsonField(
                                                                                                             productModelItem,
                                                                                                             r'''$.product_id''',
-                                                                                                          ).toString(),
-                                                                                                          getJsonField(
+                                                                                                          ).toString();
+                                                                                                          FFAppState().storeID = FFAppState().storeID;
+                                                                                                          FFAppState().userID = FFAppState().userID;
+                                                                                                          FFAppState().productName = getJsonField(
                                                                                                             productModelItem,
                                                                                                             r'''$.product_name''',
-                                                                                                          ).toString(),
-                                                                                                          'product detail',
-                                                                                                          getJsonField(
+                                                                                                          ).toString();
+                                                                                                          safeSetState(() {});
+                                                                                                          logFirebaseEvent('Image_custom_action');
+                                                                                                          await actions.facebookEventClass(
+                                                                                                            getJsonField(
+                                                                                                              productModelItem,
+                                                                                                              r'''$.product_id''',
+                                                                                                            ).toString(),
+                                                                                                            getJsonField(
+                                                                                                              productModelItem,
+                                                                                                              r'''$.product_name''',
+                                                                                                            ).toString(),
+                                                                                                            'product detail',
+                                                                                                            getJsonField(
+                                                                                                              productModelItem,
+                                                                                                              r'''$.price''',
+                                                                                                            ),
+                                                                                                            0,
+                                                                                                            getJsonField(
+                                                                                                              productModelItem,
+                                                                                                              r'''$.mrp''',
+                                                                                                            ),
+                                                                                                            'productdetail',
+                                                                                                            FFAppState().emptyJson,
+                                                                                                            ' ',
+                                                                                                            ' ',
+                                                                                                            ' ',
+                                                                                                            ' ',
+                                                                                                            ' ',
+                                                                                                          );
+                                                                                                          logFirebaseEvent('Image_google_analytics_event');
+                                                                                                          logFirebaseEvent(
+                                                                                                            'Navigation',
+                                                                                                            parameters: {
+                                                                                                              'Navigate To': 'Product Detail Screen',
+                                                                                                            },
+                                                                                                          );
+                                                                                                        } else {
+                                                                                                          logFirebaseEvent('Image_navigate_to');
+
+                                                                                                          context.pushNamed(TrialProductListingWidget.routeName);
+
+                                                                                                          logFirebaseEvent('Image_update_app_state');
+                                                                                                          FFAppState().trialId = getJsonField(
                                                                                                             productModelItem,
-                                                                                                            r'''$.price''',
-                                                                                                          ),
-                                                                                                          0,
-                                                                                                          getJsonField(
+                                                                                                            r'''$.trail_id''',
+                                                                                                          ).toString();
+                                                                                                          FFAppState().trialPackBannerImage = getJsonField(
                                                                                                             productModelItem,
-                                                                                                            r'''$.mrp''',
-                                                                                                          ),
-                                                                                                          'productdetail',
-                                                                                                          FFAppState().emptyJson,
-                                                                                                          ' ',
-                                                                                                          ' ',
-                                                                                                          ' ',
-                                                                                                          ' ',
-                                                                                                          ' ',
-                                                                                                        );
-                                                                                                        logFirebaseEvent('Image_google_analytics_event');
-                                                                                                        logFirebaseEvent(
-                                                                                                          'Navigation',
-                                                                                                          parameters: {
-                                                                                                            'Navigate To': 'Product Detail Screen',
-                                                                                                          },
-                                                                                                        );
+                                                                                                            r'''$.product_image''',
+                                                                                                          ).toString();
+                                                                                                          FFAppState().trialPackCategoryName = getJsonField(
+                                                                                                            productModelItem,
+                                                                                                            r'''$.product_name''',
+                                                                                                          ).toString();
+                                                                                                          safeSetState(() {});
+                                                                                                          logFirebaseEvent('Image_google_analytics_event');
+                                                                                                          logFirebaseEvent('SubCatCardClickAnalytics');
+                                                                                                        }
                                                                                                       },
                                                                                                       child: ClipRRect(
                                                                                                         borderRadius: BorderRadius.circular(8.0),
@@ -1605,11 +1636,16 @@ class _DailyCartScreenWidgetState extends State<DailyCartScreenWidget>
                                                                                                             }
                                                                                                           },
                                                                                                         ),
-                                                                                                        if (FFAppConstants.isSubcribe ==
-                                                                                                            getJsonField(
-                                                                                                              productModelItem,
-                                                                                                              r'''$.isOfferProduct''',
-                                                                                                            ).toString())
+                                                                                                        if ((FFAppConstants.isSubcribe ==
+                                                                                                                getJsonField(
+                                                                                                                  productModelItem,
+                                                                                                                  r'''$.isOfferProduct''',
+                                                                                                                ).toString()) &&
+                                                                                                            (getJsonField(
+                                                                                                                  productModelItem,
+                                                                                                                  r'''$.trail_id''',
+                                                                                                                ) ==
+                                                                                                                null))
                                                                                                           Align(
                                                                                                             alignment: AlignmentDirectional(1.0, 1.0),
                                                                                                             child: Padding(
@@ -6078,8 +6114,8 @@ class _DailyCartScreenWidgetState extends State<DailyCartScreenWidget>
                                                                             ],
                                                                           ),
                                                                         ),
-                                                                        if (_model.selectedPaymentMethod ==
-                                                                            'COD')
+                                                                        if (FFAppState().couponDiscount >
+                                                                            0.0)
                                                                           Padding(
                                                                             padding: EdgeInsetsDirectional.fromSTEB(
                                                                                 0.0,
@@ -6095,16 +6131,7 @@ class _DailyCartScreenWidgetState extends State<DailyCartScreenWidget>
                                                                                   mainAxisSize: MainAxisSize.max,
                                                                                   children: [
                                                                                     Text(
-                                                                                      getJsonField(
-                                                                                        functions.getZoneRuleByType(
-                                                                                            getJsonField(
-                                                                                              dailyCartScreenShowspcatcartResponse.jsonBody,
-                                                                                              r'''$.data.zone_permanent_charges''',
-                                                                                              true,
-                                                                                            )!,
-                                                                                            'cod'),
-                                                                                        r'''$.zone_rule_display_name''',
-                                                                                      ).toString(),
+                                                                                      'Coupon Discount',
                                                                                       style: FlutterFlowTheme.of(context).bodyMedium.override(
                                                                                             font: GoogleFonts.montserrat(
                                                                                               fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
@@ -6128,40 +6155,31 @@ class _DailyCartScreenWidgetState extends State<DailyCartScreenWidget>
                                                                                         FFAppConstants.currancyAED,
                                                                                         style: FlutterFlowTheme.of(context).bodyMedium.override(
                                                                                               font: GoogleFonts.montserrat(
-                                                                                                fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
+                                                                                                fontWeight: FontWeight.w500,
                                                                                                 fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
                                                                                               ),
-                                                                                              color: FFAppConstants.primaryPurple2,
+                                                                                              color: FFAppConstants.darkGreen,
                                                                                               fontSize: 12.0,
                                                                                               letterSpacing: 0.0,
-                                                                                              fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
+                                                                                              fontWeight: FontWeight.w500,
                                                                                               fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
                                                                                             ),
                                                                                       ),
                                                                                     ),
                                                                                     Text(
-                                                                                      functions.setDecimalValueWithCount(
-                                                                                          getJsonField(
-                                                                                            functions.getZoneRuleByType(
-                                                                                                getJsonField(
-                                                                                                  dailyCartScreenShowspcatcartResponse.jsonBody,
-                                                                                                  r'''$.data.zone_permanent_charges''',
-                                                                                                  true,
-                                                                                                )!,
-                                                                                                'cod'),
-                                                                                            r'''$.zone_rule_value''',
-                                                                                          ).toString(),
-                                                                                          2,
-                                                                                          false),
+                                                                                      valueOrDefault<String>(
+                                                                                        functions.setDecimalValue(FFAppState().couponDiscount.toString()),
+                                                                                        '0.00',
+                                                                                      ),
                                                                                       style: FlutterFlowTheme.of(context).bodyMedium.override(
                                                                                             font: GoogleFonts.montserrat(
-                                                                                              fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
+                                                                                              fontWeight: FontWeight.w500,
                                                                                               fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
                                                                                             ),
-                                                                                            color: FFAppConstants.primaryPurple2,
+                                                                                            color: FFAppConstants.darkGreen,
                                                                                             fontSize: 12.0,
                                                                                             letterSpacing: 0.0,
-                                                                                            fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
+                                                                                            fontWeight: FontWeight.w500,
                                                                                             fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
                                                                                           ),
                                                                                     ),
@@ -6170,209 +6188,6 @@ class _DailyCartScreenWidgetState extends State<DailyCartScreenWidget>
                                                                               ],
                                                                             ),
                                                                           ),
-                                                                        if (FFAppConstants.zeroValue !=
-                                                                            getJsonField(
-                                                                              functions.getZoneRuleByType(
-                                                                                  getJsonField(
-                                                                                    dailyCartScreenShowspcatcartResponse.jsonBody,
-                                                                                    r'''$.data.zone_permanent_charges''',
-                                                                                    true,
-                                                                                  )!,
-                                                                                  'min_order'),
-                                                                              r'''$.zone_price_effect''',
-                                                                            ))
-                                                                          Column(
-                                                                            mainAxisSize:
-                                                                                MainAxisSize.max,
-                                                                            children: [
-                                                                              Padding(
-                                                                                padding: EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 0.0),
-                                                                                child: Row(
-                                                                                  mainAxisSize: MainAxisSize.max,
-                                                                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                                                  children: [
-                                                                                    Row(
-                                                                                      mainAxisSize: MainAxisSize.max,
-                                                                                      children: [
-                                                                                        Text(
-                                                                                          getJsonField(
-                                                                                            functions.getZoneRuleByType(
-                                                                                                getJsonField(
-                                                                                                  dailyCartScreenShowspcatcartResponse.jsonBody,
-                                                                                                  r'''$.data.zone_permanent_charges''',
-                                                                                                  true,
-                                                                                                )!,
-                                                                                                'min_order'),
-                                                                                            r'''$.zone_rule_display_name''',
-                                                                                          ).toString(),
-                                                                                          style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                                font: GoogleFonts.montserrat(
-                                                                                                  fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
-                                                                                                  fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                                                                                                ),
-                                                                                                color: FFAppConstants.blackColor0A0A0A,
-                                                                                                fontSize: 13.0,
-                                                                                                letterSpacing: 0.0,
-                                                                                                fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
-                                                                                                fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                                                                                              ),
-                                                                                        ),
-                                                                                      ],
-                                                                                    ),
-                                                                                    Row(
-                                                                                      mainAxisSize: MainAxisSize.max,
-                                                                                      children: [
-                                                                                        Padding(
-                                                                                          padding: EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
-                                                                                          child: Text(
-                                                                                            FFAppConstants.currancyAED,
-                                                                                            style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                                  font: GoogleFonts.montserrat(
-                                                                                                    fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
-                                                                                                    fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                                                                                                  ),
-                                                                                                  color: FFAppConstants.primaryPurple2,
-                                                                                                  fontSize: 12.0,
-                                                                                                  letterSpacing: 0.0,
-                                                                                                  fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
-                                                                                                  fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                                                                                                ),
-                                                                                          ),
-                                                                                        ),
-                                                                                        Text(
-                                                                                          functions.setDecimalValueWithCount(
-                                                                                              getJsonField(
-                                                                                                functions.getZoneRuleByType(
-                                                                                                    getJsonField(
-                                                                                                      dailyCartScreenShowspcatcartResponse.jsonBody,
-                                                                                                      r'''$.data.zone_permanent_charges''',
-                                                                                                      true,
-                                                                                                    )!,
-                                                                                                    'min_order'),
-                                                                                                r'''$.zone_rule_value''',
-                                                                                              ).toString(),
-                                                                                              2,
-                                                                                              false),
-                                                                                          style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                                font: GoogleFonts.montserrat(
-                                                                                                  fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
-                                                                                                  fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                                                                                                ),
-                                                                                                color: FFAppConstants.primaryPurple2,
-                                                                                                fontSize: 12.0,
-                                                                                                letterSpacing: 0.0,
-                                                                                                fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
-                                                                                                fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                                                                                              ),
-                                                                                        ),
-                                                                                      ],
-                                                                                    ),
-                                                                                  ],
-                                                                                ),
-                                                                              ),
-                                                                              Padding(
-                                                                                padding: EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 0.0),
-                                                                                child: Text(
-                                                                                  getJsonField(
-                                                                                    functions.getZoneRuleByType(
-                                                                                        getJsonField(
-                                                                                          dailyCartScreenShowspcatcartResponse.jsonBody,
-                                                                                          r'''$.data.zone_permanent_charges''',
-                                                                                          true,
-                                                                                        )!,
-                                                                                        'min_order'),
-                                                                                    r'''$.text_message''',
-                                                                                  ).toString(),
-                                                                                  textAlign: TextAlign.center,
-                                                                                  style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                        font: GoogleFonts.montserrat(
-                                                                                          fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
-                                                                                          fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                                                                                        ),
-                                                                                        color: FFAppConstants.redDF3F56,
-                                                                                        fontSize: 11.0,
-                                                                                        letterSpacing: 0.0,
-                                                                                        fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
-                                                                                        fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                                                                                      ),
-                                                                                ),
-                                                                              ),
-                                                                            ],
-                                                                          ),
-                                                                        Padding(
-                                                                          padding: EdgeInsetsDirectional.fromSTEB(
-                                                                              0.0,
-                                                                              5.0,
-                                                                              0.0,
-                                                                              0.0),
-                                                                          child:
-                                                                              Row(
-                                                                            mainAxisSize:
-                                                                                MainAxisSize.max,
-                                                                            mainAxisAlignment:
-                                                                                MainAxisAlignment.spaceBetween,
-                                                                            children: [
-                                                                              Row(
-                                                                                mainAxisSize: MainAxisSize.max,
-                                                                                children: [
-                                                                                  Text(
-                                                                                    'Delivery Partner Tip',
-                                                                                    style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                          font: GoogleFonts.montserrat(
-                                                                                            fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
-                                                                                            fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                                                                                          ),
-                                                                                          color: FFAppConstants.blackColor0A0A0A,
-                                                                                          fontSize: 13.0,
-                                                                                          letterSpacing: 0.0,
-                                                                                          fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
-                                                                                          fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                                                                                        ),
-                                                                                  ),
-                                                                                ],
-                                                                              ),
-                                                                              Row(
-                                                                                mainAxisSize: MainAxisSize.max,
-                                                                                children: [
-                                                                                  Padding(
-                                                                                    padding: EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
-                                                                                    child: Text(
-                                                                                      FFAppConstants.currancyAED,
-                                                                                      style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                            font: GoogleFonts.montserrat(
-                                                                                              fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
-                                                                                              fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                                                                                            ),
-                                                                                            color: FFAppConstants.primaryPurple2,
-                                                                                            fontSize: 12.0,
-                                                                                            letterSpacing: 0.0,
-                                                                                            fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
-                                                                                            fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                                                                                          ),
-                                                                                    ),
-                                                                                  ),
-                                                                                  Text(
-                                                                                    valueOrDefault<String>(
-                                                                                      functions.setDecimalValue(FFAppState().isDeliveryPartnerTipSelected),
-                                                                                      '0.00',
-                                                                                    ),
-                                                                                    style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                          font: GoogleFonts.montserrat(
-                                                                                            fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
-                                                                                            fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                                                                                          ),
-                                                                                          color: FFAppConstants.primaryPurple2,
-                                                                                          fontSize: 12.0,
-                                                                                          letterSpacing: 0.0,
-                                                                                          fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
-                                                                                          fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                                                                                        ),
-                                                                                  ),
-                                                                                ],
-                                                                              ),
-                                                                            ],
-                                                                          ),
-                                                                        ),
                                                                         if (functions.checkSelectedTimeslotCashbackDiscount(
                                                                                     getJsonField(
                                                                                       dailyCartScreenShowspcatcartResponse.jsonBody,
@@ -6513,8 +6328,8 @@ class _DailyCartScreenWidgetState extends State<DailyCartScreenWidget>
                                                                               ],
                                                                             ),
                                                                           ),
-                                                                        if (FFAppState().couponDiscount >
-                                                                            0.0)
+                                                                        if (_model.selectedPaymentMethod ==
+                                                                            'COD')
                                                                           Padding(
                                                                             padding: EdgeInsetsDirectional.fromSTEB(
                                                                                 0.0,
@@ -6530,7 +6345,16 @@ class _DailyCartScreenWidgetState extends State<DailyCartScreenWidget>
                                                                                   mainAxisSize: MainAxisSize.max,
                                                                                   children: [
                                                                                     Text(
-                                                                                      'Coupon Discount',
+                                                                                      getJsonField(
+                                                                                        functions.getZoneRuleByType(
+                                                                                            getJsonField(
+                                                                                              dailyCartScreenShowspcatcartResponse.jsonBody,
+                                                                                              r'''$.data.zone_permanent_charges''',
+                                                                                              true,
+                                                                                            )!,
+                                                                                            'cod'),
+                                                                                        r'''$.zone_rule_display_name''',
+                                                                                      ).toString(),
                                                                                       style: FlutterFlowTheme.of(context).bodyMedium.override(
                                                                                             font: GoogleFonts.montserrat(
                                                                                               fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
@@ -6554,31 +6378,40 @@ class _DailyCartScreenWidgetState extends State<DailyCartScreenWidget>
                                                                                         FFAppConstants.currancyAED,
                                                                                         style: FlutterFlowTheme.of(context).bodyMedium.override(
                                                                                               font: GoogleFonts.montserrat(
-                                                                                                fontWeight: FontWeight.w500,
+                                                                                                fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
                                                                                                 fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
                                                                                               ),
-                                                                                              color: FFAppConstants.darkGreen,
+                                                                                              color: FFAppConstants.redDF3F56,
                                                                                               fontSize: 12.0,
                                                                                               letterSpacing: 0.0,
-                                                                                              fontWeight: FontWeight.w500,
+                                                                                              fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
                                                                                               fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
                                                                                             ),
                                                                                       ),
                                                                                     ),
                                                                                     Text(
-                                                                                      valueOrDefault<String>(
-                                                                                        functions.setDecimalValue(FFAppState().couponDiscount.toString()),
-                                                                                        '0.00',
-                                                                                      ),
+                                                                                      functions.setDecimalValueWithCount(
+                                                                                          getJsonField(
+                                                                                            functions.getZoneRuleByType(
+                                                                                                getJsonField(
+                                                                                                  dailyCartScreenShowspcatcartResponse.jsonBody,
+                                                                                                  r'''$.data.zone_permanent_charges''',
+                                                                                                  true,
+                                                                                                )!,
+                                                                                                'cod'),
+                                                                                            r'''$.zone_rule_value''',
+                                                                                          ).toString(),
+                                                                                          2,
+                                                                                          false),
                                                                                       style: FlutterFlowTheme.of(context).bodyMedium.override(
                                                                                             font: GoogleFonts.montserrat(
-                                                                                              fontWeight: FontWeight.w500,
+                                                                                              fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
                                                                                               fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
                                                                                             ),
-                                                                                            color: FFAppConstants.darkGreen,
+                                                                                            color: FFAppConstants.redDF3F56,
                                                                                             fontSize: 12.0,
                                                                                             letterSpacing: 0.0,
-                                                                                            fontWeight: FontWeight.w500,
+                                                                                            fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
                                                                                             fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
                                                                                           ),
                                                                                     ),
@@ -6587,99 +6420,312 @@ class _DailyCartScreenWidgetState extends State<DailyCartScreenWidget>
                                                                               ],
                                                                             ),
                                                                           ),
-                                                                        Builder(
-                                                                          builder:
-                                                                              (context) {
-                                                                            final adonData =
+                                                                        if ((getJsonField(
+                                                                                  dailyCartScreenShowspcatcartResponse.jsonBody,
+                                                                                  r'''$.data.zone_permanent_charges''',
+                                                                                ) !=
+                                                                                null) &&
+                                                                            (FFAppConstants.zeroValue !=
                                                                                 getJsonField(
-                                                                              dailyCartScreenShowspcatcartResponse.jsonBody,
-                                                                              r'''$.data.zone_delivery_addons''',
-                                                                            ).toList();
-
-                                                                            return ListView.builder(
-                                                                              padding: EdgeInsets.zero,
-                                                                              shrinkWrap: true,
-                                                                              scrollDirection: Axis.vertical,
-                                                                              itemCount: adonData.length,
-                                                                              itemBuilder: (context, adonDataIndex) {
-                                                                                final adonDataItem = adonData[adonDataIndex];
-                                                                                return Padding(
-                                                                                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 0.0),
-                                                                                  child: Row(
-                                                                                    mainAxisSize: MainAxisSize.max,
-                                                                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                                                    children: [
-                                                                                      Row(
-                                                                                        mainAxisSize: MainAxisSize.max,
-                                                                                        children: [
-                                                                                          Text(
-                                                                                            getJsonField(
-                                                                                              adonDataItem,
-                                                                                              r'''$.zone_rule_display_name''',
-                                                                                            ).toString(),
-                                                                                            style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                                  font: GoogleFonts.montserrat(
-                                                                                                    fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
-                                                                                                    fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                                                                                                  ),
-                                                                                                  color: FFAppConstants.blackColor0A0A0A,
-                                                                                                  fontSize: 13.0,
-                                                                                                  letterSpacing: 0.0,
+                                                                                  functions.getZoneRuleByType(
+                                                                                      getJsonField(
+                                                                                        dailyCartScreenShowspcatcartResponse.jsonBody,
+                                                                                        r'''$.data.zone_permanent_charges''',
+                                                                                        true,
+                                                                                      )!,
+                                                                                      'min_order'),
+                                                                                  r'''$.zone_price_effect''',
+                                                                                )))
+                                                                          Column(
+                                                                            mainAxisSize:
+                                                                                MainAxisSize.max,
+                                                                            children: [
+                                                                              Padding(
+                                                                                padding: EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 0.0),
+                                                                                child: Row(
+                                                                                  mainAxisSize: MainAxisSize.max,
+                                                                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                                                  children: [
+                                                                                    Row(
+                                                                                      mainAxisSize: MainAxisSize.max,
+                                                                                      children: [
+                                                                                        Text(
+                                                                                          getJsonField(
+                                                                                            functions.getZoneRuleByType(
+                                                                                                getJsonField(
+                                                                                                  dailyCartScreenShowspcatcartResponse.jsonBody,
+                                                                                                  r'''$.data.zone_permanent_charges''',
+                                                                                                  true,
+                                                                                                )!,
+                                                                                                'min_order'),
+                                                                                            r'''$.zone_rule_display_name''',
+                                                                                          ).toString(),
+                                                                                          style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                                font: GoogleFonts.montserrat(
                                                                                                   fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
                                                                                                   fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
                                                                                                 ),
-                                                                                          ),
-                                                                                        ],
-                                                                                      ),
-                                                                                      Row(
-                                                                                        mainAxisSize: MainAxisSize.max,
-                                                                                        children: [
-                                                                                          Padding(
-                                                                                            padding: EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
-                                                                                            child: Text(
-                                                                                              FFAppConstants.currancyAED,
-                                                                                              style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                                    font: GoogleFonts.montserrat(
-                                                                                                      fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
-                                                                                                      fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                                                                                                    ),
-                                                                                                    color: FFAppConstants.primaryPurple2,
-                                                                                                    fontSize: 12.0,
-                                                                                                    letterSpacing: 0.0,
-                                                                                                    fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
-                                                                                                    fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                                                                                                  ),
-                                                                                            ),
-                                                                                          ),
-                                                                                          Text(
-                                                                                            functions.setDecimalValueWithCount(
-                                                                                                getJsonField(
-                                                                                                  adonDataItem,
-                                                                                                  r'''$.zone_price_effect''',
-                                                                                                ).toString(),
-                                                                                                2,
-                                                                                                false),
+                                                                                                color: FFAppConstants.blackColor0A0A0A,
+                                                                                                fontSize: 13.0,
+                                                                                                letterSpacing: 0.0,
+                                                                                                fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
+                                                                                                fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                                              ),
+                                                                                        ),
+                                                                                      ],
+                                                                                    ),
+                                                                                    Row(
+                                                                                      mainAxisSize: MainAxisSize.max,
+                                                                                      children: [
+                                                                                        Padding(
+                                                                                          padding: EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
+                                                                                          child: Text(
+                                                                                            FFAppConstants.currancyAED,
                                                                                             style: FlutterFlowTheme.of(context).bodyMedium.override(
                                                                                                   font: GoogleFonts.montserrat(
                                                                                                     fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
                                                                                                     fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
                                                                                                   ),
-                                                                                                  color: FFAppConstants.primaryPurple2,
+                                                                                                  color: FFAppConstants.redDF3F56,
                                                                                                   fontSize: 12.0,
                                                                                                   letterSpacing: 0.0,
                                                                                                   fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
                                                                                                   fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
                                                                                                 ),
                                                                                           ),
-                                                                                        ],
+                                                                                        ),
+                                                                                        Text(
+                                                                                          functions.setDecimalValueWithCount(
+                                                                                              getJsonField(
+                                                                                                functions.getZoneRuleByType(
+                                                                                                    getJsonField(
+                                                                                                      dailyCartScreenShowspcatcartResponse.jsonBody,
+                                                                                                      r'''$.data.zone_permanent_charges''',
+                                                                                                      true,
+                                                                                                    )!,
+                                                                                                    'min_order'),
+                                                                                                r'''$.zone_rule_value''',
+                                                                                              ).toString(),
+                                                                                              2,
+                                                                                              false),
+                                                                                          style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                                font: GoogleFonts.montserrat(
+                                                                                                  fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
+                                                                                                  fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                                                ),
+                                                                                                color: FFAppConstants.redDF3F56,
+                                                                                                fontSize: 12.0,
+                                                                                                letterSpacing: 0.0,
+                                                                                                fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
+                                                                                                fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                                              ),
+                                                                                        ),
+                                                                                      ],
+                                                                                    ),
+                                                                                  ],
+                                                                                ),
+                                                                              ),
+                                                                              Padding(
+                                                                                padding: EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 0.0),
+                                                                                child: Text(
+                                                                                  getJsonField(
+                                                                                    functions.getZoneRuleByType(
+                                                                                        getJsonField(
+                                                                                          dailyCartScreenShowspcatcartResponse.jsonBody,
+                                                                                          r'''$.data.zone_permanent_charges''',
+                                                                                          true,
+                                                                                        )!,
+                                                                                        'min_order'),
+                                                                                    r'''$.text_message''',
+                                                                                  ).toString(),
+                                                                                  textAlign: TextAlign.center,
+                                                                                  style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                        font: GoogleFonts.montserrat(
+                                                                                          fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
+                                                                                          fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                                        ),
+                                                                                        color: FFAppConstants.redDF3F56,
+                                                                                        fontSize: 11.0,
+                                                                                        letterSpacing: 0.0,
+                                                                                        fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
+                                                                                        fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
                                                                                       ),
-                                                                                    ],
+                                                                                ),
+                                                                              ),
+                                                                            ],
+                                                                          ),
+                                                                        Padding(
+                                                                          padding: EdgeInsetsDirectional.fromSTEB(
+                                                                              0.0,
+                                                                              5.0,
+                                                                              0.0,
+                                                                              0.0),
+                                                                          child:
+                                                                              Row(
+                                                                            mainAxisSize:
+                                                                                MainAxisSize.max,
+                                                                            mainAxisAlignment:
+                                                                                MainAxisAlignment.spaceBetween,
+                                                                            children: [
+                                                                              Row(
+                                                                                mainAxisSize: MainAxisSize.max,
+                                                                                children: [
+                                                                                  Text(
+                                                                                    'Delivery Partner Tip',
+                                                                                    style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                          font: GoogleFonts.montserrat(
+                                                                                            fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
+                                                                                            fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                                          ),
+                                                                                          color: FFAppConstants.blackColor0A0A0A,
+                                                                                          fontSize: 13.0,
+                                                                                          letterSpacing: 0.0,
+                                                                                          fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
+                                                                                          fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                                        ),
                                                                                   ),
-                                                                                );
-                                                                              },
-                                                                            );
-                                                                          },
+                                                                                ],
+                                                                              ),
+                                                                              Row(
+                                                                                mainAxisSize: MainAxisSize.max,
+                                                                                children: [
+                                                                                  Padding(
+                                                                                    padding: EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
+                                                                                    child: Text(
+                                                                                      FFAppConstants.currancyAED,
+                                                                                      style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                            font: GoogleFonts.montserrat(
+                                                                                              fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
+                                                                                              fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                                            ),
+                                                                                            color: FFAppConstants.redDF3F56,
+                                                                                            fontSize: 12.0,
+                                                                                            letterSpacing: 0.0,
+                                                                                            fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
+                                                                                            fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                                          ),
+                                                                                    ),
+                                                                                  ),
+                                                                                  Text(
+                                                                                    valueOrDefault<String>(
+                                                                                      functions.setDecimalValue(FFAppState().isDeliveryPartnerTipSelected),
+                                                                                      '0.00',
+                                                                                    ),
+                                                                                    style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                          font: GoogleFonts.montserrat(
+                                                                                            fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
+                                                                                            fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                                          ),
+                                                                                          color: FFAppConstants.redDF3F56,
+                                                                                          fontSize: 12.0,
+                                                                                          letterSpacing: 0.0,
+                                                                                          fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
+                                                                                          fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                                        ),
+                                                                                  ),
+                                                                                ],
+                                                                              ),
+                                                                            ],
+                                                                          ),
                                                                         ),
+                                                                        if (getJsonField(
+                                                                              dailyCartScreenShowspcatcartResponse.jsonBody,
+                                                                              r'''$.data.zone_delivery_addons''',
+                                                                            ) !=
+                                                                            null)
+                                                                          Builder(
+                                                                            builder:
+                                                                                (context) {
+                                                                              final adonData = getJsonField(
+                                                                                dailyCartScreenShowspcatcartResponse.jsonBody,
+                                                                                r'''$.data.zone_delivery_addons''',
+                                                                              ).toList();
+
+                                                                              return ListView.builder(
+                                                                                padding: EdgeInsets.zero,
+                                                                                primary: false,
+                                                                                shrinkWrap: true,
+                                                                                scrollDirection: Axis.vertical,
+                                                                                itemCount: adonData.length,
+                                                                                itemBuilder: (context, adonDataIndex) {
+                                                                                  final adonDataItem = adonData[adonDataIndex];
+                                                                                  return Padding(
+                                                                                    padding: EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 0.0),
+                                                                                    child: Row(
+                                                                                      mainAxisSize: MainAxisSize.max,
+                                                                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                                                      children: [
+                                                                                        Row(
+                                                                                          mainAxisSize: MainAxisSize.max,
+                                                                                          children: [
+                                                                                            Text(
+                                                                                              getJsonField(
+                                                                                                adonDataItem,
+                                                                                                r'''$.zone_rule_display_name''',
+                                                                                              ).toString(),
+                                                                                              style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                                    font: GoogleFonts.montserrat(
+                                                                                                      fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
+                                                                                                      fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                                                    ),
+                                                                                                    color: FFAppConstants.blackColor0A0A0A,
+                                                                                                    fontSize: 13.0,
+                                                                                                    letterSpacing: 0.0,
+                                                                                                    fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
+                                                                                                    fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                                                  ),
+                                                                                            ),
+                                                                                          ],
+                                                                                        ),
+                                                                                        Row(
+                                                                                          mainAxisSize: MainAxisSize.max,
+                                                                                          children: [
+                                                                                            Padding(
+                                                                                              padding: EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
+                                                                                              child: Text(
+                                                                                                FFAppConstants.currancyAED,
+                                                                                                style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                                      font: GoogleFonts.montserrat(
+                                                                                                        fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
+                                                                                                        fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                                                      ),
+                                                                                                      color: FFAppConstants.redDF3F56,
+                                                                                                      fontSize: 12.0,
+                                                                                                      letterSpacing: 0.0,
+                                                                                                      fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
+                                                                                                      fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                                                    ),
+                                                                                              ),
+                                                                                            ),
+                                                                                            Text(
+                                                                                              functions.setDecimalValueWithCount(
+                                                                                                  getJsonField(
+                                                                                                    adonDataItem,
+                                                                                                    r'''$.zone_price_effect''',
+                                                                                                  ).toString(),
+                                                                                                  2,
+                                                                                                  false),
+                                                                                              style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                                    font: GoogleFonts.montserrat(
+                                                                                                      fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
+                                                                                                      fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                                                    ),
+                                                                                                    color: FFAppConstants.redDF3F56,
+                                                                                                    fontSize: 12.0,
+                                                                                                    letterSpacing: 0.0,
+                                                                                                    fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
+                                                                                                    fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                                                  ),
+                                                                                            ),
+                                                                                          ],
+                                                                                        ),
+                                                                                      ],
+                                                                                    ),
+                                                                                  );
+                                                                                },
+                                                                              );
+                                                                            },
+                                                                          ),
                                                                         Padding(
                                                                           padding: EdgeInsetsDirectional.fromSTEB(
                                                                               0.0,
@@ -7598,369 +7644,7 @@ class _DailyCartScreenWidgetState extends State<DailyCartScreenWidget>
                                                                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                                               children: [
                                                                                 Text(
-                                                                                  valueOrDefault<String>(
-                                                                                    functions
-                                                                                        .totalValueAmountUpdae(
-                                                                                            FFAppState().isDeliveryPartnerTipSelected,
-                                                                                            FFAppState().couponDiscount.toString(),
-                                                                                            getJsonField(
-                                                                                              dailyCartScreenShowspcatcartResponse.jsonBody,
-                                                                                              r'''$.data.total_price''',
-                                                                                            ).toString(),
-                                                                                            functions
-                                                                                                .checkWalletWithAction(
-                                                                                                    _model.isRefWalletCheckBoxSelected,
-                                                                                                    valueOrDefault<String>(
-                                                                                                      functions
-                                                                                                          .totalValueAmountUpdae(
-                                                                                                              FFAppState().isDeliveryPartnerTipSelected,
-                                                                                                              FFAppState().couponDiscount.toString(),
-                                                                                                              getJsonField(
-                                                                                                                dailyCartScreenShowspcatcartResponse.jsonBody,
-                                                                                                                r'''$.data.total_price''',
-                                                                                                              ).toString(),
-                                                                                                              getJsonField(
-                                                                                                                dailyCartScreenShowspcatcartResponse.jsonBody,
-                                                                                                                r'''$.data.referral_balance''',
-                                                                                                              ).toString(),
-                                                                                                              'false',
-                                                                                                              _model.selectedPaymentMethod,
-                                                                                                              _model.selectedPaymentMethod == 'COD'
-                                                                                                                  ? getJsonField(
-                                                                                                                      functions.getZoneRuleByType(
-                                                                                                                          getJsonField(
-                                                                                                                            dailyCartScreenShowspcatcartResponse.jsonBody,
-                                                                                                                            r'''$.data.zone_permanent_charges''',
-                                                                                                                            true,
-                                                                                                                          )!,
-                                                                                                                          'cod'),
-                                                                                                                      r'''$.zone_rule_value''',
-                                                                                                                    ).toString()
-                                                                                                                  : '0',
-                                                                                                              'false',
-                                                                                                              '0',
-                                                                                                              functions.checkSelectedTimeslotCashbackDiscount(
-                                                                                                                              getJsonField(
-                                                                                                                                dailyCartScreenShowspcatcartResponse.jsonBody,
-                                                                                                                                r'''$.data.data''',
-                                                                                                                                true,
-                                                                                                                              )!,
-                                                                                                                              'amount',
-                                                                                                                              'Time Slot Discount') !=
-                                                                                                                          ''
-                                                                                                                  ? functions.checkSelectedTimeslotCashbackDiscount(
-                                                                                                                      getJsonField(
-                                                                                                                        dailyCartScreenShowspcatcartResponse.jsonBody,
-                                                                                                                        r'''$.data.data''',
-                                                                                                                        true,
-                                                                                                                      )!,
-                                                                                                                      'amount',
-                                                                                                                      'Time Slot Discount')
-                                                                                                                  : '0',
-                                                                                                              functions.checkSelectedTimeslotCashbackDiscount(
-                                                                                                                              getJsonField(
-                                                                                                                                dailyCartScreenShowspcatcartResponse.jsonBody,
-                                                                                                                                r'''$.data.data''',
-                                                                                                                                true,
-                                                                                                                              )!,
-                                                                                                                              'amount',
-                                                                                                                              'Surge Charge') !=
-                                                                                                                          ''
-                                                                                                                  ? functions.checkSelectedTimeslotCashbackDiscount(
-                                                                                                                      getJsonField(
-                                                                                                                        dailyCartScreenShowspcatcartResponse.jsonBody,
-                                                                                                                        r'''$.data.data''',
-                                                                                                                        true,
-                                                                                                                      )!,
-                                                                                                                      'amount',
-                                                                                                                      'Surge Charge')
-                                                                                                                  : '0',
-                                                                                                              getJsonField(
-                                                                                                                functions.getZoneRuleByType(
-                                                                                                                    getJsonField(
-                                                                                                                      dailyCartScreenShowspcatcartResponse.jsonBody,
-                                                                                                                      r'''$.data.zone_permanent_charges''',
-                                                                                                                      true,
-                                                                                                                    )!,
-                                                                                                                    'min_order'),
-                                                                                                                r'''$.zone_price_effect''',
-                                                                                                              ).toString(),
-                                                                                                              getJsonField(
-                                                                                                                dailyCartScreenShowspcatcartResponse.jsonBody,
-                                                                                                                r'''$.data.zone_delivery_addons''',
-                                                                                                                true,
-                                                                                                              ),
-                                                                                                              false)
-                                                                                                          .toString(),
-                                                                                                      '0.00',
-                                                                                                    ),
-                                                                                                    getJsonField(
-                                                                                                      dailyCartScreenShowspcatcartResponse.jsonBody,
-                                                                                                      r'''$.data.referral_balance''',
-                                                                                                    ).toString(),
-                                                                                                    getJsonField(
-                                                                                                      FFAppState().appInfo,
-                                                                                                      r'''$.wallet_deduction_percentage''',
-                                                                                                    ).toString())
-                                                                                                .toString(),
-                                                                                            'add',
-                                                                                            _model.selectedPaymentMethod,
-                                                                                            _model.selectedPaymentMethod == 'COD'
-                                                                                                ? getJsonField(
-                                                                                                    functions.getZoneRuleByType(
-                                                                                                        getJsonField(
-                                                                                                          dailyCartScreenShowspcatcartResponse.jsonBody,
-                                                                                                          r'''$.data.zone_permanent_charges''',
-                                                                                                          true,
-                                                                                                        )!,
-                                                                                                        'cod'),
-                                                                                                    r'''$.zone_rule_value''',
-                                                                                                  ).toString()
-                                                                                                : '0',
-                                                                                            functions
-                                                                                                .calculateFinalPayableForCashPayment(
-                                                                                                    valueOrDefault<String>(
-                                                                                                      functions
-                                                                                                          .totalValueAmountUpdae(
-                                                                                                              FFAppState().isDeliveryPartnerTipSelected,
-                                                                                                              FFAppState().couponDiscount.toString(),
-                                                                                                              getJsonField(
-                                                                                                                dailyCartScreenShowspcatcartResponse.jsonBody,
-                                                                                                                r'''$.data.total_price''',
-                                                                                                              ).toString(),
-                                                                                                              getJsonField(
-                                                                                                                dailyCartScreenShowspcatcartResponse.jsonBody,
-                                                                                                                r'''$.data.referral_balance''',
-                                                                                                              ).toString(),
-                                                                                                              'false',
-                                                                                                              _model.selectedPaymentMethod,
-                                                                                                              _model.selectedPaymentMethod == 'COD'
-                                                                                                                  ? getJsonField(
-                                                                                                                      functions.getZoneRuleByType(
-                                                                                                                          getJsonField(
-                                                                                                                            dailyCartScreenShowspcatcartResponse.jsonBody,
-                                                                                                                            r'''$.data.zone_permanent_charges''',
-                                                                                                                            true,
-                                                                                                                          )!,
-                                                                                                                          'cod'),
-                                                                                                                      r'''$.zone_rule_value''',
-                                                                                                                    ).toString()
-                                                                                                                  : '0',
-                                                                                                              'false',
-                                                                                                              '0',
-                                                                                                              functions.checkSelectedTimeslotCashbackDiscount(
-                                                                                                                              getJsonField(
-                                                                                                                                dailyCartScreenShowspcatcartResponse.jsonBody,
-                                                                                                                                r'''$.data.data''',
-                                                                                                                                true,
-                                                                                                                              )!,
-                                                                                                                              'amount',
-                                                                                                                              'Time Slot Discount') !=
-                                                                                                                          ''
-                                                                                                                  ? functions.checkSelectedTimeslotCashbackDiscount(
-                                                                                                                      getJsonField(
-                                                                                                                        dailyCartScreenShowspcatcartResponse.jsonBody,
-                                                                                                                        r'''$.data.data''',
-                                                                                                                        true,
-                                                                                                                      )!,
-                                                                                                                      'amount',
-                                                                                                                      'Time Slot Discount')
-                                                                                                                  : '0',
-                                                                                                              functions.checkSelectedTimeslotCashbackDiscount(
-                                                                                                                              getJsonField(
-                                                                                                                                dailyCartScreenShowspcatcartResponse.jsonBody,
-                                                                                                                                r'''$.data.data''',
-                                                                                                                                true,
-                                                                                                                              )!,
-                                                                                                                              'amount',
-                                                                                                                              'Surge Charge') !=
-                                                                                                                          ''
-                                                                                                                  ? functions.checkSelectedTimeslotCashbackDiscount(
-                                                                                                                      getJsonField(
-                                                                                                                        dailyCartScreenShowspcatcartResponse.jsonBody,
-                                                                                                                        r'''$.data.data''',
-                                                                                                                        true,
-                                                                                                                      )!,
-                                                                                                                      'amount',
-                                                                                                                      'Surge Charge')
-                                                                                                                  : '0',
-                                                                                                              getJsonField(
-                                                                                                                functions.getZoneRuleByType(
-                                                                                                                    getJsonField(
-                                                                                                                      dailyCartScreenShowspcatcartResponse.jsonBody,
-                                                                                                                      r'''$.data.zone_permanent_charges''',
-                                                                                                                      true,
-                                                                                                                    )!,
-                                                                                                                    'min_order'),
-                                                                                                                r'''$.zone_price_effect''',
-                                                                                                              ).toString(),
-                                                                                                              getJsonField(
-                                                                                                                dailyCartScreenShowspcatcartResponse.jsonBody,
-                                                                                                                r'''$.data.zone_delivery_addons''',
-                                                                                                                true,
-                                                                                                              ),
-                                                                                                              false)
-                                                                                                          .toString(),
-                                                                                                      '0.00',
-                                                                                                    ),
-                                                                                                    functions
-                                                                                                        .checkWalletWithAction(
-                                                                                                            _model.isRefWalletCheckBoxSelected,
-                                                                                                            valueOrDefault<String>(
-                                                                                                              functions
-                                                                                                                  .totalValueAmountUpdae(
-                                                                                                                      FFAppState().isDeliveryPartnerTipSelected,
-                                                                                                                      FFAppState().couponDiscount.toString(),
-                                                                                                                      getJsonField(
-                                                                                                                        dailyCartScreenShowspcatcartResponse.jsonBody,
-                                                                                                                        r'''$.data.total_price''',
-                                                                                                                      ).toString(),
-                                                                                                                      getJsonField(
-                                                                                                                        dailyCartScreenShowspcatcartResponse.jsonBody,
-                                                                                                                        r'''$.data.referral_balance''',
-                                                                                                                      ).toString(),
-                                                                                                                      'false',
-                                                                                                                      _model.selectedPaymentMethod,
-                                                                                                                      _model.selectedPaymentMethod == 'COD'
-                                                                                                                          ? getJsonField(
-                                                                                                                              functions.getZoneRuleByType(
-                                                                                                                                  getJsonField(
-                                                                                                                                    dailyCartScreenShowspcatcartResponse.jsonBody,
-                                                                                                                                    r'''$.data.zone_permanent_charges''',
-                                                                                                                                    true,
-                                                                                                                                  )!,
-                                                                                                                                  'cod'),
-                                                                                                                              r'''$.zone_rule_value''',
-                                                                                                                            ).toString()
-                                                                                                                          : '0',
-                                                                                                                      'false',
-                                                                                                                      '0',
-                                                                                                                      functions.checkSelectedTimeslotCashbackDiscount(
-                                                                                                                                      getJsonField(
-                                                                                                                                        dailyCartScreenShowspcatcartResponse.jsonBody,
-                                                                                                                                        r'''$.data.data''',
-                                                                                                                                        true,
-                                                                                                                                      )!,
-                                                                                                                                      'amount',
-                                                                                                                                      'Time Slot Discount') !=
-                                                                                                                                  ''
-                                                                                                                          ? functions.checkSelectedTimeslotCashbackDiscount(
-                                                                                                                              getJsonField(
-                                                                                                                                dailyCartScreenShowspcatcartResponse.jsonBody,
-                                                                                                                                r'''$.data.data''',
-                                                                                                                                true,
-                                                                                                                              )!,
-                                                                                                                              'amount',
-                                                                                                                              'Time Slot Discount')
-                                                                                                                          : '0',
-                                                                                                                      functions.checkSelectedTimeslotCashbackDiscount(
-                                                                                                                                      getJsonField(
-                                                                                                                                        dailyCartScreenShowspcatcartResponse.jsonBody,
-                                                                                                                                        r'''$.data.data''',
-                                                                                                                                        true,
-                                                                                                                                      )!,
-                                                                                                                                      'amount',
-                                                                                                                                      'Surge Charge') !=
-                                                                                                                                  ''
-                                                                                                                          ? functions.checkSelectedTimeslotCashbackDiscount(
-                                                                                                                              getJsonField(
-                                                                                                                                dailyCartScreenShowspcatcartResponse.jsonBody,
-                                                                                                                                r'''$.data.data''',
-                                                                                                                                true,
-                                                                                                                              )!,
-                                                                                                                              'amount',
-                                                                                                                              'Surge Charge')
-                                                                                                                          : '0',
-                                                                                                                      getJsonField(
-                                                                                                                        functions.getZoneRuleByType(
-                                                                                                                            getJsonField(
-                                                                                                                              dailyCartScreenShowspcatcartResponse.jsonBody,
-                                                                                                                              r'''$.data.zone_permanent_charges''',
-                                                                                                                              true,
-                                                                                                                            )!,
-                                                                                                                            'min_order'),
-                                                                                                                        r'''$.zone_price_effect''',
-                                                                                                                      ).toString(),
-                                                                                                                      getJsonField(
-                                                                                                                        dailyCartScreenShowspcatcartResponse.jsonBody,
-                                                                                                                        r'''$.data.zone_delivery_addons''',
-                                                                                                                        true,
-                                                                                                                      ),
-                                                                                                                      false)
-                                                                                                                  .toString(),
-                                                                                                              '0.00',
-                                                                                                            ),
-                                                                                                            getJsonField(
-                                                                                                              dailyCartScreenShowspcatcartResponse.jsonBody,
-                                                                                                              r'''$.data.referral_balance''',
-                                                                                                            ).toString(),
-                                                                                                            getJsonField(
-                                                                                                              FFAppState().appInfo,
-                                                                                                              r'''$.wallet_deduction_percentage''',
-                                                                                                            ).toString())
-                                                                                                        .toString(),
-                                                                                                    getJsonField(
-                                                                                                      dailyCartScreenShowspcatcartResponse.jsonBody,
-                                                                                                      r'''$.data.wallet_balance''',
-                                                                                                    ).toString(),
-                                                                                                    _model.isWalletCheckBoxSelected)
-                                                                                                .toString(),
-                                                                                            'add',
-                                                                                            functions.checkSelectedTimeslotCashbackDiscount(
-                                                                                                            getJsonField(
-                                                                                                              dailyCartScreenShowspcatcartResponse.jsonBody,
-                                                                                                              r'''$.data.data''',
-                                                                                                              true,
-                                                                                                            )!,
-                                                                                                            'amount',
-                                                                                                            'Time Slot Discount') !=
-                                                                                                        ''
-                                                                                                ? functions.checkSelectedTimeslotCashbackDiscount(
-                                                                                                    getJsonField(
-                                                                                                      dailyCartScreenShowspcatcartResponse.jsonBody,
-                                                                                                      r'''$.data.data''',
-                                                                                                      true,
-                                                                                                    )!,
-                                                                                                    'amount',
-                                                                                                    'Time Slot Discount')
-                                                                                                : '0',
-                                                                                            functions.checkSelectedTimeslotCashbackDiscount(
-                                                                                                            getJsonField(
-                                                                                                              dailyCartScreenShowspcatcartResponse.jsonBody,
-                                                                                                              r'''$.data.data''',
-                                                                                                              true,
-                                                                                                            )!,
-                                                                                                            'amount',
-                                                                                                            'Surge Charge') !=
-                                                                                                        ''
-                                                                                                ? functions.checkSelectedTimeslotCashbackDiscount(
-                                                                                                    getJsonField(
-                                                                                                      dailyCartScreenShowspcatcartResponse.jsonBody,
-                                                                                                      r'''$.data.data''',
-                                                                                                      true,
-                                                                                                    )!,
-                                                                                                    'amount',
-                                                                                                    'Surge Charge')
-                                                                                                : '0',
-                                                                                            getJsonField(
-                                                                                              functions.getZoneRuleByType(
-                                                                                                  getJsonField(
-                                                                                                    dailyCartScreenShowspcatcartResponse.jsonBody,
-                                                                                                    r'''$.data.zone_permanent_charges''',
-                                                                                                    true,
-                                                                                                  )!,
-                                                                                                  'min_order'),
-                                                                                              r'''$.zone_price_effect''',
-                                                                                            ).toString(),
-                                                                                            getJsonField(
-                                                                                              dailyCartScreenShowspcatcartResponse.jsonBody,
-                                                                                              r'''$.data.zone_delivery_addons''',
-                                                                                              true,
-                                                                                            ),
-                                                                                            true)
-                                                                                        .toString(),
-                                                                                    '0.00',
-                                                                                  ),
+                                                                                  'Total to pay',
                                                                                   style: FlutterFlowTheme.of(context).bodyMedium.override(
                                                                                         font: GoogleFonts.montserrat(
                                                                                           fontWeight: FontWeight.bold,
@@ -10382,6 +10066,13 @@ class _DailyCartScreenWidgetState extends State<DailyCartScreenWidget>
                                                                                                                 'Daily order apple pay',
                                                                                                                 ParamType.String,
                                                                                                               ),
+                                                                                                              'groupID': serializeParam(
+                                                                                                                getJsonField(
+                                                                                                                  (_model.apiResultspayment?.jsonBody ?? ''),
+                                                                                                                  r'''$.data.group_id''',
+                                                                                                                ).toString(),
+                                                                                                                ParamType.String,
+                                                                                                              ),
                                                                                                             }.withoutNulls,
                                                                                                           );
 
@@ -11666,6 +11357,13 @@ class _DailyCartScreenWidgetState extends State<DailyCartScreenWidget>
                                                                                                               'Daily order apple pay',
                                                                                                               ParamType.String,
                                                                                                             ),
+                                                                                                            'groupID': serializeParam(
+                                                                                                              getJsonField(
+                                                                                                                (_model.apiResults5yy6Copy?.jsonBody ?? ''),
+                                                                                                                r'''$.data.group_id''',
+                                                                                                              ).toString(),
+                                                                                                              ParamType.String,
+                                                                                                            ),
                                                                                                           }.withoutNulls,
                                                                                                         );
 
@@ -12573,90 +12271,111 @@ class _DailyCartScreenWidgetState extends State<DailyCartScreenWidget>
                                                                                                   children: [
                                                                                                     Padding(
                                                                                                       padding: EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
-                                                                                                      child: Column(
-                                                                                                        mainAxisSize: MainAxisSize.max,
-                                                                                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                                                                                        children: [
-                                                                                                          Padding(
-                                                                                                            padding: EdgeInsetsDirectional.fromSTEB(3.0, 0.0, 0.0, 0.0),
-                                                                                                            child: RichText(
-                                                                                                              textScaler: MediaQuery.of(context).textScaler,
-                                                                                                              text: TextSpan(
-                                                                                                                children: [
-                                                                                                                  TextSpan(
-                                                                                                                    text: 'Pay with card ',
-                                                                                                                    style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                                                          font: GoogleFonts.montserrat(
+                                                                                                      child: InkWell(
+                                                                                                        splashColor: Colors.transparent,
+                                                                                                        focusColor: Colors.transparent,
+                                                                                                        hoverColor: Colors.transparent,
+                                                                                                        highlightColor: Colors.transparent,
+                                                                                                        onTap: () async {
+                                                                                                          logFirebaseEvent('DAILY_CART_SCREEN_Column_nmfoquyw_ON_TAP');
+                                                                                                          logFirebaseEvent('Column_navigate_to');
+
+                                                                                                          context.pushNamed(CardScreenWidget.routeName);
+
+                                                                                                          logFirebaseEvent('Column_update_app_state');
+                                                                                                          FFAppState().categoryName = 'cart';
+                                                                                                          FFAppState().selectedCardID = '';
+                                                                                                          FFAppState().cardScreenNavigation = 'dailyCart';
+                                                                                                          FFAppState().isSiNoSelected = false;
+                                                                                                          safeSetState(() {});
+                                                                                                          logFirebaseEvent('Column_google_analytics_event');
+                                                                                                          logFirebaseEvent('AddressListButtonClickedAnalytics');
+                                                                                                        },
+                                                                                                        child: Column(
+                                                                                                          mainAxisSize: MainAxisSize.max,
+                                                                                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                                                                                          children: [
+                                                                                                            Padding(
+                                                                                                              padding: EdgeInsetsDirectional.fromSTEB(3.0, 0.0, 0.0, 0.0),
+                                                                                                              child: RichText(
+                                                                                                                textScaler: MediaQuery.of(context).textScaler,
+                                                                                                                text: TextSpan(
+                                                                                                                  children: [
+                                                                                                                    TextSpan(
+                                                                                                                      text: 'Pay with card ',
+                                                                                                                      style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                                                            font: GoogleFonts.montserrat(
+                                                                                                                              fontWeight: FontWeight.normal,
+                                                                                                                              fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                                                                            ),
+                                                                                                                            color: FFAppConstants.blackColor0A0A0A,
+                                                                                                                            fontSize: 10.0,
+                                                                                                                            letterSpacing: 0.0,
                                                                                                                             fontWeight: FontWeight.normal,
                                                                                                                             fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
                                                                                                                           ),
-                                                                                                                          color: FFAppConstants.blackColor0A0A0A,
-                                                                                                                          fontSize: 10.0,
-                                                                                                                          letterSpacing: 0.0,
+                                                                                                                    )
+                                                                                                                  ],
+                                                                                                                  style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                                                        font: GoogleFonts.montserrat(
                                                                                                                           fontWeight: FontWeight.normal,
                                                                                                                           fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
                                                                                                                         ),
-                                                                                                                  )
-                                                                                                                ],
-                                                                                                                style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                                                      font: GoogleFonts.montserrat(
+                                                                                                                        color: FFAppConstants.blackColor0A0A0A,
+                                                                                                                        fontSize: 12.0,
+                                                                                                                        letterSpacing: 0.0,
                                                                                                                         fontWeight: FontWeight.normal,
                                                                                                                         fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
                                                                                                                       ),
-                                                                                                                      color: FFAppConstants.blackColor0A0A0A,
-                                                                                                                      fontSize: 12.0,
-                                                                                                                      letterSpacing: 0.0,
-                                                                                                                      fontWeight: FontWeight.normal,
-                                                                                                                      fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                                                                                                                    ),
+                                                                                                                ),
                                                                                                               ),
                                                                                                             ),
-                                                                                                          ),
-                                                                                                          Padding(
-                                                                                                            padding: EdgeInsetsDirectional.fromSTEB(3.0, 3.0, 0.0, 0.0),
-                                                                                                            child: RichText(
-                                                                                                              textScaler: MediaQuery.of(context).textScaler,
-                                                                                                              text: TextSpan(
-                                                                                                                children: [
-                                                                                                                  TextSpan(
-                                                                                                                    text: FFAppState().isCardChange == true
-                                                                                                                        ? FFAppState().selectedCardNumber
-                                                                                                                        : (getJsonField(
+                                                                                                            Padding(
+                                                                                                              padding: EdgeInsetsDirectional.fromSTEB(3.0, 3.0, 0.0, 0.0),
+                                                                                                              child: RichText(
+                                                                                                                textScaler: MediaQuery.of(context).textScaler,
+                                                                                                                text: TextSpan(
+                                                                                                                  children: [
+                                                                                                                    TextSpan(
+                                                                                                                      text: FFAppState().isCardChange == true
+                                                                                                                          ? FFAppState().selectedCardNumber
+                                                                                                                          : (getJsonField(
+                                                                                                                                    QuickartGroup.showspcatcartCall.lastCardDetails(
+                                                                                                                                      dailyCartScreenShowspcatcartResponse.jsonBody,
+                                                                                                                                    ),
+                                                                                                                                    r'''$.card_no''',
+                                                                                                                                  ) !=
+                                                                                                                                  null
+                                                                                                                              ? getJsonField(
                                                                                                                                   QuickartGroup.showspcatcartCall.lastCardDetails(
                                                                                                                                     dailyCartScreenShowspcatcartResponse.jsonBody,
                                                                                                                                   ),
                                                                                                                                   r'''$.card_no''',
-                                                                                                                                ) !=
-                                                                                                                                null
-                                                                                                                            ? getJsonField(
-                                                                                                                                QuickartGroup.showspcatcartCall.lastCardDetails(
-                                                                                                                                  dailyCartScreenShowspcatcartResponse.jsonBody,
-                                                                                                                                ),
-                                                                                                                                r'''$.card_no''',
-                                                                                                                              ).toString()
-                                                                                                                            : ' '),
-                                                                                                                    style: GoogleFonts.montserrat(
-                                                                                                                      color: FFAppConstants.blackColor0A0A0A,
-                                                                                                                      fontWeight: FontWeight.w500,
-                                                                                                                      fontSize: 12.0,
-                                                                                                                    ),
-                                                                                                                  )
-                                                                                                                ],
-                                                                                                                style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                                                      font: GoogleFonts.montserrat(
+                                                                                                                                ).toString()
+                                                                                                                              : ' '),
+                                                                                                                      style: GoogleFonts.montserrat(
+                                                                                                                        color: FFAppConstants.blackColor0A0A0A,
+                                                                                                                        fontWeight: FontWeight.w500,
+                                                                                                                        fontSize: 12.0,
+                                                                                                                      ),
+                                                                                                                    )
+                                                                                                                  ],
+                                                                                                                  style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                                                        font: GoogleFonts.montserrat(
+                                                                                                                          fontWeight: FontWeight.w500,
+                                                                                                                          fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                                                                        ),
+                                                                                                                        color: FFAppConstants.blackColor0A0A0A,
+                                                                                                                        fontSize: 10.0,
+                                                                                                                        letterSpacing: 0.0,
                                                                                                                         fontWeight: FontWeight.w500,
                                                                                                                         fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
                                                                                                                       ),
-                                                                                                                      color: FFAppConstants.blackColor0A0A0A,
-                                                                                                                      fontSize: 10.0,
-                                                                                                                      letterSpacing: 0.0,
-                                                                                                                      fontWeight: FontWeight.w500,
-                                                                                                                      fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                                                                                                                    ),
+                                                                                                                ),
                                                                                                               ),
                                                                                                             ),
-                                                                                                          ),
-                                                                                                        ],
+                                                                                                          ],
+                                                                                                        ),
                                                                                                       ),
                                                                                                     ),
                                                                                                   ],
@@ -13071,6 +12790,13 @@ class _DailyCartScreenWidgetState extends State<DailyCartScreenWidget>
                                                                                                             ),
                                                                                                             'orderType': serializeParam(
                                                                                                               'Daily order apple pay',
+                                                                                                              ParamType.String,
+                                                                                                            ),
+                                                                                                            'groupID': serializeParam(
+                                                                                                              getJsonField(
+                                                                                                                (_model.apiResults5yy66?.jsonBody ?? ''),
+                                                                                                                r'''$.data.group_id''',
+                                                                                                              ).toString(),
                                                                                                               ParamType.String,
                                                                                                             ),
                                                                                                           }.withoutNulls,
@@ -14563,6 +14289,13 @@ class _DailyCartScreenWidgetState extends State<DailyCartScreenWidget>
                                                                                                               'Daily order  card',
                                                                                                               ParamType.String,
                                                                                                             ),
+                                                                                                            'groupID': serializeParam(
+                                                                                                              getJsonField(
+                                                                                                                (_model.apiResultsyy?.jsonBody ?? ''),
+                                                                                                                r'''$.data.group_id''',
+                                                                                                              ).toString(),
+                                                                                                              ParamType.String,
+                                                                                                            ),
                                                                                                           }.withoutNulls,
                                                                                                         );
 
@@ -15847,6 +15580,13 @@ class _DailyCartScreenWidgetState extends State<DailyCartScreenWidget>
                                                                                                             'Daily order  card',
                                                                                                             ParamType.String,
                                                                                                           ),
+                                                                                                          'groupID': serializeParam(
+                                                                                                            getJsonField(
+                                                                                                              (_model.apiResults5yCopy2?.jsonBody ?? ''),
+                                                                                                              r'''$.data.group_id''',
+                                                                                                            ).toString(),
+                                                                                                            ParamType.String,
+                                                                                                          ),
                                                                                                         }.withoutNulls,
                                                                                                       );
 
@@ -17025,25 +16765,12 @@ class _DailyCartScreenWidgetState extends State<DailyCartScreenWidget>
                                                                               );
                                                                               logFirebaseEvent('Container_update_app_state');
                                                                               FFAppState().paymentMethod = FFAppState().isCardChange == true ? FFAppState().paymentMethod : 'card';
-                                                                              FFAppState().selectedAddresID = FFAppState().selectedAddress1 == ''
-                                                                                  ? (QuickartGroup.showspcatcartCall
-                                                                                              .lastAdd(
-                                                                                                dailyCartScreenShowspcatcartResponse.jsonBody,
-                                                                                              )!
-                                                                                              .length >
-                                                                                          0
-                                                                                      ? (_model.checkAddressExits !=
-                                                                                              getJsonField(
-                                                                                                dailyCartScreenShowspcatcartResponse.jsonBody,
-                                                                                                r'''$.data.lastadd[0].cityExists''',
-                                                                                              )
-                                                                                          ? getJsonField(
-                                                                                              dailyCartScreenShowspcatcartResponse.jsonBody,
-                                                                                              r'''$.data.lastadd[0].address_id''',
-                                                                                            ).toString()
-                                                                                          : 'null')
-                                                                                      : FFAppState().selectedAddresID)
-                                                                                  : FFAppState().selectedAddresID;
+                                                                              FFAppState().selectedAddresID = FFAppState().selectedAddress1 != ''
+                                                                                  ? FFAppState().selectedAddresID
+                                                                                  : getJsonField(
+                                                                                      dailyCartScreenShowspcatcartResponse.jsonBody,
+                                                                                      r'''$.data.lastadd[0].address_id''',
+                                                                                    ).toString();
                                                                               FFAppState().selectedCardID = () {
                                                                                 if (FFAppState().isCardChange == true) {
                                                                                   return FFAppState().selectedCardID;

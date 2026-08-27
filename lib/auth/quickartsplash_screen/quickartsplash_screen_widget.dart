@@ -58,6 +58,12 @@ class _QuickartsplashScreenWidgetState
         ' ',
         ' ',
       );
+      logFirebaseEvent('QuickartsplashScreen_wait__delay');
+      await Future.delayed(
+        Duration(
+          milliseconds: 500,
+        ),
+      );
       logFirebaseEvent('QuickartsplashScreen_custom_action');
       _model.connectivityResultCopy = await actions.checkInternetConnection();
       logFirebaseEvent('QuickartsplashScreen_custom_action');

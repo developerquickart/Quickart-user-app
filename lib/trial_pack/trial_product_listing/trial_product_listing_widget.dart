@@ -5,6 +5,7 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/custom_functions.dart' as functions;
 import '/index.dart';
 import 'dart:async';
@@ -97,6 +98,14 @@ class _TrialProductListingWidgetState extends State<TrialProductListingWidget>
               trialId: FFAppState().trialId,
               userId: FFAppState().userID,
               platform: isiOS ? 'ios' : 'android',
+              zoneID: getJsonField(
+                FFAppState().zoneInfo,
+                r'''$.zone_id''',
+              ).toString(),
+              storeID: getJsonField(
+                FFAppState().zoneInfo,
+                r'''$.store_id''',
+              ).toString(),
             )))
           .future,
       builder: (context, snapshot) {
@@ -474,7 +483,7 @@ class _TrialProductListingWidgetState extends State<TrialProductListingWidget>
                                                                                     text: TextSpan(
                                                                                       children: [
                                                                                         TextSpan(
-                                                                                          text: 'AED ',
+                                                                                          text: FFAppConstants.currancyAED,
                                                                                           style: FlutterFlowTheme.of(context).bodyMedium.override(
                                                                                                 font: GoogleFonts.montserrat(
                                                                                                   fontWeight: FontWeight.w600,
@@ -521,7 +530,7 @@ class _TrialProductListingWidgetState extends State<TrialProductListingWidget>
                                                                                       text: TextSpan(
                                                                                         children: [
                                                                                           TextSpan(
-                                                                                            text: 'AED ',
+                                                                                            text: FFAppConstants.currancyAED,
                                                                                             style: FlutterFlowTheme.of(context).bodyMedium.override(
                                                                                                   font: GoogleFonts.montserrat(
                                                                                                     fontWeight: FontWeight.w600,
@@ -751,7 +760,8 @@ class _TrialProductListingWidgetState extends State<TrialProductListingWidget>
                                                   text: TextSpan(
                                                     children: [
                                                       TextSpan(
-                                                        text: 'AED ',
+                                                        text: FFAppConstants
+                                                            .currancyAED,
                                                         style: FlutterFlowTheme
                                                                 .of(context)
                                                             .bodyMedium
@@ -947,8 +957,32 @@ class _TrialProductListingWidgetState extends State<TrialProductListingWidget>
                                                   'Button_navigate_to');
 
                                               context.pushNamed(
-                                                  TrialProductCartScreenWidget
+                                                  DailyCartScreenWidget
                                                       .routeName);
+
+                                              logFirebaseEvent(
+                                                  'Button_update_app_state');
+                                              FFAppState().isCartShow = false;
+                                              FFAppState().screenName =
+                                                  'dailyCart';
+                                              safeSetState(() {});
+                                              logFirebaseEvent(
+                                                  'Button_custom_action');
+                                              await actions.facebookEventClass(
+                                                FFAppState().userID,
+                                                ' ',
+                                                ' ',
+                                                FFAppState().cartTotalPrice,
+                                                FFAppState().cartTotalCount,
+                                                0.0,
+                                                'cart',
+                                                FFAppState().emptyJson,
+                                                'daily cart',
+                                                ' ',
+                                                ' ',
+                                                ' ',
+                                                ' ',
+                                              );
                                             }
 
                                             safeSetState(() {});
@@ -1039,8 +1073,34 @@ class _TrialProductListingWidgetState extends State<TrialProductListingWidget>
                                                       'Button_navigate_to');
 
                                                   context.pushNamed(
-                                                      TrialProductCartScreenWidget
+                                                      DailyCartScreenWidget
                                                           .routeName);
+
+                                                  logFirebaseEvent(
+                                                      'Button_update_app_state');
+                                                  FFAppState().isCartShow =
+                                                      false;
+                                                  FFAppState().screenName =
+                                                      'dailyCart';
+                                                  safeSetState(() {});
+                                                  logFirebaseEvent(
+                                                      'Button_custom_action');
+                                                  await actions
+                                                      .facebookEventClass(
+                                                    FFAppState().userID,
+                                                    ' ',
+                                                    ' ',
+                                                    FFAppState().cartTotalPrice,
+                                                    FFAppState().cartTotalCount,
+                                                    0.0,
+                                                    'cart',
+                                                    FFAppState().emptyJson,
+                                                    'daily cart',
+                                                    ' ',
+                                                    ' ',
+                                                    ' ',
+                                                    ' ',
+                                                  );
                                                 } else {
                                                   logFirebaseEvent(
                                                       'Button_alert_dialog');
@@ -1089,8 +1149,33 @@ class _TrialProductListingWidgetState extends State<TrialProductListingWidget>
                                                     'Button_navigate_to');
 
                                                 context.pushNamed(
-                                                    TrialProductCartScreenWidget
+                                                    DailyCartScreenWidget
                                                         .routeName);
+
+                                                logFirebaseEvent(
+                                                    'Button_update_app_state');
+                                                FFAppState().isCartShow = false;
+                                                FFAppState().screenName =
+                                                    'dailyCart';
+                                                safeSetState(() {});
+                                                logFirebaseEvent(
+                                                    'Button_custom_action');
+                                                await actions
+                                                    .facebookEventClass(
+                                                  FFAppState().userID,
+                                                  ' ',
+                                                  ' ',
+                                                  FFAppState().cartTotalPrice,
+                                                  FFAppState().cartTotalCount,
+                                                  0.0,
+                                                  'cart',
+                                                  FFAppState().emptyJson,
+                                                  'daily cart',
+                                                  ' ',
+                                                  ' ',
+                                                  ' ',
+                                                  ' ',
+                                                );
                                               }
 
                                               safeSetState(() {});

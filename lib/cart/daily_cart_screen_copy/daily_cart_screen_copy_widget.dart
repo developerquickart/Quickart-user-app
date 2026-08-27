@@ -9357,6 +9357,10 @@ class _DailyCartScreenCopyWidgetState extends State<DailyCartScreenCopyWidget>
                                                                                                                 'Daily order apple pay',
                                                                                                                 ParamType.String,
                                                                                                               ),
+                                                                                                              'groupID': serializeParam(
+                                                                                                                '0',
+                                                                                                                ParamType.String,
+                                                                                                              ),
                                                                                                             }.withoutNulls,
                                                                                                           );
 
@@ -9829,6 +9833,10 @@ class _DailyCartScreenCopyWidgetState extends State<DailyCartScreenCopyWidget>
                                                                                                             ),
                                                                                                             'orderType': serializeParam(
                                                                                                               'Daily order apple pay',
+                                                                                                              ParamType.String,
+                                                                                                            ),
+                                                                                                            'groupID': serializeParam(
+                                                                                                              '0',
                                                                                                               ParamType.String,
                                                                                                             ),
                                                                                                           }.withoutNulls,
@@ -11087,6 +11095,10 @@ class _DailyCartScreenCopyWidgetState extends State<DailyCartScreenCopyWidget>
                                                                                                               'Daily order apple pay',
                                                                                                               ParamType.String,
                                                                                                             ),
+                                                                                                            'groupID': serializeParam(
+                                                                                                              '0',
+                                                                                                              ParamType.String,
+                                                                                                            ),
                                                                                                           }.withoutNulls,
                                                                                                         );
 
@@ -11772,6 +11784,10 @@ class _DailyCartScreenCopyWidgetState extends State<DailyCartScreenCopyWidget>
                                                                                                               'Daily order  card',
                                                                                                               ParamType.String,
                                                                                                             ),
+                                                                                                            'groupID': serializeParam(
+                                                                                                              '0',
+                                                                                                              ParamType.String,
+                                                                                                            ),
                                                                                                           }.withoutNulls,
                                                                                                         );
 
@@ -12241,6 +12257,10 @@ class _DailyCartScreenCopyWidgetState extends State<DailyCartScreenCopyWidget>
                                                                                                           ),
                                                                                                           'orderType': serializeParam(
                                                                                                             'Daily order  card',
+                                                                                                            ParamType.String,
+                                                                                                          ),
+                                                                                                          'groupID': serializeParam(
+                                                                                                            '0',
                                                                                                             ParamType.String,
                                                                                                           ),
                                                                                                         }.withoutNulls,

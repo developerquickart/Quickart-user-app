@@ -61,6 +61,14 @@ class CartSubscriptionScreenModel
 
   String isRefSubWalletCheckBoxSelected = 'remove';
 
+  String valueType = '0';
+
+  String surgeCharge = 'surge_charge';
+
+  String cashback = 'cashback';
+
+  String discount = 'discount';
+
   ///  State fields for stateful widgets in this page.
 
   // Stores action output result for [Backend Call - API (totaldeliveries)] action in cartSubscriptionScreen widget.

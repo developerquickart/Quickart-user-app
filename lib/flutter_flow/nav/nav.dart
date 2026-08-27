@@ -594,6 +594,10 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               'orderType',
               ParamType.String,
             ),
+            groupID: params.getParam(
+              'groupID',
+              ParamType.String,
+            ),
           ),
         ),
         FFRoute(

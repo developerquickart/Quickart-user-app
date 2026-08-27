@@ -191,6 +191,10 @@ class _TrialPackcategoriesWidgetState extends State<TrialPackcategoriesWidget> {
                                 FFAppState().zoneInfo,
                                 r'''$.zone_id''',
                               ).toString(),
+                              storeID: getJsonField(
+                                FFAppState().zoneInfo,
+                                r'''$.store_id''',
+                              ).toString(),
                             )))
                           .future,
                       builder: (context, snapshot) {

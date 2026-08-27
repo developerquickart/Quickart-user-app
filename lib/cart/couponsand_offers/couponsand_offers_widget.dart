@@ -235,6 +235,8 @@ class _CouponsandOffersWidgetState extends State<CouponsandOffersWidget> {
                                     logFirebaseEvent('Text_update_page_state');
                                     _model.isLoadingIndicator = true;
                                     safeSetState(() {});
+                                    logFirebaseEvent('Text_haptic_feedback');
+                                    HapticFeedback.heavyImpact();
                                     logFirebaseEvent('Text_backend_call');
                                     _model.apiResultrm2 = await QuickartGroup
                                         .applyCouponCall
@@ -725,6 +727,10 @@ class _CouponsandOffersWidgetState extends State<CouponsandOffersWidget> {
                                                                             true;
                                                                         safeSetState(
                                                                             () {});
+                                                                        logFirebaseEvent(
+                                                                            'Text_haptic_feedback');
+                                                                        HapticFeedback
+                                                                            .heavyImpact();
                                                                         logFirebaseEvent(
                                                                             'Text_backend_call');
                                                                         _model.apiResulth77 = await QuickartGroup

@@ -226,6 +226,10 @@ class _CardScreenWidgetState extends State<CardScreenWidget> {
                                   'add card',
                                   ParamType.String,
                                 ),
+                                'groupID': serializeParam(
+                                  '0',
+                                  ParamType.String,
+                                ),
                               }.withoutNulls,
                             );
 

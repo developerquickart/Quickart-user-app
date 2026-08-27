@@ -271,6 +271,7 @@ final parametersBuilderMap =
           'screenPName': getParameter<String>(data, 'screenPName'),
           'mrp': getParameter<double>(data, 'mrp'),
           'orderType': getParameter<String>(data, 'orderType'),
+          'groupID': getParameter<String>(data, 'groupID'),
         },
       ),
   'product_details_screen': (data) async => ParameterData(

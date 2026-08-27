@@ -1753,7 +1753,8 @@ class _ProductsListViewWidgetState extends State<ProductsListViewWidget> {
                                                   text: TextSpan(
                                                     children: [
                                                       TextSpan(
-                                                        text: 'AED ',
+                                                        text: FFAppConstants
+                                                            .currancyAED,
                                                         style: FlutterFlowTheme
                                                                 .of(context)
                                                             .bodyMedium
@@ -1852,7 +1853,8 @@ class _ProductsListViewWidgetState extends State<ProductsListViewWidget> {
                                                             MainAxisSize.max,
                                                         children: [
                                                           Text(
-                                                            'AED ',
+                                                            FFAppConstants
+                                                                .currancyAED,
                                                             textAlign:
                                                                 TextAlign.start,
                                                             style: FlutterFlowTheme

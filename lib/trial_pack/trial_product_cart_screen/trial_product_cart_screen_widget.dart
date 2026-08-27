@@ -4280,6 +4280,13 @@ class _TrialProductCartScreenWidgetState
                                                                                 'trail packk order apple pay',
                                                                                 ParamType.String,
                                                                               ),
+                                                                              'groupID': serializeParam(
+                                                                                getJsonField(
+                                                                                  (_model.apiResultTrialPackPayment1?.jsonBody ?? ''),
+                                                                                  r'''$.data.group_id''',
+                                                                                ).toString(),
+                                                                                ParamType.String,
+                                                                              ),
                                                                             }.withoutNulls,
                                                                           );
 
@@ -5520,6 +5527,14 @@ class _TrialProductCartScreenWidgetState
                                                                           'orderType':
                                                                               serializeParam(
                                                                             'trail pack order card',
+                                                                            ParamType.String,
+                                                                          ),
+                                                                          'groupID':
+                                                                              serializeParam(
+                                                                            getJsonField(
+                                                                              (_model.apiResultTrialPackPayment?.jsonBody ?? ''),
+                                                                              r'''$.data.group_id''',
+                                                                            ).toString(),
                                                                             ParamType.String,
                                                                           ),
                                                                         }.withoutNulls,

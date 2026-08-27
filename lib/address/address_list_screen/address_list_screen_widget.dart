@@ -325,7 +325,11 @@ class _AddressListScreenWidgetState extends State<AddressListScreenWidget> {
                                                 await QuickartGroup
                                                     .updateselectedaddressCall
                                                     .call(
-                                              storeID: FFAppState().storeID,
+                                              storeID: getJsonField(
+                                                (_model.getZone?.jsonBody ??
+                                                    ''),
+                                                r'''$.store_id''',
+                                              ).toString(),
                                               zoneID: QuickartZoneGroup
                                                   .getZoneIDCall
                                                   .zoneID(

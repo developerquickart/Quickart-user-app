@@ -6117,6 +6117,10 @@ class _CartSubscriptionScreenCopyWidgetState
                                                                                                                       'subscription order apple pay',
                                                                                                                       ParamType.String,
                                                                                                                     ),
+                                                                                                                    'groupID': serializeParam(
+                                                                                                                      '0',
+                                                                                                                      ParamType.String,
+                                                                                                                    ),
                                                                                                                   }.withoutNulls,
                                                                                                                 );
 
@@ -6846,6 +6850,10 @@ class _CartSubscriptionScreenCopyWidgetState
                                                                                                               ),
                                                                                                               'orderType': serializeParam(
                                                                                                                 'subscription order card',
+                                                                                                                ParamType.String,
+                                                                                                              ),
+                                                                                                              'groupID': serializeParam(
+                                                                                                                '0',
                                                                                                                 ParamType.String,
                                                                                                               ),
                                                                                                             }.withoutNulls,

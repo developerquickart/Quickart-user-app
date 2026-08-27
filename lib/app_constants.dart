@@ -146,4 +146,6 @@ abstract class FFAppConstants {
   static const Color greenLightBG = Color(4293721584);
   static const String trailMsg =
       'You can purchase only one Trail Pack at a time.';
+  static const String cancelMsg =
+      'Are you sure you want to go back? Your payment process will be cancelled.';
 }
