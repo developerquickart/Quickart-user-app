@@ -876,8 +876,7 @@ class _DashboardScreenWidgetState extends State<DashboardScreenWidget> {
                                                           text: TextSpan(
                                                             children: [
                                                               TextSpan(
-                                                                text: FFAppState()
-                                                                    .usserType,
+                                                                text: 'Get ',
                                                                 style: FlutterFlowTheme.of(
                                                                         context)
                                                                     .bodyMedium
@@ -1304,6 +1303,7 @@ class _DashboardScreenWidgetState extends State<DashboardScreenWidget> {
                                                   ? 235.0
                                                   : 240.0,
                                               decoration: BoxDecoration(
+                                                color: Colors.transparent,
                                                 borderRadius:
                                                     BorderRadius.circular(0.0),
                                               ),
@@ -6101,7 +6101,7 @@ class _DashboardScreenWidgetState extends State<DashboardScreenWidget> {
                                                       .fromSTEB(
                                                           0.0, 20.0, 0.0, 0.0),
                                                   child: Text(
-                                                    'Set your area once so we can show the right products, prices, and delivery options for you.',
+                                                    'Add your address to see products, prices, and delivery options available in your area.',
                                                     textAlign: TextAlign.center,
                                                     style: FlutterFlowTheme.of(
                                                             context)
@@ -6138,7 +6138,7 @@ class _DashboardScreenWidgetState extends State<DashboardScreenWidget> {
                                                   child: FFButtonWidget(
                                                     onPressed: () async {
                                                       logFirebaseEvent(
-                                                          'DASHBOARD_SCREEN_ADD_ADDRESS_TO_START_OR');
+                                                          'DASHBOARD_SCREEN_ADD_ADDRESS__START_ORDE');
                                                       logFirebaseEvent(
                                                           'Button_navigate_to');
 
@@ -6157,7 +6157,7 @@ class _DashboardScreenWidgetState extends State<DashboardScreenWidget> {
                                                           'AddressListScreenFromDashboardAnalytics');
                                                     },
                                                     text:
-                                                        'Add  Address to Start Ordering',
+                                                        'Add Address & Start Ordering',
                                                     options: FFButtonOptions(
                                                       width: MediaQuery.sizeOf(
                                                                   context)

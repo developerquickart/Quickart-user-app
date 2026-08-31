@@ -1,4 +1,5 @@
 import '/backend/api_requests/api_calls.dart';
+import '/components/custom_alert_dailog/custom_alert_dailog_widget.dart';
 import '/flutter_flow/flutter_flow_google_map.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_place_picker.dart';
@@ -6,6 +7,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/custom_code/actions/index.dart' as actions;
+import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -347,67 +349,196 @@ class _GoogleMapsRedirectWidgetState extends State<GoogleMapsRedirectWidget> {
                         alignment: AlignmentDirectional(0.0, 1.0),
                         child: PointerInterceptor(
                           intercepting: isWeb,
-                          child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 0.0, 0.0, 10.0),
-                            child: FFButtonWidget(
-                              onPressed: () async {
-                                logFirebaseEvent(
-                                    'GOOGLE_MAPS_REDIRECT_CONFIRM_LOCATION_BT');
-                                logFirebaseEvent('Button_custom_action');
-                                _model.getAddressfromMap =
-                                    await actions.getAddressformMap(
-                                  _model.googleMapsCenter!,
-                                  true,
-                                  getJsonField(
-                                    FFAppState().appInfo,
-                                    r'''$.country_list''',
-                                  ).toString(),
-                                );
-                                if (FFAppState().isEmiratesSelected == true) {
-                                  logFirebaseEvent('Button_update_app_state');
-                                  FFAppState().isLocationVisible = true;
-                                  FFAppState().latLang =
-                                      _model.googleMapsCenter;
-                                  safeSetState(() {});
-                                } else {
-                                  logFirebaseEvent('Button_alert_dialog');
-                                  await showDialog(
-                                    context: context,
-                                    builder: (alertDialogContext) {
-                                      return AlertDialog(
-                                        title: Text(FFAppState().AppName),
-                                        content: Text(
-                                            'We are not serviceable for this location'),
-                                        actions: [
-                                          TextButton(
-                                            onPressed: () => Navigator.pop(
-                                                alertDialogContext),
-                                            child: Text('Ok'),
-                                          ),
-                                        ],
-                                      );
-                                    },
+                          child: Builder(
+                            builder: (context) => Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 0.0, 0.0, 10.0),
+                              child: FFButtonWidget(
+                                onPressed: () async {
+                                  logFirebaseEvent(
+                                      'GOOGLE_MAPS_REDIRECT_CONFIRM_LOCATION_BT');
+                                  logFirebaseEvent('Button_custom_action');
+                                  _model.getAddressfromMap =
+                                      await actions.getAddressformMap(
+                                    _model.googleMapsCenter!,
+                                    true,
+                                    getJsonField(
+                                      FFAppState().appInfo,
+                                      r'''$.country_list''',
+                                    ).toString(),
                                   );
-                                  logFirebaseEvent('Button_update_app_state');
-                                  FFAppState().selectedMapAddress = '';
-                                  safeSetState(() {});
-                                }
+                                  if (FFAppState().isEmiratesSelected == true) {
+                                    logFirebaseEvent('Button_backend_call');
+                                    _model.apiResultic8 =
+                                        await QuickartZoneGroup.getZoneIDCall
+                                            .call(
+                                      lat: functions
+                                          .getCurrentLatitudeLogitude(
+                                              _model.googleMapsCenter!, 'lat')
+                                          .toString(),
+                                      lng: functions
+                                          .getCurrentLatitudeLogitude(
+                                              _model.googleMapsCenter!, 'lng')
+                                          .toString(),
+                                      userid: FFAppState().userID,
+                                    );
 
-                                safeSetState(() {});
-                              },
-                              text: 'Confirm Location',
-                              options: FFButtonOptions(
-                                height: 40.0,
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    24.0, 0.0, 24.0, 0.0),
-                                iconPadding: EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 0.0, 0.0, 0.0),
-                                color: FFAppConstants.indigoColor,
-                                textStyle: FlutterFlowTheme.of(context)
-                                    .titleSmall
-                                    .override(
-                                      font: GoogleFonts.montserrat(
+                                    if ((_model.apiResultic8?.succeeded ??
+                                        true)) {
+                                      if (FFAppConstants.statusAPI1 ==
+                                          getJsonField(
+                                            (_model.apiResultic8?.jsonBody ??
+                                                ''),
+                                            r'''$.status''',
+                                          ).toString()) {
+                                        logFirebaseEvent(
+                                            'Button_update_app_state');
+                                        FFAppState().isLocationVisible = true;
+                                        FFAppState().latLang =
+                                            _model.googleMapsCenter;
+                                        FFAppState().zoneInfo =
+                                            QuickartZoneGroup.getZoneIDCall
+                                                .data(
+                                          (_model.apiResultic8?.jsonBody ?? ''),
+                                        );
+                                        safeSetState(() {});
+                                      } else {
+                                        logFirebaseEvent('Button_alert_dialog');
+                                        await showDialog(
+                                          context: context,
+                                          builder: (dialogContext) {
+                                            return Dialog(
+                                              elevation: 0,
+                                              insetPadding: EdgeInsets.zero,
+                                              backgroundColor:
+                                                  Colors.transparent,
+                                              alignment:
+                                                  AlignmentDirectional(0.0, 0.0)
+                                                      .resolve(
+                                                          Directionality.of(
+                                                              context)),
+                                              child: GestureDetector(
+                                                onTap: () {
+                                                  FocusScope.of(dialogContext)
+                                                      .unfocus();
+                                                  FocusManager
+                                                      .instance.primaryFocus
+                                                      ?.unfocus();
+                                                },
+                                                child: CustomAlertDailogWidget(
+                                                  des:
+                                                      'We are not serviceable for this location',
+                                                  height: 111.0,
+                                                  title: ' ',
+                                                ),
+                                              ),
+                                            );
+                                          },
+                                        );
+
+                                        logFirebaseEvent(
+                                            'Button_update_app_state');
+                                        FFAppState().selectedMapAddress = '';
+                                        safeSetState(() {});
+                                      }
+                                    } else {
+                                      logFirebaseEvent('Button_alert_dialog');
+                                      await showDialog(
+                                        context: context,
+                                        builder: (dialogContext) {
+                                          return Dialog(
+                                            elevation: 0,
+                                            insetPadding: EdgeInsets.zero,
+                                            backgroundColor: Colors.transparent,
+                                            alignment: AlignmentDirectional(
+                                                    0.0, 0.0)
+                                                .resolve(
+                                                    Directionality.of(context)),
+                                            child: GestureDetector(
+                                              onTap: () {
+                                                FocusScope.of(dialogContext)
+                                                    .unfocus();
+                                                FocusManager
+                                                    .instance.primaryFocus
+                                                    ?.unfocus();
+                                              },
+                                              child: CustomAlertDailogWidget(
+                                                des:
+                                                    'We are not serviceable for this location',
+                                                height: 111.0,
+                                                title: ' ',
+                                              ),
+                                            ),
+                                          );
+                                        },
+                                      );
+
+                                      logFirebaseEvent(
+                                          'Button_update_app_state');
+                                      FFAppState().selectedMapAddress = '';
+                                      safeSetState(() {});
+                                    }
+                                  } else {
+                                    logFirebaseEvent('Button_alert_dialog');
+                                    await showDialog(
+                                      context: context,
+                                      builder: (dialogContext) {
+                                        return Dialog(
+                                          elevation: 0,
+                                          insetPadding: EdgeInsets.zero,
+                                          backgroundColor: Colors.transparent,
+                                          alignment: AlignmentDirectional(
+                                                  0.0, 0.0)
+                                              .resolve(
+                                                  Directionality.of(context)),
+                                          child: GestureDetector(
+                                            onTap: () {
+                                              FocusScope.of(dialogContext)
+                                                  .unfocus();
+                                              FocusManager.instance.primaryFocus
+                                                  ?.unfocus();
+                                            },
+                                            child: CustomAlertDailogWidget(
+                                              des:
+                                                  'We are not serviceable for this location',
+                                              height: 111.0,
+                                              title: ' ',
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                    );
+
+                                    logFirebaseEvent('Button_update_app_state');
+                                    FFAppState().selectedMapAddress = '';
+                                    safeSetState(() {});
+                                  }
+
+                                  safeSetState(() {});
+                                },
+                                text: 'Confirm Location',
+                                options: FFButtonOptions(
+                                  height: 40.0,
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      24.0, 0.0, 24.0, 0.0),
+                                  iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                      0.0, 0.0, 0.0, 0.0),
+                                  color: FFAppConstants.indigoColor,
+                                  textStyle: FlutterFlowTheme.of(context)
+                                      .titleSmall
+                                      .override(
+                                        font: GoogleFonts.montserrat(
+                                          fontWeight:
+                                              FlutterFlowTheme.of(context)
+                                                  .titleSmall
+                                                  .fontWeight,
+                                          fontStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .titleSmall
+                                                  .fontStyle,
+                                        ),
+                                        color: Colors.white,
+                                        letterSpacing: 0.0,
                                         fontWeight: FlutterFlowTheme.of(context)
                                             .titleSmall
                                             .fontWeight,
@@ -415,21 +546,13 @@ class _GoogleMapsRedirectWidgetState extends State<GoogleMapsRedirectWidget> {
                                             .titleSmall
                                             .fontStyle,
                                       ),
-                                      color: Colors.white,
-                                      letterSpacing: 0.0,
-                                      fontWeight: FlutterFlowTheme.of(context)
-                                          .titleSmall
-                                          .fontWeight,
-                                      fontStyle: FlutterFlowTheme.of(context)
-                                          .titleSmall
-                                          .fontStyle,
-                                    ),
-                                elevation: 3.0,
-                                borderSide: BorderSide(
-                                  color: Colors.transparent,
-                                  width: 1.0,
+                                  elevation: 3.0,
+                                  borderSide: BorderSide(
+                                    color: Colors.transparent,
+                                    width: 1.0,
+                                  ),
+                                  borderRadius: BorderRadius.circular(8.0),
                                 ),
-                                borderRadius: BorderRadius.circular(8.0),
                               ),
                             ),
                           ),

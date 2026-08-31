@@ -559,7 +559,7 @@ class _QuickartsplashScreenWidgetState
                   FocusManager.instance.primaryFocus?.unfocus();
                 },
                 child: CustomRetryAlertWidget(
-                  height: 120.0,
+                  height: 150.0,
                   des: FFAppConstants.internetString,
                 ),
               ),

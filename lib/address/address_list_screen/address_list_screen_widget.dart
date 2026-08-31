@@ -6,6 +6,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/custom_functions.dart' as functions;
 import '/index.dart';
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -233,15 +234,18 @@ class _AddressListScreenWidgetState extends State<AddressListScreenWidget> {
                   padding:
                       EdgeInsetsDirectional.fromSTEB(20.0, 20.0, 20.0, 20.0),
                   child: FutureBuilder<ApiCallResponse>(
-                    future: QuickartGroup.showaddressCall.call(
-                      userid: FFAppState().userID,
-                      storeid: getJsonField(
-                        FFAppState().zoneInfo,
-                        r'''$.zone_id''',
-                      ).toString(),
-                      deviceId: FFAppState().deviceID,
-                      platform: isiOS ? 'ios' : 'android',
-                    ),
+                    future: (_model.apiRequestCompleter ??=
+                            Completer<ApiCallResponse>()
+                              ..complete(QuickartGroup.showaddressCall.call(
+                                userid: FFAppState().userID,
+                                storeid: getJsonField(
+                                  FFAppState().zoneInfo,
+                                  r'''$.zone_id''',
+                                ).toString(),
+                                deviceId: FFAppState().deviceID,
+                                platform: isiOS ? 'ios' : 'android',
+                              )))
+                        .future,
                     builder: (context, snapshot) {
                       // Customize what your widget looks like when it's loading.
                       if (!snapshot.hasData) {
@@ -436,28 +440,20 @@ class _AddressListScreenWidgetState extends State<AddressListScreenWidget> {
                                                           .routeName);
                                                 } else {
                                                   logFirebaseEvent(
-                                                      'Container_navigate_back');
-                                                  context.pop();
-                                                  logFirebaseEvent(
-                                                      'Container_show_snack_bar');
-                                                  ScaffoldMessenger.of(context)
-                                                      .showSnackBar(
-                                                    SnackBar(
-                                                      content: Text(
-                                                        'test  .......111',
-                                                        style: TextStyle(
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .primaryText,
-                                                        ),
-                                                      ),
-                                                      duration: Duration(
-                                                          milliseconds: 4000),
-                                                      backgroundColor:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .secondary,
-                                                    ),
+                                                      'Container_custom_action');
+                                                  await actions
+                                                      .navigateToBackBtnScreen(
+                                                    context,
+                                                    'dailyCartScreen',
+                                                    () async {
+                                                      logFirebaseEvent(
+                                                          '_refresh_database_request');
+                                                      safeSetState(() => _model
+                                                              .apiRequestCompleter =
+                                                          null);
+                                                      await _model
+                                                          .waitForApiRequestCompleted();
+                                                    },
                                                   );
                                                 }
 

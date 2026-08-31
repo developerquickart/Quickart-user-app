@@ -12,7 +12,7 @@ class OrderTrackingPageModel extends FlutterFlowModel<OrderTrackingPageWidget> {
 
   String dailyorderType = 'daily';
 
-  String trialorderType = 'trail';
+  String trialorderType = 'trial';
 
   bool deliveryProofImage = false;
 

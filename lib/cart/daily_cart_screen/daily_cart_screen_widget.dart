@@ -1949,6 +1949,7 @@ class _DailyCartScreenWidgetState extends State<DailyCartScreenWidget>
                                                                                                                       fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
                                                                                                                     ),
                                                                                                               ),
+                                                                                                              textAlign: TextAlign.end,
                                                                                                             ),
                                                                                                           ),
                                                                                                           Row(
@@ -6425,17 +6426,14 @@ class _DailyCartScreenWidgetState extends State<DailyCartScreenWidget>
                                                                                   r'''$.data.zone_permanent_charges''',
                                                                                 ) !=
                                                                                 null) &&
-                                                                            (FFAppConstants.zeroValue !=
-                                                                                getJsonField(
-                                                                                  functions.getZoneRuleByType(
-                                                                                      getJsonField(
-                                                                                        dailyCartScreenShowspcatcartResponse.jsonBody,
-                                                                                        r'''$.data.zone_permanent_charges''',
-                                                                                        true,
-                                                                                      )!,
-                                                                                      'min_order'),
-                                                                                  r'''$.zone_price_effect''',
-                                                                                )))
+                                                                            (functions.getZoneRuleByType(
+                                                                                    getJsonField(
+                                                                                      dailyCartScreenShowspcatcartResponse.jsonBody,
+                                                                                      r'''$.data.zone_permanent_charges''',
+                                                                                      true,
+                                                                                    )!,
+                                                                                    'min_order') !=
+                                                                                null))
                                                                           Column(
                                                                             mainAxisSize:
                                                                                 MainAxisSize.max,

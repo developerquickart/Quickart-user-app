@@ -14,7 +14,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import '/backend/schema/structs/index.dart';
 import '/auth/firebase_auth/auth_util.dart';
 
-double? calculateTineSlotPricingTotal(
+double? calculateTimeSlotPricingTotal(
   List<dynamic> data,
   String type,
 ) {

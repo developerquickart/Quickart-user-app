@@ -2819,7 +2819,8 @@ class _ProductsListViewWidgetState extends State<ProductsListViewWidget> {
                                               r'''$.message''',
                                             ).toString(),
                                             style: GoogleFonts.montserrat(
-                                              color: FFAppConstants.indigoColor,
+                                              color: FFAppConstants
+                                                  .blackColor0A0A0A,
                                               fontWeight: FontWeight.w500,
                                               fontSize: 12.0,
                                             ),
@@ -2896,7 +2897,10 @@ class _ProductsListViewWidgetState extends State<ProductsListViewWidget> {
                                                 .addremwishlistCall
                                                 .call(
                                           userid: FFAppState().userID,
-                                          storeID: FFAppState().storeID,
+                                          storeID: getJsonField(
+                                            FFAppState().zoneInfo,
+                                            r'''$.store_id''',
+                                          ).toString(),
                                           varientID: getJsonField(
                                             productModelItem,
                                             r'''$.varient_id''',

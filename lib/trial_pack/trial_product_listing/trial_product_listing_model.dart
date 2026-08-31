@@ -14,8 +14,6 @@ class TrialProductListingModel
   Completer<ApiCallResponse>? apiRequestCompleter;
   // Stores action output result for [Backend Call - API (addtrailpack)] action in Button widget.
   ApiCallResponse? apiResultcAddCart31;
-  // Stores action output result for [Backend Call - API (addtrailpack)] action in Button widget.
-  ApiCallResponse? apiResultcAddCart3;
 
   @override
   void initState(BuildContext context) {}

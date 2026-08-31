@@ -35,7 +35,7 @@ double? totalValueAmountUpdae(
   // Print only when isPrint == true
   void printLog(String message) {
     if (isPrint == true) {
-      print(message);
+      // print(message);
     }
   }
 

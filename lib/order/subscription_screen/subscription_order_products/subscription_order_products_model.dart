@@ -50,6 +50,16 @@ class SubscriptionOrderProductsModel
 
   String? selectedCartID;
 
+  bool isViewBillDetail = false;
+
+  dynamic billDetailJson;
+
+  String discount = 'discount';
+
+  String walletUsed = 'paid_by_wallet';
+
+  String totalPrice = 'total_price';
+
   ///  State fields for stateful widgets in this page.
 
   // Stores action output result for [Backend Call - API (generateinvoice)] action in Button widget.

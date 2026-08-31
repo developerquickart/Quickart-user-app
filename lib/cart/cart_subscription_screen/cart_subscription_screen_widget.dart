@@ -3516,7 +3516,7 @@ class _CartSubscriptionScreenWidgetState
                                                                         ),
                                                                       ),
                                                                     if (functions.stringToDouble(functions
-                                                                            .calculateTineSlotPricingTotal(
+                                                                            .calculateTimeSlotPricingTotal(
                                                                                 QuickartGroup.showsubcartCall
                                                                                     .cardData(
                                                                                       tabBarShowsubcartResponse.jsonBody,
@@ -3579,7 +3579,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                 ),
                                                                                 Text(
                                                                                   functions
-                                                                                      .calculateTineSlotPricingTotal(
+                                                                                      .calculateTimeSlotPricingTotal(
                                                                                           QuickartGroup.showsubcartCall
                                                                                               .cardData(
                                                                                                 tabBarShowsubcartResponse.jsonBody,
@@ -3605,7 +3605,7 @@ class _CartSubscriptionScreenWidgetState
                                                                         ),
                                                                       ),
                                                                     if (functions.stringToDouble(functions
-                                                                            .calculateTineSlotPricingTotal(
+                                                                            .calculateTimeSlotPricingTotal(
                                                                                 QuickartGroup.showsubcartCall
                                                                                     .cardData(
                                                                                       tabBarShowsubcartResponse.jsonBody,
@@ -3668,7 +3668,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                 ),
                                                                                 Text(
                                                                                   functions
-                                                                                      .calculateTineSlotPricingTotal(
+                                                                                      .calculateTimeSlotPricingTotal(
                                                                                           QuickartGroup.showsubcartCall
                                                                                               .cardData(
                                                                                                 tabBarShowsubcartResponse.jsonBody,
@@ -4014,7 +4014,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                     '0',
                                                                                                     'no',
                                                                                                     functions.stringToDouble(functions
-                                                                                                                .calculateTineSlotPricingTotal(
+                                                                                                                .calculateTimeSlotPricingTotal(
                                                                                                                     QuickartGroup.showsubcartCall
                                                                                                                         .cardData(
                                                                                                                           tabBarShowsubcartResponse.jsonBody,
@@ -4024,7 +4024,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                 .toString()) >
                                                                                                             0.0
                                                                                                         ? functions
-                                                                                                            .calculateTineSlotPricingTotal(
+                                                                                                            .calculateTimeSlotPricingTotal(
                                                                                                                 QuickartGroup.showsubcartCall
                                                                                                                     .cardData(
                                                                                                                       tabBarShowsubcartResponse.jsonBody,
@@ -4034,7 +4034,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                             .toString()
                                                                                                         : '0',
                                                                                                     functions.stringToDouble(functions
-                                                                                                                .calculateTineSlotPricingTotal(
+                                                                                                                .calculateTimeSlotPricingTotal(
                                                                                                                     QuickartGroup.showsubcartCall
                                                                                                                         .cardData(
                                                                                                                           tabBarShowsubcartResponse.jsonBody,
@@ -4044,7 +4044,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                 .toString()) >
                                                                                                             0.0
                                                                                                         ? functions
-                                                                                                            .calculateTineSlotPricingTotal(
+                                                                                                            .calculateTimeSlotPricingTotal(
                                                                                                                 QuickartGroup.showsubcartCall
                                                                                                                     .cardData(
                                                                                                                       tabBarShowsubcartResponse.jsonBody,
@@ -4299,7 +4299,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                               '0',
                                                                                                               'no',
                                                                                                               functions.stringToDouble(functions
-                                                                                                                          .calculateTineSlotPricingTotal(
+                                                                                                                          .calculateTimeSlotPricingTotal(
                                                                                                                               QuickartGroup.showsubcartCall
                                                                                                                                   .cardData(
                                                                                                                                     tabBarShowsubcartResponse.jsonBody,
@@ -4309,7 +4309,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                           .toString()) >
                                                                                                                       0.0
                                                                                                                   ? functions
-                                                                                                                      .calculateTineSlotPricingTotal(
+                                                                                                                      .calculateTimeSlotPricingTotal(
                                                                                                                           QuickartGroup.showsubcartCall
                                                                                                                               .cardData(
                                                                                                                                 tabBarShowsubcartResponse.jsonBody,
@@ -4319,7 +4319,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                       .toString()
                                                                                                                   : '0',
                                                                                                               functions.stringToDouble(functions
-                                                                                                                          .calculateTineSlotPricingTotal(
+                                                                                                                          .calculateTimeSlotPricingTotal(
                                                                                                                               QuickartGroup.showsubcartCall
                                                                                                                                   .cardData(
                                                                                                                                     tabBarShowsubcartResponse.jsonBody,
@@ -4329,7 +4329,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                           .toString()) >
                                                                                                                       0.0
                                                                                                                   ? functions
-                                                                                                                      .calculateTineSlotPricingTotal(
+                                                                                                                      .calculateTimeSlotPricingTotal(
                                                                                                                           QuickartGroup.showsubcartCall
                                                                                                                               .cardData(
                                                                                                                                 tabBarShowsubcartResponse.jsonBody,
@@ -4614,7 +4614,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                               '0',
                                                                                                               'no',
                                                                                                               functions.stringToDouble(functions
-                                                                                                                          .calculateTineSlotPricingTotal(
+                                                                                                                          .calculateTimeSlotPricingTotal(
                                                                                                                               QuickartGroup.showsubcartCall
                                                                                                                                   .cardData(
                                                                                                                                     tabBarShowsubcartResponse.jsonBody,
@@ -4624,7 +4624,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                           .toString()) >
                                                                                                                       0.0
                                                                                                                   ? functions
-                                                                                                                      .calculateTineSlotPricingTotal(
+                                                                                                                      .calculateTimeSlotPricingTotal(
                                                                                                                           QuickartGroup.showsubcartCall
                                                                                                                               .cardData(
                                                                                                                                 tabBarShowsubcartResponse.jsonBody,
@@ -4634,7 +4634,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                       .toString()
                                                                                                                   : '0',
                                                                                                               functions.stringToDouble(functions
-                                                                                                                          .calculateTineSlotPricingTotal(
+                                                                                                                          .calculateTimeSlotPricingTotal(
                                                                                                                               QuickartGroup.showsubcartCall
                                                                                                                                   .cardData(
                                                                                                                                     tabBarShowsubcartResponse.jsonBody,
@@ -4644,7 +4644,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                           .toString()) >
                                                                                                                       0.0
                                                                                                                   ? functions
-                                                                                                                      .calculateTineSlotPricingTotal(
+                                                                                                                      .calculateTimeSlotPricingTotal(
                                                                                                                           QuickartGroup.showsubcartCall
                                                                                                                               .cardData(
                                                                                                                                 tabBarShowsubcartResponse.jsonBody,
@@ -4691,7 +4691,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                       '0',
                                                                                                                       'no',
                                                                                                                       functions.stringToDouble(functions
-                                                                                                                                  .calculateTineSlotPricingTotal(
+                                                                                                                                  .calculateTimeSlotPricingTotal(
                                                                                                                                       QuickartGroup.showsubcartCall
                                                                                                                                           .cardData(
                                                                                                                                             tabBarShowsubcartResponse.jsonBody,
@@ -4701,7 +4701,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                   .toString()) >
                                                                                                                               0.0
                                                                                                                           ? functions
-                                                                                                                              .calculateTineSlotPricingTotal(
+                                                                                                                              .calculateTimeSlotPricingTotal(
                                                                                                                                   QuickartGroup.showsubcartCall
                                                                                                                                       .cardData(
                                                                                                                                         tabBarShowsubcartResponse.jsonBody,
@@ -4711,7 +4711,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                               .toString()
                                                                                                                           : '0',
                                                                                                                       functions.stringToDouble(functions
-                                                                                                                                  .calculateTineSlotPricingTotal(
+                                                                                                                                  .calculateTimeSlotPricingTotal(
                                                                                                                                       QuickartGroup.showsubcartCall
                                                                                                                                           .cardData(
                                                                                                                                             tabBarShowsubcartResponse.jsonBody,
@@ -4721,7 +4721,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                   .toString()) >
                                                                                                                               0.0
                                                                                                                           ? functions
-                                                                                                                              .calculateTineSlotPricingTotal(
+                                                                                                                              .calculateTimeSlotPricingTotal(
                                                                                                                                   QuickartGroup.showsubcartCall
                                                                                                                                       .cardData(
                                                                                                                                         tabBarShowsubcartResponse.jsonBody,
@@ -4903,7 +4903,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                 '0',
                                                                                                                 'no',
                                                                                                                 functions.stringToDouble(functions
-                                                                                                                            .calculateTineSlotPricingTotal(
+                                                                                                                            .calculateTimeSlotPricingTotal(
                                                                                                                                 QuickartGroup.showsubcartCall
                                                                                                                                     .cardData(
                                                                                                                                       tabBarShowsubcartResponse.jsonBody,
@@ -4913,7 +4913,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                             .toString()) >
                                                                                                                         0.0
                                                                                                                     ? functions
-                                                                                                                        .calculateTineSlotPricingTotal(
+                                                                                                                        .calculateTimeSlotPricingTotal(
                                                                                                                             QuickartGroup.showsubcartCall
                                                                                                                                 .cardData(
                                                                                                                                   tabBarShowsubcartResponse.jsonBody,
@@ -4923,7 +4923,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                         .toString()
                                                                                                                     : '0',
                                                                                                                 functions.stringToDouble(functions
-                                                                                                                            .calculateTineSlotPricingTotal(
+                                                                                                                            .calculateTimeSlotPricingTotal(
                                                                                                                                 QuickartGroup.showsubcartCall
                                                                                                                                     .cardData(
                                                                                                                                       tabBarShowsubcartResponse.jsonBody,
@@ -4933,7 +4933,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                             .toString()) >
                                                                                                                         0.0
                                                                                                                     ? functions
-                                                                                                                        .calculateTineSlotPricingTotal(
+                                                                                                                        .calculateTimeSlotPricingTotal(
                                                                                                                             QuickartGroup.showsubcartCall
                                                                                                                                 .cardData(
                                                                                                                                   tabBarShowsubcartResponse.jsonBody,
@@ -4991,7 +4991,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                 '0',
                                                                                                                 'no',
                                                                                                                 functions.stringToDouble(functions
-                                                                                                                            .calculateTineSlotPricingTotal(
+                                                                                                                            .calculateTimeSlotPricingTotal(
                                                                                                                                 QuickartGroup.showsubcartCall
                                                                                                                                     .cardData(
                                                                                                                                       tabBarShowsubcartResponse.jsonBody,
@@ -5001,7 +5001,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                             .toString()) >
                                                                                                                         0.0
                                                                                                                     ? functions
-                                                                                                                        .calculateTineSlotPricingTotal(
+                                                                                                                        .calculateTimeSlotPricingTotal(
                                                                                                                             QuickartGroup.showsubcartCall
                                                                                                                                 .cardData(
                                                                                                                                   tabBarShowsubcartResponse.jsonBody,
@@ -5011,7 +5011,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                         .toString()
                                                                                                                     : '0',
                                                                                                                 functions.stringToDouble(functions
-                                                                                                                            .calculateTineSlotPricingTotal(
+                                                                                                                            .calculateTimeSlotPricingTotal(
                                                                                                                                 QuickartGroup.showsubcartCall
                                                                                                                                     .cardData(
                                                                                                                                       tabBarShowsubcartResponse.jsonBody,
@@ -5021,7 +5021,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                             .toString()) >
                                                                                                                         0.0
                                                                                                                     ? functions
-                                                                                                                        .calculateTineSlotPricingTotal(
+                                                                                                                        .calculateTimeSlotPricingTotal(
                                                                                                                             QuickartGroup.showsubcartCall
                                                                                                                                 .cardData(
                                                                                                                                   tabBarShowsubcartResponse.jsonBody,
@@ -5068,7 +5068,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                         '0',
                                                                                                                         'no',
                                                                                                                         functions.stringToDouble(functions
-                                                                                                                                    .calculateTineSlotPricingTotal(
+                                                                                                                                    .calculateTimeSlotPricingTotal(
                                                                                                                                         QuickartGroup.showsubcartCall
                                                                                                                                             .cardData(
                                                                                                                                               tabBarShowsubcartResponse.jsonBody,
@@ -5078,7 +5078,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                     .toString()) >
                                                                                                                                 0.0
                                                                                                                             ? functions
-                                                                                                                                .calculateTineSlotPricingTotal(
+                                                                                                                                .calculateTimeSlotPricingTotal(
                                                                                                                                     QuickartGroup.showsubcartCall
                                                                                                                                         .cardData(
                                                                                                                                           tabBarShowsubcartResponse.jsonBody,
@@ -5088,7 +5088,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                 .toString()
                                                                                                                             : '0',
                                                                                                                         functions.stringToDouble(functions
-                                                                                                                                    .calculateTineSlotPricingTotal(
+                                                                                                                                    .calculateTimeSlotPricingTotal(
                                                                                                                                         QuickartGroup.showsubcartCall
                                                                                                                                             .cardData(
                                                                                                                                               tabBarShowsubcartResponse.jsonBody,
@@ -5098,7 +5098,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                     .toString()) >
                                                                                                                                 0.0
                                                                                                                             ? functions
-                                                                                                                                .calculateTineSlotPricingTotal(
+                                                                                                                                .calculateTimeSlotPricingTotal(
                                                                                                                                     QuickartGroup.showsubcartCall
                                                                                                                                         .cardData(
                                                                                                                                           tabBarShowsubcartResponse.jsonBody,
@@ -5143,7 +5143,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                   .toString(),
                                                                                               'add',
                                                                                               functions.stringToDouble(functions
-                                                                                                          .calculateTineSlotPricingTotal(
+                                                                                                          .calculateTimeSlotPricingTotal(
                                                                                                               QuickartGroup.showsubcartCall
                                                                                                                   .cardData(
                                                                                                                     tabBarShowsubcartResponse.jsonBody,
@@ -5153,7 +5153,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                           .toString()) >
                                                                                                       0.0
                                                                                                   ? functions
-                                                                                                      .calculateTineSlotPricingTotal(
+                                                                                                      .calculateTimeSlotPricingTotal(
                                                                                                           QuickartGroup.showsubcartCall
                                                                                                               .cardData(
                                                                                                                 tabBarShowsubcartResponse.jsonBody,
@@ -5163,7 +5163,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                       .toString()
                                                                                                   : '0',
                                                                                               functions.stringToDouble(functions
-                                                                                                          .calculateTineSlotPricingTotal(
+                                                                                                          .calculateTimeSlotPricingTotal(
                                                                                                               QuickartGroup.showsubcartCall
                                                                                                                   .cardData(
                                                                                                                     tabBarShowsubcartResponse.jsonBody,
@@ -5173,7 +5173,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                           .toString()) >
                                                                                                       0.0
                                                                                                   ? functions
-                                                                                                      .calculateTineSlotPricingTotal(
+                                                                                                      .calculateTimeSlotPricingTotal(
                                                                                                           QuickartGroup.showsubcartCall
                                                                                                               .cardData(
                                                                                                                 tabBarShowsubcartResponse.jsonBody,
@@ -6014,7 +6014,7 @@ class _CartSubscriptionScreenWidgetState
                                                                         padding: EdgeInsetsDirectional.fromSTEB(
                                                                             0.0,
                                                                             5.0,
-                                                                            5.0,
+                                                                            3.0,
                                                                             0.0),
                                                                         child:
                                                                             Row(
@@ -6027,7 +6027,7 @@ class _CartSubscriptionScreenWidgetState
                                                                               mainAxisSize: MainAxisSize.max,
                                                                               children: [
                                                                                 Padding(
-                                                                                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 5.0, 0.0),
+                                                                                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 3.0, 0.0),
                                                                                   child: Icon(
                                                                                     FFIcons.kcreditCardsPayment,
                                                                                     color: FFAppConstants.green86DF67,
@@ -6059,7 +6059,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                               null) ||
                                                                                           (FFAppState().isCardChange == true)) {
                                                                                         return Padding(
-                                                                                          padding: EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 3.0, 0.0),
+                                                                                          padding: EdgeInsetsDirectional.fromSTEB(2.0, 0.0, 3.0, 0.0),
                                                                                           child: InkWell(
                                                                                             splashColor: Colors.transparent,
                                                                                             focusColor: Colors.transparent,
@@ -6638,7 +6638,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                     '0',
                                                                                                                                     'no',
                                                                                                                                     functions.stringToDouble(functions
-                                                                                                                                                .calculateTineSlotPricingTotal(
+                                                                                                                                                .calculateTimeSlotPricingTotal(
                                                                                                                                                     QuickartGroup.showsubcartCall
                                                                                                                                                         .cardData(
                                                                                                                                                           tabBarShowsubcartResponse.jsonBody,
@@ -6648,7 +6648,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                                 .toString()) >
                                                                                                                                             0.0
                                                                                                                                         ? functions
-                                                                                                                                            .calculateTineSlotPricingTotal(
+                                                                                                                                            .calculateTimeSlotPricingTotal(
                                                                                                                                                 QuickartGroup.showsubcartCall
                                                                                                                                                     .cardData(
                                                                                                                                                       tabBarShowsubcartResponse.jsonBody,
@@ -6658,7 +6658,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                             .toString()
                                                                                                                                         : '0',
                                                                                                                                     functions.stringToDouble(functions
-                                                                                                                                                .calculateTineSlotPricingTotal(
+                                                                                                                                                .calculateTimeSlotPricingTotal(
                                                                                                                                                     QuickartGroup.showsubcartCall
                                                                                                                                                         .cardData(
                                                                                                                                                           tabBarShowsubcartResponse.jsonBody,
@@ -6668,7 +6668,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                                 .toString()) >
                                                                                                                                             0.0
                                                                                                                                         ? functions
-                                                                                                                                            .calculateTineSlotPricingTotal(
+                                                                                                                                            .calculateTimeSlotPricingTotal(
                                                                                                                                                 QuickartGroup.showsubcartCall
                                                                                                                                                     .cardData(
                                                                                                                                                       tabBarShowsubcartResponse.jsonBody,
@@ -6726,7 +6726,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                     '0',
                                                                                                                                     'no',
                                                                                                                                     functions.stringToDouble(functions
-                                                                                                                                                .calculateTineSlotPricingTotal(
+                                                                                                                                                .calculateTimeSlotPricingTotal(
                                                                                                                                                     QuickartGroup.showsubcartCall
                                                                                                                                                         .cardData(
                                                                                                                                                           tabBarShowsubcartResponse.jsonBody,
@@ -6736,7 +6736,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                                 .toString()) >
                                                                                                                                             0.0
                                                                                                                                         ? functions
-                                                                                                                                            .calculateTineSlotPricingTotal(
+                                                                                                                                            .calculateTimeSlotPricingTotal(
                                                                                                                                                 QuickartGroup.showsubcartCall
                                                                                                                                                     .cardData(
                                                                                                                                                       tabBarShowsubcartResponse.jsonBody,
@@ -6746,7 +6746,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                             .toString()
                                                                                                                                         : '0',
                                                                                                                                     functions.stringToDouble(functions
-                                                                                                                                                .calculateTineSlotPricingTotal(
+                                                                                                                                                .calculateTimeSlotPricingTotal(
                                                                                                                                                     QuickartGroup.showsubcartCall
                                                                                                                                                         .cardData(
                                                                                                                                                           tabBarShowsubcartResponse.jsonBody,
@@ -6756,7 +6756,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                                 .toString()) >
                                                                                                                                             0.0
                                                                                                                                         ? functions
-                                                                                                                                            .calculateTineSlotPricingTotal(
+                                                                                                                                            .calculateTimeSlotPricingTotal(
                                                                                                                                                 QuickartGroup.showsubcartCall
                                                                                                                                                     .cardData(
                                                                                                                                                       tabBarShowsubcartResponse.jsonBody,
@@ -6803,7 +6803,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                             '0',
                                                                                                                                             'no',
                                                                                                                                             functions.stringToDouble(functions
-                                                                                                                                                        .calculateTineSlotPricingTotal(
+                                                                                                                                                        .calculateTimeSlotPricingTotal(
                                                                                                                                                             QuickartGroup.showsubcartCall
                                                                                                                                                                 .cardData(
                                                                                                                                                                   tabBarShowsubcartResponse.jsonBody,
@@ -6813,7 +6813,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                                         .toString()) >
                                                                                                                                                     0.0
                                                                                                                                                 ? functions
-                                                                                                                                                    .calculateTineSlotPricingTotal(
+                                                                                                                                                    .calculateTimeSlotPricingTotal(
                                                                                                                                                         QuickartGroup.showsubcartCall
                                                                                                                                                             .cardData(
                                                                                                                                                               tabBarShowsubcartResponse.jsonBody,
@@ -6823,7 +6823,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                                     .toString()
                                                                                                                                                 : '0',
                                                                                                                                             functions.stringToDouble(functions
-                                                                                                                                                        .calculateTineSlotPricingTotal(
+                                                                                                                                                        .calculateTimeSlotPricingTotal(
                                                                                                                                                             QuickartGroup.showsubcartCall
                                                                                                                                                                 .cardData(
                                                                                                                                                                   tabBarShowsubcartResponse.jsonBody,
@@ -6833,7 +6833,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                                         .toString()) >
                                                                                                                                                     0.0
                                                                                                                                                 ? functions
-                                                                                                                                                    .calculateTineSlotPricingTotal(
+                                                                                                                                                    .calculateTimeSlotPricingTotal(
                                                                                                                                                         QuickartGroup.showsubcartCall
                                                                                                                                                             .cardData(
                                                                                                                                                               tabBarShowsubcartResponse.jsonBody,
@@ -6878,7 +6878,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                       .toString(),
                                                                                                                   'add',
                                                                                                                   functions.stringToDouble(functions
-                                                                                                                              .calculateTineSlotPricingTotal(
+                                                                                                                              .calculateTimeSlotPricingTotal(
                                                                                                                                   QuickartGroup.showsubcartCall
                                                                                                                                       .cardData(
                                                                                                                                         tabBarShowsubcartResponse.jsonBody,
@@ -6888,7 +6888,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                               .toString()) >
                                                                                                                           0.0
                                                                                                                       ? functions
-                                                                                                                          .calculateTineSlotPricingTotal(
+                                                                                                                          .calculateTimeSlotPricingTotal(
                                                                                                                               QuickartGroup.showsubcartCall
                                                                                                                                   .cardData(
                                                                                                                                     tabBarShowsubcartResponse.jsonBody,
@@ -6898,7 +6898,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                           .toString()
                                                                                                                       : '0',
                                                                                                                   functions.stringToDouble(functions
-                                                                                                                              .calculateTineSlotPricingTotal(
+                                                                                                                              .calculateTimeSlotPricingTotal(
                                                                                                                                   QuickartGroup.showsubcartCall
                                                                                                                                       .cardData(
                                                                                                                                         tabBarShowsubcartResponse.jsonBody,
@@ -6908,7 +6908,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                               .toString()) >
                                                                                                                           0.0
                                                                                                                       ? functions
-                                                                                                                          .calculateTineSlotPricingTotal(
+                                                                                                                          .calculateTimeSlotPricingTotal(
                                                                                                                               QuickartGroup.showsubcartCall
                                                                                                                                   .cardData(
                                                                                                                                     tabBarShowsubcartResponse.jsonBody,
@@ -6996,7 +6996,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                         '0',
                                                                                                                                         'no',
                                                                                                                                         functions.stringToDouble(functions
-                                                                                                                                                    .calculateTineSlotPricingTotal(
+                                                                                                                                                    .calculateTimeSlotPricingTotal(
                                                                                                                                                         QuickartGroup.showsubcartCall
                                                                                                                                                             .cardData(
                                                                                                                                                               tabBarShowsubcartResponse.jsonBody,
@@ -7006,7 +7006,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                                     .toString()) >
                                                                                                                                                 0.0
                                                                                                                                             ? functions
-                                                                                                                                                .calculateTineSlotPricingTotal(
+                                                                                                                                                .calculateTimeSlotPricingTotal(
                                                                                                                                                     QuickartGroup.showsubcartCall
                                                                                                                                                         .cardData(
                                                                                                                                                           tabBarShowsubcartResponse.jsonBody,
@@ -7016,7 +7016,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                                 .toString()
                                                                                                                                             : '0',
                                                                                                                                         functions.stringToDouble(functions
-                                                                                                                                                    .calculateTineSlotPricingTotal(
+                                                                                                                                                    .calculateTimeSlotPricingTotal(
                                                                                                                                                         QuickartGroup.showsubcartCall
                                                                                                                                                             .cardData(
                                                                                                                                                               tabBarShowsubcartResponse.jsonBody,
@@ -7026,7 +7026,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                                     .toString()) >
                                                                                                                                                 0.0
                                                                                                                                             ? functions
-                                                                                                                                                .calculateTineSlotPricingTotal(
+                                                                                                                                                .calculateTimeSlotPricingTotal(
                                                                                                                                                     QuickartGroup.showsubcartCall
                                                                                                                                                         .cardData(
                                                                                                                                                           tabBarShowsubcartResponse.jsonBody,
@@ -7084,7 +7084,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                         '0',
                                                                                                                                         'no',
                                                                                                                                         functions.stringToDouble(functions
-                                                                                                                                                    .calculateTineSlotPricingTotal(
+                                                                                                                                                    .calculateTimeSlotPricingTotal(
                                                                                                                                                         QuickartGroup.showsubcartCall
                                                                                                                                                             .cardData(
                                                                                                                                                               tabBarShowsubcartResponse.jsonBody,
@@ -7094,7 +7094,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                                     .toString()) >
                                                                                                                                                 0.0
                                                                                                                                             ? functions
-                                                                                                                                                .calculateTineSlotPricingTotal(
+                                                                                                                                                .calculateTimeSlotPricingTotal(
                                                                                                                                                     QuickartGroup.showsubcartCall
                                                                                                                                                         .cardData(
                                                                                                                                                           tabBarShowsubcartResponse.jsonBody,
@@ -7104,7 +7104,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                                 .toString()
                                                                                                                                             : '0',
                                                                                                                                         functions.stringToDouble(functions
-                                                                                                                                                    .calculateTineSlotPricingTotal(
+                                                                                                                                                    .calculateTimeSlotPricingTotal(
                                                                                                                                                         QuickartGroup.showsubcartCall
                                                                                                                                                             .cardData(
                                                                                                                                                               tabBarShowsubcartResponse.jsonBody,
@@ -7114,7 +7114,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                                     .toString()) >
                                                                                                                                                 0.0
                                                                                                                                             ? functions
-                                                                                                                                                .calculateTineSlotPricingTotal(
+                                                                                                                                                .calculateTimeSlotPricingTotal(
                                                                                                                                                     QuickartGroup.showsubcartCall
                                                                                                                                                         .cardData(
                                                                                                                                                           tabBarShowsubcartResponse.jsonBody,
@@ -7161,7 +7161,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                                 '0',
                                                                                                                                                 'no',
                                                                                                                                                 functions.stringToDouble(functions
-                                                                                                                                                            .calculateTineSlotPricingTotal(
+                                                                                                                                                            .calculateTimeSlotPricingTotal(
                                                                                                                                                                 QuickartGroup.showsubcartCall
                                                                                                                                                                     .cardData(
                                                                                                                                                                       tabBarShowsubcartResponse.jsonBody,
@@ -7171,7 +7171,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                                             .toString()) >
                                                                                                                                                         0.0
                                                                                                                                                     ? functions
-                                                                                                                                                        .calculateTineSlotPricingTotal(
+                                                                                                                                                        .calculateTimeSlotPricingTotal(
                                                                                                                                                             QuickartGroup.showsubcartCall
                                                                                                                                                                 .cardData(
                                                                                                                                                                   tabBarShowsubcartResponse.jsonBody,
@@ -7181,7 +7181,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                                         .toString()
                                                                                                                                                     : '0',
                                                                                                                                                 functions.stringToDouble(functions
-                                                                                                                                                            .calculateTineSlotPricingTotal(
+                                                                                                                                                            .calculateTimeSlotPricingTotal(
                                                                                                                                                                 QuickartGroup.showsubcartCall
                                                                                                                                                                     .cardData(
                                                                                                                                                                       tabBarShowsubcartResponse.jsonBody,
@@ -7191,7 +7191,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                                             .toString()) >
                                                                                                                                                         0.0
                                                                                                                                                     ? functions
-                                                                                                                                                        .calculateTineSlotPricingTotal(
+                                                                                                                                                        .calculateTimeSlotPricingTotal(
                                                                                                                                                             QuickartGroup.showsubcartCall
                                                                                                                                                                 .cardData(
                                                                                                                                                                   tabBarShowsubcartResponse.jsonBody,
@@ -7236,7 +7236,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                           .toString(),
                                                                                                                       'add',
                                                                                                                       functions.stringToDouble(functions
-                                                                                                                                  .calculateTineSlotPricingTotal(
+                                                                                                                                  .calculateTimeSlotPricingTotal(
                                                                                                                                       QuickartGroup.showsubcartCall
                                                                                                                                           .cardData(
                                                                                                                                             tabBarShowsubcartResponse.jsonBody,
@@ -7246,7 +7246,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                   .toString()) >
                                                                                                                               0.0
                                                                                                                           ? functions
-                                                                                                                              .calculateTineSlotPricingTotal(
+                                                                                                                              .calculateTimeSlotPricingTotal(
                                                                                                                                   QuickartGroup.showsubcartCall
                                                                                                                                       .cardData(
                                                                                                                                         tabBarShowsubcartResponse.jsonBody,
@@ -7256,7 +7256,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                               .toString()
                                                                                                                           : '0',
                                                                                                                       functions.stringToDouble(functions
-                                                                                                                                  .calculateTineSlotPricingTotal(
+                                                                                                                                  .calculateTimeSlotPricingTotal(
                                                                                                                                       QuickartGroup.showsubcartCall
                                                                                                                                           .cardData(
                                                                                                                                             tabBarShowsubcartResponse.jsonBody,
@@ -7266,7 +7266,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                   .toString()) >
                                                                                                                               0.0
                                                                                                                           ? functions
-                                                                                                                              .calculateTineSlotPricingTotal(
+                                                                                                                              .calculateTimeSlotPricingTotal(
                                                                                                                                   QuickartGroup.showsubcartCall
                                                                                                                                       .cardData(
                                                                                                                                         tabBarShowsubcartResponse.jsonBody,
@@ -7311,7 +7311,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                       '0',
                                                                                                                                       'no',
                                                                                                                                       functions.stringToDouble(functions
-                                                                                                                                                  .calculateTineSlotPricingTotal(
+                                                                                                                                                  .calculateTimeSlotPricingTotal(
                                                                                                                                                       QuickartGroup.showsubcartCall
                                                                                                                                                           .cardData(
                                                                                                                                                             tabBarShowsubcartResponse.jsonBody,
@@ -7321,7 +7321,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                                   .toString()) >
                                                                                                                                               0.0
                                                                                                                                           ? functions
-                                                                                                                                              .calculateTineSlotPricingTotal(
+                                                                                                                                              .calculateTimeSlotPricingTotal(
                                                                                                                                                   QuickartGroup.showsubcartCall
                                                                                                                                                       .cardData(
                                                                                                                                                         tabBarShowsubcartResponse.jsonBody,
@@ -7331,7 +7331,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                               .toString()
                                                                                                                                           : '0',
                                                                                                                                       functions.stringToDouble(functions
-                                                                                                                                                  .calculateTineSlotPricingTotal(
+                                                                                                                                                  .calculateTimeSlotPricingTotal(
                                                                                                                                                       QuickartGroup.showsubcartCall
                                                                                                                                                           .cardData(
                                                                                                                                                             tabBarShowsubcartResponse.jsonBody,
@@ -7341,7 +7341,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                                   .toString()) >
                                                                                                                                               0.0
                                                                                                                                           ? functions
-                                                                                                                                              .calculateTineSlotPricingTotal(
+                                                                                                                                              .calculateTimeSlotPricingTotal(
                                                                                                                                                   QuickartGroup.showsubcartCall
                                                                                                                                                       .cardData(
                                                                                                                                                         tabBarShowsubcartResponse.jsonBody,
@@ -7388,7 +7388,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                               '0',
                                                                                                                                               'no',
                                                                                                                                               functions.stringToDouble(functions
-                                                                                                                                                          .calculateTineSlotPricingTotal(
+                                                                                                                                                          .calculateTimeSlotPricingTotal(
                                                                                                                                                               QuickartGroup.showsubcartCall
                                                                                                                                                                   .cardData(
                                                                                                                                                                     tabBarShowsubcartResponse.jsonBody,
@@ -7398,7 +7398,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                                           .toString()) >
                                                                                                                                                       0.0
                                                                                                                                                   ? functions
-                                                                                                                                                      .calculateTineSlotPricingTotal(
+                                                                                                                                                      .calculateTimeSlotPricingTotal(
                                                                                                                                                           QuickartGroup.showsubcartCall
                                                                                                                                                               .cardData(
                                                                                                                                                                 tabBarShowsubcartResponse.jsonBody,
@@ -7408,7 +7408,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                                       .toString()
                                                                                                                                                   : '0',
                                                                                                                                               functions.stringToDouble(functions
-                                                                                                                                                          .calculateTineSlotPricingTotal(
+                                                                                                                                                          .calculateTimeSlotPricingTotal(
                                                                                                                                                               QuickartGroup.showsubcartCall
                                                                                                                                                                   .cardData(
                                                                                                                                                                     tabBarShowsubcartResponse.jsonBody,
@@ -7418,7 +7418,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                                           .toString()) >
                                                                                                                                                       0.0
                                                                                                                                                   ? functions
-                                                                                                                                                      .calculateTineSlotPricingTotal(
+                                                                                                                                                      .calculateTimeSlotPricingTotal(
                                                                                                                                                           QuickartGroup.showsubcartCall
                                                                                                                                                               .cardData(
                                                                                                                                                                 tabBarShowsubcartResponse.jsonBody,
@@ -7486,7 +7486,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                       '0',
                                                                                                                                       'no',
                                                                                                                                       functions.stringToDouble(functions
-                                                                                                                                                  .calculateTineSlotPricingTotal(
+                                                                                                                                                  .calculateTimeSlotPricingTotal(
                                                                                                                                                       QuickartGroup.showsubcartCall
                                                                                                                                                           .cardData(
                                                                                                                                                             tabBarShowsubcartResponse.jsonBody,
@@ -7496,7 +7496,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                                   .toString()) >
                                                                                                                                               0.0
                                                                                                                                           ? functions
-                                                                                                                                              .calculateTineSlotPricingTotal(
+                                                                                                                                              .calculateTimeSlotPricingTotal(
                                                                                                                                                   QuickartGroup.showsubcartCall
                                                                                                                                                       .cardData(
                                                                                                                                                         tabBarShowsubcartResponse.jsonBody,
@@ -7506,7 +7506,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                               .toString()
                                                                                                                                           : '0',
                                                                                                                                       functions.stringToDouble(functions
-                                                                                                                                                  .calculateTineSlotPricingTotal(
+                                                                                                                                                  .calculateTimeSlotPricingTotal(
                                                                                                                                                       QuickartGroup.showsubcartCall
                                                                                                                                                           .cardData(
                                                                                                                                                             tabBarShowsubcartResponse.jsonBody,
@@ -7516,7 +7516,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                                   .toString()) >
                                                                                                                                               0.0
                                                                                                                                           ? functions
-                                                                                                                                              .calculateTineSlotPricingTotal(
+                                                                                                                                              .calculateTimeSlotPricingTotal(
                                                                                                                                                   QuickartGroup.showsubcartCall
                                                                                                                                                       .cardData(
                                                                                                                                                         tabBarShowsubcartResponse.jsonBody,
@@ -7623,7 +7623,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                               '0',
                                                                                                                                               'no',
                                                                                                                                               functions.stringToDouble(functions
-                                                                                                                                                          .calculateTineSlotPricingTotal(
+                                                                                                                                                          .calculateTimeSlotPricingTotal(
                                                                                                                                                               QuickartGroup.showsubcartCall
                                                                                                                                                                   .cardData(
                                                                                                                                                                     tabBarShowsubcartResponse.jsonBody,
@@ -7633,7 +7633,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                                           .toString()) >
                                                                                                                                                       0.0
                                                                                                                                                   ? functions
-                                                                                                                                                      .calculateTineSlotPricingTotal(
+                                                                                                                                                      .calculateTimeSlotPricingTotal(
                                                                                                                                                           QuickartGroup.showsubcartCall
                                                                                                                                                               .cardData(
                                                                                                                                                                 tabBarShowsubcartResponse.jsonBody,
@@ -7643,7 +7643,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                                       .toString()
                                                                                                                                                   : '0',
                                                                                                                                               functions.stringToDouble(functions
-                                                                                                                                                          .calculateTineSlotPricingTotal(
+                                                                                                                                                          .calculateTimeSlotPricingTotal(
                                                                                                                                                               QuickartGroup.showsubcartCall
                                                                                                                                                                   .cardData(
                                                                                                                                                                     tabBarShowsubcartResponse.jsonBody,
@@ -7653,7 +7653,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                                           .toString()) >
                                                                                                                                                       0.0
                                                                                                                                                   ? functions
-                                                                                                                                                      .calculateTineSlotPricingTotal(
+                                                                                                                                                      .calculateTimeSlotPricingTotal(
                                                                                                                                                           QuickartGroup.showsubcartCall
                                                                                                                                                               .cardData(
                                                                                                                                                                 tabBarShowsubcartResponse.jsonBody,
@@ -7711,7 +7711,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                               '0',
                                                                                                                                               'no',
                                                                                                                                               functions.stringToDouble(functions
-                                                                                                                                                          .calculateTineSlotPricingTotal(
+                                                                                                                                                          .calculateTimeSlotPricingTotal(
                                                                                                                                                               QuickartGroup.showsubcartCall
                                                                                                                                                                   .cardData(
                                                                                                                                                                     tabBarShowsubcartResponse.jsonBody,
@@ -7721,7 +7721,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                                           .toString()) >
                                                                                                                                                       0.0
                                                                                                                                                   ? functions
-                                                                                                                                                      .calculateTineSlotPricingTotal(
+                                                                                                                                                      .calculateTimeSlotPricingTotal(
                                                                                                                                                           QuickartGroup.showsubcartCall
                                                                                                                                                               .cardData(
                                                                                                                                                                 tabBarShowsubcartResponse.jsonBody,
@@ -7731,7 +7731,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                                       .toString()
                                                                                                                                                   : '0',
                                                                                                                                               functions.stringToDouble(functions
-                                                                                                                                                          .calculateTineSlotPricingTotal(
+                                                                                                                                                          .calculateTimeSlotPricingTotal(
                                                                                                                                                               QuickartGroup.showsubcartCall
                                                                                                                                                                   .cardData(
                                                                                                                                                                     tabBarShowsubcartResponse.jsonBody,
@@ -7741,7 +7741,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                                           .toString()) >
                                                                                                                                                       0.0
                                                                                                                                                   ? functions
-                                                                                                                                                      .calculateTineSlotPricingTotal(
+                                                                                                                                                      .calculateTimeSlotPricingTotal(
                                                                                                                                                           QuickartGroup.showsubcartCall
                                                                                                                                                               .cardData(
                                                                                                                                                                 tabBarShowsubcartResponse.jsonBody,
@@ -7788,7 +7788,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                                       '0',
                                                                                                                                                       'no',
                                                                                                                                                       functions.stringToDouble(functions
-                                                                                                                                                                  .calculateTineSlotPricingTotal(
+                                                                                                                                                                  .calculateTimeSlotPricingTotal(
                                                                                                                                                                       QuickartGroup.showsubcartCall
                                                                                                                                                                           .cardData(
                                                                                                                                                                             tabBarShowsubcartResponse.jsonBody,
@@ -7798,7 +7798,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                                                   .toString()) >
                                                                                                                                                               0.0
                                                                                                                                                           ? functions
-                                                                                                                                                              .calculateTineSlotPricingTotal(
+                                                                                                                                                              .calculateTimeSlotPricingTotal(
                                                                                                                                                                   QuickartGroup.showsubcartCall
                                                                                                                                                                       .cardData(
                                                                                                                                                                         tabBarShowsubcartResponse.jsonBody,
@@ -7808,7 +7808,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                                               .toString()
                                                                                                                                                           : '0',
                                                                                                                                                       functions.stringToDouble(functions
-                                                                                                                                                                  .calculateTineSlotPricingTotal(
+                                                                                                                                                                  .calculateTimeSlotPricingTotal(
                                                                                                                                                                       QuickartGroup.showsubcartCall
                                                                                                                                                                           .cardData(
                                                                                                                                                                             tabBarShowsubcartResponse.jsonBody,
@@ -7818,7 +7818,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                                                   .toString()) >
                                                                                                                                                               0.0
                                                                                                                                                           ? functions
-                                                                                                                                                              .calculateTineSlotPricingTotal(
+                                                                                                                                                              .calculateTimeSlotPricingTotal(
                                                                                                                                                                   QuickartGroup.showsubcartCall
                                                                                                                                                                       .cardData(
                                                                                                                                                                         tabBarShowsubcartResponse.jsonBody,
@@ -7863,7 +7863,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                 .toString(),
                                                                                                                             'add',
                                                                                                                             functions.stringToDouble(functions
-                                                                                                                                        .calculateTineSlotPricingTotal(
+                                                                                                                                        .calculateTimeSlotPricingTotal(
                                                                                                                                             QuickartGroup.showsubcartCall
                                                                                                                                                 .cardData(
                                                                                                                                                   tabBarShowsubcartResponse.jsonBody,
@@ -7873,7 +7873,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                         .toString()) >
                                                                                                                                     0.0
                                                                                                                                 ? functions
-                                                                                                                                    .calculateTineSlotPricingTotal(
+                                                                                                                                    .calculateTimeSlotPricingTotal(
                                                                                                                                         QuickartGroup.showsubcartCall
                                                                                                                                             .cardData(
                                                                                                                                               tabBarShowsubcartResponse.jsonBody,
@@ -7883,7 +7883,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                     .toString()
                                                                                                                                 : '0',
                                                                                                                             functions.stringToDouble(functions
-                                                                                                                                        .calculateTineSlotPricingTotal(
+                                                                                                                                        .calculateTimeSlotPricingTotal(
                                                                                                                                             QuickartGroup.showsubcartCall
                                                                                                                                                 .cardData(
                                                                                                                                                   tabBarShowsubcartResponse.jsonBody,
@@ -7893,7 +7893,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                         .toString()) >
                                                                                                                                     0.0
                                                                                                                                 ? functions
-                                                                                                                                    .calculateTineSlotPricingTotal(
+                                                                                                                                    .calculateTimeSlotPricingTotal(
                                                                                                                                         QuickartGroup.showsubcartCall
                                                                                                                                             .cardData(
                                                                                                                                               tabBarShowsubcartResponse.jsonBody,
@@ -7980,7 +7980,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                           '0',
                                                                                                                                           'no',
                                                                                                                                           functions.stringToDouble(functions
-                                                                                                                                                      .calculateTineSlotPricingTotal(
+                                                                                                                                                      .calculateTimeSlotPricingTotal(
                                                                                                                                                           QuickartGroup.showsubcartCall
                                                                                                                                                               .cardData(
                                                                                                                                                                 tabBarShowsubcartResponse.jsonBody,
@@ -7990,7 +7990,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                                       .toString()) >
                                                                                                                                                   0.0
                                                                                                                                               ? functions
-                                                                                                                                                  .calculateTineSlotPricingTotal(
+                                                                                                                                                  .calculateTimeSlotPricingTotal(
                                                                                                                                                       QuickartGroup.showsubcartCall
                                                                                                                                                           .cardData(
                                                                                                                                                             tabBarShowsubcartResponse.jsonBody,
@@ -8000,7 +8000,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                                   .toString()
                                                                                                                                               : '0',
                                                                                                                                           functions.stringToDouble(functions
-                                                                                                                                                      .calculateTineSlotPricingTotal(
+                                                                                                                                                      .calculateTimeSlotPricingTotal(
                                                                                                                                                           QuickartGroup.showsubcartCall
                                                                                                                                                               .cardData(
                                                                                                                                                                 tabBarShowsubcartResponse.jsonBody,
@@ -8010,7 +8010,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                                       .toString()) >
                                                                                                                                                   0.0
                                                                                                                                               ? functions
-                                                                                                                                                  .calculateTineSlotPricingTotal(
+                                                                                                                                                  .calculateTimeSlotPricingTotal(
                                                                                                                                                       QuickartGroup.showsubcartCall
                                                                                                                                                           .cardData(
                                                                                                                                                             tabBarShowsubcartResponse.jsonBody,
@@ -8068,7 +8068,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                           '0',
                                                                                                                                           'no',
                                                                                                                                           functions.stringToDouble(functions
-                                                                                                                                                      .calculateTineSlotPricingTotal(
+                                                                                                                                                      .calculateTimeSlotPricingTotal(
                                                                                                                                                           QuickartGroup.showsubcartCall
                                                                                                                                                               .cardData(
                                                                                                                                                                 tabBarShowsubcartResponse.jsonBody,
@@ -8078,7 +8078,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                                       .toString()) >
                                                                                                                                                   0.0
                                                                                                                                               ? functions
-                                                                                                                                                  .calculateTineSlotPricingTotal(
+                                                                                                                                                  .calculateTimeSlotPricingTotal(
                                                                                                                                                       QuickartGroup.showsubcartCall
                                                                                                                                                           .cardData(
                                                                                                                                                             tabBarShowsubcartResponse.jsonBody,
@@ -8088,7 +8088,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                                   .toString()
                                                                                                                                               : '0',
                                                                                                                                           functions.stringToDouble(functions
-                                                                                                                                                      .calculateTineSlotPricingTotal(
+                                                                                                                                                      .calculateTimeSlotPricingTotal(
                                                                                                                                                           QuickartGroup.showsubcartCall
                                                                                                                                                               .cardData(
                                                                                                                                                                 tabBarShowsubcartResponse.jsonBody,
@@ -8098,7 +8098,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                                       .toString()) >
                                                                                                                                                   0.0
                                                                                                                                               ? functions
-                                                                                                                                                  .calculateTineSlotPricingTotal(
+                                                                                                                                                  .calculateTimeSlotPricingTotal(
                                                                                                                                                       QuickartGroup.showsubcartCall
                                                                                                                                                           .cardData(
                                                                                                                                                             tabBarShowsubcartResponse.jsonBody,
@@ -8145,7 +8145,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                                   '0',
                                                                                                                                                   'no',
                                                                                                                                                   functions.stringToDouble(functions
-                                                                                                                                                              .calculateTineSlotPricingTotal(
+                                                                                                                                                              .calculateTimeSlotPricingTotal(
                                                                                                                                                                   QuickartGroup.showsubcartCall
                                                                                                                                                                       .cardData(
                                                                                                                                                                         tabBarShowsubcartResponse.jsonBody,
@@ -8155,7 +8155,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                                               .toString()) >
                                                                                                                                                           0.0
                                                                                                                                                       ? functions
-                                                                                                                                                          .calculateTineSlotPricingTotal(
+                                                                                                                                                          .calculateTimeSlotPricingTotal(
                                                                                                                                                               QuickartGroup.showsubcartCall
                                                                                                                                                                   .cardData(
                                                                                                                                                                     tabBarShowsubcartResponse.jsonBody,
@@ -8165,7 +8165,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                                           .toString()
                                                                                                                                                       : '0',
                                                                                                                                                   functions.stringToDouble(functions
-                                                                                                                                                              .calculateTineSlotPricingTotal(
+                                                                                                                                                              .calculateTimeSlotPricingTotal(
                                                                                                                                                                   QuickartGroup.showsubcartCall
                                                                                                                                                                       .cardData(
                                                                                                                                                                         tabBarShowsubcartResponse.jsonBody,
@@ -8175,7 +8175,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                                               .toString()) >
                                                                                                                                                           0.0
                                                                                                                                                       ? functions
-                                                                                                                                                          .calculateTineSlotPricingTotal(
+                                                                                                                                                          .calculateTimeSlotPricingTotal(
                                                                                                                                                               QuickartGroup.showsubcartCall
                                                                                                                                                                   .cardData(
                                                                                                                                                                     tabBarShowsubcartResponse.jsonBody,
@@ -8220,7 +8220,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                             .toString(),
                                                                                                                         'add',
                                                                                                                         functions.stringToDouble(functions
-                                                                                                                                    .calculateTineSlotPricingTotal(
+                                                                                                                                    .calculateTimeSlotPricingTotal(
                                                                                                                                         QuickartGroup.showsubcartCall
                                                                                                                                             .cardData(
                                                                                                                                               tabBarShowsubcartResponse.jsonBody,
@@ -8230,7 +8230,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                     .toString()) >
                                                                                                                                 0.0
                                                                                                                             ? functions
-                                                                                                                                .calculateTineSlotPricingTotal(
+                                                                                                                                .calculateTimeSlotPricingTotal(
                                                                                                                                     QuickartGroup.showsubcartCall
                                                                                                                                         .cardData(
                                                                                                                                           tabBarShowsubcartResponse.jsonBody,
@@ -8240,7 +8240,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                 .toString()
                                                                                                                             : '0',
                                                                                                                         functions.stringToDouble(functions
-                                                                                                                                    .calculateTineSlotPricingTotal(
+                                                                                                                                    .calculateTimeSlotPricingTotal(
                                                                                                                                         QuickartGroup.showsubcartCall
                                                                                                                                             .cardData(
                                                                                                                                               tabBarShowsubcartResponse.jsonBody,
@@ -8250,7 +8250,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                     .toString()) >
                                                                                                                                 0.0
                                                                                                                             ? functions
-                                                                                                                                .calculateTineSlotPricingTotal(
+                                                                                                                                .calculateTimeSlotPricingTotal(
                                                                                                                                     QuickartGroup.showsubcartCall
                                                                                                                                         .cardData(
                                                                                                                                           tabBarShowsubcartResponse.jsonBody,
@@ -8600,7 +8600,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                               '0',
                                                                                                                               'no',
                                                                                                                               functions.stringToDouble(functions
-                                                                                                                                          .calculateTineSlotPricingTotal(
+                                                                                                                                          .calculateTimeSlotPricingTotal(
                                                                                                                                               QuickartGroup.showsubcartCall
                                                                                                                                                   .cardData(
                                                                                                                                                     tabBarShowsubcartResponse.jsonBody,
@@ -8610,7 +8610,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                           .toString()) >
                                                                                                                                       0.0
                                                                                                                                   ? functions
-                                                                                                                                      .calculateTineSlotPricingTotal(
+                                                                                                                                      .calculateTimeSlotPricingTotal(
                                                                                                                                           QuickartGroup.showsubcartCall
                                                                                                                                               .cardData(
                                                                                                                                                 tabBarShowsubcartResponse.jsonBody,
@@ -8620,7 +8620,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                       .toString()
                                                                                                                                   : '0',
                                                                                                                               functions.stringToDouble(functions
-                                                                                                                                          .calculateTineSlotPricingTotal(
+                                                                                                                                          .calculateTimeSlotPricingTotal(
                                                                                                                                               QuickartGroup.showsubcartCall
                                                                                                                                                   .cardData(
                                                                                                                                                     tabBarShowsubcartResponse.jsonBody,
@@ -8630,7 +8630,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                           .toString()) >
                                                                                                                                       0.0
                                                                                                                                   ? functions
-                                                                                                                                      .calculateTineSlotPricingTotal(
+                                                                                                                                      .calculateTimeSlotPricingTotal(
                                                                                                                                           QuickartGroup.showsubcartCall
                                                                                                                                               .cardData(
                                                                                                                                                 tabBarShowsubcartResponse.jsonBody,
@@ -8688,7 +8688,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                               '0',
                                                                                                                               'no',
                                                                                                                               functions.stringToDouble(functions
-                                                                                                                                          .calculateTineSlotPricingTotal(
+                                                                                                                                          .calculateTimeSlotPricingTotal(
                                                                                                                                               QuickartGroup.showsubcartCall
                                                                                                                                                   .cardData(
                                                                                                                                                     tabBarShowsubcartResponse.jsonBody,
@@ -8698,7 +8698,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                           .toString()) >
                                                                                                                                       0.0
                                                                                                                                   ? functions
-                                                                                                                                      .calculateTineSlotPricingTotal(
+                                                                                                                                      .calculateTimeSlotPricingTotal(
                                                                                                                                           QuickartGroup.showsubcartCall
                                                                                                                                               .cardData(
                                                                                                                                                 tabBarShowsubcartResponse.jsonBody,
@@ -8708,7 +8708,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                       .toString()
                                                                                                                                   : '0',
                                                                                                                               functions.stringToDouble(functions
-                                                                                                                                          .calculateTineSlotPricingTotal(
+                                                                                                                                          .calculateTimeSlotPricingTotal(
                                                                                                                                               QuickartGroup.showsubcartCall
                                                                                                                                                   .cardData(
                                                                                                                                                     tabBarShowsubcartResponse.jsonBody,
@@ -8718,7 +8718,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                           .toString()) >
                                                                                                                                       0.0
                                                                                                                                   ? functions
-                                                                                                                                      .calculateTineSlotPricingTotal(
+                                                                                                                                      .calculateTimeSlotPricingTotal(
                                                                                                                                           QuickartGroup.showsubcartCall
                                                                                                                                               .cardData(
                                                                                                                                                 tabBarShowsubcartResponse.jsonBody,
@@ -8765,7 +8765,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                       '0',
                                                                                                                                       'no',
                                                                                                                                       functions.stringToDouble(functions
-                                                                                                                                                  .calculateTineSlotPricingTotal(
+                                                                                                                                                  .calculateTimeSlotPricingTotal(
                                                                                                                                                       QuickartGroup.showsubcartCall
                                                                                                                                                           .cardData(
                                                                                                                                                             tabBarShowsubcartResponse.jsonBody,
@@ -8775,7 +8775,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                                   .toString()) >
                                                                                                                                               0.0
                                                                                                                                           ? functions
-                                                                                                                                              .calculateTineSlotPricingTotal(
+                                                                                                                                              .calculateTimeSlotPricingTotal(
                                                                                                                                                   QuickartGroup.showsubcartCall
                                                                                                                                                       .cardData(
                                                                                                                                                         tabBarShowsubcartResponse.jsonBody,
@@ -8785,7 +8785,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                               .toString()
                                                                                                                                           : '0',
                                                                                                                                       functions.stringToDouble(functions
-                                                                                                                                                  .calculateTineSlotPricingTotal(
+                                                                                                                                                  .calculateTimeSlotPricingTotal(
                                                                                                                                                       QuickartGroup.showsubcartCall
                                                                                                                                                           .cardData(
                                                                                                                                                             tabBarShowsubcartResponse.jsonBody,
@@ -8795,7 +8795,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                                   .toString()) >
                                                                                                                                               0.0
                                                                                                                                           ? functions
-                                                                                                                                              .calculateTineSlotPricingTotal(
+                                                                                                                                              .calculateTimeSlotPricingTotal(
                                                                                                                                                   QuickartGroup.showsubcartCall
                                                                                                                                                       .cardData(
                                                                                                                                                         tabBarShowsubcartResponse.jsonBody,
@@ -8840,7 +8840,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                 .toString(),
                                                                                                             'add',
                                                                                                             functions.stringToDouble(functions
-                                                                                                                        .calculateTineSlotPricingTotal(
+                                                                                                                        .calculateTimeSlotPricingTotal(
                                                                                                                             QuickartGroup.showsubcartCall
                                                                                                                                 .cardData(
                                                                                                                                   tabBarShowsubcartResponse.jsonBody,
@@ -8850,7 +8850,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                         .toString()) >
                                                                                                                     0.0
                                                                                                                 ? functions
-                                                                                                                    .calculateTineSlotPricingTotal(
+                                                                                                                    .calculateTimeSlotPricingTotal(
                                                                                                                         QuickartGroup.showsubcartCall
                                                                                                                             .cardData(
                                                                                                                               tabBarShowsubcartResponse.jsonBody,
@@ -8860,7 +8860,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                     .toString()
                                                                                                                 : '0',
                                                                                                             functions.stringToDouble(functions
-                                                                                                                        .calculateTineSlotPricingTotal(
+                                                                                                                        .calculateTimeSlotPricingTotal(
                                                                                                                             QuickartGroup.showsubcartCall
                                                                                                                                 .cardData(
                                                                                                                                   tabBarShowsubcartResponse.jsonBody,
@@ -8870,7 +8870,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                         .toString()) >
                                                                                                                     0.0
                                                                                                                 ? functions
-                                                                                                                    .calculateTineSlotPricingTotal(
+                                                                                                                    .calculateTimeSlotPricingTotal(
                                                                                                                         QuickartGroup.showsubcartCall
                                                                                                                             .cardData(
                                                                                                                               tabBarShowsubcartResponse.jsonBody,
@@ -8958,7 +8958,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                   '0',
                                                                                                                                   'no',
                                                                                                                                   functions.stringToDouble(functions
-                                                                                                                                              .calculateTineSlotPricingTotal(
+                                                                                                                                              .calculateTimeSlotPricingTotal(
                                                                                                                                                   QuickartGroup.showsubcartCall
                                                                                                                                                       .cardData(
                                                                                                                                                         tabBarShowsubcartResponse.jsonBody,
@@ -8968,7 +8968,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                               .toString()) >
                                                                                                                                           0.0
                                                                                                                                       ? functions
-                                                                                                                                          .calculateTineSlotPricingTotal(
+                                                                                                                                          .calculateTimeSlotPricingTotal(
                                                                                                                                               QuickartGroup.showsubcartCall
                                                                                                                                                   .cardData(
                                                                                                                                                     tabBarShowsubcartResponse.jsonBody,
@@ -8978,7 +8978,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                           .toString()
                                                                                                                                       : '0',
                                                                                                                                   functions.stringToDouble(functions
-                                                                                                                                              .calculateTineSlotPricingTotal(
+                                                                                                                                              .calculateTimeSlotPricingTotal(
                                                                                                                                                   QuickartGroup.showsubcartCall
                                                                                                                                                       .cardData(
                                                                                                                                                         tabBarShowsubcartResponse.jsonBody,
@@ -8988,7 +8988,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                               .toString()) >
                                                                                                                                           0.0
                                                                                                                                       ? functions
-                                                                                                                                          .calculateTineSlotPricingTotal(
+                                                                                                                                          .calculateTimeSlotPricingTotal(
                                                                                                                                               QuickartGroup.showsubcartCall
                                                                                                                                                   .cardData(
                                                                                                                                                     tabBarShowsubcartResponse.jsonBody,
@@ -9046,7 +9046,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                   '0',
                                                                                                                                   'no',
                                                                                                                                   functions.stringToDouble(functions
-                                                                                                                                              .calculateTineSlotPricingTotal(
+                                                                                                                                              .calculateTimeSlotPricingTotal(
                                                                                                                                                   QuickartGroup.showsubcartCall
                                                                                                                                                       .cardData(
                                                                                                                                                         tabBarShowsubcartResponse.jsonBody,
@@ -9056,7 +9056,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                               .toString()) >
                                                                                                                                           0.0
                                                                                                                                       ? functions
-                                                                                                                                          .calculateTineSlotPricingTotal(
+                                                                                                                                          .calculateTimeSlotPricingTotal(
                                                                                                                                               QuickartGroup.showsubcartCall
                                                                                                                                                   .cardData(
                                                                                                                                                     tabBarShowsubcartResponse.jsonBody,
@@ -9066,7 +9066,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                           .toString()
                                                                                                                                       : '0',
                                                                                                                                   functions.stringToDouble(functions
-                                                                                                                                              .calculateTineSlotPricingTotal(
+                                                                                                                                              .calculateTimeSlotPricingTotal(
                                                                                                                                                   QuickartGroup.showsubcartCall
                                                                                                                                                       .cardData(
                                                                                                                                                         tabBarShowsubcartResponse.jsonBody,
@@ -9076,7 +9076,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                               .toString()) >
                                                                                                                                           0.0
                                                                                                                                       ? functions
-                                                                                                                                          .calculateTineSlotPricingTotal(
+                                                                                                                                          .calculateTimeSlotPricingTotal(
                                                                                                                                               QuickartGroup.showsubcartCall
                                                                                                                                                   .cardData(
                                                                                                                                                     tabBarShowsubcartResponse.jsonBody,
@@ -9123,7 +9123,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                           '0',
                                                                                                                                           'no',
                                                                                                                                           functions.stringToDouble(functions
-                                                                                                                                                      .calculateTineSlotPricingTotal(
+                                                                                                                                                      .calculateTimeSlotPricingTotal(
                                                                                                                                                           QuickartGroup.showsubcartCall
                                                                                                                                                               .cardData(
                                                                                                                                                                 tabBarShowsubcartResponse.jsonBody,
@@ -9133,7 +9133,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                                       .toString()) >
                                                                                                                                                   0.0
                                                                                                                                               ? functions
-                                                                                                                                                  .calculateTineSlotPricingTotal(
+                                                                                                                                                  .calculateTimeSlotPricingTotal(
                                                                                                                                                       QuickartGroup.showsubcartCall
                                                                                                                                                           .cardData(
                                                                                                                                                             tabBarShowsubcartResponse.jsonBody,
@@ -9143,7 +9143,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                                   .toString()
                                                                                                                                               : '0',
                                                                                                                                           functions.stringToDouble(functions
-                                                                                                                                                      .calculateTineSlotPricingTotal(
+                                                                                                                                                      .calculateTimeSlotPricingTotal(
                                                                                                                                                           QuickartGroup.showsubcartCall
                                                                                                                                                               .cardData(
                                                                                                                                                                 tabBarShowsubcartResponse.jsonBody,
@@ -9153,7 +9153,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                                       .toString()) >
                                                                                                                                                   0.0
                                                                                                                                               ? functions
-                                                                                                                                                  .calculateTineSlotPricingTotal(
+                                                                                                                                                  .calculateTimeSlotPricingTotal(
                                                                                                                                                       QuickartGroup.showsubcartCall
                                                                                                                                                           .cardData(
                                                                                                                                                             tabBarShowsubcartResponse.jsonBody,
@@ -9198,7 +9198,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                     .toString(),
                                                                                                                 'add',
                                                                                                                 functions.stringToDouble(functions
-                                                                                                                            .calculateTineSlotPricingTotal(
+                                                                                                                            .calculateTimeSlotPricingTotal(
                                                                                                                                 QuickartGroup.showsubcartCall
                                                                                                                                     .cardData(
                                                                                                                                       tabBarShowsubcartResponse.jsonBody,
@@ -9208,7 +9208,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                             .toString()) >
                                                                                                                         0.0
                                                                                                                     ? functions
-                                                                                                                        .calculateTineSlotPricingTotal(
+                                                                                                                        .calculateTimeSlotPricingTotal(
                                                                                                                             QuickartGroup.showsubcartCall
                                                                                                                                 .cardData(
                                                                                                                                   tabBarShowsubcartResponse.jsonBody,
@@ -9218,7 +9218,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                         .toString()
                                                                                                                     : '0',
                                                                                                                 functions.stringToDouble(functions
-                                                                                                                            .calculateTineSlotPricingTotal(
+                                                                                                                            .calculateTimeSlotPricingTotal(
                                                                                                                                 QuickartGroup.showsubcartCall
                                                                                                                                     .cardData(
                                                                                                                                       tabBarShowsubcartResponse.jsonBody,
@@ -9228,7 +9228,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                             .toString()) >
                                                                                                                         0.0
                                                                                                                     ? functions
-                                                                                                                        .calculateTineSlotPricingTotal(
+                                                                                                                        .calculateTimeSlotPricingTotal(
                                                                                                                             QuickartGroup.showsubcartCall
                                                                                                                                 .cardData(
                                                                                                                                   tabBarShowsubcartResponse.jsonBody,
@@ -9273,7 +9273,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                 '0',
                                                                                                                                 'no',
                                                                                                                                 functions.stringToDouble(functions
-                                                                                                                                            .calculateTineSlotPricingTotal(
+                                                                                                                                            .calculateTimeSlotPricingTotal(
                                                                                                                                                 QuickartGroup.showsubcartCall
                                                                                                                                                     .cardData(
                                                                                                                                                       tabBarShowsubcartResponse.jsonBody,
@@ -9283,7 +9283,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                             .toString()) >
                                                                                                                                         0.0
                                                                                                                                     ? functions
-                                                                                                                                        .calculateTineSlotPricingTotal(
+                                                                                                                                        .calculateTimeSlotPricingTotal(
                                                                                                                                             QuickartGroup.showsubcartCall
                                                                                                                                                 .cardData(
                                                                                                                                                   tabBarShowsubcartResponse.jsonBody,
@@ -9293,7 +9293,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                         .toString()
                                                                                                                                     : '0',
                                                                                                                                 functions.stringToDouble(functions
-                                                                                                                                            .calculateTineSlotPricingTotal(
+                                                                                                                                            .calculateTimeSlotPricingTotal(
                                                                                                                                                 QuickartGroup.showsubcartCall
                                                                                                                                                     .cardData(
                                                                                                                                                       tabBarShowsubcartResponse.jsonBody,
@@ -9303,7 +9303,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                             .toString()) >
                                                                                                                                         0.0
                                                                                                                                     ? functions
-                                                                                                                                        .calculateTineSlotPricingTotal(
+                                                                                                                                        .calculateTimeSlotPricingTotal(
                                                                                                                                             QuickartGroup.showsubcartCall
                                                                                                                                                 .cardData(
                                                                                                                                                   tabBarShowsubcartResponse.jsonBody,
@@ -9350,7 +9350,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                         '0',
                                                                                                                                         'no',
                                                                                                                                         functions.stringToDouble(functions
-                                                                                                                                                    .calculateTineSlotPricingTotal(
+                                                                                                                                                    .calculateTimeSlotPricingTotal(
                                                                                                                                                         QuickartGroup.showsubcartCall
                                                                                                                                                             .cardData(
                                                                                                                                                               tabBarShowsubcartResponse.jsonBody,
@@ -9360,7 +9360,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                                     .toString()) >
                                                                                                                                                 0.0
                                                                                                                                             ? functions
-                                                                                                                                                .calculateTineSlotPricingTotal(
+                                                                                                                                                .calculateTimeSlotPricingTotal(
                                                                                                                                                     QuickartGroup.showsubcartCall
                                                                                                                                                         .cardData(
                                                                                                                                                           tabBarShowsubcartResponse.jsonBody,
@@ -9370,7 +9370,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                                 .toString()
                                                                                                                                             : '0',
                                                                                                                                         functions.stringToDouble(functions
-                                                                                                                                                    .calculateTineSlotPricingTotal(
+                                                                                                                                                    .calculateTimeSlotPricingTotal(
                                                                                                                                                         QuickartGroup.showsubcartCall
                                                                                                                                                             .cardData(
                                                                                                                                                               tabBarShowsubcartResponse.jsonBody,
@@ -9380,7 +9380,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                                     .toString()) >
                                                                                                                                                 0.0
                                                                                                                                             ? functions
-                                                                                                                                                .calculateTineSlotPricingTotal(
+                                                                                                                                                .calculateTimeSlotPricingTotal(
                                                                                                                                                     QuickartGroup.showsubcartCall
                                                                                                                                                         .cardData(
                                                                                                                                                           tabBarShowsubcartResponse.jsonBody,
@@ -9448,7 +9448,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                 '0',
                                                                                                                                 'no',
                                                                                                                                 functions.stringToDouble(functions
-                                                                                                                                            .calculateTineSlotPricingTotal(
+                                                                                                                                            .calculateTimeSlotPricingTotal(
                                                                                                                                                 QuickartGroup.showsubcartCall
                                                                                                                                                     .cardData(
                                                                                                                                                       tabBarShowsubcartResponse.jsonBody,
@@ -9458,7 +9458,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                             .toString()) >
                                                                                                                                         0.0
                                                                                                                                     ? functions
-                                                                                                                                        .calculateTineSlotPricingTotal(
+                                                                                                                                        .calculateTimeSlotPricingTotal(
                                                                                                                                             QuickartGroup.showsubcartCall
                                                                                                                                                 .cardData(
                                                                                                                                                   tabBarShowsubcartResponse.jsonBody,
@@ -9468,7 +9468,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                         .toString()
                                                                                                                                     : '0',
                                                                                                                                 functions.stringToDouble(functions
-                                                                                                                                            .calculateTineSlotPricingTotal(
+                                                                                                                                            .calculateTimeSlotPricingTotal(
                                                                                                                                                 QuickartGroup.showsubcartCall
                                                                                                                                                     .cardData(
                                                                                                                                                       tabBarShowsubcartResponse.jsonBody,
@@ -9478,7 +9478,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                             .toString()) >
                                                                                                                                         0.0
                                                                                                                                     ? functions
-                                                                                                                                        .calculateTineSlotPricingTotal(
+                                                                                                                                        .calculateTimeSlotPricingTotal(
                                                                                                                                             QuickartGroup.showsubcartCall
                                                                                                                                                 .cardData(
                                                                                                                                                   tabBarShowsubcartResponse.jsonBody,
@@ -9585,7 +9585,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                         '0',
                                                                                                                                         'no',
                                                                                                                                         functions.stringToDouble(functions
-                                                                                                                                                    .calculateTineSlotPricingTotal(
+                                                                                                                                                    .calculateTimeSlotPricingTotal(
                                                                                                                                                         QuickartGroup.showsubcartCall
                                                                                                                                                             .cardData(
                                                                                                                                                               tabBarShowsubcartResponse.jsonBody,
@@ -9595,7 +9595,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                                     .toString()) >
                                                                                                                                                 0.0
                                                                                                                                             ? functions
-                                                                                                                                                .calculateTineSlotPricingTotal(
+                                                                                                                                                .calculateTimeSlotPricingTotal(
                                                                                                                                                     QuickartGroup.showsubcartCall
                                                                                                                                                         .cardData(
                                                                                                                                                           tabBarShowsubcartResponse.jsonBody,
@@ -9605,7 +9605,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                                 .toString()
                                                                                                                                             : '0',
                                                                                                                                         functions.stringToDouble(functions
-                                                                                                                                                    .calculateTineSlotPricingTotal(
+                                                                                                                                                    .calculateTimeSlotPricingTotal(
                                                                                                                                                         QuickartGroup.showsubcartCall
                                                                                                                                                             .cardData(
                                                                                                                                                               tabBarShowsubcartResponse.jsonBody,
@@ -9615,7 +9615,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                                     .toString()) >
                                                                                                                                                 0.0
                                                                                                                                             ? functions
-                                                                                                                                                .calculateTineSlotPricingTotal(
+                                                                                                                                                .calculateTimeSlotPricingTotal(
                                                                                                                                                     QuickartGroup.showsubcartCall
                                                                                                                                                         .cardData(
                                                                                                                                                           tabBarShowsubcartResponse.jsonBody,
@@ -9673,7 +9673,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                         '0',
                                                                                                                                         'no',
                                                                                                                                         functions.stringToDouble(functions
-                                                                                                                                                    .calculateTineSlotPricingTotal(
+                                                                                                                                                    .calculateTimeSlotPricingTotal(
                                                                                                                                                         QuickartGroup.showsubcartCall
                                                                                                                                                             .cardData(
                                                                                                                                                               tabBarShowsubcartResponse.jsonBody,
@@ -9683,7 +9683,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                                     .toString()) >
                                                                                                                                                 0.0
                                                                                                                                             ? functions
-                                                                                                                                                .calculateTineSlotPricingTotal(
+                                                                                                                                                .calculateTimeSlotPricingTotal(
                                                                                                                                                     QuickartGroup.showsubcartCall
                                                                                                                                                         .cardData(
                                                                                                                                                           tabBarShowsubcartResponse.jsonBody,
@@ -9693,7 +9693,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                                 .toString()
                                                                                                                                             : '0',
                                                                                                                                         functions.stringToDouble(functions
-                                                                                                                                                    .calculateTineSlotPricingTotal(
+                                                                                                                                                    .calculateTimeSlotPricingTotal(
                                                                                                                                                         QuickartGroup.showsubcartCall
                                                                                                                                                             .cardData(
                                                                                                                                                               tabBarShowsubcartResponse.jsonBody,
@@ -9703,7 +9703,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                                     .toString()) >
                                                                                                                                                 0.0
                                                                                                                                             ? functions
-                                                                                                                                                .calculateTineSlotPricingTotal(
+                                                                                                                                                .calculateTimeSlotPricingTotal(
                                                                                                                                                     QuickartGroup.showsubcartCall
                                                                                                                                                         .cardData(
                                                                                                                                                           tabBarShowsubcartResponse.jsonBody,
@@ -9750,7 +9750,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                                 '0',
                                                                                                                                                 'no',
                                                                                                                                                 functions.stringToDouble(functions
-                                                                                                                                                            .calculateTineSlotPricingTotal(
+                                                                                                                                                            .calculateTimeSlotPricingTotal(
                                                                                                                                                                 QuickartGroup.showsubcartCall
                                                                                                                                                                     .cardData(
                                                                                                                                                                       tabBarShowsubcartResponse.jsonBody,
@@ -9760,7 +9760,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                                             .toString()) >
                                                                                                                                                         0.0
                                                                                                                                                     ? functions
-                                                                                                                                                        .calculateTineSlotPricingTotal(
+                                                                                                                                                        .calculateTimeSlotPricingTotal(
                                                                                                                                                             QuickartGroup.showsubcartCall
                                                                                                                                                                 .cardData(
                                                                                                                                                                   tabBarShowsubcartResponse.jsonBody,
@@ -9770,7 +9770,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                                         .toString()
                                                                                                                                                     : '0',
                                                                                                                                                 functions.stringToDouble(functions
-                                                                                                                                                            .calculateTineSlotPricingTotal(
+                                                                                                                                                            .calculateTimeSlotPricingTotal(
                                                                                                                                                                 QuickartGroup.showsubcartCall
                                                                                                                                                                     .cardData(
                                                                                                                                                                       tabBarShowsubcartResponse.jsonBody,
@@ -9780,7 +9780,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                                             .toString()) >
                                                                                                                                                         0.0
                                                                                                                                                     ? functions
-                                                                                                                                                        .calculateTineSlotPricingTotal(
+                                                                                                                                                        .calculateTimeSlotPricingTotal(
                                                                                                                                                             QuickartGroup.showsubcartCall
                                                                                                                                                                 .cardData(
                                                                                                                                                                   tabBarShowsubcartResponse.jsonBody,
@@ -9825,7 +9825,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                           .toString(),
                                                                                                                       'add',
                                                                                                                       functions.stringToDouble(functions
-                                                                                                                                  .calculateTineSlotPricingTotal(
+                                                                                                                                  .calculateTimeSlotPricingTotal(
                                                                                                                                       QuickartGroup.showsubcartCall
                                                                                                                                           .cardData(
                                                                                                                                             tabBarShowsubcartResponse.jsonBody,
@@ -9835,7 +9835,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                   .toString()) >
                                                                                                                               0.0
                                                                                                                           ? functions
-                                                                                                                              .calculateTineSlotPricingTotal(
+                                                                                                                              .calculateTimeSlotPricingTotal(
                                                                                                                                   QuickartGroup.showsubcartCall
                                                                                                                                       .cardData(
                                                                                                                                         tabBarShowsubcartResponse.jsonBody,
@@ -9845,7 +9845,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                               .toString()
                                                                                                                           : '0',
                                                                                                                       functions.stringToDouble(functions
-                                                                                                                                  .calculateTineSlotPricingTotal(
+                                                                                                                                  .calculateTimeSlotPricingTotal(
                                                                                                                                       QuickartGroup.showsubcartCall
                                                                                                                                           .cardData(
                                                                                                                                             tabBarShowsubcartResponse.jsonBody,
@@ -9855,7 +9855,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                   .toString()) >
                                                                                                                               0.0
                                                                                                                           ? functions
-                                                                                                                              .calculateTineSlotPricingTotal(
+                                                                                                                              .calculateTimeSlotPricingTotal(
                                                                                                                                   QuickartGroup.showsubcartCall
                                                                                                                                       .cardData(
                                                                                                                                         tabBarShowsubcartResponse.jsonBody,
@@ -9942,7 +9942,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                     '0',
                                                                                                                                     'no',
                                                                                                                                     functions.stringToDouble(functions
-                                                                                                                                                .calculateTineSlotPricingTotal(
+                                                                                                                                                .calculateTimeSlotPricingTotal(
                                                                                                                                                     QuickartGroup.showsubcartCall
                                                                                                                                                         .cardData(
                                                                                                                                                           tabBarShowsubcartResponse.jsonBody,
@@ -9952,7 +9952,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                                 .toString()) >
                                                                                                                                             0.0
                                                                                                                                         ? functions
-                                                                                                                                            .calculateTineSlotPricingTotal(
+                                                                                                                                            .calculateTimeSlotPricingTotal(
                                                                                                                                                 QuickartGroup.showsubcartCall
                                                                                                                                                     .cardData(
                                                                                                                                                       tabBarShowsubcartResponse.jsonBody,
@@ -9962,7 +9962,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                             .toString()
                                                                                                                                         : '0',
                                                                                                                                     functions.stringToDouble(functions
-                                                                                                                                                .calculateTineSlotPricingTotal(
+                                                                                                                                                .calculateTimeSlotPricingTotal(
                                                                                                                                                     QuickartGroup.showsubcartCall
                                                                                                                                                         .cardData(
                                                                                                                                                           tabBarShowsubcartResponse.jsonBody,
@@ -9972,7 +9972,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                                 .toString()) >
                                                                                                                                             0.0
                                                                                                                                         ? functions
-                                                                                                                                            .calculateTineSlotPricingTotal(
+                                                                                                                                            .calculateTimeSlotPricingTotal(
                                                                                                                                                 QuickartGroup.showsubcartCall
                                                                                                                                                     .cardData(
                                                                                                                                                       tabBarShowsubcartResponse.jsonBody,
@@ -10030,7 +10030,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                     '0',
                                                                                                                                     'no',
                                                                                                                                     functions.stringToDouble(functions
-                                                                                                                                                .calculateTineSlotPricingTotal(
+                                                                                                                                                .calculateTimeSlotPricingTotal(
                                                                                                                                                     QuickartGroup.showsubcartCall
                                                                                                                                                         .cardData(
                                                                                                                                                           tabBarShowsubcartResponse.jsonBody,
@@ -10040,7 +10040,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                                 .toString()) >
                                                                                                                                             0.0
                                                                                                                                         ? functions
-                                                                                                                                            .calculateTineSlotPricingTotal(
+                                                                                                                                            .calculateTimeSlotPricingTotal(
                                                                                                                                                 QuickartGroup.showsubcartCall
                                                                                                                                                     .cardData(
                                                                                                                                                       tabBarShowsubcartResponse.jsonBody,
@@ -10050,7 +10050,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                             .toString()
                                                                                                                                         : '0',
                                                                                                                                     functions.stringToDouble(functions
-                                                                                                                                                .calculateTineSlotPricingTotal(
+                                                                                                                                                .calculateTimeSlotPricingTotal(
                                                                                                                                                     QuickartGroup.showsubcartCall
                                                                                                                                                         .cardData(
                                                                                                                                                           tabBarShowsubcartResponse.jsonBody,
@@ -10060,7 +10060,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                                 .toString()) >
                                                                                                                                             0.0
                                                                                                                                         ? functions
-                                                                                                                                            .calculateTineSlotPricingTotal(
+                                                                                                                                            .calculateTimeSlotPricingTotal(
                                                                                                                                                 QuickartGroup.showsubcartCall
                                                                                                                                                     .cardData(
                                                                                                                                                       tabBarShowsubcartResponse.jsonBody,
@@ -10107,7 +10107,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                             '0',
                                                                                                                                             'no',
                                                                                                                                             functions.stringToDouble(functions
-                                                                                                                                                        .calculateTineSlotPricingTotal(
+                                                                                                                                                        .calculateTimeSlotPricingTotal(
                                                                                                                                                             QuickartGroup.showsubcartCall
                                                                                                                                                                 .cardData(
                                                                                                                                                                   tabBarShowsubcartResponse.jsonBody,
@@ -10117,7 +10117,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                                         .toString()) >
                                                                                                                                                     0.0
                                                                                                                                                 ? functions
-                                                                                                                                                    .calculateTineSlotPricingTotal(
+                                                                                                                                                    .calculateTimeSlotPricingTotal(
                                                                                                                                                         QuickartGroup.showsubcartCall
                                                                                                                                                             .cardData(
                                                                                                                                                               tabBarShowsubcartResponse.jsonBody,
@@ -10127,7 +10127,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                                     .toString()
                                                                                                                                                 : '0',
                                                                                                                                             functions.stringToDouble(functions
-                                                                                                                                                        .calculateTineSlotPricingTotal(
+                                                                                                                                                        .calculateTimeSlotPricingTotal(
                                                                                                                                                             QuickartGroup.showsubcartCall
                                                                                                                                                                 .cardData(
                                                                                                                                                                   tabBarShowsubcartResponse.jsonBody,
@@ -10137,7 +10137,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                                         .toString()) >
                                                                                                                                                     0.0
                                                                                                                                                 ? functions
-                                                                                                                                                    .calculateTineSlotPricingTotal(
+                                                                                                                                                    .calculateTimeSlotPricingTotal(
                                                                                                                                                         QuickartGroup.showsubcartCall
                                                                                                                                                             .cardData(
                                                                                                                                                               tabBarShowsubcartResponse.jsonBody,
@@ -10182,7 +10182,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                       .toString(),
                                                                                                                   'add',
                                                                                                                   functions.stringToDouble(functions
-                                                                                                                              .calculateTineSlotPricingTotal(
+                                                                                                                              .calculateTimeSlotPricingTotal(
                                                                                                                                   QuickartGroup.showsubcartCall
                                                                                                                                       .cardData(
                                                                                                                                         tabBarShowsubcartResponse.jsonBody,
@@ -10192,7 +10192,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                               .toString()) >
                                                                                                                           0.0
                                                                                                                       ? functions
-                                                                                                                          .calculateTineSlotPricingTotal(
+                                                                                                                          .calculateTimeSlotPricingTotal(
                                                                                                                               QuickartGroup.showsubcartCall
                                                                                                                                   .cardData(
                                                                                                                                     tabBarShowsubcartResponse.jsonBody,
@@ -10202,7 +10202,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                           .toString()
                                                                                                                       : '0',
                                                                                                                   functions.stringToDouble(functions
-                                                                                                                              .calculateTineSlotPricingTotal(
+                                                                                                                              .calculateTimeSlotPricingTotal(
                                                                                                                                   QuickartGroup.showsubcartCall
                                                                                                                                       .cardData(
                                                                                                                                         tabBarShowsubcartResponse.jsonBody,
@@ -10212,7 +10212,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                               .toString()) >
                                                                                                                           0.0
                                                                                                                       ? functions
-                                                                                                                          .calculateTineSlotPricingTotal(
+                                                                                                                          .calculateTimeSlotPricingTotal(
                                                                                                                               QuickartGroup.showsubcartCall
                                                                                                                                   .cardData(
                                                                                                                                     tabBarShowsubcartResponse.jsonBody,
@@ -11558,7 +11558,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                               '0',
                                                                                                               'no',
                                                                                                               functions.stringToDouble(functions
-                                                                                                                          .calculateTineSlotPricingTotal(
+                                                                                                                          .calculateTimeSlotPricingTotal(
                                                                                                                               QuickartGroup.showsubcartCall
                                                                                                                                   .cardData(
                                                                                                                                     tabBarShowsubcartResponse.jsonBody,
@@ -11568,7 +11568,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                           .toString()) >
                                                                                                                       0.0
                                                                                                                   ? functions
-                                                                                                                      .calculateTineSlotPricingTotal(
+                                                                                                                      .calculateTimeSlotPricingTotal(
                                                                                                                           QuickartGroup.showsubcartCall
                                                                                                                               .cardData(
                                                                                                                                 tabBarShowsubcartResponse.jsonBody,
@@ -11578,7 +11578,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                       .toString()
                                                                                                                   : '0',
                                                                                                               functions.stringToDouble(functions
-                                                                                                                          .calculateTineSlotPricingTotal(
+                                                                                                                          .calculateTimeSlotPricingTotal(
                                                                                                                               QuickartGroup.showsubcartCall
                                                                                                                                   .cardData(
                                                                                                                                     tabBarShowsubcartResponse.jsonBody,
@@ -11588,7 +11588,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                           .toString()) >
                                                                                                                       0.0
                                                                                                                   ? functions
-                                                                                                                      .calculateTineSlotPricingTotal(
+                                                                                                                      .calculateTimeSlotPricingTotal(
                                                                                                                           QuickartGroup.showsubcartCall
                                                                                                                               .cardData(
                                                                                                                                 tabBarShowsubcartResponse.jsonBody,
@@ -11635,7 +11635,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                       '0',
                                                                                                                       'no',
                                                                                                                       functions.stringToDouble(functions
-                                                                                                                                  .calculateTineSlotPricingTotal(
+                                                                                                                                  .calculateTimeSlotPricingTotal(
                                                                                                                                       QuickartGroup.showsubcartCall
                                                                                                                                           .cardData(
                                                                                                                                             tabBarShowsubcartResponse.jsonBody,
@@ -11645,7 +11645,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                   .toString()) >
                                                                                                                               0.0
                                                                                                                           ? functions
-                                                                                                                              .calculateTineSlotPricingTotal(
+                                                                                                                              .calculateTimeSlotPricingTotal(
                                                                                                                                   QuickartGroup.showsubcartCall
                                                                                                                                       .cardData(
                                                                                                                                         tabBarShowsubcartResponse.jsonBody,
@@ -11655,7 +11655,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                               .toString()
                                                                                                                           : '0',
                                                                                                                       functions.stringToDouble(functions
-                                                                                                                                  .calculateTineSlotPricingTotal(
+                                                                                                                                  .calculateTimeSlotPricingTotal(
                                                                                                                                       QuickartGroup.showsubcartCall
                                                                                                                                           .cardData(
                                                                                                                                             tabBarShowsubcartResponse.jsonBody,
@@ -11665,7 +11665,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                   .toString()) >
                                                                                                                               0.0
                                                                                                                           ? functions
-                                                                                                                              .calculateTineSlotPricingTotal(
+                                                                                                                              .calculateTimeSlotPricingTotal(
                                                                                                                                   QuickartGroup.showsubcartCall
                                                                                                                                       .cardData(
                                                                                                                                         tabBarShowsubcartResponse.jsonBody,
@@ -11736,7 +11736,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                 '0',
                                                                                                                 'no',
                                                                                                                 functions.stringToDouble(functions
-                                                                                                                            .calculateTineSlotPricingTotal(
+                                                                                                                            .calculateTimeSlotPricingTotal(
                                                                                                                                 QuickartGroup.showsubcartCall
                                                                                                                                     .cardData(
                                                                                                                                       tabBarShowsubcartResponse.jsonBody,
@@ -11746,7 +11746,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                             .toString()) >
                                                                                                                         0.0
                                                                                                                     ? functions
-                                                                                                                        .calculateTineSlotPricingTotal(
+                                                                                                                        .calculateTimeSlotPricingTotal(
                                                                                                                             QuickartGroup.showsubcartCall
                                                                                                                                 .cardData(
                                                                                                                                   tabBarShowsubcartResponse.jsonBody,
@@ -11756,7 +11756,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                         .toString()
                                                                                                                     : '0',
                                                                                                                 functions.stringToDouble(functions
-                                                                                                                            .calculateTineSlotPricingTotal(
+                                                                                                                            .calculateTimeSlotPricingTotal(
                                                                                                                                 QuickartGroup.showsubcartCall
                                                                                                                                     .cardData(
                                                                                                                                       tabBarShowsubcartResponse.jsonBody,
@@ -11766,7 +11766,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                             .toString()) >
                                                                                                                         0.0
                                                                                                                     ? functions
-                                                                                                                        .calculateTineSlotPricingTotal(
+                                                                                                                        .calculateTimeSlotPricingTotal(
                                                                                                                             QuickartGroup.showsubcartCall
                                                                                                                                 .cardData(
                                                                                                                                   tabBarShowsubcartResponse.jsonBody,
@@ -11824,7 +11824,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                 '0',
                                                                                                                 'no',
                                                                                                                 functions.stringToDouble(functions
-                                                                                                                            .calculateTineSlotPricingTotal(
+                                                                                                                            .calculateTimeSlotPricingTotal(
                                                                                                                                 QuickartGroup.showsubcartCall
                                                                                                                                     .cardData(
                                                                                                                                       tabBarShowsubcartResponse.jsonBody,
@@ -11834,7 +11834,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                             .toString()) >
                                                                                                                         0.0
                                                                                                                     ? functions
-                                                                                                                        .calculateTineSlotPricingTotal(
+                                                                                                                        .calculateTimeSlotPricingTotal(
                                                                                                                             QuickartGroup.showsubcartCall
                                                                                                                                 .cardData(
                                                                                                                                   tabBarShowsubcartResponse.jsonBody,
@@ -11844,7 +11844,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                         .toString()
                                                                                                                     : '0',
                                                                                                                 functions.stringToDouble(functions
-                                                                                                                            .calculateTineSlotPricingTotal(
+                                                                                                                            .calculateTimeSlotPricingTotal(
                                                                                                                                 QuickartGroup.showsubcartCall
                                                                                                                                     .cardData(
                                                                                                                                       tabBarShowsubcartResponse.jsonBody,
@@ -11854,7 +11854,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                             .toString()) >
                                                                                                                         0.0
                                                                                                                     ? functions
-                                                                                                                        .calculateTineSlotPricingTotal(
+                                                                                                                        .calculateTimeSlotPricingTotal(
                                                                                                                             QuickartGroup.showsubcartCall
                                                                                                                                 .cardData(
                                                                                                                                   tabBarShowsubcartResponse.jsonBody,
@@ -11901,7 +11901,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                         '0',
                                                                                                                         'no',
                                                                                                                         functions.stringToDouble(functions
-                                                                                                                                    .calculateTineSlotPricingTotal(
+                                                                                                                                    .calculateTimeSlotPricingTotal(
                                                                                                                                         QuickartGroup.showsubcartCall
                                                                                                                                             .cardData(
                                                                                                                                               tabBarShowsubcartResponse.jsonBody,
@@ -11911,7 +11911,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                     .toString()) >
                                                                                                                                 0.0
                                                                                                                             ? functions
-                                                                                                                                .calculateTineSlotPricingTotal(
+                                                                                                                                .calculateTimeSlotPricingTotal(
                                                                                                                                     QuickartGroup.showsubcartCall
                                                                                                                                         .cardData(
                                                                                                                                           tabBarShowsubcartResponse.jsonBody,
@@ -11921,7 +11921,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                 .toString()
                                                                                                                             : '0',
                                                                                                                         functions.stringToDouble(functions
-                                                                                                                                    .calculateTineSlotPricingTotal(
+                                                                                                                                    .calculateTimeSlotPricingTotal(
                                                                                                                                         QuickartGroup.showsubcartCall
                                                                                                                                             .cardData(
                                                                                                                                               tabBarShowsubcartResponse.jsonBody,
@@ -11931,7 +11931,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                     .toString()) >
                                                                                                                                 0.0
                                                                                                                             ? functions
-                                                                                                                                .calculateTineSlotPricingTotal(
+                                                                                                                                .calculateTimeSlotPricingTotal(
                                                                                                                                     QuickartGroup.showsubcartCall
                                                                                                                                         .cardData(
                                                                                                                                           tabBarShowsubcartResponse.jsonBody,
@@ -11976,7 +11976,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                   .toString(),
                                                                                               'add',
                                                                                               functions.stringToDouble(functions
-                                                                                                          .calculateTineSlotPricingTotal(
+                                                                                                          .calculateTimeSlotPricingTotal(
                                                                                                               QuickartGroup.showsubcartCall
                                                                                                                   .cardData(
                                                                                                                     tabBarShowsubcartResponse.jsonBody,
@@ -11986,7 +11986,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                           .toString()) >
                                                                                                       0.0
                                                                                                   ? functions
-                                                                                                      .calculateTineSlotPricingTotal(
+                                                                                                      .calculateTimeSlotPricingTotal(
                                                                                                           QuickartGroup.showsubcartCall
                                                                                                               .cardData(
                                                                                                                 tabBarShowsubcartResponse.jsonBody,
@@ -11996,7 +11996,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                       .toString()
                                                                                                   : '0',
                                                                                               functions.stringToDouble(functions
-                                                                                                          .calculateTineSlotPricingTotal(
+                                                                                                          .calculateTimeSlotPricingTotal(
                                                                                                               QuickartGroup.showsubcartCall
                                                                                                                   .cardData(
                                                                                                                     tabBarShowsubcartResponse.jsonBody,
@@ -12006,7 +12006,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                           .toString()) >
                                                                                                       0.0
                                                                                                   ? functions
-                                                                                                      .calculateTineSlotPricingTotal(
+                                                                                                      .calculateTimeSlotPricingTotal(
                                                                                                           QuickartGroup.showsubcartCall
                                                                                                               .cardData(
                                                                                                                 tabBarShowsubcartResponse.jsonBody,
@@ -12056,7 +12056,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                               '0',
                                                                                                               'no',
                                                                                                               functions.stringToDouble(functions
-                                                                                                                          .calculateTineSlotPricingTotal(
+                                                                                                                          .calculateTimeSlotPricingTotal(
                                                                                                                               QuickartGroup.showsubcartCall
                                                                                                                                   .cardData(
                                                                                                                                     tabBarShowsubcartResponse.jsonBody,
@@ -12066,7 +12066,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                           .toString()) >
                                                                                                                       0.0
                                                                                                                   ? functions
-                                                                                                                      .calculateTineSlotPricingTotal(
+                                                                                                                      .calculateTimeSlotPricingTotal(
                                                                                                                           QuickartGroup.showsubcartCall
                                                                                                                               .cardData(
                                                                                                                                 tabBarShowsubcartResponse.jsonBody,
@@ -12076,7 +12076,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                       .toString()
                                                                                                                   : '0',
                                                                                                               functions.stringToDouble(functions
-                                                                                                                          .calculateTineSlotPricingTotal(
+                                                                                                                          .calculateTimeSlotPricingTotal(
                                                                                                                               QuickartGroup.showsubcartCall
                                                                                                                                   .cardData(
                                                                                                                                     tabBarShowsubcartResponse.jsonBody,
@@ -12086,7 +12086,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                           .toString()) >
                                                                                                                       0.0
                                                                                                                   ? functions
-                                                                                                                      .calculateTineSlotPricingTotal(
+                                                                                                                      .calculateTimeSlotPricingTotal(
                                                                                                                           QuickartGroup.showsubcartCall
                                                                                                                               .cardData(
                                                                                                                                 tabBarShowsubcartResponse.jsonBody,
@@ -12200,7 +12200,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                   '0',
                                                                                                                   'no',
                                                                                                                   functions.stringToDouble(functions
-                                                                                                                              .calculateTineSlotPricingTotal(
+                                                                                                                              .calculateTimeSlotPricingTotal(
                                                                                                                                   QuickartGroup.showsubcartCall
                                                                                                                                       .cardData(
                                                                                                                                         tabBarShowsubcartResponse.jsonBody,
@@ -12210,7 +12210,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                               .toString()) >
                                                                                                                           0.0
                                                                                                                       ? functions
-                                                                                                                          .calculateTineSlotPricingTotal(
+                                                                                                                          .calculateTimeSlotPricingTotal(
                                                                                                                               QuickartGroup.showsubcartCall
                                                                                                                                   .cardData(
                                                                                                                                     tabBarShowsubcartResponse.jsonBody,
@@ -12220,7 +12220,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                           .toString()
                                                                                                                       : '0',
                                                                                                                   functions.stringToDouble(functions
-                                                                                                                              .calculateTineSlotPricingTotal(
+                                                                                                                              .calculateTimeSlotPricingTotal(
                                                                                                                                   QuickartGroup.showsubcartCall
                                                                                                                                       .cardData(
                                                                                                                                         tabBarShowsubcartResponse.jsonBody,
@@ -12230,7 +12230,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                               .toString()) >
                                                                                                                           0.0
                                                                                                                       ? functions
-                                                                                                                          .calculateTineSlotPricingTotal(
+                                                                                                                          .calculateTimeSlotPricingTotal(
                                                                                                                               QuickartGroup.showsubcartCall
                                                                                                                                   .cardData(
                                                                                                                                     tabBarShowsubcartResponse.jsonBody,
@@ -12288,7 +12288,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                   '0',
                                                                                                                   'no',
                                                                                                                   functions.stringToDouble(functions
-                                                                                                                              .calculateTineSlotPricingTotal(
+                                                                                                                              .calculateTimeSlotPricingTotal(
                                                                                                                                   QuickartGroup.showsubcartCall
                                                                                                                                       .cardData(
                                                                                                                                         tabBarShowsubcartResponse.jsonBody,
@@ -12298,7 +12298,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                               .toString()) >
                                                                                                                           0.0
                                                                                                                       ? functions
-                                                                                                                          .calculateTineSlotPricingTotal(
+                                                                                                                          .calculateTimeSlotPricingTotal(
                                                                                                                               QuickartGroup.showsubcartCall
                                                                                                                                   .cardData(
                                                                                                                                     tabBarShowsubcartResponse.jsonBody,
@@ -12308,7 +12308,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                           .toString()
                                                                                                                       : '0',
                                                                                                                   functions.stringToDouble(functions
-                                                                                                                              .calculateTineSlotPricingTotal(
+                                                                                                                              .calculateTimeSlotPricingTotal(
                                                                                                                                   QuickartGroup.showsubcartCall
                                                                                                                                       .cardData(
                                                                                                                                         tabBarShowsubcartResponse.jsonBody,
@@ -12318,7 +12318,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                               .toString()) >
                                                                                                                           0.0
                                                                                                                       ? functions
-                                                                                                                          .calculateTineSlotPricingTotal(
+                                                                                                                          .calculateTimeSlotPricingTotal(
                                                                                                                               QuickartGroup.showsubcartCall
                                                                                                                                   .cardData(
                                                                                                                                     tabBarShowsubcartResponse.jsonBody,
@@ -12365,7 +12365,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                           '0',
                                                                                                                           'no',
                                                                                                                           functions.stringToDouble(functions
-                                                                                                                                      .calculateTineSlotPricingTotal(
+                                                                                                                                      .calculateTimeSlotPricingTotal(
                                                                                                                                           QuickartGroup.showsubcartCall
                                                                                                                                               .cardData(
                                                                                                                                                 tabBarShowsubcartResponse.jsonBody,
@@ -12375,7 +12375,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                       .toString()) >
                                                                                                                                   0.0
                                                                                                                               ? functions
-                                                                                                                                  .calculateTineSlotPricingTotal(
+                                                                                                                                  .calculateTimeSlotPricingTotal(
                                                                                                                                       QuickartGroup.showsubcartCall
                                                                                                                                           .cardData(
                                                                                                                                             tabBarShowsubcartResponse.jsonBody,
@@ -12385,7 +12385,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                   .toString()
                                                                                                                               : '0',
                                                                                                                           functions.stringToDouble(functions
-                                                                                                                                      .calculateTineSlotPricingTotal(
+                                                                                                                                      .calculateTimeSlotPricingTotal(
                                                                                                                                           QuickartGroup.showsubcartCall
                                                                                                                                               .cardData(
                                                                                                                                                 tabBarShowsubcartResponse.jsonBody,
@@ -12395,7 +12395,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                       .toString()) >
                                                                                                                                   0.0
                                                                                                                               ? functions
-                                                                                                                                  .calculateTineSlotPricingTotal(
+                                                                                                                                  .calculateTimeSlotPricingTotal(
                                                                                                                                       QuickartGroup.showsubcartCall
                                                                                                                                           .cardData(
                                                                                                                                             tabBarShowsubcartResponse.jsonBody,
@@ -12440,7 +12440,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                     .toString(),
                                                                                                 'add',
                                                                                                 functions.stringToDouble(functions
-                                                                                                            .calculateTineSlotPricingTotal(
+                                                                                                            .calculateTimeSlotPricingTotal(
                                                                                                                 QuickartGroup.showsubcartCall
                                                                                                                     .cardData(
                                                                                                                       tabBarShowsubcartResponse.jsonBody,
@@ -12450,7 +12450,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                             .toString()) >
                                                                                                         0.0
                                                                                                     ? functions
-                                                                                                        .calculateTineSlotPricingTotal(
+                                                                                                        .calculateTimeSlotPricingTotal(
                                                                                                             QuickartGroup.showsubcartCall
                                                                                                                 .cardData(
                                                                                                                   tabBarShowsubcartResponse.jsonBody,
@@ -12460,7 +12460,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                         .toString()
                                                                                                     : '0',
                                                                                                 functions.stringToDouble(functions
-                                                                                                            .calculateTineSlotPricingTotal(
+                                                                                                            .calculateTimeSlotPricingTotal(
                                                                                                                 QuickartGroup.showsubcartCall
                                                                                                                     .cardData(
                                                                                                                       tabBarShowsubcartResponse.jsonBody,
@@ -12470,7 +12470,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                             .toString()) >
                                                                                                         0.0
                                                                                                     ? functions
-                                                                                                        .calculateTineSlotPricingTotal(
+                                                                                                        .calculateTimeSlotPricingTotal(
                                                                                                             QuickartGroup.showsubcartCall
                                                                                                                 .cardData(
                                                                                                                   tabBarShowsubcartResponse.jsonBody,
@@ -12851,7 +12851,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                   '0',
                                                                                                                   'no',
                                                                                                                   functions.stringToDouble(functions
-                                                                                                                              .calculateTineSlotPricingTotal(
+                                                                                                                              .calculateTimeSlotPricingTotal(
                                                                                                                                   QuickartGroup.showsubcartCall
                                                                                                                                       .cardData(
                                                                                                                                         tabBarShowsubcartResponse.jsonBody,
@@ -12861,7 +12861,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                               .toString()) >
                                                                                                                           0.0
                                                                                                                       ? functions
-                                                                                                                          .calculateTineSlotPricingTotal(
+                                                                                                                          .calculateTimeSlotPricingTotal(
                                                                                                                               QuickartGroup.showsubcartCall
                                                                                                                                   .cardData(
                                                                                                                                     tabBarShowsubcartResponse.jsonBody,
@@ -12871,7 +12871,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                           .toString()
                                                                                                                       : '0',
                                                                                                                   functions.stringToDouble(functions
-                                                                                                                              .calculateTineSlotPricingTotal(
+                                                                                                                              .calculateTimeSlotPricingTotal(
                                                                                                                                   QuickartGroup.showsubcartCall
                                                                                                                                       .cardData(
                                                                                                                                         tabBarShowsubcartResponse.jsonBody,
@@ -12881,7 +12881,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                               .toString()) >
                                                                                                                           0.0
                                                                                                                       ? functions
-                                                                                                                          .calculateTineSlotPricingTotal(
+                                                                                                                          .calculateTimeSlotPricingTotal(
                                                                                                                               QuickartGroup.showsubcartCall
                                                                                                                                   .cardData(
                                                                                                                                     tabBarShowsubcartResponse.jsonBody,
@@ -12939,7 +12939,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                   '0',
                                                                                                                   'no',
                                                                                                                   functions.stringToDouble(functions
-                                                                                                                              .calculateTineSlotPricingTotal(
+                                                                                                                              .calculateTimeSlotPricingTotal(
                                                                                                                                   QuickartGroup.showsubcartCall
                                                                                                                                       .cardData(
                                                                                                                                         tabBarShowsubcartResponse.jsonBody,
@@ -12949,7 +12949,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                               .toString()) >
                                                                                                                           0.0
                                                                                                                       ? functions
-                                                                                                                          .calculateTineSlotPricingTotal(
+                                                                                                                          .calculateTimeSlotPricingTotal(
                                                                                                                               QuickartGroup.showsubcartCall
                                                                                                                                   .cardData(
                                                                                                                                     tabBarShowsubcartResponse.jsonBody,
@@ -12959,7 +12959,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                           .toString()
                                                                                                                       : '0',
                                                                                                                   functions.stringToDouble(functions
-                                                                                                                              .calculateTineSlotPricingTotal(
+                                                                                                                              .calculateTimeSlotPricingTotal(
                                                                                                                                   QuickartGroup.showsubcartCall
                                                                                                                                       .cardData(
                                                                                                                                         tabBarShowsubcartResponse.jsonBody,
@@ -12969,7 +12969,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                               .toString()) >
                                                                                                                           0.0
                                                                                                                       ? functions
-                                                                                                                          .calculateTineSlotPricingTotal(
+                                                                                                                          .calculateTimeSlotPricingTotal(
                                                                                                                               QuickartGroup.showsubcartCall
                                                                                                                                   .cardData(
                                                                                                                                     tabBarShowsubcartResponse.jsonBody,
@@ -13016,7 +13016,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                           '0',
                                                                                                                           'no',
                                                                                                                           functions.stringToDouble(functions
-                                                                                                                                      .calculateTineSlotPricingTotal(
+                                                                                                                                      .calculateTimeSlotPricingTotal(
                                                                                                                                           QuickartGroup.showsubcartCall
                                                                                                                                               .cardData(
                                                                                                                                                 tabBarShowsubcartResponse.jsonBody,
@@ -13026,7 +13026,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                       .toString()) >
                                                                                                                                   0.0
                                                                                                                               ? functions
-                                                                                                                                  .calculateTineSlotPricingTotal(
+                                                                                                                                  .calculateTimeSlotPricingTotal(
                                                                                                                                       QuickartGroup.showsubcartCall
                                                                                                                                           .cardData(
                                                                                                                                             tabBarShowsubcartResponse.jsonBody,
@@ -13036,7 +13036,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                   .toString()
                                                                                                                               : '0',
                                                                                                                           functions.stringToDouble(functions
-                                                                                                                                      .calculateTineSlotPricingTotal(
+                                                                                                                                      .calculateTimeSlotPricingTotal(
                                                                                                                                           QuickartGroup.showsubcartCall
                                                                                                                                               .cardData(
                                                                                                                                                 tabBarShowsubcartResponse.jsonBody,
@@ -13046,7 +13046,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                       .toString()) >
                                                                                                                                   0.0
                                                                                                                               ? functions
-                                                                                                                                  .calculateTineSlotPricingTotal(
+                                                                                                                                  .calculateTimeSlotPricingTotal(
                                                                                                                                       QuickartGroup.showsubcartCall
                                                                                                                                           .cardData(
                                                                                                                                             tabBarShowsubcartResponse.jsonBody,
@@ -13091,7 +13091,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                     .toString(),
                                                                                                 'add',
                                                                                                 functions.stringToDouble(functions
-                                                                                                            .calculateTineSlotPricingTotal(
+                                                                                                            .calculateTimeSlotPricingTotal(
                                                                                                                 QuickartGroup.showsubcartCall
                                                                                                                     .cardData(
                                                                                                                       tabBarShowsubcartResponse.jsonBody,
@@ -13101,7 +13101,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                             .toString()) >
                                                                                                         0.0
                                                                                                     ? functions
-                                                                                                        .calculateTineSlotPricingTotal(
+                                                                                                        .calculateTimeSlotPricingTotal(
                                                                                                             QuickartGroup.showsubcartCall
                                                                                                                 .cardData(
                                                                                                                   tabBarShowsubcartResponse.jsonBody,
@@ -13111,7 +13111,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                         .toString()
                                                                                                     : '0',
                                                                                                 functions.stringToDouble(functions
-                                                                                                            .calculateTineSlotPricingTotal(
+                                                                                                            .calculateTimeSlotPricingTotal(
                                                                                                                 QuickartGroup.showsubcartCall
                                                                                                                     .cardData(
                                                                                                                       tabBarShowsubcartResponse.jsonBody,
@@ -13121,7 +13121,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                             .toString()) >
                                                                                                         0.0
                                                                                                     ? functions
-                                                                                                        .calculateTineSlotPricingTotal(
+                                                                                                        .calculateTimeSlotPricingTotal(
                                                                                                             QuickartGroup.showsubcartCall
                                                                                                                 .cardData(
                                                                                                                   tabBarShowsubcartResponse.jsonBody,
@@ -14878,7 +14878,9 @@ class _CartSubscriptionScreenWidgetState
                           ),
                           child: Container(
                             width: double.infinity,
-                            height: 490.0,
+                            height: FFAppState().selectedDeliveryDate != ''
+                                ? 490.0
+                                : 400.0,
                             decoration: BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.only(
@@ -16747,7 +16749,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                         fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
                                                                                       ),
                                                                                       color: FFAppConstants.blackColor0A0A0A,
-                                                                                      fontSize: 10.0,
+                                                                                      fontSize: 12.0,
                                                                                       letterSpacing: 0.0,
                                                                                       fontWeight: FontWeight.normal,
                                                                                       fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
@@ -16841,7 +16843,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                       ).toString()
                                                                                                   ? FFAppConstants.redDF3F56
                                                                                                   : FFAppConstants.darkGreen,
-                                                                                              fontSize: 12.0,
+                                                                                              fontSize: 10.0,
                                                                                               letterSpacing: 0.0,
                                                                                               fontWeight: FontWeight.w500,
                                                                                               fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
@@ -16867,7 +16869,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                       ).toString()
                                                                                                   ? FFAppConstants.redDF3F56
                                                                                                   : FFAppConstants.darkGreen,
-                                                                                              fontSize: 12.0,
+                                                                                              fontSize: 10.0,
                                                                                               letterSpacing: 0.0,
                                                                                               fontWeight: FontWeight.bold,
                                                                                               fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
@@ -16896,7 +16898,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                       ).toString()
                                                                                                   ? FFAppConstants.redDF3F56
                                                                                                   : FFAppConstants.darkGreen,
-                                                                                              fontSize: 12.0,
+                                                                                              fontSize: 10.0,
                                                                                               letterSpacing: 0.0,
                                                                                               fontWeight: FontWeight.w500,
                                                                                               fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
@@ -16950,7 +16952,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                         fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
                                                                                                       ),
                                                                                                       color: FFAppConstants.blackColor0A0A0A,
-                                                                                                      fontSize: 12.0,
+                                                                                                      fontSize: 10.0,
                                                                                                       letterSpacing: 0.0,
                                                                                                       fontWeight: FontWeight.w500,
                                                                                                       fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
@@ -16973,7 +16975,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                         fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
                                                                                                       ),
                                                                                                       color: FFAppConstants.blackColor0A0A0A,
-                                                                                                      fontSize: 12.0,
+                                                                                                      fontSize: 10.0,
                                                                                                       letterSpacing: 0.0,
                                                                                                       fontWeight: FontWeight.bold,
                                                                                                       fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,

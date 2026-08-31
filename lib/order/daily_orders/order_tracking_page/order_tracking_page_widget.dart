@@ -2541,11 +2541,7 @@ class _OrderTrackingPageWidgetState extends State<OrderTrackingPageWidget> {
                                                                   r'''$.data.total_price''',
                                                                 ).toString()) +
                                                                 double.parse(
-                                                                    getJsonField(
-                                                                  orderTrackingPageOrderDetailAPIResponse
-                                                                      .jsonBody,
-                                                                  r'''$.data.trail_discount''',
-                                                                ).toString()))
+                                                                    '0'))
                                                             .toString())!,
                                                         style: FlutterFlowTheme
                                                                 .of(context)
@@ -2686,11 +2682,7 @@ class _OrderTrackingPageWidgetState extends State<OrderTrackingPageWidget> {
                                                                   r'''$.data.total_products_mrp''',
                                                                 ).toString()) +
                                                                 double.parse(
-                                                                    getJsonField(
-                                                                  orderTrackingPageOrderDetailAPIResponse
-                                                                      .jsonBody,
-                                                                  r'''$.data.trail_discount''',
-                                                                ).toString()))
+                                                                    '0'))
                                                             .toString())!,
                                                         style: FlutterFlowTheme
                                                                 .of(context)
@@ -4503,11 +4495,7 @@ class _OrderTrackingPageWidgetState extends State<OrderTrackingPageWidget> {
                                                                         .jsonBody,
                                                                     r'''$.data.coupon_discount''',
                                                                   ).toString(),
-                                                                  getJsonField(
-                                                                    orderTrackingPageOrderDetailAPIResponse
-                                                                        .jsonBody,
-                                                                    r'''$.data.trail_discount''',
-                                                                  ).toString()));
+                                                                  '0'));
                                                             }
                                                           }(),
                                                           '0.00',

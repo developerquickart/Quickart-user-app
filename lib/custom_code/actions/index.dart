@@ -45,3 +45,5 @@ export '/custom_code/actions/save_login_data.dart' show saveLoginData;
 export '/custom_code/actions/clear_share_prefe_data.dart'
     show clearSharePrefeData;
 export '/custom_code/actions/is_vpn_enabled.dart' show isVpnEnabled;
+export '/custom_code/actions/navigate_to_back_btn_screen.dart'
+    show navigateToBackBtnScreen;

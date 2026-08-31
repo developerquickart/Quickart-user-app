@@ -5714,8 +5714,7 @@ class ProductsearchCall {
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'productsearch',
-      apiUrl:
-          'https://fipunwrfngwnoaersvlb.supabase.co/functions/v1/product-search',
+      apiUrl: 'https://pvtiycfiimwxnruqyvqq.supabase.co/functions/v1/rapid-api',
       callType: ApiCallType.POST,
       headers: {},
       params: {},
