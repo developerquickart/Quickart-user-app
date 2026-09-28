@@ -61,6 +61,22 @@ class _CartSubscriptionScreenWidgetState
       FFAppState().deliveryPartnerInstructionBell = '';
       FFAppState().deliveryPartnerInstructionDoor = '';
       FFAppState().update(() {});
+      logFirebaseEvent('cartSubscriptionScreen_custom_action');
+      await actions.facebookEventClass(
+        FFAppState().userID,
+        '0',
+        '0',
+        0.0,
+        0,
+        0.0,
+        'cartViewedS',
+        FFAppState().emptyJson,
+        '0',
+        '0',
+        '0',
+        '0',
+        '0',
+      );
       logFirebaseEvent('cartSubscriptionScreen_update_page_state');
       _model.isPaymentDone = true;
       safeSetState(() {});
@@ -1180,12 +1196,12 @@ class _CartSubscriptionScreenWidgetState
                                                                                       Padding(
                                                                                         padding: EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 0.0),
                                                                                         child: Container(
-                                                                                          width: 93.0,
+                                                                                          width: 99.0,
                                                                                           decoration: BoxDecoration(),
                                                                                           child: Column(
                                                                                             mainAxisSize: MainAxisSize.max,
                                                                                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                                                                            crossAxisAlignment: CrossAxisAlignment.center,
+                                                                                            crossAxisAlignment: CrossAxisAlignment.end,
                                                                                             children: [
                                                                                               RichText(
                                                                                                 textScaler: MediaQuery.of(context).textScaler,
@@ -1302,45 +1318,518 @@ class _CartSubscriptionScreenWidgetState
                                                                                                   },
                                                                                                 ),
                                                                                               ),
-                                                                                              Container(
-                                                                                                width: 90.0,
-                                                                                                height: 35.0,
-                                                                                                decoration: BoxDecoration(
-                                                                                                  borderRadius: BorderRadius.only(
-                                                                                                    topLeft: Radius.circular(5.0),
-                                                                                                    topRight: Radius.circular(5.0),
-                                                                                                    bottomLeft: Radius.circular(5.0),
-                                                                                                    bottomRight: Radius.circular(5.0),
-                                                                                                  ),
-                                                                                                  border: Border.all(
-                                                                                                    color: FFAppConstants.calculatorColor,
-                                                                                                    width: 0.0,
-                                                                                                  ),
-                                                                                                ),
-                                                                                                child: Row(
-                                                                                                  mainAxisSize: MainAxisSize.max,
-                                                                                                  mainAxisAlignment: MainAxisAlignment.center,
-                                                                                                  children: [
-                                                                                                    Expanded(
-                                                                                                      child: Align(
-                                                                                                        alignment: AlignmentDirectional(0.0, 0.0),
-                                                                                                        child: FFButtonWidget(
+                                                                                              Builder(
+                                                                                                builder: (context) {
+                                                                                                  if (FFAppConstants.stockNotify !=
+                                                                                                      getJsonField(
+                                                                                                        productSubModelItem,
+                                                                                                        r'''$.stock''',
+                                                                                                      ).toString()) {
+                                                                                                    return Container(
+                                                                                                      width: 90.0,
+                                                                                                      height: 35.0,
+                                                                                                      decoration: BoxDecoration(
+                                                                                                        borderRadius: BorderRadius.only(
+                                                                                                          topLeft: Radius.circular(5.0),
+                                                                                                          topRight: Radius.circular(5.0),
+                                                                                                          bottomLeft: Radius.circular(5.0),
+                                                                                                          bottomRight: Radius.circular(5.0),
+                                                                                                        ),
+                                                                                                        border: Border.all(
+                                                                                                          color: FFAppConstants.calculatorColor,
+                                                                                                          width: 0.0,
+                                                                                                        ),
+                                                                                                      ),
+                                                                                                      child: Row(
+                                                                                                        mainAxisSize: MainAxisSize.max,
+                                                                                                        mainAxisAlignment: MainAxisAlignment.center,
+                                                                                                        children: [
+                                                                                                          Expanded(
+                                                                                                            child: Align(
+                                                                                                              alignment: AlignmentDirectional(0.0, 0.0),
+                                                                                                              child: FFButtonWidget(
+                                                                                                                onPressed: () async {
+                                                                                                                  logFirebaseEvent('CART_SUBSCRIPTION_SCREEN__BTN_ON_TAP');
+                                                                                                                  logFirebaseEvent('Button_custom_action');
+                                                                                                                  _model.internet = await actions.checkInternetConnection();
+                                                                                                                  if (_model.internet == true) {
+                                                                                                                    logFirebaseEvent('Button_haptic_feedback');
+                                                                                                                    HapticFeedback.heavyImpact();
+                                                                                                                    logFirebaseEvent('Button_backend_call');
+                                                                                                                    _model.addtosubCart = await QuickartGroup.addtosubcartCall.call(
+                                                                                                                      userid: FFAppState().userID,
+                                                                                                                      qty: functions.addRemoveQTY(
+                                                                                                                          getJsonField(
+                                                                                                                            productSubModelItem,
+                                                                                                                            r'''$.cart_qty''',
+                                                                                                                          ),
+                                                                                                                          'remove'),
+                                                                                                                      storeid: getJsonField(
+                                                                                                                        FFAppState().zoneInfo,
+                                                                                                                        r'''$.store_id''',
+                                                                                                                      ).toString(),
+                                                                                                                      varientid: getJsonField(
+                                                                                                                        productSubModelItem,
+                                                                                                                        r'''$.varient_id''',
+                                                                                                                      ).toString(),
+                                                                                                                      deviceid: FFAppState().deviceID,
+                                                                                                                      repeatOrder: getJsonField(
+                                                                                                                        productSubModelItem,
+                                                                                                                        r'''$.repeat_orders''',
+                                                                                                                      ).toString(),
+                                                                                                                      timeSlot: getJsonField(
+                                                                                                                        productSubModelItem,
+                                                                                                                        r'''$.sub_time_slot''',
+                                                                                                                      ).toString(),
+                                                                                                                      subTotalDelivery: getJsonField(
+                                                                                                                        productSubModelItem,
+                                                                                                                        r'''$.sub_total_delivery''',
+                                                                                                                      ).toString(),
+                                                                                                                      subTotalDate: getJsonField(
+                                                                                                                        productSubModelItem,
+                                                                                                                        r'''$.sub_delivery_date''',
+                                                                                                                      ).toString(),
+                                                                                                                      platform: isiOS ? 'ios' : 'android',
+                                                                                                                    );
+
+                                                                                                                    if ((_model.addtosubCart?.succeeded ?? true)) {
+                                                                                                                      logFirebaseEvent('Button_update_app_state');
+                                                                                                                      FFAppState().subCartSavingAmount = QuickartGroup.addtosubcartCall.savingPrice(
+                                                                                                                        (_model.addtosubCart?.jsonBody ?? ''),
+                                                                                                                      )!;
+                                                                                                                      FFAppState().subCartTotalPrice = QuickartGroup.addtosubcartCall.totalPrice(
+                                                                                                                        (_model.addtosubCart?.jsonBody ?? ''),
+                                                                                                                      )!;
+                                                                                                                      FFAppState().subCartTotalItem = QuickartGroup.addtosubcartCall.totalItems(
+                                                                                                                        (_model.addtosubCart?.jsonBody ?? ''),
+                                                                                                                      )!;
+                                                                                                                      FFAppState().refreshTrigger = true;
+                                                                                                                      safeSetState(() {});
+                                                                                                                      logFirebaseEvent('Button_refresh_database_request');
+                                                                                                                      safeSetState(() => _model.apiRequestCompleter = null);
+                                                                                                                      await _model.waitForApiRequestCompleted();
+                                                                                                                      logFirebaseEvent('Button_google_analytics_event');
+                                                                                                                      logFirebaseEvent(
+                                                                                                                        'Remove From Sub Cart',
+                                                                                                                        parameters: {
+                                                                                                                          'Screen Name': 'Subscription Cart Screen',
+                                                                                                                          'API Name': 'Add To SubCart',
+                                                                                                                        },
+                                                                                                                      );
+                                                                                                                      logFirebaseEvent('Button_custom_action');
+                                                                                                                      await actions.facebookEventClass(
+                                                                                                                        getJsonField(
+                                                                                                                          productSubModelItem,
+                                                                                                                          r'''$.varient_id''',
+                                                                                                                        ).toString(),
+                                                                                                                        getJsonField(
+                                                                                                                          productSubModelItem,
+                                                                                                                          r'''$.product_name''',
+                                                                                                                        ).toString(),
+                                                                                                                        'subscription product',
+                                                                                                                        functions.stringToDouble(getJsonField(
+                                                                                                                          productSubModelItem,
+                                                                                                                          r'''$.price''',
+                                                                                                                        ).toString()),
+                                                                                                                        1,
+                                                                                                                        functions.stringToDouble(getJsonField(
+                                                                                                                          productSubModelItem,
+                                                                                                                          r'''$.mrp''',
+                                                                                                                        ).toString()),
+                                                                                                                        'remove',
+                                                                                                                        FFAppState().emptyJson,
+                                                                                                                        'emptyjons',
+                                                                                                                        ' ',
+                                                                                                                        ' ',
+                                                                                                                        ' ',
+                                                                                                                        ' ',
+                                                                                                                      );
+                                                                                                                    } else {
+                                                                                                                      logFirebaseEvent('Button_show_snack_bar');
+                                                                                                                      ScaffoldMessenger.of(context).showSnackBar(
+                                                                                                                        SnackBar(
+                                                                                                                          content: Text(
+                                                                                                                            getJsonField(
+                                                                                                                              (_model.addtosubCart?.jsonBody ?? ''),
+                                                                                                                              r'''$.message''',
+                                                                                                                            ).toString(),
+                                                                                                                            style: GoogleFonts.montserrat(
+                                                                                                                              color: FFAppConstants.indigoColor,
+                                                                                                                              fontWeight: FontWeight.w500,
+                                                                                                                              fontSize: 12.0,
+                                                                                                                            ),
+                                                                                                                          ),
+                                                                                                                          duration: Duration(milliseconds: 1200),
+                                                                                                                          backgroundColor: FFAppConstants.primaryPurpleE4D8F5,
+                                                                                                                        ),
+                                                                                                                      );
+                                                                                                                    }
+                                                                                                                  } else {
+                                                                                                                    logFirebaseEvent('Button_show_snack_bar');
+                                                                                                                    ScaffoldMessenger.of(context).showSnackBar(
+                                                                                                                      SnackBar(
+                                                                                                                        content: Text(
+                                                                                                                          FFAppConstants.internetString,
+                                                                                                                          style: GoogleFonts.montserrat(
+                                                                                                                            color: FFAppConstants.indigoColor,
+                                                                                                                            fontWeight: FontWeight.w500,
+                                                                                                                            fontSize: 12.0,
+                                                                                                                          ),
+                                                                                                                        ),
+                                                                                                                        duration: Duration(milliseconds: 1000),
+                                                                                                                        backgroundColor: FFAppConstants.primaryPurpleE4D8F5,
+                                                                                                                      ),
+                                                                                                                    );
+                                                                                                                  }
+
+                                                                                                                  safeSetState(() {});
+                                                                                                                },
+                                                                                                                text: '-',
+                                                                                                                options: FFButtonOptions(
+                                                                                                                  width: 30.0,
+                                                                                                                  height: 35.0,
+                                                                                                                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                                                                                                                  iconPadding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                                                                                                                  color: FFAppConstants.calculatorColor,
+                                                                                                                  textStyle: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                                                        font: GoogleFonts.montserrat(
+                                                                                                                          fontWeight: FontWeight.w500,
+                                                                                                                          fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                                                                        ),
+                                                                                                                        color: FFAppConstants.whiteColor,
+                                                                                                                        fontSize: 20.0,
+                                                                                                                        letterSpacing: 0.0,
+                                                                                                                        fontWeight: FontWeight.w500,
+                                                                                                                        fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                                                                      ),
+                                                                                                                  elevation: 0.0,
+                                                                                                                  borderRadius: BorderRadius.only(
+                                                                                                                    topLeft: Radius.circular(5.0),
+                                                                                                                    bottomLeft: Radius.circular(5.0),
+                                                                                                                  ),
+                                                                                                                ),
+                                                                                                              ),
+                                                                                                            ),
+                                                                                                          ),
+                                                                                                          Container(
+                                                                                                            width: 30.0,
+                                                                                                            height: 35.0,
+                                                                                                            decoration: BoxDecoration(
+                                                                                                              color: FFAppConstants.whiteColor,
+                                                                                                            ),
+                                                                                                            child: Align(
+                                                                                                              alignment: AlignmentDirectional(0.0, 0.0),
+                                                                                                              child: Text(
+                                                                                                                getJsonField(
+                                                                                                                  productSubModelItem,
+                                                                                                                  r'''$.cart_qty''',
+                                                                                                                ).toString(),
+                                                                                                                textAlign: TextAlign.center,
+                                                                                                                style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                                                      font: GoogleFonts.montserrat(
+                                                                                                                        fontWeight: FontWeight.bold,
+                                                                                                                        fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                                                                      ),
+                                                                                                                      color: FFAppConstants.blackColor0A0A0A,
+                                                                                                                      letterSpacing: 0.0,
+                                                                                                                      fontWeight: FontWeight.bold,
+                                                                                                                      fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                                                                    ),
+                                                                                                              ),
+                                                                                                            ),
+                                                                                                          ),
+                                                                                                          Expanded(
+                                                                                                            child: Align(
+                                                                                                              alignment: AlignmentDirectional(0.0, 0.0),
+                                                                                                              child: Builder(
+                                                                                                                builder: (context) => FFButtonWidget(
+                                                                                                                  onPressed: () async {
+                                                                                                                    logFirebaseEvent('CART_SUBSCRIPTION_SCREEN__BTN_ON_TAP');
+                                                                                                                    logFirebaseEvent('Button_custom_action');
+                                                                                                                    _model.checkinternet = await actions.checkInternetConnection();
+                                                                                                                    if (_model.checkinternet == true) {
+                                                                                                                      if (getJsonField(
+                                                                                                                            productSubModelItem,
+                                                                                                                            r'''$.stock''',
+                                                                                                                          ) ==
+                                                                                                                          getJsonField(
+                                                                                                                            productSubModelItem,
+                                                                                                                            r'''$.cart_qty''',
+                                                                                                                          )) {
+                                                                                                                        logFirebaseEvent('Button_alert_dialog');
+                                                                                                                        await showDialog(
+                                                                                                                          context: context,
+                                                                                                                          builder: (dialogContext) {
+                                                                                                                            return Dialog(
+                                                                                                                              elevation: 0,
+                                                                                                                              insetPadding: EdgeInsets.zero,
+                                                                                                                              backgroundColor: Colors.transparent,
+                                                                                                                              alignment: AlignmentDirectional(0.0, 0.0).resolve(Directionality.of(context)),
+                                                                                                                              child: GestureDetector(
+                                                                                                                                onTap: () {
+                                                                                                                                  FocusScope.of(dialogContext).unfocus();
+                                                                                                                                  FocusManager.instance.primaryFocus?.unfocus();
+                                                                                                                                },
+                                                                                                                                child: CustomAlertDailogWidget(
+                                                                                                                                  des: FFAppConstants.noStock,
+                                                                                                                                  height: 120.0,
+                                                                                                                                  title: ' ',
+                                                                                                                                ),
+                                                                                                                              ),
+                                                                                                                            );
+                                                                                                                          },
+                                                                                                                        );
+                                                                                                                      } else {
+                                                                                                                        logFirebaseEvent('Button_haptic_feedback');
+                                                                                                                        HapticFeedback.heavyImpact();
+                                                                                                                        logFirebaseEvent('Button_backend_call');
+                                                                                                                        _model.apiResultAddsubCart12 = await QuickartGroup.addtosubcartCall.call(
+                                                                                                                          userid: FFAppState().userID,
+                                                                                                                          qty: functions.addRemoveQTY(
+                                                                                                                              getJsonField(
+                                                                                                                                productSubModelItem,
+                                                                                                                                r'''$.cart_qty''',
+                                                                                                                              ),
+                                                                                                                              'add'),
+                                                                                                                          storeid: getJsonField(
+                                                                                                                            FFAppState().zoneInfo,
+                                                                                                                            r'''$.store_id''',
+                                                                                                                          ).toString(),
+                                                                                                                          varientid: getJsonField(
+                                                                                                                            productSubModelItem,
+                                                                                                                            r'''$.varient_id''',
+                                                                                                                          ).toString(),
+                                                                                                                          deviceid: FFAppState().deviceID,
+                                                                                                                          repeatOrder: getJsonField(
+                                                                                                                            productSubModelItem,
+                                                                                                                            r'''$.repeat_orders''',
+                                                                                                                          ).toString(),
+                                                                                                                          timeSlot: getJsonField(
+                                                                                                                            productSubModelItem,
+                                                                                                                            r'''$.sub_time_slot''',
+                                                                                                                          ).toString(),
+                                                                                                                          subTotalDelivery: getJsonField(
+                                                                                                                            productSubModelItem,
+                                                                                                                            r'''$.sub_total_delivery''',
+                                                                                                                          ).toString(),
+                                                                                                                          subTotalDate: getJsonField(
+                                                                                                                            productSubModelItem,
+                                                                                                                            r'''$.sub_delivery_date''',
+                                                                                                                          ).toString(),
+                                                                                                                          platform: isiOS ? 'ios' : 'android',
+                                                                                                                          featuresID: FFAppState().nullValue ==
+                                                                                                                                  getJsonField(
+                                                                                                                                    productSubModelItem,
+                                                                                                                                    r'''$.product_feature_id''',
+                                                                                                                                  ).toString()
+                                                                                                                              ? ''
+                                                                                                                              : getJsonField(
+                                                                                                                                  productSubModelItem,
+                                                                                                                                  r'''$.product_feature_id''',
+                                                                                                                                ).toString(),
+                                                                                                                        );
+
+                                                                                                                        if ((_model.apiResultAddsubCart12?.succeeded ?? true)) {
+                                                                                                                          if (FFAppConstants.statusAPI1 ==
+                                                                                                                              getJsonField(
+                                                                                                                                (_model.apiResultAddsubCart12?.jsonBody ?? ''),
+                                                                                                                                r'''$.status''',
+                                                                                                                              ).toString()) {
+                                                                                                                            logFirebaseEvent('Button_update_app_state');
+                                                                                                                            FFAppState().subCartSavingAmount = QuickartGroup.addtosubcartCall.savingPrice(
+                                                                                                                              (_model.apiResultAddsubCart12?.jsonBody ?? ''),
+                                                                                                                            )!;
+                                                                                                                            FFAppState().subCartTotalPrice = QuickartGroup.addtosubcartCall.totalPrice(
+                                                                                                                              (_model.apiResultAddsubCart12?.jsonBody ?? ''),
+                                                                                                                            )!;
+                                                                                                                            FFAppState().subCartTotalItem = QuickartGroup.addtosubcartCall.totalItems(
+                                                                                                                              (_model.apiResultAddsubCart12?.jsonBody ?? ''),
+                                                                                                                            )!;
+                                                                                                                            FFAppState().refreshTrigger = true;
+                                                                                                                            safeSetState(() {});
+                                                                                                                            logFirebaseEvent('Button_refresh_database_request');
+                                                                                                                            safeSetState(() => _model.apiRequestCompleter = null);
+                                                                                                                            await _model.waitForApiRequestCompleted();
+                                                                                                                            logFirebaseEvent('Button_google_analytics_event');
+                                                                                                                            logFirebaseEvent(
+                                                                                                                              'Add To Sub Cart',
+                                                                                                                              parameters: {
+                                                                                                                                'Screen Name': 'Subscription Cart Screen',
+                                                                                                                                'API Name': 'Add To SubCart',
+                                                                                                                              },
+                                                                                                                            );
+                                                                                                                            logFirebaseEvent('Button_custom_action');
+                                                                                                                            await actions.facebookEventClass(
+                                                                                                                              getJsonField(
+                                                                                                                                productSubModelItem,
+                                                                                                                                r'''$.varient_id''',
+                                                                                                                              ).toString(),
+                                                                                                                              getJsonField(
+                                                                                                                                productSubModelItem,
+                                                                                                                                r'''$.product_name''',
+                                                                                                                              ).toString(),
+                                                                                                                              'subscription product',
+                                                                                                                              functions.stringToDouble(getJsonField(
+                                                                                                                                productSubModelItem,
+                                                                                                                                r'''$.price''',
+                                                                                                                              ).toString()),
+                                                                                                                              1,
+                                                                                                                              functions.stringToDouble(getJsonField(
+                                                                                                                                productSubModelItem,
+                                                                                                                                r'''$.mrp''',
+                                                                                                                              ).toString()),
+                                                                                                                              'add',
+                                                                                                                              FFAppState().emptyJson,
+                                                                                                                              'emptyjons',
+                                                                                                                              ' ',
+                                                                                                                              ' ',
+                                                                                                                              ' ',
+                                                                                                                              ' ',
+                                                                                                                            );
+                                                                                                                          } else {
+                                                                                                                            logFirebaseEvent('Button_alert_dialog');
+                                                                                                                            await showDialog(
+                                                                                                                              context: context,
+                                                                                                                              builder: (dialogContext) {
+                                                                                                                                return Dialog(
+                                                                                                                                  elevation: 0,
+                                                                                                                                  insetPadding: EdgeInsets.zero,
+                                                                                                                                  backgroundColor: Colors.transparent,
+                                                                                                                                  alignment: AlignmentDirectional(0.0, 0.0).resolve(Directionality.of(context)),
+                                                                                                                                  child: GestureDetector(
+                                                                                                                                    onTap: () {
+                                                                                                                                      FocusScope.of(dialogContext).unfocus();
+                                                                                                                                      FocusManager.instance.primaryFocus?.unfocus();
+                                                                                                                                    },
+                                                                                                                                    child: CustomAlertDailogWidget(
+                                                                                                                                      des: getJsonField(
+                                                                                                                                        (_model.apiResultAddsubCart12?.jsonBody ?? ''),
+                                                                                                                                        r'''$.message''',
+                                                                                                                                      ).toString(),
+                                                                                                                                      height: 120.0,
+                                                                                                                                      title: ' ',
+                                                                                                                                    ),
+                                                                                                                                  ),
+                                                                                                                                );
+                                                                                                                              },
+                                                                                                                            );
+                                                                                                                          }
+                                                                                                                        } else {
+                                                                                                                          logFirebaseEvent('Button_show_snack_bar');
+                                                                                                                          ScaffoldMessenger.of(context).showSnackBar(
+                                                                                                                            SnackBar(
+                                                                                                                              content: Text(
+                                                                                                                                getJsonField(
+                                                                                                                                  (_model.apiResultAddsubCart12?.jsonBody ?? ''),
+                                                                                                                                  r'''$.message''',
+                                                                                                                                ).toString(),
+                                                                                                                                style: GoogleFonts.montserrat(
+                                                                                                                                  color: FFAppConstants.blackColor0A0A0A,
+                                                                                                                                  fontWeight: FontWeight.w500,
+                                                                                                                                  fontSize: 12.0,
+                                                                                                                                ),
+                                                                                                                              ),
+                                                                                                                              duration: Duration(milliseconds: 3350),
+                                                                                                                              backgroundColor: FFAppConstants.NeutralBlack50Color,
+                                                                                                                            ),
+                                                                                                                          );
+                                                                                                                        }
+                                                                                                                      }
+                                                                                                                    } else {
+                                                                                                                      logFirebaseEvent('Button_show_snack_bar');
+                                                                                                                      ScaffoldMessenger.of(context).showSnackBar(
+                                                                                                                        SnackBar(
+                                                                                                                          content: Text(
+                                                                                                                            FFAppConstants.internetString,
+                                                                                                                            style: GoogleFonts.montserrat(
+                                                                                                                              color: FFAppConstants.indigoColor,
+                                                                                                                              fontWeight: FontWeight.w500,
+                                                                                                                              fontSize: 12.0,
+                                                                                                                            ),
+                                                                                                                          ),
+                                                                                                                          duration: Duration(milliseconds: 1000),
+                                                                                                                          backgroundColor: FFAppConstants.primaryPurpleE4D8F5,
+                                                                                                                        ),
+                                                                                                                      );
+                                                                                                                    }
+
+                                                                                                                    safeSetState(() {});
+                                                                                                                  },
+                                                                                                                  text: '+',
+                                                                                                                  options: FFButtonOptions(
+                                                                                                                    width: 30.0,
+                                                                                                                    height: 35.0,
+                                                                                                                    padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                                                                                                                    iconPadding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                                                                                                                    color: FFAppConstants.calculatorColor,
+                                                                                                                    textStyle: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                                                          font: GoogleFonts.montserrat(
+                                                                                                                            fontWeight: FontWeight.w500,
+                                                                                                                            fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                                                                          ),
+                                                                                                                          color: FFAppConstants.whiteColor,
+                                                                                                                          fontSize: 20.0,
+                                                                                                                          letterSpacing: 0.0,
+                                                                                                                          fontWeight: FontWeight.w500,
+                                                                                                                          fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                                                                        ),
+                                                                                                                    elevation: 0.0,
+                                                                                                                    borderSide: BorderSide(
+                                                                                                                      width: 0.0,
+                                                                                                                    ),
+                                                                                                                    borderRadius: BorderRadius.only(
+                                                                                                                      topRight: Radius.circular(5.0),
+                                                                                                                      bottomRight: Radius.circular(5.0),
+                                                                                                                    ),
+                                                                                                                  ),
+                                                                                                                ),
+                                                                                                              ),
+                                                                                                            ),
+                                                                                                          ),
+                                                                                                        ],
+                                                                                                      ),
+                                                                                                    );
+                                                                                                  } else {
+                                                                                                    return Column(
+                                                                                                      mainAxisSize: MainAxisSize.max,
+                                                                                                      crossAxisAlignment: CrossAxisAlignment.end,
+                                                                                                      children: [
+                                                                                                        Align(
+                                                                                                          alignment: AlignmentDirectional(0.0, 0.0),
+                                                                                                          child: Padding(
+                                                                                                            padding: EdgeInsetsDirectional.fromSTEB(0.0, 3.0, 0.0, 0.0),
+                                                                                                            child: Text(
+                                                                                                              'OUT OF STOCK',
+                                                                                                              textAlign: TextAlign.end,
+                                                                                                              style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                                                    font: GoogleFonts.montserrat(
+                                                                                                                      fontWeight: FontWeight.w600,
+                                                                                                                      fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                                                                    ),
+                                                                                                                    color: valueOrDefault<Color>(
+                                                                                                                      FFAppConstants.redDF3F56,
+                                                                                                                      Color(0xFFF70A0A),
+                                                                                                                    ),
+                                                                                                                    fontSize: 12.0,
+                                                                                                                    letterSpacing: 0.0,
+                                                                                                                    fontWeight: FontWeight.w600,
+                                                                                                                    fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                                                                  ),
+                                                                                                            ),
+                                                                                                          ),
+                                                                                                        ),
+                                                                                                        FFButtonWidget(
                                                                                                           onPressed: () async {
-                                                                                                            logFirebaseEvent('CART_SUBSCRIPTION_SCREEN__BTN_ON_TAP');
+                                                                                                            logFirebaseEvent('CART_SUBSCRIPTION_SCREEN_REMOVE_BTN_ON_T');
                                                                                                             logFirebaseEvent('Button_custom_action');
-                                                                                                            _model.internet = await actions.checkInternetConnection();
-                                                                                                            if (_model.internet == true) {
+                                                                                                            _model.internet1 = await actions.checkInternetConnection();
+                                                                                                            if (_model.internet1 == true) {
                                                                                                               logFirebaseEvent('Button_haptic_feedback');
                                                                                                               HapticFeedback.heavyImpact();
                                                                                                               logFirebaseEvent('Button_backend_call');
-                                                                                                              _model.addtosubCart = await QuickartGroup.addtosubcartCall.call(
+                                                                                                              _model.removetosubCart = await QuickartGroup.addtosubcartCall.call(
                                                                                                                 userid: FFAppState().userID,
-                                                                                                                qty: functions.addRemoveQTY(
-                                                                                                                    getJsonField(
-                                                                                                                      productSubModelItem,
-                                                                                                                      r'''$.cart_qty''',
-                                                                                                                    ),
-                                                                                                                    'remove'),
+                                                                                                                qty: '0',
                                                                                                                 storeid: getJsonField(
                                                                                                                   FFAppState().zoneInfo,
                                                                                                                   r'''$.store_id''',
@@ -1369,16 +1858,16 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                 platform: isiOS ? 'ios' : 'android',
                                                                                                               );
 
-                                                                                                              if ((_model.addtosubCart?.succeeded ?? true)) {
+                                                                                                              if ((_model.removetosubCart?.succeeded ?? true)) {
                                                                                                                 logFirebaseEvent('Button_update_app_state');
                                                                                                                 FFAppState().subCartSavingAmount = QuickartGroup.addtosubcartCall.savingPrice(
-                                                                                                                  (_model.addtosubCart?.jsonBody ?? ''),
+                                                                                                                  (_model.removetosubCart?.jsonBody ?? ''),
                                                                                                                 )!;
                                                                                                                 FFAppState().subCartTotalPrice = QuickartGroup.addtosubcartCall.totalPrice(
-                                                                                                                  (_model.addtosubCart?.jsonBody ?? ''),
+                                                                                                                  (_model.removetosubCart?.jsonBody ?? ''),
                                                                                                                 )!;
                                                                                                                 FFAppState().subCartTotalItem = QuickartGroup.addtosubcartCall.totalItems(
-                                                                                                                  (_model.addtosubCart?.jsonBody ?? ''),
+                                                                                                                  (_model.removetosubCart?.jsonBody ?? ''),
                                                                                                                 )!;
                                                                                                                 FFAppState().refreshTrigger = true;
                                                                                                                 safeSetState(() {});
@@ -1390,7 +1879,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                   'Remove From Sub Cart',
                                                                                                                   parameters: {
                                                                                                                     'Screen Name': 'Subscription Cart Screen',
-                                                                                                                    'API Name': 'Add To SubCart',
+                                                                                                                    'API Name': 'removeTo SubCart',
                                                                                                                   },
                                                                                                                 );
                                                                                                                 logFirebaseEvent('Button_custom_action');
@@ -1408,11 +1897,8 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                     productSubModelItem,
                                                                                                                     r'''$.price''',
                                                                                                                   ),
-                                                                                                                  1,
-                                                                                                                  getJsonField(
-                                                                                                                    productSubModelItem,
-                                                                                                                    r'''$.mrp''',
-                                                                                                                  ),
+                                                                                                                  0,
+                                                                                                                  0.0,
                                                                                                                   'remove',
                                                                                                                   FFAppState().emptyJson,
                                                                                                                   'emptyjons',
@@ -1426,10 +1912,9 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                 ScaffoldMessenger.of(context).showSnackBar(
                                                                                                                   SnackBar(
                                                                                                                     content: Text(
-                                                                                                                      getJsonField(
-                                                                                                                        (_model.addtosubCart?.jsonBody ?? ''),
-                                                                                                                        r'''$.message''',
-                                                                                                                      ).toString(),
+                                                                                                                      QuickartGroup.addtosubcartCall.message(
+                                                                                                                        (_model.removetosubCart?.jsonBody ?? ''),
+                                                                                                                      )!,
                                                                                                                       style: GoogleFonts.montserrat(
                                                                                                                         color: FFAppConstants.indigoColor,
                                                                                                                         fontWeight: FontWeight.w500,
@@ -1461,310 +1946,31 @@ class _CartSubscriptionScreenWidgetState
 
                                                                                                             safeSetState(() {});
                                                                                                           },
-                                                                                                          text: '-',
+                                                                                                          text: 'Remove',
                                                                                                           options: FFButtonOptions(
-                                                                                                            width: 30.0,
-                                                                                                            height: 35.0,
-                                                                                                            padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                                                                                                            height: 30.0,
+                                                                                                            padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
                                                                                                             iconPadding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                                                                                                            color: FFAppConstants.calculatorColor,
-                                                                                                            textStyle: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                                                  font: GoogleFonts.montserrat(
-                                                                                                                    fontWeight: FontWeight.w500,
-                                                                                                                    fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                                                            color: Colors.white,
+                                                                                                            textStyle: FlutterFlowTheme.of(context).titleSmall.override(
+                                                                                                                  font: GoogleFonts.readexPro(
+                                                                                                                    fontWeight: FlutterFlowTheme.of(context).titleSmall.fontWeight,
+                                                                                                                    fontStyle: FlutterFlowTheme.of(context).titleSmall.fontStyle,
                                                                                                                   ),
-                                                                                                                  color: FFAppConstants.whiteColor,
-                                                                                                                  fontSize: 20.0,
+                                                                                                                  color: FFAppConstants.lightBlack7a7a7a,
+                                                                                                                  fontSize: 12.0,
                                                                                                                   letterSpacing: 0.0,
-                                                                                                                  fontWeight: FontWeight.w500,
-                                                                                                                  fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                                                                  fontWeight: FlutterFlowTheme.of(context).titleSmall.fontWeight,
+                                                                                                                  fontStyle: FlutterFlowTheme.of(context).titleSmall.fontStyle,
                                                                                                                 ),
                                                                                                             elevation: 0.0,
-                                                                                                            borderRadius: BorderRadius.only(
-                                                                                                              topLeft: Radius.circular(5.0),
-                                                                                                              bottomLeft: Radius.circular(5.0),
-                                                                                                            ),
+                                                                                                            borderRadius: BorderRadius.circular(8.0),
                                                                                                           ),
                                                                                                         ),
-                                                                                                      ),
-                                                                                                    ),
-                                                                                                    Container(
-                                                                                                      width: 30.0,
-                                                                                                      height: 35.0,
-                                                                                                      decoration: BoxDecoration(
-                                                                                                        color: FFAppConstants.whiteColor,
-                                                                                                      ),
-                                                                                                      child: Align(
-                                                                                                        alignment: AlignmentDirectional(0.0, 0.0),
-                                                                                                        child: Text(
-                                                                                                          getJsonField(
-                                                                                                            productSubModelItem,
-                                                                                                            r'''$.cart_qty''',
-                                                                                                          ).toString(),
-                                                                                                          textAlign: TextAlign.center,
-                                                                                                          style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                                                font: GoogleFonts.montserrat(
-                                                                                                                  fontWeight: FontWeight.bold,
-                                                                                                                  fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                                                                                                                ),
-                                                                                                                color: FFAppConstants.blackColor0A0A0A,
-                                                                                                                letterSpacing: 0.0,
-                                                                                                                fontWeight: FontWeight.bold,
-                                                                                                                fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                                                                                                              ),
-                                                                                                        ),
-                                                                                                      ),
-                                                                                                    ),
-                                                                                                    Expanded(
-                                                                                                      child: Align(
-                                                                                                        alignment: AlignmentDirectional(0.0, 0.0),
-                                                                                                        child: Builder(
-                                                                                                          builder: (context) => FFButtonWidget(
-                                                                                                            onPressed: () async {
-                                                                                                              logFirebaseEvent('CART_SUBSCRIPTION_SCREEN__BTN_ON_TAP');
-                                                                                                              logFirebaseEvent('Button_custom_action');
-                                                                                                              _model.checkinternet = await actions.checkInternetConnection();
-                                                                                                              if (_model.checkinternet == true) {
-                                                                                                                if (getJsonField(
-                                                                                                                      productSubModelItem,
-                                                                                                                      r'''$.stock''',
-                                                                                                                    ) ==
-                                                                                                                    getJsonField(
-                                                                                                                      productSubModelItem,
-                                                                                                                      r'''$.cart_qty''',
-                                                                                                                    )) {
-                                                                                                                  logFirebaseEvent('Button_alert_dialog');
-                                                                                                                  await showDialog(
-                                                                                                                    context: context,
-                                                                                                                    builder: (dialogContext) {
-                                                                                                                      return Dialog(
-                                                                                                                        elevation: 0,
-                                                                                                                        insetPadding: EdgeInsets.zero,
-                                                                                                                        backgroundColor: Colors.transparent,
-                                                                                                                        alignment: AlignmentDirectional(0.0, 0.0).resolve(Directionality.of(context)),
-                                                                                                                        child: GestureDetector(
-                                                                                                                          onTap: () {
-                                                                                                                            FocusScope.of(dialogContext).unfocus();
-                                                                                                                            FocusManager.instance.primaryFocus?.unfocus();
-                                                                                                                          },
-                                                                                                                          child: CustomAlertDailogWidget(
-                                                                                                                            des: FFAppConstants.noStock,
-                                                                                                                            height: 120.0,
-                                                                                                                            title: ' ',
-                                                                                                                          ),
-                                                                                                                        ),
-                                                                                                                      );
-                                                                                                                    },
-                                                                                                                  );
-                                                                                                                } else {
-                                                                                                                  logFirebaseEvent('Button_haptic_feedback');
-                                                                                                                  HapticFeedback.heavyImpact();
-                                                                                                                  logFirebaseEvent('Button_backend_call');
-                                                                                                                  _model.apiResultAddsubCart12 = await QuickartGroup.addtosubcartCall.call(
-                                                                                                                    userid: FFAppState().userID,
-                                                                                                                    qty: functions.addRemoveQTY(
-                                                                                                                        getJsonField(
-                                                                                                                          productSubModelItem,
-                                                                                                                          r'''$.cart_qty''',
-                                                                                                                        ),
-                                                                                                                        'add'),
-                                                                                                                    storeid: getJsonField(
-                                                                                                                      FFAppState().zoneInfo,
-                                                                                                                      r'''$.store_id''',
-                                                                                                                    ).toString(),
-                                                                                                                    varientid: getJsonField(
-                                                                                                                      productSubModelItem,
-                                                                                                                      r'''$.varient_id''',
-                                                                                                                    ).toString(),
-                                                                                                                    deviceid: FFAppState().deviceID,
-                                                                                                                    repeatOrder: getJsonField(
-                                                                                                                      productSubModelItem,
-                                                                                                                      r'''$.repeat_orders''',
-                                                                                                                    ).toString(),
-                                                                                                                    timeSlot: getJsonField(
-                                                                                                                      productSubModelItem,
-                                                                                                                      r'''$.sub_time_slot''',
-                                                                                                                    ).toString(),
-                                                                                                                    subTotalDelivery: getJsonField(
-                                                                                                                      productSubModelItem,
-                                                                                                                      r'''$.sub_total_delivery''',
-                                                                                                                    ).toString(),
-                                                                                                                    subTotalDate: getJsonField(
-                                                                                                                      productSubModelItem,
-                                                                                                                      r'''$.sub_delivery_date''',
-                                                                                                                    ).toString(),
-                                                                                                                    platform: isiOS ? 'ios' : 'android',
-                                                                                                                    featuresID: FFAppState().nullValue ==
-                                                                                                                            getJsonField(
-                                                                                                                              productSubModelItem,
-                                                                                                                              r'''$.product_feature_id''',
-                                                                                                                            ).toString()
-                                                                                                                        ? ''
-                                                                                                                        : getJsonField(
-                                                                                                                            productSubModelItem,
-                                                                                                                            r'''$.product_feature_id''',
-                                                                                                                          ).toString(),
-                                                                                                                  );
-
-                                                                                                                  if ((_model.apiResultAddsubCart12?.succeeded ?? true)) {
-                                                                                                                    if (FFAppConstants.statusAPI1 ==
-                                                                                                                        getJsonField(
-                                                                                                                          (_model.apiResultAddsubCart12?.jsonBody ?? ''),
-                                                                                                                          r'''$.status''',
-                                                                                                                        ).toString()) {
-                                                                                                                      logFirebaseEvent('Button_update_app_state');
-                                                                                                                      FFAppState().subCartSavingAmount = QuickartGroup.addtosubcartCall.savingPrice(
-                                                                                                                        (_model.apiResultAddsubCart12?.jsonBody ?? ''),
-                                                                                                                      )!;
-                                                                                                                      FFAppState().subCartTotalPrice = QuickartGroup.addtosubcartCall.totalPrice(
-                                                                                                                        (_model.apiResultAddsubCart12?.jsonBody ?? ''),
-                                                                                                                      )!;
-                                                                                                                      FFAppState().subCartTotalItem = QuickartGroup.addtosubcartCall.totalItems(
-                                                                                                                        (_model.apiResultAddsubCart12?.jsonBody ?? ''),
-                                                                                                                      )!;
-                                                                                                                      FFAppState().refreshTrigger = true;
-                                                                                                                      safeSetState(() {});
-                                                                                                                      logFirebaseEvent('Button_refresh_database_request');
-                                                                                                                      safeSetState(() => _model.apiRequestCompleter = null);
-                                                                                                                      await _model.waitForApiRequestCompleted();
-                                                                                                                      logFirebaseEvent('Button_google_analytics_event');
-                                                                                                                      logFirebaseEvent(
-                                                                                                                        'Add To Sub Cart',
-                                                                                                                        parameters: {
-                                                                                                                          'Screen Name': 'Subscription Cart Screen',
-                                                                                                                          'API Name': 'Add To SubCart',
-                                                                                                                        },
-                                                                                                                      );
-                                                                                                                      logFirebaseEvent('Button_custom_action');
-                                                                                                                      await actions.facebookEventClass(
-                                                                                                                        getJsonField(
-                                                                                                                          productSubModelItem,
-                                                                                                                          r'''$.varient_id''',
-                                                                                                                        ).toString(),
-                                                                                                                        getJsonField(
-                                                                                                                          productSubModelItem,
-                                                                                                                          r'''$.product_name''',
-                                                                                                                        ).toString(),
-                                                                                                                        'subscription product',
-                                                                                                                        getJsonField(
-                                                                                                                          productSubModelItem,
-                                                                                                                          r'''$.price''',
-                                                                                                                        ),
-                                                                                                                        1,
-                                                                                                                        getJsonField(
-                                                                                                                          productSubModelItem,
-                                                                                                                          r'''$.mrp''',
-                                                                                                                        ),
-                                                                                                                        'add',
-                                                                                                                        FFAppState().emptyJson,
-                                                                                                                        'emptyjons',
-                                                                                                                        ' ',
-                                                                                                                        ' ',
-                                                                                                                        ' ',
-                                                                                                                        ' ',
-                                                                                                                      );
-                                                                                                                    } else {
-                                                                                                                      logFirebaseEvent('Button_alert_dialog');
-                                                                                                                      await showDialog(
-                                                                                                                        context: context,
-                                                                                                                        builder: (dialogContext) {
-                                                                                                                          return Dialog(
-                                                                                                                            elevation: 0,
-                                                                                                                            insetPadding: EdgeInsets.zero,
-                                                                                                                            backgroundColor: Colors.transparent,
-                                                                                                                            alignment: AlignmentDirectional(0.0, 0.0).resolve(Directionality.of(context)),
-                                                                                                                            child: GestureDetector(
-                                                                                                                              onTap: () {
-                                                                                                                                FocusScope.of(dialogContext).unfocus();
-                                                                                                                                FocusManager.instance.primaryFocus?.unfocus();
-                                                                                                                              },
-                                                                                                                              child: CustomAlertDailogWidget(
-                                                                                                                                des: getJsonField(
-                                                                                                                                  (_model.apiResultAddsubCart12?.jsonBody ?? ''),
-                                                                                                                                  r'''$.message''',
-                                                                                                                                ).toString(),
-                                                                                                                                height: 120.0,
-                                                                                                                                title: ' ',
-                                                                                                                              ),
-                                                                                                                            ),
-                                                                                                                          );
-                                                                                                                        },
-                                                                                                                      );
-                                                                                                                    }
-                                                                                                                  } else {
-                                                                                                                    logFirebaseEvent('Button_show_snack_bar');
-                                                                                                                    ScaffoldMessenger.of(context).showSnackBar(
-                                                                                                                      SnackBar(
-                                                                                                                        content: Text(
-                                                                                                                          getJsonField(
-                                                                                                                            (_model.apiResultAddsubCart12?.jsonBody ?? ''),
-                                                                                                                            r'''$.message''',
-                                                                                                                          ).toString(),
-                                                                                                                          style: GoogleFonts.montserrat(
-                                                                                                                            color: FFAppConstants.blackColor0A0A0A,
-                                                                                                                            fontWeight: FontWeight.w500,
-                                                                                                                            fontSize: 12.0,
-                                                                                                                          ),
-                                                                                                                        ),
-                                                                                                                        duration: Duration(milliseconds: 3350),
-                                                                                                                        backgroundColor: FFAppConstants.NeutralBlack50Color,
-                                                                                                                      ),
-                                                                                                                    );
-                                                                                                                  }
-                                                                                                                }
-                                                                                                              } else {
-                                                                                                                logFirebaseEvent('Button_show_snack_bar');
-                                                                                                                ScaffoldMessenger.of(context).showSnackBar(
-                                                                                                                  SnackBar(
-                                                                                                                    content: Text(
-                                                                                                                      FFAppConstants.internetString,
-                                                                                                                      style: GoogleFonts.montserrat(
-                                                                                                                        color: FFAppConstants.indigoColor,
-                                                                                                                        fontWeight: FontWeight.w500,
-                                                                                                                        fontSize: 12.0,
-                                                                                                                      ),
-                                                                                                                    ),
-                                                                                                                    duration: Duration(milliseconds: 1000),
-                                                                                                                    backgroundColor: FFAppConstants.primaryPurpleE4D8F5,
-                                                                                                                  ),
-                                                                                                                );
-                                                                                                              }
-
-                                                                                                              safeSetState(() {});
-                                                                                                            },
-                                                                                                            text: '+',
-                                                                                                            options: FFButtonOptions(
-                                                                                                              width: 30.0,
-                                                                                                              height: 35.0,
-                                                                                                              padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                                                                                                              iconPadding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                                                                                                              color: FFAppConstants.calculatorColor,
-                                                                                                              textStyle: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                                                    font: GoogleFonts.montserrat(
-                                                                                                                      fontWeight: FontWeight.w500,
-                                                                                                                      fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                                                                                                                    ),
-                                                                                                                    color: FFAppConstants.whiteColor,
-                                                                                                                    fontSize: 20.0,
-                                                                                                                    letterSpacing: 0.0,
-                                                                                                                    fontWeight: FontWeight.w500,
-                                                                                                                    fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                                                                                                                  ),
-                                                                                                              elevation: 0.0,
-                                                                                                              borderSide: BorderSide(
-                                                                                                                width: 0.0,
-                                                                                                              ),
-                                                                                                              borderRadius: BorderRadius.only(
-                                                                                                                topRight: Radius.circular(5.0),
-                                                                                                                bottomRight: Radius.circular(5.0),
-                                                                                                              ),
-                                                                                                            ),
-                                                                                                          ),
-                                                                                                        ),
-                                                                                                      ),
-                                                                                                    ),
-                                                                                                  ],
-                                                                                                ),
+                                                                                                      ],
+                                                                                                    );
+                                                                                                  }
+                                                                                                },
                                                                                               ),
                                                                                             ],
                                                                                           ),
@@ -2018,6 +2224,22 @@ class _CartSubscriptionScreenWidgetState
                                                                                                     r'''$.varient_id''',
                                                                                                   );
                                                                                                   safeSetState(() {});
+                                                                                                  logFirebaseEvent('Column_custom_action');
+                                                                                                  await actions.facebookEventClass(
+                                                                                                    FFAppState().userID,
+                                                                                                    '0',
+                                                                                                    '0',
+                                                                                                    0.0,
+                                                                                                    0,
+                                                                                                    0.0,
+                                                                                                    'timeSlotView',
+                                                                                                    FFAppState().emptyJson,
+                                                                                                    '0',
+                                                                                                    'subscriptionCart',
+                                                                                                    '0',
+                                                                                                    '0',
+                                                                                                    '0',
+                                                                                                  );
                                                                                                   if ((FFAppState().isSubCartVisible == true) &&
                                                                                                       (FFAppState().varientID ==
                                                                                                           getJsonField(
@@ -2579,6 +2801,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                             ).toString()
                                                                                                         ? true
                                                                                                         : false;
+                                                                                                    _model.timeSlotjson = null;
                                                                                                     safeSetState(() {});
                                                                                                   } else {
                                                                                                     logFirebaseEvent('Column_update_page_state');
@@ -3563,6 +3786,23 @@ class _CartSubscriptionScreenWidgetState
                                                                                 Padding(
                                                                                   padding: EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
                                                                                   child: Text(
+                                                                                    '-',
+                                                                                    style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                          font: GoogleFonts.montserrat(
+                                                                                            fontWeight: FontWeight.w500,
+                                                                                            fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                                          ),
+                                                                                          color: FFAppConstants.darkGreen,
+                                                                                          fontSize: 12.0,
+                                                                                          letterSpacing: 0.0,
+                                                                                          fontWeight: FontWeight.w500,
+                                                                                          fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                                        ),
+                                                                                  ),
+                                                                                ),
+                                                                                Padding(
+                                                                                  padding: EdgeInsetsDirectional.fromSTEB(2.0, 0.0, 0.0, 0.0),
+                                                                                  child: Text(
                                                                                     FFAppConstants.currancyAED,
                                                                                     style: FlutterFlowTheme.of(context).bodyMedium.override(
                                                                                           font: GoogleFonts.montserrat(
@@ -3652,13 +3892,30 @@ class _CartSubscriptionScreenWidgetState
                                                                                 Padding(
                                                                                   padding: EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
                                                                                   child: Text(
+                                                                                    '+',
+                                                                                    style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                          font: GoogleFonts.montserrat(
+                                                                                            fontWeight: FontWeight.w600,
+                                                                                            fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                                          ),
+                                                                                          color: FFAppConstants.primaryPurple2,
+                                                                                          fontSize: 12.0,
+                                                                                          letterSpacing: 0.0,
+                                                                                          fontWeight: FontWeight.w600,
+                                                                                          fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                                        ),
+                                                                                  ),
+                                                                                ),
+                                                                                Padding(
+                                                                                  padding: EdgeInsetsDirectional.fromSTEB(2.0, 0.0, 0.0, 0.0),
+                                                                                  child: Text(
                                                                                     FFAppConstants.currancyAED,
                                                                                     style: FlutterFlowTheme.of(context).bodyMedium.override(
                                                                                           font: GoogleFonts.montserrat(
                                                                                             fontWeight: FontWeight.w500,
                                                                                             fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
                                                                                           ),
-                                                                                          color: FFAppConstants.redDF3F56,
+                                                                                          color: FFAppConstants.primaryPurple2,
                                                                                           fontSize: 12.0,
                                                                                           letterSpacing: 0.0,
                                                                                           fontWeight: FontWeight.w500,
@@ -3681,7 +3938,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                           fontWeight: FontWeight.w500,
                                                                                           fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
                                                                                         ),
-                                                                                        color: FFAppConstants.redDF3F56,
+                                                                                        color: FFAppConstants.primaryPurple2,
                                                                                         fontSize: 12.0,
                                                                                         letterSpacing: 0.0,
                                                                                         fontWeight: FontWeight.w500,
@@ -3758,13 +4015,30 @@ class _CartSubscriptionScreenWidgetState
                                                                                     Padding(
                                                                                       padding: EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
                                                                                       child: Text(
+                                                                                        '+',
+                                                                                        style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                              font: GoogleFonts.montserrat(
+                                                                                                fontWeight: FontWeight.w600,
+                                                                                                fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                                              ),
+                                                                                              color: FFAppConstants.primaryPurple2,
+                                                                                              fontSize: 12.0,
+                                                                                              letterSpacing: 0.0,
+                                                                                              fontWeight: FontWeight.w600,
+                                                                                              fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                                            ),
+                                                                                      ),
+                                                                                    ),
+                                                                                    Padding(
+                                                                                      padding: EdgeInsetsDirectional.fromSTEB(2.0, 0.0, 0.0, 0.0),
+                                                                                      child: Text(
                                                                                         FFAppConstants.currancyAED,
                                                                                         style: FlutterFlowTheme.of(context).bodyMedium.override(
                                                                                               font: GoogleFonts.montserrat(
                                                                                                 fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
                                                                                                 fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
                                                                                               ),
-                                                                                              color: FFAppConstants.redDF3F56,
+                                                                                              color: FFAppConstants.primaryPurple2,
                                                                                               fontSize: 12.0,
                                                                                               letterSpacing: 0.0,
                                                                                               fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
@@ -3791,7 +4065,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                               fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
                                                                                               fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
                                                                                             ),
-                                                                                            color: FFAppConstants.redDF3F56,
+                                                                                            color: FFAppConstants.primaryPurple2,
                                                                                             fontSize: 12.0,
                                                                                             letterSpacing: 0.0,
                                                                                             fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
@@ -3827,7 +4101,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                       fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
                                                                                       fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
                                                                                     ),
-                                                                                    color: FFAppConstants.redDF3F56,
+                                                                                    color: FFAppConstants.primaryPurple2,
                                                                                     fontSize: 11.0,
                                                                                     letterSpacing: 0.0,
                                                                                     fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
@@ -3901,13 +4175,30 @@ class _CartSubscriptionScreenWidgetState
                                                                                         Padding(
                                                                                           padding: EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
                                                                                           child: Text(
+                                                                                            '+',
+                                                                                            style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                                  font: GoogleFonts.montserrat(
+                                                                                                    fontWeight: FontWeight.w600,
+                                                                                                    fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                                                  ),
+                                                                                                  color: FFAppConstants.primaryPurple2,
+                                                                                                  fontSize: 12.0,
+                                                                                                  letterSpacing: 0.0,
+                                                                                                  fontWeight: FontWeight.w600,
+                                                                                                  fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                                                ),
+                                                                                          ),
+                                                                                        ),
+                                                                                        Padding(
+                                                                                          padding: EdgeInsetsDirectional.fromSTEB(2.0, 0.0, 0.0, 0.0),
+                                                                                          child: Text(
                                                                                             FFAppConstants.currancyAED,
                                                                                             style: FlutterFlowTheme.of(context).bodyMedium.override(
                                                                                                   font: GoogleFonts.montserrat(
                                                                                                     fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
                                                                                                     fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
                                                                                                   ),
-                                                                                                  color: FFAppConstants.redDF3F56,
+                                                                                                  color: FFAppConstants.primaryPurple2,
                                                                                                   fontSize: 12.0,
                                                                                                   letterSpacing: 0.0,
                                                                                                   fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
@@ -3928,7 +4219,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                   fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
                                                                                                   fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
                                                                                                 ),
-                                                                                                color: FFAppConstants.redDF3F56,
+                                                                                                color: FFAppConstants.primaryPurple2,
                                                                                                 fontSize: 12.0,
                                                                                                 letterSpacing: 0.0,
                                                                                                 fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
@@ -4099,9 +4390,12 @@ class _CartSubscriptionScreenWidgetState
                                                                           ],
                                                                         ),
                                                                       ),
-                                                                    if (FFAppState()
-                                                                            .usserType !=
-                                                                        'guest')
+                                                                    if (getJsonField(
+                                                                          tabBarShowsubcartResponse
+                                                                              .jsonBody,
+                                                                          r'''$.data.user_type''',
+                                                                        ) ==
+                                                                        null)
                                                                       Column(
                                                                         mainAxisSize:
                                                                             MainAxisSize.max,
@@ -4232,6 +4526,107 @@ class _CartSubscriptionScreenWidgetState
                                                                                           logFirebaseEvent('CheckboxWallet_update_page_state');
                                                                                           _model.isRefSubWalletCheckBoxSelected = 'add';
                                                                                           safeSetState(() {});
+                                                                                          logFirebaseEvent('CheckboxWallet_custom_action');
+                                                                                          await actions.facebookEventClass(
+                                                                                            'Reward wallet add',
+                                                                                            FFAppState().userID,
+                                                                                            '0',
+                                                                                            0.0,
+                                                                                            0,
+                                                                                            functions.stringToDouble(functions
+                                                                                                .checkWalletWithAction(
+                                                                                                    _model.isRefSubWalletCheckBoxSelected,
+                                                                                                    valueOrDefault<String>(
+                                                                                                      functions
+                                                                                                          .totalValueAmountUpdae(
+                                                                                                              '0',
+                                                                                                              FFAppState().couponDiscount.toString(),
+                                                                                                              getJsonField(
+                                                                                                                tabBarShowsubcartResponse.jsonBody,
+                                                                                                                r'''$.data.total_price''',
+                                                                                                              ).toString(),
+                                                                                                              '0',
+                                                                                                              'no',
+                                                                                                              _model.selectedPaymentMethod,
+                                                                                                              '0',
+                                                                                                              '0',
+                                                                                                              'no',
+                                                                                                              functions.stringToDouble(functions
+                                                                                                                          .calculateTimeSlotPricingTotal(
+                                                                                                                              QuickartGroup.showsubcartCall
+                                                                                                                                  .cardData(
+                                                                                                                                    tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                  )!
+                                                                                                                                  .toList(),
+                                                                                                                              'discount')
+                                                                                                                          .toString()) >
+                                                                                                                      0.0
+                                                                                                                  ? functions
+                                                                                                                      .calculateTimeSlotPricingTotal(
+                                                                                                                          QuickartGroup.showsubcartCall
+                                                                                                                              .cardData(
+                                                                                                                                tabBarShowsubcartResponse.jsonBody,
+                                                                                                                              )!
+                                                                                                                              .toList(),
+                                                                                                                          'discount')
+                                                                                                                      .toString()
+                                                                                                                  : '0',
+                                                                                                              functions.stringToDouble(functions
+                                                                                                                          .calculateTimeSlotPricingTotal(
+                                                                                                                              QuickartGroup.showsubcartCall
+                                                                                                                                  .cardData(
+                                                                                                                                    tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                  )!
+                                                                                                                                  .toList(),
+                                                                                                                              'surge_charge')
+                                                                                                                          .toString()) >
+                                                                                                                      0.0
+                                                                                                                  ? functions
+                                                                                                                      .calculateTimeSlotPricingTotal(
+                                                                                                                          QuickartGroup.showsubcartCall
+                                                                                                                              .cardData(
+                                                                                                                                tabBarShowsubcartResponse.jsonBody,
+                                                                                                                              )!
+                                                                                                                              .toList(),
+                                                                                                                          'surge_charge')
+                                                                                                                      .toString()
+                                                                                                                  : '0',
+                                                                                                              getJsonField(
+                                                                                                                functions.getZoneRuleByType(
+                                                                                                                    getJsonField(
+                                                                                                                      tabBarShowsubcartResponse.jsonBody,
+                                                                                                                      r'''$.data.zone_permanent_charges''',
+                                                                                                                      true,
+                                                                                                                    )!,
+                                                                                                                    'min_order'),
+                                                                                                                r'''$.zone_price_effect''',
+                                                                                                              ).toString(),
+                                                                                                              getJsonField(
+                                                                                                                tabBarShowsubcartResponse.jsonBody,
+                                                                                                                r'''$.data.zone_delivery_addons''',
+                                                                                                                true,
+                                                                                                              ),
+                                                                                                              true)
+                                                                                                          .toString(),
+                                                                                                      '0.00',
+                                                                                                    ),
+                                                                                                    functions.setDecimalValue(getJsonField(
+                                                                                                      tabBarShowsubcartResponse.jsonBody,
+                                                                                                      r'''$.data.referral_balance''',
+                                                                                                    ).toString()),
+                                                                                                    getJsonField(
+                                                                                                      FFAppState().appInfo,
+                                                                                                      r'''$.wallet_deduction_percentage''',
+                                                                                                    ).toString())
+                                                                                                .toString()),
+                                                                                            'walletSelected',
+                                                                                            FFAppState().emptyJson,
+                                                                                            'subscription',
+                                                                                            '0',
+                                                                                            '0',
+                                                                                            '0',
+                                                                                            '0',
+                                                                                          );
                                                                                           logFirebaseEvent('CheckboxWallet_google_analytics_event');
                                                                                           logFirebaseEvent(
                                                                                             'Selection',
@@ -4245,6 +4640,107 @@ class _CartSubscriptionScreenWidgetState
                                                                                           logFirebaseEvent('CheckboxWallet_update_page_state');
                                                                                           _model.isRefSubWalletCheckBoxSelected = 'remove';
                                                                                           safeSetState(() {});
+                                                                                          logFirebaseEvent('CheckboxWallet_custom_action');
+                                                                                          await actions.facebookEventClass(
+                                                                                            'Reward wallet remove',
+                                                                                            FFAppState().userID,
+                                                                                            '0',
+                                                                                            0.0,
+                                                                                            0,
+                                                                                            functions.stringToDouble(functions
+                                                                                                .checkWalletWithAction(
+                                                                                                    _model.isRefSubWalletCheckBoxSelected,
+                                                                                                    valueOrDefault<String>(
+                                                                                                      functions
+                                                                                                          .totalValueAmountUpdae(
+                                                                                                              '0',
+                                                                                                              FFAppState().couponDiscount.toString(),
+                                                                                                              getJsonField(
+                                                                                                                tabBarShowsubcartResponse.jsonBody,
+                                                                                                                r'''$.data.total_price''',
+                                                                                                              ).toString(),
+                                                                                                              '0',
+                                                                                                              'no',
+                                                                                                              _model.selectedPaymentMethod,
+                                                                                                              '0',
+                                                                                                              '0',
+                                                                                                              'no',
+                                                                                                              functions.stringToDouble(functions
+                                                                                                                          .calculateTimeSlotPricingTotal(
+                                                                                                                              QuickartGroup.showsubcartCall
+                                                                                                                                  .cardData(
+                                                                                                                                    tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                  )!
+                                                                                                                                  .toList(),
+                                                                                                                              'discount')
+                                                                                                                          .toString()) >
+                                                                                                                      0.0
+                                                                                                                  ? functions
+                                                                                                                      .calculateTimeSlotPricingTotal(
+                                                                                                                          QuickartGroup.showsubcartCall
+                                                                                                                              .cardData(
+                                                                                                                                tabBarShowsubcartResponse.jsonBody,
+                                                                                                                              )!
+                                                                                                                              .toList(),
+                                                                                                                          'discount')
+                                                                                                                      .toString()
+                                                                                                                  : '0',
+                                                                                                              functions.stringToDouble(functions
+                                                                                                                          .calculateTimeSlotPricingTotal(
+                                                                                                                              QuickartGroup.showsubcartCall
+                                                                                                                                  .cardData(
+                                                                                                                                    tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                  )!
+                                                                                                                                  .toList(),
+                                                                                                                              'surge_charge')
+                                                                                                                          .toString()) >
+                                                                                                                      0.0
+                                                                                                                  ? functions
+                                                                                                                      .calculateTimeSlotPricingTotal(
+                                                                                                                          QuickartGroup.showsubcartCall
+                                                                                                                              .cardData(
+                                                                                                                                tabBarShowsubcartResponse.jsonBody,
+                                                                                                                              )!
+                                                                                                                              .toList(),
+                                                                                                                          'surge_charge')
+                                                                                                                      .toString()
+                                                                                                                  : '0',
+                                                                                                              getJsonField(
+                                                                                                                functions.getZoneRuleByType(
+                                                                                                                    getJsonField(
+                                                                                                                      tabBarShowsubcartResponse.jsonBody,
+                                                                                                                      r'''$.data.zone_permanent_charges''',
+                                                                                                                      true,
+                                                                                                                    )!,
+                                                                                                                    'min_order'),
+                                                                                                                r'''$.zone_price_effect''',
+                                                                                                              ).toString(),
+                                                                                                              getJsonField(
+                                                                                                                tabBarShowsubcartResponse.jsonBody,
+                                                                                                                r'''$.data.zone_delivery_addons''',
+                                                                                                                true,
+                                                                                                              ),
+                                                                                                              true)
+                                                                                                          .toString(),
+                                                                                                      '0.00',
+                                                                                                    ),
+                                                                                                    functions.setDecimalValue(getJsonField(
+                                                                                                      tabBarShowsubcartResponse.jsonBody,
+                                                                                                      r'''$.data.referral_balance''',
+                                                                                                    ).toString()),
+                                                                                                    getJsonField(
+                                                                                                      FFAppState().appInfo,
+                                                                                                      r'''$.wallet_deduction_percentage''',
+                                                                                                    ).toString())
+                                                                                                .toString()),
+                                                                                            'walletSelected',
+                                                                                            FFAppState().emptyJson,
+                                                                                            'subscription',
+                                                                                            '0',
+                                                                                            '0',
+                                                                                            '0',
+                                                                                            '0',
+                                                                                          );
                                                                                           logFirebaseEvent('CheckboxWallet_google_analytics_event');
                                                                                           logFirebaseEvent(
                                                                                             'Selection',
@@ -4548,6 +5044,189 @@ class _CartSubscriptionScreenWidgetState
                                                                                           logFirebaseEvent('CheckboxWallet_update_page_state');
                                                                                           _model.isSubWalletCheckBoxSelected = 'add';
                                                                                           safeSetState(() {});
+                                                                                          logFirebaseEvent('CheckboxWallet_custom_action');
+                                                                                          await actions.facebookEventClass(
+                                                                                            'Refund wallet add',
+                                                                                            FFAppState().userID,
+                                                                                            '0',
+                                                                                            0.0,
+                                                                                            0,
+                                                                                            functions.stringToDouble(functions
+                                                                                                .calculateFinalPayableForCashPayment(
+                                                                                                    valueOrDefault<String>(
+                                                                                                      functions
+                                                                                                          .totalValueAmountUpdae(
+                                                                                                              '0',
+                                                                                                              FFAppState().couponDiscount.toString(),
+                                                                                                              getJsonField(
+                                                                                                                tabBarShowsubcartResponse.jsonBody,
+                                                                                                                r'''$.data.total_price''',
+                                                                                                              ).toString(),
+                                                                                                              '0',
+                                                                                                              'no',
+                                                                                                              _model.selectedPaymentMethod,
+                                                                                                              '0',
+                                                                                                              '0',
+                                                                                                              'no',
+                                                                                                              functions.stringToDouble(functions
+                                                                                                                          .calculateTimeSlotPricingTotal(
+                                                                                                                              QuickartGroup.showsubcartCall
+                                                                                                                                  .cardData(
+                                                                                                                                    tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                  )!
+                                                                                                                                  .toList(),
+                                                                                                                              'discount')
+                                                                                                                          .toString()) >
+                                                                                                                      0.0
+                                                                                                                  ? functions
+                                                                                                                      .calculateTimeSlotPricingTotal(
+                                                                                                                          QuickartGroup.showsubcartCall
+                                                                                                                              .cardData(
+                                                                                                                                tabBarShowsubcartResponse.jsonBody,
+                                                                                                                              )!
+                                                                                                                              .toList(),
+                                                                                                                          'discount')
+                                                                                                                      .toString()
+                                                                                                                  : '0',
+                                                                                                              functions.stringToDouble(functions
+                                                                                                                          .calculateTimeSlotPricingTotal(
+                                                                                                                              QuickartGroup.showsubcartCall
+                                                                                                                                  .cardData(
+                                                                                                                                    tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                  )!
+                                                                                                                                  .toList(),
+                                                                                                                              'surge_charge')
+                                                                                                                          .toString()) >
+                                                                                                                      0.0
+                                                                                                                  ? functions
+                                                                                                                      .calculateTimeSlotPricingTotal(
+                                                                                                                          QuickartGroup.showsubcartCall
+                                                                                                                              .cardData(
+                                                                                                                                tabBarShowsubcartResponse.jsonBody,
+                                                                                                                              )!
+                                                                                                                              .toList(),
+                                                                                                                          'surge_charge')
+                                                                                                                      .toString()
+                                                                                                                  : '0',
+                                                                                                              getJsonField(
+                                                                                                                functions.getZoneRuleByType(
+                                                                                                                    getJsonField(
+                                                                                                                      tabBarShowsubcartResponse.jsonBody,
+                                                                                                                      r'''$.data.zone_permanent_charges''',
+                                                                                                                      true,
+                                                                                                                    )!,
+                                                                                                                    'min_order'),
+                                                                                                                r'''$.zone_price_effect''',
+                                                                                                              ).toString(),
+                                                                                                              getJsonField(
+                                                                                                                tabBarShowsubcartResponse.jsonBody,
+                                                                                                                r'''$.data.zone_delivery_addons''',
+                                                                                                                true,
+                                                                                                              ),
+                                                                                                              true)
+                                                                                                          .toString(),
+                                                                                                      '0.00',
+                                                                                                    ),
+                                                                                                    functions
+                                                                                                        .checkWalletWithAction(
+                                                                                                            _model.isRefSubWalletCheckBoxSelected,
+                                                                                                            valueOrDefault<String>(
+                                                                                                              functions
+                                                                                                                  .totalValueAmountUpdae(
+                                                                                                                      '0',
+                                                                                                                      FFAppState().couponDiscount.toString(),
+                                                                                                                      getJsonField(
+                                                                                                                        tabBarShowsubcartResponse.jsonBody,
+                                                                                                                        r'''$.data.total_price''',
+                                                                                                                      ).toString(),
+                                                                                                                      '0',
+                                                                                                                      'no',
+                                                                                                                      _model.selectedPaymentMethod,
+                                                                                                                      '0',
+                                                                                                                      '0',
+                                                                                                                      'no',
+                                                                                                                      functions.stringToDouble(functions
+                                                                                                                                  .calculateTimeSlotPricingTotal(
+                                                                                                                                      QuickartGroup.showsubcartCall
+                                                                                                                                          .cardData(
+                                                                                                                                            tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                          )!
+                                                                                                                                          .toList(),
+                                                                                                                                      'discount')
+                                                                                                                                  .toString()) >
+                                                                                                                              0.0
+                                                                                                                          ? functions
+                                                                                                                              .calculateTimeSlotPricingTotal(
+                                                                                                                                  QuickartGroup.showsubcartCall
+                                                                                                                                      .cardData(
+                                                                                                                                        tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                      )!
+                                                                                                                                      .toList(),
+                                                                                                                                  'discount')
+                                                                                                                              .toString()
+                                                                                                                          : '0',
+                                                                                                                      functions.stringToDouble(functions
+                                                                                                                                  .calculateTimeSlotPricingTotal(
+                                                                                                                                      QuickartGroup.showsubcartCall
+                                                                                                                                          .cardData(
+                                                                                                                                            tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                          )!
+                                                                                                                                          .toList(),
+                                                                                                                                      'surge_charge')
+                                                                                                                                  .toString()) >
+                                                                                                                              0.0
+                                                                                                                          ? functions
+                                                                                                                              .calculateTimeSlotPricingTotal(
+                                                                                                                                  QuickartGroup.showsubcartCall
+                                                                                                                                      .cardData(
+                                                                                                                                        tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                      )!
+                                                                                                                                      .toList(),
+                                                                                                                                  'surge_charge')
+                                                                                                                              .toString()
+                                                                                                                          : '0',
+                                                                                                                      getJsonField(
+                                                                                                                        functions.getZoneRuleByType(
+                                                                                                                            getJsonField(
+                                                                                                                              tabBarShowsubcartResponse.jsonBody,
+                                                                                                                              r'''$.data.zone_permanent_charges''',
+                                                                                                                              true,
+                                                                                                                            )!,
+                                                                                                                            'min_order'),
+                                                                                                                        r'''$.zone_price_effect''',
+                                                                                                                      ).toString(),
+                                                                                                                      getJsonField(
+                                                                                                                        tabBarShowsubcartResponse.jsonBody,
+                                                                                                                        r'''$.data.zone_delivery_addons''',
+                                                                                                                        true,
+                                                                                                                      ),
+                                                                                                                      true)
+                                                                                                                  .toString(),
+                                                                                                              '0.00',
+                                                                                                            ),
+                                                                                                            getJsonField(
+                                                                                                              tabBarShowsubcartResponse.jsonBody,
+                                                                                                              r'''$.data.referral_balance''',
+                                                                                                            ).toString(),
+                                                                                                            getJsonField(
+                                                                                                              FFAppState().appInfo,
+                                                                                                              r'''$.wallet_deduction_percentage''',
+                                                                                                            ).toString())
+                                                                                                        .toString(),
+                                                                                                    getJsonField(
+                                                                                                      tabBarShowsubcartResponse.jsonBody,
+                                                                                                      r'''$.data.wallet_balance''',
+                                                                                                    ).toString(),
+                                                                                                    _model.isSubWalletCheckBoxSelected)
+                                                                                                .toString()),
+                                                                                            'walletSelected',
+                                                                                            FFAppState().emptyJson,
+                                                                                            'subscription',
+                                                                                            '0',
+                                                                                            '0',
+                                                                                            '0',
+                                                                                            '0',
+                                                                                          );
                                                                                           logFirebaseEvent('CheckboxWallet_google_analytics_event');
                                                                                           logFirebaseEvent(
                                                                                             'Selection',
@@ -4561,6 +5240,189 @@ class _CartSubscriptionScreenWidgetState
                                                                                           logFirebaseEvent('CheckboxWallet_update_page_state');
                                                                                           _model.isSubWalletCheckBoxSelected = 'remove';
                                                                                           safeSetState(() {});
+                                                                                          logFirebaseEvent('CheckboxWallet_custom_action');
+                                                                                          await actions.facebookEventClass(
+                                                                                            'Refund wallet remove',
+                                                                                            FFAppState().userID,
+                                                                                            '0',
+                                                                                            0.0,
+                                                                                            0,
+                                                                                            functions.stringToDouble(functions
+                                                                                                .calculateFinalPayableForCashPayment(
+                                                                                                    valueOrDefault<String>(
+                                                                                                      functions
+                                                                                                          .totalValueAmountUpdae(
+                                                                                                              '0',
+                                                                                                              FFAppState().couponDiscount.toString(),
+                                                                                                              getJsonField(
+                                                                                                                tabBarShowsubcartResponse.jsonBody,
+                                                                                                                r'''$.data.total_price''',
+                                                                                                              ).toString(),
+                                                                                                              '0',
+                                                                                                              'no',
+                                                                                                              _model.selectedPaymentMethod,
+                                                                                                              '0',
+                                                                                                              '0',
+                                                                                                              'no',
+                                                                                                              functions.stringToDouble(functions
+                                                                                                                          .calculateTimeSlotPricingTotal(
+                                                                                                                              QuickartGroup.showsubcartCall
+                                                                                                                                  .cardData(
+                                                                                                                                    tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                  )!
+                                                                                                                                  .toList(),
+                                                                                                                              'discount')
+                                                                                                                          .toString()) >
+                                                                                                                      0.0
+                                                                                                                  ? functions
+                                                                                                                      .calculateTimeSlotPricingTotal(
+                                                                                                                          QuickartGroup.showsubcartCall
+                                                                                                                              .cardData(
+                                                                                                                                tabBarShowsubcartResponse.jsonBody,
+                                                                                                                              )!
+                                                                                                                              .toList(),
+                                                                                                                          'discount')
+                                                                                                                      .toString()
+                                                                                                                  : '0',
+                                                                                                              functions.stringToDouble(functions
+                                                                                                                          .calculateTimeSlotPricingTotal(
+                                                                                                                              QuickartGroup.showsubcartCall
+                                                                                                                                  .cardData(
+                                                                                                                                    tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                  )!
+                                                                                                                                  .toList(),
+                                                                                                                              'surge_charge')
+                                                                                                                          .toString()) >
+                                                                                                                      0.0
+                                                                                                                  ? functions
+                                                                                                                      .calculateTimeSlotPricingTotal(
+                                                                                                                          QuickartGroup.showsubcartCall
+                                                                                                                              .cardData(
+                                                                                                                                tabBarShowsubcartResponse.jsonBody,
+                                                                                                                              )!
+                                                                                                                              .toList(),
+                                                                                                                          'surge_charge')
+                                                                                                                      .toString()
+                                                                                                                  : '0',
+                                                                                                              getJsonField(
+                                                                                                                functions.getZoneRuleByType(
+                                                                                                                    getJsonField(
+                                                                                                                      tabBarShowsubcartResponse.jsonBody,
+                                                                                                                      r'''$.data.zone_permanent_charges''',
+                                                                                                                      true,
+                                                                                                                    )!,
+                                                                                                                    'min_order'),
+                                                                                                                r'''$.zone_price_effect''',
+                                                                                                              ).toString(),
+                                                                                                              getJsonField(
+                                                                                                                tabBarShowsubcartResponse.jsonBody,
+                                                                                                                r'''$.data.zone_delivery_addons''',
+                                                                                                                true,
+                                                                                                              ),
+                                                                                                              true)
+                                                                                                          .toString(),
+                                                                                                      '0.00',
+                                                                                                    ),
+                                                                                                    functions
+                                                                                                        .checkWalletWithAction(
+                                                                                                            _model.isRefSubWalletCheckBoxSelected,
+                                                                                                            valueOrDefault<String>(
+                                                                                                              functions
+                                                                                                                  .totalValueAmountUpdae(
+                                                                                                                      '0',
+                                                                                                                      FFAppState().couponDiscount.toString(),
+                                                                                                                      getJsonField(
+                                                                                                                        tabBarShowsubcartResponse.jsonBody,
+                                                                                                                        r'''$.data.total_price''',
+                                                                                                                      ).toString(),
+                                                                                                                      '0',
+                                                                                                                      'no',
+                                                                                                                      _model.selectedPaymentMethod,
+                                                                                                                      '0',
+                                                                                                                      '0',
+                                                                                                                      'no',
+                                                                                                                      functions.stringToDouble(functions
+                                                                                                                                  .calculateTimeSlotPricingTotal(
+                                                                                                                                      QuickartGroup.showsubcartCall
+                                                                                                                                          .cardData(
+                                                                                                                                            tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                          )!
+                                                                                                                                          .toList(),
+                                                                                                                                      'discount')
+                                                                                                                                  .toString()) >
+                                                                                                                              0.0
+                                                                                                                          ? functions
+                                                                                                                              .calculateTimeSlotPricingTotal(
+                                                                                                                                  QuickartGroup.showsubcartCall
+                                                                                                                                      .cardData(
+                                                                                                                                        tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                      )!
+                                                                                                                                      .toList(),
+                                                                                                                                  'discount')
+                                                                                                                              .toString()
+                                                                                                                          : '0',
+                                                                                                                      functions.stringToDouble(functions
+                                                                                                                                  .calculateTimeSlotPricingTotal(
+                                                                                                                                      QuickartGroup.showsubcartCall
+                                                                                                                                          .cardData(
+                                                                                                                                            tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                          )!
+                                                                                                                                          .toList(),
+                                                                                                                                      'surge_charge')
+                                                                                                                                  .toString()) >
+                                                                                                                              0.0
+                                                                                                                          ? functions
+                                                                                                                              .calculateTimeSlotPricingTotal(
+                                                                                                                                  QuickartGroup.showsubcartCall
+                                                                                                                                      .cardData(
+                                                                                                                                        tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                      )!
+                                                                                                                                      .toList(),
+                                                                                                                                  'surge_charge')
+                                                                                                                              .toString()
+                                                                                                                          : '0',
+                                                                                                                      getJsonField(
+                                                                                                                        functions.getZoneRuleByType(
+                                                                                                                            getJsonField(
+                                                                                                                              tabBarShowsubcartResponse.jsonBody,
+                                                                                                                              r'''$.data.zone_permanent_charges''',
+                                                                                                                              true,
+                                                                                                                            )!,
+                                                                                                                            'min_order'),
+                                                                                                                        r'''$.zone_price_effect''',
+                                                                                                                      ).toString(),
+                                                                                                                      getJsonField(
+                                                                                                                        tabBarShowsubcartResponse.jsonBody,
+                                                                                                                        r'''$.data.zone_delivery_addons''',
+                                                                                                                        true,
+                                                                                                                      ),
+                                                                                                                      true)
+                                                                                                                  .toString(),
+                                                                                                              '0.00',
+                                                                                                            ),
+                                                                                                            getJsonField(
+                                                                                                              tabBarShowsubcartResponse.jsonBody,
+                                                                                                              r'''$.data.referral_balance''',
+                                                                                                            ).toString(),
+                                                                                                            getJsonField(
+                                                                                                              FFAppState().appInfo,
+                                                                                                              r'''$.wallet_deduction_percentage''',
+                                                                                                            ).toString())
+                                                                                                        .toString(),
+                                                                                                    getJsonField(
+                                                                                                      tabBarShowsubcartResponse.jsonBody,
+                                                                                                      r'''$.data.wallet_balance''',
+                                                                                                    ).toString(),
+                                                                                                    _model.isSubWalletCheckBoxSelected)
+                                                                                                .toString()),
+                                                                                            'walletSelected',
+                                                                                            FFAppState().emptyJson,
+                                                                                            'subscription',
+                                                                                            '0',
+                                                                                            '0',
+                                                                                            '0',
+                                                                                            '0',
+                                                                                          );
                                                                                           logFirebaseEvent('CheckboxWallet_google_analytics_event');
                                                                                           logFirebaseEvent(
                                                                                             'Selection',
@@ -6957,6 +7819,358 @@ class _CartSubscriptionScreenWidgetState
                                                                                                             logFirebaseEvent('AppleContainer_custom_action');
                                                                                                             _model.isVpnONAP = await actions.isVpnEnabled();
                                                                                                             if (_model.isVpnONAP == false) {
+                                                                                                              logFirebaseEvent('AppleContainer_custom_action');
+                                                                                                              await actions.facebookEventClass(
+                                                                                                                (List<String> var1) {
+                                                                                                                  return var1.join(', ');
+                                                                                                                }(functions
+                                                                                                                    .getVarientIdsWithCartQty(
+                                                                                                                        getJsonField(
+                                                                                                                          tabBarShowsubcartResponse.jsonBody,
+                                                                                                                          r'''$.data.data''',
+                                                                                                                        ),
+                                                                                                                        'daily')
+                                                                                                                    .map((e) => e.toString())
+                                                                                                                    .toList()),
+                                                                                                                FFAppState().userID,
+                                                                                                                'subscription order',
+                                                                                                                0.0,
+                                                                                                                0,
+                                                                                                                valueOrDefault<double>(
+                                                                                                                  functions.totalValueAmountUpdae(
+                                                                                                                      '0',
+                                                                                                                      FFAppState().couponDiscount.toString(),
+                                                                                                                      getJsonField(
+                                                                                                                        tabBarShowsubcartResponse.jsonBody,
+                                                                                                                        r'''$.data.total_price''',
+                                                                                                                      ).toString(),
+                                                                                                                      functions
+                                                                                                                          .checkWalletWithAction(
+                                                                                                                              _model.isRefSubWalletCheckBoxSelected,
+                                                                                                                              valueOrDefault<String>(
+                                                                                                                                functions
+                                                                                                                                    .totalValueAmountUpdae(
+                                                                                                                                        '0',
+                                                                                                                                        FFAppState().couponDiscount.toString(),
+                                                                                                                                        getJsonField(
+                                                                                                                                          tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                          r'''$.data.total_price''',
+                                                                                                                                        ).toString(),
+                                                                                                                                        '0',
+                                                                                                                                        'no',
+                                                                                                                                        _model.selectedPaymentMethod,
+                                                                                                                                        '0',
+                                                                                                                                        '0',
+                                                                                                                                        'no',
+                                                                                                                                        functions.stringToDouble(functions
+                                                                                                                                                    .calculateTimeSlotPricingTotal(
+                                                                                                                                                        QuickartGroup.showsubcartCall
+                                                                                                                                                            .cardData(
+                                                                                                                                                              tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                                            )!
+                                                                                                                                                            .toList(),
+                                                                                                                                                        'discount')
+                                                                                                                                                    .toString()) >
+                                                                                                                                                0.0
+                                                                                                                                            ? functions
+                                                                                                                                                .calculateTimeSlotPricingTotal(
+                                                                                                                                                    QuickartGroup.showsubcartCall
+                                                                                                                                                        .cardData(
+                                                                                                                                                          tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                                        )!
+                                                                                                                                                        .toList(),
+                                                                                                                                                    'discount')
+                                                                                                                                                .toString()
+                                                                                                                                            : '0',
+                                                                                                                                        functions.stringToDouble(functions
+                                                                                                                                                    .calculateTimeSlotPricingTotal(
+                                                                                                                                                        QuickartGroup.showsubcartCall
+                                                                                                                                                            .cardData(
+                                                                                                                                                              tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                                            )!
+                                                                                                                                                            .toList(),
+                                                                                                                                                        'surge_charge')
+                                                                                                                                                    .toString()) >
+                                                                                                                                                0.0
+                                                                                                                                            ? functions
+                                                                                                                                                .calculateTimeSlotPricingTotal(
+                                                                                                                                                    QuickartGroup.showsubcartCall
+                                                                                                                                                        .cardData(
+                                                                                                                                                          tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                                        )!
+                                                                                                                                                        .toList(),
+                                                                                                                                                    'surge_charge')
+                                                                                                                                                .toString()
+                                                                                                                                            : '0',
+                                                                                                                                        getJsonField(
+                                                                                                                                          functions.getZoneRuleByType(
+                                                                                                                                              getJsonField(
+                                                                                                                                                tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                                r'''$.data.zone_permanent_charges''',
+                                                                                                                                                true,
+                                                                                                                                              )!,
+                                                                                                                                              'min_order'),
+                                                                                                                                          r'''$.zone_price_effect''',
+                                                                                                                                        ).toString(),
+                                                                                                                                        getJsonField(
+                                                                                                                                          tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                          r'''$.data.zone_delivery_addons''',
+                                                                                                                                          true,
+                                                                                                                                        ),
+                                                                                                                                        true)
+                                                                                                                                    .toString(),
+                                                                                                                                '0.00',
+                                                                                                                              ),
+                                                                                                                              getJsonField(
+                                                                                                                                tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                r'''$.data.referral_balance''',
+                                                                                                                              ).toString(),
+                                                                                                                              getJsonField(
+                                                                                                                                FFAppState().appInfo,
+                                                                                                                                r'''$.wallet_deduction_percentage''',
+                                                                                                                              ).toString())
+                                                                                                                          .toString(),
+                                                                                                                      'add',
+                                                                                                                      _model.selectedPaymentMethod,
+                                                                                                                      '0',
+                                                                                                                      functions
+                                                                                                                          .calculateFinalPayableForCashPayment(
+                                                                                                                              valueOrDefault<String>(
+                                                                                                                                functions
+                                                                                                                                    .totalValueAmountUpdae(
+                                                                                                                                        '0',
+                                                                                                                                        FFAppState().couponDiscount.toString(),
+                                                                                                                                        getJsonField(
+                                                                                                                                          tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                          r'''$.data.total_price''',
+                                                                                                                                        ).toString(),
+                                                                                                                                        '0',
+                                                                                                                                        'no',
+                                                                                                                                        _model.selectedPaymentMethod,
+                                                                                                                                        '0',
+                                                                                                                                        '0',
+                                                                                                                                        'no',
+                                                                                                                                        functions.stringToDouble(functions
+                                                                                                                                                    .calculateTimeSlotPricingTotal(
+                                                                                                                                                        QuickartGroup.showsubcartCall
+                                                                                                                                                            .cardData(
+                                                                                                                                                              tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                                            )!
+                                                                                                                                                            .toList(),
+                                                                                                                                                        'discount')
+                                                                                                                                                    .toString()) >
+                                                                                                                                                0.0
+                                                                                                                                            ? functions
+                                                                                                                                                .calculateTimeSlotPricingTotal(
+                                                                                                                                                    QuickartGroup.showsubcartCall
+                                                                                                                                                        .cardData(
+                                                                                                                                                          tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                                        )!
+                                                                                                                                                        .toList(),
+                                                                                                                                                    'discount')
+                                                                                                                                                .toString()
+                                                                                                                                            : '0',
+                                                                                                                                        functions.stringToDouble(functions
+                                                                                                                                                    .calculateTimeSlotPricingTotal(
+                                                                                                                                                        QuickartGroup.showsubcartCall
+                                                                                                                                                            .cardData(
+                                                                                                                                                              tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                                            )!
+                                                                                                                                                            .toList(),
+                                                                                                                                                        'surge_charge')
+                                                                                                                                                    .toString()) >
+                                                                                                                                                0.0
+                                                                                                                                            ? functions
+                                                                                                                                                .calculateTimeSlotPricingTotal(
+                                                                                                                                                    QuickartGroup.showsubcartCall
+                                                                                                                                                        .cardData(
+                                                                                                                                                          tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                                        )!
+                                                                                                                                                        .toList(),
+                                                                                                                                                    'surge_charge')
+                                                                                                                                                .toString()
+                                                                                                                                            : '0',
+                                                                                                                                        getJsonField(
+                                                                                                                                          functions.getZoneRuleByType(
+                                                                                                                                              getJsonField(
+                                                                                                                                                tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                                r'''$.data.zone_permanent_charges''',
+                                                                                                                                                true,
+                                                                                                                                              )!,
+                                                                                                                                              'min_order'),
+                                                                                                                                          r'''$.zone_price_effect''',
+                                                                                                                                        ).toString(),
+                                                                                                                                        getJsonField(
+                                                                                                                                          tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                          r'''$.data.zone_delivery_addons''',
+                                                                                                                                          true,
+                                                                                                                                        ),
+                                                                                                                                        true)
+                                                                                                                                    .toString(),
+                                                                                                                                '0.00',
+                                                                                                                              ),
+                                                                                                                              functions
+                                                                                                                                  .checkWalletWithAction(
+                                                                                                                                      _model.isRefSubWalletCheckBoxSelected,
+                                                                                                                                      valueOrDefault<String>(
+                                                                                                                                        functions
+                                                                                                                                            .totalValueAmountUpdae(
+                                                                                                                                                '0',
+                                                                                                                                                FFAppState().couponDiscount.toString(),
+                                                                                                                                                getJsonField(
+                                                                                                                                                  tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                                  r'''$.data.total_price''',
+                                                                                                                                                ).toString(),
+                                                                                                                                                '0',
+                                                                                                                                                'no',
+                                                                                                                                                _model.selectedPaymentMethod,
+                                                                                                                                                '0',
+                                                                                                                                                '0',
+                                                                                                                                                'no',
+                                                                                                                                                functions.stringToDouble(functions
+                                                                                                                                                            .calculateTimeSlotPricingTotal(
+                                                                                                                                                                QuickartGroup.showsubcartCall
+                                                                                                                                                                    .cardData(
+                                                                                                                                                                      tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                                                    )!
+                                                                                                                                                                    .toList(),
+                                                                                                                                                                'discount')
+                                                                                                                                                            .toString()) >
+                                                                                                                                                        0.0
+                                                                                                                                                    ? functions
+                                                                                                                                                        .calculateTimeSlotPricingTotal(
+                                                                                                                                                            QuickartGroup.showsubcartCall
+                                                                                                                                                                .cardData(
+                                                                                                                                                                  tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                                                )!
+                                                                                                                                                                .toList(),
+                                                                                                                                                            'discount')
+                                                                                                                                                        .toString()
+                                                                                                                                                    : '0',
+                                                                                                                                                functions.stringToDouble(functions
+                                                                                                                                                            .calculateTimeSlotPricingTotal(
+                                                                                                                                                                QuickartGroup.showsubcartCall
+                                                                                                                                                                    .cardData(
+                                                                                                                                                                      tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                                                    )!
+                                                                                                                                                                    .toList(),
+                                                                                                                                                                'surge_charge')
+                                                                                                                                                            .toString()) >
+                                                                                                                                                        0.0
+                                                                                                                                                    ? functions
+                                                                                                                                                        .calculateTimeSlotPricingTotal(
+                                                                                                                                                            QuickartGroup.showsubcartCall
+                                                                                                                                                                .cardData(
+                                                                                                                                                                  tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                                                )!
+                                                                                                                                                                .toList(),
+                                                                                                                                                            'surge_charge')
+                                                                                                                                                        .toString()
+                                                                                                                                                    : '0',
+                                                                                                                                                getJsonField(
+                                                                                                                                                  functions.getZoneRuleByType(
+                                                                                                                                                      getJsonField(
+                                                                                                                                                        tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                                        r'''$.data.zone_permanent_charges''',
+                                                                                                                                                        true,
+                                                                                                                                                      )!,
+                                                                                                                                                      'min_order'),
+                                                                                                                                                  r'''$.zone_price_effect''',
+                                                                                                                                                ).toString(),
+                                                                                                                                                getJsonField(
+                                                                                                                                                  tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                                  r'''$.data.zone_delivery_addons''',
+                                                                                                                                                  true,
+                                                                                                                                                ),
+                                                                                                                                                true)
+                                                                                                                                            .toString(),
+                                                                                                                                        '0.00',
+                                                                                                                                      ),
+                                                                                                                                      getJsonField(
+                                                                                                                                        tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                        r'''$.data.referral_balance''',
+                                                                                                                                      ).toString(),
+                                                                                                                                      getJsonField(
+                                                                                                                                        FFAppState().appInfo,
+                                                                                                                                        r'''$.wallet_deduction_percentage''',
+                                                                                                                                      ).toString())
+                                                                                                                                  .toString(),
+                                                                                                                              getJsonField(
+                                                                                                                                tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                r'''$.data.wallet_balance''',
+                                                                                                                              ).toString(),
+                                                                                                                              _model.isSubWalletCheckBoxSelected)
+                                                                                                                          .toString(),
+                                                                                                                      'add',
+                                                                                                                      functions.stringToDouble(functions
+                                                                                                                                  .calculateTimeSlotPricingTotal(
+                                                                                                                                      QuickartGroup.showsubcartCall
+                                                                                                                                          .cardData(
+                                                                                                                                            tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                          )!
+                                                                                                                                          .toList(),
+                                                                                                                                      'discount')
+                                                                                                                                  .toString()) >
+                                                                                                                              0.0
+                                                                                                                          ? functions
+                                                                                                                              .calculateTimeSlotPricingTotal(
+                                                                                                                                  QuickartGroup.showsubcartCall
+                                                                                                                                      .cardData(
+                                                                                                                                        tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                      )!
+                                                                                                                                      .toList(),
+                                                                                                                                  'discount')
+                                                                                                                              .toString()
+                                                                                                                          : '0',
+                                                                                                                      functions.stringToDouble(functions
+                                                                                                                                  .calculateTimeSlotPricingTotal(
+                                                                                                                                      QuickartGroup.showsubcartCall
+                                                                                                                                          .cardData(
+                                                                                                                                            tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                          )!
+                                                                                                                                          .toList(),
+                                                                                                                                      'surge_charge')
+                                                                                                                                  .toString()) >
+                                                                                                                              0.0
+                                                                                                                          ? functions
+                                                                                                                              .calculateTimeSlotPricingTotal(
+                                                                                                                                  QuickartGroup.showsubcartCall
+                                                                                                                                      .cardData(
+                                                                                                                                        tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                      )!
+                                                                                                                                      .toList(),
+                                                                                                                                  'surge_charge')
+                                                                                                                              .toString()
+                                                                                                                          : '0',
+                                                                                                                      getJsonField(
+                                                                                                                        functions.getZoneRuleByType(
+                                                                                                                            getJsonField(
+                                                                                                                              tabBarShowsubcartResponse.jsonBody,
+                                                                                                                              r'''$.data.zone_permanent_charges''',
+                                                                                                                              true,
+                                                                                                                            )!,
+                                                                                                                            'min_order'),
+                                                                                                                        r'''$.zone_price_effect''',
+                                                                                                                      ).toString(),
+                                                                                                                      getJsonField(
+                                                                                                                        tabBarShowsubcartResponse.jsonBody,
+                                                                                                                        r'''$.data.zone_delivery_addons''',
+                                                                                                                        true,
+                                                                                                                      ),
+                                                                                                                      true),
+                                                                                                                  0.00,
+                                                                                                                ),
+                                                                                                                'paymentStarted',
+                                                                                                                getJsonField(
+                                                                                                                  tabBarShowsubcartResponse.jsonBody,
+                                                                                                                  r'''$.data.data''',
+                                                                                                                ),
+                                                                                                                'apple pay',
+                                                                                                                ' ',
+                                                                                                                ' ',
+                                                                                                                ' ',
+                                                                                                                ' ',
+                                                                                                              );
                                                                                                               logFirebaseEvent('AppleContainer_backend_call');
                                                                                                               _model.apiResultapplePaynew = await QuickartGroup.subpaymentCall.call(
                                                                                                                 userid: FFAppState().userID,
@@ -7464,7 +8678,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                     .toString(),
                                                                                                                 delPartnerInstruction: functions.combineInstructions(FFAppState().deliveryPartnerInstructionAvoid, FFAppState().deliveryPartnerInstructionBell, FFAppState().deliveryPartnerInstructionDoor),
                                                                                                                 orderInstruction: (String var1) {
-                                                                                                                  return var1.trim() ?? '';
+                                                                                                                  return var1.trim().replaceAll('\\', '\\\\').replaceAll('"', '\\"').replaceAll('\r', '\\r').replaceAll('\n', '\\n') ?? '';
                                                                                                                 }(_model.textController.text),
                                                                                                                 platform: isiOS ? 'ios' : 'android',
                                                                                                                 totalrefwalletamt: (_model.isRefSubWalletCheckBoxSelected == 'add'
@@ -7949,7 +9163,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                           'daily')
                                                                                                                       .map((e) => e.toString())
                                                                                                                       .toList()),
-                                                                                                                  '0',
+                                                                                                                  FFAppState().userID,
                                                                                                                   'subscription order',
                                                                                                                   0.0,
                                                                                                                   0,
@@ -8283,7 +9497,10 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                     r'''$.data.data''',
                                                                                                                   ),
                                                                                                                   'subscription order apple pay',
-                                                                                                                  ' ',
+                                                                                                                  getJsonField(
+                                                                                                                    (_model.apiResultapplePaynew?.jsonBody ?? ''),
+                                                                                                                    r'''$.data.group_id''',
+                                                                                                                  ).toString(),
                                                                                                                   ' ',
                                                                                                                   ' ',
                                                                                                                   ' ',
@@ -8322,6 +9539,361 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                 logFirebaseEvent('AppleContainer_update_page_state');
                                                                                                                 _model.isPaymentDone = true;
                                                                                                                 safeSetState(() {});
+                                                                                                                logFirebaseEvent('AppleContainer_custom_action');
+                                                                                                                await actions.facebookEventClass(
+                                                                                                                  (List<String> var1) {
+                                                                                                                    return var1.join(', ');
+                                                                                                                  }(functions
+                                                                                                                      .getVarientIdsWithCartQty(
+                                                                                                                          getJsonField(
+                                                                                                                            tabBarShowsubcartResponse.jsonBody,
+                                                                                                                            r'''$.data.data''',
+                                                                                                                          ),
+                                                                                                                          'daily')
+                                                                                                                      .map((e) => e.toString())
+                                                                                                                      .toList()),
+                                                                                                                  FFAppState().userID,
+                                                                                                                  'subscription order',
+                                                                                                                  0.0,
+                                                                                                                  0,
+                                                                                                                  valueOrDefault<double>(
+                                                                                                                    functions.totalValueAmountUpdae(
+                                                                                                                        '0',
+                                                                                                                        FFAppState().couponDiscount.toString(),
+                                                                                                                        getJsonField(
+                                                                                                                          tabBarShowsubcartResponse.jsonBody,
+                                                                                                                          r'''$.data.total_price''',
+                                                                                                                        ).toString(),
+                                                                                                                        functions
+                                                                                                                            .checkWalletWithAction(
+                                                                                                                                _model.isRefSubWalletCheckBoxSelected,
+                                                                                                                                valueOrDefault<String>(
+                                                                                                                                  functions
+                                                                                                                                      .totalValueAmountUpdae(
+                                                                                                                                          '0',
+                                                                                                                                          FFAppState().couponDiscount.toString(),
+                                                                                                                                          getJsonField(
+                                                                                                                                            tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                            r'''$.data.total_price''',
+                                                                                                                                          ).toString(),
+                                                                                                                                          '0',
+                                                                                                                                          'no',
+                                                                                                                                          _model.selectedPaymentMethod,
+                                                                                                                                          '0',
+                                                                                                                                          '0',
+                                                                                                                                          'no',
+                                                                                                                                          functions.stringToDouble(functions
+                                                                                                                                                      .calculateTimeSlotPricingTotal(
+                                                                                                                                                          QuickartGroup.showsubcartCall
+                                                                                                                                                              .cardData(
+                                                                                                                                                                tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                                              )!
+                                                                                                                                                              .toList(),
+                                                                                                                                                          'discount')
+                                                                                                                                                      .toString()) >
+                                                                                                                                                  0.0
+                                                                                                                                              ? functions
+                                                                                                                                                  .calculateTimeSlotPricingTotal(
+                                                                                                                                                      QuickartGroup.showsubcartCall
+                                                                                                                                                          .cardData(
+                                                                                                                                                            tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                                          )!
+                                                                                                                                                          .toList(),
+                                                                                                                                                      'discount')
+                                                                                                                                                  .toString()
+                                                                                                                                              : '0',
+                                                                                                                                          functions.stringToDouble(functions
+                                                                                                                                                      .calculateTimeSlotPricingTotal(
+                                                                                                                                                          QuickartGroup.showsubcartCall
+                                                                                                                                                              .cardData(
+                                                                                                                                                                tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                                              )!
+                                                                                                                                                              .toList(),
+                                                                                                                                                          'surge_charge')
+                                                                                                                                                      .toString()) >
+                                                                                                                                                  0.0
+                                                                                                                                              ? functions
+                                                                                                                                                  .calculateTimeSlotPricingTotal(
+                                                                                                                                                      QuickartGroup.showsubcartCall
+                                                                                                                                                          .cardData(
+                                                                                                                                                            tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                                          )!
+                                                                                                                                                          .toList(),
+                                                                                                                                                      'surge_charge')
+                                                                                                                                                  .toString()
+                                                                                                                                              : '0',
+                                                                                                                                          getJsonField(
+                                                                                                                                            functions.getZoneRuleByType(
+                                                                                                                                                getJsonField(
+                                                                                                                                                  tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                                  r'''$.data.zone_permanent_charges''',
+                                                                                                                                                  true,
+                                                                                                                                                )!,
+                                                                                                                                                'min_order'),
+                                                                                                                                            r'''$.zone_price_effect''',
+                                                                                                                                          ).toString(),
+                                                                                                                                          getJsonField(
+                                                                                                                                            tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                            r'''$.data.zone_delivery_addons''',
+                                                                                                                                            true,
+                                                                                                                                          ),
+                                                                                                                                          true)
+                                                                                                                                      .toString(),
+                                                                                                                                  '0.00',
+                                                                                                                                ),
+                                                                                                                                getJsonField(
+                                                                                                                                  tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                  r'''$.data.referral_balance''',
+                                                                                                                                ).toString(),
+                                                                                                                                getJsonField(
+                                                                                                                                  FFAppState().appInfo,
+                                                                                                                                  r'''$.wallet_deduction_percentage''',
+                                                                                                                                ).toString())
+                                                                                                                            .toString(),
+                                                                                                                        'add',
+                                                                                                                        _model.selectedPaymentMethod,
+                                                                                                                        '0',
+                                                                                                                        functions
+                                                                                                                            .calculateFinalPayableForCashPayment(
+                                                                                                                                valueOrDefault<String>(
+                                                                                                                                  functions
+                                                                                                                                      .totalValueAmountUpdae(
+                                                                                                                                          '0',
+                                                                                                                                          FFAppState().couponDiscount.toString(),
+                                                                                                                                          getJsonField(
+                                                                                                                                            tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                            r'''$.data.total_price''',
+                                                                                                                                          ).toString(),
+                                                                                                                                          '0',
+                                                                                                                                          'no',
+                                                                                                                                          _model.selectedPaymentMethod,
+                                                                                                                                          '0',
+                                                                                                                                          '0',
+                                                                                                                                          'no',
+                                                                                                                                          functions.stringToDouble(functions
+                                                                                                                                                      .calculateTimeSlotPricingTotal(
+                                                                                                                                                          QuickartGroup.showsubcartCall
+                                                                                                                                                              .cardData(
+                                                                                                                                                                tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                                              )!
+                                                                                                                                                              .toList(),
+                                                                                                                                                          'discount')
+                                                                                                                                                      .toString()) >
+                                                                                                                                                  0.0
+                                                                                                                                              ? functions
+                                                                                                                                                  .calculateTimeSlotPricingTotal(
+                                                                                                                                                      QuickartGroup.showsubcartCall
+                                                                                                                                                          .cardData(
+                                                                                                                                                            tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                                          )!
+                                                                                                                                                          .toList(),
+                                                                                                                                                      'discount')
+                                                                                                                                                  .toString()
+                                                                                                                                              : '0',
+                                                                                                                                          functions.stringToDouble(functions
+                                                                                                                                                      .calculateTimeSlotPricingTotal(
+                                                                                                                                                          QuickartGroup.showsubcartCall
+                                                                                                                                                              .cardData(
+                                                                                                                                                                tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                                              )!
+                                                                                                                                                              .toList(),
+                                                                                                                                                          'surge_charge')
+                                                                                                                                                      .toString()) >
+                                                                                                                                                  0.0
+                                                                                                                                              ? functions
+                                                                                                                                                  .calculateTimeSlotPricingTotal(
+                                                                                                                                                      QuickartGroup.showsubcartCall
+                                                                                                                                                          .cardData(
+                                                                                                                                                            tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                                          )!
+                                                                                                                                                          .toList(),
+                                                                                                                                                      'surge_charge')
+                                                                                                                                                  .toString()
+                                                                                                                                              : '0',
+                                                                                                                                          getJsonField(
+                                                                                                                                            functions.getZoneRuleByType(
+                                                                                                                                                getJsonField(
+                                                                                                                                                  tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                                  r'''$.data.zone_permanent_charges''',
+                                                                                                                                                  true,
+                                                                                                                                                )!,
+                                                                                                                                                'min_order'),
+                                                                                                                                            r'''$.zone_price_effect''',
+                                                                                                                                          ).toString(),
+                                                                                                                                          getJsonField(
+                                                                                                                                            tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                            r'''$.data.zone_delivery_addons''',
+                                                                                                                                            true,
+                                                                                                                                          ),
+                                                                                                                                          true)
+                                                                                                                                      .toString(),
+                                                                                                                                  '0.00',
+                                                                                                                                ),
+                                                                                                                                functions
+                                                                                                                                    .checkWalletWithAction(
+                                                                                                                                        _model.isRefSubWalletCheckBoxSelected,
+                                                                                                                                        valueOrDefault<String>(
+                                                                                                                                          functions
+                                                                                                                                              .totalValueAmountUpdae(
+                                                                                                                                                  '0',
+                                                                                                                                                  FFAppState().couponDiscount.toString(),
+                                                                                                                                                  getJsonField(
+                                                                                                                                                    tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                                    r'''$.data.total_price''',
+                                                                                                                                                  ).toString(),
+                                                                                                                                                  '0',
+                                                                                                                                                  'no',
+                                                                                                                                                  _model.selectedPaymentMethod,
+                                                                                                                                                  '0',
+                                                                                                                                                  '0',
+                                                                                                                                                  'no',
+                                                                                                                                                  functions.stringToDouble(functions
+                                                                                                                                                              .calculateTimeSlotPricingTotal(
+                                                                                                                                                                  QuickartGroup.showsubcartCall
+                                                                                                                                                                      .cardData(
+                                                                                                                                                                        tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                                                      )!
+                                                                                                                                                                      .toList(),
+                                                                                                                                                                  'discount')
+                                                                                                                                                              .toString()) >
+                                                                                                                                                          0.0
+                                                                                                                                                      ? functions
+                                                                                                                                                          .calculateTimeSlotPricingTotal(
+                                                                                                                                                              QuickartGroup.showsubcartCall
+                                                                                                                                                                  .cardData(
+                                                                                                                                                                    tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                                                  )!
+                                                                                                                                                                  .toList(),
+                                                                                                                                                              'discount')
+                                                                                                                                                          .toString()
+                                                                                                                                                      : '0',
+                                                                                                                                                  functions.stringToDouble(functions
+                                                                                                                                                              .calculateTimeSlotPricingTotal(
+                                                                                                                                                                  QuickartGroup.showsubcartCall
+                                                                                                                                                                      .cardData(
+                                                                                                                                                                        tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                                                      )!
+                                                                                                                                                                      .toList(),
+                                                                                                                                                                  'surge_charge')
+                                                                                                                                                              .toString()) >
+                                                                                                                                                          0.0
+                                                                                                                                                      ? functions
+                                                                                                                                                          .calculateTimeSlotPricingTotal(
+                                                                                                                                                              QuickartGroup.showsubcartCall
+                                                                                                                                                                  .cardData(
+                                                                                                                                                                    tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                                                  )!
+                                                                                                                                                                  .toList(),
+                                                                                                                                                              'surge_charge')
+                                                                                                                                                          .toString()
+                                                                                                                                                      : '0',
+                                                                                                                                                  getJsonField(
+                                                                                                                                                    functions.getZoneRuleByType(
+                                                                                                                                                        getJsonField(
+                                                                                                                                                          tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                                          r'''$.data.zone_permanent_charges''',
+                                                                                                                                                          true,
+                                                                                                                                                        )!,
+                                                                                                                                                        'min_order'),
+                                                                                                                                                    r'''$.zone_price_effect''',
+                                                                                                                                                  ).toString(),
+                                                                                                                                                  getJsonField(
+                                                                                                                                                    tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                                    r'''$.data.zone_delivery_addons''',
+                                                                                                                                                    true,
+                                                                                                                                                  ),
+                                                                                                                                                  true)
+                                                                                                                                              .toString(),
+                                                                                                                                          '0.00',
+                                                                                                                                        ),
+                                                                                                                                        getJsonField(
+                                                                                                                                          tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                          r'''$.data.referral_balance''',
+                                                                                                                                        ).toString(),
+                                                                                                                                        getJsonField(
+                                                                                                                                          FFAppState().appInfo,
+                                                                                                                                          r'''$.wallet_deduction_percentage''',
+                                                                                                                                        ).toString())
+                                                                                                                                    .toString(),
+                                                                                                                                getJsonField(
+                                                                                                                                  tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                  r'''$.data.wallet_balance''',
+                                                                                                                                ).toString(),
+                                                                                                                                _model.isSubWalletCheckBoxSelected)
+                                                                                                                            .toString(),
+                                                                                                                        'add',
+                                                                                                                        functions.stringToDouble(functions
+                                                                                                                                    .calculateTimeSlotPricingTotal(
+                                                                                                                                        QuickartGroup.showsubcartCall
+                                                                                                                                            .cardData(
+                                                                                                                                              tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                            )!
+                                                                                                                                            .toList(),
+                                                                                                                                        'discount')
+                                                                                                                                    .toString()) >
+                                                                                                                                0.0
+                                                                                                                            ? functions
+                                                                                                                                .calculateTimeSlotPricingTotal(
+                                                                                                                                    QuickartGroup.showsubcartCall
+                                                                                                                                        .cardData(
+                                                                                                                                          tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                        )!
+                                                                                                                                        .toList(),
+                                                                                                                                    'discount')
+                                                                                                                                .toString()
+                                                                                                                            : '0',
+                                                                                                                        functions.stringToDouble(functions
+                                                                                                                                    .calculateTimeSlotPricingTotal(
+                                                                                                                                        QuickartGroup.showsubcartCall
+                                                                                                                                            .cardData(
+                                                                                                                                              tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                            )!
+                                                                                                                                            .toList(),
+                                                                                                                                        'surge_charge')
+                                                                                                                                    .toString()) >
+                                                                                                                                0.0
+                                                                                                                            ? functions
+                                                                                                                                .calculateTimeSlotPricingTotal(
+                                                                                                                                    QuickartGroup.showsubcartCall
+                                                                                                                                        .cardData(
+                                                                                                                                          tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                        )!
+                                                                                                                                        .toList(),
+                                                                                                                                    'surge_charge')
+                                                                                                                                .toString()
+                                                                                                                            : '0',
+                                                                                                                        getJsonField(
+                                                                                                                          functions.getZoneRuleByType(
+                                                                                                                              getJsonField(
+                                                                                                                                tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                r'''$.data.zone_permanent_charges''',
+                                                                                                                                true,
+                                                                                                                              )!,
+                                                                                                                              'min_order'),
+                                                                                                                          r'''$.zone_price_effect''',
+                                                                                                                        ).toString(),
+                                                                                                                        getJsonField(
+                                                                                                                          tabBarShowsubcartResponse.jsonBody,
+                                                                                                                          r'''$.data.zone_delivery_addons''',
+                                                                                                                          true,
+                                                                                                                        ),
+                                                                                                                        true),
+                                                                                                                    0.00,
+                                                                                                                  ),
+                                                                                                                  'paymentFailed',
+                                                                                                                  getJsonField(
+                                                                                                                    tabBarShowsubcartResponse.jsonBody,
+                                                                                                                    r'''$.data.data''',
+                                                                                                                  ),
+                                                                                                                  'subscription order apple pay',
+                                                                                                                  ' ',
+                                                                                                                  getJsonField(
+                                                                                                                    (_model.apiResultapplePaynew?.jsonBody ?? ''),
+                                                                                                                    r'''$.message''',
+                                                                                                                  ).toString(),
+                                                                                                                  ' ',
+                                                                                                                  ' ',
+                                                                                                                );
                                                                                                               }
                                                                                                             } else {
                                                                                                               logFirebaseEvent('AppleContainer_update_page_state');
@@ -8919,6 +10491,358 @@ class _CartSubscriptionScreenWidgetState
                                                                                                       logFirebaseEvent('QuickPayContainer_custom_action');
                                                                                                       _model.isVpnONQP = await actions.isVpnEnabled();
                                                                                                       if (_model.isVpnONQP == false) {
+                                                                                                        logFirebaseEvent('QuickPayContainer_custom_action');
+                                                                                                        await actions.facebookEventClass(
+                                                                                                          (List<String> var1) {
+                                                                                                            return var1.join(', ');
+                                                                                                          }(functions
+                                                                                                              .getVarientIdsWithCartQty(
+                                                                                                                  getJsonField(
+                                                                                                                    tabBarShowsubcartResponse.jsonBody,
+                                                                                                                    r'''$.data.data''',
+                                                                                                                  ),
+                                                                                                                  'daily')
+                                                                                                              .map((e) => e.toString())
+                                                                                                              .toList()),
+                                                                                                          FFAppState().userID,
+                                                                                                          'subscription order',
+                                                                                                          0.0,
+                                                                                                          0,
+                                                                                                          valueOrDefault<double>(
+                                                                                                            functions.totalValueAmountUpdae(
+                                                                                                                '0',
+                                                                                                                FFAppState().couponDiscount.toString(),
+                                                                                                                getJsonField(
+                                                                                                                  tabBarShowsubcartResponse.jsonBody,
+                                                                                                                  r'''$.data.total_price''',
+                                                                                                                ).toString(),
+                                                                                                                functions
+                                                                                                                    .checkWalletWithAction(
+                                                                                                                        _model.isRefSubWalletCheckBoxSelected,
+                                                                                                                        valueOrDefault<String>(
+                                                                                                                          functions
+                                                                                                                              .totalValueAmountUpdae(
+                                                                                                                                  '0',
+                                                                                                                                  FFAppState().couponDiscount.toString(),
+                                                                                                                                  getJsonField(
+                                                                                                                                    tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                    r'''$.data.total_price''',
+                                                                                                                                  ).toString(),
+                                                                                                                                  '0',
+                                                                                                                                  'no',
+                                                                                                                                  _model.selectedPaymentMethod,
+                                                                                                                                  '0',
+                                                                                                                                  '0',
+                                                                                                                                  'no',
+                                                                                                                                  functions.stringToDouble(functions
+                                                                                                                                              .calculateTimeSlotPricingTotal(
+                                                                                                                                                  QuickartGroup.showsubcartCall
+                                                                                                                                                      .cardData(
+                                                                                                                                                        tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                                      )!
+                                                                                                                                                      .toList(),
+                                                                                                                                                  'discount')
+                                                                                                                                              .toString()) >
+                                                                                                                                          0.0
+                                                                                                                                      ? functions
+                                                                                                                                          .calculateTimeSlotPricingTotal(
+                                                                                                                                              QuickartGroup.showsubcartCall
+                                                                                                                                                  .cardData(
+                                                                                                                                                    tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                                  )!
+                                                                                                                                                  .toList(),
+                                                                                                                                              'discount')
+                                                                                                                                          .toString()
+                                                                                                                                      : '0',
+                                                                                                                                  functions.stringToDouble(functions
+                                                                                                                                              .calculateTimeSlotPricingTotal(
+                                                                                                                                                  QuickartGroup.showsubcartCall
+                                                                                                                                                      .cardData(
+                                                                                                                                                        tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                                      )!
+                                                                                                                                                      .toList(),
+                                                                                                                                                  'surge_charge')
+                                                                                                                                              .toString()) >
+                                                                                                                                          0.0
+                                                                                                                                      ? functions
+                                                                                                                                          .calculateTimeSlotPricingTotal(
+                                                                                                                                              QuickartGroup.showsubcartCall
+                                                                                                                                                  .cardData(
+                                                                                                                                                    tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                                  )!
+                                                                                                                                                  .toList(),
+                                                                                                                                              'surge_charge')
+                                                                                                                                          .toString()
+                                                                                                                                      : '0',
+                                                                                                                                  getJsonField(
+                                                                                                                                    functions.getZoneRuleByType(
+                                                                                                                                        getJsonField(
+                                                                                                                                          tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                          r'''$.data.zone_permanent_charges''',
+                                                                                                                                          true,
+                                                                                                                                        )!,
+                                                                                                                                        'min_order'),
+                                                                                                                                    r'''$.zone_price_effect''',
+                                                                                                                                  ).toString(),
+                                                                                                                                  getJsonField(
+                                                                                                                                    tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                    r'''$.data.zone_delivery_addons''',
+                                                                                                                                    true,
+                                                                                                                                  ),
+                                                                                                                                  true)
+                                                                                                                              .toString(),
+                                                                                                                          '0.00',
+                                                                                                                        ),
+                                                                                                                        getJsonField(
+                                                                                                                          tabBarShowsubcartResponse.jsonBody,
+                                                                                                                          r'''$.data.referral_balance''',
+                                                                                                                        ).toString(),
+                                                                                                                        getJsonField(
+                                                                                                                          FFAppState().appInfo,
+                                                                                                                          r'''$.wallet_deduction_percentage''',
+                                                                                                                        ).toString())
+                                                                                                                    .toString(),
+                                                                                                                'add',
+                                                                                                                _model.selectedPaymentMethod,
+                                                                                                                '0',
+                                                                                                                functions
+                                                                                                                    .calculateFinalPayableForCashPayment(
+                                                                                                                        valueOrDefault<String>(
+                                                                                                                          functions
+                                                                                                                              .totalValueAmountUpdae(
+                                                                                                                                  '0',
+                                                                                                                                  FFAppState().couponDiscount.toString(),
+                                                                                                                                  getJsonField(
+                                                                                                                                    tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                    r'''$.data.total_price''',
+                                                                                                                                  ).toString(),
+                                                                                                                                  '0',
+                                                                                                                                  'no',
+                                                                                                                                  _model.selectedPaymentMethod,
+                                                                                                                                  '0',
+                                                                                                                                  '0',
+                                                                                                                                  'no',
+                                                                                                                                  functions.stringToDouble(functions
+                                                                                                                                              .calculateTimeSlotPricingTotal(
+                                                                                                                                                  QuickartGroup.showsubcartCall
+                                                                                                                                                      .cardData(
+                                                                                                                                                        tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                                      )!
+                                                                                                                                                      .toList(),
+                                                                                                                                                  'discount')
+                                                                                                                                              .toString()) >
+                                                                                                                                          0.0
+                                                                                                                                      ? functions
+                                                                                                                                          .calculateTimeSlotPricingTotal(
+                                                                                                                                              QuickartGroup.showsubcartCall
+                                                                                                                                                  .cardData(
+                                                                                                                                                    tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                                  )!
+                                                                                                                                                  .toList(),
+                                                                                                                                              'discount')
+                                                                                                                                          .toString()
+                                                                                                                                      : '0',
+                                                                                                                                  functions.stringToDouble(functions
+                                                                                                                                              .calculateTimeSlotPricingTotal(
+                                                                                                                                                  QuickartGroup.showsubcartCall
+                                                                                                                                                      .cardData(
+                                                                                                                                                        tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                                      )!
+                                                                                                                                                      .toList(),
+                                                                                                                                                  'surge_charge')
+                                                                                                                                              .toString()) >
+                                                                                                                                          0.0
+                                                                                                                                      ? functions
+                                                                                                                                          .calculateTimeSlotPricingTotal(
+                                                                                                                                              QuickartGroup.showsubcartCall
+                                                                                                                                                  .cardData(
+                                                                                                                                                    tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                                  )!
+                                                                                                                                                  .toList(),
+                                                                                                                                              'surge_charge')
+                                                                                                                                          .toString()
+                                                                                                                                      : '0',
+                                                                                                                                  getJsonField(
+                                                                                                                                    functions.getZoneRuleByType(
+                                                                                                                                        getJsonField(
+                                                                                                                                          tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                          r'''$.data.zone_permanent_charges''',
+                                                                                                                                          true,
+                                                                                                                                        )!,
+                                                                                                                                        'min_order'),
+                                                                                                                                    r'''$.zone_price_effect''',
+                                                                                                                                  ).toString(),
+                                                                                                                                  getJsonField(
+                                                                                                                                    tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                    r'''$.data.zone_delivery_addons''',
+                                                                                                                                    true,
+                                                                                                                                  ),
+                                                                                                                                  true)
+                                                                                                                              .toString(),
+                                                                                                                          '0.00',
+                                                                                                                        ),
+                                                                                                                        functions
+                                                                                                                            .checkWalletWithAction(
+                                                                                                                                _model.isRefSubWalletCheckBoxSelected,
+                                                                                                                                valueOrDefault<String>(
+                                                                                                                                  functions
+                                                                                                                                      .totalValueAmountUpdae(
+                                                                                                                                          '0',
+                                                                                                                                          FFAppState().couponDiscount.toString(),
+                                                                                                                                          getJsonField(
+                                                                                                                                            tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                            r'''$.data.total_price''',
+                                                                                                                                          ).toString(),
+                                                                                                                                          '0',
+                                                                                                                                          'no',
+                                                                                                                                          _model.selectedPaymentMethod,
+                                                                                                                                          '0',
+                                                                                                                                          '0',
+                                                                                                                                          'no',
+                                                                                                                                          functions.stringToDouble(functions
+                                                                                                                                                      .calculateTimeSlotPricingTotal(
+                                                                                                                                                          QuickartGroup.showsubcartCall
+                                                                                                                                                              .cardData(
+                                                                                                                                                                tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                                              )!
+                                                                                                                                                              .toList(),
+                                                                                                                                                          'discount')
+                                                                                                                                                      .toString()) >
+                                                                                                                                                  0.0
+                                                                                                                                              ? functions
+                                                                                                                                                  .calculateTimeSlotPricingTotal(
+                                                                                                                                                      QuickartGroup.showsubcartCall
+                                                                                                                                                          .cardData(
+                                                                                                                                                            tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                                          )!
+                                                                                                                                                          .toList(),
+                                                                                                                                                      'discount')
+                                                                                                                                                  .toString()
+                                                                                                                                              : '0',
+                                                                                                                                          functions.stringToDouble(functions
+                                                                                                                                                      .calculateTimeSlotPricingTotal(
+                                                                                                                                                          QuickartGroup.showsubcartCall
+                                                                                                                                                              .cardData(
+                                                                                                                                                                tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                                              )!
+                                                                                                                                                              .toList(),
+                                                                                                                                                          'surge_charge')
+                                                                                                                                                      .toString()) >
+                                                                                                                                                  0.0
+                                                                                                                                              ? functions
+                                                                                                                                                  .calculateTimeSlotPricingTotal(
+                                                                                                                                                      QuickartGroup.showsubcartCall
+                                                                                                                                                          .cardData(
+                                                                                                                                                            tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                                          )!
+                                                                                                                                                          .toList(),
+                                                                                                                                                      'surge_charge')
+                                                                                                                                                  .toString()
+                                                                                                                                              : '0',
+                                                                                                                                          getJsonField(
+                                                                                                                                            functions.getZoneRuleByType(
+                                                                                                                                                getJsonField(
+                                                                                                                                                  tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                                  r'''$.data.zone_permanent_charges''',
+                                                                                                                                                  true,
+                                                                                                                                                )!,
+                                                                                                                                                'min_order'),
+                                                                                                                                            r'''$.zone_price_effect''',
+                                                                                                                                          ).toString(),
+                                                                                                                                          getJsonField(
+                                                                                                                                            tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                            r'''$.data.zone_delivery_addons''',
+                                                                                                                                            true,
+                                                                                                                                          ),
+                                                                                                                                          true)
+                                                                                                                                      .toString(),
+                                                                                                                                  '0.00',
+                                                                                                                                ),
+                                                                                                                                getJsonField(
+                                                                                                                                  tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                  r'''$.data.referral_balance''',
+                                                                                                                                ).toString(),
+                                                                                                                                getJsonField(
+                                                                                                                                  FFAppState().appInfo,
+                                                                                                                                  r'''$.wallet_deduction_percentage''',
+                                                                                                                                ).toString())
+                                                                                                                            .toString(),
+                                                                                                                        getJsonField(
+                                                                                                                          tabBarShowsubcartResponse.jsonBody,
+                                                                                                                          r'''$.data.wallet_balance''',
+                                                                                                                        ).toString(),
+                                                                                                                        _model.isSubWalletCheckBoxSelected)
+                                                                                                                    .toString(),
+                                                                                                                'add',
+                                                                                                                functions.stringToDouble(functions
+                                                                                                                            .calculateTimeSlotPricingTotal(
+                                                                                                                                QuickartGroup.showsubcartCall
+                                                                                                                                    .cardData(
+                                                                                                                                      tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                    )!
+                                                                                                                                    .toList(),
+                                                                                                                                'discount')
+                                                                                                                            .toString()) >
+                                                                                                                        0.0
+                                                                                                                    ? functions
+                                                                                                                        .calculateTimeSlotPricingTotal(
+                                                                                                                            QuickartGroup.showsubcartCall
+                                                                                                                                .cardData(
+                                                                                                                                  tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                )!
+                                                                                                                                .toList(),
+                                                                                                                            'discount')
+                                                                                                                        .toString()
+                                                                                                                    : '0',
+                                                                                                                functions.stringToDouble(functions
+                                                                                                                            .calculateTimeSlotPricingTotal(
+                                                                                                                                QuickartGroup.showsubcartCall
+                                                                                                                                    .cardData(
+                                                                                                                                      tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                    )!
+                                                                                                                                    .toList(),
+                                                                                                                                'surge_charge')
+                                                                                                                            .toString()) >
+                                                                                                                        0.0
+                                                                                                                    ? functions
+                                                                                                                        .calculateTimeSlotPricingTotal(
+                                                                                                                            QuickartGroup.showsubcartCall
+                                                                                                                                .cardData(
+                                                                                                                                  tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                )!
+                                                                                                                                .toList(),
+                                                                                                                            'surge_charge')
+                                                                                                                        .toString()
+                                                                                                                    : '0',
+                                                                                                                getJsonField(
+                                                                                                                  functions.getZoneRuleByType(
+                                                                                                                      getJsonField(
+                                                                                                                        tabBarShowsubcartResponse.jsonBody,
+                                                                                                                        r'''$.data.zone_permanent_charges''',
+                                                                                                                        true,
+                                                                                                                      )!,
+                                                                                                                      'min_order'),
+                                                                                                                  r'''$.zone_price_effect''',
+                                                                                                                ).toString(),
+                                                                                                                getJsonField(
+                                                                                                                  tabBarShowsubcartResponse.jsonBody,
+                                                                                                                  r'''$.data.zone_delivery_addons''',
+                                                                                                                  true,
+                                                                                                                ),
+                                                                                                                true),
+                                                                                                            0.00,
+                                                                                                          ),
+                                                                                                          'paymentStarted',
+                                                                                                          getJsonField(
+                                                                                                            tabBarShowsubcartResponse.jsonBody,
+                                                                                                            r'''$.data.data''',
+                                                                                                          ),
+                                                                                                          'quick pay',
+                                                                                                          ' ',
+                                                                                                          ' ',
+                                                                                                          ' ',
+                                                                                                          ' ',
+                                                                                                        );
                                                                                                         logFirebaseEvent('QuickPayContainer_backend_call');
                                                                                                         _model.apiResult44bquickPay = await QuickartGroup.subpaymentCall.call(
                                                                                                           userid: FFAppState().userID,
@@ -9426,7 +11350,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                               .toString(),
                                                                                                           delPartnerInstruction: functions.combineInstructions(FFAppState().deliveryPartnerInstructionAvoid, FFAppState().deliveryPartnerInstructionBell, FFAppState().deliveryPartnerInstructionDoor),
                                                                                                           orderInstruction: (String var1) {
-                                                                                                            return var1.trim() ?? '';
+                                                                                                            return var1.trim().replaceAll('\\', '\\\\').replaceAll('"', '\\"').replaceAll('\r', '\\r').replaceAll('\n', '\\n') ?? '';
                                                                                                           }(_model.textController.text),
                                                                                                           platform: isiOS ? 'ios' : 'android',
                                                                                                           totalrefwalletamt: (_model.isRefSubWalletCheckBoxSelected == 'add'
@@ -9911,7 +11835,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                     'daily')
                                                                                                                 .map((e) => e.toString())
                                                                                                                 .toList()),
-                                                                                                            '0',
+                                                                                                            FFAppState().userID,
                                                                                                             'subscription order',
                                                                                                             0.0,
                                                                                                             0,
@@ -10245,7 +12169,10 @@ class _CartSubscriptionScreenWidgetState
                                                                                                               r'''$.data.data''',
                                                                                                             ),
                                                                                                             'subscription order card',
-                                                                                                            ' ',
+                                                                                                            getJsonField(
+                                                                                                              (_model.apiResult44bquickPay?.jsonBody ?? ''),
+                                                                                                              r'''$.data.group_id''',
+                                                                                                            ).toString(),
                                                                                                             ' ',
                                                                                                             ' ',
                                                                                                             ' ',
@@ -10284,6 +12211,361 @@ class _CartSubscriptionScreenWidgetState
                                                                                                           logFirebaseEvent('QuickPayContainer_update_page_state');
                                                                                                           _model.isPaymentDone = true;
                                                                                                           safeSetState(() {});
+                                                                                                          logFirebaseEvent('QuickPayContainer_custom_action');
+                                                                                                          await actions.facebookEventClass(
+                                                                                                            (List<String> var1) {
+                                                                                                              return var1.join(', ');
+                                                                                                            }(functions
+                                                                                                                .getVarientIdsWithCartQty(
+                                                                                                                    getJsonField(
+                                                                                                                      tabBarShowsubcartResponse.jsonBody,
+                                                                                                                      r'''$.data.data''',
+                                                                                                                    ),
+                                                                                                                    'daily')
+                                                                                                                .map((e) => e.toString())
+                                                                                                                .toList()),
+                                                                                                            FFAppState().userID,
+                                                                                                            'subscription order',
+                                                                                                            0.0,
+                                                                                                            0,
+                                                                                                            valueOrDefault<double>(
+                                                                                                              functions.totalValueAmountUpdae(
+                                                                                                                  '0',
+                                                                                                                  FFAppState().couponDiscount.toString(),
+                                                                                                                  getJsonField(
+                                                                                                                    tabBarShowsubcartResponse.jsonBody,
+                                                                                                                    r'''$.data.total_price''',
+                                                                                                                  ).toString(),
+                                                                                                                  functions
+                                                                                                                      .checkWalletWithAction(
+                                                                                                                          _model.isRefSubWalletCheckBoxSelected,
+                                                                                                                          valueOrDefault<String>(
+                                                                                                                            functions
+                                                                                                                                .totalValueAmountUpdae(
+                                                                                                                                    '0',
+                                                                                                                                    FFAppState().couponDiscount.toString(),
+                                                                                                                                    getJsonField(
+                                                                                                                                      tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                      r'''$.data.total_price''',
+                                                                                                                                    ).toString(),
+                                                                                                                                    '0',
+                                                                                                                                    'no',
+                                                                                                                                    _model.selectedPaymentMethod,
+                                                                                                                                    '0',
+                                                                                                                                    '0',
+                                                                                                                                    'no',
+                                                                                                                                    functions.stringToDouble(functions
+                                                                                                                                                .calculateTimeSlotPricingTotal(
+                                                                                                                                                    QuickartGroup.showsubcartCall
+                                                                                                                                                        .cardData(
+                                                                                                                                                          tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                                        )!
+                                                                                                                                                        .toList(),
+                                                                                                                                                    'discount')
+                                                                                                                                                .toString()) >
+                                                                                                                                            0.0
+                                                                                                                                        ? functions
+                                                                                                                                            .calculateTimeSlotPricingTotal(
+                                                                                                                                                QuickartGroup.showsubcartCall
+                                                                                                                                                    .cardData(
+                                                                                                                                                      tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                                    )!
+                                                                                                                                                    .toList(),
+                                                                                                                                                'discount')
+                                                                                                                                            .toString()
+                                                                                                                                        : '0',
+                                                                                                                                    functions.stringToDouble(functions
+                                                                                                                                                .calculateTimeSlotPricingTotal(
+                                                                                                                                                    QuickartGroup.showsubcartCall
+                                                                                                                                                        .cardData(
+                                                                                                                                                          tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                                        )!
+                                                                                                                                                        .toList(),
+                                                                                                                                                    'surge_charge')
+                                                                                                                                                .toString()) >
+                                                                                                                                            0.0
+                                                                                                                                        ? functions
+                                                                                                                                            .calculateTimeSlotPricingTotal(
+                                                                                                                                                QuickartGroup.showsubcartCall
+                                                                                                                                                    .cardData(
+                                                                                                                                                      tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                                    )!
+                                                                                                                                                    .toList(),
+                                                                                                                                                'surge_charge')
+                                                                                                                                            .toString()
+                                                                                                                                        : '0',
+                                                                                                                                    getJsonField(
+                                                                                                                                      functions.getZoneRuleByType(
+                                                                                                                                          getJsonField(
+                                                                                                                                            tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                            r'''$.data.zone_permanent_charges''',
+                                                                                                                                            true,
+                                                                                                                                          )!,
+                                                                                                                                          'min_order'),
+                                                                                                                                      r'''$.zone_price_effect''',
+                                                                                                                                    ).toString(),
+                                                                                                                                    getJsonField(
+                                                                                                                                      tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                      r'''$.data.zone_delivery_addons''',
+                                                                                                                                      true,
+                                                                                                                                    ),
+                                                                                                                                    true)
+                                                                                                                                .toString(),
+                                                                                                                            '0.00',
+                                                                                                                          ),
+                                                                                                                          getJsonField(
+                                                                                                                            tabBarShowsubcartResponse.jsonBody,
+                                                                                                                            r'''$.data.referral_balance''',
+                                                                                                                          ).toString(),
+                                                                                                                          getJsonField(
+                                                                                                                            FFAppState().appInfo,
+                                                                                                                            r'''$.wallet_deduction_percentage''',
+                                                                                                                          ).toString())
+                                                                                                                      .toString(),
+                                                                                                                  'add',
+                                                                                                                  _model.selectedPaymentMethod,
+                                                                                                                  '0',
+                                                                                                                  functions
+                                                                                                                      .calculateFinalPayableForCashPayment(
+                                                                                                                          valueOrDefault<String>(
+                                                                                                                            functions
+                                                                                                                                .totalValueAmountUpdae(
+                                                                                                                                    '0',
+                                                                                                                                    FFAppState().couponDiscount.toString(),
+                                                                                                                                    getJsonField(
+                                                                                                                                      tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                      r'''$.data.total_price''',
+                                                                                                                                    ).toString(),
+                                                                                                                                    '0',
+                                                                                                                                    'no',
+                                                                                                                                    _model.selectedPaymentMethod,
+                                                                                                                                    '0',
+                                                                                                                                    '0',
+                                                                                                                                    'no',
+                                                                                                                                    functions.stringToDouble(functions
+                                                                                                                                                .calculateTimeSlotPricingTotal(
+                                                                                                                                                    QuickartGroup.showsubcartCall
+                                                                                                                                                        .cardData(
+                                                                                                                                                          tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                                        )!
+                                                                                                                                                        .toList(),
+                                                                                                                                                    'discount')
+                                                                                                                                                .toString()) >
+                                                                                                                                            0.0
+                                                                                                                                        ? functions
+                                                                                                                                            .calculateTimeSlotPricingTotal(
+                                                                                                                                                QuickartGroup.showsubcartCall
+                                                                                                                                                    .cardData(
+                                                                                                                                                      tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                                    )!
+                                                                                                                                                    .toList(),
+                                                                                                                                                'discount')
+                                                                                                                                            .toString()
+                                                                                                                                        : '0',
+                                                                                                                                    functions.stringToDouble(functions
+                                                                                                                                                .calculateTimeSlotPricingTotal(
+                                                                                                                                                    QuickartGroup.showsubcartCall
+                                                                                                                                                        .cardData(
+                                                                                                                                                          tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                                        )!
+                                                                                                                                                        .toList(),
+                                                                                                                                                    'surge_charge')
+                                                                                                                                                .toString()) >
+                                                                                                                                            0.0
+                                                                                                                                        ? functions
+                                                                                                                                            .calculateTimeSlotPricingTotal(
+                                                                                                                                                QuickartGroup.showsubcartCall
+                                                                                                                                                    .cardData(
+                                                                                                                                                      tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                                    )!
+                                                                                                                                                    .toList(),
+                                                                                                                                                'surge_charge')
+                                                                                                                                            .toString()
+                                                                                                                                        : '0',
+                                                                                                                                    getJsonField(
+                                                                                                                                      functions.getZoneRuleByType(
+                                                                                                                                          getJsonField(
+                                                                                                                                            tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                            r'''$.data.zone_permanent_charges''',
+                                                                                                                                            true,
+                                                                                                                                          )!,
+                                                                                                                                          'min_order'),
+                                                                                                                                      r'''$.zone_price_effect''',
+                                                                                                                                    ).toString(),
+                                                                                                                                    getJsonField(
+                                                                                                                                      tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                      r'''$.data.zone_delivery_addons''',
+                                                                                                                                      true,
+                                                                                                                                    ),
+                                                                                                                                    true)
+                                                                                                                                .toString(),
+                                                                                                                            '0.00',
+                                                                                                                          ),
+                                                                                                                          functions
+                                                                                                                              .checkWalletWithAction(
+                                                                                                                                  _model.isRefSubWalletCheckBoxSelected,
+                                                                                                                                  valueOrDefault<String>(
+                                                                                                                                    functions
+                                                                                                                                        .totalValueAmountUpdae(
+                                                                                                                                            '0',
+                                                                                                                                            FFAppState().couponDiscount.toString(),
+                                                                                                                                            getJsonField(
+                                                                                                                                              tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                              r'''$.data.total_price''',
+                                                                                                                                            ).toString(),
+                                                                                                                                            '0',
+                                                                                                                                            'no',
+                                                                                                                                            _model.selectedPaymentMethod,
+                                                                                                                                            '0',
+                                                                                                                                            '0',
+                                                                                                                                            'no',
+                                                                                                                                            functions.stringToDouble(functions
+                                                                                                                                                        .calculateTimeSlotPricingTotal(
+                                                                                                                                                            QuickartGroup.showsubcartCall
+                                                                                                                                                                .cardData(
+                                                                                                                                                                  tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                                                )!
+                                                                                                                                                                .toList(),
+                                                                                                                                                            'discount')
+                                                                                                                                                        .toString()) >
+                                                                                                                                                    0.0
+                                                                                                                                                ? functions
+                                                                                                                                                    .calculateTimeSlotPricingTotal(
+                                                                                                                                                        QuickartGroup.showsubcartCall
+                                                                                                                                                            .cardData(
+                                                                                                                                                              tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                                            )!
+                                                                                                                                                            .toList(),
+                                                                                                                                                        'discount')
+                                                                                                                                                    .toString()
+                                                                                                                                                : '0',
+                                                                                                                                            functions.stringToDouble(functions
+                                                                                                                                                        .calculateTimeSlotPricingTotal(
+                                                                                                                                                            QuickartGroup.showsubcartCall
+                                                                                                                                                                .cardData(
+                                                                                                                                                                  tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                                                )!
+                                                                                                                                                                .toList(),
+                                                                                                                                                            'surge_charge')
+                                                                                                                                                        .toString()) >
+                                                                                                                                                    0.0
+                                                                                                                                                ? functions
+                                                                                                                                                    .calculateTimeSlotPricingTotal(
+                                                                                                                                                        QuickartGroup.showsubcartCall
+                                                                                                                                                            .cardData(
+                                                                                                                                                              tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                                            )!
+                                                                                                                                                            .toList(),
+                                                                                                                                                        'surge_charge')
+                                                                                                                                                    .toString()
+                                                                                                                                                : '0',
+                                                                                                                                            getJsonField(
+                                                                                                                                              functions.getZoneRuleByType(
+                                                                                                                                                  getJsonField(
+                                                                                                                                                    tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                                    r'''$.data.zone_permanent_charges''',
+                                                                                                                                                    true,
+                                                                                                                                                  )!,
+                                                                                                                                                  'min_order'),
+                                                                                                                                              r'''$.zone_price_effect''',
+                                                                                                                                            ).toString(),
+                                                                                                                                            getJsonField(
+                                                                                                                                              tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                              r'''$.data.zone_delivery_addons''',
+                                                                                                                                              true,
+                                                                                                                                            ),
+                                                                                                                                            true)
+                                                                                                                                        .toString(),
+                                                                                                                                    '0.00',
+                                                                                                                                  ),
+                                                                                                                                  getJsonField(
+                                                                                                                                    tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                    r'''$.data.referral_balance''',
+                                                                                                                                  ).toString(),
+                                                                                                                                  getJsonField(
+                                                                                                                                    FFAppState().appInfo,
+                                                                                                                                    r'''$.wallet_deduction_percentage''',
+                                                                                                                                  ).toString())
+                                                                                                                              .toString(),
+                                                                                                                          getJsonField(
+                                                                                                                            tabBarShowsubcartResponse.jsonBody,
+                                                                                                                            r'''$.data.wallet_balance''',
+                                                                                                                          ).toString(),
+                                                                                                                          _model.isSubWalletCheckBoxSelected)
+                                                                                                                      .toString(),
+                                                                                                                  'add',
+                                                                                                                  functions.stringToDouble(functions
+                                                                                                                              .calculateTimeSlotPricingTotal(
+                                                                                                                                  QuickartGroup.showsubcartCall
+                                                                                                                                      .cardData(
+                                                                                                                                        tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                      )!
+                                                                                                                                      .toList(),
+                                                                                                                                  'discount')
+                                                                                                                              .toString()) >
+                                                                                                                          0.0
+                                                                                                                      ? functions
+                                                                                                                          .calculateTimeSlotPricingTotal(
+                                                                                                                              QuickartGroup.showsubcartCall
+                                                                                                                                  .cardData(
+                                                                                                                                    tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                  )!
+                                                                                                                                  .toList(),
+                                                                                                                              'discount')
+                                                                                                                          .toString()
+                                                                                                                      : '0',
+                                                                                                                  functions.stringToDouble(functions
+                                                                                                                              .calculateTimeSlotPricingTotal(
+                                                                                                                                  QuickartGroup.showsubcartCall
+                                                                                                                                      .cardData(
+                                                                                                                                        tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                      )!
+                                                                                                                                      .toList(),
+                                                                                                                                  'surge_charge')
+                                                                                                                              .toString()) >
+                                                                                                                          0.0
+                                                                                                                      ? functions
+                                                                                                                          .calculateTimeSlotPricingTotal(
+                                                                                                                              QuickartGroup.showsubcartCall
+                                                                                                                                  .cardData(
+                                                                                                                                    tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                  )!
+                                                                                                                                  .toList(),
+                                                                                                                              'surge_charge')
+                                                                                                                          .toString()
+                                                                                                                      : '0',
+                                                                                                                  getJsonField(
+                                                                                                                    functions.getZoneRuleByType(
+                                                                                                                        getJsonField(
+                                                                                                                          tabBarShowsubcartResponse.jsonBody,
+                                                                                                                          r'''$.data.zone_permanent_charges''',
+                                                                                                                          true,
+                                                                                                                        )!,
+                                                                                                                        'min_order'),
+                                                                                                                    r'''$.zone_price_effect''',
+                                                                                                                  ).toString(),
+                                                                                                                  getJsonField(
+                                                                                                                    tabBarShowsubcartResponse.jsonBody,
+                                                                                                                    r'''$.data.zone_delivery_addons''',
+                                                                                                                    true,
+                                                                                                                  ),
+                                                                                                                  true),
+                                                                                                              0.00,
+                                                                                                            ),
+                                                                                                            'paymentFailed',
+                                                                                                            getJsonField(
+                                                                                                              tabBarShowsubcartResponse.jsonBody,
+                                                                                                              r'''$.data.data''',
+                                                                                                            ),
+                                                                                                            'subscription order card',
+                                                                                                            ' ',
+                                                                                                            getJsonField(
+                                                                                                              (_model.apiResult44bquickPay?.jsonBody ?? ''),
+                                                                                                              r'''$.message''',
+                                                                                                            ).toString(),
+                                                                                                            ' ',
+                                                                                                            ' ',
+                                                                                                          );
                                                                                                         }
                                                                                                       } else {
                                                                                                         logFirebaseEvent('QuickPayContainer_alert_dialog');
@@ -10891,7 +13173,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                         ).toString()
                                                                                       : FFAppState().selectedAddresID;
                                                                                   FFAppState().isAddressChange = false;
-                                                                                  FFAppState().screenName = '';
+                                                                                  FFAppState().screenName = 'subscription';
                                                                                   safeSetState(() {});
                                                                                   logFirebaseEvent('Column_google_analytics_event');
                                                                                   logFirebaseEvent(
@@ -11518,6 +13800,355 @@ class _CartSubscriptionScreenWidgetState
                                                                                       logFirebaseEvent('PaymentContainer_update_page_state');
                                                                                       _model.isPaymentDone = false;
                                                                                       safeSetState(() {});
+                                                                                      logFirebaseEvent('PaymentContainer_custom_action');
+                                                                                      await actions.facebookEventClass(
+                                                                                        (List<String> var1) {
+                                                                                          return var1.join(', ');
+                                                                                        }(functions
+                                                                                            .getVarientIdsWithCartQty(
+                                                                                                getJsonField(
+                                                                                                  tabBarShowsubcartResponse.jsonBody,
+                                                                                                  r'''$.data.data''',
+                                                                                                ),
+                                                                                                'daily')
+                                                                                            .map((e) => e.toString())
+                                                                                            .toList()),
+                                                                                        FFAppState().userID,
+                                                                                        'subscription order',
+                                                                                        0.0,
+                                                                                        0,
+                                                                                        valueOrDefault<double>(
+                                                                                          functions.totalValueAmountUpdae(
+                                                                                              '0',
+                                                                                              FFAppState().couponDiscount.toString(),
+                                                                                              getJsonField(
+                                                                                                tabBarShowsubcartResponse.jsonBody,
+                                                                                                r'''$.data.total_price''',
+                                                                                              ).toString(),
+                                                                                              functions
+                                                                                                  .checkWalletWithAction(
+                                                                                                      _model.isRefSubWalletCheckBoxSelected,
+                                                                                                      valueOrDefault<String>(
+                                                                                                        functions
+                                                                                                            .totalValueAmountUpdae(
+                                                                                                                '0',
+                                                                                                                FFAppState().couponDiscount.toString(),
+                                                                                                                getJsonField(
+                                                                                                                  tabBarShowsubcartResponse.jsonBody,
+                                                                                                                  r'''$.data.total_price''',
+                                                                                                                ).toString(),
+                                                                                                                '0',
+                                                                                                                'no',
+                                                                                                                _model.selectedPaymentMethod,
+                                                                                                                '0',
+                                                                                                                '0',
+                                                                                                                'no',
+                                                                                                                functions.stringToDouble(functions
+                                                                                                                            .calculateTimeSlotPricingTotal(
+                                                                                                                                QuickartGroup.showsubcartCall
+                                                                                                                                    .cardData(
+                                                                                                                                      tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                    )!
+                                                                                                                                    .toList(),
+                                                                                                                                'discount')
+                                                                                                                            .toString()) >
+                                                                                                                        0.0
+                                                                                                                    ? functions
+                                                                                                                        .calculateTimeSlotPricingTotal(
+                                                                                                                            QuickartGroup.showsubcartCall
+                                                                                                                                .cardData(
+                                                                                                                                  tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                )!
+                                                                                                                                .toList(),
+                                                                                                                            'discount')
+                                                                                                                        .toString()
+                                                                                                                    : '0',
+                                                                                                                functions.stringToDouble(functions
+                                                                                                                            .calculateTimeSlotPricingTotal(
+                                                                                                                                QuickartGroup.showsubcartCall
+                                                                                                                                    .cardData(
+                                                                                                                                      tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                    )!
+                                                                                                                                    .toList(),
+                                                                                                                                'surge_charge')
+                                                                                                                            .toString()) >
+                                                                                                                        0.0
+                                                                                                                    ? functions
+                                                                                                                        .calculateTimeSlotPricingTotal(
+                                                                                                                            QuickartGroup.showsubcartCall
+                                                                                                                                .cardData(
+                                                                                                                                  tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                )!
+                                                                                                                                .toList(),
+                                                                                                                            'surge_charge')
+                                                                                                                        .toString()
+                                                                                                                    : '0',
+                                                                                                                getJsonField(
+                                                                                                                  functions.getZoneRuleByType(
+                                                                                                                      getJsonField(
+                                                                                                                        tabBarShowsubcartResponse.jsonBody,
+                                                                                                                        r'''$.data.zone_permanent_charges''',
+                                                                                                                        true,
+                                                                                                                      )!,
+                                                                                                                      'min_order'),
+                                                                                                                  r'''$.zone_price_effect''',
+                                                                                                                ).toString(),
+                                                                                                                getJsonField(
+                                                                                                                  tabBarShowsubcartResponse.jsonBody,
+                                                                                                                  r'''$.data.zone_delivery_addons''',
+                                                                                                                  true,
+                                                                                                                ),
+                                                                                                                true)
+                                                                                                            .toString(),
+                                                                                                        '0.00',
+                                                                                                      ),
+                                                                                                      getJsonField(
+                                                                                                        tabBarShowsubcartResponse.jsonBody,
+                                                                                                        r'''$.data.referral_balance''',
+                                                                                                      ).toString(),
+                                                                                                      getJsonField(
+                                                                                                        FFAppState().appInfo,
+                                                                                                        r'''$.wallet_deduction_percentage''',
+                                                                                                      ).toString())
+                                                                                                  .toString(),
+                                                                                              'add',
+                                                                                              _model.selectedPaymentMethod,
+                                                                                              '0',
+                                                                                              functions
+                                                                                                  .calculateFinalPayableForCashPayment(
+                                                                                                      valueOrDefault<String>(
+                                                                                                        functions
+                                                                                                            .totalValueAmountUpdae(
+                                                                                                                '0',
+                                                                                                                FFAppState().couponDiscount.toString(),
+                                                                                                                getJsonField(
+                                                                                                                  tabBarShowsubcartResponse.jsonBody,
+                                                                                                                  r'''$.data.total_price''',
+                                                                                                                ).toString(),
+                                                                                                                '0',
+                                                                                                                'no',
+                                                                                                                _model.selectedPaymentMethod,
+                                                                                                                '0',
+                                                                                                                '0',
+                                                                                                                'no',
+                                                                                                                functions.stringToDouble(functions
+                                                                                                                            .calculateTimeSlotPricingTotal(
+                                                                                                                                QuickartGroup.showsubcartCall
+                                                                                                                                    .cardData(
+                                                                                                                                      tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                    )!
+                                                                                                                                    .toList(),
+                                                                                                                                'discount')
+                                                                                                                            .toString()) >
+                                                                                                                        0.0
+                                                                                                                    ? functions
+                                                                                                                        .calculateTimeSlotPricingTotal(
+                                                                                                                            QuickartGroup.showsubcartCall
+                                                                                                                                .cardData(
+                                                                                                                                  tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                )!
+                                                                                                                                .toList(),
+                                                                                                                            'discount')
+                                                                                                                        .toString()
+                                                                                                                    : '0',
+                                                                                                                functions.stringToDouble(functions
+                                                                                                                            .calculateTimeSlotPricingTotal(
+                                                                                                                                QuickartGroup.showsubcartCall
+                                                                                                                                    .cardData(
+                                                                                                                                      tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                    )!
+                                                                                                                                    .toList(),
+                                                                                                                                'surge_charge')
+                                                                                                                            .toString()) >
+                                                                                                                        0.0
+                                                                                                                    ? functions
+                                                                                                                        .calculateTimeSlotPricingTotal(
+                                                                                                                            QuickartGroup.showsubcartCall
+                                                                                                                                .cardData(
+                                                                                                                                  tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                )!
+                                                                                                                                .toList(),
+                                                                                                                            'surge_charge')
+                                                                                                                        .toString()
+                                                                                                                    : '0',
+                                                                                                                getJsonField(
+                                                                                                                  functions.getZoneRuleByType(
+                                                                                                                      getJsonField(
+                                                                                                                        tabBarShowsubcartResponse.jsonBody,
+                                                                                                                        r'''$.data.zone_permanent_charges''',
+                                                                                                                        true,
+                                                                                                                      )!,
+                                                                                                                      'min_order'),
+                                                                                                                  r'''$.zone_price_effect''',
+                                                                                                                ).toString(),
+                                                                                                                getJsonField(
+                                                                                                                  tabBarShowsubcartResponse.jsonBody,
+                                                                                                                  r'''$.data.zone_delivery_addons''',
+                                                                                                                  true,
+                                                                                                                ),
+                                                                                                                true)
+                                                                                                            .toString(),
+                                                                                                        '0.00',
+                                                                                                      ),
+                                                                                                      functions
+                                                                                                          .checkWalletWithAction(
+                                                                                                              _model.isRefSubWalletCheckBoxSelected,
+                                                                                                              valueOrDefault<String>(
+                                                                                                                functions
+                                                                                                                    .totalValueAmountUpdae(
+                                                                                                                        '0',
+                                                                                                                        FFAppState().couponDiscount.toString(),
+                                                                                                                        getJsonField(
+                                                                                                                          tabBarShowsubcartResponse.jsonBody,
+                                                                                                                          r'''$.data.total_price''',
+                                                                                                                        ).toString(),
+                                                                                                                        '0',
+                                                                                                                        'no',
+                                                                                                                        _model.selectedPaymentMethod,
+                                                                                                                        '0',
+                                                                                                                        '0',
+                                                                                                                        'no',
+                                                                                                                        functions.stringToDouble(functions
+                                                                                                                                    .calculateTimeSlotPricingTotal(
+                                                                                                                                        QuickartGroup.showsubcartCall
+                                                                                                                                            .cardData(
+                                                                                                                                              tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                            )!
+                                                                                                                                            .toList(),
+                                                                                                                                        'discount')
+                                                                                                                                    .toString()) >
+                                                                                                                                0.0
+                                                                                                                            ? functions
+                                                                                                                                .calculateTimeSlotPricingTotal(
+                                                                                                                                    QuickartGroup.showsubcartCall
+                                                                                                                                        .cardData(
+                                                                                                                                          tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                        )!
+                                                                                                                                        .toList(),
+                                                                                                                                    'discount')
+                                                                                                                                .toString()
+                                                                                                                            : '0',
+                                                                                                                        functions.stringToDouble(functions
+                                                                                                                                    .calculateTimeSlotPricingTotal(
+                                                                                                                                        QuickartGroup.showsubcartCall
+                                                                                                                                            .cardData(
+                                                                                                                                              tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                            )!
+                                                                                                                                            .toList(),
+                                                                                                                                        'surge_charge')
+                                                                                                                                    .toString()) >
+                                                                                                                                0.0
+                                                                                                                            ? functions
+                                                                                                                                .calculateTimeSlotPricingTotal(
+                                                                                                                                    QuickartGroup.showsubcartCall
+                                                                                                                                        .cardData(
+                                                                                                                                          tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                        )!
+                                                                                                                                        .toList(),
+                                                                                                                                    'surge_charge')
+                                                                                                                                .toString()
+                                                                                                                            : '0',
+                                                                                                                        getJsonField(
+                                                                                                                          functions.getZoneRuleByType(
+                                                                                                                              getJsonField(
+                                                                                                                                tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                r'''$.data.zone_permanent_charges''',
+                                                                                                                                true,
+                                                                                                                              )!,
+                                                                                                                              'min_order'),
+                                                                                                                          r'''$.zone_price_effect''',
+                                                                                                                        ).toString(),
+                                                                                                                        getJsonField(
+                                                                                                                          tabBarShowsubcartResponse.jsonBody,
+                                                                                                                          r'''$.data.zone_delivery_addons''',
+                                                                                                                          true,
+                                                                                                                        ),
+                                                                                                                        true)
+                                                                                                                    .toString(),
+                                                                                                                '0.00',
+                                                                                                              ),
+                                                                                                              getJsonField(
+                                                                                                                tabBarShowsubcartResponse.jsonBody,
+                                                                                                                r'''$.data.referral_balance''',
+                                                                                                              ).toString(),
+                                                                                                              getJsonField(
+                                                                                                                FFAppState().appInfo,
+                                                                                                                r'''$.wallet_deduction_percentage''',
+                                                                                                              ).toString())
+                                                                                                          .toString(),
+                                                                                                      getJsonField(
+                                                                                                        tabBarShowsubcartResponse.jsonBody,
+                                                                                                        r'''$.data.wallet_balance''',
+                                                                                                      ).toString(),
+                                                                                                      _model.isSubWalletCheckBoxSelected)
+                                                                                                  .toString(),
+                                                                                              'add',
+                                                                                              functions.stringToDouble(functions
+                                                                                                          .calculateTimeSlotPricingTotal(
+                                                                                                              QuickartGroup.showsubcartCall
+                                                                                                                  .cardData(
+                                                                                                                    tabBarShowsubcartResponse.jsonBody,
+                                                                                                                  )!
+                                                                                                                  .toList(),
+                                                                                                              'discount')
+                                                                                                          .toString()) >
+                                                                                                      0.0
+                                                                                                  ? functions
+                                                                                                      .calculateTimeSlotPricingTotal(
+                                                                                                          QuickartGroup.showsubcartCall
+                                                                                                              .cardData(
+                                                                                                                tabBarShowsubcartResponse.jsonBody,
+                                                                                                              )!
+                                                                                                              .toList(),
+                                                                                                          'discount')
+                                                                                                      .toString()
+                                                                                                  : '0',
+                                                                                              functions.stringToDouble(functions
+                                                                                                          .calculateTimeSlotPricingTotal(
+                                                                                                              QuickartGroup.showsubcartCall
+                                                                                                                  .cardData(
+                                                                                                                    tabBarShowsubcartResponse.jsonBody,
+                                                                                                                  )!
+                                                                                                                  .toList(),
+                                                                                                              'surge_charge')
+                                                                                                          .toString()) >
+                                                                                                      0.0
+                                                                                                  ? functions
+                                                                                                      .calculateTimeSlotPricingTotal(
+                                                                                                          QuickartGroup.showsubcartCall
+                                                                                                              .cardData(
+                                                                                                                tabBarShowsubcartResponse.jsonBody,
+                                                                                                              )!
+                                                                                                              .toList(),
+                                                                                                          'surge_charge')
+                                                                                                      .toString()
+                                                                                                  : '0',
+                                                                                              getJsonField(
+                                                                                                functions.getZoneRuleByType(
+                                                                                                    getJsonField(
+                                                                                                      tabBarShowsubcartResponse.jsonBody,
+                                                                                                      r'''$.data.zone_permanent_charges''',
+                                                                                                      true,
+                                                                                                    )!,
+                                                                                                    'min_order'),
+                                                                                                r'''$.zone_price_effect''',
+                                                                                              ).toString(),
+                                                                                              getJsonField(
+                                                                                                tabBarShowsubcartResponse.jsonBody,
+                                                                                                r'''$.data.zone_delivery_addons''',
+                                                                                                true,
+                                                                                              ),
+                                                                                              true),
+                                                                                          0.00,
+                                                                                        ),
+                                                                                        'paymentStarted',
+                                                                                        FFAppState().emptyJson,
+                                                                                        'save card',
+                                                                                        ' ',
+                                                                                        ' ',
+                                                                                        ' ',
+                                                                                        ' ',
+                                                                                      );
                                                                                       logFirebaseEvent('PaymentContainer_backend_call');
                                                                                       _model.apiResultSUBC1 = await QuickartGroup.checkoutsubcribtionorderCall.call(
                                                                                         userid: FFAppState().userID,
@@ -12034,7 +14665,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                           0.00,
                                                                                         ),
                                                                                         orderInstruction: (String var1) {
-                                                                                          return var1.trim() ?? '';
+                                                                                          return var1.trim().replaceAll('\\', '\\\\').replaceAll('"', '\\"').replaceAll('\r', '\\r').replaceAll('\n', '\\n') ?? '';
                                                                                         }(_model.textController.text),
                                                                                         platform: isiOS ? 'ios' : 'android',
                                                                                         totalrefwalletamt: (_model.isRefSubWalletCheckBoxSelected == 'add'
@@ -12169,7 +14800,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                   'daily')
                                                                                               .map((e) => e.toString())
                                                                                               .toList()),
-                                                                                          '0',
+                                                                                          FFAppState().userID,
                                                                                           'subscription order',
                                                                                           0.0,
                                                                                           0,
@@ -12499,8 +15130,11 @@ class _CartSubscriptionScreenWidgetState
                                                                                           ),
                                                                                           'purchase',
                                                                                           FFAppState().emptyJson,
-                                                                                          'emptyjons',
-                                                                                          ' ',
+                                                                                          'perperdelivery',
+                                                                                          getJsonField(
+                                                                                            (_model.apiResultSUBC1?.jsonBody ?? ''),
+                                                                                            r'''$.group_id''',
+                                                                                          ).toString(),
                                                                                           ' ',
                                                                                           ' ',
                                                                                           ' ',
@@ -12539,6 +15173,358 @@ class _CartSubscriptionScreenWidgetState
                                                                                         logFirebaseEvent('PaymentContainer_update_page_state');
                                                                                         _model.isPaymentDone = true;
                                                                                         safeSetState(() {});
+                                                                                        logFirebaseEvent('PaymentContainer_custom_action');
+                                                                                        await actions.facebookEventClass(
+                                                                                          (List<String> var1) {
+                                                                                            return var1.join(', ');
+                                                                                          }(functions
+                                                                                              .getVarientIdsWithCartQty(
+                                                                                                  getJsonField(
+                                                                                                    tabBarShowsubcartResponse.jsonBody,
+                                                                                                    r'''$.data.data''',
+                                                                                                  ),
+                                                                                                  'daily')
+                                                                                              .map((e) => e.toString())
+                                                                                              .toList()),
+                                                                                          FFAppState().userID,
+                                                                                          'subscription order',
+                                                                                          0.0,
+                                                                                          0,
+                                                                                          valueOrDefault<double>(
+                                                                                            functions.totalValueAmountUpdae(
+                                                                                                '0',
+                                                                                                FFAppState().couponDiscount.toString(),
+                                                                                                getJsonField(
+                                                                                                  tabBarShowsubcartResponse.jsonBody,
+                                                                                                  r'''$.data.total_price''',
+                                                                                                ).toString(),
+                                                                                                functions
+                                                                                                    .checkWalletWithAction(
+                                                                                                        _model.isRefSubWalletCheckBoxSelected,
+                                                                                                        valueOrDefault<String>(
+                                                                                                          functions
+                                                                                                              .totalValueAmountUpdae(
+                                                                                                                  '0',
+                                                                                                                  FFAppState().couponDiscount.toString(),
+                                                                                                                  getJsonField(
+                                                                                                                    tabBarShowsubcartResponse.jsonBody,
+                                                                                                                    r'''$.data.total_price''',
+                                                                                                                  ).toString(),
+                                                                                                                  '0',
+                                                                                                                  'no',
+                                                                                                                  _model.selectedPaymentMethod,
+                                                                                                                  '0',
+                                                                                                                  '0',
+                                                                                                                  'no',
+                                                                                                                  functions.stringToDouble(functions
+                                                                                                                              .calculateTimeSlotPricingTotal(
+                                                                                                                                  QuickartGroup.showsubcartCall
+                                                                                                                                      .cardData(
+                                                                                                                                        tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                      )!
+                                                                                                                                      .toList(),
+                                                                                                                                  'discount')
+                                                                                                                              .toString()) >
+                                                                                                                          0.0
+                                                                                                                      ? functions
+                                                                                                                          .calculateTimeSlotPricingTotal(
+                                                                                                                              QuickartGroup.showsubcartCall
+                                                                                                                                  .cardData(
+                                                                                                                                    tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                  )!
+                                                                                                                                  .toList(),
+                                                                                                                              'discount')
+                                                                                                                          .toString()
+                                                                                                                      : '0',
+                                                                                                                  functions.stringToDouble(functions
+                                                                                                                              .calculateTimeSlotPricingTotal(
+                                                                                                                                  QuickartGroup.showsubcartCall
+                                                                                                                                      .cardData(
+                                                                                                                                        tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                      )!
+                                                                                                                                      .toList(),
+                                                                                                                                  'surge_charge')
+                                                                                                                              .toString()) >
+                                                                                                                          0.0
+                                                                                                                      ? functions
+                                                                                                                          .calculateTimeSlotPricingTotal(
+                                                                                                                              QuickartGroup.showsubcartCall
+                                                                                                                                  .cardData(
+                                                                                                                                    tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                  )!
+                                                                                                                                  .toList(),
+                                                                                                                              'surge_charge')
+                                                                                                                          .toString()
+                                                                                                                      : '0',
+                                                                                                                  getJsonField(
+                                                                                                                    functions.getZoneRuleByType(
+                                                                                                                        getJsonField(
+                                                                                                                          tabBarShowsubcartResponse.jsonBody,
+                                                                                                                          r'''$.data.zone_permanent_charges''',
+                                                                                                                          true,
+                                                                                                                        )!,
+                                                                                                                        'min_order'),
+                                                                                                                    r'''$.zone_price_effect''',
+                                                                                                                  ).toString(),
+                                                                                                                  getJsonField(
+                                                                                                                    tabBarShowsubcartResponse.jsonBody,
+                                                                                                                    r'''$.data.zone_delivery_addons''',
+                                                                                                                    true,
+                                                                                                                  ),
+                                                                                                                  true)
+                                                                                                              .toString(),
+                                                                                                          '0.00',
+                                                                                                        ),
+                                                                                                        getJsonField(
+                                                                                                          tabBarShowsubcartResponse.jsonBody,
+                                                                                                          r'''$.data.referral_balance''',
+                                                                                                        ).toString(),
+                                                                                                        getJsonField(
+                                                                                                          FFAppState().appInfo,
+                                                                                                          r'''$.wallet_deduction_percentage''',
+                                                                                                        ).toString())
+                                                                                                    .toString(),
+                                                                                                'add',
+                                                                                                _model.selectedPaymentMethod,
+                                                                                                '0',
+                                                                                                functions
+                                                                                                    .calculateFinalPayableForCashPayment(
+                                                                                                        valueOrDefault<String>(
+                                                                                                          functions
+                                                                                                              .totalValueAmountUpdae(
+                                                                                                                  '0',
+                                                                                                                  FFAppState().couponDiscount.toString(),
+                                                                                                                  getJsonField(
+                                                                                                                    tabBarShowsubcartResponse.jsonBody,
+                                                                                                                    r'''$.data.total_price''',
+                                                                                                                  ).toString(),
+                                                                                                                  '0',
+                                                                                                                  'no',
+                                                                                                                  _model.selectedPaymentMethod,
+                                                                                                                  '0',
+                                                                                                                  '0',
+                                                                                                                  'no',
+                                                                                                                  functions.stringToDouble(functions
+                                                                                                                              .calculateTimeSlotPricingTotal(
+                                                                                                                                  QuickartGroup.showsubcartCall
+                                                                                                                                      .cardData(
+                                                                                                                                        tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                      )!
+                                                                                                                                      .toList(),
+                                                                                                                                  'discount')
+                                                                                                                              .toString()) >
+                                                                                                                          0.0
+                                                                                                                      ? functions
+                                                                                                                          .calculateTimeSlotPricingTotal(
+                                                                                                                              QuickartGroup.showsubcartCall
+                                                                                                                                  .cardData(
+                                                                                                                                    tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                  )!
+                                                                                                                                  .toList(),
+                                                                                                                              'discount')
+                                                                                                                          .toString()
+                                                                                                                      : '0',
+                                                                                                                  functions.stringToDouble(functions
+                                                                                                                              .calculateTimeSlotPricingTotal(
+                                                                                                                                  QuickartGroup.showsubcartCall
+                                                                                                                                      .cardData(
+                                                                                                                                        tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                      )!
+                                                                                                                                      .toList(),
+                                                                                                                                  'surge_charge')
+                                                                                                                              .toString()) >
+                                                                                                                          0.0
+                                                                                                                      ? functions
+                                                                                                                          .calculateTimeSlotPricingTotal(
+                                                                                                                              QuickartGroup.showsubcartCall
+                                                                                                                                  .cardData(
+                                                                                                                                    tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                  )!
+                                                                                                                                  .toList(),
+                                                                                                                              'surge_charge')
+                                                                                                                          .toString()
+                                                                                                                      : '0',
+                                                                                                                  getJsonField(
+                                                                                                                    functions.getZoneRuleByType(
+                                                                                                                        getJsonField(
+                                                                                                                          tabBarShowsubcartResponse.jsonBody,
+                                                                                                                          r'''$.data.zone_permanent_charges''',
+                                                                                                                          true,
+                                                                                                                        )!,
+                                                                                                                        'min_order'),
+                                                                                                                    r'''$.zone_price_effect''',
+                                                                                                                  ).toString(),
+                                                                                                                  getJsonField(
+                                                                                                                    tabBarShowsubcartResponse.jsonBody,
+                                                                                                                    r'''$.data.zone_delivery_addons''',
+                                                                                                                    true,
+                                                                                                                  ),
+                                                                                                                  true)
+                                                                                                              .toString(),
+                                                                                                          '0.00',
+                                                                                                        ),
+                                                                                                        functions
+                                                                                                            .checkWalletWithAction(
+                                                                                                                _model.isRefSubWalletCheckBoxSelected,
+                                                                                                                valueOrDefault<String>(
+                                                                                                                  functions
+                                                                                                                      .totalValueAmountUpdae(
+                                                                                                                          '0',
+                                                                                                                          FFAppState().couponDiscount.toString(),
+                                                                                                                          getJsonField(
+                                                                                                                            tabBarShowsubcartResponse.jsonBody,
+                                                                                                                            r'''$.data.total_price''',
+                                                                                                                          ).toString(),
+                                                                                                                          '0',
+                                                                                                                          'no',
+                                                                                                                          _model.selectedPaymentMethod,
+                                                                                                                          '0',
+                                                                                                                          '0',
+                                                                                                                          'no',
+                                                                                                                          functions.stringToDouble(functions
+                                                                                                                                      .calculateTimeSlotPricingTotal(
+                                                                                                                                          QuickartGroup.showsubcartCall
+                                                                                                                                              .cardData(
+                                                                                                                                                tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                              )!
+                                                                                                                                              .toList(),
+                                                                                                                                          'discount')
+                                                                                                                                      .toString()) >
+                                                                                                                                  0.0
+                                                                                                                              ? functions
+                                                                                                                                  .calculateTimeSlotPricingTotal(
+                                                                                                                                      QuickartGroup.showsubcartCall
+                                                                                                                                          .cardData(
+                                                                                                                                            tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                          )!
+                                                                                                                                          .toList(),
+                                                                                                                                      'discount')
+                                                                                                                                  .toString()
+                                                                                                                              : '0',
+                                                                                                                          functions.stringToDouble(functions
+                                                                                                                                      .calculateTimeSlotPricingTotal(
+                                                                                                                                          QuickartGroup.showsubcartCall
+                                                                                                                                              .cardData(
+                                                                                                                                                tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                              )!
+                                                                                                                                              .toList(),
+                                                                                                                                          'surge_charge')
+                                                                                                                                      .toString()) >
+                                                                                                                                  0.0
+                                                                                                                              ? functions
+                                                                                                                                  .calculateTimeSlotPricingTotal(
+                                                                                                                                      QuickartGroup.showsubcartCall
+                                                                                                                                          .cardData(
+                                                                                                                                            tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                          )!
+                                                                                                                                          .toList(),
+                                                                                                                                      'surge_charge')
+                                                                                                                                  .toString()
+                                                                                                                              : '0',
+                                                                                                                          getJsonField(
+                                                                                                                            functions.getZoneRuleByType(
+                                                                                                                                getJsonField(
+                                                                                                                                  tabBarShowsubcartResponse.jsonBody,
+                                                                                                                                  r'''$.data.zone_permanent_charges''',
+                                                                                                                                  true,
+                                                                                                                                )!,
+                                                                                                                                'min_order'),
+                                                                                                                            r'''$.zone_price_effect''',
+                                                                                                                          ).toString(),
+                                                                                                                          getJsonField(
+                                                                                                                            tabBarShowsubcartResponse.jsonBody,
+                                                                                                                            r'''$.data.zone_delivery_addons''',
+                                                                                                                            true,
+                                                                                                                          ),
+                                                                                                                          true)
+                                                                                                                      .toString(),
+                                                                                                                  '0.00',
+                                                                                                                ),
+                                                                                                                getJsonField(
+                                                                                                                  tabBarShowsubcartResponse.jsonBody,
+                                                                                                                  r'''$.data.referral_balance''',
+                                                                                                                ).toString(),
+                                                                                                                getJsonField(
+                                                                                                                  FFAppState().appInfo,
+                                                                                                                  r'''$.wallet_deduction_percentage''',
+                                                                                                                ).toString())
+                                                                                                            .toString(),
+                                                                                                        getJsonField(
+                                                                                                          tabBarShowsubcartResponse.jsonBody,
+                                                                                                          r'''$.data.wallet_balance''',
+                                                                                                        ).toString(),
+                                                                                                        _model.isSubWalletCheckBoxSelected)
+                                                                                                    .toString(),
+                                                                                                'add',
+                                                                                                functions.stringToDouble(functions
+                                                                                                            .calculateTimeSlotPricingTotal(
+                                                                                                                QuickartGroup.showsubcartCall
+                                                                                                                    .cardData(
+                                                                                                                      tabBarShowsubcartResponse.jsonBody,
+                                                                                                                    )!
+                                                                                                                    .toList(),
+                                                                                                                'discount')
+                                                                                                            .toString()) >
+                                                                                                        0.0
+                                                                                                    ? functions
+                                                                                                        .calculateTimeSlotPricingTotal(
+                                                                                                            QuickartGroup.showsubcartCall
+                                                                                                                .cardData(
+                                                                                                                  tabBarShowsubcartResponse.jsonBody,
+                                                                                                                )!
+                                                                                                                .toList(),
+                                                                                                            'discount')
+                                                                                                        .toString()
+                                                                                                    : '0',
+                                                                                                functions.stringToDouble(functions
+                                                                                                            .calculateTimeSlotPricingTotal(
+                                                                                                                QuickartGroup.showsubcartCall
+                                                                                                                    .cardData(
+                                                                                                                      tabBarShowsubcartResponse.jsonBody,
+                                                                                                                    )!
+                                                                                                                    .toList(),
+                                                                                                                'surge_charge')
+                                                                                                            .toString()) >
+                                                                                                        0.0
+                                                                                                    ? functions
+                                                                                                        .calculateTimeSlotPricingTotal(
+                                                                                                            QuickartGroup.showsubcartCall
+                                                                                                                .cardData(
+                                                                                                                  tabBarShowsubcartResponse.jsonBody,
+                                                                                                                )!
+                                                                                                                .toList(),
+                                                                                                            'surge_charge')
+                                                                                                        .toString()
+                                                                                                    : '0',
+                                                                                                getJsonField(
+                                                                                                  functions.getZoneRuleByType(
+                                                                                                      getJsonField(
+                                                                                                        tabBarShowsubcartResponse.jsonBody,
+                                                                                                        r'''$.data.zone_permanent_charges''',
+                                                                                                        true,
+                                                                                                      )!,
+                                                                                                      'min_order'),
+                                                                                                  r'''$.zone_price_effect''',
+                                                                                                ).toString(),
+                                                                                                getJsonField(
+                                                                                                  tabBarShowsubcartResponse.jsonBody,
+                                                                                                  r'''$.data.zone_delivery_addons''',
+                                                                                                  true,
+                                                                                                ),
+                                                                                                true),
+                                                                                            0.00,
+                                                                                          ),
+                                                                                          'paymentFailed',
+                                                                                          FFAppState().emptyJson,
+                                                                                          'perperdelivery',
+                                                                                          ' ',
+                                                                                          getJsonField(
+                                                                                            (_model.apiResultSUBC1?.jsonBody ?? ''),
+                                                                                            r'''$.message''',
+                                                                                          ).toString(),
+                                                                                          ' ',
+                                                                                          ' ',
+                                                                                        );
                                                                                       }
                                                                                     } else {
                                                                                       logFirebaseEvent('PaymentContainer_show_snack_bar');
@@ -16619,7 +19605,11 @@ class _CartSubscriptionScreenWidgetState
                                                                   .fontStyle,
                                                         ),
                                               ),
-                                              if (_model.timeSlotjson != null)
+                                              if ((_model.timeSlotjson !=
+                                                      null) &&
+                                                  (FFAppState()
+                                                              .selectedDeliveryDate !=
+                                                          ''))
                                                 Container(
                                                   width:
                                                       MediaQuery.sizeOf(context)
@@ -16689,6 +19679,32 @@ class _CartSubscriptionScreenWidgetState
                                                                           () async {
                                                                         logFirebaseEvent(
                                                                             'CART_SUBSCRIPTION_SCREEN_Container_pvghg');
+                                                                        logFirebaseEvent(
+                                                                            'Container_custom_action');
+                                                                        await actions
+                                                                            .facebookEventClass(
+                                                                          FFAppState()
+                                                                              .userID,
+                                                                          FFAppState()
+                                                                              .selectedDeliveryDate,
+                                                                          getJsonField(
+                                                                            timeSlotModelItem,
+                                                                            r'''$.timeslot''',
+                                                                          ).toString(),
+                                                                          0.0,
+                                                                          0,
+                                                                          0.0,
+                                                                          FFAppState().isDeliveryTimeSlotSelected != ''
+                                                                              ? 'timeSlotChanges'
+                                                                              : 'timeSlotSelected',
+                                                                          FFAppState()
+                                                                              .emptyJson,
+                                                                          '0',
+                                                                          'subscriptionCart',
+                                                                          '0',
+                                                                          '0',
+                                                                          '0',
+                                                                        );
                                                                         logFirebaseEvent(
                                                                             'Container_update_app_state');
                                                                         FFAppState().isDeliveryTimeSlotSelected =
@@ -16830,7 +19846,13 @@ class _CartSubscriptionScreenWidgetState
                                                                                                   r'''$.value_type''',
                                                                                                 ).toString()
                                                                                             ? 'Flat ${FFAppConstants.currancyAED}'
-                                                                                            : '',
+                                                                                            : (_model.surgeCharge ==
+                                                                                                    getJsonField(
+                                                                                                      timeSlotModelItem,
+                                                                                                      r'''$.pricing_type''',
+                                                                                                    ).toString()
+                                                                                                ? ''
+                                                                                                : 'Get '),
                                                                                         style: FlutterFlowTheme.of(context).bodyMedium.override(
                                                                                               font: GoogleFonts.montserrat(
                                                                                                 fontWeight: FontWeight.w500,
@@ -16945,7 +19967,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                           text: TextSpan(
                                                                                             children: [
                                                                                               TextSpan(
-                                                                                                text: 'above ',
+                                                                                                text: 'up  to  ',
                                                                                                 style: FlutterFlowTheme.of(context).bodyMedium.override(
                                                                                                       font: GoogleFonts.montserrat(
                                                                                                         fontWeight: FontWeight.w500,

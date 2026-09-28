@@ -154,6 +154,23 @@ class _SearchProductScreenWidgetState extends State<SearchProductScreenWidget> {
                                       FFAppState().searchLoader = false;
                                       safeSetState(() {});
                                       logFirebaseEvent(
+                                          'TextField_custom_action');
+                                      await actions.facebookEventClass(
+                                        FFAppState().userID,
+                                        _model.textController.text,
+                                        '0',
+                                        0.0,
+                                        0,
+                                        0.0,
+                                        'searchStart',
+                                        FFAppState().emptyJson,
+                                        '0',
+                                        '0',
+                                        '0',
+                                        '0',
+                                        '0',
+                                      );
+                                      logFirebaseEvent(
                                           'TextField_backend_call');
                                       _model.searchProductAPIResponsefil =
                                           await ProductsearchCall.call(

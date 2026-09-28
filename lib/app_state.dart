@@ -1748,6 +1748,12 @@ class FFAppState extends ChangeNotifier {
   set zoneInfo(dynamic value) {
     _zoneInfo = value;
   }
+
+  String _mapAddress = '';
+  String get mapAddress => _mapAddress;
+  set mapAddress(String value) {
+    _mapAddress = value;
+  }
 }
 
 void _safeInit(Function() initializeField) {

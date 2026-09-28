@@ -2119,13 +2119,7 @@ class _TrialProductCartScreenWidgetState
                                           width:
                                               MediaQuery.sizeOf(context).width *
                                                   1.0,
-                                          height: valueOrDefault<double>(
-                                            _model.trialCartPaymentRadioButtonValue ==
-                                                    'COD'
-                                                ? 165.0
-                                                : 120.0,
-                                            280.0,
-                                          ),
+                                          height: 160.0,
                                           decoration: BoxDecoration(
                                             color: FFAppConstants.whiteColor,
                                           ),

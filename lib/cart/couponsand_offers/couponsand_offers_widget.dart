@@ -7,6 +7,7 @@ import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -35,6 +36,27 @@ class _CouponsandOffersWidgetState extends State<CouponsandOffersWidget> {
 
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'CouponsandOffers'});
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      logFirebaseEvent('COUPONSAND_OFFERS_CouponsandOffers_ON_IN');
+      logFirebaseEvent('CouponsandOffers_custom_action');
+      await actions.facebookEventClass(
+        FFAppState().userID,
+        '0',
+        '0',
+        0.0,
+        0,
+        0.0,
+        'couponViewed',
+        FFAppState().emptyJson,
+        '0',
+        '0',
+        '0',
+        '0',
+        '0',
+      );
+    });
+
     _model.textController ??= TextEditingController();
     _model.textFieldFocusNode ??= FocusNode();
 
@@ -310,16 +332,20 @@ class _CouponsandOffersWidgetState extends State<CouponsandOffersWidget> {
                                           FFAppState().userID,
                                           _model.textController.text,
                                           FFAppState().couponType,
-                                          0.0,
+                                          functions.stringToDouble(getJsonField(
+                                            (_model.apiResultrm2?.jsonBody ??
+                                                ''),
+                                            r'''$.data.save_amount''',
+                                          ).toString()),
                                           1,
                                           0.0,
                                           'coupon',
                                           FFAppState().emptyJson,
-                                          ' ',
-                                          ' ',
-                                          ' ',
-                                          ' ',
-                                          ' ',
+                                          '0 ',
+                                          '0 ',
+                                          '0 ',
+                                          '0 ',
+                                          '0',
                                         );
                                       } else {
                                         logFirebaseEvent('Text_show_snack_bar');
@@ -813,16 +839,19 @@ class _CouponsandOffersWidgetState extends State<CouponsandOffersWidget> {
                                                                                 r'''$.coupon_code''',
                                                                               ).toString(),
                                                                               FFAppState().couponType,
-                                                                              0.0,
+                                                                              functions.checkDoubleValue(getJsonField(
+                                                                                (_model.apiResulth77?.jsonBody ?? ''),
+                                                                                r'''$.data.save_amount''',
+                                                                              ).toString())!,
                                                                               1,
                                                                               0.0,
                                                                               'coupon',
                                                                               FFAppState().emptyJson,
-                                                                              ' ',
-                                                                              ' ',
-                                                                              ' ',
-                                                                              ' ',
-                                                                              ' ',
+                                                                              '0 ',
+                                                                              ' 0',
+                                                                              '0 ',
+                                                                              ' 0',
+                                                                              ' 0',
                                                                             );
                                                                             logFirebaseEvent('Text_google_analytics_event');
                                                                             logFirebaseEvent(

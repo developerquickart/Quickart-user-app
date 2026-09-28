@@ -313,6 +313,10 @@ class _AddressListScreenWidgetState extends State<AddressListScreenWidget> {
                                             r'''$.lng''',
                                           ).toString(),
                                           userid: FFAppState().userID,
+                                          addressID: getJsonField(
+                                            addressListItem,
+                                            r'''$.address_id''',
+                                          ).toString(),
                                         );
 
                                         if ((_model.getZone?.succeeded ??
@@ -431,20 +435,13 @@ class _AddressListScreenWidgetState extends State<AddressListScreenWidget> {
                                                 );
                                                 FFAppState().update(() {});
                                                 if (FFAppState().screenName ==
-                                                    'dashbaord') {
-                                                  logFirebaseEvent(
-                                                      'Container_navigate_to');
-
-                                                  context.goNamed(
-                                                      DashboardScreenWidget
-                                                          .routeName);
-                                                } else {
+                                                    'homeScreen') {
                                                   logFirebaseEvent(
                                                       'Container_custom_action');
                                                   await actions
                                                       .navigateToBackBtnScreen(
                                                     context,
-                                                    'dailyCartScreen',
+                                                    'DashboardScreen',
                                                     () async {
                                                       logFirebaseEvent(
                                                           '_refresh_database_request');
@@ -455,6 +452,91 @@ class _AddressListScreenWidgetState extends State<AddressListScreenWidget> {
                                                           .waitForApiRequestCompleted();
                                                     },
                                                   );
+                                                } else {
+                                                  logFirebaseEvent(
+                                                      'Container_custom_action');
+                                                  await actions
+                                                      .facebookEventClass(
+                                                    FFAppState().userID,
+                                                    getJsonField(
+                                                      addressListItem,
+                                                      r'''$.address_id''',
+                                                    ).toString(),
+                                                    getJsonField(
+                                                      addressListItem,
+                                                      r'''$.type''',
+                                                    ).toString(),
+                                                    0.0,
+                                                    0,
+                                                    0.0,
+                                                    'addressSelected',
+                                                    FFAppState().emptyJson,
+                                                    '0',
+                                                    getJsonField(
+                                                      addressListItem,
+                                                      r'''$.society_name''',
+                                                    ).toString(),
+                                                    '0',
+                                                    '0',
+                                                    '0',
+                                                  );
+                                                  if (FFAppState().screenName ==
+                                                      'dailyCart') {
+                                                    logFirebaseEvent(
+                                                        'Container_custom_action');
+                                                    await actions
+                                                        .navigateToBackBtnScreen(
+                                                      context,
+                                                      'dailyCartScreen',
+                                                      () async {
+                                                        logFirebaseEvent(
+                                                            '_refresh_database_request');
+                                                        safeSetState(() => _model
+                                                                .apiRequestCompleter =
+                                                            null);
+                                                        await _model
+                                                            .waitForApiRequestCompleted();
+                                                      },
+                                                    );
+                                                  } else {
+                                                    if (FFAppState()
+                                                            .screenName ==
+                                                        'subscription') {
+                                                      logFirebaseEvent(
+                                                          'Container_custom_action');
+                                                      await actions
+                                                          .navigateToBackBtnScreen(
+                                                        context,
+                                                        'cartSubscriptionScreen',
+                                                        () async {
+                                                          logFirebaseEvent(
+                                                              '_refresh_database_request');
+                                                          safeSetState(() =>
+                                                              _model.apiRequestCompleter =
+                                                                  null);
+                                                          await _model
+                                                              .waitForApiRequestCompleted();
+                                                        },
+                                                      );
+                                                    } else {
+                                                      logFirebaseEvent(
+                                                          'Container_custom_action');
+                                                      await actions
+                                                          .navigateToBackBtnScreen(
+                                                        context,
+                                                        'DashboardScreen',
+                                                        () async {
+                                                          logFirebaseEvent(
+                                                              '_refresh_database_request');
+                                                          safeSetState(() =>
+                                                              _model.apiRequestCompleter =
+                                                                  null);
+                                                          await _model
+                                                              .waitForApiRequestCompleted();
+                                                        },
+                                                      );
+                                                    }
+                                                  }
                                                 }
 
                                                 logFirebaseEvent(

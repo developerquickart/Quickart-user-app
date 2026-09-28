@@ -12,6 +12,7 @@ import '/flutter_flow/uploaded_file.dart';
 import '/backend/backend.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '/backend/schema/structs/index.dart';
+import '/flutter_flow/ff_builtin_enums.dart';
 import '/auth/firebase_auth/auth_util.dart';
 
 double? totalValueAmountUpdae(
@@ -146,6 +147,11 @@ double? totalValueAmountUpdae(
     total = 0.0;
 
     printLog("G1----total reset to 0 ---->$total");
+  }
+  if (total <= 0.005) {
+    total = 0.0;
+
+    printLog("G1----total after wallet is 0 ---->$total");
   }
 
   // COD charge

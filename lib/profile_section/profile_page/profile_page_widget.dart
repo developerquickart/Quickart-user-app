@@ -1644,9 +1644,11 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                                                 height: 40.0,
                                                 decoration: BoxDecoration(),
                                                 child: Visibility(
-                                                  visible:
-                                                      FFAppState().usserType !=
-                                                          'guest',
+                                                  visible: getJsonField(
+                                                        FFAppState().appInfo,
+                                                        r'''$.user_type''',
+                                                      ) ==
+                                                      null,
                                                   child: Padding(
                                                     padding:
                                                         EdgeInsetsDirectional
@@ -2441,6 +2443,24 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                                                       ),
                                                     );
                                                     logFirebaseEvent(
+                                                        'Row_custom_action');
+                                                    await actions
+                                                        .facebookEventClass(
+                                                      _model.refCodeN!,
+                                                      FFAppState().userID,
+                                                      '0',
+                                                      0.0,
+                                                      0,
+                                                      0.0,
+                                                      'appShare',
+                                                      FFAppState().emptyJson,
+                                                      '0',
+                                                      '0',
+                                                      '0',
+                                                      '0',
+                                                      '0',
+                                                    );
+                                                    logFirebaseEvent(
                                                         'Row_share');
                                                     await Share.share(
                                                       '${getJsonField(
@@ -3200,6 +3220,26 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                                                             logFirebaseEvent(
                                                                 'logoutRow_custom_action');
                                                             await actions
+                                                                .facebookEventClass(
+                                                              '0',
+                                                              FFAppState()
+                                                                  .userID,
+                                                              '0',
+                                                              0.0,
+                                                              0,
+                                                              0.0,
+                                                              'logout',
+                                                              FFAppState()
+                                                                  .emptyJson,
+                                                              '0',
+                                                              '',
+                                                              '0',
+                                                              '0',
+                                                              '0',
+                                                            );
+                                                            logFirebaseEvent(
+                                                                'logoutRow_custom_action');
+                                                            await actions
                                                                 .clearSharePrefeData();
                                                             logFirebaseEvent(
                                                                 'logoutRow_navigate_to');
@@ -3412,136 +3452,6 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                                                                   () async {
                                                                 logFirebaseEvent(
                                                                     'PROFILE_arrow_forward_ios_ICN_ON_TAP');
-                                                                logFirebaseEvent(
-                                                                    'IconButton_alert_dialog');
-                                                                var confirmDialogResponse =
-                                                                    await showDialog<
-                                                                            bool>(
-                                                                          context:
-                                                                              context,
-                                                                          builder:
-                                                                              (alertDialogContext) {
-                                                                            return AlertDialog(
-                                                                              title: Text(FFAppState().AppName),
-                                                                              content: Text(FFAppState().logoutMsg),
-                                                                              actions: [
-                                                                                TextButton(
-                                                                                  onPressed: () => Navigator.pop(alertDialogContext, false),
-                                                                                  child: Text('Cancel'),
-                                                                                ),
-                                                                                TextButton(
-                                                                                  onPressed: () => Navigator.pop(alertDialogContext, true),
-                                                                                  child: Text('Logout'),
-                                                                                ),
-                                                                              ],
-                                                                            );
-                                                                          },
-                                                                        ) ??
-                                                                        false;
-                                                                if (confirmDialogResponse) {
-                                                                  logFirebaseEvent(
-                                                                      'IconButton_navigate_to');
-
-                                                                  context.pushNamed(
-                                                                      LoginOnBoardScreenWidget
-                                                                          .routeName);
-
-                                                                  logFirebaseEvent(
-                                                                      'IconButton_update_app_state');
-                                                                  FFAppState()
-                                                                          .isUserLogin =
-                                                                      false;
-                                                                  FFAppState()
-                                                                      .deletePhoneNo();
-                                                                  FFAppState()
-                                                                      .phoneNo = '';
-
-                                                                  FFAppState()
-                                                                      .deleteUserID();
-                                                                  FFAppState()
-                                                                      .userID = '';
-
-                                                                  FFAppState()
-                                                                      .deleteUserEmail();
-                                                                  FFAppState()
-                                                                      .userEmail = '';
-
-                                                                  FFAppState()
-                                                                      .deleteUserName();
-                                                                  FFAppState()
-                                                                      .userName = '';
-
-                                                                  FFAppState()
-                                                                      .deleteIsverified();
-                                                                  FFAppState()
-                                                                      .isverified = 1;
-
-                                                                  FFAppState()
-                                                                          .countryCode =
-                                                                      '971';
-                                                                  FFAppState()
-                                                                      .categoryName = '';
-                                                                  FFAppState()
-                                                                      .deleteProfileImage();
-                                                                  FFAppState()
-                                                                      .profileImage = '';
-
-                                                                  FFAppState()
-                                                                      .deleteProfileImageBytes();
-                                                                  FFAppState()
-                                                                          .profileImageBytes =
-                                                                      'https://media.istockphoto.com/id/1916685823/photo/businesswoman-using-laptop-with-banking-applications-via-internet-network.jpg?s=612x612&w=0&k=20&c=L9wQekG3TJ-6fSFlUCUelo5xOCYkm9SVE5ER5J8QiK0=';
-
-                                                                  FFAppState()
-                                                                      .deleteUserPhoneNo();
-                                                                  FFAppState()
-                                                                      .userPhoneNo = '';
-
-                                                                  FFAppState()
-                                                                      .deleteUserCountryCode();
-                                                                  FFAppState()
-                                                                      .userCountryCode = '';
-
-                                                                  FFAppState()
-                                                                      .deleteUserPhoneEP();
-                                                                  FFAppState()
-                                                                      .userPhoneEP = '';
-
-                                                                  FFAppState()
-                                                                      .deleteUserPhoneProfile();
-                                                                  FFAppState()
-                                                                      .userPhoneProfile = '';
-
-                                                                  FFAppState()
-                                                                      .deleteUserCountryCodeEP();
-                                                                  FFAppState()
-                                                                      .userCountryCodeEP = '';
-
-                                                                  FFAppState()
-                                                                      .deleteUsserType();
-                                                                  FFAppState()
-                                                                      .usserType = '';
-
-                                                                  FFAppState()
-                                                                          .subCartSavingAmount =
-                                                                      0.0;
-                                                                  FFAppState()
-                                                                          .subCartTotalPrice =
-                                                                      0.0;
-                                                                  FFAppState()
-                                                                      .subCartTotalItem = 0;
-                                                                  FFAppState()
-                                                                      .cartTotalCount = 0;
-                                                                  FFAppState()
-                                                                          .cartTotalPrice =
-                                                                      0.0;
-                                                                  FFAppState()
-                                                                      .cartAmount = '';
-                                                                  FFAppState()
-                                                                      .cartTotal = '';
-                                                                  safeSetState(
-                                                                      () {});
-                                                                }
                                                               },
                                                             ),
                                                           ],
@@ -3573,6 +3483,24 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                                                     LoginOnBoardScreenWidget
                                                         .routeName);
 
+                                                logFirebaseEvent(
+                                                    'Row_custom_action');
+                                                await actions
+                                                    .facebookEventClass(
+                                                  FFAppState().userID,
+                                                  '0',
+                                                  '0',
+                                                  0.0,
+                                                  0,
+                                                  0.0,
+                                                  'guestToRegister',
+                                                  FFAppState().emptyJson,
+                                                  '0',
+                                                  '0',
+                                                  '0',
+                                                  '0',
+                                                  '0',
+                                                );
                                                 logFirebaseEvent(
                                                     'Row_wait__delay');
                                                 await Future.delayed(
@@ -3683,6 +3611,10 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                                                         'Login Onboard Screen',
                                                   },
                                                 );
+                                                logFirebaseEvent(
+                                                    'Row_custom_action');
+                                                await actions
+                                                    .clearSharePrefeData();
                                               },
                                               child: Row(
                                                 mainAxisSize: MainAxisSize.max,

@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'serialization_util.dart';
+
 import '../../flutter_flow/flutter_flow_util.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -41,10 +42,14 @@ class _PushNotificationsHandlerState extends State<PushNotificationsHandler> {
     }
     _handledMessageIds.add(message.messageId);
 
+    await _handlePushNotificationData(message.data);
+  }
+
+  Future _handlePushNotificationData(Map<String, dynamic> messageData) async {
     safeSetState(() => _loading = true);
     try {
-      final initialPageName = message.data['initialPageName'] as String;
-      final initialParameterData = getInitialParameterData(message.data);
+      final initialPageName = messageData['initialPageName'] as String;
+      final initialParameterData = getInitialParameterData(messageData);
       final parametersBuilder = parametersBuilderMap[initialPageName];
       if (parametersBuilder != null) {
         final parameterData = await parametersBuilder(initialParameterData);
@@ -402,9 +407,17 @@ final parametersBuilderMap =
           'title': getParameter<String>(data, 'title'),
         },
       ),
-  'QuickartsplashScreenCopy': ParameterData.none(),
   'dailyCartScreenCopy': ParameterData.none(),
   'cartSubscriptionScreenCopy': ParameterData.none(),
+  'RatingOrderScreenCopy1': (data) async => ParameterData(
+        allParams: {
+          'cartId': getParameter<String>(data, 'cartId'),
+          'subscriptionID': getParameter<String>(data, 'subscriptionID'),
+          'screenName': getParameter<String>(data, 'screenName'),
+          'rating': getParameter<int>(data, 'rating'),
+          'reviewStr': getParameter<String>(data, 'reviewStr'),
+        },
+      ),
 };
 
 Map<String, dynamic> getInitialParameterData(Map<String, dynamic> data) {

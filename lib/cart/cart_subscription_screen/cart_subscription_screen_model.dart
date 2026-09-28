@@ -97,6 +97,10 @@ class CartSubscriptionScreenModel
   bool? checkinternet;
   // Stores action output result for [Backend Call - API (addtosubcart)] action in Button widget.
   ApiCallResponse? apiResultAddsubCart12;
+  // Stores action output result for [Custom Action - checkInternetConnection] action in Button widget.
+  bool? internet1;
+  // Stores action output result for [Backend Call - API (addtosubcart)] action in Button widget.
+  ApiCallResponse? removetosubCart;
   // Stores action output result for [Custom Action - checkInternetConnection] action in Container widget.
   bool? isInternet;
   // Stores action output result for [Backend Call - API (updatessubcart )] action in Container widget.

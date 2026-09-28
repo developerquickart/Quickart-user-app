@@ -1,6 +1,7 @@
 import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_google_map.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import 'dart:async';
 import '/index.dart';
 import 'add_address_screen_widget.dart' show AddAddressScreenWidget;
 import 'package:flutter/material.dart';
@@ -74,6 +75,7 @@ class AddAddressScreenModel extends FlutterFlowModel<AddAddressScreenWidget> {
   bool? connectivityResult;
   // Stores action output result for [Backend Call - API (addaddress)] action in Button widget.
   ApiCallResponse? apiResultAddAddress;
+  Completer<ApiCallResponse>? apiRequestCompleter;
   // Stores action output result for [Backend Call - API (editaddress)] action in Button widget.
   ApiCallResponse? apiResultEditAddress;
   bool isDataUploading_uploadData63y1 = false;
@@ -103,5 +105,21 @@ class AddAddressScreenModel extends FlutterFlowModel<AddAddressScreenWidget> {
 
     textEmailFocusNode?.dispose();
     textEmailTextController?.dispose();
+  }
+
+  /// Additional helper methods.
+  Future waitForApiRequestCompleted({
+    double minWait = 0,
+    double maxWait = double.infinity,
+  }) async {
+    final stopwatch = Stopwatch()..start();
+    while (true) {
+      await Future.delayed(Duration(milliseconds: 50));
+      final timeElapsed = stopwatch.elapsedMilliseconds;
+      final requestComplete = apiRequestCompleter?.isCompleted ?? false;
+      if (timeElapsed > maxWait || (requestComplete && timeElapsed > minWait)) {
+        break;
+      }
+    }
   }
 }

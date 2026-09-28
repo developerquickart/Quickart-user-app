@@ -5,6 +5,7 @@ import '/components/custom_alert_signup_dailog/custom_alert_signup_dailog_widget
 import '/components/order_again_list_view/order_again_list_view_widget.dart';
 import '/components/products_list_view/products_list_view_widget.dart';
 import '/components/top_category_widget/top_category_widget_widget.dart';
+import '/flutter_flow/ff_builtin_enums.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_timer.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -109,6 +110,11 @@ class _DashboardScreenWidgetState extends State<DashboardScreenWidget> {
       _model.apiResultCartCount =
           await QuickartGroup.updateproductdetailsCall.call(
         userid: FFAppState().userID,
+        platform: FFAppState().platform,
+        storeId: getJsonField(
+          FFAppState().zoneInfo,
+          r'''$.store_id''',
+        ).toString(),
       );
 
       if ((_model.apiResultCartCount?.succeeded ?? true)) {
@@ -318,6 +324,15 @@ class _DashboardScreenWidgetState extends State<DashboardScreenWidget> {
           ),
         );
       }
+
+      if (getJsonField(
+            FFAppState().zoneInfo,
+            r'''$.address''',
+          ) ==
+          null) {
+        logFirebaseEvent('DashboardScreen_custom_action');
+        _model.selectedAddressNew = await actions.getAddressFormLatLng();
+      }
     });
 
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
@@ -381,10 +396,10 @@ class _DashboardScreenWidgetState extends State<DashboardScreenWidget> {
                 children: [
                   Builder(
                     builder: (context) {
-                      if (FFAppConstants.errorMessage !=
+                      if (FFAppConstants.userStatus !=
                           getJsonField(
                             dashboardScreenOneAPIResponse.jsonBody,
-                            r'''$.message''',
+                            r'''$.user_active_status''',
                           ).toString()) {
                         return Align(
                           alignment: AlignmentDirectional(0.0, -1.0),
@@ -609,12 +624,12 @@ class _DashboardScreenWidgetState extends State<DashboardScreenWidget> {
                                                     mainAxisSize:
                                                         MainAxisSize.min,
                                                     children: [
-                                                      if ((FFAppState()
-                                                                  .usserType !=
-                                                              'guest') ||
-                                                          (FFAppState()
-                                                                  .userName !=
-                                                              'Guest'))
+                                                      if (getJsonField(
+                                                            FFAppState()
+                                                                .appInfo,
+                                                            r'''$.user_type''',
+                                                          ) ==
+                                                          null)
                                                         Padding(
                                                           padding:
                                                               EdgeInsetsDirectional
@@ -740,12 +755,12 @@ class _DashboardScreenWidgetState extends State<DashboardScreenWidget> {
                                                             ),
                                                           ),
                                                         ),
-                                                      if ((FFAppState()
-                                                                  .usserType !=
-                                                              'guest') ||
-                                                          (FFAppState()
-                                                                  .userName !=
-                                                              'Guest'))
+                                                      if (getJsonField(
+                                                            FFAppState()
+                                                                .appInfo,
+                                                            r'''$.user_type''',
+                                                          ) ==
+                                                          null)
                                                         Padding(
                                                           padding:
                                                               EdgeInsetsDirectional
@@ -1039,42 +1054,20 @@ class _DashboardScreenWidgetState extends State<DashboardScreenWidget> {
                                                                           0.0,
                                                                           0.0,
                                                                           0.0),
-                                                              child: InkWell(
-                                                                splashColor: Colors
-                                                                    .transparent,
-                                                                focusColor: Colors
-                                                                    .transparent,
-                                                                hoverColor: Colors
-                                                                    .transparent,
-                                                                highlightColor:
-                                                                    Colors
-                                                                        .transparent,
-                                                                onTap:
-                                                                    () async {
-                                                                  logFirebaseEvent(
-                                                                      'DASHBOARD_SCREEN_Icon_7juhrwuo_ON_TAP');
-                                                                  logFirebaseEvent(
-                                                                      'Icon_update_app_state');
-                                                                  FFAppState()
-                                                                      .categoryName = '';
-                                                                  safeSetState(
-                                                                      () {});
-                                                                },
-                                                                child: Icon(
-                                                                  Icons.house,
-                                                                  color:
-                                                                      colorFromCssString(
-                                                                    getJsonField(
-                                                                      dashboardScreenOneAPIResponse
-                                                                          .jsonBody,
-                                                                      r'''$.oneapi_bg_first_image.bg_image_color''',
-                                                                    ).toString(),
-                                                                    defaultColor:
-                                                                        Colors
-                                                                            .black,
-                                                                  ),
-                                                                  size: 20.0,
+                                                              child: Icon(
+                                                                Icons.house,
+                                                                color:
+                                                                    colorFromCssString(
+                                                                  getJsonField(
+                                                                    dashboardScreenOneAPIResponse
+                                                                        .jsonBody,
+                                                                    r'''$.oneapi_bg_first_image.bg_image_color''',
+                                                                  ).toString(),
+                                                                  defaultColor:
+                                                                      Colors
+                                                                          .black,
                                                                 ),
+                                                                size: 20.0,
                                                               ),
                                                             ),
                                                             Align(
@@ -1101,7 +1094,18 @@ class _DashboardScreenWidgetState extends State<DashboardScreenWidget> {
                                                                               .zoneInfo,
                                                                           r'''$.address.house_no''',
                                                                         ).toString()
-                                                                      : ''.maybeHandleOverflow(
+                                                                      : () {
+                                                                          if (FFAppState().selectedMapAddress !=
+                                                                                  '') {
+                                                                            return FFAppState().selectedMapAddress;
+                                                                          } else if (_model.selectedAddressNew != null &&
+                                                                              _model.selectedAddressNew != '') {
+                                                                            return _model.selectedAddressNew!;
+                                                                          } else {
+                                                                            return '';
+                                                                          }
+                                                                        }()
+                                                                          .maybeHandleOverflow(
                                                                           maxChars:
                                                                               25,
                                                                           replacement:
@@ -4287,117 +4291,286 @@ class _DashboardScreenWidgetState extends State<DashboardScreenWidget> {
                           ),
                         );
                       } else {
-                        return Align(
-                          alignment: AlignmentDirectional(0.0, 0.0),
-                          child: Text(
-                            'Something went wrong..',
-                            style: FlutterFlowTheme.of(context)
-                                .bodyMedium
-                                .override(
-                                  font: GoogleFonts.readexPro(
-                                    fontWeight: FlutterFlowTheme.of(context)
-                                        .bodyMedium
-                                        .fontWeight,
-                                    fontStyle: FlutterFlowTheme.of(context)
-                                        .bodyMedium
-                                        .fontStyle,
-                                  ),
-                                  letterSpacing: 0.0,
-                                  fontWeight: FlutterFlowTheme.of(context)
-                                      .bodyMedium
-                                      .fontWeight,
-                                  fontStyle: FlutterFlowTheme.of(context)
-                                      .bodyMedium
-                                      .fontStyle,
+                        return Column(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment:
+                              (FFMainAxisAlignment.center).flutterValue,
+                          children: [
+                            Align(
+                              alignment: AlignmentDirectional(0.0, 0.0),
+                              child: Text(
+                                'Something went wrong..\nPlease login again',
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyMedium
+                                    .override(
+                                      font: GoogleFonts.montserrat(
+                                        fontWeight: FontWeight.w500,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .fontStyle,
+                                      ),
+                                      letterSpacing: 0.0,
+                                      fontWeight: FontWeight.w500,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .fontStyle,
+                                    ),
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 20.0, 0.0, 0.0),
+                              child: FFButtonWidget(
+                                onPressed: () async {
+                                  logFirebaseEvent(
+                                      'DASHBOARD_SCREEN_PAGE_LOGIN_BTN_ON_TAP');
+                                  logFirebaseEvent('Button_custom_action');
+                                  await actions.facebookEventClass(
+                                    '0',
+                                    FFAppState().userID,
+                                    '0',
+                                    0.0,
+                                    0,
+                                    0.0,
+                                    'logout',
+                                    FFAppState().emptyJson,
+                                    '0',
+                                    '',
+                                    '0',
+                                    '0',
+                                    '0',
+                                  );
+                                  logFirebaseEvent('Button_custom_action');
+                                  await actions.clearSharePrefeData();
+                                  logFirebaseEvent('Button_navigate_to');
+
+                                  context.goNamed(
+                                      LoginOnBoardScreenWidget.routeName);
+
+                                  logFirebaseEvent('Button_wait__delay');
+                                  await Future.delayed(
+                                    Duration(
+                                      milliseconds: 300,
+                                    ),
+                                  );
+                                  logFirebaseEvent('Button_update_app_state');
+                                  FFAppState().isUserLogin = false;
+                                  FFAppState().deletePhoneNo();
+                                  FFAppState().phoneNo = '';
+
+                                  FFAppState().deleteUserID();
+                                  FFAppState().userID = '';
+
+                                  FFAppState().deleteUserEmail();
+                                  FFAppState().userEmail = '';
+
+                                  FFAppState().deleteUserName();
+                                  FFAppState().userName = '';
+
+                                  FFAppState().deleteIsverified();
+                                  FFAppState().isverified = 1;
+
+                                  FFAppState().countryCode = '971';
+                                  FFAppState().categoryName = '';
+                                  FFAppState().deleteProfileImage();
+                                  FFAppState().profileImage = '';
+
+                                  FFAppState().deleteProfileImageBytes();
+                                  FFAppState().profileImageBytes =
+                                      'https://media.istockphoto.com/id/1916685823/photo/businesswoman-using-laptop-with-banking-applications-via-internet-network.jpg?s=612x612&w=0&k=20&c=L9wQekG3TJ-6fSFlUCUelo5xOCYkm9SVE5ER5J8QiK0=';
+
+                                  FFAppState().deleteUserPhoneNo();
+                                  FFAppState().userPhoneNo = '';
+
+                                  FFAppState().deleteUserCountryCode();
+                                  FFAppState().userCountryCode = '';
+
+                                  FFAppState().deleteUserPhoneEP();
+                                  FFAppState().userPhoneEP = '';
+
+                                  FFAppState().deleteUserPhoneProfile();
+                                  FFAppState().userPhoneProfile = '';
+
+                                  FFAppState().deleteUserCountryCodeEP();
+                                  FFAppState().userCountryCodeEP = '';
+
+                                  FFAppState().deleteUsserType();
+                                  FFAppState().usserType = '';
+
+                                  FFAppState().subCartSavingAmount = 0.0;
+                                  FFAppState().subCartTotalPrice = 0.0;
+                                  FFAppState().subCartTotalItem = 0;
+                                  FFAppState().cartTotalCount = 0;
+                                  FFAppState().cartTotalPrice = 0.0;
+                                  FFAppState().cartAmount = '';
+                                  FFAppState().cartTotal = '';
+                                  FFAppState().userWallet = 0.0;
+                                  FFAppState().userWalletstr = '';
+                                  FFAppState().cartSavingPrice = 0.0;
+                                  FFAppState().selectedCardNumber = '';
+                                  FFAppState().selectedCardID = '';
+                                  FFAppState().deleteSelectedAddresID();
+                                  FFAppState().selectedAddresID = '';
+
+                                  FFAppState().selectedAddress1 = '';
+                                  FFAppState().selectedAddress = 'Dubai';
+                                  FFAppState().selectedAddressType = '';
+                                  FFAppState().selectedCartAddress = '';
+                                  FFAppState().deleteDialCode();
+                                  FFAppState().dialCode = 'AE';
+
+                                  safeSetState(() {});
+                                  logFirebaseEvent(
+                                      'Button_google_analytics_event');
+                                  logFirebaseEvent(
+                                    'Navigation',
+                                    parameters: {
+                                      'Screen Name': 'Profile',
+                                      'Navigate To': 'Login Onboard Screen',
+                                    },
+                                  );
+                                },
+                                text: 'Login',
+                                options: FFButtonOptions(
+                                  height: 40.0,
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      26.0, 0.0, 26.0, 0.0),
+                                  iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                      0.0, 0.0, 0.0, 0.0),
+                                  color: FFAppConstants.indigoColor,
+                                  textStyle: FlutterFlowTheme.of(context)
+                                      .titleSmall
+                                      .override(
+                                        font: GoogleFonts.montserrat(
+                                          fontWeight:
+                                              FlutterFlowTheme.of(context)
+                                                  .titleSmall
+                                                  .fontWeight,
+                                          fontStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .titleSmall
+                                                  .fontStyle,
+                                        ),
+                                        color: Colors.white,
+                                        letterSpacing: 0.0,
+                                        fontWeight: FlutterFlowTheme.of(context)
+                                            .titleSmall
+                                            .fontWeight,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .titleSmall
+                                            .fontStyle,
+                                      ),
+                                  elevation: 0.0,
+                                  borderRadius: BorderRadius.circular(24.0),
                                 ),
-                          ),
+                              ),
+                            ),
+                          ],
                         );
                       }
                     },
                   ),
-                  Align(
-                    alignment: AlignmentDirectional(1.0, 1.0),
-                    child: Padding(
-                      padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 15.0, 150.0),
-                      child: InkWell(
-                        splashColor: Colors.transparent,
-                        focusColor: Colors.transparent,
-                        hoverColor: Colors.transparent,
-                        highlightColor: Colors.transparent,
-                        onTap: () async {
-                          logFirebaseEvent(
-                              'DASHBOARD_SCREEN_cartbtnContainer_ON_TAP');
-                          if ((FFAppState().cartTotalCount == 0) &&
-                              (FFAppState().subCartTotalItem == 0)) {
-                            logFirebaseEvent('cartbtnContainer_navigate_to');
+                  if (FFAppConstants.userStatus !=
+                      getJsonField(
+                        dashboardScreenOneAPIResponse.jsonBody,
+                        r'''$.user_active_status''',
+                      ).toString())
+                    Align(
+                      alignment: AlignmentDirectional(1.0, 1.0),
+                      child: Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(
+                            0.0, 0.0, 15.0, 150.0),
+                        child: InkWell(
+                          splashColor: Colors.transparent,
+                          focusColor: Colors.transparent,
+                          hoverColor: Colors.transparent,
+                          highlightColor: Colors.transparent,
+                          onTap: () async {
+                            logFirebaseEvent(
+                                'DASHBOARD_SCREEN_cartbtnContainer_ON_TAP');
+                            if ((FFAppState().cartTotalCount == 0) &&
+                                (FFAppState().subCartTotalItem == 0)) {
+                              logFirebaseEvent('cartbtnContainer_navigate_to');
 
-                            context.pushNamed(DailyCartScreenWidget.routeName);
+                              context
+                                  .pushNamed(DailyCartScreenWidget.routeName);
 
-                            logFirebaseEvent(
-                                'cartbtnContainer_google_analytics_event');
-                            logFirebaseEvent(
-                                'CartScreenFromDashboardAnalytics');
-                          } else {
-                            logFirebaseEvent(
-                                'cartbtnContainer_update_app_state');
-                            FFAppState().isCartShow =
-                                !(FFAppState().isCartShow ?? true);
-                            safeSetState(() {});
-                          }
-                        },
-                        child: Container(
-                          width: 50.0,
-                          height: 50.0,
-                          decoration: BoxDecoration(
-                            color: FFAppConstants.indigoColor,
-                            shape: BoxShape.circle,
-                          ),
-                          child: Align(
-                            alignment: AlignmentDirectional(0.0, 0.0),
-                            child: Stack(
-                              children: [
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 10.0, 0.0, 0.0),
-                                  child: Icon(
-                                    Icons.shopping_cart_sharp,
-                                    color: Color(0xFFFEDF31),
-                                    size: 24.0,
-                                  ),
-                                ),
-                                if (functions
-                                        .setIngeterValue(functions
-                                            .additionFunctionInt(
-                                                FFAppState().cartTotalCount,
-                                                FFAppState().subCartTotalItem)
-                                            .toString())
-                                        .toString() !=
-                                    '0')
+                              logFirebaseEvent(
+                                  'cartbtnContainer_google_analytics_event');
+                              logFirebaseEvent(
+                                  'CartScreenFromDashboardAnalytics');
+                            } else {
+                              logFirebaseEvent(
+                                  'cartbtnContainer_update_app_state');
+                              FFAppState().isCartShow =
+                                  !(FFAppState().isCartShow ?? true);
+                              safeSetState(() {});
+                            }
+                          },
+                          child: Container(
+                            width: 50.0,
+                            height: 50.0,
+                            decoration: BoxDecoration(
+                              color: FFAppConstants.indigoColor,
+                              shape: BoxShape.circle,
+                            ),
+                            child: Align(
+                              alignment: AlignmentDirectional(0.0, 0.0),
+                              child: Stack(
+                                children: [
                                   Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
-                                        8.0, 0.0, 0.0, 0.0),
-                                    child: Container(
-                                      width: 20.0,
-                                      height: 20.0,
-                                      decoration: BoxDecoration(
-                                        color:
-                                            FFAppConstants.NeutralBlack50Color,
-                                        shape: BoxShape.circle,
-                                      ),
-                                      child: Align(
-                                        alignment:
-                                            AlignmentDirectional(0.0, 0.0),
-                                        child: Text(
-                                          functions
+                                        0.0, 10.0, 0.0, 0.0),
+                                    child: Icon(
+                                      Icons.shopping_cart_sharp,
+                                      color: Color(0xFFFEDF31),
+                                      size: 24.0,
+                                    ),
+                                  ),
+                                  if (functions
+                                          .setIngeterValue(functions
                                               .additionFunctionInt(
                                                   FFAppState().cartTotalCount,
                                                   FFAppState().subCartTotalItem)
-                                              .toString(),
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyMedium
-                                              .override(
-                                                font: GoogleFonts.montserrat(
+                                              .toString())
+                                          .toString() !=
+                                      '0')
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          8.0, 0.0, 0.0, 0.0),
+                                      child: Container(
+                                        width: 20.0,
+                                        height: 20.0,
+                                        decoration: BoxDecoration(
+                                          color: FFAppConstants
+                                              .NeutralBlack50Color,
+                                          shape: BoxShape.circle,
+                                        ),
+                                        child: Align(
+                                          alignment:
+                                              AlignmentDirectional(0.0, 0.0),
+                                          child: Text(
+                                            functions
+                                                .additionFunctionInt(
+                                                    FFAppState().cartTotalCount,
+                                                    FFAppState()
+                                                        .subCartTotalItem)
+                                                .toString(),
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyMedium
+                                                .override(
+                                                  font: GoogleFonts.montserrat(
+                                                    fontWeight: FontWeight.w600,
+                                                    fontStyle:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .bodyMedium
+                                                            .fontStyle,
+                                                  ),
+                                                  color: FFAppConstants
+                                                      .blackColor0A0A0A,
+                                                  fontSize: 10.0,
+                                                  letterSpacing: 0.0,
                                                   fontWeight: FontWeight.w600,
                                                   fontStyle:
                                                       FlutterFlowTheme.of(
@@ -4405,45 +4578,40 @@ class _DashboardScreenWidgetState extends State<DashboardScreenWidget> {
                                                           .bodyMedium
                                                           .fontStyle,
                                                 ),
-                                                color: FFAppConstants
-                                                    .blackColor0A0A0A,
-                                                fontSize: 10.0,
-                                                letterSpacing: 0.0,
-                                                fontWeight: FontWeight.w600,
-                                                fontStyle:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyMedium
-                                                        .fontStyle,
-                                              ),
+                                          ),
                                         ),
                                       ),
                                     ),
-                                  ),
-                              ],
+                                ],
+                              ),
                             ),
                           ),
                         ),
                       ),
                     ),
-                  ),
-                  Align(
-                    alignment: AlignmentDirectional(0.0, 1.0),
-                    child: Container(
-                      width: MediaQuery.sizeOf(context).width * 1.0,
-                      height: MediaQuery.sizeOf(context).height * 0.1,
-                      decoration: BoxDecoration(),
-                      child: Align(
-                        alignment: AlignmentDirectional(0.0, 1.0),
-                        child: wrapWithModel(
-                          model: _model.bottomnavBarModel,
-                          updateCallback: () => safeSetState(() {}),
-                          child: BottomnavBarWidget(
-                            pageName: 'home',
+                  if (FFAppConstants.userStatus !=
+                      getJsonField(
+                        dashboardScreenOneAPIResponse.jsonBody,
+                        r'''$.user_active_status''',
+                      ).toString())
+                    Align(
+                      alignment: AlignmentDirectional(0.0, 1.0),
+                      child: Container(
+                        width: MediaQuery.sizeOf(context).width * 1.0,
+                        height: MediaQuery.sizeOf(context).height * 0.1,
+                        decoration: BoxDecoration(),
+                        child: Align(
+                          alignment: AlignmentDirectional(0.0, 1.0),
+                          child: wrapWithModel(
+                            model: _model.bottomnavBarModel,
+                            updateCallback: () => safeSetState(() {}),
+                            child: BottomnavBarWidget(
+                              pageName: 'home',
+                            ),
                           ),
                         ),
                       ),
                     ),
-                  ),
                   if (FFAppState().isCartShow == true)
                     Align(
                       alignment: AlignmentDirectional(0.0, 1.0),
@@ -5018,7 +5186,12 @@ class _DashboardScreenWidgetState extends State<DashboardScreenWidget> {
                             dashboardScreenOneAPIResponse.jsonBody,
                             r'''$.popup_banner''',
                           ).toString()) &&
-                      (FFAppState().isPopUpShow != false))
+                      (FFAppState().isPopUpShow != false) &&
+                      (FFAppConstants.userStatus !=
+                          getJsonField(
+                            dashboardScreenOneAPIResponse.jsonBody,
+                            r'''$.user_active_status''',
+                          ).toString()))
                     InkWell(
                       splashColor: Colors.transparent,
                       focusColor: Colors.transparent,
@@ -5999,7 +6172,12 @@ class _DashboardScreenWidgetState extends State<DashboardScreenWidget> {
                         ),
                       ),
                     ),
-                  if (FFAppState().zoneInfo == null)
+                  if ((FFAppState().zoneInfo == null) &&
+                      (FFAppConstants.userStatus !=
+                          getJsonField(
+                            dashboardScreenOneAPIResponse.jsonBody,
+                            r'''$.user_active_status''',
+                          ).toString()))
                     Container(
                       width: MediaQuery.sizeOf(context).width * 1.0,
                       height: MediaQuery.sizeOf(context).height * 1.0,
@@ -6140,17 +6318,17 @@ class _DashboardScreenWidgetState extends State<DashboardScreenWidget> {
                                                       logFirebaseEvent(
                                                           'DASHBOARD_SCREEN_ADD_ADDRESS__START_ORDE');
                                                       logFirebaseEvent(
+                                                          'Button_update_app_state');
+                                                      FFAppState().screenName =
+                                                          'homeScreen';
+                                                      safeSetState(() {});
+                                                      logFirebaseEvent(
                                                           'Button_navigate_to');
 
                                                       context.pushNamed(
                                                           AddressListScreenWidget
                                                               .routeName);
 
-                                                      logFirebaseEvent(
-                                                          'Button_update_app_state');
-                                                      FFAppState().screenName =
-                                                          'dashbaord';
-                                                      safeSetState(() {});
                                                       logFirebaseEvent(
                                                           'Button_google_analytics_event');
                                                       logFirebaseEvent(
@@ -6223,17 +6401,17 @@ class _DashboardScreenWidgetState extends State<DashboardScreenWidget> {
                                                       logFirebaseEvent(
                                                           'DASHBOARD_SCREEN_CHOOSE_ON_MAP_BTN_ON_TA');
                                                       logFirebaseEvent(
-                                                          'Button_navigate_to');
-
-                                                      context.pushNamed(
-                                                          AddressListScreenWidget
-                                                              .routeName);
-
-                                                      logFirebaseEvent(
                                                           'Button_update_app_state');
                                                       FFAppState().screenName =
                                                           'dashbaord';
                                                       safeSetState(() {});
+                                                      logFirebaseEvent(
+                                                          'Button_navigate_to');
+
+                                                      context.pushNamed(
+                                                          GoogleMapsRedirectWidget
+                                                              .routeName);
+
                                                       logFirebaseEvent(
                                                           'Button_google_analytics_event');
                                                       logFirebaseEvent(

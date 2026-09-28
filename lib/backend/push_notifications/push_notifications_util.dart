@@ -1,5 +1,3 @@
-import 'dart:io' show Platform;
-
 
 import '../../auth/firebase_auth/auth_util.dart';
 import '../cloud_functions/cloud_functions.dart';
@@ -17,20 +15,23 @@ class UserTokenInfo {
   final String fcmToken;
 }
 
-Stream<UserTokenInfo> getFcmTokenStream(String userPath) =>
-    Stream.value(!kIsWeb && (Platform.isIOS || Platform.isAndroid))
-        .where((shouldGetToken) => shouldGetToken)
-        .asyncMap<String?>(
-            (_) => FirebaseMessaging.instance.requestPermission().then(
-                  (settings) => settings.authorizationStatus ==
-                          AuthorizationStatus.authorized
-                      ? FirebaseMessaging.instance.getToken()
-                      : null,
-                ))
-        .switchMap((fcmToken) => Stream.value(fcmToken)
-            .merge(FirebaseMessaging.instance.onTokenRefresh))
-        .where((fcmToken) => fcmToken != null && fcmToken.isNotEmpty)
-        .map((token) => UserTokenInfo(userPath, token!));
+Stream<UserTokenInfo> getFcmTokenStream(String userPath) => Stream.value(
+        !kIsWeb &&
+            (defaultTargetPlatform == TargetPlatform.iOS ||
+                defaultTargetPlatform == TargetPlatform.android))
+    .where((shouldGetToken) => shouldGetToken)
+    .asyncMap<String?>((shouldRequestPermission) async {
+      final settings = shouldRequestPermission
+          ? await FirebaseMessaging.instance.requestPermission()
+          : await FirebaseMessaging.instance.getNotificationSettings();
+      return settings.authorizationStatus == AuthorizationStatus.authorized
+          ? FirebaseMessaging.instance.getToken()
+          : null;
+    })
+    .switchMap((fcmToken) =>
+        Stream.value(fcmToken).merge(FirebaseMessaging.instance.onTokenRefresh))
+    .where((fcmToken) => fcmToken != null && fcmToken.isNotEmpty)
+    .map((token) => UserTokenInfo(userPath, token!));
 
 final fcmTokenUserStream = authenticatedUserStream
     .where((user) => user != null)
@@ -43,7 +44,8 @@ final fcmTokenUserStream = authenticatedUserStream
         {
           'userDocPath': userTokenInfo.userPath,
           'fcmToken': userTokenInfo.fcmToken,
-          'deviceType': Platform.isIOS ? 'iOS' : 'Android',
+          'deviceType':
+              defaultTargetPlatform == TargetPlatform.iOS ? 'iOS' : 'Android',
         },
       ),
     );

@@ -94,6 +94,22 @@ class _SearchResultScreenWidgetState extends State<SearchResultScreenWidget> {
           );
           logFirebaseEvent('SearchResultScreen_custom_action');
           await actions.facebookEventClass(
+            FFAppState().userID,
+            FFAppState().keyword,
+            '0',
+            0.0,
+            0,
+            0.0,
+            'searchStart',
+            FFAppState().emptyJson,
+            '0',
+            '0',
+            '0',
+            '0',
+            '0',
+          );
+          logFirebaseEvent('SearchResultScreen_custom_action');
+          await actions.facebookEventClass(
             widget.utmMedium!,
             widget.placement!,
             FFAppState().userID,

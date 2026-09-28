@@ -83,6 +83,7 @@ class _QuickartsplashScreenWidgetState
                 .getCurrentLatitudeLogitude(currentUserLocationValue!, 'lng')
                 .toString(),
             userid: FFAppState().userID,
+            addressID: '',
           );
 
           if (!(_model.getZoneIDResult?.succeeded ?? true)) {
@@ -567,6 +568,23 @@ class _QuickartsplashScreenWidgetState
           },
         );
       }
+
+      logFirebaseEvent('QuickartsplashScreen_custom_action');
+      await actions.facebookEventClass(
+        isiOS ? FFAppConstants.appVersioniOS : FFAppConstants.appVersionAndroid,
+        FFAppState().userID,
+        _model.fcmTokenNew!,
+        0.0,
+        0,
+        0.0,
+        'appOpen',
+        FFAppState().emptyJson,
+        '0',
+        '0',
+        '0',
+        '0',
+        '0',
+      );
     });
 
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
@@ -642,13 +660,16 @@ class _QuickartsplashScreenWidgetState
                   ],
                 ),
               ),
-              ClipRRect(
-                borderRadius: BorderRadius.circular(8.0),
-                child: Image.network(
-                  'https://quickart.b-cdn.net/images/app-home-splash-screeneid1.gif',
-                  width: MediaQuery.sizeOf(context).width * 1.0,
-                  height: MediaQuery.sizeOf(context).height * 1.0,
-                  fit: BoxFit.fill,
+              Align(
+                alignment: AlignmentDirectional(0.0, 0.0),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(8.0),
+                  child: Image.network(
+                    'https://quickart.b-cdn.net/images/app-home-splash-screeneid1.gif',
+                    width: MediaQuery.sizeOf(context).width * 1.0,
+                    height: MediaQuery.sizeOf(context).height * 1.0,
+                    fit: BoxFit.fill,
+                  ),
                 ),
               ),
             ],

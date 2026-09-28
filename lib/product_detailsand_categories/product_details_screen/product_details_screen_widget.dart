@@ -157,6 +157,10 @@ class _ProductDetailsScreenWidgetState
                     )
                   : FFAppState().productID,
               platform: isiOS ? 'ios' : 'android',
+              zoneID: getJsonField(
+                FFAppState().zoneInfo,
+                r'''$.store_id''',
+              ).toString(),
             )))
           .future,
       builder: (context, snapshot) {
@@ -2225,6 +2229,26 @@ class _ProductDetailsScreenWidgetState
                                                                         true;
                                                                     safeSetState(
                                                                         () {});
+                                                                    logFirebaseEvent(
+                                                                        'Container_custom_action');
+                                                                    await actions
+                                                                        .facebookEventClass(
+                                                                      FFAppState()
+                                                                          .userID,
+                                                                      '0',
+                                                                      '0',
+                                                                      0.0,
+                                                                      0,
+                                                                      0.0,
+                                                                      'timeSlotView',
+                                                                      FFAppState()
+                                                                          .emptyJson,
+                                                                      '0',
+                                                                      'SubscriptionCart',
+                                                                      '0',
+                                                                      '0',
+                                                                      '0',
+                                                                    );
                                                                     logFirebaseEvent(
                                                                         'Container_backend_call');
                                                                     _model.apiResultWeek1 =
@@ -5854,6 +5878,25 @@ class _ProductDetailsScreenWidgetState
                                                                         onTap:
                                                                             () async {
                                                                           logFirebaseEvent('PRODUCT_DETAILS_SCREEN_Container_fqfwqtn');
+                                                                          logFirebaseEvent('Container_custom_action');
+                                                                          await actions.facebookEventClass(
+                                                                            FFAppState().userID,
+                                                                            _model.subscriptionDate!,
+                                                                            getJsonField(
+                                                                              timeSlotModelItem,
+                                                                              r'''$.timeslot''',
+                                                                            ).toString(),
+                                                                            0.0,
+                                                                            0,
+                                                                            0.0,
+                                                                            FFAppState().isDeliveryTimeSlotSelected != '' ? 'timeSlotChanges' : 'timeSlotSelected',
+                                                                            FFAppState().emptyJson,
+                                                                            '0',
+                                                                            'subcriptionCart',
+                                                                            '0',
+                                                                            '0',
+                                                                            '0',
+                                                                          );
                                                                           logFirebaseEvent('Container_update_app_state');
                                                                           FFAppState().isDeliveryTimeSlotSelected =
                                                                               getJsonField(
@@ -5982,7 +6025,13 @@ class _ProductDetailsScreenWidgetState
                                                                                                     r'''$.value_type''',
                                                                                                   )
                                                                                               ? 'Flat ${FFAppConstants.currancyAED}'
-                                                                                              : '',
+                                                                                              : (_model.surgeCharge ==
+                                                                                                      getJsonField(
+                                                                                                        timeSlotModelItem,
+                                                                                                        r'''$.pricing_type''',
+                                                                                                      ).toString()
+                                                                                                  ? ''
+                                                                                                  : 'Get '),
                                                                                           style: FlutterFlowTheme.of(context).bodyMedium.override(
                                                                                                 font: GoogleFonts.montserrat(
                                                                                                   fontWeight: FontWeight.w500,
@@ -6097,7 +6146,7 @@ class _ProductDetailsScreenWidgetState
                                                                                             text: TextSpan(
                                                                                               children: [
                                                                                                 TextSpan(
-                                                                                                  text: 'above ',
+                                                                                                  text: 'up to  ',
                                                                                                   style: FlutterFlowTheme.of(context).bodyMedium.override(
                                                                                                         font: GoogleFonts.montserrat(
                                                                                                           fontWeight: FontWeight.w500,

@@ -153,36 +153,36 @@ class _TrialProductListingWidgetState extends State<TrialProductListingWidget>
                           child: Row(
                             mainAxisSize: MainAxisSize.max,
                             children: [
-                              Container(
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(24.0),
-                                ),
-                                child: FlutterFlowIconButton(
-                                  borderColor: Colors.transparent,
-                                  borderRadius: 30.0,
-                                  borderWidth: 1.0,
-                                  buttonSize: 46.0,
-                                  icon: Icon(
-                                    Icons.chevron_left,
-                                    color:
-                                        FFAppConstants.appBarIconandTitleColor,
-                                    size: FFAppConstants.appBarIconFont
-                                        .toDouble(),
+                              Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    10.0, 0.0, 0.0, 0.0),
+                                child: Container(
+                                  width: 50.0,
+                                  height: 50.0,
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(25.0),
                                   ),
-                                  onPressed: () async {
-                                    logFirebaseEvent(
-                                        'TRIAL_PRODUCT_LISTING_chevron_left_ICN_O');
-                                    logFirebaseEvent('IconButton_navigate_to');
-
-                                    context.pushNamed(
-                                        TrialPackcategoriesWidget.routeName);
-
-                                    logFirebaseEvent(
-                                        'IconButton_update_app_state');
-                                    FFAppState().isCartShow = false;
-                                    safeSetState(() {});
-                                  },
+                                  child: FlutterFlowIconButton(
+                                    borderColor: Colors.transparent,
+                                    borderRadius: 40.0,
+                                    borderWidth: 1.0,
+                                    buttonSize: 50.0,
+                                    icon: Icon(
+                                      Icons.chevron_left,
+                                      color: FFAppConstants
+                                          .appBarIconandTitleColor,
+                                      size: FFAppConstants.appBarIconFont
+                                          .toDouble(),
+                                    ),
+                                    onPressed: () async {
+                                      logFirebaseEvent(
+                                          'TRIAL_PRODUCT_LISTING_chevron_left_ICN_O');
+                                      logFirebaseEvent(
+                                          'IconButton_navigate_back');
+                                      context.safePop();
+                                    },
+                                  ),
                                 ),
                               ),
                             ],
@@ -898,6 +898,10 @@ class _TrialProductListingWidgetState extends State<TrialProductListingWidget>
                                                 qty: '1',
                                                 platform:
                                                     isiOS ? 'ios' : 'android',
+                                                storeID: getJsonField(
+                                                  FFAppState().zoneInfo,
+                                                  r'''$.store_id''',
+                                                ).toString(),
                                               );
 
                                               if ((_model.apiResultcAddCart31

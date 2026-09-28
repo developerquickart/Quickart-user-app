@@ -46,6 +46,22 @@ class _DateTimeSlotBottomSheetWidgetState
       logFirebaseEvent('DateTimeSlotBottomSheet_update_component');
       _model.productJson = widget.productModel;
       safeSetState(() {});
+      logFirebaseEvent('DateTimeSlotBottomSheet_custom_action');
+      await actions.facebookEventClass(
+        FFAppState().userID,
+        '0',
+        '0',
+        0.0,
+        0,
+        0.0,
+        'timeSlotView',
+        FFAppState().emptyJson,
+        '0',
+        'dailyCart',
+        '0',
+        '0',
+        '0',
+      );
     });
 
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
@@ -417,6 +433,33 @@ class _DateTimeSlotBottomSheetWidgetState
                                               logFirebaseEvent(
                                                   'DATE_TIME_SLOT_BOTTOM_SHEET_Container_bp');
                                               logFirebaseEvent(
+                                                  'Container_custom_action');
+                                              await actions.facebookEventClass(
+                                                FFAppState().userID,
+                                                getJsonField(
+                                                  timeSlotModelItem,
+                                                  r'''$.time_slots''',
+                                                ).toString(),
+                                                getJsonField(
+                                                  timeSlotModelItem,
+                                                  r'''$.date''',
+                                                ).toString(),
+                                                0.0,
+                                                0,
+                                                0.0,
+                                                FFAppState()
+                                                                .selectedDeliveryTimeSlot !=
+                                                            ''
+                                                    ? 'timeSlotChanges'
+                                                    : 'timeSlotSelected',
+                                                FFAppState().emptyJson,
+                                                '0',
+                                                'dailyCart',
+                                                '0',
+                                                '0',
+                                                '0',
+                                              );
+                                              logFirebaseEvent(
                                                   'Container_update_app_state');
                                               FFAppState()
                                                       .selectedDeliveryTimeSlot =
@@ -678,7 +721,13 @@ class _DateTimeSlotBottomSheetWidgetState
                                                                                                       r'''$.value_type''',
                                                                                                     ).toString()
                                                                                                 ? 'Flat ${FFAppConstants.currancyAED}'
-                                                                                                : '',
+                                                                                                : (_model.surgeCharge ==
+                                                                                                        getJsonField(
+                                                                                                          timeSlotModelItem,
+                                                                                                          r'''$.pricing_type''',
+                                                                                                        ).toString()
+                                                                                                    ? ''
+                                                                                                    : 'Get '),
                                                                                             style: FlutterFlowTheme.of(context).bodyMedium.override(
                                                                                                   font: GoogleFonts.montserrat(
                                                                                                     fontWeight: FontWeight.w500,
@@ -733,6 +782,23 @@ class _DateTimeSlotBottomSheetWidgetState
                                                                                                   fontWeight: FontWeight.w500,
                                                                                                   fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
                                                                                                 ),
+                                                                                          ),
+                                                                                          TextSpan(
+                                                                                            text: getJsonField(
+                                                                                                      timeSlotModelItem,
+                                                                                                      r'''$.max_cap''',
+                                                                                                    ) !=
+                                                                                                    null
+                                                                                                ? ' up to${FFAppConstants.currancyAED}${getJsonField(
+                                                                                                    timeSlotModelItem,
+                                                                                                    r'''$.max_cap''',
+                                                                                                  ).toString()}'
+                                                                                                : '',
+                                                                                            style: TextStyle(
+                                                                                              color: Colors.white,
+                                                                                              fontWeight: FontWeight.bold,
+                                                                                              fontSize: 12.0,
+                                                                                            ),
                                                                                           )
                                                                                         ],
                                                                                         style: FlutterFlowTheme.of(context).bodyMedium.override(

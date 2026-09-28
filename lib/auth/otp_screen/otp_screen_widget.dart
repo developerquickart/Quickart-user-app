@@ -629,8 +629,13 @@ class _OtpScreenWidgetState extends State<OtpScreenWidget> {
                                           ? 'register'
                                           : 'registerrr',
                                       FFAppState().emptyJson,
-                                      ' ',
-                                      ' ',
+                                      getJsonField(
+                                        (_model.apiResultVerifyOTPbutton
+                                                ?.jsonBody ??
+                                            ''),
+                                        r'''$.data.id''',
+                                      ).toString(),
+                                      FFAppState().phoneNo,
                                       ' ',
                                       ' ',
                                       ' ',

@@ -42,6 +42,8 @@ class DashboardScreenModel extends FlutterFlowModel<DashboardScreenWidget> {
   ApiCallResponse? apiResultso;
   // Stores action output result for [Custom Action - generateReferralLink] action in DashboardScreen widget.
   String? refCodew;
+  // Stores action output result for [Custom Action - getAddressFormLatLng] action in DashboardScreen widget.
+  String? selectedAddressNew;
   // State field(s) for Carousel widget.
   CarouselSliderController? carouselController;
   int carouselCurrentIndex = 0;

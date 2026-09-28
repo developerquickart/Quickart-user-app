@@ -2784,10 +2784,10 @@ class _ProductsListViewWidgetState extends State<ProductsListViewWidget> {
                                           r'''$.product_name''',
                                         ).toString(),
                                         'remove',
-                                        getJsonField(
+                                        functions.stringToDouble(getJsonField(
                                           productModelItem,
                                           r'''$.price''',
-                                        ),
+                                        ).toString()),
                                         0,
                                         0.0,
                                         'wishList',
@@ -2840,7 +2840,8 @@ class _ProductsListViewWidgetState extends State<ProductsListViewWidget> {
                                         content: Text(
                                           FFAppConstants.internetString,
                                           style: GoogleFonts.montserrat(
-                                            color: FFAppConstants.indigoColor,
+                                            color:
+                                                FFAppConstants.blackColor0A0A0A,
                                             fontWeight: FontWeight.w500,
                                             fontSize: 12.0,
                                           ),
@@ -2940,10 +2941,11 @@ class _ProductsListViewWidgetState extends State<ProductsListViewWidget> {
                                               r'''$.product_name''',
                                             ).toString(),
                                             'add',
-                                            getJsonField(
+                                            functions
+                                                .stringToDouble(getJsonField(
                                               productModelItem,
                                               r'''$.price''',
-                                            ),
+                                            ).toString()),
                                             0,
                                             0.0,
                                             'wishList',
@@ -2977,7 +2979,7 @@ class _ProductsListViewWidgetState extends State<ProductsListViewWidget> {
                                                 ).toString(),
                                                 style: GoogleFonts.montserrat(
                                                   color: FFAppConstants
-                                                      .primaryPurpleE4D8F5,
+                                                      .blackColor0A0A0A,
                                                   fontWeight: FontWeight.w500,
                                                   fontSize: 12.0,
                                                 ),
@@ -2998,8 +3000,8 @@ class _ProductsListViewWidgetState extends State<ProductsListViewWidget> {
                                             content: Text(
                                               FFAppConstants.internetString,
                                               style: GoogleFonts.montserrat(
-                                                color:
-                                                    FFAppConstants.indigoColor,
+                                                color: FFAppConstants
+                                                    .blackColor0A0A0A,
                                                 fontWeight: FontWeight.w500,
                                                 fontSize: 12.0,
                                               ),

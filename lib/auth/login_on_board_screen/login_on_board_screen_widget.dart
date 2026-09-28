@@ -417,7 +417,12 @@ class _LoginOnBoardScreenWidgetState extends State<LoginOnBoardScreenWidget> {
                                       ).toString(),
                                       true,
                                       'yes',
-                                      '7',
+                                      getJsonField(
+                                        (_model.getZoneIDResultGuest
+                                                ?.jsonBody ??
+                                            ''),
+                                        r'''$.data.store_id''',
+                                      ).toString(),
                                       getJsonField(
                                         (_model.appinfoGuest?.jsonBody ?? ''),
                                         r'''$.data''',

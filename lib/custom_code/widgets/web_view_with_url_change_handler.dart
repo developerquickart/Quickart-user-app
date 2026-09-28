@@ -1,6 +1,7 @@
 // Automatic FlutterFlow imports
 import '/backend/backend.dart';
 import '/backend/schema/structs/index.dart';
+import '/flutter_flow/ff_builtin_enums.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/custom_code/widgets/index.dart'; // Imports other custom widgets
@@ -64,6 +65,10 @@ class _WebViewWithUrlChangeHandlerState
             FFAppState().isPaymentSuccess = true;
             widget.reloadPage();
             debugPrint('Save success detected, reloading page.');
+          } else if (url.contains("api/payment/abandon")) {
+            FFAppState().isPaymentSuccess = false;
+            widget.reloadPage();
+            debugPrint('Payment failure detected, reloading page.');
           } else if (url.contains("api/failure")) {
             FFAppState().isPaymentSuccess = false;
             widget.reloadPage();

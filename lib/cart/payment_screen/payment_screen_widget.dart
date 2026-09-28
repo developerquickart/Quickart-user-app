@@ -322,16 +322,16 @@ class _PaymentScreenWidgetState extends State<PaymentScreenWidget> {
                           logFirebaseEvent(
                               'WebViewWithUrlChangeHandler_custom_actio');
                           await actions.facebookEventClass(
-                            '0',
-                            '0',
+                            FFAppState().groupID,
+                            FFAppState().userID,
                             'product',
                             0.0,
                             0,
                             widget.mrp!,
                             'purchase',
                             FFAppState().emptyJson,
-                            '',
-                            ' ',
+                            widget.orderType,
+                            FFAppState().groupID,
                             ' ',
                             ' ',
                             ' ',
@@ -371,6 +371,23 @@ class _PaymentScreenWidgetState extends State<PaymentScreenWidget> {
                                 ],
                               );
                             },
+                          );
+                          logFirebaseEvent(
+                              'WebViewWithUrlChangeHandler_custom_actio');
+                          await actions.facebookEventClass(
+                            FFAppState().groupID,
+                            FFAppState().userID,
+                            'product',
+                            0.0,
+                            0,
+                            widget.mrp!,
+                            'paymentFailed',
+                            FFAppState().emptyJson,
+                            widget.orderType,
+                            FFAppState().groupID,
+                            ' Your payment could not be processed. Please try again or use a different payment method.',
+                            ' ',
+                            ' ',
                           );
                           logFirebaseEvent(
                               'WebViewWithUrlChangeHandler_navigate_bac');

@@ -112,9 +112,9 @@ export '/note_deeplinkflutterchanges/note_deeplinkflutterchanges_widget.dart'
 export '/product_detailsand_categories/search_product/searchby_popup_banner/searchby_popup_banner_widget.dart'
     show SearchbyPopupBannerWidget;
 export '/web_view_app/web_view_app_widget.dart' show WebViewAppWidget;
-export '/auth/quickartsplash_screen_copy/quickartsplash_screen_copy_widget.dart'
-    show QuickartsplashScreenCopyWidget;
 export '/cart/daily_cart_screen_copy/daily_cart_screen_copy_widget.dart'
     show DailyCartScreenCopyWidget;
 export '/cart/cart_subscription_screen_copy/cart_subscription_screen_copy_widget.dart'
     show CartSubscriptionScreenCopyWidget;
+export '/rating_review/rating_order_screen_copy1/rating_order_screen_copy1_widget.dart'
+    show RatingOrderScreenCopy1Widget;

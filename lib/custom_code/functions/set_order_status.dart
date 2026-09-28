@@ -12,6 +12,7 @@ import '/flutter_flow/uploaded_file.dart';
 import '/backend/backend.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '/backend/schema/structs/index.dart';
+import '/flutter_flow/ff_builtin_enums.dart';
 import '/auth/firebase_auth/auth_util.dart';
 
 String? setOrderStatus(String? orderStatus) {
@@ -35,6 +36,8 @@ String? setOrderStatus(String? orderStatus) {
     status = "Out For Delivery";
   } else if (orderStatus == "Ready For Pick Up") {
     status = "Ready For Pick Up";
+  } else if (orderStatus == "Payment_processing") {
+    status = "Payment Processing";
   } else {
     status = orderStatus;
   }

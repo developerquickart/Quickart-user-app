@@ -2257,9 +2257,6 @@ class _AddAddressScreenWidgetState extends State<AddAddressScreenWidget> {
                                                             ?.succeeded ??
                                                         true)) {
                                                       logFirebaseEvent(
-                                                          'Button_navigate_back');
-                                                      context.safePop();
-                                                      logFirebaseEvent(
                                                           'Button_update_app_state');
                                                       FFAppState()
                                                           .deletePhoneNo();
@@ -2269,6 +2266,47 @@ class _AddAddressScreenWidgetState extends State<AddAddressScreenWidget> {
                                                           .selectedMapAddress = '';
                                                       FFAppState()
                                                           .update(() {});
+                                                      logFirebaseEvent(
+                                                          'Button_custom_action');
+                                                      await actions
+                                                          .navigateToBackBtnScreen(
+                                                        context,
+                                                        'AddressListScreen',
+                                                        () async {
+                                                          logFirebaseEvent(
+                                                              '_refresh_database_request');
+                                                          safeSetState(() =>
+                                                              _model.apiRequestCompleter =
+                                                                  null);
+                                                          await _model
+                                                              .waitForApiRequestCompleted();
+                                                        },
+                                                      );
+                                                      logFirebaseEvent(
+                                                          'Button_custom_action');
+                                                      await actions
+                                                          .facebookEventClass(
+                                                        FFAppState().userID,
+                                                        getJsonField(
+                                                          (_model.apiResultAddAddress
+                                                                  ?.jsonBody ??
+                                                              ''),
+                                                          r'''$.data.address_id''',
+                                                        ).toString(),
+                                                        FFAppState()
+                                                            .selectedAddressType,
+                                                        0.0,
+                                                        0,
+                                                        0.0,
+                                                        'addAddress',
+                                                        FFAppState().emptyJson,
+                                                        '0',
+                                                        FFAppState()
+                                                            .selectedMapAddress,
+                                                        '0',
+                                                        '0',
+                                                        '0',
+                                                      );
                                                       logFirebaseEvent(
                                                           'Button_show_snack_bar');
                                                       ScaffoldMessenger.of(
@@ -2453,8 +2491,45 @@ class _AddAddressScreenWidgetState extends State<AddAddressScreenWidget> {
                                                         ),
                                                       );
                                                       logFirebaseEvent(
-                                                          'Button_navigate_back');
-                                                      context.safePop();
+                                                          'Button_custom_action');
+                                                      await actions
+                                                          .navigateToBackBtnScreen(
+                                                        context,
+                                                        'AddressListScreen',
+                                                        () async {
+                                                          logFirebaseEvent(
+                                                              '_refresh_database_request');
+                                                          safeSetState(() =>
+                                                              _model.apiRequestCompleter =
+                                                                  null);
+                                                          await _model
+                                                              .waitForApiRequestCompleted();
+                                                        },
+                                                      );
+                                                      logFirebaseEvent(
+                                                          'Button_custom_action');
+                                                      await actions
+                                                          .facebookEventClass(
+                                                        FFAppState().userID,
+                                                        getJsonField(
+                                                          FFAppState()
+                                                              .addressModel,
+                                                          r'''$.address_id''',
+                                                        ).toString(),
+                                                        FFAppState()
+                                                            .selectedAddressType,
+                                                        0.0,
+                                                        0,
+                                                        0.0,
+                                                        'editAddress',
+                                                        FFAppState().emptyJson,
+                                                        '0',
+                                                        FFAppState()
+                                                            .selectedMapAddress,
+                                                        '0',
+                                                        '0',
+                                                        '0',
+                                                      );
                                                       logFirebaseEvent(
                                                           'Button_google_analytics_event');
                                                       logFirebaseEvent(

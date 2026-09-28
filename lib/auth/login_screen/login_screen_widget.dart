@@ -460,10 +460,29 @@ class _LoginScreenWidgetState extends State<LoginScreenWidget> {
                                           fontSize: 10.0,
                                         ),
                                       ),
-                                      duration: Duration(milliseconds: 1000),
+                                      duration: Duration(milliseconds: 4500),
                                       backgroundColor:
                                           FFAppConstants.primaryPurpleE4D8F5,
                                     ),
+                                  );
+                                  logFirebaseEvent('Button_custom_action');
+                                  await actions.facebookEventClass(
+                                    'Mobile',
+                                    FFAppState().phoneNo,
+                                    getJsonField(
+                                      (_model.apiResultqrg?.jsonBody ?? ''),
+                                      r'''$.message''',
+                                    ).toString(),
+                                    0.0,
+                                    0,
+                                    0.0,
+                                    'login',
+                                    FFAppState().emptyJson,
+                                    ' ',
+                                    ' ',
+                                    ' ',
+                                    ' ',
+                                    ' ',
                                   );
                                 }
                               }
@@ -508,10 +527,29 @@ class _LoginScreenWidgetState extends State<LoginScreenWidget> {
                                         fontSize: 10.0,
                                       ),
                                     ),
-                                    duration: Duration(milliseconds: 1000),
+                                    duration: Duration(milliseconds: 3950),
                                     backgroundColor:
                                         FFAppConstants.primaryPurpleE4D8F5,
                                   ),
+                                );
+                                logFirebaseEvent('Button_custom_action');
+                                await actions.facebookEventClass(
+                                  'Mobile',
+                                  FFAppState().phoneNo,
+                                  getJsonField(
+                                    (_model.apiResultqrg?.jsonBody ?? ''),
+                                    r'''$.message''',
+                                  ).toString(),
+                                  0.0,
+                                  0,
+                                  0.0,
+                                  'login',
+                                  FFAppState().emptyJson,
+                                  ' ',
+                                  ' ',
+                                  ' ',
+                                  ' ',
+                                  ' ',
                                 );
                               }
                             }

@@ -570,6 +570,7 @@ class ProductDetailCall {
     String? userID = '',
     String? productID = '',
     String? platform = '',
+    String? zoneID = '',
   }) async {
     final baseUrl = QuickartGroup.getBaseUrl();
 
@@ -579,7 +580,8 @@ class ProductDetailCall {
   "product_id": "${productID}",
   "store_id": "${storeID}",
   "is_subscription": 1,
-  "platform": "${platform}"
+  "platform": "${platform}",
+  "zone_id": "${zoneID}"
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'ProductDetail',
@@ -977,6 +979,7 @@ class ShowwishlistCall {
     String? maxDiscount = '',
     String? deviceid = '',
     String? platform = '',
+    String? zoneID = '',
   }) async {
     final baseUrl = QuickartGroup.getBaseUrl();
 
@@ -991,8 +994,9 @@ class ShowwishlistCall {
   "min_discount": "${minDiscount}",
   "max_discount": "${maxDiscount}",
   "is_subscription": 1,
-  "device_id" : "${deviceid}",
-  "platform": "${platform}"
+  "device_id": "${deviceid}",
+  "platform": "${platform}",
+  "zone_id": "${zoneID}"
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'showwishlist',
@@ -2889,11 +2893,14 @@ class CheckoutquickorderCall {
     String? priceEffect = '',
     dynamic zoneDeliveryAddonsJson,
     dynamic zonePermanentChargesJson,
+    dynamic zoneCategoryWiseTimeslotChargesJson,
   }) async {
     final baseUrl = QuickartGroup.getBaseUrl();
 
     final zoneDeliveryAddons = _serializeJson(zoneDeliveryAddonsJson);
     final zonePermanentCharges = _serializeJson(zonePermanentChargesJson);
+    final zoneCategoryWiseTimeslotCharges =
+        _serializeJson(zoneCategoryWiseTimeslotChargesJson);
     final ffApiRequestBody = '''
 {
   "user_id": "${userid}",
@@ -2922,7 +2929,8 @@ class CheckoutquickorderCall {
   "price_effect": "${priceEffect}",
   "zone_delivery_addons": ${zoneDeliveryAddons},
   "zone_id": "${zoneID}",
-  "zone_permanent_charges": ${zonePermanentCharges}
+  "zone_permanent_charges": ${zonePermanentCharges},
+  "zone_category_wise_timeslot_charges": ${zoneCategoryWiseTimeslotCharges}
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'checkoutquickorder',
@@ -3212,11 +3220,14 @@ class PaymentCall {
     String? priceEffect = '',
     dynamic zoneDeliveryAddonsJson,
     dynamic zonePermanentChargesJson,
+    dynamic zoneCategoryWiseTimeslotChargesJson,
   }) async {
     final baseUrl = QuickartGroup.getBaseUrl();
 
     final zoneDeliveryAddons = _serializeJson(zoneDeliveryAddonsJson);
     final zonePermanentCharges = _serializeJson(zonePermanentChargesJson);
+    final zoneCategoryWiseTimeslotCharges =
+        _serializeJson(zoneCategoryWiseTimeslotChargesJson);
     final ffApiRequestBody = '''
 {
   "address_id": "${addressid}",
@@ -3247,7 +3258,8 @@ class PaymentCall {
   "pricing_type": "${pricingType}",
   "price_effect": "${priceEffect}",
   "zone_delivery_addons": ${zoneDeliveryAddons},
-  "zone_permanent_charges": ${zonePermanentCharges}
+  "zone_permanent_charges": ${zonePermanentCharges},
+  "zone_category_wise_timeslot_charges": ${zoneCategoryWiseTimeslotCharges}
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'payment',
@@ -3610,13 +3622,15 @@ class UpdateproductdetailsCall {
   Future<ApiCallResponse> call({
     String? userid = '',
     String? platform = '',
+    String? storeId = '',
   }) async {
     final baseUrl = QuickartGroup.getBaseUrl();
 
     final ffApiRequestBody = '''
 {
   "user_id": "${userid}",
-  "platform": "${platform}"
+  "platform": "${platform}",
+  "store_id": "${storeId}"
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'updateproductdetails',
@@ -4163,8 +4177,6 @@ class ShowspcatcartCall {
 {
   "user_id": "${escapeStringForJson(userid)}",
   "device_id": "${escapeStringForJson(deviceid)}",
-  "selected_date": "null",
-  "selected_time": "null",
   "platform": "${escapeStringForJson(platform)}",
   "zone_id": "${escapeStringForJson(zoneID)}",
   "store_id": "${escapeStringForJson(storeId)}"
@@ -4223,7 +4235,6 @@ class MyorderssubscriptionlistCall {
 
     final ffApiRequestBody = '''
 {
-  "store_id": "${escapeStringForJson(storeid)}",
   "user_id": "${escapeStringForJson(userid)}",
   "page": ${page},
   "perpage": ${pageper},
@@ -4475,6 +4486,7 @@ class AddtrailpackCall {
     String? userid = '',
     String? qty = '',
     String? platform = '',
+    String? storeID = '',
   }) async {
     final baseUrl = QuickartGroup.getBaseUrl();
 
@@ -4483,7 +4495,8 @@ class AddtrailpackCall {
   "trail_id": "${escapeStringForJson(trialid)}",
   "user_id": "${escapeStringForJson(userid)}",
   "qty": "${escapeStringForJson(qty)}",
-  "platform": "${escapeStringForJson(platform)}"
+  "platform": "${escapeStringForJson(platform)}",
+  "store_id": "${escapeStringForJson(storeID)}"
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'addtrailpack',
@@ -5540,6 +5553,7 @@ class GetZoneIDCall {
     String? lat = '',
     String? lng = '',
     String? userid = '',
+    String? addressID = '',
   }) async {
     final baseUrl = QuickartZoneGroup.getBaseUrl();
 
@@ -5547,7 +5561,8 @@ class GetZoneIDCall {
 {
   "lat": "${escapeStringForJson(lat)}",
   "lng": "${escapeStringForJson(lng)}",
-  "user_id": "${escapeStringForJson(userid)}"
+  "user_id": "${escapeStringForJson(userid)}",
+  "address_id": "${escapeStringForJson(addressID)}"
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'getZoneID',

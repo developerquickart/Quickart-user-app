@@ -4,6 +4,8 @@ import 'dart:io';
 import 'package:app_tracking_transparency/app_tracking_transparency.dart';
 import 'package:appsflyer_sdk/appsflyer_sdk.dart';
 import 'package:flutter/foundation.dart';
+import 'package:quic_kart/custom_code/actions/facebook_event_class.dart'
+    as actions;
 import 'package:quic_kart/flutter_flow/flutter_flow_util.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/material.dart';
@@ -171,7 +173,11 @@ class AppsflyerService {
       targetRoute = "/all-categories?$utm";
     } else if (deepLinkValue == "SignUpScreen") {
       final String? refCode = params["deep_link_sub1"]?.toString();
-      targetRoute = "/SignUpScreen?refCode=$refCode";
+      if (FFAppState().isUserLogin == true) {
+        targetRoute = "/quickartsplashScreen";
+      } else {
+        targetRoute = "/SignUpScreen?refCode=$refCode";
+      }
     } else if (deepLinkValue == "top-selling-product-list") {
       targetRoute = "/top-selling-product-list?$utm";
     } else if (deepLinkValue == "recent-selling-product-list") {
@@ -275,10 +281,25 @@ class AppsflyerService {
   }
 
   AppsflyerSdk? get sdk => _sdk;
-  void navigateFromNotification(
+  Future<void> navigateFromNotification(
     String deepLink,
     Map<String, dynamic> params,
-  ) {
+  ) async {
+    await actions.facebookEventClass(
+      deepLink,
+      params['user_id']?.toString() ?? '',
+      '',
+      0.0,
+      0,
+      0.0,
+      'pushNotificationOpened',
+      params,
+      '',
+      '',
+      '',
+      '',
+      '',
+    );
     _navigate(deepLink, params);
   }
 }

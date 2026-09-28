@@ -59,6 +59,7 @@ class _SubCategoriesScreenWidgetState extends State<SubCategoriesScreenWidget> {
   late SubCategoriesScreenModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  LatLng? currentUserLocationValue;
 
   @override
   void initState() {
@@ -577,6 +578,11 @@ class _SubCategoriesScreenWidgetState extends State<SubCategoriesScreenWidget> {
                                                   onTap: () async {
                                                     logFirebaseEvent(
                                                         'SUB_CATEGORIES_SCREEN_Container_0j2krpez');
+                                                    currentUserLocationValue =
+                                                        await getCurrentUserLocation(
+                                                            defaultLocation:
+                                                                LatLng(
+                                                                    0.0, 0.0));
                                                     logFirebaseEvent(
                                                         'Container_update_page_state');
                                                     _model.selectedSubCatID =
@@ -612,14 +618,34 @@ class _SubCategoriesScreenWidgetState extends State<SubCategoriesScreenWidget> {
                                                           FFAppState().maxPrice,
                                                       stock: FFAppState().stock,
                                                       minDiscount:
-                                                          FFAppState().minPrice,
-                                                      maxDiscount: FFAppState()
-                                                          .maxDiscount,
+                                                          _model.isFilterSelected ==
+                                                                  3
+                                                              ? '0.0'
+                                                              : FFAppState()
+                                                                  .minDiscount,
+                                                      maxDiscount:
+                                                          _model.isFilterSelected ==
+                                                                  3
+                                                              ? '99.99'
+                                                              : FFAppState()
+                                                                  .minDiscount,
                                                       sort: FFAppState().sort,
                                                       sortName:
                                                           FFAppState().sortName,
-                                                      sortPrice: FFAppState()
-                                                          .sortPrice,
+                                                      sortPrice: () {
+                                                        if (_model
+                                                                .isFilterSelected ==
+                                                            1) {
+                                                          return 'htol';
+                                                        } else if (_model
+                                                                .isFilterSelected ==
+                                                            2) {
+                                                          return 'ltoh';
+                                                        } else {
+                                                          return FFAppState()
+                                                              .sortPrice;
+                                                        }
+                                                      }(),
                                                       subCatID: 'all',
                                                       platform: isiOS
                                                           ? 'ios'
@@ -628,6 +654,16 @@ class _SubCategoriesScreenWidgetState extends State<SubCategoriesScreenWidget> {
                                                         FFAppState().zoneInfo,
                                                         r'''$.zone_id''',
                                                       ).toString(),
+                                                      lat: functions
+                                                          .getCurrentLatitudeLogitude(
+                                                              currentUserLocationValue!,
+                                                              'lat')
+                                                          .toString(),
+                                                      lng: functions
+                                                          .getCurrentLatitudeLogitude(
+                                                              currentUserLocationValue!,
+                                                              'lng')
+                                                          .toString(),
                                                     );
 
                                                     if ((_model
@@ -1689,6 +1725,7 @@ class _SubCategoriesScreenWidgetState extends State<SubCategoriesScreenWidget> {
                                                                                               child: FFButtonWidget(
                                                                                                 onPressed: () async {
                                                                                                   logFirebaseEvent('SUB_CATEGORIES_SCREEN_ADD_BTN_ON_TAP');
+                                                                                                  currentUserLocationValue = await getCurrentUserLocation(defaultLocation: LatLng(0.0, 0.0));
                                                                                                   if (functions.checkVariantFeatureCondition(productModelItem) == true) {
                                                                                                     logFirebaseEvent('Button_bottom_sheet');
                                                                                                     await showModalBottomSheet(
@@ -1751,13 +1788,27 @@ class _SubCategoriesScreenWidgetState extends State<SubCategoriesScreenWidget> {
                                                                                                           minPrice: FFAppState().minPrice,
                                                                                                           maxPrice: FFAppState().maxPrice,
                                                                                                           stock: FFAppState().stock,
-                                                                                                          minDiscount: FFAppState().minDiscount,
-                                                                                                          maxDiscount: FFAppState().maxDiscount,
+                                                                                                          minDiscount: _model.isFilterSelected == 3 ? '0.0' : FFAppState().minDiscount,
+                                                                                                          maxDiscount: _model.isFilterSelected == 3 ? '99.99' : FFAppState().minDiscount,
                                                                                                           sort: FFAppState().sort,
                                                                                                           sortName: FFAppState().sortName,
-                                                                                                          sortPrice: FFAppState().sortPrice,
+                                                                                                          sortPrice: () {
+                                                                                                            if (_model.isFilterSelected == 1) {
+                                                                                                              return 'htol';
+                                                                                                            } else if (_model.isFilterSelected == 2) {
+                                                                                                              return 'ltoh';
+                                                                                                            } else {
+                                                                                                              return FFAppState().sortPrice;
+                                                                                                            }
+                                                                                                          }(),
                                                                                                           subCatID: _model.selectedSubCatID,
                                                                                                           platform: isiOS ? 'ios' : 'android',
+                                                                                                          zoneID: getJsonField(
+                                                                                                            FFAppState().zoneInfo,
+                                                                                                            r'''$.zone_id''',
+                                                                                                          ).toString(),
+                                                                                                          lat: functions.getCurrentLatitudeLogitude(currentUserLocationValue!, 'lat').toString(),
+                                                                                                          lng: functions.getCurrentLatitudeLogitude(currentUserLocationValue!, 'lng').toString(),
                                                                                                         );
 
                                                                                                         if ((_model.apiResultbf5Copy1?.succeeded ?? true)) {
@@ -1969,6 +2020,7 @@ class _SubCategoriesScreenWidgetState extends State<SubCategoriesScreenWidget> {
                                                                                                   child: FFButtonWidget(
                                                                                                     onPressed: () async {
                                                                                                       logFirebaseEvent('SUB_CATEGORIES_SCREEN_PAGE__BTN_ON_TAP');
+                                                                                                      currentUserLocationValue = await getCurrentUserLocation(defaultLocation: LatLng(0.0, 0.0));
                                                                                                       if (functions.checkVariantFeatureCondition(productModelItem) == true) {
                                                                                                         logFirebaseEvent('Button_bottom_sheet');
                                                                                                         await showModalBottomSheet(
@@ -2041,7 +2093,7 @@ class _SubCategoriesScreenWidgetState extends State<SubCategoriesScreenWidget> {
                                                                                                               },
                                                                                                             );
                                                                                                             logFirebaseEvent('Button_backend_call');
-                                                                                                            _model.catproductlistCopy = await QuickartGroup.catproductCall.call(
+                                                                                                            _model.apiResult001 = await QuickartGroup.catproductCall.call(
                                                                                                               userid: FFAppState().userID,
                                                                                                               storeid: getJsonField(
                                                                                                                 FFAppState().zoneInfo,
@@ -2052,101 +2104,146 @@ class _SubCategoriesScreenWidgetState extends State<SubCategoriesScreenWidget> {
                                                                                                               minPrice: FFAppState().minPrice,
                                                                                                               maxPrice: FFAppState().maxPrice,
                                                                                                               stock: FFAppState().stock,
-                                                                                                              minDiscount: FFAppState().minDiscount,
-                                                                                                              maxDiscount: FFAppState().maxDiscount,
-                                                                                                              sort: FFAppState().sort,
+                                                                                                              minDiscount: _model.isFilterSelected == 3 ? '0.0' : FFAppState().minDiscount,
+                                                                                                              maxDiscount: _model.isFilterSelected == 3 ? '99.99' : FFAppState().minDiscount,
+                                                                                                              sort: () {
+                                                                                                                if (_model.isFilterSelected == 1) {
+                                                                                                                  return 'htol';
+                                                                                                                } else if (_model.isFilterSelected == 2) {
+                                                                                                                  return 'ltoh';
+                                                                                                                } else {
+                                                                                                                  return FFAppState().sortPrice;
+                                                                                                                }
+                                                                                                              }(),
                                                                                                               sortName: FFAppState().sortName,
-                                                                                                              sortPrice: FFAppState().sortPrice,
+                                                                                                              sortPrice: () {
+                                                                                                                if (_model.isFilterSelected == 1) {
+                                                                                                                  return 'htol';
+                                                                                                                } else if (_model.isFilterSelected == 2) {
+                                                                                                                  return 'ltoh';
+                                                                                                                } else {
+                                                                                                                  return FFAppState().sortPrice;
+                                                                                                                }
+                                                                                                              }(),
                                                                                                               subCatID: _model.selectedSubCatID,
                                                                                                               platform: isiOS ? 'ios' : 'android',
+                                                                                                              zoneID: getJsonField(
+                                                                                                                FFAppState().zoneInfo,
+                                                                                                                r'''$.zone_id''',
+                                                                                                              ).toString(),
+                                                                                                              lat: functions.getCurrentLatitudeLogitude(currentUserLocationValue!, 'lat').toString(),
+                                                                                                              lng: functions.getCurrentLatitudeLogitude(currentUserLocationValue!, 'lng').toString(),
                                                                                                             );
 
-                                                                                                            if ((_model.catproductlistCopy?.succeeded ?? true)) {
-                                                                                                              logFirebaseEvent('Button_update_page_state');
-                                                                                                              _model.productModelJson = getJsonField(
-                                                                                                                (_model.catproductlistCopy?.jsonBody ?? ''),
-                                                                                                                r'''$.data''',
-                                                                                                              );
-                                                                                                              safeSetState(() {});
-                                                                                                              logFirebaseEvent('Button_update_app_state');
-                                                                                                              FFAppState().isCartShow = false;
-                                                                                                              FFAppState().cartTotalCount = QuickartGroup.addToCartCall.totalItems(
-                                                                                                                (_model.addtocartremoveCopy?.jsonBody ?? ''),
-                                                                                                              )!;
-                                                                                                              FFAppState().cartSavingPrice = functions.stringToDouble(QuickartGroup.addToCartCall
-                                                                                                                  .savingPrice(
-                                                                                                                    (_model.addtocartremoveCopy?.jsonBody ?? ''),
-                                                                                                                  )!
-                                                                                                                  .toString());
-                                                                                                              FFAppState().cartTotalPrice = functions.stringToDouble(QuickartGroup.addToCartCall
-                                                                                                                  .totalPrice(
-                                                                                                                    (_model.addtocartremoveCopy?.jsonBody ?? ''),
-                                                                                                                  )!
-                                                                                                                  .toString());
-                                                                                                              FFAppState().refreshTrigger = true;
-                                                                                                              safeSetState(() {});
-                                                                                                              logFirebaseEvent('Button_google_analytics_event');
-                                                                                                              logFirebaseEvent(
-                                                                                                                'AddToCartButtonAnalytics',
-                                                                                                                parameters: {
-                                                                                                                  'VarientId': getJsonField(
+                                                                                                            if ((_model.apiResult001?.succeeded ?? true)) {
+                                                                                                              if (FFAppConstants.checkStatus ==
+                                                                                                                  getJsonField(
+                                                                                                                    (_model.apiResult001?.jsonBody ?? ''),
+                                                                                                                    r'''$.status''',
+                                                                                                                  ).toString()) {
+                                                                                                                logFirebaseEvent('Button_update_page_state');
+                                                                                                                _model.productModelJson = getJsonField(
+                                                                                                                  (_model.apiResult001?.jsonBody ?? ''),
+                                                                                                                  r'''$.data''',
+                                                                                                                );
+                                                                                                                safeSetState(() {});
+                                                                                                                logFirebaseEvent('Button_update_app_state');
+                                                                                                                FFAppState().isCartShow = false;
+                                                                                                                FFAppState().cartTotalCount = QuickartGroup.addToCartCall.totalItems(
+                                                                                                                  (_model.addtocartremoveCopy?.jsonBody ?? ''),
+                                                                                                                )!;
+                                                                                                                FFAppState().cartSavingPrice = functions.stringToDouble(QuickartGroup.addToCartCall
+                                                                                                                    .savingPrice(
+                                                                                                                      (_model.addtocartremoveCopy?.jsonBody ?? ''),
+                                                                                                                    )!
+                                                                                                                    .toString());
+                                                                                                                FFAppState().cartTotalPrice = functions.stringToDouble(QuickartGroup.addToCartCall
+                                                                                                                    .totalPrice(
+                                                                                                                      (_model.addtocartremoveCopy?.jsonBody ?? ''),
+                                                                                                                    )!
+                                                                                                                    .toString());
+                                                                                                                FFAppState().refreshTrigger = true;
+                                                                                                                safeSetState(() {});
+                                                                                                                logFirebaseEvent('Button_custom_action');
+                                                                                                                await actions.facebookEventClass(
+                                                                                                                  getJsonField(
                                                                                                                     productModelItem,
                                                                                                                     r'''$.varient_id''',
-                                                                                                                  ),
-                                                                                                                  'Quantity': getJsonField(
+                                                                                                                  ).toString(),
+                                                                                                                  getJsonField(
                                                                                                                     productModelItem,
-                                                                                                                    r'''$.cart_qty''',
-                                                                                                                  ),
-                                                                                                                },
-                                                                                                              );
-                                                                                                              logFirebaseEvent('Button_custom_action');
-                                                                                                              await actions.facebookEventClass(
-                                                                                                                getJsonField(
-                                                                                                                  productModelItem,
-                                                                                                                  r'''$.varient_id''',
-                                                                                                                ).toString(),
-                                                                                                                getJsonField(
-                                                                                                                  productModelItem,
-                                                                                                                  r'''$.product_name''',
-                                                                                                                ).toString(),
-                                                                                                                'product',
-                                                                                                                functions.stringToDouble(getJsonField(
-                                                                                                                  productModelItem,
-                                                                                                                  r'''$.price''',
-                                                                                                                ).toString()),
-                                                                                                                getJsonField(
+                                                                                                                    r'''$.product_name''',
+                                                                                                                  ).toString(),
+                                                                                                                  'product',
+                                                                                                                  functions.stringToDouble(getJsonField(
+                                                                                                                    productModelItem,
+                                                                                                                    r'''$.price''',
+                                                                                                                  ).toString()),
+                                                                                                                  getJsonField(
+                                                                                                                        productModelItem,
+                                                                                                                        r'''$.cart_qty''',
+                                                                                                                      ) -
+                                                                                                                      1,
+                                                                                                                  functions.stringToDouble(getJsonField(
+                                                                                                                    productModelItem,
+                                                                                                                    r'''$.mrp''',
+                                                                                                                  ).toString()),
+                                                                                                                  'remove',
+                                                                                                                  FFAppState().emptyJson,
+                                                                                                                  'emptyjson',
+                                                                                                                  ' ',
+                                                                                                                  ' ',
+                                                                                                                  ' ',
+                                                                                                                  ' ',
+                                                                                                                );
+                                                                                                                logFirebaseEvent('Button_google_analytics_event');
+                                                                                                                logFirebaseEvent(
+                                                                                                                  'AddToCartButtonAnalytics',
+                                                                                                                  parameters: {
+                                                                                                                    'VarientId': getJsonField(
+                                                                                                                      productModelItem,
+                                                                                                                      r'''$.varient_id''',
+                                                                                                                    ),
+                                                                                                                    'Quantity': getJsonField(
                                                                                                                       productModelItem,
                                                                                                                       r'''$.cart_qty''',
-                                                                                                                    ) -
-                                                                                                                    1,
-                                                                                                                functions.stringToDouble(getJsonField(
-                                                                                                                  productModelItem,
-                                                                                                                  r'''$.mrp''',
-                                                                                                                ).toString()),
-                                                                                                                'remove',
-                                                                                                                FFAppState().emptyJson,
-                                                                                                                'emptyjson',
-                                                                                                                ' ',
-                                                                                                                ' ',
-                                                                                                                ' ',
-                                                                                                                ' ',
-                                                                                                              );
+                                                                                                                    ),
+                                                                                                                  },
+                                                                                                                );
+                                                                                                              } else {
+                                                                                                                logFirebaseEvent('Button_show_snack_bar');
+                                                                                                                ScaffoldMessenger.of(context).showSnackBar(
+                                                                                                                  SnackBar(
+                                                                                                                    content: Text(
+                                                                                                                      QuickartGroup.catproductCall.message(
+                                                                                                                        (_model.apiResult001?.jsonBody ?? ''),
+                                                                                                                      )!,
+                                                                                                                      style: GoogleFonts.montserrat(
+                                                                                                                        color: FFAppConstants.indigoColor,
+                                                                                                                        fontWeight: FontWeight.w500,
+                                                                                                                        fontSize: 12.0,
+                                                                                                                      ),
+                                                                                                                    ),
+                                                                                                                    duration: Duration(milliseconds: 4000),
+                                                                                                                    backgroundColor: FFAppConstants.primaryPurpleE4D8F5,
+                                                                                                                  ),
+                                                                                                                );
+                                                                                                              }
                                                                                                             } else {
                                                                                                               logFirebaseEvent('Button_show_snack_bar');
                                                                                                               ScaffoldMessenger.of(context).showSnackBar(
                                                                                                                 SnackBar(
                                                                                                                   content: Text(
-                                                                                                                    getJsonField(
-                                                                                                                      (_model.addtocartremoveCopy?.jsonBody ?? ''),
-                                                                                                                      r'''$.message''',
-                                                                                                                    ).toString(),
+                                                                                                                    QuickartGroup.catproductCall.message(
+                                                                                                                      (_model.apiResult001?.jsonBody ?? ''),
+                                                                                                                    )!,
                                                                                                                     style: GoogleFonts.montserrat(
                                                                                                                       color: FFAppConstants.indigoColor,
                                                                                                                       fontWeight: FontWeight.w500,
                                                                                                                       fontSize: 12.0,
                                                                                                                     ),
                                                                                                                   ),
-                                                                                                                  duration: Duration(milliseconds: 1500),
+                                                                                                                  duration: Duration(milliseconds: 4000),
                                                                                                                   backgroundColor: FFAppConstants.primaryPurpleE4D8F5,
                                                                                                                 ),
                                                                                                               );
@@ -2263,6 +2360,7 @@ class _SubCategoriesScreenWidgetState extends State<SubCategoriesScreenWidget> {
                                                                                                     builder: (context) => FFButtonWidget(
                                                                                                       onPressed: () async {
                                                                                                         logFirebaseEvent('SUB_CATEGORIES_SCREEN_PAGE__BTN_ON_TAP');
+                                                                                                        currentUserLocationValue = await getCurrentUserLocation(defaultLocation: LatLng(0.0, 0.0));
                                                                                                         if (functions.checkVariantFeatureCondition(productModelItem) == true) {
                                                                                                           logFirebaseEvent('Button_bottom_sheet');
                                                                                                           await showModalBottomSheet(
@@ -2370,13 +2468,27 @@ class _SubCategoriesScreenWidgetState extends State<SubCategoriesScreenWidget> {
                                                                                                                   minPrice: FFAppState().minPrice,
                                                                                                                   maxPrice: FFAppState().maxPrice,
                                                                                                                   stock: FFAppState().stock,
-                                                                                                                  minDiscount: FFAppState().minDiscount,
-                                                                                                                  maxDiscount: FFAppState().maxDiscount,
+                                                                                                                  minDiscount: _model.isFilterSelected == 3 ? '0.0' : FFAppState().minDiscount,
+                                                                                                                  maxDiscount: _model.isFilterSelected == 3 ? '99.99' : FFAppState().minDiscount,
                                                                                                                   sort: FFAppState().sort,
                                                                                                                   sortName: FFAppState().sortName,
-                                                                                                                  sortPrice: FFAppState().sortPrice,
+                                                                                                                  sortPrice: () {
+                                                                                                                    if (_model.isFilterSelected == 1) {
+                                                                                                                      return 'htol';
+                                                                                                                    } else if (_model.isFilterSelected == 2) {
+                                                                                                                      return 'ltoh';
+                                                                                                                    } else {
+                                                                                                                      return FFAppState().sortPrice;
+                                                                                                                    }
+                                                                                                                  }(),
                                                                                                                   subCatID: _model.selectedSubCatID,
                                                                                                                   platform: isiOS ? 'ios' : 'android',
+                                                                                                                  zoneID: getJsonField(
+                                                                                                                    FFAppState().zoneInfo,
+                                                                                                                    r'''$.zone_id''',
+                                                                                                                  ).toString(),
+                                                                                                                  lat: functions.getCurrentLatitudeLogitude(currentUserLocationValue!, 'lat').toString(),
+                                                                                                                  lng: functions.getCurrentLatitudeLogitude(currentUserLocationValue!, 'lng').toString(),
                                                                                                                 );
 
                                                                                                                 if ((_model.apiResult0v0123?.succeeded ?? true)) {
@@ -3854,10 +3966,9 @@ class _SubCategoriesScreenWidgetState extends State<SubCategoriesScreenWidget> {
                                                                                         ScaffoldMessenger.of(context).showSnackBar(
                                                                                           SnackBar(
                                                                                             content: Text(
-                                                                                              getJsonField(
-                                                                                                (_model.apiResultCartProduct?.jsonBody ?? ''),
-                                                                                                r'''$.message''',
-                                                                                              ).toString(),
+                                                                                              QuickartGroup.catproductCall.message(
+                                                                                                (_model.apiResultCartProduct2?.jsonBody ?? ''),
+                                                                                              )!,
                                                                                               style: GoogleFonts.montserrat(
                                                                                                 color: FFAppConstants.indigoColor,
                                                                                                 fontSize: 12.0,
@@ -4191,6 +4302,7 @@ class _SubCategoriesScreenWidgetState extends State<SubCategoriesScreenWidget> {
                                                                                               child: FFButtonWidget(
                                                                                                 onPressed: () async {
                                                                                                   logFirebaseEvent('SUB_CATEGORIES_SCREEN_ADD_BTN_ON_TAP');
+                                                                                                  currentUserLocationValue = await getCurrentUserLocation(defaultLocation: LatLng(0.0, 0.0));
                                                                                                   if (functions.checkVariantFeatureCondition(productModelItem) == true) {
                                                                                                     logFirebaseEvent('Button_bottom_sheet');
                                                                                                     await showModalBottomSheet(
@@ -4253,13 +4365,27 @@ class _SubCategoriesScreenWidgetState extends State<SubCategoriesScreenWidget> {
                                                                                                           minPrice: FFAppState().minPrice,
                                                                                                           maxPrice: FFAppState().maxPrice,
                                                                                                           stock: FFAppState().stock,
-                                                                                                          minDiscount: FFAppState().minDiscount,
-                                                                                                          maxDiscount: FFAppState().maxDiscount,
+                                                                                                          minDiscount: _model.isFilterSelected == 3 ? '0.0' : FFAppState().minDiscount,
+                                                                                                          maxDiscount: _model.isFilterSelected == 3 ? '99.99' : FFAppState().minDiscount,
                                                                                                           sort: FFAppState().sort,
                                                                                                           sortName: FFAppState().sortName,
-                                                                                                          sortPrice: FFAppState().sortPrice,
+                                                                                                          sortPrice: () {
+                                                                                                            if (_model.isFilterSelected == 1) {
+                                                                                                              return 'htol';
+                                                                                                            } else if (_model.isFilterSelected == 2) {
+                                                                                                              return 'ltoh';
+                                                                                                            } else {
+                                                                                                              return FFAppState().sortPrice;
+                                                                                                            }
+                                                                                                          }(),
                                                                                                           subCatID: _model.selectedSubCatID,
                                                                                                           platform: isiOS ? 'ios' : 'android',
+                                                                                                          zoneID: getJsonField(
+                                                                                                            FFAppState().zoneInfo,
+                                                                                                            r'''$.zone_id''',
+                                                                                                          ).toString(),
+                                                                                                          lat: functions.getCurrentLatitudeLogitude(currentUserLocationValue!, 'lat').toString(),
+                                                                                                          lng: functions.getCurrentLatitudeLogitude(currentUserLocationValue!, 'lng').toString(),
                                                                                                         );
 
                                                                                                         if ((_model.apiResultbf51?.succeeded ?? true)) {
@@ -4468,6 +4594,7 @@ class _SubCategoriesScreenWidgetState extends State<SubCategoriesScreenWidget> {
                                                                                                   child: FFButtonWidget(
                                                                                                     onPressed: () async {
                                                                                                       logFirebaseEvent('SUB_CATEGORIES_SCREEN_PAGE__BTN_ON_TAP');
+                                                                                                      currentUserLocationValue = await getCurrentUserLocation(defaultLocation: LatLng(0.0, 0.0));
                                                                                                       if (functions.checkVariantFeatureCondition(productModelItem) == true) {
                                                                                                         logFirebaseEvent('Button_bottom_sheet');
                                                                                                         await showModalBottomSheet(
@@ -4551,13 +4678,27 @@ class _SubCategoriesScreenWidgetState extends State<SubCategoriesScreenWidget> {
                                                                                                               minPrice: FFAppState().minPrice,
                                                                                                               maxPrice: FFAppState().maxPrice,
                                                                                                               stock: FFAppState().stock,
-                                                                                                              minDiscount: FFAppState().minDiscount,
-                                                                                                              maxDiscount: FFAppState().maxDiscount,
+                                                                                                              minDiscount: _model.isFilterSelected == 3 ? '0.0' : FFAppState().minDiscount,
+                                                                                                              maxDiscount: _model.isFilterSelected == 3 ? '99.99' : FFAppState().minDiscount,
                                                                                                               sort: FFAppState().sort,
                                                                                                               sortName: FFAppState().sortName,
-                                                                                                              sortPrice: FFAppState().sortPrice,
+                                                                                                              sortPrice: () {
+                                                                                                                if (_model.isFilterSelected == 1) {
+                                                                                                                  return 'htol';
+                                                                                                                } else if (_model.isFilterSelected == 2) {
+                                                                                                                  return 'ltoh';
+                                                                                                                } else {
+                                                                                                                  return FFAppState().sortPrice;
+                                                                                                                }
+                                                                                                              }(),
                                                                                                               subCatID: _model.selectedSubCatID,
                                                                                                               platform: isiOS ? 'ios' : 'android',
+                                                                                                              zoneID: getJsonField(
+                                                                                                                FFAppState().zoneInfo,
+                                                                                                                r'''$.zone_id''',
+                                                                                                              ).toString(),
+                                                                                                              lat: functions.getCurrentLatitudeLogitude(currentUserLocationValue!, 'lat').toString(),
+                                                                                                              lng: functions.getCurrentLatitudeLogitude(currentUserLocationValue!, 'lng').toString(),
                                                                                                             );
 
                                                                                                             if ((_model.catproductlist222?.succeeded ?? true)) {
@@ -4760,6 +4901,7 @@ class _SubCategoriesScreenWidgetState extends State<SubCategoriesScreenWidget> {
                                                                                                     builder: (context) => FFButtonWidget(
                                                                                                       onPressed: () async {
                                                                                                         logFirebaseEvent('SUB_CATEGORIES_SCREEN_PAGE__BTN_ON_TAP');
+                                                                                                        currentUserLocationValue = await getCurrentUserLocation(defaultLocation: LatLng(0.0, 0.0));
                                                                                                         if (functions.checkVariantFeatureCondition(productModelItem) == true) {
                                                                                                           logFirebaseEvent('Button_bottom_sheet');
                                                                                                           await showModalBottomSheet(
@@ -4867,13 +5009,27 @@ class _SubCategoriesScreenWidgetState extends State<SubCategoriesScreenWidget> {
                                                                                                                   minPrice: FFAppState().minPrice,
                                                                                                                   maxPrice: FFAppState().maxPrice,
                                                                                                                   stock: FFAppState().stock,
-                                                                                                                  minDiscount: FFAppState().minDiscount,
-                                                                                                                  maxDiscount: FFAppState().maxDiscount,
+                                                                                                                  minDiscount: _model.isFilterSelected == 3 ? '0.0' : FFAppState().minDiscount,
+                                                                                                                  maxDiscount: _model.isFilterSelected == 3 ? '99.99' : FFAppState().minDiscount,
                                                                                                                   sort: FFAppState().sort,
                                                                                                                   sortName: FFAppState().sortName,
-                                                                                                                  sortPrice: FFAppState().sortPrice,
+                                                                                                                  sortPrice: () {
+                                                                                                                    if (_model.isFilterSelected == 1) {
+                                                                                                                      return 'htol';
+                                                                                                                    } else if (_model.isFilterSelected == 2) {
+                                                                                                                      return 'ltoh';
+                                                                                                                    } else {
+                                                                                                                      return FFAppState().sortPrice;
+                                                                                                                    }
+                                                                                                                  }(),
                                                                                                                   subCatID: _model.selectedSubCatID,
                                                                                                                   platform: isiOS ? 'ios' : 'android',
+                                                                                                                  zoneID: getJsonField(
+                                                                                                                    FFAppState().zoneInfo,
+                                                                                                                    r'''$.zone_id''',
+                                                                                                                  ).toString(),
+                                                                                                                  lat: functions.getCurrentLatitudeLogitude(currentUserLocationValue!, 'lat').toString(),
+                                                                                                                  lng: functions.getCurrentLatitudeLogitude(currentUserLocationValue!, 'lng').toString(),
                                                                                                                 );
 
                                                                                                                 if ((_model.apiResult0v01234?.succeeded ?? true)) {

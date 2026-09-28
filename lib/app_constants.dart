@@ -101,8 +101,8 @@ abstract class FFAppConstants {
   static const String errorMessage = 'c';
   static const String forcefullyUpdate = '0';
   static const String appVersion = '1.0.20';
-  static const String appVersioniOS = '3.1';
-  static const String appVersionAndroid = '3.1';
+  static const String appVersioniOS = '3.4';
+  static const String appVersionAndroid = '3.4';
   static const Color textFieldBorderColor = Color(4292927712);
   static const String isOrderConfirmed = 'Confirmed';
   static const String productNotFound =
@@ -148,4 +148,5 @@ abstract class FFAppConstants {
       'You can purchase only one Trail Pack at a time.';
   static const String cancelMsg =
       'Are you sure you want to go back? Your payment process will be cancelled.';
+  static const String userStatus = 'deactivate';
 }

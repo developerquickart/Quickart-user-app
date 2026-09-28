@@ -123,9 +123,8 @@ class _TrialPackcategoriesWidgetState extends State<TrialPackcategoriesWidget> {
             ),
             onPressed: () async {
               logFirebaseEvent('TRIAL_PACKCATEGORIES_chevron_left_ICN_ON');
-              logFirebaseEvent('IconButton_navigate_to');
-
-              context.goNamed(DashboardScreenWidget.routeName);
+              logFirebaseEvent('IconButton_navigate_back');
+              context.safePop();
             },
           ),
           title: InkWell(
@@ -277,6 +276,7 @@ class _TrialPackcategoriesWidgetState extends State<TrialPackcategoriesWidget> {
                                         catteeDataItem,
                                         r'''$.title''',
                                       ).toString();
+                                      FFAppState().screenName = 'trailList';
                                       safeSetState(() {});
                                       logFirebaseEvent(
                                           'Container_google_analytics_event');

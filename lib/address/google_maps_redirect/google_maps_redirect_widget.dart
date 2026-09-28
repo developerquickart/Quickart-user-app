@@ -381,6 +381,7 @@ class _GoogleMapsRedirectWidgetState extends State<GoogleMapsRedirectWidget> {
                                               _model.googleMapsCenter!, 'lng')
                                           .toString(),
                                       userid: FFAppState().userID,
+                                      addressID: 'null',
                                     );
 
                                     if ((_model.apiResultic8?.succeeded ??
@@ -793,9 +794,6 @@ class _GoogleMapsRedirectWidgetState extends State<GoogleMapsRedirectWidget> {
                                                   logFirebaseEvent(
                                                       'GOOGLE_MAPS_REDIRECT_NEXT_BTN_ON_TAP');
                                                   logFirebaseEvent(
-                                                      'Button_navigate_back');
-                                                  context.pop();
-                                                  logFirebaseEvent(
                                                       'Button_update_app_state');
                                                   FFAppState()
                                                           .isLocationVisible =
@@ -803,6 +801,43 @@ class _GoogleMapsRedirectWidgetState extends State<GoogleMapsRedirectWidget> {
                                                   FFAppState().latLang =
                                                       _model.googleMapsCenter;
                                                   safeSetState(() {});
+                                                  if ((FFAppState()
+                                                              .screenName ==
+                                                          'dashboard') &&
+                                                      (FFAppState()
+                                                              .categoryName !=
+                                                          'editAddress') &&
+                                                      (FFAppState()
+                                                              .categoryName !=
+                                                          'addAddress')) {
+                                                    logFirebaseEvent(
+                                                        'Button_update_app_state');
+                                                    FFAppState()
+                                                            .selectedMapAddress =
+                                                        _model
+                                                            .getAddressfromMap!;
+                                                    safeSetState(() {});
+                                                    logFirebaseEvent(
+                                                        'Button_custom_action');
+                                                    await actions
+                                                        .navigateToBackBtnScreen(
+                                                      context,
+                                                      'DashboardScreen',
+                                                      () async {
+                                                        logFirebaseEvent(
+                                                            '_refresh_database_request');
+                                                        safeSetState(() => _model
+                                                                .apiRequestCompleter =
+                                                            null);
+                                                        await _model
+                                                            .waitForApiRequestCompleted();
+                                                      },
+                                                    );
+                                                  } else {
+                                                    logFirebaseEvent(
+                                                        'Button_navigate_back');
+                                                    context.pop();
+                                                  }
                                                 },
                                                 text: 'Next',
                                                 options: FFButtonOptions(

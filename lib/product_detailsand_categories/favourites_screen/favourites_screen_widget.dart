@@ -13,6 +13,7 @@ import '/index.dart';
 import 'dart:async';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -41,6 +42,27 @@ class _FavouritesScreenWidgetState extends State<FavouritesScreenWidget> {
 
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'favouritesScreen'});
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      logFirebaseEvent('FAVOURITES_SCREEN_favouritesScreen_ON_IN');
+      logFirebaseEvent('favouritesScreen_custom_action');
+      await actions.facebookEventClass(
+        FFAppState().userID,
+        '0',
+        '0',
+        0.0,
+        0,
+        0.0,
+        'wishlistViewed',
+        FFAppState().emptyJson,
+        '0',
+        '0',
+        '0',
+        '0',
+        '0',
+      );
+    });
+
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
@@ -140,6 +162,10 @@ class _FavouritesScreenWidgetState extends State<FavouritesScreenWidget> {
                                   maxDiscount: FFAppState().maxDiscount,
                                   deviceid: FFAppState().deviceID,
                                   platform: isiOS ? 'ios' : 'android',
+                                  zoneID: getJsonField(
+                                    FFAppState().zoneInfo,
+                                    r'''$.zone_id''',
+                                  ).toString(),
                                 )))
                               .future,
                           builder: (context, snapshot) {

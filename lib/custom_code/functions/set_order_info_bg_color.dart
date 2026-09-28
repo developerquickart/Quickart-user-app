@@ -12,6 +12,7 @@ import '/flutter_flow/uploaded_file.dart';
 import '/backend/backend.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '/backend/schema/structs/index.dart';
+import '/flutter_flow/ff_builtin_enums.dart';
 import '/auth/firebase_auth/auth_util.dart';
 
 Color setOrderInfoBgColor(String orderStatus) {
@@ -32,6 +33,8 @@ Color setOrderInfoBgColor(String orderStatus) {
   } else if (orderStatus == "Ready For Pick Up") {
     color = Color(0xFFFF7E38);
   } else if (orderStatus == "Confirmed") {
+    color = Color(0xFFFF7E38);
+  } else if (orderStatus == "Payment_processing") {
     color = Color(0xFFFF7E38);
   } else {
     color = Color(0xFFee8b60);
