@@ -81,7 +81,7 @@ class _TopCategoryWidgetWidgetState extends State<TopCategoryWidgetWidget> {
           'category',
           FFAppState().emptyJson,
           'c',
-          ' ',
+          FFAppState().userID,
           ' ',
           ' ',
           ' ',

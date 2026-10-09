@@ -8384,7 +8384,15 @@ class _CartSubscriptionScreenCopyWidgetState
                                                                                         safeSetState(() {});
                                                                                         logFirebaseEvent('PaymentContainer_navigate_to');
 
-                                                                                        context.pushNamed(OrderSuccessFailScreenWidget.routeName);
+                                                                                        context.pushNamed(
+                                                                                          OrderSuccessFailScreenWidget.routeName,
+                                                                                          queryParameters: {
+                                                                                            'groupID': serializeParam(
+                                                                                              '0',
+                                                                                              ParamType.String,
+                                                                                            ),
+                                                                                          }.withoutNulls,
+                                                                                        );
 
                                                                                         logFirebaseEvent('PaymentContainer_update_app_state');
                                                                                         FFAppState().screenName = 'subscription';

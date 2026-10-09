@@ -4,8 +4,8 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/custom_functions.dart' as functions;
-import '/index.dart';
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -105,20 +105,16 @@ class _SubscriptionOrderProductsInfoWidgetState
                 ),
                 onPressed: () async {
                   logFirebaseEvent('SUBSCRIPTION_ORDER_PRODUCTS_INFO_arrow_b');
-                  logFirebaseEvent('IconButton_navigate_to');
-
-                  context.goNamed(
-                    SubscriptionOrderProductsWidget.routeName,
-                    queryParameters: {
-                      'orderDate': serializeParam(
-                        widget.orderDate,
-                        ParamType.String,
-                      ),
-                      'orderPrice': serializeParam(
-                        widget.orderPrice,
-                        ParamType.String,
-                      ),
-                    }.withoutNulls,
+                  logFirebaseEvent('IconButton_custom_action');
+                  await actions.navigrateToSubscriptionOrder(
+                    context,
+                    () async {
+                      logFirebaseEvent('_refresh_database_request');
+                      safeSetState(() => _model.apiRequestCompleter = null);
+                      await _model.waitForApiRequestCompleted();
+                    },
+                    widget.orderDate!,
+                    widget.orderPrice!,
                   );
                 },
               ),
@@ -321,21 +317,20 @@ class _SubscriptionOrderProductsInfoWidgetState
                                     onTap: () async {
                                       logFirebaseEvent(
                                           'SUBSCRIPTION_ORDER_PRODUCTS_INFO_Icon_yp');
-                                      logFirebaseEvent('Icon_navigate_to');
-
-                                      context.goNamed(
-                                        SubscriptionOrderProductsWidget
-                                            .routeName,
-                                        queryParameters: {
-                                          'orderDate': serializeParam(
-                                            widget.orderDate,
-                                            ParamType.String,
-                                          ),
-                                          'orderPrice': serializeParam(
-                                            widget.orderPrice,
-                                            ParamType.String,
-                                          ),
-                                        }.withoutNulls,
+                                      logFirebaseEvent('Icon_custom_action');
+                                      await actions
+                                          .navigrateToSubscriptionOrder(
+                                        context,
+                                        () async {
+                                          logFirebaseEvent(
+                                              '_refresh_database_request');
+                                          safeSetState(() => _model
+                                              .apiRequestCompleter = null);
+                                          await _model
+                                              .waitForApiRequestCompleted();
+                                        },
+                                        widget.orderDate!,
+                                        widget.orderPrice!,
                                       );
                                     },
                                     child: Icon(
@@ -520,6 +515,40 @@ class _SubscriptionOrderProductsInfoWidgetState
                                                                         .apiResultOrderPause1
                                                                         ?.succeeded ??
                                                                     true)) {
+                                                                  logFirebaseEvent(
+                                                                      'Container_custom_action');
+                                                                  await actions
+                                                                      .facebookEventClass(
+                                                                    getJsonField(
+                                                                      subscriptionDetailsItem,
+                                                                      r'''$.subscription_id''',
+                                                                    ).toString(),
+                                                                    getJsonField(
+                                                                      subscriptionDetailsItem,
+                                                                      r'''$.cart_id''',
+                                                                    ).toString(),
+                                                                    getJsonField(
+                                                                      subscriptionDetailsItem,
+                                                                      r'''$.store_order_id''',
+                                                                    ).toString(),
+                                                                    0.0,
+                                                                    0,
+                                                                    0.0,
+                                                                    'subscriptionPause',
+                                                                    FFAppState()
+                                                                        .emptyJson,
+                                                                    dateTimeFormat(
+                                                                        "yMMMd",
+                                                                        getCurrentTimestamp),
+                                                                    FFAppState()
+                                                                        .userID,
+                                                                    getJsonField(
+                                                                      subscriptionDetailsItem,
+                                                                      r'''$.delivery_date''',
+                                                                    ).toString(),
+                                                                    '0',
+                                                                    '0',
+                                                                  );
                                                                   logFirebaseEvent(
                                                                       'Container_refresh_database_request');
                                                                   safeSetState(() =>
@@ -1605,6 +1634,23 @@ class _SubscriptionOrderProductsInfoWidgetState
                                                 .apiRequestCompleter = null);
                                             await _model
                                                 .waitForApiRequestCompleted();
+                                            logFirebaseEvent(
+                                                'Button_custom_action');
+                                            await actions.facebookEventClass(
+                                              _model.subscriptionId!,
+                                              _model.subscriptionCartId!,
+                                              _model.orderTimeSlot!,
+                                              0.0,
+                                              0,
+                                              0.0,
+                                              'subscriptionResume',
+                                              FFAppState().emptyJson,
+                                              _model.orderTimeSlot,
+                                              FFAppState().userID,
+                                              '0',
+                                              '0',
+                                              '0',
+                                            );
                                             logFirebaseEvent(
                                                 'Button_wait__delay');
                                             await Future.delayed(

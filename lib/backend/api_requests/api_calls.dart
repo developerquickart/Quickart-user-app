@@ -13,7 +13,7 @@ const _kPrivateApiFunctionName = 'ffPrivateApiCall';
 
 class QuickartGroup {
   static String getBaseUrl() =>
-      'https://zoneapi-production.up.railway.app/testnodejsapp/';
+      'https://web-production-31cac.up.railway.app/testnodejsapp/';
   static Map<String, String> headers = {};
   static LoginCall loginCall = LoginCall();
   static VerifyOTPCall verifyOTPCall = VerifyOTPCall();
@@ -160,12 +160,12 @@ class LoginCall {
 
     final ffApiRequestBody = '''
 {
-  "user_phone": "${userPhone}",
-  "country_code": "${countryCode}",
+  "user_phone": ${userPhone == null ? 'null' : '"${userPhone}"'},
+  "country_code": ${countryCode == null ? 'null' : '"${countryCode}"'},
   "is_whatapp_msg_unable": ${isWhatappMsgUnable},
   "is_terms_cond_unable": ${isTermsCondUnable},
-  "dial_code": "${dialCode}",
-  "platform": "${platform}"
+  "dial_code": ${dialCode == null ? 'null' : '"${dialCode}"'},
+  "platform": ${platform == null ? 'null' : '"${platform}"'}
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'login',
@@ -212,17 +212,17 @@ class VerifyOTPCall {
 
     final ffApiRequestBody = '''
 {
-  "user_phone": "${phoneNo}",
-  "country_code": "${countryCode}",
-  "otp": "${otp}",
-  "user_email": "${email}",
-  "name": "${name}",
-  "referral_code": "${referralCode}",
+  "user_phone": ${phoneNo == null ? 'null' : '"${phoneNo}"'},
+  "country_code": ${countryCode == null ? 'null' : '"${countryCode}"'},
+  "otp": ${otp == null ? 'null' : '"${otp}"'},
+  "user_email": ${email == null ? 'null' : '"${email}"'},
+  "name": ${name == null ? 'null' : '"${name}"'},
+  "referral_code": ${referralCode == null ? 'null' : '"${referralCode}"'},
   "is_terms_cond_unable": true,
-  "actual_device_id": "${deviceID}",
+  "actual_device_id": ${deviceID == null ? 'null' : '"${deviceID}"'},
   "is_whatapp_msg_unable": "1",
-  "uuid": "${uuid}",
-  "platform": "${platform}"
+  "uuid": ${uuid == null ? 'null' : '"${uuid}"'},
+  "platform": ${platform == null ? 'null' : '"${platform}"'}
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'Verify OTP',
@@ -280,18 +280,18 @@ class RegisterDetailCall {
 
     final ffApiRequestBody = '''
 {
-  "user_phone": "${phoneNo}",
-  "country_code": "${countryCode}",
-  "user_email": "${email}",
-  "name": "${name}",
-  "referral_code": "${referralCode}",
+  "user_phone": ${phoneNo == null ? 'null' : '"${phoneNo}"'},
+  "country_code": ${countryCode == null ? 'null' : '"${countryCode}"'},
+  "user_email": ${email == null ? 'null' : '"${email}"'},
+  "name": ${name == null ? 'null' : '"${name}"'},
+  "referral_code": ${referralCode == null ? 'null' : '"${referralCode}"'},
   "is_terms_cond_unable": ${termsandcondion},
   "is_whatapp_msg_unable": ${whatsApp},
-  "dial_code": "${dialCode}",
-  "actual_device_id": "${deviceid}",
-  "device_id": "${fcmToken}",
-  "uuid": "${uuid}",
-  "platform": "${platform}"
+  "dial_code": ${dialCode == null ? 'null' : '"${dialCode}"'},
+  "actual_device_id": ${deviceid == null ? 'null' : '"${deviceid}"'},
+  "device_id": ${fcmToken == null ? 'null' : '"${fcmToken}"'},
+  "uuid": ${uuid == null ? 'null' : '"${uuid}"'},
+  "platform": ${platform == null ? 'null' : '"${platform}"'}
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'Register Detail',
@@ -332,12 +332,12 @@ class OneAPICall {
 
     final ffApiRequestBody = '''
 {
-  "store_id": "${storeID}",
-  "user_id": "${userID}",
+  "store_id": ${storeID == null ? 'null' : '"${storeID}"'},
+  "user_id": ${userID == null ? 'null' : '"${userID}"'},
   "is_subscription": 1,
-  "device_id": "${deviceID}",
-  "platform": "${platform}",
-  "zone_id": "${zoneID}"
+  "device_id": ${deviceID == null ? 'null' : '"${deviceID}"'},
+  "platform": ${platform == null ? 'null' : '"${platform}"'},
+  "zone_id": ${zoneID == null ? 'null' : '"${zoneID}"'}
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'oneAPI',
@@ -444,13 +444,13 @@ class CateeCall {
 
     final ffApiRequestBody = '''
 {
-  "store_id": "${storeID}",
-  "byname": "${latest}",
-  "latest": "${byname}",
-  "platform": "${platform}",
-  "zone_id": "${zoneID}",
-  "lat": "${lat}",
-  "lng": "${lng}"
+  "store_id": ${storeID == null ? 'null' : '"${storeID}"'},
+  "byname": ${latest == null ? 'null' : '"${latest}"'},
+  "latest": ${byname == null ? 'null' : '"${byname}"'},
+  "platform": ${platform == null ? 'null' : '"${platform}"'},
+  "zone_id": ${zoneID == null ? 'null' : '"${zoneID}"'},
+  "lat": ${lat == null ? 'null' : '"${lat}"'},
+  "lng": ${lng == null ? 'null' : '"${lng}"'}
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'Catee',
@@ -494,8 +494,8 @@ class MyOrdersCall {
 
     final ffApiRequestBody = '''
 {
-  "user_id": "${userID}",
-  "platform": "${platform}"
+  "user_id": ${userID == null ? 'null' : '"${userID}"'},
+  "platform": ${platform == null ? 'null' : '"${platform}"'}
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'myOrders',
@@ -536,10 +536,10 @@ class ResendOTPCall {
 
     final ffApiRequestBody = '''
 {
-  "user_phone": "${phonoNo}",
-  "country_code": "${countryCode}",
-  "isotptype": "${otpType}",
-  "platform": "${platform}"
+  "user_phone": ${phonoNo == null ? 'null' : '"${phonoNo}"'},
+  "country_code": ${countryCode == null ? 'null' : '"${countryCode}"'},
+  "isotptype": ${otpType == null ? 'null' : '"${otpType}"'},
+  "platform": ${platform == null ? 'null' : '"${platform}"'}
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'resendOTP',
@@ -576,12 +576,12 @@ class ProductDetailCall {
 
     final ffApiRequestBody = '''
 {
-  "user_id": "${userID}",
-  "product_id": "${productID}",
-  "store_id": "${storeID}",
+  "user_id": ${userID == null ? 'null' : '"${userID}"'},
+  "product_id": ${productID == null ? 'null' : '"${productID}"'},
+  "store_id": ${storeID == null ? 'null' : '"${storeID}"'},
   "is_subscription": 1,
-  "platform": "${platform}",
-  "zone_id": "${zoneID}"
+  "platform": ${platform == null ? 'null' : '"${platform}"'},
+  "zone_id": ${zoneID == null ? 'null' : '"${zoneID}"'}
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'ProductDetail',
@@ -638,9 +638,9 @@ class OrderDetailAPICall {
 
     final ffApiRequestBody = '''
 {
-  "user_id": "${userID}",
-  "group_id": "${groupid}",
-  "platform": "${platform}"
+  "user_id": ${userID == null ? 'null' : '"${userID}"'},
+  "group_id": ${groupid == null ? 'null' : '"${groupid}"'},
+  "platform": ${platform == null ? 'null' : '"${platform}"'}
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'OrderDetailAPI',
@@ -686,11 +686,11 @@ class AddremwishlistCall {
 
     final ffApiRequestBody = '''
 {
-  "user_id": "${userid}",
-  "store_id": "${storeID}",
-  "varient_id": "${varientID}",
-  "device_id": "${deviceid}",
-  "platform": "${platform}"
+  "user_id": ${userid == null ? 'null' : '"${userid}"'},
+  "store_id": ${storeID == null ? 'null' : '"${storeID}"'},
+  "varient_id": ${varientID == null ? 'null' : '"${varientID}"'},
+  "device_id": ${deviceid == null ? 'null' : '"${deviceid}"'},
+  "platform": ${platform == null ? 'null' : '"${platform}"'}
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'addremwishlist',
@@ -745,25 +745,25 @@ class TopsellingCall {
 
     final ffApiRequestBody = '''
 {
-  "store_id": "${storeid}",
-  "user_id": "${userid}",
-  "byname": "${byname}",
-  "min_price": "${minPrice}",
-  "max_price": "${maxPrice}",
-  "stock": "${stock}",
-  "min_discount": "${minDiscount}",
-  "max_discount": "${maxDiscount}",
-  "sort": "${sort}",
-  "sortname": "${sortName}",
-  "sortprice": "${sortPrice}",
-  "cat_id": "${catId}",
-  "sub_cat_id": "${subCatId}",
+  "store_id": ${storeid == null ? 'null' : '"${storeid}"'},
+  "user_id": ${userid == null ? 'null' : '"${userid}"'},
+  "byname": ${byname == null ? 'null' : '"${byname}"'},
+  "min_price": ${minPrice == null ? 'null' : '"${minPrice}"'},
+  "max_price": ${maxPrice == null ? 'null' : '"${maxPrice}"'},
+  "stock": ${stock == null ? 'null' : '"${stock}"'},
+  "min_discount": ${minDiscount == null ? 'null' : '"${minDiscount}"'},
+  "max_discount": ${maxDiscount == null ? 'null' : '"${maxDiscount}"'},
+  "sort": ${sort == null ? 'null' : '"${sort}"'},
+  "sortname": ${sortName == null ? 'null' : '"${sortName}"'},
+  "sortprice": ${sortPrice == null ? 'null' : '"${sortPrice}"'},
+  "cat_id": ${catId == null ? 'null' : '"${catId}"'},
+  "sub_cat_id": ${subCatId == null ? 'null' : '"${subCatId}"'},
   "page": ${page},
   "perpage": ${perpage},
-  "platform": "${platform}",
-  "zone_id": "${zoneid}",
-  "lat": "${lat}",
-  "lng": "${lng}"
+  "platform": ${platform == null ? 'null' : '"${platform}"'},
+  "zone_id": ${zoneid == null ? 'null' : '"${zoneid}"'},
+  "lat": ${lat == null ? 'null' : '"${lat}"'},
+  "lng": ${lng == null ? 'null' : '"${lng}"'}
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'topselling',
@@ -819,25 +819,25 @@ class RecentsellingCall {
 
     final ffApiRequestBody = '''
 {
-  "store_id": "${storeid}",
-  "user_id": "${userid}",
-  "byname": "${byname}",
-  "min_price": "${minPrice}",
-  "max_price": "${maxPrice}",
-  "stock": "${stock}",
-  "min_discount": "${minDiscount}",
-  "max_discount": "${maxDiscount}",
-  "sort": "${sort}",
-  "sortname": "${sortName}",
-  "sortprice": "${sortPrice}",
-  "cat_id": "${catId}",
-  "sub_cat_id": "${subCatId}",
+  "store_id": ${storeid == null ? 'null' : '"${storeid}"'},
+  "user_id": ${userid == null ? 'null' : '"${userid}"'},
+  "byname": ${byname == null ? 'null' : '"${byname}"'},
+  "min_price": ${minPrice == null ? 'null' : '"${minPrice}"'},
+  "max_price": ${maxPrice == null ? 'null' : '"${maxPrice}"'},
+  "stock": ${stock == null ? 'null' : '"${stock}"'},
+  "min_discount": ${minDiscount == null ? 'null' : '"${minDiscount}"'},
+  "max_discount": ${maxDiscount == null ? 'null' : '"${maxDiscount}"'},
+  "sort": ${sort == null ? 'null' : '"${sort}"'},
+  "sortname": ${sortName == null ? 'null' : '"${sortName}"'},
+  "sortprice": ${sortPrice == null ? 'null' : '"${sortPrice}"'},
+  "cat_id": ${catId == null ? 'null' : '"${catId}"'},
+  "sub_cat_id": ${subCatId == null ? 'null' : '"${subCatId}"'},
   "page": ${page},
   "perpage": ${pageper},
-  "platform": "${platform}",
-  "zone_id": "${zoneid}",
-  "lat": "${lat}",
-  "lng": "${lng}"
+  "platform": ${platform == null ? 'null' : '"${platform}"'},
+  "zone_id": ${zoneid == null ? 'null' : '"${zoneid}"'},
+  "lat": ${lat == null ? 'null' : '"${lat}"'},
+  "lng": ${lng == null ? 'null' : '"${lng}"'}
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'recentselling',
@@ -893,25 +893,25 @@ class AdditionalCatSearchCall {
 
     final ffApiRequestBody = '''
 {
-  "store_id": "${storeid}",
-  "user_id": "${userid}",
-  "byname": "${byName}",
-  "min_price": "${minPrice}",
-  "max_price": "${maxPrice}",
-  "stock": "${stock}",
-  "min_discount": "${minDiscount}",
-  "max_discount": "${maxDiscount}",
-  "sort": "${sort}",
-  "sortname": "${sortName}",
-  "sortprice": "${sortPrice}",
-  "cat_id": "${catId}",
-  "sub_cat_id": "${subCatId}",
+  "store_id": ${storeid == null ? 'null' : '"${storeid}"'},
+  "user_id": ${userid == null ? 'null' : '"${userid}"'},
+  "byname": ${byName == null ? 'null' : '"${byName}"'},
+  "min_price": ${minPrice == null ? 'null' : '"${minPrice}"'},
+  "max_price": ${maxPrice == null ? 'null' : '"${maxPrice}"'},
+  "stock": ${stock == null ? 'null' : '"${stock}"'},
+  "min_discount": ${minDiscount == null ? 'null' : '"${minDiscount}"'},
+  "max_discount": ${maxDiscount == null ? 'null' : '"${maxDiscount}"'},
+  "sort": ${sort == null ? 'null' : '"${sort}"'},
+  "sortname": ${sortName == null ? 'null' : '"${sortName}"'},
+  "sortprice": ${sortPrice == null ? 'null' : '"${sortPrice}"'},
+  "cat_id": ${catId == null ? 'null' : '"${catId}"'},
+  "sub_cat_id": ${subCatId == null ? 'null' : '"${subCatId}"'},
   "page": ${page},
   "perpage": ${perpage},
-  "platform": "${platform}",
-  "zone_id": "${zoneid}",
-  "lat": "${lat}",
-  "lng": "${lng}"
+  "platform": ${platform == null ? 'null' : '"${platform}"'},
+  "zone_id": ${zoneid == null ? 'null' : '"${zoneid}"'},
+  "lat": ${lat == null ? 'null' : '"${lat}"'},
+  "lng": ${lng == null ? 'null' : '"${lng}"'}
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'additionalCatSearch',
@@ -985,18 +985,18 @@ class ShowwishlistCall {
 
     final ffApiRequestBody = '''
 {
-  "store_id": "${storeid}",
-  "user_id": "${userid}",
-  "byname": "${byname}",
-  "min_price": "${minPrice}",
-  "max_price": "${maxPrice}",
-  "stock": "${stock}",
-  "min_discount": "${minDiscount}",
-  "max_discount": "${maxDiscount}",
+  "store_id": ${storeid == null ? 'null' : '"${storeid}"'},
+  "user_id": ${userid == null ? 'null' : '"${userid}"'},
+  "byname": ${byname == null ? 'null' : '"${byname}"'},
+  "min_price": ${minPrice == null ? 'null' : '"${minPrice}"'},
+  "max_price": ${maxPrice == null ? 'null' : '"${maxPrice}"'},
+  "stock": ${stock == null ? 'null' : '"${stock}"'},
+  "min_discount": ${minDiscount == null ? 'null' : '"${minDiscount}"'},
+  "max_discount": ${maxDiscount == null ? 'null' : '"${maxDiscount}"'},
   "is_subscription": 1,
-  "device_id": "${deviceid}",
-  "platform": "${platform}",
-  "zone_id": "${zoneID}"
+  "device_id": ${deviceid == null ? 'null' : '"${deviceid}"'},
+  "platform": ${platform == null ? 'null' : '"${platform}"'},
+  "zone_id": ${zoneID == null ? 'null' : '"${zoneID}"'}
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'showwishlist',
@@ -1064,10 +1064,10 @@ class UserdeactivateCall {
 
     final ffApiRequestBody = '''
 {
-  "user_id": "${userid}",
+  "user_id": ${userid == null ? 'null' : '"${userid}"'},
   "deactivate_by": "Cuatomer",
   "activate_deactivate_status": "deactivate",
-  "platform": "${platform}"
+  "platform": ${platform == null ? 'null' : '"${platform}"'}
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'userdeactivate',
@@ -1119,26 +1119,26 @@ class SearchbystoreproductCall {
 
     final ffApiRequestBody = '''
 {
-  "user_id": "${userid}",
-  "store_id": "${storeid}",
-  "keyword": "${keyword}",
-  "byname": "${byName}",
-  "min_price": "${minPrice}",
-  "max_price": "${maxPrice}",
-  "stock": "${stock}",
-  "min_discount": "${minDiscount}",
-  "max_discount": "${maxDiscount}",
-  "sort": "${sort}",
-  "sortname": "${sortName}",
-  "sortprice": "${sortPrice}",
-  "cat_id": "${catId}",
-  "sub_cat_id": "${subCatId}",
-  "device_id": "${deviceid}",
-  "min_rating": "${minRating}",
-  "max_rating": "${maxRating}",
+  "user_id": ${userid == null ? 'null' : '"${userid}"'},
+  "store_id": ${storeid == null ? 'null' : '"${storeid}"'},
+  "keyword": ${keyword == null ? 'null' : '"${keyword}"'},
+  "byname": ${byName == null ? 'null' : '"${byName}"'},
+  "min_price": ${minPrice == null ? 'null' : '"${minPrice}"'},
+  "max_price": ${maxPrice == null ? 'null' : '"${maxPrice}"'},
+  "stock": ${stock == null ? 'null' : '"${stock}"'},
+  "min_discount": ${minDiscount == null ? 'null' : '"${minDiscount}"'},
+  "max_discount": ${maxDiscount == null ? 'null' : '"${maxDiscount}"'},
+  "sort": ${sort == null ? 'null' : '"${sort}"'},
+  "sortname": ${sortName == null ? 'null' : '"${sortName}"'},
+  "sortprice": ${sortPrice == null ? 'null' : '"${sortPrice}"'},
+  "cat_id": ${catId == null ? 'null' : '"${catId}"'},
+  "sub_cat_id": ${subCatId == null ? 'null' : '"${subCatId}"'},
+  "device_id": ${deviceid == null ? 'null' : '"${deviceid}"'},
+  "min_rating": ${minRating == null ? 'null' : '"${minRating}"'},
+  "max_rating": ${maxRating == null ? 'null' : '"${maxRating}"'},
   "perpage": ${perpage},
   "page": ${page},
-  "platform": "${platform}"
+  "platform": ${platform == null ? 'null' : '"${platform}"'}
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'searchbystoreproduct',
@@ -1177,8 +1177,8 @@ class RecentsearchCall {
 
     final ffApiRequestBody = '''
 {
-  "user_id": "${userid}",
-  "platform": "${platform}"
+  "user_id": ${userid == null ? 'null' : '"${userid}"'},
+  "platform": ${platform == null ? 'null' : '"${platform}"'}
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'recentsearch',
@@ -1218,9 +1218,9 @@ class TrensearchproductsCall {
 
     final ffApiRequestBody = '''
 {
-  "store_id": "${storeID}",
-  "user_id":"${userid}",
-  "platform": "${platform}"
+  "store_id": ${storeID == null ? 'null' : '"${storeID}"'},
+  "user_id":${userid == null ? 'null' : '"${userid}"'},
+  "platform": ${platform == null ? 'null' : '"${platform}"'}
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'trensearchproducts',
@@ -1263,12 +1263,12 @@ class SubcateeCall {
 
     final ffApiRequestBody = '''
 {
-  "store_id": "${storeid}",
-  "cat_id": "${catid}",
-  "platform": "${platform}",
-  "zone_id": "${zoneID}",
-  "lat": "${lat}",
-  "lng": "${lng}"
+  "store_id": ${storeid == null ? 'null' : '"${storeid}"'},
+  "cat_id": ${catid == null ? 'null' : '"${catid}"'},
+  "platform": ${platform == null ? 'null' : '"${platform}"'},
+  "zone_id": ${zoneID == null ? 'null' : '"${zoneID}"'},
+  "lat": ${lat == null ? 'null' : '"${lat}"'},
+  "lng": ${lng == null ? 'null' : '"${lng}"'}
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'subcatee',
@@ -1329,16 +1329,16 @@ class RepeatordersCall {
 
     final ffApiRequestBody = '''
 {
-  "user_id": "${userid}",
-  "store_id": "${storeid}",
-  "device_id": "${deviceID}",
-  "platform": "${platform}",
-  "min_discount": "${minDiscount}",
-  "max_discount": "${maxDiscount}",
-  "sortprice": "${sortPrice}",
-  "zone_id": "${zoneID}",
-  "lat": "${lat}",
-  "lng": "${lng}"
+  "user_id": ${userid == null ? 'null' : '"${userid}"'},
+  "store_id": ${storeid == null ? 'null' : '"${storeid}"'},
+  "device_id": ${deviceID == null ? 'null' : '"${deviceID}"'},
+  "platform": ${platform == null ? 'null' : '"${platform}"'},
+  "min_discount": ${minDiscount == null ? 'null' : '"${minDiscount}"'},
+  "max_discount": ${maxDiscount == null ? 'null' : '"${maxDiscount}"'},
+  "sortprice": ${sortPrice == null ? 'null' : '"${sortPrice}"'},
+  "zone_id": ${zoneID == null ? 'null' : '"${zoneID}"'},
+  "lat": ${lat == null ? 'null' : '"${lat}"'},
+  "lng": ${lng == null ? 'null' : '"${lng}"'}
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'repeatorders',
@@ -1380,12 +1380,12 @@ class AppinfoCall {
 
     final ffApiRequestBody = '''
 {
-  "user_id": "${userid}",
-  "platform": "${platform}",
+  "user_id": ${userid == null ? 'null' : '"${userid}"'},
+  "platform": ${platform == null ? 'null' : '"${platform}"'},
   "app_name": "customer",
-  "device_id": "${fcmToken}",
-  "actual_device_id": "${deviceid}",
-  "store_id": "${stroreid}"
+  "device_id": ${fcmToken == null ? 'null' : '"${fcmToken}"'},
+  "actual_device_id": ${deviceid == null ? 'null' : '"${deviceid}"'},
+  "store_id": ${stroreid == null ? 'null' : '"${stroreid}"'}
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'appinfo',
@@ -1438,13 +1438,13 @@ class AddToCartCall {
 
     final ffApiRequestBody = '''
 {
-  "user_id": "${userid}",
-  "qty": "${qty}",
-  "store_id": "${storeid}",
-  "varient_id": "${varientid}",
-  "device_id": "${deviceid}",
-  "platform": "${platform}",
-  "product_feature_id": "${featuresID}"
+  "user_id": ${userid == null ? 'null' : '"${userid}"'},
+  "qty": ${qty == null ? 'null' : '"${qty}"'},
+  "store_id": ${storeid == null ? 'null' : '"${storeid}"'},
+  "varient_id": ${varientid == null ? 'null' : '"${varientid}"'},
+  "device_id": ${deviceid == null ? 'null' : '"${deviceid}"'},
+  "platform": ${platform == null ? 'null' : '"${platform}"'},
+  "product_feature_id": ${featuresID == null ? 'null' : '"${featuresID}"'}
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'Add to Cart',
@@ -1510,23 +1510,23 @@ class CatproductCall {
 
     final ffApiRequestBody = '''
 {
-  "store_id": "${storeid}",
-  "cat_id": "${catid}",
-  "user_id": "${userid}",
-  "byname": "${byName}",
-  "min_price": "${minPrice}",
-  "max_price": "${maxPrice}",
-  "stock": "${stock}",
-  "min_discount": "${minDiscount}",
-  "max_discount": "${maxDiscount}",
-  "sort": "${sort}",
-  "sortname": "${sortName}",
-  "sortprice": "${sortPrice}",
-  "sub_cat_id": "${subCatID}",
-  "platform": "${platform}",
-  "zone_id": "${zoneID}",
-  "lat": "${lat}",
-  "lng": "${lng}"
+  "store_id": ${storeid == null ? 'null' : '"${storeid}"'},
+  "cat_id": ${catid == null ? 'null' : '"${catid}"'},
+  "user_id": ${userid == null ? 'null' : '"${userid}"'},
+  "byname": ${byName == null ? 'null' : '"${byName}"'},
+  "min_price": ${minPrice == null ? 'null' : '"${minPrice}"'},
+  "max_price": ${maxPrice == null ? 'null' : '"${maxPrice}"'},
+  "stock": ${stock == null ? 'null' : '"${stock}"'},
+  "min_discount": ${minDiscount == null ? 'null' : '"${minDiscount}"'},
+  "max_discount": ${maxDiscount == null ? 'null' : '"${maxDiscount}"'},
+  "sort": ${sort == null ? 'null' : '"${sort}"'},
+  "sortname": ${sortName == null ? 'null' : '"${sortName}"'},
+  "sortprice": ${sortPrice == null ? 'null' : '"${sortPrice}"'},
+  "sub_cat_id": ${subCatID == null ? 'null' : '"${subCatID}"'},
+  "platform": ${platform == null ? 'null' : '"${platform}"'},
+  "zone_id": ${zoneID == null ? 'null' : '"${zoneID}"'},
+  "lat": ${lat == null ? 'null' : '"${lat}"'},
+  "lng": ${lng == null ? 'null' : '"${lng}"'}
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'catproduct',
@@ -1567,10 +1567,10 @@ class ShowaddressCall {
 
     final ffApiRequestBody = '''
 {
-  "user_id": "${userid}",
-  "store_id": "${storeid}",
-  "device_id": "${deviceId}",
-  "platform": "${platform}"
+  "user_id": ${userid == null ? 'null' : '"${userid}"'},
+  "store_id": ${storeid == null ? 'null' : '"${storeid}"'},
+  "device_id": ${deviceId == null ? 'null' : '"${deviceId}"'},
+  "platform": ${platform == null ? 'null' : '"${platform}"'}
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'showaddress',
@@ -1616,10 +1616,10 @@ class RemoveaddressCall {
 
     final ffApiRequestBody = '''
 {
-  "user_id": "${userid}",
-  "address_id": "${addressID}",
-  "device_id": "${deviceId}",
-  "platform": "${platform}"
+  "user_id": ${userid == null ? 'null' : '"${userid}"'},
+  "address_id": ${addressID == null ? 'null' : '"${addressID}"'},
+  "device_id": ${deviceId == null ? 'null' : '"${deviceId}"'},
+  "platform": ${platform == null ? 'null' : '"${platform}"'}
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'removeaddress',
@@ -1714,11 +1714,11 @@ class MyorderssubscriptionCall {
 
     final ffApiRequestBody = '''
 {
-  "store_id": "${storeId}",
-  "user_id": "${userid}",
+  "store_id": ${storeId == null ? 'null' : '"${storeId}"'},
+  "user_id": ${userid == null ? 'null' : '"${userid}"'},
   "page": ${page},
   "perpage": ${pageCount},
-  "platform": "${platform}"
+  "platform": ${platform == null ? 'null' : '"${platform}"'}
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'myorderssubscription',
@@ -1822,9 +1822,9 @@ class ShowcartCall {
 
     final ffApiRequestBody = '''
 {
-  "user_id": "${userid}",
-  "device_id": "${deviceid}",
-  "platform": "${platform}"
+  "user_id": ${userid == null ? 'null' : '"${userid}"'},
+  "device_id": ${deviceid == null ? 'null' : '"${deviceid}"'},
+  "platform": ${platform == null ? 'null' : '"${platform}"'}
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'showcart',
@@ -1882,10 +1882,10 @@ class MyOrdersSubCall {
 
     final ffApiRequestBody = '''
 {
-  "cart_id": "${cartId}",
-  "store_order_id": "${orderStatusID}",
-  "subscription_id": "${subscriptionId}",
-  "platform": "${platform}"
+  "cart_id": ${cartId == null ? 'null' : '"${cartId}"'},
+  "store_order_id": ${orderStatusID == null ? 'null' : '"${orderStatusID}"'},
+  "subscription_id": ${subscriptionId == null ? 'null' : '"${subscriptionId}"'},
+  "platform": ${platform == null ? 'null' : '"${platform}"'}
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'myOrdersSub',
@@ -1962,28 +1962,28 @@ class SearchByBannerCall {
 
     final ffApiRequestBody = '''
 {
-  "user_id": "${userId}",
-  "store_id": "${storeId}",
+  "user_id": ${userId == null ? 'null' : '"${userId}"'},
+  "store_id": ${storeId == null ? 'null' : '"${storeId}"'},
   "keyword": "${keyword} ",
-  "byname": "${byName}",
-  "min_price": "${minPrice}",
-  "max_price": "${maxPrice}",
-  "stock": "${stock}",
-  "min_discount": "${minDiscount}",
-  "max_discount": "${maxDiscount}",
-  "sort": "${sort}",
-  "sortname": "${sortName}",
-  "sortprice": "${sortPrice}",
-  "cat_id": "${catid}",
-  "sub_cat_id": "${subCatid}",
-  "device_id": "${deviceid}",
-  "brand_id": "${brandID}",
-  "banner_id": "${bannerID}",
-  "banner_type": "${bannerType}",
+  "byname": ${byName == null ? 'null' : '"${byName}"'},
+  "min_price": ${minPrice == null ? 'null' : '"${minPrice}"'},
+  "max_price": ${maxPrice == null ? 'null' : '"${maxPrice}"'},
+  "stock": ${stock == null ? 'null' : '"${stock}"'},
+  "min_discount": ${minDiscount == null ? 'null' : '"${minDiscount}"'},
+  "max_discount": ${maxDiscount == null ? 'null' : '"${maxDiscount}"'},
+  "sort": ${sort == null ? 'null' : '"${sort}"'},
+  "sortname": ${sortName == null ? 'null' : '"${sortName}"'},
+  "sortprice": ${sortPrice == null ? 'null' : '"${sortPrice}"'},
+  "cat_id": ${catid == null ? 'null' : '"${catid}"'},
+  "sub_cat_id": ${subCatid == null ? 'null' : '"${subCatid}"'},
+  "device_id": ${deviceid == null ? 'null' : '"${deviceid}"'},
+  "brand_id": ${brandID == null ? 'null' : '"${brandID}"'},
+  "banner_id": ${bannerID == null ? 'null' : '"${bannerID}"'},
+  "banner_type": ${bannerType == null ? 'null' : '"${bannerType}"'},
   "perpage": ${pageper},
   "page": ${page},
-  "platform": "${platform}",
-  "zone_id": "${zoneID}"
+  "platform": ${platform == null ? 'null' : '"${platform}"'},
+  "zone_id": ${zoneID == null ? 'null' : '"${zoneID}"'}
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'searchByBanner',
@@ -2060,12 +2060,12 @@ class TimeslotCall {
 
     final ffApiRequestBody = '''
 {
-  "store_id": "${storeID}",
-  "selected_date": "${selectedDate}",
-  "repeated_days": "${repeatedDays}",
-  "platform": "${platform}",
-  "zone_id": "${zoneID}",
-  "varient_id": "${variantID}"
+  "store_id": ${storeID == null ? 'null' : '"${storeID}"'},
+  "selected_date": ${selectedDate == null ? 'null' : '"${selectedDate}"'},
+  "repeated_days": ${repeatedDays == null ? 'null' : '"${repeatedDays}"'},
+  "platform": ${platform == null ? 'null' : '"${platform}"'},
+  "zone_id": ${zoneID == null ? 'null' : '"${zoneID}"'},
+  "varient_id": ${variantID == null ? 'null' : '"${variantID}"'}
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'timeslot',
@@ -2117,16 +2117,16 @@ class SneakyproductlistCall {
 
     final ffApiRequestBody = '''
 {
-  "userLat": "${lat}",
-  "userLng": "${long}",
-  "store_id": "${storeid}",
-  "device_id": "${deviceid}",
-  "user_id": "${userid}",
-  "platform": "${platform}",
-  "min_discount": "${minPrice}",
-  "max_discount": "${maxPrice}",
-  "sortprice": "${sortPrice}",
-  "zone_id": "${zoneid}"
+  "userLat": ${lat == null ? 'null' : '"${lat}"'},
+  "userLng": ${long == null ? 'null' : '"${long}"'},
+  "store_id": ${storeid == null ? 'null' : '"${storeid}"'},
+  "device_id": ${deviceid == null ? 'null' : '"${deviceid}"'},
+  "user_id": ${userid == null ? 'null' : '"${userid}"'},
+  "platform": ${platform == null ? 'null' : '"${platform}"'},
+  "min_discount": ${minPrice == null ? 'null' : '"${minPrice}"'},
+  "max_discount": ${maxPrice == null ? 'null' : '"${maxPrice}"'},
+  "sortprice": ${sortPrice == null ? 'null' : '"${sortPrice}"'},
+  "zone_id": ${zoneid == null ? 'null' : '"${zoneid}"'}
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'sneakyproductlist',
@@ -2166,7 +2166,7 @@ class CancelOrderCall {
     final ffApiRequestBody = '''
 {
   "user_id": ${userId},
-  "platform": "${platform}"
+  "platform": ${platform == null ? 'null' : '"${platform}"'}
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'cancelOrder',
@@ -2199,12 +2199,12 @@ class PlacerepeatedorderCall {
 
     final ffApiRequestBody = '''
 {
-  "cart_id": "${cartid}",
-  "user_id": "${userid}",
-  "replace_status": "${replaceStatus}",
-  "device_id": "${deviceid}",
-  "order_type": "${orderType}",
-  "platform": "${platform}"
+  "cart_id": ${cartid == null ? 'null' : '"${cartid}"'},
+  "user_id": ${userid == null ? 'null' : '"${userid}"'},
+  "replace_status": ${replaceStatus == null ? 'null' : '"${replaceStatus}"'},
+  "device_id": ${deviceid == null ? 'null' : '"${deviceid}"'},
+  "order_type": ${orderType == null ? 'null' : '"${orderType}"'},
+  "platform": ${platform == null ? 'null' : '"${platform}"'}
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'placerepeatedorder',
@@ -2238,8 +2238,8 @@ class UserbankdetailsCall {
 
     final ffApiRequestBody = '''
 {
-  "user_id": "${userid}",
-  "platform": "${platform}"
+  "user_id": ${userid == null ? 'null' : '"${userid}"'},
+  "platform": ${platform == null ? 'null' : '"${platform}"'}
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'userbankdetails',
@@ -2278,8 +2278,8 @@ class NotificationlistCall {
 
     final ffApiRequestBody = '''
 {
-  "user_id": "${userid}",
-  "platform": "${platform}"
+  "user_id": ${userid == null ? 'null' : '"${userid}"'},
+  "platform": ${platform == null ? 'null' : '"${platform}"'}
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'notificationlist',
@@ -2351,11 +2351,11 @@ class CancelledproductorderCall {
 
     final ffApiRequestBody = '''
 {
-  "cart_id": "${cartID}",
-  "user_id": "${userid}",
-  "store_order_id": "${storeOrderid}",
-  "cancel_reason": "${cancelReason}",
-  "platform": "${platform}"
+  "cart_id": ${cartID == null ? 'null' : '"${cartID}"'},
+  "user_id": ${userid == null ? 'null' : '"${userid}"'},
+  "store_order_id": ${storeOrderid == null ? 'null' : '"${storeOrderid}"'},
+  "cancel_reason": ${cancelReason == null ? 'null' : '"${cancelReason}"'},
+  "platform": ${platform == null ? 'null' : '"${platform}"'}
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'cancelledproductorder',
@@ -2401,20 +2401,20 @@ class AddtosubcartCall {
 
     final ffApiRequestBody = '''
 {
-  "user_id": "${userid}",
-  "qty": "${qty}",
-  "store_id": "${storeid}",
-  "varient_id": "${varientid}",
+  "user_id": ${userid == null ? 'null' : '"${userid}"'},
+  "qty": ${qty == null ? 'null' : '"${qty}"'},
+  "store_id": ${storeid == null ? 'null' : '"${storeid}"'},
+  "varient_id": ${varientid == null ? 'null' : '"${varientid}"'},
   "is_subscription": 1,
   "percentage": 20,
-  "device_id": "${deviceid}",
-  "repeat_orders": "${repeatOrder}",
-  "time_slot": "${timeSlot}",
-  "sub_totaldelivery": "${subTotalDelivery}",
-  "start_delivery_date": "${subTotalDate}",
-  "isAutoRenew": "${autoRenew}",
-  "platform": "${platform}",
-  "product_feature_id": "${featuresID}"
+  "device_id": ${deviceid == null ? 'null' : '"${deviceid}"'},
+  "repeat_orders": ${repeatOrder == null ? 'null' : '"${repeatOrder}"'},
+  "time_slot": ${timeSlot == null ? 'null' : '"${timeSlot}"'},
+  "sub_totaldelivery": ${subTotalDelivery == null ? 'null' : '"${subTotalDelivery}"'},
+  "start_delivery_date": ${subTotalDate == null ? 'null' : '"${subTotalDate}"'},
+  "isAutoRenew": ${autoRenew == null ? 'null' : '"${autoRenew}"'},
+  "platform": ${platform == null ? 'null' : '"${platform}"'},
+  "product_feature_id": ${featuresID == null ? 'null' : '"${featuresID}"'}
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'addtosubcart',
@@ -2468,11 +2468,11 @@ class ShowsubcartCall {
 
     final ffApiRequestBody = '''
 {
-  "user_id": "${userid}",
-  "device_id": "${deviceid}",
-  "platform": "${platform}",
-  "zone_id": "${zoneID}",
-  "store_id": "${storeID}"
+  "user_id": ${userid == null ? 'null' : '"${userid}"'},
+  "device_id": ${deviceid == null ? 'null' : '"${deviceid}"'},
+  "platform": ${platform == null ? 'null' : '"${platform}"'},
+  "zone_id": ${zoneID == null ? 'null' : '"${zoneID}"'},
+  "store_id": ${storeID == null ? 'null' : '"${storeID}"'}
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'showsubcart',
@@ -2529,12 +2529,12 @@ class CouponListCall {
 
     final ffApiRequestBody = '''
 {
-  "user_id": "${userId}",
-  "store_id": "${storeId}",
-  "total_delivery": "${totalDelievery}",
-  "cart_id": "${cartId}",
-  "platform": "${platform}",
-  "zone_id": "${zoneID}"
+  "user_id": ${userId == null ? 'null' : '"${userId}"'},
+  "store_id": ${storeId == null ? 'null' : '"${storeId}"'},
+  "total_delivery": ${totalDelievery == null ? 'null' : '"${totalDelievery}"'},
+  "cart_id": ${cartId == null ? 'null' : '"${cartId}"'},
+  "platform": ${platform == null ? 'null' : '"${platform}"'},
+  "zone_id": ${zoneID == null ? 'null' : '"${zoneID}"'}
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'CouponList',
@@ -2580,11 +2580,11 @@ class ApplyCouponCall {
 
     final ffApiRequestBody = '''
 {
-  "store_id": "${storeId}",
-  "coupon_code": "${couponCode}",
-  "user_id": "${userId}",
-  "order_type": "${orderType}",
-  "platform": "${platform}"
+  "store_id": ${storeId == null ? 'null' : '"${storeId}"'},
+  "coupon_code": ${couponCode == null ? 'null' : '"${couponCode}"'},
+  "user_id": ${userId == null ? 'null' : '"${userId}"'},
+  "order_type": ${orderType == null ? 'null' : '"${orderType}"'},
+  "platform": ${platform == null ? 'null' : '"${platform}"'}
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'applyCoupon',
@@ -2625,11 +2625,11 @@ class SubscriptionOrderPauseCall {
 
     final ffApiRequestBody = '''
 {
-  "subscription_id": "${susbscriptionId}",
-  "pause_reason": "${pauseReason}",
-  "cart_id": "${cartId}",
-  "store_order_id": "${storeOrderId}",
-  "platform": "${platform}"
+  "subscription_id": ${susbscriptionId == null ? 'null' : '"${susbscriptionId}"'},
+  "pause_reason": ${pauseReason == null ? 'null' : '"${pauseReason}"'},
+  "cart_id": ${cartId == null ? 'null' : '"${cartId}"'},
+  "store_order_id": ${storeOrderId == null ? 'null' : '"${storeOrderId}"'},
+  "platform": ${platform == null ? 'null' : '"${platform}"'}
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'subscriptionOrderPause',
@@ -2659,9 +2659,9 @@ class DailyCartTimeSlotCall {
 
     final ffApiRequestBody = '''
 {
-  "store_id":"${storeId}",
-  "selected_date":"${selectedDate}",
-  "platform": "${platform}"
+  "store_id":${storeId == null ? 'null' : '"${storeId}"'},
+  "selected_date":${selectedDate == null ? 'null' : '"${selectedDate}"'},
+  "platform": ${platform == null ? 'null' : '"${platform}"'}
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'dailyCartTimeSlot',
@@ -2702,10 +2702,10 @@ class MydailyordersCall {
 
     final ffApiRequestBody = '''
 {
-  "user_id": "${userid}",
+  "user_id": ${userid == null ? 'null' : '"${userid}"'},
   "page": ${pageno},
   "perpage": ${pageCount},
-  "platform": "${platform}"
+  "platform": ${platform == null ? 'null' : '"${platform}"'}
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'mydailyorders',
@@ -2746,10 +2746,10 @@ class CancelledquickorderCall {
 
     final ffApiRequestBody = '''
 {
-  "group_id": "${cartID}",
-  "user_id": "${userID}",
-  "cancel_reason": "${cancelResoan}",
-  "platform": "${platform}"
+  "group_id": ${cartID == null ? 'null' : '"${cartID}"'},
+  "user_id": ${userID == null ? 'null' : '"${userID}"'},
+  "cancel_reason": ${cancelResoan == null ? 'null' : '"${cancelResoan}"'},
+  "platform": ${platform == null ? 'null' : '"${platform}"'}
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'cancelledquickorder',
@@ -2806,30 +2806,30 @@ class CheckoutsubcribtionorderCall {
     final zoneDeliveryAddons = _serializeJson(zoneDeliveryAddonsJson);
     final ffApiRequestBody = '''
 {
-  "user_id": "${userid}",
+  "user_id": ${userid == null ? 'null' : '"${userid}"'},
   "is_subscription": 1,
-  "address_id": "${addressID}",
+  "address_id": ${addressID == null ? 'null' : '"${addressID}"'},
   "bank_id": 0,
-  "si_sub_ref_no": "${siNo}",
-  "store_id": "${storeid}",
-  "payment_method": "${paymentMethod}",
+  "si_sub_ref_no": ${siNo == null ? 'null' : '"${siNo}"'},
+  "store_id": ${storeid == null ? 'null' : '"${storeid}"'},
+  "payment_method": ${paymentMethod == null ? 'null' : '"${paymentMethod}"'},
   "payment_status": "pending",
-  "wallet": "${wallet}",
+  "wallet": ${wallet == null ? 'null' : '"${wallet}"'},
   "payment_id": null,
   "payment_gateway": null,
   "coupon_id": 0,
   "coupon_code": "",
   "discount_amount": 0.0,
-  "device_id": "${deviceid}",
-  "del_partner_instruction": "${delPartnerInstruction}",
-  "payment_type": "${paymentType}",
+  "device_id": ${deviceid == null ? 'null' : '"${deviceid}"'},
+  "del_partner_instruction": ${delPartnerInstruction == null ? 'null' : '"${delPartnerInstruction}"'},
+  "payment_type": ${paymentType == null ? 'null' : '"${paymentType}"'},
   "del_partner_tip": "0",
-  "totalwalletamt": "${totalwalletamt}",
-  "order_instruction": "${orderInstruction}",
-  "AutoRenewSubCart": "${autorenewSubCart}",
-  "platform": "${platform}",
-  "totalrefwalletamt": "${totalrefwalletamt}",
-  "zone_id": "${zoneId}",
+  "totalwalletamt": ${totalwalletamt == null ? 'null' : '"${totalwalletamt}"'},
+  "order_instruction": ${orderInstruction == null ? 'null' : '"${orderInstruction}"'},
+  "AutoRenewSubCart": ${autorenewSubCart == null ? 'null' : '"${autorenewSubCart}"'},
+  "platform": ${platform == null ? 'null' : '"${platform}"'},
+  "totalrefwalletamt": ${totalrefwalletamt == null ? 'null' : '"${totalrefwalletamt}"'},
+  "zone_id": ${zoneId == null ? 'null' : '"${zoneId}"'},
   "zone_delivery_addons": ${zoneDeliveryAddons},
   "zone_permanent_charges": ${zonePermanentCharges},
   "zone_product_wise_charges": ${zoneProductWiseCharges}
@@ -2903,32 +2903,32 @@ class CheckoutquickorderCall {
         _serializeJson(zoneCategoryWiseTimeslotChargesJson);
     final ffApiRequestBody = '''
 {
-  "user_id": "${userid}",
-  "device_id": "${deviceid}",
-  "address_id": "${addressID}",
-  "bank_id": "${bankID}",
-  "si_sub_ref_no": "${siNo}",
-  "store_id": "${storeid}",
-  "payment_method": "${paymentMethod}",
+  "user_id": ${userid == null ? 'null' : '"${userid}"'},
+  "device_id": ${deviceid == null ? 'null' : '"${deviceid}"'},
+  "address_id": ${addressID == null ? 'null' : '"${addressID}"'},
+  "bank_id": ${bankID == null ? 'null' : '"${bankID}"'},
+  "si_sub_ref_no": ${siNo == null ? 'null' : '"${siNo}"'},
+  "store_id": ${storeid == null ? 'null' : '"${storeid}"'},
+  "payment_method": ${paymentMethod == null ? 'null' : '"${paymentMethod}"'},
   "payment_status": "pending",
-  "wallet": "${wallet}",
+  "wallet": ${wallet == null ? 'null' : '"${wallet}"'},
   "payment_id": null,
   "payment_gateway": null,
-  "coupon_id": "${couponid}",
-  "coupon_code": "${couponCode}",
-  "discount_amount": "${discountAmount}",
-  "delivery_date": "${deliveryDate}",
-  "time_slot": "${timeSlot}",
-  "del_partner_tip": "${deliveryPartnerTip}",
-  "del_partner_instruction": "${deliveryPartnerInstruction}",
+  "coupon_id": ${couponid == null ? 'null' : '"${couponid}"'},
+  "coupon_code": ${couponCode == null ? 'null' : '"${couponCode}"'},
+  "discount_amount": ${discountAmount == null ? 'null' : '"${discountAmount}"'},
+  "delivery_date": ${deliveryDate == null ? 'null' : '"${deliveryDate}"'},
+  "time_slot": ${timeSlot == null ? 'null' : '"${timeSlot}"'},
+  "del_partner_tip": ${deliveryPartnerTip == null ? 'null' : '"${deliveryPartnerTip}"'},
+  "del_partner_instruction": ${deliveryPartnerInstruction == null ? 'null' : '"${deliveryPartnerInstruction}"'},
   "totalwalletamt": ${totalwalletamt},
-  "order_instruction": "${orderInstruction}",
-  "platform": "${platform}",
-  "totalrefwalletamt": "${totalrefwalletamt}",
-  "pricing_type": "${pricingType}",
-  "price_effect": "${priceEffect}",
+  "order_instruction": ${orderInstruction == null ? 'null' : '"${orderInstruction}"'},
+  "platform": ${platform == null ? 'null' : '"${platform}"'},
+  "totalrefwalletamt": ${totalrefwalletamt == null ? 'null' : '"${totalrefwalletamt}"'},
+  "pricing_type": ${pricingType == null ? 'null' : '"${pricingType}"'},
+  "price_effect": ${priceEffect == null ? 'null' : '"${priceEffect}"'},
   "zone_delivery_addons": ${zoneDeliveryAddons},
-  "zone_id": "${zoneID}",
+  "zone_id": ${zoneID == null ? 'null' : '"${zoneID}"'},
   "zone_permanent_charges": ${zonePermanentCharges},
   "zone_category_wise_timeslot_charges": ${zoneCategoryWiseTimeslotCharges}
 }''';
@@ -3007,9 +3007,9 @@ class ResumeOrderCall {
 
     final ffApiRequestBody = '''
 {
-  "store_id": "${storeId}",
-  "selected_date": "${selectedDate}",
-  "platform": "${platform}"
+  "store_id": ${storeId == null ? 'null' : '"${storeId}"'},
+  "selected_date": ${selectedDate == null ? 'null' : '"${selectedDate}"'},
+  "platform": ${platform == null ? 'null' : '"${platform}"'}
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'ResumeOrder',
@@ -3042,12 +3042,12 @@ class SendOTPCall {
 
     final ffApiRequestBody = '''
 {
-  "user_id": "${userId}",
-  "new_info": "${newInfo}",
-  "change_type": "${changeType}",
-  "country_code": "${countryCode}",
-  "dial_code": "${dialCode}",
-  "platform": "${platform}"
+  "user_id": ${userId == null ? 'null' : '"${userId}"'},
+  "new_info": ${newInfo == null ? 'null' : '"${newInfo}"'},
+  "change_type": ${changeType == null ? 'null' : '"${changeType}"'},
+  "country_code": ${countryCode == null ? 'null' : '"${countryCode}"'},
+  "dial_code": ${dialCode == null ? 'null' : '"${dialCode}"'},
+  "platform": ${platform == null ? 'null' : '"${platform}"'}
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'SendOTP',
@@ -3086,9 +3086,9 @@ class VerifyOTPUpdateCall {
 
     final ffApiRequestBody = '''
 {
-  "otp": "${otp}",
-  "lastid": "${lastId}",
-  "platform": "${platform}"
+  "otp": ${otp == null ? 'null' : '"${otp}"'},
+  "lastid": ${lastId == null ? 'null' : '"${lastId}"'},
+  "platform": ${platform == null ? 'null' : '"${platform}"'}
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'verifyOTPUpdate',
@@ -3120,11 +3120,11 @@ class SubscriptionOrderResumeCall {
 
     final ffApiRequestBody = '''
 {
-  "subscription_id": "${subscriptionId}",
-  "cart_id": "${cartId}",
-  "time_slot": "${timeSlot}",
-  "delivery_date": "${delieveryDate}",
-  "platform": "${platform}"
+  "subscription_id": ${subscriptionId == null ? 'null' : '"${subscriptionId}"'},
+  "cart_id": ${cartId == null ? 'null' : '"${cartId}"'},
+  "time_slot": ${timeSlot == null ? 'null' : '"${timeSlot}"'},
+  "delivery_date": ${delieveryDate == null ? 'null' : '"${delieveryDate}"'},
+  "platform": ${platform == null ? 'null' : '"${platform}"'}
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'subscriptionOrderResume',
@@ -3230,33 +3230,33 @@ class PaymentCall {
         _serializeJson(zoneCategoryWiseTimeslotChargesJson);
     final ffApiRequestBody = '''
 {
-  "address_id": "${addressid}",
-  "user_id": "${userid}",
+  "address_id": ${addressid == null ? 'null' : '"${addressid}"'},
+  "user_id": ${userid == null ? 'null' : '"${userid}"'},
   "bank_id": 0,
-  "si_sub_ref_no": "${siNO}",
-  "store_id": "${storeid}",
-  "payment_method": "${paymentMethod}",
+  "si_sub_ref_no": ${siNO == null ? 'null' : '"${siNO}"'},
+  "store_id": ${storeid == null ? 'null' : '"${storeid}"'},
+  "payment_method": ${paymentMethod == null ? 'null' : '"${paymentMethod}"'},
   "payment_status": "success",
-  "wallet": "${walllet}",
+  "wallet": ${walllet == null ? 'null' : '"${walllet}"'},
   "payment_id": null,
   "payment_gateway": null,
-  "coupon_id": "${couponid}",
-  "coupon_code": "${couponcode}",
-  "discount_amount": "${couponDiscount}",
-  "delivery_date": "${deliveryDate}",
-  "time_slot": "${timeSlot}",
-  "del_partner_tip": "${partertip}",
-  "del_partner_instruction": "${parterInstruction}",
-  "device_id": "${deviceid}",
-  "totalwalletamt": "${totalWalletAmt}",
+  "coupon_id": ${couponid == null ? 'null' : '"${couponid}"'},
+  "coupon_code": ${couponcode == null ? 'null' : '"${couponcode}"'},
+  "discount_amount": ${couponDiscount == null ? 'null' : '"${couponDiscount}"'},
+  "delivery_date": ${deliveryDate == null ? 'null' : '"${deliveryDate}"'},
+  "time_slot": ${timeSlot == null ? 'null' : '"${timeSlot}"'},
+  "del_partner_tip": ${partertip == null ? 'null' : '"${partertip}"'},
+  "del_partner_instruction": ${parterInstruction == null ? 'null' : '"${parterInstruction}"'},
+  "device_id": ${deviceid == null ? 'null' : '"${deviceid}"'},
+  "totalwalletamt": ${totalWalletAmt == null ? 'null' : '"${totalWalletAmt}"'},
   "group_id": "null",
-  "payment_type": "${paymentType}",
-  "order_instruction": "${orderInstruction}",
-  "platform": "${platform}",
-  "totalrefwalletamt": "${totalrefwalletamt}",
-  "zone_id": "${zoneID}",
-  "pricing_type": "${pricingType}",
-  "price_effect": "${priceEffect}",
+  "payment_type": ${paymentType == null ? 'null' : '"${paymentType}"'},
+  "order_instruction": ${orderInstruction == null ? 'null' : '"${orderInstruction}"'},
+  "platform": ${platform == null ? 'null' : '"${platform}"'},
+  "totalrefwalletamt": ${totalrefwalletamt == null ? 'null' : '"${totalrefwalletamt}"'},
+  "zone_id": ${zoneID == null ? 'null' : '"${zoneID}"'},
+  "pricing_type": ${pricingType == null ? 'null' : '"${pricingType}"'},
+  "price_effect": ${priceEffect == null ? 'null' : '"${priceEffect}"'},
   "zone_delivery_addons": ${zoneDeliveryAddons},
   "zone_permanent_charges": ${zonePermanentCharges},
   "zone_category_wise_timeslot_charges": ${zoneCategoryWiseTimeslotCharges}
@@ -3303,10 +3303,10 @@ class CancelledquickorderprodCall {
 
     final ffApiRequestBody = '''
 {
-  "cart_id": "${cartid}",
-  "user_id": "${userid}",
-  "cancel_reason": "${cancelReason}",
-  "platform": "${platform}"
+  "cart_id": ${cartid == null ? 'null' : '"${cartid}"'},
+  "user_id": ${userid == null ? 'null' : '"${userid}"'},
+  "cancel_reason": ${cancelReason == null ? 'null' : '"${cancelReason}"'},
+  "platform": ${platform == null ? 'null' : '"${platform}"'}
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'cancelledquickorderprod',
@@ -3348,16 +3348,16 @@ class SeosourceCall {
 
     final ffApiRequestBody = '''
 {
-  "utm_source": "${utmSource}",
-  "utm_campaign": "${utmcampaign}",
-  "utm_network": "${utmnetwork}",
-  "utm_medium": "${utmmedium}",
-  "utm_keyword": "${utmkeyword}",
-  "placement": "${placement}",
-  "user_id": "${userid}",
-  "device_id": "${deviceid}",
-  "fcm_token": "${fcmtoken}",
-  "platform": "${platform}"
+  "utm_source": ${utmSource == null ? 'null' : '"${utmSource}"'},
+  "utm_campaign": ${utmcampaign == null ? 'null' : '"${utmcampaign}"'},
+  "utm_network": ${utmnetwork == null ? 'null' : '"${utmnetwork}"'},
+  "utm_medium": ${utmmedium == null ? 'null' : '"${utmmedium}"'},
+  "utm_keyword": ${utmkeyword == null ? 'null' : '"${utmkeyword}"'},
+  "placement": ${placement == null ? 'null' : '"${placement}"'},
+  "user_id": ${userid == null ? 'null' : '"${userid}"'},
+  "device_id": ${deviceid == null ? 'null' : '"${deviceid}"'},
+  "fcm_token": ${fcmtoken == null ? 'null' : '"${fcmtoken}"'},
+  "platform": ${platform == null ? 'null' : '"${platform}"'}
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'seosource',
@@ -3389,11 +3389,11 @@ class OrdercardchangesCall {
 
     final ffApiRequestBody = '''
 {
-  "user_id": "${userid}",
-  "device_id": "${deviceid}",
-  "si_sub_ref_no": "${siNo}",
-  "cart_id": "${cartid}",
-  "platform": "${platform}"
+  "user_id": ${userid == null ? 'null' : '"${userid}"'},
+  "device_id": ${deviceid == null ? 'null' : '"${deviceid}"'},
+  "si_sub_ref_no": ${siNo == null ? 'null' : '"${siNo}"'},
+  "cart_id": ${cartid == null ? 'null' : '"${cartid}"'},
+  "platform": ${platform == null ? 'null' : '"${platform}"'}
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'ordercardchanges',
@@ -3446,29 +3446,29 @@ class SubpaymentCall {
     final zoneProductWiseCharges = _serializeJson(zoneProductWiseChargesJson);
     final ffApiRequestBody = '''
 {
-  "user_id": "${userid}",
+  "user_id": ${userid == null ? 'null' : '"${userid}"'},
   "is_subscription": 1,
-  "address_id": "${addressid}",
+  "address_id": ${addressid == null ? 'null' : '"${addressid}"'},
   "bank_id": 0,
-  "si_sub_ref_no": "${siNo}",
-  "store_id": "${storeid}",
-  "payment_method": "${paymentMethod}",
+  "si_sub_ref_no": ${siNo == null ? 'null' : '"${siNo}"'},
+  "store_id": ${storeid == null ? 'null' : '"${storeid}"'},
+  "payment_method": ${paymentMethod == null ? 'null' : '"${paymentMethod}"'},
   "payment_status": "success",
-  "wallet": "${wallet}",
+  "wallet": ${wallet == null ? 'null' : '"${wallet}"'},
   "payment_id": null,
   "payment_gateway": null,
   "coupon_id": 0,
   "coupon_code": "",
   "discount_amount": 0.0,
-  "device_id": "${deviceid}",
+  "device_id": ${deviceid == null ? 'null' : '"${deviceid}"'},
   "group_id": "null",
-  "payment_type": "${paymentType}",
-  "totalwalletamt": "${totalWalletAmt}",
-  "del_partner_instruction": "${delPartnerInstruction}",
-  "order_instruction": "${orderInstruction}",
-  "platform": "${platform}",
-  "totalrefwalletamt": "${totalrefwalletamt}",
-   "zone_id": "${zoneId}",
+  "payment_type": ${paymentType == null ? 'null' : '"${paymentType}"'},
+  "totalwalletamt": ${totalWalletAmt == null ? 'null' : '"${totalWalletAmt}"'},
+  "del_partner_instruction": ${delPartnerInstruction == null ? 'null' : '"${delPartnerInstruction}"'},
+  "order_instruction": ${orderInstruction == null ? 'null' : '"${orderInstruction}"'},
+  "platform": ${platform == null ? 'null' : '"${platform}"'},
+  "totalrefwalletamt": ${totalrefwalletamt == null ? 'null' : '"${totalrefwalletamt}"'},
+   "zone_id": ${zoneId == null ? 'null' : '"${zoneId}"'},
   "zone_delivery_addons": ${zoneDeliveryAddons},
   "zone_permanent_charges": ${zonePermanentCharges},
   "zone_product_wise_charges": ${zoneProductWiseCharges}
@@ -3515,10 +3515,10 @@ class GuestloginCall {
 
     final ffApiRequestBody = '''
 {
-  "actual_device_id": "${deviceid}",
-  "device_id": "${fcmToken}",
-  "uuid": "${uuid}",
-  "platform": "${platform}"
+  "actual_device_id": ${deviceid == null ? 'null' : '"${deviceid}"'},
+  "device_id": ${fcmToken == null ? 'null' : '"${fcmToken}"'},
+  "uuid": ${uuid == null ? 'null' : '"${uuid}"'},
+  "platform": ${platform == null ? 'null' : '"${platform}"'}
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'guestlogin',
@@ -3556,8 +3556,8 @@ class SavecardCall {
 
     final ffApiRequestBody = '''
 {
- "user_id":"${userid}",
- "platform": "${platform}"
+ "user_id":${userid == null ? 'null' : '"${userid}"'},
+ "platform": ${platform == null ? 'null' : '"${platform}"'}
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'savecard',
@@ -3596,9 +3596,9 @@ class DeleteCardCall {
 
     final ffApiRequestBody = '''
 {
- "user_id": "${userId}",
- "bank_id": "${bankId}",
- "platform": "${platform}"
+ "user_id": ${userId == null ? 'null' : '"${userId}"'},
+ "bank_id": ${bankId == null ? 'null' : '"${bankId}"'},
+ "platform": ${platform == null ? 'null' : '"${platform}"'}
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'DeleteCard',
@@ -3628,9 +3628,9 @@ class UpdateproductdetailsCall {
 
     final ffApiRequestBody = '''
 {
-  "user_id": "${userid}",
-  "platform": "${platform}",
-  "store_id": "${storeId}"
+  "user_id": ${userid == null ? 'null' : '"${userid}"'},
+  "platform": ${platform == null ? 'null' : '"${platform}"'},
+  "store_id": ${storeId == null ? 'null' : '"${storeId}"'}
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'updateproductdetails',
@@ -3725,11 +3725,11 @@ class QuickplacerepeatedorderCall {
 
     final ffApiRequestBody = '''
 {
-  "cart_id": "${cartid}",
-  "user_id": "${userid}",
+  "cart_id": ${cartid == null ? 'null' : '"${cartid}"'},
+  "user_id": ${userid == null ? 'null' : '"${userid}"'},
   "order_type": "quick",
   "replace_status": 1,
-  "platform": "${platform}"
+  "platform": ${platform == null ? 'null' : '"${platform}"'}
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'quickplacerepeatedorder',
@@ -3765,10 +3765,10 @@ class OrderssubscriptionproductCall {
 
     final ffApiRequestBody = '''
 {
-  "user_id": "${userid}",
-  "store_id": "${storeid}",
-  "group_id": "${groupid}",
-  "platform": "${platform}"
+  "user_id": ${userid == null ? 'null' : '"${userid}"'},
+  "store_id": ${storeid == null ? 'null' : '"${storeid}"'},
+  "group_id": ${groupid == null ? 'null' : '"${groupid}"'},
+  "platform": ${platform == null ? 'null' : '"${platform}"'}
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'orderssubscriptionproduct',
@@ -3821,21 +3821,21 @@ class SearchbybrandsCall {
 
     final ffApiRequestBody = '''
 {
-  "user_id": "${userid}",
-  "store_id": "${storeid}",
-  "keyword": "${keyword}",
-  "byname": "${byName}",
-  "min_price": "${minPrice}",
-  "max_price": "${maxPrice}",
-  "stock": "${stock}",
-  "min_discount": "${minDiscount}",
-  "max_discount": "${maxDiscount}",
-  "sort": "${sort}",
-  "sortname": "${sortName}",
-  "sortprice": "${sortPrice}",
-  "cat_id": "${catid}",
-  "sub_cat_id": "${subcatid}",
-  "device_id": "${deviceid}",
+  "user_id": ${userid == null ? 'null' : '"${userid}"'},
+  "store_id": ${storeid == null ? 'null' : '"${storeid}"'},
+  "keyword": ${keyword == null ? 'null' : '"${keyword}"'},
+  "byname": ${byName == null ? 'null' : '"${byName}"'},
+  "min_price": ${minPrice == null ? 'null' : '"${minPrice}"'},
+  "max_price": ${maxPrice == null ? 'null' : '"${maxPrice}"'},
+  "stock": ${stock == null ? 'null' : '"${stock}"'},
+  "min_discount": ${minDiscount == null ? 'null' : '"${minDiscount}"'},
+  "max_discount": ${maxDiscount == null ? 'null' : '"${maxDiscount}"'},
+  "sort": ${sort == null ? 'null' : '"${sort}"'},
+  "sortname": ${sortName == null ? 'null' : '"${sortName}"'},
+  "sortprice": ${sortPrice == null ? 'null' : '"${sortPrice}"'},
+  "cat_id": ${catid == null ? 'null' : '"${catid}"'},
+  "sub_cat_id": ${subcatid == null ? 'null' : '"${subcatid}"'},
+  "device_id": ${deviceid == null ? 'null' : '"${deviceid}"'},
   "min_rating": "null",
   "max_rating": "null",
   "brand_id": ${brandid}
@@ -3877,8 +3877,8 @@ class ProfileDetailsCall {
 
     final ffApiRequestBody = '''
 {
-  "user_id": "${userId}",
-  "platform": "${platform}"
+  "user_id": ${userId == null ? 'null' : '"${userId}"'},
+  "platform": ${platform == null ? 'null' : '"${platform}"'}
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'ProfileDetails',
@@ -3910,11 +3910,11 @@ class AddnotifymeCall {
 
     final ffApiRequestBody = '''
 {
-  "product_id": "${productID}",
-  "varient_id": "${varientID}",
-  "user_id": "${userID}",
-  "platform": "${platform}",
-  "fcmtoken": "${fcmToken}"
+  "product_id": ${productID == null ? 'null' : '"${productID}"'},
+  "varient_id": ${varientID == null ? 'null' : '"${varientID}"'},
+  "user_id": ${userID == null ? 'null' : '"${userID}"'},
+  "platform": ${platform == null ? 'null' : '"${platform}"'},
+  "fcmtoken": ${fcmToken == null ? 'null' : '"${fcmToken}"'}
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'addnotifyme',
@@ -3949,9 +3949,9 @@ class ShownotifymeCall {
 
     final ffApiRequestBody = '''
 {
-  "user_id": "${userid}",
-  "store_id": "${storeid}",
-  "platform": "${platform}"
+  "user_id": ${userid == null ? 'null' : '"${userid}"'},
+  "store_id": ${storeid == null ? 'null' : '"${storeid}"'},
+  "platform": ${platform == null ? 'null' : '"${platform}"'}
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'shownotifyme',
@@ -3993,11 +3993,11 @@ class DeletenotifymeCall {
 
     final ffApiRequestBody = '''
 {
-  "product_id": "${productID}",
-  "varient_id": "${varientID}",
-  "user_id": "${userID}",
-  "platform": "${platform}",
-  "fcmtoken": "${fcmToken}"
+  "product_id": ${productID == null ? 'null' : '"${productID}"'},
+  "varient_id": ${varientID == null ? 'null' : '"${varientID}"'},
+  "user_id": ${userID == null ? 'null' : '"${userID}"'},
+  "platform": ${platform == null ? 'null' : '"${platform}"'},
+  "fcmtoken": ${fcmToken == null ? 'null' : '"${fcmToken}"'}
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'deletenotifyme',
@@ -4035,12 +4035,12 @@ class VerifydetailsCall {
 
     final ffApiRequestBody = '''
 {
-  "transfertype": "${transferType}",
-  "appuuid": "${appUUID}",
-  "serveruuid": "${serverUUID}",
-  "appuserid": "${appUserID}",
-  "serveruserid": "${serverUSerID}",
-  "platform": "${platform}"
+  "transfertype": ${transferType == null ? 'null' : '"${transferType}"'},
+  "appuuid": ${appUUID == null ? 'null' : '"${appUUID}"'},
+  "serveruuid": ${serverUUID == null ? 'null' : '"${serverUUID}"'},
+  "appuserid": ${appUserID == null ? 'null' : '"${appUserID}"'},
+  "serveruserid": ${serverUSerID == null ? 'null' : '"${serverUSerID}"'},
+  "platform": ${platform == null ? 'null' : '"${platform}"'}
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'verifydetails',
@@ -4086,12 +4086,12 @@ class ReviewondeliveryCall {
 
     final ffApiRequestBody = '''
 {
-  "user_id": "${escapeStringForJson(userid)}",
-  "cart_id": "${escapeStringForJson(cartID)}",
+  "user_id": ${userid == null ? 'null' : '"${escapeStringForJson(userid)}"'},
+  "cart_id": ${cartID == null ? 'null' : '"${escapeStringForJson(cartID)}"'},
   "rating": ${rating},
-  "description": "${escapeStringForJson(descriptiion)}",
-  "subscription_id": "${escapeStringForJson(subScriptinID)}",
-  "platform": "${escapeStringForJson(platform)}"
+  "description": ${descriptiion == null ? 'null' : '"${escapeStringForJson(descriptiion)}"'},
+  "subscription_id": ${subScriptinID == null ? 'null' : '"${escapeStringForJson(subScriptinID)}"'},
+  "platform": ${platform == null ? 'null' : '"${escapeStringForJson(platform)}"'}
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'reviewondelivery',
@@ -4131,14 +4131,14 @@ class AddproductratingCall {
 
     final ffApiRequestBody = '''
 {
-  "user_id": "${escapeStringForJson(userID)}",
-  "store_id": "${escapeStringForJson(storeid)}",
-  "varient_id": "${escapeStringForJson(varientID)}",
+  "user_id": ${userID == null ? 'null' : '"${escapeStringForJson(userID)}"'},
+  "store_id": ${storeid == null ? 'null' : '"${escapeStringForJson(storeid)}"'},
+  "varient_id": ${varientID == null ? 'null' : '"${escapeStringForJson(varientID)}"'},
   "rating": ${rating},
-  "description": "${escapeStringForJson(description)}",
-  "cart_id": "${escapeStringForJson(cartID)}",
-  "subscription_id": "${escapeStringForJson(subscriptionID)}",
-  "platform": "${escapeStringForJson(platform)}"
+  "description": ${description == null ? 'null' : '"${escapeStringForJson(description)}"'},
+  "cart_id": ${cartID == null ? 'null' : '"${escapeStringForJson(cartID)}"'},
+  "subscription_id": ${subscriptionID == null ? 'null' : '"${escapeStringForJson(subscriptionID)}"'},
+  "platform": ${platform == null ? 'null' : '"${escapeStringForJson(platform)}"'}
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'addproductrating',
@@ -4175,11 +4175,11 @@ class ShowspcatcartCall {
 
     final ffApiRequestBody = '''
 {
-  "user_id": "${escapeStringForJson(userid)}",
-  "device_id": "${escapeStringForJson(deviceid)}",
-  "platform": "${escapeStringForJson(platform)}",
-  "zone_id": "${escapeStringForJson(zoneID)}",
-  "store_id": "${escapeStringForJson(storeId)}"
+  "user_id": ${userid == null ? 'null' : '"${escapeStringForJson(userid)}"'},
+  "device_id": ${deviceid == null ? 'null' : '"${escapeStringForJson(deviceid)}"'},
+  "platform": ${platform == null ? 'null' : '"${escapeStringForJson(platform)}"'},
+  "zone_id": ${zoneID == null ? 'null' : '"${escapeStringForJson(zoneID)}"'},
+  "store_id": ${storeId == null ? 'null' : '"${escapeStringForJson(storeId)}"'}
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'showspcatcart',
@@ -4235,10 +4235,10 @@ class MyorderssubscriptionlistCall {
 
     final ffApiRequestBody = '''
 {
-  "user_id": "${escapeStringForJson(userid)}",
+  "user_id": ${userid == null ? 'null' : '"${escapeStringForJson(userid)}"'},
   "page": ${page},
   "perpage": ${pageper},
-  "platform": "${escapeStringForJson(platform)}"
+  "platform": ${platform == null ? 'null' : '"${escapeStringForJson(platform)}"'}
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'myorderssubscriptionlist',
@@ -4279,9 +4279,9 @@ class UpquickordertimeslotCall {
     final datetimeArray = _serializeJson(datetimeArrayJson, true);
     final ffApiRequestBody = '''
 {
-  "user_id": "${escapeStringForJson(userid)}",
+  "user_id": ${userid == null ? 'null' : '"${escapeStringForJson(userid)}"'},
   "dataarray": ${datetimeArray},
-  "platform": "${escapeStringForJson(platform)}"
+  "platform": ${platform == null ? 'null' : '"${escapeStringForJson(platform)}"'}
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'upquickordertimeslot',
@@ -4315,8 +4315,8 @@ class ProductreviewlistCall {
 
     final ffApiRequestBody = '''
 {
-  "varient_id": "${escapeStringForJson(varientid)}",
-  "platform": "${escapeStringForJson(platform)}"
+  "varient_id": ${varientid == null ? 'null' : '"${escapeStringForJson(varientid)}"'},
+  "platform": ${platform == null ? 'null' : '"${escapeStringForJson(platform)}"'}
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'productreviewlist',
@@ -4363,24 +4363,24 @@ class OccasionalcatsearchCall {
 
     final ffApiRequestBody = '''
 {
-  "store_id": "${escapeStringForJson(storeid)}",
-  "user_id": "${escapeStringForJson(userid)}",
-  "byname": "${escapeStringForJson(byName)}",
+  "store_id": ${storeid == null ? 'null' : '"${escapeStringForJson(storeid)}"'},
+  "user_id": ${userid == null ? 'null' : '"${escapeStringForJson(userid)}"'},
+  "byname": ${byName == null ? 'null' : '"${escapeStringForJson(byName)}"'},
   "min_price": "null",
   "max_price": "null",
   "stock": "null",
-  "min_discount": "${escapeStringForJson(minDiscount)}",
-  "max_discount": "${escapeStringForJson(maxDiscount)}",
+  "min_discount": ${minDiscount == null ? 'null' : '"${escapeStringForJson(minDiscount)}"'},
+  "max_discount": ${maxDiscount == null ? 'null' : '"${escapeStringForJson(maxDiscount)}"'},
   "sort": "null",
   "sortname": "null",
-  "sortprice": "${escapeStringForJson(sortPrice)}",
+  "sortprice": ${sortPrice == null ? 'null' : '"${escapeStringForJson(sortPrice)}"'},
   "cat_id": "null",
   "sub_cat_id": "null",
   "cattype": "occasional",
   "page": ${page},
   "perpage": ${pageCount},
-  "platform": "${escapeStringForJson(platform)}",
-  "zone_id": "${escapeStringForJson(zoneID)}"
+  "platform": ${platform == null ? 'null' : '"${escapeStringForJson(platform)}"'},
+  "zone_id": ${zoneID == null ? 'null' : '"${escapeStringForJson(zoneID)}"'}
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'occasionalcatsearch',
@@ -4421,10 +4421,10 @@ class TrialproductlistCall {
 
     final ffApiRequestBody = '''
 {
-  "user_id": "${escapeStringForJson(userId)}",
-  "platform": "${escapeStringForJson(platform)}",
-  "zone_id": "${escapeStringForJson(zoneID)}",
-  "store_id": "${escapeStringForJson(storeID)}"
+  "user_id": ${userId == null ? 'null' : '"${escapeStringForJson(userId)}"'},
+  "platform": ${platform == null ? 'null' : '"${escapeStringForJson(platform)}"'},
+  "zone_id": ${zoneID == null ? 'null' : '"${escapeStringForJson(zoneID)}"'},
+  "store_id": ${storeID == null ? 'null' : '"${escapeStringForJson(storeID)}"'}
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'trialproductlist',
@@ -4456,11 +4456,11 @@ class TrialPackDetailsCall {
 
     final ffApiRequestBody = '''
 {
-  "trail_id": "${escapeStringForJson(trialId)}",
-  "user_id": "${escapeStringForJson(userId)}",
-  "platform": "${escapeStringForJson(platform)}",
-  "zone_id": "${escapeStringForJson(zoneID)}",
-  "store_id": "${escapeStringForJson(storeID)}"
+  "trail_id": ${trialId == null ? 'null' : '"${escapeStringForJson(trialId)}"'},
+  "user_id": ${userId == null ? 'null' : '"${escapeStringForJson(userId)}"'},
+  "platform": ${platform == null ? 'null' : '"${escapeStringForJson(platform)}"'},
+  "zone_id": ${zoneID == null ? 'null' : '"${escapeStringForJson(zoneID)}"'},
+  "store_id": ${storeID == null ? 'null' : '"${escapeStringForJson(storeID)}"'}
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'trialPackDetails',
@@ -4492,11 +4492,11 @@ class AddtrailpackCall {
 
     final ffApiRequestBody = '''
 {
-  "trail_id": "${escapeStringForJson(trialid)}",
-  "user_id": "${escapeStringForJson(userid)}",
-  "qty": "${escapeStringForJson(qty)}",
-  "platform": "${escapeStringForJson(platform)}",
-  "store_id": "${escapeStringForJson(storeID)}"
+  "trail_id": ${trialid == null ? 'null' : '"${escapeStringForJson(trialid)}"'},
+  "user_id": ${userid == null ? 'null' : '"${escapeStringForJson(userid)}"'},
+  "qty": ${qty == null ? 'null' : '"${escapeStringForJson(qty)}"'},
+  "platform": ${platform == null ? 'null' : '"${escapeStringForJson(platform)}"'},
+  "store_id": ${storeID == null ? 'null' : '"${escapeStringForJson(storeID)}"'}
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'addtrailpack',
@@ -4536,10 +4536,10 @@ class ShowtrailpackCall {
 
     final ffApiRequestBody = '''
 {
-  "user_id": "${escapeStringForJson(userid)}",
-  "device_id": "${escapeStringForJson(deviceid)}",
-  "platform": "${escapeStringForJson(platform)}",
-  "zone_id": "${escapeStringForJson(zoneID)}"
+  "user_id": ${userid == null ? 'null' : '"${escapeStringForJson(userid)}"'},
+  "device_id": ${deviceid == null ? 'null' : '"${escapeStringForJson(deviceid)}"'},
+  "platform": ${platform == null ? 'null' : '"${escapeStringForJson(platform)}"'},
+  "zone_id": ${zoneID == null ? 'null' : '"${escapeStringForJson(zoneID)}"'}
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'showtrailpack',
@@ -4602,23 +4602,23 @@ class CheckouttrailpackCall {
 
     final ffApiRequestBody = '''
 {
-  "user_id": "${escapeStringForJson(userid)}",
-  "address_id": "${escapeStringForJson(addressid)}",
+  "user_id": ${userid == null ? 'null' : '"${escapeStringForJson(userid)}"'},
+  "address_id": ${addressid == null ? 'null' : '"${escapeStringForJson(addressid)}"'},
   "bank_id": 0,
-  "si_sub_ref_no": "${escapeStringForJson(sino)}",
-  "store_id": "${escapeStringForJson(storeid)}",
-  "payment_method": "${escapeStringForJson(paymentMethod)}",
+  "si_sub_ref_no": ${sino == null ? 'null' : '"${escapeStringForJson(sino)}"'},
+  "store_id": ${storeid == null ? 'null' : '"${escapeStringForJson(storeid)}"'},
+  "payment_method": ${paymentMethod == null ? 'null' : '"${escapeStringForJson(paymentMethod)}"'},
   "payment_status": "Pending",
   "payment_id": null,
   "payment_gateway": null,
   "discount_amount": 0.0,
-  "delivery_date": "${escapeStringForJson(deliveryDate)}",
-  "time_slot": "${escapeStringForJson(timeSlot)}",
-  "device_id": "${escapeStringForJson(deviceid)}",
-  "del_partner_tip": "${escapeStringForJson(deliverypartnerTip)}",
-  "del_partner_instruction": "${escapeStringForJson(deliveryInstruction)}",
-  "order_instruction": "${escapeStringForJson(orderInstruction)}",
-  "platform": "${escapeStringForJson(platform)}"
+  "delivery_date": ${deliveryDate == null ? 'null' : '"${escapeStringForJson(deliveryDate)}"'},
+  "time_slot": ${timeSlot == null ? 'null' : '"${escapeStringForJson(timeSlot)}"'},
+  "device_id": ${deviceid == null ? 'null' : '"${escapeStringForJson(deviceid)}"'},
+  "del_partner_tip": ${deliverypartnerTip == null ? 'null' : '"${escapeStringForJson(deliverypartnerTip)}"'},
+  "del_partner_instruction": ${deliveryInstruction == null ? 'null' : '"${escapeStringForJson(deliveryInstruction)}"'},
+  "order_instruction": ${orderInstruction == null ? 'null' : '"${escapeStringForJson(orderInstruction)}"'},
+  "platform": ${platform == null ? 'null' : '"${escapeStringForJson(platform)}"'}
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'checkouttrailpack',
@@ -4662,12 +4662,12 @@ class TrailpaymentCall {
 
     final ffApiRequestBody = '''
 {
-  "user_id": "${escapeStringForJson(userid)}",
-  "address_id": "${escapeStringForJson(addressid)}",
+  "user_id": ${userid == null ? 'null' : '"${escapeStringForJson(userid)}"'},
+  "address_id": ${addressid == null ? 'null' : '"${escapeStringForJson(addressid)}"'},
   "bank_id": 0,
-  "si_sub_ref_no": "${escapeStringForJson(sino)}",
-  "store_id": "${escapeStringForJson(storeid)}",
-  "payment_method": "${escapeStringForJson(paymentMethod)}",
+  "si_sub_ref_no": ${sino == null ? 'null' : '"${escapeStringForJson(sino)}"'},
+  "store_id": ${storeid == null ? 'null' : '"${escapeStringForJson(storeid)}"'},
+  "payment_method": ${paymentMethod == null ? 'null' : '"${escapeStringForJson(paymentMethod)}"'},
   "payment_status": "Pending",
   "wallet": "no",
   "payment_id": null,
@@ -4675,15 +4675,15 @@ class TrailpaymentCall {
   "coupon_id": 0,
   "coupon_code": "",
   "discount_amount": 0.0,
-  "delivery_date": "${escapeStringForJson(deliveryDate)}",
-  "time_slot": "${escapeStringForJson(timeSlot)}",
-  "del_partner_tip": "${escapeStringForJson(delPartnerTip)}",
-  "del_partner_instruction": "${escapeStringForJson(delPartnerInstruction)}",
-  "device_id": "${escapeStringForJson(deviceid)}",
+  "delivery_date": ${deliveryDate == null ? 'null' : '"${escapeStringForJson(deliveryDate)}"'},
+  "time_slot": ${timeSlot == null ? 'null' : '"${escapeStringForJson(timeSlot)}"'},
+  "del_partner_tip": ${delPartnerTip == null ? 'null' : '"${escapeStringForJson(delPartnerTip)}"'},
+  "del_partner_instruction": ${delPartnerInstruction == null ? 'null' : '"${escapeStringForJson(delPartnerInstruction)}"'},
+  "device_id": ${deviceid == null ? 'null' : '"${escapeStringForJson(deviceid)}"'},
   "totalwalletamt": 0,
   "group_id": "null",
-  "order_instruction": "${escapeStringForJson(orderInstruction)}",
-  "platform": "${escapeStringForJson(platform)}"
+  "order_instruction": ${orderInstruction == null ? 'null' : '"${escapeStringForJson(orderInstruction)}"'},
+  "platform": ${platform == null ? 'null' : '"${escapeStringForJson(platform)}"'}
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'trailpayment',
@@ -4731,22 +4731,22 @@ class FeaturedCategoryCall {
 
     final ffApiRequestBody = '''
 {
-  "store_id": "${escapeStringForJson(storedId)}",
-  "fcat_id": "${escapeStringForJson(fcatId)}",
-  "user_id": "${escapeStringForJson(userid)}",
-  "byname": "${escapeStringForJson(byName)}",
-  "min_price": "${escapeStringForJson(minprice)}",
-  "max_price": "${escapeStringForJson(maxprice)}",
-  "stock": "${escapeStringForJson(stock)}",
-  "min_discount": "${escapeStringForJson(minDiscount)}",
-  "max_discount": "${escapeStringForJson(maxDiscount)}",
-  "min_rating": "${escapeStringForJson(minrating)}",
-  "max_rating": "${escapeStringForJson(maxrating)}",
-  "sort": "${escapeStringForJson(sort)}",
-  "sortname": "${escapeStringForJson(sortName)}",
-  "sortprice": "${escapeStringForJson(sortPrice)}",
-  "platform": "${escapeStringForJson(platform)}",
-  "zone_id": "${escapeStringForJson(zoneID)}"
+  "store_id": ${storedId == null ? 'null' : '"${escapeStringForJson(storedId)}"'},
+  "fcat_id": ${fcatId == null ? 'null' : '"${escapeStringForJson(fcatId)}"'},
+  "user_id": ${userid == null ? 'null' : '"${escapeStringForJson(userid)}"'},
+  "byname": ${byName == null ? 'null' : '"${escapeStringForJson(byName)}"'},
+  "min_price": ${minprice == null ? 'null' : '"${escapeStringForJson(minprice)}"'},
+  "max_price": ${maxprice == null ? 'null' : '"${escapeStringForJson(maxprice)}"'},
+  "stock": ${stock == null ? 'null' : '"${escapeStringForJson(stock)}"'},
+  "min_discount": ${minDiscount == null ? 'null' : '"${escapeStringForJson(minDiscount)}"'},
+  "max_discount": ${maxDiscount == null ? 'null' : '"${escapeStringForJson(maxDiscount)}"'},
+  "min_rating": ${minrating == null ? 'null' : '"${escapeStringForJson(minrating)}"'},
+  "max_rating": ${maxrating == null ? 'null' : '"${escapeStringForJson(maxrating)}"'},
+  "sort": ${sort == null ? 'null' : '"${escapeStringForJson(sort)}"'},
+  "sortname": ${sortName == null ? 'null' : '"${escapeStringForJson(sortName)}"'},
+  "sortprice": ${sortPrice == null ? 'null' : '"${escapeStringForJson(sortPrice)}"'},
+  "platform": ${platform == null ? 'null' : '"${escapeStringForJson(platform)}"'},
+  "zone_id": ${zoneID == null ? 'null' : '"${escapeStringForJson(zoneID)}"'}
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'FeaturedCategory',
@@ -4779,12 +4779,12 @@ class MightHaveMissedCall {
 
     final ffApiRequestBody = '''
 {
-  "store_id": "${escapeStringForJson(storeId)}",
-  "user_id": "${escapeStringForJson(userId)}",
-  "device_id": "${escapeStringForJson(deviceId)}",
-  "type": "${escapeStringForJson(orderType)}",
-  "platform": "${escapeStringForJson(platform)}",
-  "zone_id": "${escapeStringForJson(zoneID)}"
+  "store_id": ${storeId == null ? 'null' : '"${escapeStringForJson(storeId)}"'},
+  "user_id": ${userId == null ? 'null' : '"${escapeStringForJson(userId)}"'},
+  "device_id": ${deviceId == null ? 'null' : '"${escapeStringForJson(deviceId)}"'},
+  "type": ${orderType == null ? 'null' : '"${escapeStringForJson(orderType)}"'},
+  "platform": ${platform == null ? 'null' : '"${escapeStringForJson(platform)}"'},
+  "zone_id": ${zoneID == null ? 'null' : '"${escapeStringForJson(zoneID)}"'}
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'MightHaveMissed',
@@ -4815,10 +4815,10 @@ class UserOrderListCall {
 
     final ffApiRequestBody = '''
 {
-  "user_id": "${escapeStringForJson(userId)}",
-  "store_id": "${escapeStringForJson(storeId)}",
-  "device_id": "${escapeStringForJson(deviceId)}",
-  "platform": "${escapeStringForJson(platform)}"
+  "user_id": ${userId == null ? 'null' : '"${escapeStringForJson(userId)}"'},
+  "store_id": ${storeId == null ? 'null' : '"${escapeStringForJson(storeId)}"'},
+  "device_id": ${deviceId == null ? 'null' : '"${escapeStringForJson(deviceId)}"'},
+  "platform": ${platform == null ? 'null' : '"${escapeStringForJson(platform)}"'}
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'UserOrderList',
@@ -4847,8 +4847,8 @@ class SubscriptionMergedCall {
 
     final ffApiRequestBody = '''
 {
-  "group_id": "${escapeStringForJson(groupId)}",
-  "platform": "${escapeStringForJson(platform)}"
+  "group_id": ${groupId == null ? 'null' : '"${escapeStringForJson(groupId)}"'},
+  "platform": ${platform == null ? 'null' : '"${escapeStringForJson(platform)}"'}
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'SubscriptionMerged',
@@ -4913,10 +4913,10 @@ class AutoRenewalCall {
 
     final ffApiRequestBody = '''
 {
-  "user_id": "${escapeStringForJson(userId)}",
-  "store_order_id": "${escapeStringForJson(storeOrderId)}",
-  "cart_id": "${escapeStringForJson(cartId)}",
-  "platform": "${escapeStringForJson(platform)}"
+  "user_id": ${userId == null ? 'null' : '"${escapeStringForJson(userId)}"'},
+  "store_order_id": ${storeOrderId == null ? 'null' : '"${escapeStringForJson(storeOrderId)}"'},
+  "cart_id": ${cartId == null ? 'null' : '"${escapeStringForJson(cartId)}"'},
+  "platform": ${platform == null ? 'null' : '"${escapeStringForJson(platform)}"'}
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'AutoRenewal',
@@ -4978,10 +4978,10 @@ class TrendingrecentsearchCall {
 
     final ffApiRequestBody = '''
 {
-  "store_id": "${escapeStringForJson(storeid)}",
-  "user_id": "${escapeStringForJson(userid)}",
-  "platform": "${escapeStringForJson(platform)}",
-  "zone_id": "${escapeStringForJson(zoneID)}"
+  "store_id": ${storeid == null ? 'null' : '"${escapeStringForJson(storeid)}"'},
+  "user_id": ${userid == null ? 'null' : '"${escapeStringForJson(userid)}"'},
+  "platform": ${platform == null ? 'null' : '"${escapeStringForJson(platform)}"'},
+  "zone_id": ${zoneID == null ? 'null' : '"${escapeStringForJson(zoneID)}"'}
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'trendingrecentsearch',
@@ -5035,9 +5035,9 @@ class GenerateinvoiceCall {
 
     final ffApiRequestBody = '''
 {
-  "user_id": "${escapeStringForJson(userid)}",
-  "cart_id": "${escapeStringForJson(cartID)}",
-  "platform": "${escapeStringForJson(platform)}"
+  "user_id": ${userid == null ? 'null' : '"${escapeStringForJson(userid)}"'},
+  "cart_id": ${cartID == null ? 'null' : '"${escapeStringForJson(cartID)}"'},
+  "platform": ${platform == null ? 'null' : '"${escapeStringForJson(platform)}"'}
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'generateinvoice',
@@ -5092,23 +5092,23 @@ class SearchbypopupbannerCall {
 
     final ffApiRequestBody = '''
 {
-  "store_id": "${escapeStringForJson(storeid)}",
-  "user_id": "${escapeStringForJson(userid)}",
-  "bannerid": "${escapeStringForJson(bannerid)}",
-  "min_price": "${escapeStringForJson(minPrice)}",
-  "max_price": "${escapeStringForJson(maxPrice)}",
-  "stock": "${escapeStringForJson(stock)}",
-  "min_discount": "${escapeStringForJson(minDiscount)}",
-  "max_discount": "${escapeStringForJson(maxDiscount)}",
-  "sort": "${escapeStringForJson(sort)}",
-  "sortname": "${escapeStringForJson(sortName)}",
-  "sortprice": "${escapeStringForJson(sortPrice)}",
+  "store_id": ${storeid == null ? 'null' : '"${escapeStringForJson(storeid)}"'},
+  "user_id": ${userid == null ? 'null' : '"${escapeStringForJson(userid)}"'},
+  "bannerid": ${bannerid == null ? 'null' : '"${escapeStringForJson(bannerid)}"'},
+  "min_price": ${minPrice == null ? 'null' : '"${escapeStringForJson(minPrice)}"'},
+  "max_price": ${maxPrice == null ? 'null' : '"${escapeStringForJson(maxPrice)}"'},
+  "stock": ${stock == null ? 'null' : '"${escapeStringForJson(stock)}"'},
+  "min_discount": ${minDiscount == null ? 'null' : '"${escapeStringForJson(minDiscount)}"'},
+  "max_discount": ${maxDiscount == null ? 'null' : '"${escapeStringForJson(maxDiscount)}"'},
+  "sort": ${sort == null ? 'null' : '"${escapeStringForJson(sort)}"'},
+  "sortname": ${sortName == null ? 'null' : '"${escapeStringForJson(sortName)}"'},
+  "sortprice": ${sortPrice == null ? 'null' : '"${escapeStringForJson(sortPrice)}"'},
   "cat_id": "null",
   "sub_cat_id": "null",
   "page": ${page},
   "perpage": ${pagePer},
-  "platform": "${escapeStringForJson(platform)}",
-  "zone_id": "${escapeStringForJson(zoneID)}"
+  "platform": ${platform == null ? 'null' : '"${escapeStringForJson(platform)}"'},
+  "zone_id": ${zoneID == null ? 'null' : '"${escapeStringForJson(zoneID)}"'}
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'searchbypopupbanner',
@@ -5188,10 +5188,10 @@ class UpdatecartCall {
     final varientID = _serializeJson(varientIDJson, true);
     final ffApiRequestBody = '''
 {
-  "user_id": "${escapeStringForJson(userID)}",
-  "store_id": "${escapeStringForJson(storeID)}",
+  "user_id": ${userID == null ? 'null' : '"${escapeStringForJson(userID)}"'},
+  "store_id": ${storeID == null ? 'null' : '"${escapeStringForJson(storeID)}"'},
   "varient_id": ${varientID},
-  "product_feature_id": "${escapeStringForJson(productFeatureID)}"
+  "product_feature_id": ${productFeatureID == null ? 'null' : '"${escapeStringForJson(productFeatureID)}"'}
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'updatecart',
@@ -5232,10 +5232,10 @@ class UpdatessubcartCall {
     final varientID = _serializeJson(varientIDJson, true);
     final ffApiRequestBody = '''
 {
-  "user_id": "${escapeStringForJson(userID)}",
-  "store_id": "${escapeStringForJson(storeID)}",
+  "user_id": ${userID == null ? 'null' : '"${escapeStringForJson(userID)}"'},
+  "store_id": ${storeID == null ? 'null' : '"${escapeStringForJson(storeID)}"'},
   "varient_id": ${varientID},
-  "product_feature_id": "${escapeStringForJson(productFeatureID)}"
+  "product_feature_id": ${productFeatureID == null ? 'null' : '"${escapeStringForJson(productFeatureID)}"'}
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'updatessubcart ',
@@ -5275,10 +5275,10 @@ class SpentbywalletCall {
 
     final ffApiRequestBody = '''
 {
-  "user_id": "${escapeStringForJson(userID)}",
-  "start_date": "${escapeStringForJson(startDate)}",
-  "end_date": "${escapeStringForJson(endDate)}",
-  "type": "${escapeStringForJson(type)}"
+  "user_id": ${userID == null ? 'null' : '"${escapeStringForJson(userID)}"'},
+  "start_date": ${startDate == null ? 'null' : '"${escapeStringForJson(startDate)}"'},
+  "end_date": ${endDate == null ? 'null' : '"${escapeStringForJson(endDate)}"'},
+  "type": ${type == null ? 'null' : '"${escapeStringForJson(type)}"'}
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'spentbywallet',
@@ -5318,11 +5318,11 @@ class UpdateselectedaddressCall {
 
     final ffApiRequestBody = '''
 {
-  "zone_id": "${escapeStringForJson(zoneID)}",
-  "user_id": "${escapeStringForJson(userID)}",
-  "store_id": "${escapeStringForJson(storeID)}",
-  "lat": "${escapeStringForJson(lat)}",
-  "lng": "${escapeStringForJson(lng)}"
+  "zone_id": ${zoneID == null ? 'null' : '"${escapeStringForJson(zoneID)}"'},
+  "user_id": ${userID == null ? 'null' : '"${escapeStringForJson(userID)}"'},
+  "store_id": ${storeID == null ? 'null' : '"${escapeStringForJson(storeID)}"'},
+  "lat": ${lat == null ? 'null' : '"${escapeStringForJson(lat)}"'},
+  "lng": ${lng == null ? 'null' : '"${escapeStringForJson(lng)}"'}
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'updateselectedaddress',
@@ -5366,10 +5366,10 @@ class AddtosavesubcartCall {
 
     final ffApiRequestBody = '''
 {
-  "user_id": "${escapeStringForJson(userID)}",
-  "varient_id": "${escapeStringForJson(variantID)}",
-  "order_cart_id": "${escapeStringForJson(orderCartID)}",
-  "platform": "${escapeStringForJson(platform)}"
+  "user_id": ${userID == null ? 'null' : '"${escapeStringForJson(userID)}"'},
+  "varient_id": ${variantID == null ? 'null' : '"${escapeStringForJson(variantID)}"'},
+  "order_cart_id": ${orderCartID == null ? 'null' : '"${escapeStringForJson(orderCartID)}"'},
+  "platform": ${platform == null ? 'null' : '"${escapeStringForJson(platform)}"'}
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'addtosavesubcart',
@@ -5413,10 +5413,10 @@ class AddtosavecartCall {
 
     final ffApiRequestBody = '''
 {
-  "user_id": "${escapeStringForJson(userID)}",
-  "varient_id": "${escapeStringForJson(variantID)}",
-  "order_cart_id": "${escapeStringForJson(orderCartID)}",
-  "platform": "${escapeStringForJson(platform)}"
+  "user_id": ${userID == null ? 'null' : '"${escapeStringForJson(userID)}"'},
+  "varient_id": ${variantID == null ? 'null' : '"${escapeStringForJson(variantID)}"'},
+  "order_cart_id": ${orderCartID == null ? 'null' : '"${escapeStringForJson(orderCartID)}"'},
+  "platform": ${platform == null ? 'null' : '"${escapeStringForJson(platform)}"'}
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'addtosavecart',
@@ -5459,9 +5459,9 @@ class RemovesavecartCall {
 
     final ffApiRequestBody = '''
 {
-  "user_id": "${escapeStringForJson(userID)}",
-  "varient_id": "${escapeStringForJson(variantID)}",
-  "is_subscription": "${escapeStringForJson(isSubscription)}"
+  "user_id": ${userID == null ? 'null' : '"${escapeStringForJson(userID)}"'},
+  "varient_id": ${variantID == null ? 'null' : '"${escapeStringForJson(variantID)}"'},
+  "is_subscription": ${isSubscription == null ? 'null' : '"${escapeStringForJson(isSubscription)}"'}
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'removesavecart',
@@ -5503,8 +5503,8 @@ class PaymentabandonCall {
 
     final ffApiRequestBody = '''
 {
-  "user_id": "${escapeStringForJson(userID)}",
-  "group_id": "${escapeStringForJson(groupID)}",
+  "user_id": ${userID == null ? 'null' : '"${escapeStringForJson(userID)}"'},
+  "group_id": ${groupID == null ? 'null' : '"${escapeStringForJson(groupID)}"'},
   "reason": "user_back_from_payment"
 }''';
     return ApiManager.instance.makeApiCall(
@@ -5543,7 +5543,7 @@ class PaymentabandonCall {
 /// Start Quickart Zone Group Code
 
 class QuickartZoneGroup {
-  static String getBaseUrl() => 'https://pvtiycfiimwxnruqyvqq.supabase.co/';
+  static String getBaseUrl() => 'https://joxuekpahnwqfhpwpyky.supabase.co/';
   static Map<String, String> headers = {};
   static GetZoneIDCall getZoneIDCall = GetZoneIDCall();
 }
@@ -5559,14 +5559,14 @@ class GetZoneIDCall {
 
     final ffApiRequestBody = '''
 {
-  "lat": "${escapeStringForJson(lat)}",
-  "lng": "${escapeStringForJson(lng)}",
-  "user_id": "${escapeStringForJson(userid)}",
-  "address_id": "${escapeStringForJson(addressID)}"
+  "lat": ${lat == null ? 'null' : '"${escapeStringForJson(lat)}"'},
+  "lng": ${lng == null ? 'null' : '"${escapeStringForJson(lng)}"'},
+  "user_id": ${userid == null ? 'null' : '"${escapeStringForJson(userid)}"'},
+  "address_id": ${addressID == null ? 'null' : '"${escapeStringForJson(addressID)}"'}
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'getZoneID',
-      apiUrl: '${baseUrl}functions/v1/resolve-zone',
+      apiUrl: '${baseUrl}functions/v1/resolve-zone-live',
       callType: ApiCallType.POST,
       headers: {},
       params: {},
@@ -5705,18 +5705,18 @@ class ProductsearchCall {
   }) async {
     final ffApiRequestBody = '''
 {
-  "user_id": "${escapeStringForJson(userid)}",
-  "store_id": "${escapeStringForJson(storeid)}",
-  "keyword": "${escapeStringForJson(keyword)}",
+  "user_id": ${userid == null ? 'null' : '"${escapeStringForJson(userid)}"'},
+  "store_id": ${storeid == null ? 'null' : '"${escapeStringForJson(storeid)}"'},
+  "keyword": ${keyword == null ? 'null' : '"${escapeStringForJson(keyword)}"'},
   "byname": "null",
   "min_price": "null",
   "max_price": "null",
   "stock": "null",
-  "min_discount": "${escapeStringForJson(minDiscount)}",
-  "max_discount": "${escapeStringForJson(maxDiscount)}",
+  "min_discount": ${minDiscount == null ? 'null' : '"${escapeStringForJson(minDiscount)}"'},
+  "max_discount": ${maxDiscount == null ? 'null' : '"${escapeStringForJson(maxDiscount)}"'},
   "sort": "null",
   "sortname": "null",
-  "sortprice": "${escapeStringForJson(sortPrice)}",
+  "sortprice": ${sortPrice == null ? 'null' : '"${escapeStringForJson(sortPrice)}"'},
   "cat_id": "null",
   "sub_cat_id": "null",
   "device_id": "",
@@ -5724,12 +5724,13 @@ class ProductsearchCall {
   "max_rating": "null",
   "perpage": 200,
   "page": 1,
-  "platform": "${escapeStringForJson(platform)}",
-  "zone_id": "${escapeStringForJson(zoneId)}"
+  "platform": ${platform == null ? 'null' : '"${escapeStringForJson(platform)}"'},
+  "zone_id": ${zoneId == null ? 'null' : '"${escapeStringForJson(zoneId)}"'}
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'productsearch',
-      apiUrl: 'https://pvtiycfiimwxnruqyvqq.supabase.co/functions/v1/rapid-api',
+      apiUrl:
+          'https://joxuekpahnwqfhpwpyky.supabase.co/functions/v1/product-search',
       callType: ApiCallType.POST,
       headers: {},
       params: {},
@@ -5796,9 +5797,6 @@ String? escapeStringForJson(String? input) {
   if (input == null) {
     return null;
   }
-  return input
-      .replaceAll('\\', '\\\\')
-      .replaceAll('"', '\\"')
-      .replaceAll('\n', '\\n')
-      .replaceAll('\t', '\\t');
+  final encoded = jsonEncode(input);
+  return encoded.substring(1, encoded.length - 1);
 }

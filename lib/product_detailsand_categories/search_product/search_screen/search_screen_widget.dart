@@ -203,13 +203,6 @@ class _SearchScreenWidgetState extends State<SearchScreenWidget> {
                                                     logFirebaseEvent(
                                                         'SEARCH_SCREEN_TextField_u34f8mc4_ON_TEXT');
                                                     logFirebaseEvent(
-                                                        'TextField_navigate_to');
-
-                                                    context.pushNamed(
-                                                        SearchResultScreenWidget
-                                                            .routeName);
-
-                                                    logFirebaseEvent(
                                                         'TextField_custom_action');
                                                     await actions
                                                         .facebookEventClass(
@@ -240,6 +233,13 @@ class _SearchScreenWidgetState extends State<SearchScreenWidget> {
                                                             .searchScreenNaviagtion =
                                                         'subscription';
                                                     safeSetState(() {});
+                                                    logFirebaseEvent(
+                                                        'TextField_navigate_to');
+
+                                                    context.pushNamed(
+                                                        SearchResultScreenWidget
+                                                            .routeName);
+
                                                     logFirebaseEvent(
                                                         'TextField_google_analytics_event');
                                                     logFirebaseEvent(

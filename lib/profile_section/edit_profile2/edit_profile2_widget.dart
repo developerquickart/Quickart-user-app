@@ -1673,6 +1673,24 @@ class _EditProfile2WidgetState extends State<EditProfile2Widget> {
                                       FFAppState().userPhoneNo =
                                           FFAppState().phoneNo;
                                       FFAppState().update(() {});
+                                      logFirebaseEvent('Button_custom_action');
+                                      await actions.facebookEventClass(
+                                        FFAppState().userID,
+                                        _model.isPhoneSelected == true
+                                            ? FFAppState().userPhoneNo
+                                            : FFAppState().userEmail,
+                                        '0',
+                                        0.0,
+                                        0,
+                                        0.0,
+                                        'profileUpdate',
+                                        FFAppState().emptyJson,
+                                        '0',
+                                        '0',
+                                        '0',
+                                        '0',
+                                        '0',
+                                      );
                                       logFirebaseEvent('Button_show_snack_bar');
                                       ScaffoldMessenger.of(context)
                                           .showSnackBar(

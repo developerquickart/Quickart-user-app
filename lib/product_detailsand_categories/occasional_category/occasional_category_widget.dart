@@ -130,6 +130,26 @@ class _OccasionalCategoryWidgetState extends State<OccasionalCategoryWidget> {
           );
         }
       }
+      logFirebaseEvent('OccasionalCategory_custom_action');
+      await actions.facebookEventClass(
+        '0',
+        widget.name != null && widget.name != ''
+            ? ((String var1) {
+                return var1.replaceAll(RegExp('_'), ' ');
+              }(widget.name!))
+            : FFAppState().categoryName,
+        'occasional category',
+        0.0,
+        0,
+        0.0,
+        'productList',
+        FFAppState().emptyJson,
+        'additonal category',
+        FFAppState().userID,
+        '0',
+        '0',
+        '0',
+      );
     });
 
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));

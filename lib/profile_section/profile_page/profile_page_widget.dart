@@ -87,6 +87,32 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
         logFirebaseEvent('profilePage_custom_action');
         _model.deviceUUID = await actions.getDeviceID();
       }
+      logFirebaseEvent('profilePage_custom_action');
+      await actions.facebookEventClass(
+        FFAppState().userID,
+        (FFAppState().usserType == 'guest') &&
+                (FFAppConstants.zeroValue ==
+                    getJsonField(
+                      (_model.apiShowProfile?.jsonBody ?? ''),
+                      r'''$.data.is_verified''',
+                    ))
+            ? 'Guest'
+            : getJsonField(
+                (_model.apiShowProfile?.jsonBody ?? ''),
+                r'''$.data.name''',
+              ).toString(),
+        '0',
+        0.0,
+        0,
+        0.0,
+        'profile',
+        FFAppState().emptyJson,
+        '0',
+        '0',
+        '0',
+        '0',
+        '0',
+      );
     });
 
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
@@ -2553,6 +2579,26 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                                                                     .appInfo,
                                                                 r'''$.referral_code''',
                                                               ).toString(),
+                                                            );
+                                                            logFirebaseEvent(
+                                                                'IconButton_custom_action');
+                                                            await actions
+                                                                .facebookEventClass(
+                                                              _model.refCodep!,
+                                                              FFAppState()
+                                                                  .userID,
+                                                              '0',
+                                                              0.0,
+                                                              0,
+                                                              0.0,
+                                                              'appShare',
+                                                              FFAppState()
+                                                                  .emptyJson,
+                                                              '0',
+                                                              '0',
+                                                              '0',
+                                                              '0',
+                                                              '0',
                                                             );
                                                             logFirebaseEvent(
                                                                 'IconButton_share');

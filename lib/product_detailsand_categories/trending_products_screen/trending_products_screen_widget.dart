@@ -114,6 +114,22 @@ class _TrendingProductsScreenWidgetState
           );
         }
       }
+      logFirebaseEvent('TrendingProductsScreen_custom_action');
+      await actions.facebookEventClass(
+        '0',
+        'recent selling',
+        'Trending category',
+        0.0,
+        0,
+        0.0,
+        'productList',
+        FFAppState().emptyJson,
+        'Trending category',
+        FFAppState().userID,
+        '0',
+        '0',
+        '0',
+      );
     });
 
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));

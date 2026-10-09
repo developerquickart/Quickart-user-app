@@ -13,6 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:pointer_interceptor/pointer_interceptor.dart';
 import 'package:provider/provider.dart';
 import 'add_address_screen_model.dart';
 export 'add_address_screen_model.dart';
@@ -2379,6 +2380,29 @@ class _AddAddressScreenWidgetState extends State<AddAddressScreenWidget> {
                                                                   .primaryPurpleE4D8F5,
                                                         ),
                                                       );
+                                                      logFirebaseEvent(
+                                                          'Button_custom_action');
+                                                      await actions
+                                                          .facebookEventClass(
+                                                        'addadddress',
+                                                        getJsonField(
+                                                          (_model.apiResultAddAddress
+                                                                  ?.jsonBody ??
+                                                              ''),
+                                                          r'''$.status''',
+                                                        ).toString(),
+                                                        'Add Address',
+                                                        0.0,
+                                                        0,
+                                                        0.0,
+                                                        'apiError',
+                                                        FFAppState().emptyJson,
+                                                        '0',
+                                                        FFAppState().userID,
+                                                        '0',
+                                                        '0',
+                                                        '0',
+                                                      );
                                                     }
                                                   } else {
                                                     logFirebaseEvent(
@@ -2571,6 +2595,29 @@ class _AddAddressScreenWidgetState extends State<AddAddressScreenWidget> {
                                                               FFAppConstants
                                                                   .primaryPurpleE4D8F5,
                                                         ),
+                                                      );
+                                                      logFirebaseEvent(
+                                                          'Button_custom_action');
+                                                      await actions
+                                                          .facebookEventClass(
+                                                        'editadddress',
+                                                        getJsonField(
+                                                          (_model.apiResultEditAddress
+                                                                  ?.jsonBody ??
+                                                              ''),
+                                                          r'''$.status''',
+                                                        ).toString(),
+                                                        'Edit Address',
+                                                        0.0,
+                                                        0,
+                                                        0.0,
+                                                        'apiError',
+                                                        FFAppState().emptyJson,
+                                                        '0',
+                                                        FFAppState().userID,
+                                                        '0',
+                                                        '0',
+                                                        '0',
                                                       );
                                                     }
                                                   }
@@ -2817,116 +2864,131 @@ class _AddAddressScreenWidgetState extends State<AddAddressScreenWidget> {
               if (_model.doorImageAdd == true)
                 Align(
                   alignment: AlignmentDirectional(0.0, 0.0),
-                  child: Container(
-                    width: MediaQuery.sizeOf(context).width * 1.0,
-                    height: MediaQuery.sizeOf(context).height * 1.0,
-                    decoration: BoxDecoration(
-                      color: Color(0x5114181B),
-                    ),
-                    child: InkWell(
-                      splashColor: Colors.transparent,
-                      focusColor: Colors.transparent,
-                      hoverColor: Colors.transparent,
-                      highlightColor: Colors.transparent,
-                      onTap: () async {
-                        logFirebaseEvent(
-                            'ADD_ADDRESS_SCREEN_Column_1tcaf264_ON_TA');
-                        logFirebaseEvent('Column_update_page_state');
-                        _model.doorImageAdd = false;
-                        safeSetState(() {});
-                      },
-                      child: Column(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Align(
-                            alignment: AlignmentDirectional(0.0, 0.0),
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(8.0),
-                              child: Image.network(
-                                getJsonField(
-                                  FFAppState().addressModel,
-                                  r'''$.doorimage''',
-                                ).toString(),
-                                width: MediaQuery.sizeOf(context).width * 0.9,
-                                height: MediaQuery.sizeOf(context).height * 0.5,
-                                fit: BoxFit.cover,
+                  child: PointerInterceptor(
+                    intercepting: isWeb,
+                    child: Container(
+                      width: MediaQuery.sizeOf(context).width * 1.0,
+                      height: MediaQuery.sizeOf(context).height * 1.0,
+                      decoration: BoxDecoration(
+                        color: Color(0x5114181B),
+                      ),
+                      child: InkWell(
+                        splashColor: Colors.transparent,
+                        focusColor: Colors.transparent,
+                        hoverColor: Colors.transparent,
+                        highlightColor: Colors.transparent,
+                        onTap: () async {
+                          logFirebaseEvent(
+                              'ADD_ADDRESS_SCREEN_Column_1tcaf264_ON_TA');
+                          logFirebaseEvent('Column_update_page_state');
+                          _model.doorImageAdd = false;
+                          safeSetState(() {});
+                        },
+                        child: Column(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Align(
+                              alignment: AlignmentDirectional(0.0, 0.0),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(8.0),
+                                child: Image.network(
+                                  getJsonField(
+                                    FFAppState().addressModel,
+                                    r'''$.doorimage''',
+                                  ).toString(),
+                                  width: MediaQuery.sizeOf(context).width * 0.9,
+                                  height:
+                                      MediaQuery.sizeOf(context).height * 0.5,
+                                  fit: BoxFit.cover,
+                                ),
                               ),
                             ),
-                          ),
-                          Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 5.0, 0.0, 0.0),
-                            child: FFButtonWidget(
-                              onPressed: () async {
-                                logFirebaseEvent(
-                                    'ADD_ADDRESS_SCREEN_EDIT_DOOR_IMAGE_BTN_O');
-                                logFirebaseEvent(
-                                    'Button_store_media_for_upload');
-                                final selectedMedia =
-                                    await selectMediaWithSourceBottomSheet(
-                                  context: context,
-                                  allowPhoto: true,
-                                );
-                                if (selectedMedia != null &&
-                                    selectedMedia.every((m) =>
-                                        validateFileFormat(
-                                            m.storagePath, context))) {
-                                  safeSetState(() => _model
-                                      .isDataUploading_uploadData63y1 = true);
-                                  var selectedUploadedFiles =
-                                      <FFUploadedFile>[];
+                            Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 5.0, 0.0, 0.0),
+                              child: FFButtonWidget(
+                                onPressed: () async {
+                                  logFirebaseEvent(
+                                      'ADD_ADDRESS_SCREEN_EDIT_DOOR_IMAGE_BTN_O');
+                                  logFirebaseEvent(
+                                      'Button_store_media_for_upload');
+                                  final selectedMedia =
+                                      await selectMediaWithSourceBottomSheet(
+                                    context: context,
+                                    allowPhoto: true,
+                                  );
+                                  if (selectedMedia != null &&
+                                      selectedMedia.every((m) =>
+                                          validateFileFormat(
+                                              m.storagePath, context))) {
+                                    safeSetState(() => _model
+                                        .isDataUploading_uploadData63y1 = true);
+                                    var selectedUploadedFiles =
+                                        <FFUploadedFile>[];
 
-                                  try {
-                                    selectedUploadedFiles = selectedMedia
-                                        .map((m) => FFUploadedFile(
-                                              name:
-                                                  m.storagePath.split('/').last,
-                                              bytes: m.bytes,
-                                              height: m.dimensions?.height,
-                                              width: m.dimensions?.width,
-                                              blurHash: m.blurHash,
-                                              originalFilename:
-                                                  m.originalFilename,
-                                            ))
-                                        .toList();
-                                  } finally {
-                                    _model.isDataUploading_uploadData63y1 =
-                                        false;
+                                    try {
+                                      selectedUploadedFiles = selectedMedia
+                                          .map((m) => FFUploadedFile(
+                                                name: m.storagePath
+                                                    .split('/')
+                                                    .last,
+                                                bytes: m.bytes,
+                                                height: m.dimensions?.height,
+                                                width: m.dimensions?.width,
+                                                blurHash: m.blurHash,
+                                                originalFilename:
+                                                    m.originalFilename,
+                                              ))
+                                          .toList();
+                                    } finally {
+                                      _model.isDataUploading_uploadData63y1 =
+                                          false;
+                                    }
+                                    if (selectedUploadedFiles.length ==
+                                        selectedMedia.length) {
+                                      safeSetState(() {
+                                        _model.uploadedLocalFile_uploadData63y1 =
+                                            selectedUploadedFiles.first;
+                                      });
+                                    } else {
+                                      safeSetState(() {});
+                                      return;
+                                    }
                                   }
-                                  if (selectedUploadedFiles.length ==
-                                      selectedMedia.length) {
-                                    safeSetState(() {
-                                      _model.uploadedLocalFile_uploadData63y1 =
-                                          selectedUploadedFiles.first;
-                                    });
-                                  } else {
-                                    safeSetState(() {});
-                                    return;
-                                  }
-                                }
 
-                                logFirebaseEvent('Button_update_page_state');
-                                _model.doorImageAdd = false;
-                                safeSetState(() {});
-                              },
-                              text: 'Edit Door Image',
-                              icon: Icon(
-                                Icons.camera_outdoor,
-                                size: 22.0,
-                              ),
-                              options: FFButtonOptions(
-                                width: MediaQuery.sizeOf(context).width * 0.6,
-                                height: 40.0,
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    16.0, 0.0, 16.0, 0.0),
-                                iconPadding: EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 0.0, 0.0, 0.0),
-                                color: FFAppConstants.indigoColor,
-                                textStyle: FlutterFlowTheme.of(context)
-                                    .titleSmall
-                                    .override(
-                                      font: GoogleFonts.readexPro(
+                                  logFirebaseEvent('Button_update_page_state');
+                                  _model.doorImageAdd = false;
+                                  safeSetState(() {});
+                                },
+                                text: 'Edit Door Image',
+                                icon: Icon(
+                                  Icons.camera_outdoor,
+                                  size: 22.0,
+                                ),
+                                options: FFButtonOptions(
+                                  width: MediaQuery.sizeOf(context).width * 0.6,
+                                  height: 40.0,
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      16.0, 0.0, 16.0, 0.0),
+                                  iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                      0.0, 0.0, 0.0, 0.0),
+                                  color: FFAppConstants.indigoColor,
+                                  textStyle: FlutterFlowTheme.of(context)
+                                      .titleSmall
+                                      .override(
+                                        font: GoogleFonts.readexPro(
+                                          fontWeight:
+                                              FlutterFlowTheme.of(context)
+                                                  .titleSmall
+                                                  .fontWeight,
+                                          fontStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .titleSmall
+                                                  .fontStyle,
+                                        ),
+                                        color: Colors.white,
+                                        letterSpacing: 0.0,
                                         fontWeight: FlutterFlowTheme.of(context)
                                             .titleSmall
                                             .fontWeight,
@@ -2934,21 +2996,13 @@ class _AddAddressScreenWidgetState extends State<AddAddressScreenWidget> {
                                             .titleSmall
                                             .fontStyle,
                                       ),
-                                      color: Colors.white,
-                                      letterSpacing: 0.0,
-                                      fontWeight: FlutterFlowTheme.of(context)
-                                          .titleSmall
-                                          .fontWeight,
-                                      fontStyle: FlutterFlowTheme.of(context)
-                                          .titleSmall
-                                          .fontStyle,
-                                    ),
-                                elevation: 0.0,
-                                borderRadius: BorderRadius.circular(8.0),
+                                  elevation: 0.0,
+                                  borderRadius: BorderRadius.circular(8.0),
+                                ),
                               ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                   ),
@@ -2956,122 +3010,138 @@ class _AddAddressScreenWidgetState extends State<AddAddressScreenWidget> {
               if (_model.doorImageEdit == true)
                 Align(
                   alignment: AlignmentDirectional(0.0, 0.0),
-                  child: Container(
-                    width: MediaQuery.sizeOf(context).width * 1.0,
-                    height: MediaQuery.sizeOf(context).height * 1.0,
-                    decoration: BoxDecoration(
-                      color: Color(0x5114181B),
-                    ),
-                    child: InkWell(
-                      splashColor: Colors.transparent,
-                      focusColor: Colors.transparent,
-                      hoverColor: Colors.transparent,
-                      highlightColor: Colors.transparent,
-                      onTap: () async {
-                        logFirebaseEvent(
-                            'ADD_ADDRESS_SCREEN_Column_9iazwvci_ON_TA');
-                        logFirebaseEvent('Column_update_page_state');
-                        _model.doorImageEdit = false;
-                        safeSetState(() {});
-                      },
-                      child: Column(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Align(
-                            alignment: AlignmentDirectional(0.0, 0.0),
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(8.0),
-                              child: Image.network(
-                                getJsonField(
-                                  FFAppState().addressModel,
-                                  r'''$.doorimage''',
-                                ).toString(),
-                                width: MediaQuery.sizeOf(context).width * 0.9,
-                                height: MediaQuery.sizeOf(context).height * 0.5,
-                                fit: BoxFit.cover,
+                  child: PointerInterceptor(
+                    intercepting: isWeb,
+                    child: Container(
+                      width: MediaQuery.sizeOf(context).width * 1.0,
+                      height: MediaQuery.sizeOf(context).height * 1.0,
+                      decoration: BoxDecoration(
+                        color: Color(0x5114181B),
+                      ),
+                      child: InkWell(
+                        splashColor: Colors.transparent,
+                        focusColor: Colors.transparent,
+                        hoverColor: Colors.transparent,
+                        highlightColor: Colors.transparent,
+                        onTap: () async {
+                          logFirebaseEvent(
+                              'ADD_ADDRESS_SCREEN_Column_9iazwvci_ON_TA');
+                          logFirebaseEvent('Column_update_page_state');
+                          _model.doorImageEdit = false;
+                          safeSetState(() {});
+                        },
+                        child: Column(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Align(
+                              alignment: AlignmentDirectional(0.0, 0.0),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(8.0),
+                                child: Image.network(
+                                  getJsonField(
+                                    FFAppState().addressModel,
+                                    r'''$.doorimage''',
+                                  ).toString(),
+                                  width: MediaQuery.sizeOf(context).width * 0.9,
+                                  height:
+                                      MediaQuery.sizeOf(context).height * 0.5,
+                                  fit: BoxFit.cover,
+                                ),
                               ),
                             ),
-                          ),
-                          Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 5.0, 0.0, 0.0),
-                            child: FFButtonWidget(
-                              onPressed: () async {
-                                logFirebaseEvent(
-                                    'ADD_ADDRESS_SCREEN_EDIT_DOOR_IMAGE_BTN_O');
-                                logFirebaseEvent(
-                                    'Button_store_media_for_upload');
-                                final selectedMedia =
-                                    await selectMediaWithSourceBottomSheet(
-                                  context: context,
-                                  allowPhoto: true,
-                                );
-                                if (selectedMedia != null &&
-                                    selectedMedia.every((m) =>
-                                        validateFileFormat(
-                                            m.storagePath, context))) {
-                                  safeSetState(() => _model
-                                      .isDataUploading_uploadData63y = true);
-                                  var selectedUploadedFiles =
-                                      <FFUploadedFile>[];
+                            Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 5.0, 0.0, 0.0),
+                              child: FFButtonWidget(
+                                onPressed: () async {
+                                  logFirebaseEvent(
+                                      'ADD_ADDRESS_SCREEN_EDIT_DOOR_IMAGE_BTN_O');
+                                  logFirebaseEvent(
+                                      'Button_store_media_for_upload');
+                                  final selectedMedia =
+                                      await selectMediaWithSourceBottomSheet(
+                                    context: context,
+                                    allowPhoto: true,
+                                  );
+                                  if (selectedMedia != null &&
+                                      selectedMedia.every((m) =>
+                                          validateFileFormat(
+                                              m.storagePath, context))) {
+                                    safeSetState(() => _model
+                                        .isDataUploading_uploadData63y = true);
+                                    var selectedUploadedFiles =
+                                        <FFUploadedFile>[];
 
-                                  try {
-                                    selectedUploadedFiles = selectedMedia
-                                        .map((m) => FFUploadedFile(
-                                              name:
-                                                  m.storagePath.split('/').last,
-                                              bytes: m.bytes,
-                                              height: m.dimensions?.height,
-                                              width: m.dimensions?.width,
-                                              blurHash: m.blurHash,
-                                              originalFilename:
-                                                  m.originalFilename,
-                                            ))
-                                        .toList();
-                                  } finally {
-                                    _model.isDataUploading_uploadData63y =
-                                        false;
+                                    try {
+                                      selectedUploadedFiles = selectedMedia
+                                          .map((m) => FFUploadedFile(
+                                                name: m.storagePath
+                                                    .split('/')
+                                                    .last,
+                                                bytes: m.bytes,
+                                                height: m.dimensions?.height,
+                                                width: m.dimensions?.width,
+                                                blurHash: m.blurHash,
+                                                originalFilename:
+                                                    m.originalFilename,
+                                              ))
+                                          .toList();
+                                    } finally {
+                                      _model.isDataUploading_uploadData63y =
+                                          false;
+                                    }
+                                    if (selectedUploadedFiles.length ==
+                                        selectedMedia.length) {
+                                      safeSetState(() {
+                                        _model.uploadedLocalFile_uploadData63y =
+                                            selectedUploadedFiles.first;
+                                      });
+                                    } else {
+                                      safeSetState(() {});
+                                      return;
+                                    }
                                   }
-                                  if (selectedUploadedFiles.length ==
-                                      selectedMedia.length) {
-                                    safeSetState(() {
-                                      _model.uploadedLocalFile_uploadData63y =
-                                          selectedUploadedFiles.first;
-                                    });
-                                  } else {
+
+                                  if ((_model.uploadedLocalFile_uploadData63y
+                                              .bytes?.isNotEmpty ??
+                                          false)) {
+                                    logFirebaseEvent(
+                                        'Button_update_page_state');
+                                    _model.doorImageAdd = false;
+                                    _model.doorImageEdit = false;
+                                    _model.imgUploadNewEdit = true;
                                     safeSetState(() {});
-                                    return;
                                   }
-                                }
-
-                                if ((_model.uploadedLocalFile_uploadData63y
-                                            .bytes?.isNotEmpty ??
-                                        false)) {
-                                  logFirebaseEvent('Button_update_page_state');
-                                  _model.doorImageAdd = false;
-                                  _model.doorImageEdit = false;
-                                  _model.imgUploadNewEdit = true;
-                                  safeSetState(() {});
-                                }
-                              },
-                              text: 'Edit Door Image',
-                              icon: Icon(
-                                Icons.camera_outdoor,
-                                size: 22.0,
-                              ),
-                              options: FFButtonOptions(
-                                width: MediaQuery.sizeOf(context).width * 0.6,
-                                height: 40.0,
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    16.0, 0.0, 16.0, 0.0),
-                                iconPadding: EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 0.0, 0.0, 0.0),
-                                color: FFAppConstants.indigoColor,
-                                textStyle: FlutterFlowTheme.of(context)
-                                    .titleSmall
-                                    .override(
-                                      font: GoogleFonts.readexPro(
+                                },
+                                text: 'Edit Door Image',
+                                icon: Icon(
+                                  Icons.camera_outdoor,
+                                  size: 22.0,
+                                ),
+                                options: FFButtonOptions(
+                                  width: MediaQuery.sizeOf(context).width * 0.6,
+                                  height: 40.0,
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      16.0, 0.0, 16.0, 0.0),
+                                  iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                      0.0, 0.0, 0.0, 0.0),
+                                  color: FFAppConstants.indigoColor,
+                                  textStyle: FlutterFlowTheme.of(context)
+                                      .titleSmall
+                                      .override(
+                                        font: GoogleFonts.readexPro(
+                                          fontWeight:
+                                              FlutterFlowTheme.of(context)
+                                                  .titleSmall
+                                                  .fontWeight,
+                                          fontStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .titleSmall
+                                                  .fontStyle,
+                                        ),
+                                        color: Colors.white,
+                                        letterSpacing: 0.0,
                                         fontWeight: FlutterFlowTheme.of(context)
                                             .titleSmall
                                             .fontWeight,
@@ -3079,21 +3149,13 @@ class _AddAddressScreenWidgetState extends State<AddAddressScreenWidget> {
                                             .titleSmall
                                             .fontStyle,
                                       ),
-                                      color: Colors.white,
-                                      letterSpacing: 0.0,
-                                      fontWeight: FlutterFlowTheme.of(context)
-                                          .titleSmall
-                                          .fontWeight,
-                                      fontStyle: FlutterFlowTheme.of(context)
-                                          .titleSmall
-                                          .fontStyle,
-                                    ),
-                                elevation: 0.0,
-                                borderRadius: BorderRadius.circular(8.0),
+                                  elevation: 0.0,
+                                  borderRadius: BorderRadius.circular(8.0),
+                                ),
                               ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                   ),

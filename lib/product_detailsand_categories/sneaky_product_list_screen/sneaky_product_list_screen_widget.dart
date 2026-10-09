@@ -16,6 +16,7 @@ import 'dart:async';
 import 'package:stop_watch_timer/stop_watch_timer.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -62,6 +63,27 @@ class _SneakyProductListScreenWidgetState
 
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'SneakyProductListScreen'});
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      logFirebaseEvent('SNEAKY_PRODUCT_LIST_SCREEN_SneakyProduct');
+      logFirebaseEvent('SneakyProductListScreen_custom_action');
+      await actions.facebookEventClass(
+        '0',
+        'sneaky product list',
+        'sneaky product category',
+        0.0,
+        0,
+        0.0,
+        'productList',
+        FFAppState().emptyJson,
+        'senaky product category',
+        FFAppState().userID,
+        '0',
+        '0',
+        '0',
+      );
+    });
+
     getCurrentUserLocation(defaultLocation: LatLng(0.0, 0.0), cached: true)
         .then((loc) => safeSetState(() => currentUserLocationValue = loc));
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));

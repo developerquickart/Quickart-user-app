@@ -2,6 +2,7 @@ import '/backend/api_requests/api_calls.dart';
 import '/components/custom_alert_dailog/custom_alert_dailog_widget.dart';
 import '/components/empty_data_two_line_component/empty_data_two_line_component_widget.dart';
 import '/components/similar_pproduct/similar_pproduct_widget.dart';
+import '/flutter_flow/ff_builtin_enums.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -769,6 +770,46 @@ class _ProductDetailsScreenWidgetState
                                                               ).toString();
                                                               safeSetState(
                                                                   () {});
+                                                              logFirebaseEvent(
+                                                                  'Icon_custom_action');
+                                                              await actions
+                                                                  .facebookEventClass(
+                                                                getJsonField(
+                                                                  productDetailsScreenProductDetailResponse
+                                                                      .jsonBody,
+                                                                  r'''$.detail.product_id''',
+                                                                ).toString(),
+                                                                getJsonField(
+                                                                  productDetailsScreenProductDetailResponse
+                                                                      .jsonBody,
+                                                                  r'''$.detail.product_name''',
+                                                                ).toString(),
+                                                                '0',
+                                                                functions
+                                                                    .stringToDouble(
+                                                                        getJsonField(
+                                                                  productDetailsScreenProductDetailResponse
+                                                                      .jsonBody,
+                                                                  r'''$.detail.price''',
+                                                                ).toString()),
+                                                                0,
+                                                                functions
+                                                                    .stringToDouble(
+                                                                        getJsonField(
+                                                                  productDetailsScreenProductDetailResponse
+                                                                      .jsonBody,
+                                                                  r'''$.detail.mrp''',
+                                                                ).toString()),
+                                                                'productShare',
+                                                                FFAppState()
+                                                                    .emptyJson,
+                                                                '0',
+                                                                FFAppState()
+                                                                    .userID,
+                                                                '0',
+                                                                '0',
+                                                                '0',
+                                                              );
                                                               logFirebaseEvent(
                                                                   'Icon_share');
                                                               await Share.share(
@@ -1983,8 +2024,17 @@ class _ProductDetailsScreenWidgetState
                                           true) {
                                         return Row(
                                           mainAxisSize: MainAxisSize.max,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
+                                          mainAxisAlignment: ((FFAppConstants
+                                                          .quickAvailability ==
+                                                      getJsonField(
+                                                        productDetailsScreenProductDetailResponse
+                                                            .jsonBody,
+                                                        r'''$.detail.availability''',
+                                                      ).toString()
+                                                  ? FFMainAxisAlignment.start
+                                                  : FFMainAxisAlignment
+                                                      .spaceBetween))
+                                              .flutterValue,
                                           children: [
                                             Builder(
                                               builder: (context) {
@@ -2013,8 +2063,9 @@ class _ProductDetailsScreenWidgetState
                                                       mainAxisSize:
                                                           MainAxisSize.max,
                                                       mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .spaceEvenly,
+                                                          (FFMainAxisAlignment
+                                                                  .spaceEvenly)
+                                                              .flutterValue,
                                                       children: [
                                                         Builder(
                                                           builder: (context) {
@@ -2470,7 +2521,7 @@ class _ProductDetailsScreenWidgetState
                                                   );
                                                 } else {
                                                   return Text(
-                                                    'j',
+                                                    '',
                                                     style: FlutterFlowTheme.of(
                                                             context)
                                                         .bodyMedium
@@ -3560,27 +3611,30 @@ class _ProductDetailsScreenWidgetState
                                         padding: EdgeInsetsDirectional.fromSTEB(
                                             0.0, 5.0, 10.0, 0.0),
                                         child: Text(
-                                          functions.getVariantDescription(
-                                              getJsonField(
-                                                QuickartGroup.productDetailCall
-                                                    .productDetailData(
-                                                  productDetailsScreenProductDetailResponse
-                                                      .jsonBody,
-                                                ),
-                                                r'''$.varients''',
-                                              ),
-                                              (_model.selectedVarient == 0
-                                                      ? getJsonField(
-                                                          QuickartGroup
-                                                              .productDetailCall
-                                                              .productDetailData(
-                                                            productDetailsScreenProductDetailResponse
-                                                                .jsonBody,
-                                                          ),
-                                                          r'''$.varients[0].varient_id''',
-                                                        )
-                                                      : _model.selectedVarient!)
-                                                  .toString()),
+                                          functions.removeHtmlTags(
+                                              functions.getVariantDescription(
+                                                  getJsonField(
+                                                    QuickartGroup
+                                                        .productDetailCall
+                                                        .productDetailData(
+                                                      productDetailsScreenProductDetailResponse
+                                                          .jsonBody,
+                                                    ),
+                                                    r'''$.varients''',
+                                                  ),
+                                                  (_model.selectedVarient == 0
+                                                          ? getJsonField(
+                                                              QuickartGroup
+                                                                  .productDetailCall
+                                                                  .productDetailData(
+                                                                productDetailsScreenProductDetailResponse
+                                                                    .jsonBody,
+                                                              ),
+                                                              r'''$.varients[0].varient_id''',
+                                                            )
+                                                          : _model
+                                                              .selectedVarient!)
+                                                      .toString())),
                                           style: FlutterFlowTheme.of(context)
                                               .bodyMedium
                                               .override(
@@ -4007,9 +4061,12 @@ class _ProductDetailsScreenWidgetState
                             ),
                             child: Container(
                               width: double.infinity,
-                              height: (_model.datePicked != null) == true
-                                  ? 550.0
-                                  : 410.0,
+                              height: valueOrDefault<double>(
+                                (_model.datePicked != null) == true
+                                    ? 550.0
+                                    : 410.0,
+                                600.0,
+                              ),
                               decoration: BoxDecoration(
                                 color: Colors.white,
                                 borderRadius: BorderRadius.only(
@@ -6656,7 +6713,7 @@ class _ProductDetailsScreenWidgetState
                                                             'add',
                                                             FFAppState()
                                                                 .emptyJson,
-                                                            'emptyjson',
+                                                            'subscription',
                                                             ' ',
                                                             ' ',
                                                             ' ',

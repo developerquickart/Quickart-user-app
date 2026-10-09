@@ -1,6 +1,7 @@
 import '/backend/api_requests/api_calls.dart';
 import '/components/custom_alert_dailog/custom_alert_dailog_widget.dart';
 import '/components/custom_retry_alert/custom_retry_alert_widget.dart';
+import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/custom_code/actions/index.dart' as actions;
 import '/custom_code/widgets/index.dart' as custom_widgets;
@@ -669,6 +670,24 @@ class _QuickartsplashScreenWidgetState
                     width: MediaQuery.sizeOf(context).width * 1.0,
                     height: MediaQuery.sizeOf(context).height * 1.0,
                     fit: BoxFit.fill,
+                  ),
+                ),
+              ),
+              Container(
+                width: MediaQuery.sizeOf(context).width * 1.0,
+                height: MediaQuery.sizeOf(context).height * 1.0,
+                decoration: BoxDecoration(
+                  color: FlutterFlowTheme.of(context).secondaryBackground,
+                ),
+                child: Container(
+                  width: MediaQuery.sizeOf(context).width * 1.0,
+                  height: MediaQuery.sizeOf(context).height * 1.0,
+                  child: custom_widgets.SplashGifWidget(
+                    width: MediaQuery.sizeOf(context).width * 1.0,
+                    height: MediaQuery.sizeOf(context).height * 1.0,
+                    imageUrl:
+                        'https://quickart.b-cdn.net/images/app-home-splash-screeneid1.gif',
+                    version: getCurrentTimestamp.toString(),
                   ),
                 ),
               ),

@@ -601,8 +601,19 @@ class _CancelOrderScreenWidgetState extends State<CancelOrderScreenWidget> {
                                                           .orderStatusID,
                                                       cartID:
                                                           FFAppState().cartID,
-                                                      cancelReason: FFAppState()
-                                                          .cancelReason,
+                                                      cancelReason:
+                                                          (String var1) {
+                                                        return (var1 ?? '')
+                                                            .replaceAll(
+                                                                '\\', '\\\\')
+                                                            .replaceAll(
+                                                                '"', '\\"')
+                                                            .replaceAll(
+                                                                '\r', '\\r')
+                                                            .replaceAll(
+                                                                '\n', '\\n');
+                                                      }(_model.textController
+                                                              .text),
                                                       platform: isiOS
                                                           ? 'ios'
                                                           : 'android',
@@ -775,8 +786,15 @@ class _CancelOrderScreenWidgetState extends State<CancelOrderScreenWidget> {
                                                   storeOrderid: FFAppState()
                                                       .orderStatusID,
                                                   cartID: FFAppState().cartID,
-                                                  cancelReason:
-                                                      FFAppState().cancelReason,
+                                                  cancelReason: (String var1) {
+                                                    return (var1 ?? '')
+                                                        .replaceAll(
+                                                            '\\', '\\\\')
+                                                        .replaceAll('"', '\\"')
+                                                        .replaceAll('\r', '\\r')
+                                                        .replaceAll(
+                                                            '\n', '\\n');
+                                                  }(FFAppState().cancelReason),
                                                   platform:
                                                       isiOS ? 'ios' : 'android',
                                                 );
@@ -1029,8 +1047,19 @@ class _CancelOrderScreenWidgetState extends State<CancelOrderScreenWidget> {
                                                           .call(
                                                     cartid: FFAppState().cartID,
                                                     userid: FFAppState().userID,
-                                                    cancelReason: _model
-                                                        .textController.text,
+                                                    cancelReason:
+                                                        (String var1) {
+                                                      return (var1 ?? '')
+                                                          .replaceAll(
+                                                              '\\', '\\\\')
+                                                          .replaceAll(
+                                                              '"', '\\"')
+                                                          .replaceAll(
+                                                              '\r', '\\r')
+                                                          .replaceAll(
+                                                              '\n', '\\n');
+                                                    }(_model.textController
+                                                            .text),
                                                     platform: isiOS
                                                         ? 'ios'
                                                         : 'android',
@@ -1196,8 +1225,15 @@ class _CancelOrderScreenWidgetState extends State<CancelOrderScreenWidget> {
                                                         .call(
                                                   cartid: FFAppState().cartID,
                                                   userid: FFAppState().userID,
-                                                  cancelReason:
-                                                      FFAppState().cancelReason,
+                                                  cancelReason: (String var1) {
+                                                    return (var1 ?? '')
+                                                        .replaceAll(
+                                                            '\\', '\\\\')
+                                                        .replaceAll('"', '\\"')
+                                                        .replaceAll('\r', '\\r')
+                                                        .replaceAll(
+                                                            '\n', '\\n');
+                                                  }(FFAppState().cancelReason),
                                                   platform:
                                                       isiOS ? 'ios' : 'android',
                                                 );
@@ -1465,8 +1501,19 @@ class _CancelOrderScreenWidgetState extends State<CancelOrderScreenWidget> {
                                                     cartID:
                                                         FFAppState().groupID,
                                                     userID: FFAppState().userID,
-                                                    cancelResoan: _model
-                                                        .textController.text,
+                                                    cancelResoan:
+                                                        (String var1) {
+                                                      return (var1 ?? '')
+                                                          .replaceAll(
+                                                              '\\', '\\\\')
+                                                          .replaceAll(
+                                                              '"', '\\"')
+                                                          .replaceAll(
+                                                              '\r', '\\r')
+                                                          .replaceAll(
+                                                              '\n', '\\n');
+                                                    }(_model.textController
+                                                            .text),
                                                     platform: isiOS
                                                         ? 'ios'
                                                         : 'android',
@@ -1636,8 +1683,15 @@ class _CancelOrderScreenWidgetState extends State<CancelOrderScreenWidget> {
                                                         .call(
                                                   cartID: FFAppState().groupID,
                                                   userID: FFAppState().userID,
-                                                  cancelResoan:
-                                                      FFAppState().cancelReason,
+                                                  cancelResoan: (String var1) {
+                                                    return (var1 ?? '')
+                                                        .replaceAll(
+                                                            '\\', '\\\\')
+                                                        .replaceAll('"', '\\"')
+                                                        .replaceAll('\r', '\\r')
+                                                        .replaceAll(
+                                                            '\n', '\\n');
+                                                  }(FFAppState().cancelReason),
                                                   platform:
                                                       isiOS ? 'ios' : 'android',
                                                 );

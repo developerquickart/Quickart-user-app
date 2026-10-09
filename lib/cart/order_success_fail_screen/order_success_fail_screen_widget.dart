@@ -11,7 +11,12 @@ import 'order_success_fail_screen_model.dart';
 export 'order_success_fail_screen_model.dart';
 
 class OrderSuccessFailScreenWidget extends StatefulWidget {
-  const OrderSuccessFailScreenWidget({super.key});
+  const OrderSuccessFailScreenWidget({
+    super.key,
+    required this.groupID,
+  });
+
+  final String? groupID;
 
   static String routeName = 'OrderSuccessFailScreen';
   static String routePath = '/orderSuccessFailScreen';
@@ -202,6 +207,22 @@ class _OrderSuccessFailScreenWidgetState
                           onTap: () async {
                             logFirebaseEvent(
                                 'ORDER_SUCCESS_FAIL_SCREEN_Text_28rvin2v_');
+                            logFirebaseEvent('Text_custom_action');
+                            await actions.facebookEventClass(
+                              widget.groupID!,
+                              '0',
+                              '0',
+                              0.0,
+                              0,
+                              0.0,
+                              'orderView',
+                              FFAppState().emptyJson,
+                              '0',
+                              FFAppState().userID,
+                              '0',
+                              '0',
+                              '0',
+                            );
                             if (FFAppState().screenName == 'daily') {
                               logFirebaseEvent('Text_navigate_to');
 

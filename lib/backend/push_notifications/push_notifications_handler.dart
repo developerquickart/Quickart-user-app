@@ -267,7 +267,11 @@ final parametersBuilderMap =
       ),
   'CouponsandOffers': ParameterData.none(),
   'OrderTrackingPage': ParameterData.none(),
-  'OrderSuccessFailScreen': ParameterData.none(),
+  'OrderSuccessFailScreen': (data) async => ParameterData(
+        allParams: {
+          'groupID': getParameter<String>(data, 'groupID'),
+        },
+      ),
   'orderCancelScreen': ParameterData.none(),
   'cartSubscriptionScreen': ParameterData.none(),
   'PaymentScreen': (data) async => ParameterData(

@@ -54,6 +54,22 @@ class _RepeatOrdersWidgetState extends State<RepeatOrdersWidget> {
       logFirebaseEvent('repeatOrders_refresh_database_request');
       safeSetState(() => _model.apiRequestCompleter = null);
       await _model.waitForApiRequestCompleted();
+      logFirebaseEvent('repeatOrders_custom_action');
+      await actions.facebookEventClass(
+        '0',
+        'repeat order product',
+        'repeat order product list',
+        0.0,
+        0,
+        0.0,
+        'productList',
+        FFAppState().emptyJson,
+        'repeat order product list',
+        FFAppState().userID,
+        '0',
+        '0',
+        '0',
+      );
       logFirebaseEvent('repeatOrders_backend_call');
       _model.apiResultsWeeksRepeatOrder =
           await QuickartGroup.totaldeliveriesCall.call();

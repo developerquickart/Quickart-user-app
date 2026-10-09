@@ -13924,7 +13924,15 @@ class _DailyCartScreenCopyWidgetState extends State<DailyCartScreenCopyWidget>
                                                                                                 if ((_model.apiResult7?.succeeded ?? true)) {
                                                                                                   logFirebaseEvent('Container_navigate_to');
 
-                                                                                                  context.pushNamed(OrderSuccessFailScreenWidget.routeName);
+                                                                                                  context.pushNamed(
+                                                                                                    OrderSuccessFailScreenWidget.routeName,
+                                                                                                    queryParameters: {
+                                                                                                      'groupID': serializeParam(
+                                                                                                        '0',
+                                                                                                        ParamType.String,
+                                                                                                      ),
+                                                                                                    }.withoutNulls,
+                                                                                                  );
 
                                                                                                   logFirebaseEvent('Container_update_app_state');
                                                                                                   FFAppState().screenName = 'daily';
@@ -14753,7 +14761,15 @@ class _DailyCartScreenCopyWidgetState extends State<DailyCartScreenCopyWidget>
                                                                                                   if ((_model.apiResult2?.succeeded ?? true)) {
                                                                                                     logFirebaseEvent('Container_navigate_to');
 
-                                                                                                    context.pushNamed(OrderSuccessFailScreenWidget.routeName);
+                                                                                                    context.pushNamed(
+                                                                                                      OrderSuccessFailScreenWidget.routeName,
+                                                                                                      queryParameters: {
+                                                                                                        'groupID': serializeParam(
+                                                                                                          '0',
+                                                                                                          ParamType.String,
+                                                                                                        ),
+                                                                                                      }.withoutNulls,
+                                                                                                    );
 
                                                                                                     logFirebaseEvent('Container_update_page_state');
                                                                                                     _model.isPaymentDone = true;
@@ -15525,7 +15541,15 @@ class _DailyCartScreenCopyWidgetState extends State<DailyCartScreenCopyWidget>
                                                                                               if ((_model.apiResult77?.succeeded ?? true)) {
                                                                                                 logFirebaseEvent('Container_navigate_to');
 
-                                                                                                context.pushNamed(OrderSuccessFailScreenWidget.routeName);
+                                                                                                context.pushNamed(
+                                                                                                  OrderSuccessFailScreenWidget.routeName,
+                                                                                                  queryParameters: {
+                                                                                                    'groupID': serializeParam(
+                                                                                                      '0',
+                                                                                                      ParamType.String,
+                                                                                                    ),
+                                                                                                  }.withoutNulls,
+                                                                                                );
 
                                                                                                 logFirebaseEvent('Container_wait__delay');
                                                                                                 await Future.delayed(
@@ -16357,7 +16381,15 @@ class _DailyCartScreenCopyWidgetState extends State<DailyCartScreenCopyWidget>
                                                                                                 if ((_model.apiResult22?.succeeded ?? true)) {
                                                                                                   logFirebaseEvent('Container_navigate_to');
 
-                                                                                                  context.pushNamed(OrderSuccessFailScreenWidget.routeName);
+                                                                                                  context.pushNamed(
+                                                                                                    OrderSuccessFailScreenWidget.routeName,
+                                                                                                    queryParameters: {
+                                                                                                      'groupID': serializeParam(
+                                                                                                        '0',
+                                                                                                        ParamType.String,
+                                                                                                      ),
+                                                                                                    }.withoutNulls,
+                                                                                                  );
 
                                                                                                   logFirebaseEvent('Container_wait__delay');
                                                                                                   await Future.delayed(

@@ -5,6 +5,10 @@ import 'payment_screen_widget.dart' show PaymentScreenWidget;
 import 'package:flutter/material.dart';
 
 class PaymentScreenModel extends FlutterFlowModel<PaymentScreenWidget> {
+  ///  Local state fields for this page.
+
+  bool isLoading = false;
+
   ///  State fields for stateful widgets in this page.
 
   // Stores action output result for [Backend Call - API (paymentabandon)] action in IconButton widget.

@@ -1454,7 +1454,7 @@ class _DailyCartScreenWidgetState extends State<DailyCartScreenWidget>
                                                                                                                                       ).toString()),
                                                                                                                                       'add',
                                                                                                                                       FFAppState().emptyJson,
-                                                                                                                                      ' ',
+                                                                                                                                      ' subscription',
                                                                                                                                       ' ',
                                                                                                                                       ' ',
                                                                                                                                       ' ',
@@ -5228,56 +5228,454 @@ class _DailyCartScreenWidgetState extends State<DailyCartScreenWidget>
                                                                                                                       ),
                                                                                                                       TextSpan(
                                                                                                                         text: functions.calculateDifference(
-                                                                                                                            functions
-                                                                                                                                .updateTotalAmount(
-                                                                                                                                    FFAppState().isDeliveryPartnerTipSelected,
-                                                                                                                                    FFAppState().couponDiscount.toString(),
-                                                                                                                                    getJsonField(
-                                                                                                                                      dailyCartScreenShowspcatcartResponse.jsonBody,
-                                                                                                                                      r'''$.data.total_price''',
-                                                                                                                                    ).toString(),
-                                                                                                                                    functions
-                                                                                                                                        .checkWalletWithAction(
-                                                                                                                                            _model.isWalletCheckBoxSelected,
-                                                                                                                                            functions
-                                                                                                                                                .updateTotalAmount(
-                                                                                                                                                    FFAppState().isDeliveryPartnerTipSelected,
-                                                                                                                                                    FFAppState().couponDiscount.toString(),
-                                                                                                                                                    getJsonField(
-                                                                                                                                                      dailyCartScreenShowspcatcartResponse.jsonBody,
-                                                                                                                                                      r'''$.data.total_price''',
-                                                                                                                                                    ).toString(),
-                                                                                                                                                    getJsonField(
-                                                                                                                                                      dailyCartScreenShowspcatcartResponse.jsonBody,
-                                                                                                                                                      r'''$.data.wallet_balance''',
-                                                                                                                                                    ).toString(),
-                                                                                                                                                    'false',
-                                                                                                                                                    _model.selectedPaymentMethod,
-                                                                                                                                                    getJsonField(
-                                                                                                                                                      FFAppState().appInfo,
-                                                                                                                                                      r'''$.codcharges''',
-                                                                                                                                                    ).toString(),
-                                                                                                                                                    '',
-                                                                                                                                                    '')
-                                                                                                                                                .toString(),
+                                                                                                                            valueOrDefault<String>(
+                                                                                                                              functions
+                                                                                                                                  .totalValueAmountUpdae(
+                                                                                                                                      FFAppState().isDeliveryPartnerTipSelected,
+                                                                                                                                      FFAppState().couponDiscount.toString(),
+                                                                                                                                      getJsonField(
+                                                                                                                                        dailyCartScreenShowspcatcartResponse.jsonBody,
+                                                                                                                                        r'''$.data.total_price''',
+                                                                                                                                      ).toString(),
+                                                                                                                                      getJsonField(
+                                                                                                                                        dailyCartScreenShowspcatcartResponse.jsonBody,
+                                                                                                                                        r'''$.data.referral_balance''',
+                                                                                                                                      ).toString(),
+                                                                                                                                      'false',
+                                                                                                                                      _model.selectedPaymentMethod,
+                                                                                                                                      (_model.selectedPaymentMethod == 'COD') &&
+                                                                                                                                              (functions.stringToDouble(valueOrDefault<String>(
+                                                                                                                                                    functions
+                                                                                                                                                        .totalValueAmountUpdae(
+                                                                                                                                                            FFAppState().isDeliveryPartnerTipSelected,
+                                                                                                                                                            FFAppState().couponDiscount.toString(),
+                                                                                                                                                            getJsonField(
+                                                                                                                                                              dailyCartScreenShowspcatcartResponse.jsonBody,
+                                                                                                                                                              r'''$.data.total_price''',
+                                                                                                                                                            ).toString(),
+                                                                                                                                                            functions
+                                                                                                                                                                .checkWalletWithAction(
+                                                                                                                                                                    _model.isRefWalletCheckBoxSelected,
+                                                                                                                                                                    valueOrDefault<String>(
+                                                                                                                                                                      functions
+                                                                                                                                                                          .totalValueAmountUpdae(
+                                                                                                                                                                              FFAppState().isDeliveryPartnerTipSelected,
+                                                                                                                                                                              FFAppState().couponDiscount.toString(),
+                                                                                                                                                                              getJsonField(
+                                                                                                                                                                                dailyCartScreenShowspcatcartResponse.jsonBody,
+                                                                                                                                                                                r'''$.data.total_price''',
+                                                                                                                                                                              ).toString(),
+                                                                                                                                                                              getJsonField(
+                                                                                                                                                                                dailyCartScreenShowspcatcartResponse.jsonBody,
+                                                                                                                                                                                r'''$.data.referral_balance''',
+                                                                                                                                                                              ).toString(),
+                                                                                                                                                                              'false',
+                                                                                                                                                                              _model.selectedPaymentMethod,
+                                                                                                                                                                              _model.selectedPaymentMethod == 'COD'
+                                                                                                                                                                                  ? getJsonField(
+                                                                                                                                                                                      functions.getZoneRuleByType(
+                                                                                                                                                                                          getJsonField(
+                                                                                                                                                                                            dailyCartScreenShowspcatcartResponse.jsonBody,
+                                                                                                                                                                                            r'''$.data.zone_permanent_charges''',
+                                                                                                                                                                                            true,
+                                                                                                                                                                                          )!,
+                                                                                                                                                                                          'cod'),
+                                                                                                                                                                                      r'''$.zone_rule_value''',
+                                                                                                                                                                                    ).toString()
+                                                                                                                                                                                  : '0',
+                                                                                                                                                                              'false',
+                                                                                                                                                                              '0',
+                                                                                                                                                                              functions.stringToDouble(functions.checkSelectedTimeslotCashbackDiscount(
+                                                                                                                                                                                          getJsonField(
+                                                                                                                                                                                            dailyCartScreenShowspcatcartResponse.jsonBody,
+                                                                                                                                                                                            r'''$.data.data''',
+                                                                                                                                                                                            true,
+                                                                                                                                                                                          )!,
+                                                                                                                                                                                          'amount',
+                                                                                                                                                                                          'discount')) >
+                                                                                                                                                                                      0.0
+                                                                                                                                                                                  ? functions.checkSelectedTimeslotCashbackDiscount(
+                                                                                                                                                                                      getJsonField(
+                                                                                                                                                                                        dailyCartScreenShowspcatcartResponse.jsonBody,
+                                                                                                                                                                                        r'''$.data.data''',
+                                                                                                                                                                                        true,
+                                                                                                                                                                                      )!,
+                                                                                                                                                                                      'amount',
+                                                                                                                                                                                      'discount')
+                                                                                                                                                                                  : '0',
+                                                                                                                                                                              functions.stringToDouble(functions.checkSelectedTimeslotCashbackDiscount(
+                                                                                                                                                                                          getJsonField(
+                                                                                                                                                                                            dailyCartScreenShowspcatcartResponse.jsonBody,
+                                                                                                                                                                                            r'''$.data.data''',
+                                                                                                                                                                                            true,
+                                                                                                                                                                                          )!,
+                                                                                                                                                                                          'amount',
+                                                                                                                                                                                          'surge_charge')) >
+                                                                                                                                                                                      0.0
+                                                                                                                                                                                  ? functions.checkSelectedTimeslotCashbackDiscount(
+                                                                                                                                                                                      getJsonField(
+                                                                                                                                                                                        dailyCartScreenShowspcatcartResponse.jsonBody,
+                                                                                                                                                                                        r'''$.data.data''',
+                                                                                                                                                                                        true,
+                                                                                                                                                                                      )!,
+                                                                                                                                                                                      'amount',
+                                                                                                                                                                                      'surge_charge')
+                                                                                                                                                                                  : '0',
+                                                                                                                                                                              getJsonField(
+                                                                                                                                                                                functions.getZoneRuleByType(
+                                                                                                                                                                                    getJsonField(
+                                                                                                                                                                                      dailyCartScreenShowspcatcartResponse.jsonBody,
+                                                                                                                                                                                      r'''$.data.zone_permanent_charges''',
+                                                                                                                                                                                      true,
+                                                                                                                                                                                    )!,
+                                                                                                                                                                                    'min_order'),
+                                                                                                                                                                                r'''$.zone_price_effect''',
+                                                                                                                                                                              ).toString(),
+                                                                                                                                                                              getJsonField(
+                                                                                                                                                                                dailyCartScreenShowspcatcartResponse.jsonBody,
+                                                                                                                                                                                r'''$.data.zone_delivery_addons''',
+                                                                                                                                                                                true,
+                                                                                                                                                                              ),
+                                                                                                                                                                              false)
+                                                                                                                                                                          .toString(),
+                                                                                                                                                                      '0.00',
+                                                                                                                                                                    ),
+                                                                                                                                                                    getJsonField(
+                                                                                                                                                                      dailyCartScreenShowspcatcartResponse.jsonBody,
+                                                                                                                                                                      r'''$.data.referral_balance''',
+                                                                                                                                                                    ).toString(),
+                                                                                                                                                                    getJsonField(
+                                                                                                                                                                      FFAppState().appInfo,
+                                                                                                                                                                      r'''$.wallet_deduction_percentage''',
+                                                                                                                                                                    ).toString())
+                                                                                                                                                                .toString(),
+                                                                                                                                                            'add',
+                                                                                                                                                            _model.selectedPaymentMethod,
+                                                                                                                                                            _model.selectedPaymentMethod == 'COD'
+                                                                                                                                                                ? getJsonField(
+                                                                                                                                                                    functions.getZoneRuleByType(
+                                                                                                                                                                        getJsonField(
+                                                                                                                                                                          dailyCartScreenShowspcatcartResponse.jsonBody,
+                                                                                                                                                                          r'''$.data.zone_permanent_charges''',
+                                                                                                                                                                          true,
+                                                                                                                                                                        )!,
+                                                                                                                                                                        'cod'),
+                                                                                                                                                                    r'''$.zone_rule_value''',
+                                                                                                                                                                  ).toString()
+                                                                                                                                                                : '0',
+                                                                                                                                                            functions
+                                                                                                                                                                .calculateFinalPayableForCashPayment(
+                                                                                                                                                                    valueOrDefault<String>(
+                                                                                                                                                                      functions
+                                                                                                                                                                          .totalValueAmountUpdae(
+                                                                                                                                                                              FFAppState().isDeliveryPartnerTipSelected,
+                                                                                                                                                                              FFAppState().couponDiscount.toString(),
+                                                                                                                                                                              getJsonField(
+                                                                                                                                                                                dailyCartScreenShowspcatcartResponse.jsonBody,
+                                                                                                                                                                                r'''$.data.total_price''',
+                                                                                                                                                                              ).toString(),
+                                                                                                                                                                              getJsonField(
+                                                                                                                                                                                dailyCartScreenShowspcatcartResponse.jsonBody,
+                                                                                                                                                                                r'''$.data.referral_balance''',
+                                                                                                                                                                              ).toString(),
+                                                                                                                                                                              'false',
+                                                                                                                                                                              _model.selectedPaymentMethod,
+                                                                                                                                                                              _model.selectedPaymentMethod == 'COD'
+                                                                                                                                                                                  ? getJsonField(
+                                                                                                                                                                                      functions.getZoneRuleByType(
+                                                                                                                                                                                          getJsonField(
+                                                                                                                                                                                            dailyCartScreenShowspcatcartResponse.jsonBody,
+                                                                                                                                                                                            r'''$.data.zone_permanent_charges''',
+                                                                                                                                                                                            true,
+                                                                                                                                                                                          )!,
+                                                                                                                                                                                          'cod'),
+                                                                                                                                                                                      r'''$.zone_rule_value''',
+                                                                                                                                                                                    ).toString()
+                                                                                                                                                                                  : '0',
+                                                                                                                                                                              'false',
+                                                                                                                                                                              '0',
+                                                                                                                                                                              functions.stringToDouble(functions.checkSelectedTimeslotCashbackDiscount(
+                                                                                                                                                                                          getJsonField(
+                                                                                                                                                                                            dailyCartScreenShowspcatcartResponse.jsonBody,
+                                                                                                                                                                                            r'''$.data.data''',
+                                                                                                                                                                                            true,
+                                                                                                                                                                                          )!,
+                                                                                                                                                                                          'amount',
+                                                                                                                                                                                          'discount')) >
+                                                                                                                                                                                      0.0
+                                                                                                                                                                                  ? functions.checkSelectedTimeslotCashbackDiscount(
+                                                                                                                                                                                      getJsonField(
+                                                                                                                                                                                        dailyCartScreenShowspcatcartResponse.jsonBody,
+                                                                                                                                                                                        r'''$.data.data''',
+                                                                                                                                                                                        true,
+                                                                                                                                                                                      )!,
+                                                                                                                                                                                      'amount',
+                                                                                                                                                                                      'discount')
+                                                                                                                                                                                  : '0',
+                                                                                                                                                                              functions.stringToDouble(functions.checkSelectedTimeslotCashbackDiscount(
+                                                                                                                                                                                          getJsonField(
+                                                                                                                                                                                            dailyCartScreenShowspcatcartResponse.jsonBody,
+                                                                                                                                                                                            r'''$.data.data''',
+                                                                                                                                                                                            true,
+                                                                                                                                                                                          )!,
+                                                                                                                                                                                          'amount',
+                                                                                                                                                                                          'surge_charge')) >
+                                                                                                                                                                                      0.0
+                                                                                                                                                                                  ? functions.checkSelectedTimeslotCashbackDiscount(
+                                                                                                                                                                                      getJsonField(
+                                                                                                                                                                                        dailyCartScreenShowspcatcartResponse.jsonBody,
+                                                                                                                                                                                        r'''$.data.data''',
+                                                                                                                                                                                        true,
+                                                                                                                                                                                      )!,
+                                                                                                                                                                                      'amount',
+                                                                                                                                                                                      'surge_charge')
+                                                                                                                                                                                  : '0',
+                                                                                                                                                                              getJsonField(
+                                                                                                                                                                                functions.getZoneRuleByType(
+                                                                                                                                                                                    getJsonField(
+                                                                                                                                                                                      dailyCartScreenShowspcatcartResponse.jsonBody,
+                                                                                                                                                                                      r'''$.data.zone_permanent_charges''',
+                                                                                                                                                                                      true,
+                                                                                                                                                                                    )!,
+                                                                                                                                                                                    'min_order'),
+                                                                                                                                                                                r'''$.zone_price_effect''',
+                                                                                                                                                                              ).toString(),
+                                                                                                                                                                              getJsonField(
+                                                                                                                                                                                dailyCartScreenShowspcatcartResponse.jsonBody,
+                                                                                                                                                                                r'''$.data.zone_delivery_addons''',
+                                                                                                                                                                                true,
+                                                                                                                                                                              ),
+                                                                                                                                                                              false)
+                                                                                                                                                                          .toString(),
+                                                                                                                                                                      '0.00',
+                                                                                                                                                                    ),
+                                                                                                                                                                    functions
+                                                                                                                                                                        .checkWalletWithAction(
+                                                                                                                                                                            _model.isRefWalletCheckBoxSelected,
+                                                                                                                                                                            valueOrDefault<String>(
+                                                                                                                                                                              functions
+                                                                                                                                                                                  .totalValueAmountUpdae(
+                                                                                                                                                                                      FFAppState().isDeliveryPartnerTipSelected,
+                                                                                                                                                                                      FFAppState().couponDiscount.toString(),
+                                                                                                                                                                                      getJsonField(
+                                                                                                                                                                                        dailyCartScreenShowspcatcartResponse.jsonBody,
+                                                                                                                                                                                        r'''$.data.total_price''',
+                                                                                                                                                                                      ).toString(),
+                                                                                                                                                                                      getJsonField(
+                                                                                                                                                                                        dailyCartScreenShowspcatcartResponse.jsonBody,
+                                                                                                                                                                                        r'''$.data.referral_balance''',
+                                                                                                                                                                                      ).toString(),
+                                                                                                                                                                                      'false',
+                                                                                                                                                                                      _model.selectedPaymentMethod,
+                                                                                                                                                                                      _model.selectedPaymentMethod == 'COD'
+                                                                                                                                                                                          ? getJsonField(
+                                                                                                                                                                                              functions.getZoneRuleByType(
+                                                                                                                                                                                                  getJsonField(
+                                                                                                                                                                                                    dailyCartScreenShowspcatcartResponse.jsonBody,
+                                                                                                                                                                                                    r'''$.data.zone_permanent_charges''',
+                                                                                                                                                                                                    true,
+                                                                                                                                                                                                  )!,
+                                                                                                                                                                                                  'cod'),
+                                                                                                                                                                                              r'''$.zone_rule_value''',
+                                                                                                                                                                                            ).toString()
+                                                                                                                                                                                          : '0',
+                                                                                                                                                                                      'false',
+                                                                                                                                                                                      '0',
+                                                                                                                                                                                      functions.stringToDouble(functions.checkSelectedTimeslotCashbackDiscount(
+                                                                                                                                                                                                  getJsonField(
+                                                                                                                                                                                                    dailyCartScreenShowspcatcartResponse.jsonBody,
+                                                                                                                                                                                                    r'''$.data.data''',
+                                                                                                                                                                                                    true,
+                                                                                                                                                                                                  )!,
+                                                                                                                                                                                                  'amount',
+                                                                                                                                                                                                  'discount')) >
+                                                                                                                                                                                              0.0
+                                                                                                                                                                                          ? functions.checkSelectedTimeslotCashbackDiscount(
+                                                                                                                                                                                              getJsonField(
+                                                                                                                                                                                                dailyCartScreenShowspcatcartResponse.jsonBody,
+                                                                                                                                                                                                r'''$.data.data''',
+                                                                                                                                                                                                true,
+                                                                                                                                                                                              )!,
+                                                                                                                                                                                              'amount',
+                                                                                                                                                                                              'discount')
+                                                                                                                                                                                          : '0',
+                                                                                                                                                                                      functions.stringToDouble(functions.checkSelectedTimeslotCashbackDiscount(
+                                                                                                                                                                                                  getJsonField(
+                                                                                                                                                                                                    dailyCartScreenShowspcatcartResponse.jsonBody,
+                                                                                                                                                                                                    r'''$.data.data''',
+                                                                                                                                                                                                    true,
+                                                                                                                                                                                                  )!,
+                                                                                                                                                                                                  'amount',
+                                                                                                                                                                                                  'surge_charge')) >
+                                                                                                                                                                                              0.0
+                                                                                                                                                                                          ? functions.checkSelectedTimeslotCashbackDiscount(
+                                                                                                                                                                                              getJsonField(
+                                                                                                                                                                                                dailyCartScreenShowspcatcartResponse.jsonBody,
+                                                                                                                                                                                                r'''$.data.data''',
+                                                                                                                                                                                                true,
+                                                                                                                                                                                              )!,
+                                                                                                                                                                                              'amount',
+                                                                                                                                                                                              'surge_charge')
+                                                                                                                                                                                          : '0',
+                                                                                                                                                                                      getJsonField(
+                                                                                                                                                                                        functions.getZoneRuleByType(
+                                                                                                                                                                                            getJsonField(
+                                                                                                                                                                                              dailyCartScreenShowspcatcartResponse.jsonBody,
+                                                                                                                                                                                              r'''$.data.zone_permanent_charges''',
+                                                                                                                                                                                              true,
+                                                                                                                                                                                            )!,
+                                                                                                                                                                                            'min_order'),
+                                                                                                                                                                                        r'''$.zone_price_effect''',
+                                                                                                                                                                                      ).toString(),
+                                                                                                                                                                                      getJsonField(
+                                                                                                                                                                                        dailyCartScreenShowspcatcartResponse.jsonBody,
+                                                                                                                                                                                        r'''$.data.zone_delivery_addons''',
+                                                                                                                                                                                        true,
+                                                                                                                                                                                      ),
+                                                                                                                                                                                      false)
+                                                                                                                                                                                  .toString(),
+                                                                                                                                                                              '0.00',
+                                                                                                                                                                            ),
+                                                                                                                                                                            getJsonField(
+                                                                                                                                                                              dailyCartScreenShowspcatcartResponse.jsonBody,
+                                                                                                                                                                              r'''$.data.referral_balance''',
+                                                                                                                                                                            ).toString(),
+                                                                                                                                                                            getJsonField(
+                                                                                                                                                                              FFAppState().appInfo,
+                                                                                                                                                                              r'''$.wallet_deduction_percentage''',
+                                                                                                                                                                            ).toString())
+                                                                                                                                                                        .toString(),
+                                                                                                                                                                    getJsonField(
+                                                                                                                                                                      dailyCartScreenShowspcatcartResponse.jsonBody,
+                                                                                                                                                                      r'''$.data.wallet_balance''',
+                                                                                                                                                                    ).toString(),
+                                                                                                                                                                    _model.isWalletCheckBoxSelected)
+                                                                                                                                                                .toString(),
+                                                                                                                                                            'add',
+                                                                                                                                                            functions.stringToDouble(functions.checkSelectedTimeslotCashbackDiscount(
+                                                                                                                                                                        getJsonField(
+                                                                                                                                                                          dailyCartScreenShowspcatcartResponse.jsonBody,
+                                                                                                                                                                          r'''$.data.data''',
+                                                                                                                                                                          true,
+                                                                                                                                                                        )!,
+                                                                                                                                                                        'amount',
+                                                                                                                                                                        'discount')) >
+                                                                                                                                                                    0.0
+                                                                                                                                                                ? functions.checkSelectedTimeslotCashbackDiscount(
+                                                                                                                                                                    getJsonField(
+                                                                                                                                                                      dailyCartScreenShowspcatcartResponse.jsonBody,
+                                                                                                                                                                      r'''$.data.data''',
+                                                                                                                                                                      true,
+                                                                                                                                                                    )!,
+                                                                                                                                                                    'amount',
+                                                                                                                                                                    'discount')
+                                                                                                                                                                : '0',
+                                                                                                                                                            functions.stringToDouble(functions.checkSelectedTimeslotCashbackDiscount(
+                                                                                                                                                                        getJsonField(
+                                                                                                                                                                          dailyCartScreenShowspcatcartResponse.jsonBody,
+                                                                                                                                                                          r'''$.data.data''',
+                                                                                                                                                                          true,
+                                                                                                                                                                        )!,
+                                                                                                                                                                        'amount',
+                                                                                                                                                                        'surge_charge')) >
+                                                                                                                                                                    0.0
+                                                                                                                                                                ? functions.checkSelectedTimeslotCashbackDiscount(
+                                                                                                                                                                    getJsonField(
+                                                                                                                                                                      dailyCartScreenShowspcatcartResponse.jsonBody,
+                                                                                                                                                                      r'''$.data.data''',
+                                                                                                                                                                      true,
+                                                                                                                                                                    )!,
+                                                                                                                                                                    'amount',
+                                                                                                                                                                    'surge_charge')
+                                                                                                                                                                : '0',
+                                                                                                                                                            getJsonField(
+                                                                                                                                                              functions.getZoneRuleByType(
+                                                                                                                                                                  getJsonField(
+                                                                                                                                                                    dailyCartScreenShowspcatcartResponse.jsonBody,
+                                                                                                                                                                    r'''$.data.zone_permanent_charges''',
+                                                                                                                                                                    true,
+                                                                                                                                                                  )!,
+                                                                                                                                                                  'min_order'),
+                                                                                                                                                              r'''$.zone_price_effect''',
+                                                                                                                                                            ).toString(),
+                                                                                                                                                            getJsonField(
+                                                                                                                                                              dailyCartScreenShowspcatcartResponse.jsonBody,
+                                                                                                                                                              r'''$.data.zone_delivery_addons''',
+                                                                                                                                                              true,
+                                                                                                                                                            ),
+                                                                                                                                                            false)
+                                                                                                                                                        .toString(),
+                                                                                                                                                    '0.00',
+                                                                                                                                                  )) >
+                                                                                                                                                  0.0)
+                                                                                                                                          ? getJsonField(
+                                                                                                                                              functions.getZoneRuleByType(
+                                                                                                                                                  getJsonField(
+                                                                                                                                                    dailyCartScreenShowspcatcartResponse.jsonBody,
+                                                                                                                                                    r'''$.data.zone_permanent_charges''',
+                                                                                                                                                    true,
+                                                                                                                                                  )!,
+                                                                                                                                                  'cod'),
+                                                                                                                                              r'''$.zone_price_effect''',
+                                                                                                                                            ).toString()
+                                                                                                                                          : '0',
+                                                                                                                                      'false',
+                                                                                                                                      '0',
+                                                                                                                                      functions.stringToDouble(functions.checkSelectedTimeslotCashbackDiscount(
+                                                                                                                                                  getJsonField(
+                                                                                                                                                    dailyCartScreenShowspcatcartResponse.jsonBody,
+                                                                                                                                                    r'''$.data.data''',
+                                                                                                                                                    true,
+                                                                                                                                                  )!,
+                                                                                                                                                  'amount',
+                                                                                                                                                  'discount')) >
+                                                                                                                                              0.0
+                                                                                                                                          ? functions.checkSelectedTimeslotCashbackDiscount(
+                                                                                                                                              getJsonField(
+                                                                                                                                                dailyCartScreenShowspcatcartResponse.jsonBody,
+                                                                                                                                                r'''$.data.data''',
+                                                                                                                                                true,
+                                                                                                                                              )!,
+                                                                                                                                              'amount',
+                                                                                                                                              'discount')
+                                                                                                                                          : '0',
+                                                                                                                                      functions.stringToDouble(functions.checkSelectedTimeslotCashbackDiscount(
+                                                                                                                                                  getJsonField(
+                                                                                                                                                    dailyCartScreenShowspcatcartResponse.jsonBody,
+                                                                                                                                                    r'''$.data.data''',
+                                                                                                                                                    true,
+                                                                                                                                                  )!,
+                                                                                                                                                  'amount',
+                                                                                                                                                  'surge_charge')) >
+                                                                                                                                              0.0
+                                                                                                                                          ? functions.checkSelectedTimeslotCashbackDiscount(
+                                                                                                                                              getJsonField(
+                                                                                                                                                dailyCartScreenShowspcatcartResponse.jsonBody,
+                                                                                                                                                r'''$.data.data''',
+                                                                                                                                                true,
+                                                                                                                                              )!,
+                                                                                                                                              'amount',
+                                                                                                                                              'surge_charge')
+                                                                                                                                          : '0',
+                                                                                                                                      getJsonField(
+                                                                                                                                        functions.getZoneRuleByType(
                                                                                                                                             getJsonField(
                                                                                                                                               dailyCartScreenShowspcatcartResponse.jsonBody,
-                                                                                                                                              r'''$.data.wallet_balance''',
-                                                                                                                                            ).toString(),
-                                                                                                                                            getJsonField(
-                                                                                                                                              FFAppState().appInfo,
-                                                                                                                                              r'''$.wallet_deduction_percentage''',
-                                                                                                                                            ).toString())
-                                                                                                                                        .toString(),
-                                                                                                                                    _model.isWalletCheckBoxSelected,
-                                                                                                                                    _model.selectedPaymentMethod,
-                                                                                                                                    getJsonField(
-                                                                                                                                      FFAppState().appInfo,
-                                                                                                                                      r'''$.codcharges''',
-                                                                                                                                    ).toString(),
-                                                                                                                                    '',
-                                                                                                                                    '')
-                                                                                                                                .toString(),
+                                                                                                                                              r'''$.data.zone_permanent_charges''',
+                                                                                                                                              true,
+                                                                                                                                            )!,
+                                                                                                                                            'min_order'),
+                                                                                                                                        r'''$.zone_price_effect''',
+                                                                                                                                      ).toString(),
+                                                                                                                                      getJsonField(
+                                                                                                                                        dailyCartScreenShowspcatcartResponse.jsonBody,
+                                                                                                                                        r'''$.data.zone_delivery_addons''',
+                                                                                                                                        true,
+                                                                                                                                      ),
+                                                                                                                                      false)
+                                                                                                                                  .toString(),
+                                                                                                                              '0.00',
+                                                                                                                            ),
                                                                                                                             getJsonField(
                                                                                                                               dailyCartScreenShowspcatcartResponse.jsonBody,
                                                                                                                               r'''$.data.oneday_min_order_amount''',
@@ -6371,23 +6769,6 @@ class _DailyCartScreenWidgetState extends State<DailyCartScreenWidget>
                                                                                   mainAxisSize: MainAxisSize.max,
                                                                                   children: [
                                                                                     Padding(
-                                                                                      padding: EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
-                                                                                      child: Text(
-                                                                                        '-',
-                                                                                        style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                              font: GoogleFonts.montserrat(
-                                                                                                fontWeight: FontWeight.w500,
-                                                                                                fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                                                                                              ),
-                                                                                              color: FFAppConstants.darkGreen,
-                                                                                              fontSize: 12.0,
-                                                                                              letterSpacing: 0.0,
-                                                                                              fontWeight: FontWeight.w500,
-                                                                                              fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                                                                                            ),
-                                                                                      ),
-                                                                                    ),
-                                                                                    Padding(
                                                                                       padding: EdgeInsetsDirectional.fromSTEB(2.0, 0.0, 0.0, 0.0),
                                                                                       child: Text(
                                                                                         FFAppConstants.currancyAED,
@@ -6475,23 +6856,6 @@ class _DailyCartScreenWidgetState extends State<DailyCartScreenWidget>
                                                                                 Row(
                                                                                   mainAxisSize: MainAxisSize.max,
                                                                                   children: [
-                                                                                    Padding(
-                                                                                      padding: EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
-                                                                                      child: Text(
-                                                                                        '-',
-                                                                                        style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                              font: GoogleFonts.montserrat(
-                                                                                                fontWeight: FontWeight.w500,
-                                                                                                fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                                                                                              ),
-                                                                                              color: FFAppConstants.darkGreen,
-                                                                                              fontSize: 12.0,
-                                                                                              letterSpacing: 0.0,
-                                                                                              fontWeight: FontWeight.w500,
-                                                                                              fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                                                                                            ),
-                                                                                      ),
-                                                                                    ),
                                                                                     Padding(
                                                                                       padding: EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
                                                                                       child: Text(
@@ -6584,23 +6948,6 @@ class _DailyCartScreenWidgetState extends State<DailyCartScreenWidget>
                                                                                 Row(
                                                                                   mainAxisSize: MainAxisSize.max,
                                                                                   children: [
-                                                                                    Padding(
-                                                                                      padding: EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
-                                                                                      child: Text(
-                                                                                        '+',
-                                                                                        style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                              font: GoogleFonts.montserrat(
-                                                                                                fontWeight: FontWeight.w600,
-                                                                                                fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                                                                                              ),
-                                                                                              color: FFAppConstants.primaryPurple2,
-                                                                                              fontSize: 12.0,
-                                                                                              letterSpacing: 0.0,
-                                                                                              fontWeight: FontWeight.w600,
-                                                                                              fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                                                                                            ),
-                                                                                      ),
-                                                                                    ),
                                                                                     Padding(
                                                                                       padding: EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
                                                                                       child: Text(
@@ -7055,23 +7402,6 @@ class _DailyCartScreenWidgetState extends State<DailyCartScreenWidget>
                                                                                     Padding(
                                                                                       padding: EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
                                                                                       child: Text(
-                                                                                        '+',
-                                                                                        style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                              font: GoogleFonts.montserrat(
-                                                                                                fontWeight: FontWeight.w600,
-                                                                                                fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                                                                                              ),
-                                                                                              color: FFAppConstants.primaryPurple2,
-                                                                                              fontSize: 12.0,
-                                                                                              letterSpacing: 0.0,
-                                                                                              fontWeight: FontWeight.w600,
-                                                                                              fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                                                                                            ),
-                                                                                      ),
-                                                                                    ),
-                                                                                    Padding(
-                                                                                      padding: EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
-                                                                                      child: Text(
                                                                                         FFAppConstants.currancyAED,
                                                                                         style: FlutterFlowTheme.of(context).bodyMedium.override(
                                                                                               font: GoogleFonts.montserrat(
@@ -7171,23 +7501,6 @@ class _DailyCartScreenWidgetState extends State<DailyCartScreenWidget>
                                                                                     Row(
                                                                                       mainAxisSize: MainAxisSize.max,
                                                                                       children: [
-                                                                                        Padding(
-                                                                                          padding: EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
-                                                                                          child: Text(
-                                                                                            '+',
-                                                                                            style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                                  font: GoogleFonts.montserrat(
-                                                                                                    fontWeight: FontWeight.w600,
-                                                                                                    fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                                                                                                  ),
-                                                                                                  color: FFAppConstants.primaryPurple2,
-                                                                                                  fontSize: 12.0,
-                                                                                                  letterSpacing: 0.0,
-                                                                                                  fontWeight: FontWeight.w600,
-                                                                                                  fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                                                                                                ),
-                                                                                          ),
-                                                                                        ),
                                                                                         Padding(
                                                                                           padding: EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
                                                                                           child: Text(
@@ -7303,23 +7616,6 @@ class _DailyCartScreenWidgetState extends State<DailyCartScreenWidget>
                                                                                   Padding(
                                                                                     padding: EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
                                                                                     child: Text(
-                                                                                      '+',
-                                                                                      style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                            font: GoogleFonts.montserrat(
-                                                                                              fontWeight: FontWeight.w600,
-                                                                                              fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                                                                                            ),
-                                                                                            color: FFAppConstants.primaryPurple2,
-                                                                                            fontSize: 12.0,
-                                                                                            letterSpacing: 0.0,
-                                                                                            fontWeight: FontWeight.w600,
-                                                                                            fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                                                                                          ),
-                                                                                    ),
-                                                                                  ),
-                                                                                  Padding(
-                                                                                    padding: EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
-                                                                                    child: Text(
                                                                                       FFAppConstants.currancyAED,
                                                                                       style: FlutterFlowTheme.of(context).bodyMedium.override(
                                                                                             font: GoogleFonts.montserrat(
@@ -7408,23 +7704,6 @@ class _DailyCartScreenWidgetState extends State<DailyCartScreenWidget>
                                                                                         Row(
                                                                                           mainAxisSize: MainAxisSize.max,
                                                                                           children: [
-                                                                                            Padding(
-                                                                                              padding: EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
-                                                                                              child: Text(
-                                                                                                '+',
-                                                                                                style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                                      font: GoogleFonts.montserrat(
-                                                                                                        fontWeight: FontWeight.w600,
-                                                                                                        fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                                                                                                      ),
-                                                                                                      color: FFAppConstants.primaryPurple2,
-                                                                                                      fontSize: 12.0,
-                                                                                                      letterSpacing: 0.0,
-                                                                                                      fontWeight: FontWeight.w600,
-                                                                                                      fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                                                                                                    ),
-                                                                                              ),
-                                                                                            ),
                                                                                             Padding(
                                                                                               padding: EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
                                                                                               child: Text(
@@ -44382,7 +44661,18 @@ class _DailyCartScreenWidgetState extends State<DailyCartScreenWidget>
                                                                                                 if ((_model.apiResult7?.succeeded ?? true)) {
                                                                                                   logFirebaseEvent('Container_navigate_to');
 
-                                                                                                  context.pushNamed(OrderSuccessFailScreenWidget.routeName);
+                                                                                                  context.pushNamed(
+                                                                                                    OrderSuccessFailScreenWidget.routeName,
+                                                                                                    queryParameters: {
+                                                                                                      'groupID': serializeParam(
+                                                                                                        getJsonField(
+                                                                                                          (_model.apiResult7?.jsonBody ?? ''),
+                                                                                                          r'''$.data.group_id''',
+                                                                                                        ).toString(),
+                                                                                                        ParamType.String,
+                                                                                                      ),
+                                                                                                    }.withoutNulls,
+                                                                                                  );
 
                                                                                                   logFirebaseEvent('Container_update_app_state');
                                                                                                   FFAppState().screenName = 'daily';
@@ -49224,7 +49514,18 @@ class _DailyCartScreenWidgetState extends State<DailyCartScreenWidget>
                                                                                                   if ((_model.apiResult2?.succeeded ?? true)) {
                                                                                                     logFirebaseEvent('Container_navigate_to');
 
-                                                                                                    context.pushNamed(OrderSuccessFailScreenWidget.routeName);
+                                                                                                    context.pushNamed(
+                                                                                                      OrderSuccessFailScreenWidget.routeName,
+                                                                                                      queryParameters: {
+                                                                                                        'groupID': serializeParam(
+                                                                                                          getJsonField(
+                                                                                                            (_model.apiResult2?.jsonBody ?? ''),
+                                                                                                            r'''$.data.group_id''',
+                                                                                                          ).toString(),
+                                                                                                          ParamType.String,
+                                                                                                        ),
+                                                                                                      }.withoutNulls,
+                                                                                                    );
 
                                                                                                     logFirebaseEvent('Container_update_page_state');
                                                                                                     _model.isPaymentDone = true;
@@ -54125,7 +54426,18 @@ class _DailyCartScreenWidgetState extends State<DailyCartScreenWidget>
                                                                                               if ((_model.apiResult77?.succeeded ?? true)) {
                                                                                                 logFirebaseEvent('Container_navigate_to');
 
-                                                                                                context.pushNamed(OrderSuccessFailScreenWidget.routeName);
+                                                                                                context.pushNamed(
+                                                                                                  OrderSuccessFailScreenWidget.routeName,
+                                                                                                  queryParameters: {
+                                                                                                    'groupID': serializeParam(
+                                                                                                      getJsonField(
+                                                                                                        (_model.apiResult77?.jsonBody ?? ''),
+                                                                                                        r'''$.data.group_id''',
+                                                                                                      ).toString(),
+                                                                                                      ParamType.String,
+                                                                                                    ),
+                                                                                                  }.withoutNulls,
+                                                                                                );
 
                                                                                                 logFirebaseEvent('Container_wait__delay');
                                                                                                 await Future.delayed(
@@ -58973,7 +59285,18 @@ class _DailyCartScreenWidgetState extends State<DailyCartScreenWidget>
                                                                                                 if ((_model.apiResult22?.succeeded ?? true)) {
                                                                                                   logFirebaseEvent('Container_navigate_to');
 
-                                                                                                  context.pushNamed(OrderSuccessFailScreenWidget.routeName);
+                                                                                                  context.pushNamed(
+                                                                                                    OrderSuccessFailScreenWidget.routeName,
+                                                                                                    queryParameters: {
+                                                                                                      'groupID': serializeParam(
+                                                                                                        getJsonField(
+                                                                                                          (_model.apiResult22?.jsonBody ?? ''),
+                                                                                                          r'''$.data.group_id''',
+                                                                                                        ).toString(),
+                                                                                                        ParamType.String,
+                                                                                                      ),
+                                                                                                    }.withoutNulls,
+                                                                                                  );
 
                                                                                                   logFirebaseEvent('Container_wait__delay');
                                                                                                   await Future.delayed(

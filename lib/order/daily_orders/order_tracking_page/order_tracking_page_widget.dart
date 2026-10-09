@@ -3538,6 +3538,12 @@ class _OrderTrackingPageWidgetState extends State<OrderTrackingPageWidget> {
                                                           r'''$.data.charges_json''',
                                                         ) !=
                                                         null) &&
+                                                    (getJsonField(
+                                                          orderTrackingPageOrderDetailAPIResponse
+                                                              .jsonBody,
+                                                          r'''$.data.charges_json.zone_category_wise_timeslot_charges''',
+                                                        ) !=
+                                                        null) &&
                                                     (functions
                                                             .removeCashbackFromCharges(
                                                                 getJsonField(

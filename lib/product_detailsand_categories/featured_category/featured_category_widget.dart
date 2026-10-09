@@ -115,6 +115,28 @@ class _FeaturedCategoryWidgetState extends State<FeaturedCategoryWidget> {
           );
         }
       }
+      logFirebaseEvent('FeaturedCategory_custom_action');
+      await actions.facebookEventClass(
+        widget.id == null || widget.id == ''
+            ? FFAppState().catID
+            : (_model.isSelectedCat == true ? FFAppState().catID : widget.id!),
+        widget.title != null && widget.title != ''
+            ? ((String var1) {
+                return var1.replaceAll(RegExp('_'), ' ');
+              }(widget.title!))
+            : FFAppState().categoryName,
+        'feature category',
+        0.0,
+        0,
+        0.0,
+        'productList',
+        FFAppState().emptyJson,
+        'Feature category',
+        FFAppState().userID,
+        '0',
+        '0',
+        '0',
+      );
     });
 
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
@@ -425,6 +447,29 @@ class _FeaturedCategoryWidgetState extends State<FeaturedCategoryWidget> {
                                                 'Container_update_page_state');
                                             _model.isSelectedCat = true;
                                             safeSetState(() {});
+                                            logFirebaseEvent(
+                                                'Container_custom_action');
+                                            await actions.facebookEventClass(
+                                              getJsonField(
+                                                featuredListItem,
+                                                r'''$.id''',
+                                              ).toString(),
+                                              getJsonField(
+                                                featuredListItem,
+                                                r'''$.title''',
+                                              ).toString(),
+                                              'feature category',
+                                              0.0,
+                                              0,
+                                              0.0,
+                                              'productList',
+                                              FFAppState().emptyJson,
+                                              'Feature category',
+                                              FFAppState().userID,
+                                              '0',
+                                              '0',
+                                              '0',
+                                            );
                                             logFirebaseEvent(
                                                 'Container_refresh_database_request');
                                             safeSetState(() => _model

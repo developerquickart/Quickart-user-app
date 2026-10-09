@@ -115,6 +115,22 @@ class _TopDealsScreenWidgetState extends State<TopDealsScreenWidget> {
           );
         }
       }
+      logFirebaseEvent('topDealsScreen_custom_action');
+      await actions.facebookEventClass(
+        '0',
+        'best sellars',
+        'Best sallers category',
+        0.0,
+        0,
+        0.0,
+        'productList',
+        FFAppState().emptyJson,
+        'best sallers category',
+        FFAppState().userID,
+        '0',
+        '0',
+        '0',
+      );
     });
 
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
@@ -1474,27 +1490,31 @@ class _TopDealsScreenWidgetState extends State<TopDealsScreenWidget> {
                                                                               BorderRadius.circular(24.0),
                                                                         ),
                                                                         child:
-                                                                            Padding(
-                                                                          padding: EdgeInsetsDirectional.fromSTEB(
-                                                                              5.0,
-                                                                              2.0,
-                                                                              5.0,
-                                                                              2.0),
+                                                                            Visibility(
+                                                                          visible:
+                                                                              FFAppState().nullValue == 'ji',
                                                                           child:
-                                                                              Text(
-                                                                            'Low Shelf Life',
-                                                                            textAlign:
-                                                                                TextAlign.center,
-                                                                            style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                  font: GoogleFonts.montserrat(
+                                                                              Padding(
+                                                                            padding: EdgeInsetsDirectional.fromSTEB(
+                                                                                5.0,
+                                                                                2.0,
+                                                                                5.0,
+                                                                                2.0),
+                                                                            child:
+                                                                                Text(
+                                                                              'Low Shelf Life',
+                                                                              textAlign: TextAlign.center,
+                                                                              style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                    font: GoogleFonts.montserrat(
+                                                                                      fontWeight: FontWeight.w500,
+                                                                                      fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                                    ),
+                                                                                    fontSize: 10.0,
+                                                                                    letterSpacing: 0.0,
                                                                                     fontWeight: FontWeight.w500,
                                                                                     fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
                                                                                   ),
-                                                                                  fontSize: 10.0,
-                                                                                  letterSpacing: 0.0,
-                                                                                  fontWeight: FontWeight.w500,
-                                                                                  fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                                                                                ),
+                                                                            ),
                                                                           ),
                                                                         ),
                                                                       ),

@@ -562,7 +562,12 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: OrderSuccessFailScreenWidget.routeName,
           path: OrderSuccessFailScreenWidget.routePath,
-          builder: (context, params) => OrderSuccessFailScreenWidget(),
+          builder: (context, params) => OrderSuccessFailScreenWidget(
+            groupID: params.getParam(
+              'groupID',
+              ParamType.String,
+            ),
+          ),
         ),
         FFRoute(
           name: OrderCancelScreenWidget.routeName,
@@ -1244,6 +1249,10 @@ class FFRoute {
                     duration: transitionInfo.duration,
                     reverseDuration: transitionInfo.duration,
                     alignment: transitionInfo.alignment,
+                    curve: transitionInfo.transitionType ==
+                            PageTransitionType.scale
+                        ? const Interval(0.0, 0.5)
+                        : Curves.linear,
                     child: child,
                   ).buildTransitions(
                     context,

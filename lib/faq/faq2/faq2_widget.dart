@@ -314,7 +314,7 @@ class _Faq2WidgetState extends State<Faq2Widget> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             FaIcon(
-                              FontAwesomeIcons.whatsapp,
+                              FaIconData(FontAwesomeIcons.whatsapp.data),
                               color: Color(0xFF25D366),
                               size: 24.0,
                             ),

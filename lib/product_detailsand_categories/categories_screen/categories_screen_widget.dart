@@ -287,7 +287,7 @@ class _CategoriesScreenWidgetState extends State<CategoriesScreenWidget> {
                                         'category',
                                         FFAppState().emptyJson,
                                         'c',
-                                        ' ',
+                                        FFAppState().userID,
                                         ' ',
                                         ' ',
                                         ' ',

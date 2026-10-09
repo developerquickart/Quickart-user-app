@@ -239,6 +239,22 @@ class _LoginScreenWidgetState extends State<LoginScreenWidget> {
                             await actions.checkInternetConnection();
                         if (_model.connectivityResult == true) {
                           if (FFAppState().phoneNo != '') {
+                            logFirebaseEvent('Button_custom_action');
+                            await actions.facebookEventClass(
+                              FFAppState().countryCode,
+                              '0',
+                              '0',
+                              0.0,
+                              0,
+                              0.0,
+                              'phoneNumberEnter',
+                              FFAppState().emptyJson,
+                              '0',
+                              '0',
+                              '0',
+                              '0',
+                              '0',
+                            );
                             logFirebaseEvent('Button_backend_call');
                             _model.apiResultqrg =
                                 await QuickartGroup.loginCall.call(

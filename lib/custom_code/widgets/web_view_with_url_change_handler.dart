@@ -7,7 +7,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/custom_code/widgets/index.dart'; // Imports other custom widgets
 import '/custom_code/actions/index.dart'; // Imports custom actions
 import '/flutter_flow/custom_functions.dart'; // Imports custom functions
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide RepeatMode;
 // Begin custom widget code
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
@@ -53,7 +53,7 @@ class _WebViewWithUrlChangeHandlerState
             currentUrl = url;
           });
           debugPrint('url: $url');
-          if (url.contains("api/success")) {
+          if (url.contains("api/successfirst")) {
             FFAppState().isPaymentSuccess = true;
             // Consider implementing a more reliable mechanism instead of a fixed delay
             // Future.delayed(const Duration(milliseconds: 1000), () {
@@ -61,6 +61,10 @@ class _WebViewWithUrlChangeHandlerState
             widget.reloadPage();
             // });
             debugPrint('Payment success detected, reloading page.');
+          } else if (url.contains("api/success")) {
+            FFAppState().isPaymentSuccess = true;
+            widget.reloadPage();
+            debugPrint('Save success detected, reloading page.');
           } else if (url.contains("api/savesuccess")) {
             FFAppState().isPaymentSuccess = true;
             widget.reloadPage();

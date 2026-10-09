@@ -6,7 +6,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/custom_code/actions/index.dart'; // Imports other custom actions
 import '/flutter_flow/custom_functions.dart'; // Imports custom functions
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide RepeatMode;
 // Begin custom action code
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
@@ -18,9 +18,9 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:facebook_app_events/facebook_app_events.dart';
-// import 'package:amplitude_flutter/amplitude.dart';
-// import 'package:amplitude_flutter/configuration.dart';
-// import 'package:amplitude_flutter/events/base_event.dart';
+import 'package:amplitude_flutter/amplitude.dart';
+import 'package:amplitude_flutter/configuration.dart';
+import 'package:amplitude_flutter/events/base_event.dart';
 
 Future facebookEventClass(
   String varientID,
@@ -44,9 +44,9 @@ Future facebookEventClass(
   print("📊 Tracked eventType:---- $eventType");
   final facebookAppEvents = FacebookAppEvents();
 
-  // const apiKey = '5bab9ae8180662bd0a11b398f95af646';
-  // final amplitude = Amplitude(Configuration(apiKey: apiKey));
-  // await amplitude.isBuilt;
+  const apiKey = '5bab9ae8180662bd0a11b398f95af646';
+  final amplitude = Amplitude(Configuration(apiKey: apiKey));
+  await amplitude.isBuilt;
 
   if (eventType == 'add') {
     // Example event for add-to-cart
@@ -59,39 +59,74 @@ Future facebookEventClass(
       "item_name": itemName,
       "af_source": Platform.isIOS ? "iOS" : "Android",
     });
-    // if (qty == 1) {
-    //   final event = BaseEvent(
-    //     'Product Added to Cart',
-    //     eventProperties: {
-    //       'platform': Platform.isIOS ? 'iOS' : 'Android',
-    //       'product_id': varientID,
-    //       'product_name': itemName,
-    //       'category': category,
-    //       'price': price,
-    //       'mrp': mrp,
-    //       'quantity': qty,
-    //       'currency': currency,
-    //     },
-    //   );
+    if (qty == 1) {
+      final event = BaseEvent(
+        'Product Added to Cart',
+        eventProperties: {
+          'platform': Platform.isIOS ? 'iOS' : 'Android',
+          'product_id': varientID,
+          'product_name': itemName,
+          'category': category,
+          'price': price,
+          'mrp': mrp,
+          'quantity': qty,
+          'currency': currency,
+        },
+      );
 
-    //   await amplitude.track(event);
-    // } else {
-    //   final event = BaseEvent(
-    //     'Product Quantity Updated',
-    //     eventProperties: {
-    //       'platform': Platform.isIOS ? 'iOS' : 'Android',
-    //       'product_id': varientID,
-    //       'product_name': itemName,
-    //       'category': category,
-    //       'price': price,
-    //       'mrp': mrp,
-    //       'quantity': qty,
-    //       'currency': currency,
-    //     },
-    //   );
+      await amplitude.track(event);
 
-    //   await amplitude.track(event);
-    // }
+      if (orderType == "subscription") {
+        final event1 = BaseEvent(
+          'Subscription Product Added to Cart',
+          eventProperties: {
+            'platform': Platform.isIOS ? 'iOS' : 'Android',
+            'product_id': varientID,
+            'product_name': itemName,
+            'category': category,
+            'price': price,
+            'mrp': mrp,
+            'quantity': qty,
+            'currency': currency,
+          },
+        );
+
+        await amplitude.track(event1);
+      }
+    } else {
+      final event = BaseEvent(
+        'Product Quantity Updated',
+        eventProperties: {
+          'platform': Platform.isIOS ? 'iOS' : 'Android',
+          'product_id': varientID,
+          'product_name': itemName,
+          'category': category,
+          'price': price,
+          'mrp': mrp,
+          'quantity': qty,
+          'currency': currency,
+        },
+      );
+
+      await amplitude.track(event);
+      if (orderType == "subscription") {
+        final event1 = BaseEvent(
+          'Subscription Quantity Updated',
+          eventProperties: {
+            'platform': Platform.isIOS ? 'iOS' : 'Android',
+            'product_id': varientID,
+            'product_name': itemName,
+            'category': category,
+            'price': price,
+            'mrp': mrp,
+            'quantity': qty,
+            'currency': currency,
+          },
+        );
+
+        await amplitude.track(event1);
+      }
+    }
     print('📊 Amplitude Event: Product Added to Cart');
   } else if (eventType == 'remove') {
     // 🔹 Remove from cart event
@@ -104,23 +139,40 @@ Future facebookEventClass(
       "item_name": itemName,
       "af_source": Platform.isIOS ? "iOS" : "Android",
     });
-    // if (qty == 0) {
-    //   final event = BaseEvent(
-    //     'Product Removed to Cart',
-    //     eventProperties: {
-    //       'platform': Platform.isIOS ? 'iOS' : 'Android',
-    //       'product_id': varientID,
-    //       'product_name': itemName,
-    //       'category': category,
-    //       'price': price,
-    //       'mrp': mrp,
-    //       'quantity': qty,
-    //       'currency': currency,
-    //     },
-    //   );
+    if (qty == 0) {
+      final event = BaseEvent(
+        'Product Removed to Cart',
+        eventProperties: {
+          'platform': Platform.isIOS ? 'iOS' : 'Android',
+          'product_id': varientID,
+          'product_name': itemName,
+          'category': category,
+          'price': price,
+          'mrp': mrp,
+          'quantity': qty,
+          'currency': currency,
+        },
+      );
 
-    //   await amplitude.track(event);
-    // }
+      await amplitude.track(event);
+      if (orderType == "subscription") {
+        final event1 = BaseEvent(
+          'Subscription Product Added to Cart',
+          eventProperties: {
+            'platform': Platform.isIOS ? 'iOS' : 'Android',
+            'product_id': varientID,
+            'product_name': itemName,
+            'category': category,
+            'price': price,
+            'mrp': mrp,
+            'quantity': qty,
+            'currency': currency,
+          },
+        );
+
+        await amplitude.track(event1);
+      }
+    }
 
     print("📊 Tracked event: remove_from_cart → $itemName");
   } else if (eventType == 'purchase') {
@@ -136,21 +188,21 @@ Future facebookEventClass(
       "order_id": utmSource,
       "af_source": Platform.isIOS ? "iOS" : "Android",
     });
-    // final event = BaseEvent(
-    //   'Payment Completed',
-    //   eventProperties: {
-    //     'platform': Platform.isIOS ? 'iOS' : 'Android',
-    //     'user_id': itemName,
-    //     'payment_method': orderType,
-    //     "item_variant_id": varientID,
-    //     'amount': mrp,
-    //     'currency': currency,
-    //     'order_id': utmSource,
-    //     "order_type": orderType,
-    //   },
-    // );
+    final event = BaseEvent(
+      'Payment Completed',
+      eventProperties: {
+        'platform': Platform.isIOS ? 'iOS' : 'Android',
+        'user_id': itemName,
+        'payment_method': orderType,
+        "item_variant_id": varientID,
+        'amount': mrp,
+        'currency': currency,
+        'order_id': utmSource,
+        "order_type": orderType,
+      },
+    );
 
-    // await amplitude.track(event);
+    await amplitude.track(event);
 
     print("📊 Tracked event: purchase → $itemName");
   } else if (eventType == 'checkout') {
@@ -198,37 +250,37 @@ Future facebookEventClass(
       "order_type": orderType,
       "af_source": Platform.isIOS ? "iOS" : "Android",
     });
-    // final event = BaseEvent(
-    //   'Checkout Started',
-    //   eventProperties: {
-    //     'user_id': itemName,
-    //     'cart_id': varientID,
-    //     'cart_value': mrp,
-    //     'item_count': afItems.length,
-    //     'currency': currency,
-    //     'order_type': orderType,
-    //     "order_id": utmSource,
-    //   },
-    // );
+    final event = BaseEvent(
+      'Checkout Started',
+      eventProperties: {
+        'user_id': itemName,
+        'cart_id': varientID,
+        'cart_value': mrp,
+        'item_count': afItems.length,
+        'currency': currency,
+        'order_type': orderType,
+        "order_id": utmSource,
+      },
+    );
 
-    // amplitude.track(event);
+    amplitude.track(event);
 
-    // // Amplitude - Checkout Started
-    // final checkoutEvent = BaseEvent(
-    //   'Payment Started',
-    //   eventProperties: {
-    //     'platform': Platform.isIOS ? 'iOS' : 'Android',
-    //     'user_id': itemName,
-    //     'cart_id': varientID,
-    //     'cart_value': mrp,
-    //     'item_count': afItems.length,
-    //     'currency': currency,
-    //     'order_type': orderType,
-    //     "order_id": utmSource,
-    //   },
-    // );
+    // Amplitude - Checkout Started
+    final checkoutEvent = BaseEvent(
+      'Payment Started',
+      eventProperties: {
+        'platform': Platform.isIOS ? 'iOS' : 'Android',
+        'user_id': itemName,
+        'cart_id': varientID,
+        'cart_value': mrp,
+        'item_count': afItems.length,
+        'currency': currency,
+        'order_type': orderType,
+        "order_id": utmSource,
+      },
+    );
 
-    // await amplitude.track(checkoutEvent);
+    await amplitude.track(checkoutEvent);
 
     print("📊 Tracked event: af_initiated_checkout → $itemName");
   } else if (eventType == 'search') {
@@ -241,16 +293,16 @@ Future facebookEventClass(
 
     await appsflyer.logEvent("af_search", eventValues);
 
-    // final event = BaseEvent(
-    //   'Search Results Viewed',
-    //   eventProperties: {
-    //     'platform': Platform.isIOS ? 'iOS' : 'Android',
-    //     'search_query': itemName,
-    //     'results_count': qty,
-    //   },
-    // );
+    final event = BaseEvent(
+      'Search Results Viewed',
+      eventProperties: {
+        'platform': Platform.isIOS ? 'iOS' : 'Android',
+        'search_query': itemName,
+        'results_count': qty,
+      },
+    );
 
-    // await amplitude.track(event);
+    await amplitude.track(event);
 
     print("🔍 AppsFlyer Event: af_search → $eventValues");
   } else if (eventType == 'productdetail') {
@@ -265,20 +317,20 @@ Future facebookEventClass(
 
     await appsflyer.logEvent("af_content_view", eventValues);
 
-    // final event = BaseEvent(
-    //   'Product Viewed',
-    //   eventProperties: {
-    //     'platform': Platform.isIOS ? 'iOS' : 'Android',
-    //     'product_id': varientID,
-    //     'product_name': itemName,
-    //     'category': category,
-    //     'price': price,
-    //     'mrp': mrp,
-    //     'currency': currency,
-    //   },
-    // );
+    final event = BaseEvent(
+      'Product Viewed',
+      eventProperties: {
+        'platform': Platform.isIOS ? 'iOS' : 'Android',
+        'product_id': varientID,
+        'product_name': itemName,
+        'category': category,
+        'price': price,
+        'mrp': mrp,
+        'currency': currency,
+      },
+    );
 
-    // await amplitude.track(event);
+    await amplitude.track(event);
 
     print("👁️ AppsFlyer Event: af_content_view → $eventValues");
   } else if (eventType == 'wishList') {
@@ -294,59 +346,61 @@ Future facebookEventClass(
     if (category == "add") {
       await appsflyer.logEvent("af_add_to_wishlist", eventValues);
 
-      // final event = BaseEvent(
-      //   'Product Added to Wishlist',
-      //   eventProperties: {
-      //     'platform': Platform.isIOS ? 'iOS' : 'Android',
-      //     'product_id': varientID,
-      //     'product_name': itemName,
-      //     'category': category,
-      //     'price': price,
-      //     'mrp': mrp,
-      //     'currency': currency,
-      //   },
-      // );
+      final event = BaseEvent(
+        'Product Added to Wishlist',
+        eventProperties: {
+          'platform': Platform.isIOS ? 'iOS' : 'Android',
+          'product_id': varientID,
+          'product_name': itemName,
+          'category': category,
+          'price': price,
+          'mrp': mrp,
+          'currency': currency,
+        },
+      );
 
-      // await amplitude.track(event);
+      await amplitude.track(event);
 
       print("💖 AppsFlyer Event: af_add_to_wishlist → $eventValues");
     } else {
       await appsflyer.logEvent("af_remove_to_wishlist", eventValues);
 
-      // final event = BaseEvent(
-      //   'Product Remove to Wishlist',
-      //   eventProperties: {
-      //     'platform': Platform.isIOS ? 'iOS' : 'Android',
-      //     'product_id': varientID,
-      //     'product_name': itemName,
-      //     'category': category,
-      //     'price': price,
-      //     'mrp': mrp,
-      //     'currency': currency,
-      //   },
-      // );
+      final event = BaseEvent(
+        'Product Remove to Wishlist',
+        eventProperties: {
+          'platform': Platform.isIOS ? 'iOS' : 'Android',
+          'product_id': varientID,
+          'product_name': itemName,
+          'category': category,
+          'price': price,
+          'mrp': mrp,
+          'currency': currency,
+        },
+      );
 
-      // await amplitude.track(event);
+      await amplitude.track(event);
       print("💖 AppsFlyer Event: af_remove_to_wishlist → $eventValues");
     }
   } else if (eventType == 'category') {
     final eventValues = {
       "category_id": varientID,
       "category_name": itemName,
+      'user_id': utmSource,
       "af_source": Platform.isIOS ? "iOS" : "Android",
     };
 
     await appsflyer.logEvent("af_category_view", eventValues);
-    // final event = BaseEvent(
-    //   'Category Viewed',
-    //   eventProperties: {
-    //     'platform': Platform.isIOS ? 'iOS' : 'Android',
-    //     'category_id': varientID,
-    //     'category_name': itemName,
-    //   },
-    // );
+    final event = BaseEvent(
+      'Category Viewed',
+      eventProperties: {
+        'platform': Platform.isIOS ? 'iOS' : 'Android',
+        'category_id': varientID,
+        'category_name': itemName,
+        'user_id': utmSource,
+      },
+    );
 
-    // await amplitude.track(event);
+    await amplitude.track(event);
 
     print("📂 Event Sent: af_category_view → $eventValues");
   } else if (eventType == 'subcategory') {
@@ -354,23 +408,39 @@ Future facebookEventClass(
       "category_id": varientID,
       "subcategory_id": category,
       "subcategory_name": itemName,
+      'user_id': utmSource,
       "af_source": Platform.isIOS ? "iOS" : "Android",
     };
 
     await appsflyer.logEvent("af_subcategory_view", eventValues);
-    // final event = BaseEvent(
-    //   'Sub Category Viewed',
-    //   eventProperties: {
-    //     'platform': Platform.isIOS ? 'iOS' : 'Android',
-    //     'subcategory_id': varientID,
-    //     'subcategory_name': itemName,
-    //     'category_name': category,
-    //   },
-    // );
+    final event = BaseEvent(
+      'Sub Category Viewed',
+      eventProperties: {
+        'platform': Platform.isIOS ? 'iOS' : 'Android',
+        'subcategory_id': varientID,
+        'subcategory_name': itemName,
+        'category_name': category,
+        'user_id': utmSource,
+      },
+    );
 
-    // await amplitude.track(event);
-
+    await amplitude.track(event);
     print("🗂️ Event Sent: af_subcategory_view → $eventValues");
+    final event1 = BaseEvent(
+      'Product Listing Viewed',
+      eventProperties: {
+        'category_name': category,
+        'subcategory_id': varientID,
+        'subcategory_name': itemName,
+        'listing_type': 'category product',
+        'user_id': utmSource,
+        'platform': Platform.isIOS ? 'iOS' : 'Android',
+      },
+    );
+
+    await amplitude.track(event1);
+
+    print('📊 Amplitude Event: Product Listing Viewed');
   } else if (eventType == 'brand') {
     final eventValues = {
       "brand_id": varientID,
@@ -388,17 +458,17 @@ Future facebookEventClass(
       "af_source": Platform.isIOS ? "iOS" : "Android",
     });
 
-    // final event = BaseEvent(
-    //   'Login Guest Started',
-    //   eventProperties: {
-    //     'platform': Platform.isIOS ? 'iOS' : 'Android',
-    //     'login_method': 'guest',
-    //     'user_id': varientID,
-    //     'uuid': category
-    //   },
-    // );
+    final event = BaseEvent(
+      'Login Guest Started',
+      eventProperties: {
+        'platform': Platform.isIOS ? 'iOS' : 'Android',
+        'login_method': 'guest',
+        'user_id': varientID,
+        'uuid': category
+      },
+    );
 
-    // await amplitude.track(event);
+    await amplitude.track(event);
 
     print("📊 Tracked event: guest_login → guest_id: $varientID");
   } else if (eventType == 'register') {
@@ -419,18 +489,18 @@ Future facebookEventClass(
 
       print("📊 Tracked event: referral_code");
     }
-    // final event = BaseEvent(
-    //   'Sign Up Completed ',
-    //   eventProperties: {
-    //     'platform': Platform.isIOS ? 'iOS' : 'Android',
-    //     'name_provided': itemName.trim().isNotEmpty == true,
-    //     'phone_number_provided': utmSource?.trim().isNotEmpty == true,
-    //     'email_provided': varientID.trim().isNotEmpty == true,
-    //     'referral_code':
-    //         category.trim().isNotEmpty == true ? category.trim() : null,
-    //   },
-    // );
-    // await amplitude.track(event);
+    final event = BaseEvent(
+      'Sign Up Completed ',
+      eventProperties: {
+        'platform': Platform.isIOS ? 'iOS' : 'Android',
+        'name_provided': itemName.trim().isNotEmpty == true,
+        'phone_number_provided': utmSource?.trim().isNotEmpty == true,
+        'email_provided': varientID.trim().isNotEmpty == true,
+        'referral_code':
+            category.trim().isNotEmpty == true ? category.trim() : null,
+      },
+    );
+    await amplitude.track(event);
     print('📊 Amplitude Event: Sign Up Completed ');
   } else if (eventType == 'login') {
     await appsflyer.logEvent("login", {
@@ -439,15 +509,15 @@ Future facebookEventClass(
       "af_source": Platform.isIOS ? "iOS" : "Android",
     });
 
-    // final event = BaseEvent(
-    //   'Login Started',
-    //   eventProperties: {
-    //     'platform': Platform.isIOS ? 'iOS' : 'Android',
-    //     'login_method': 'mobile',
-    //   },
-    // );
+    final event = BaseEvent(
+      'Login Started',
+      eventProperties: {
+        'platform': Platform.isIOS ? 'iOS' : 'Android',
+        'login_method': 'mobile',
+      },
+    );
 
-    // await amplitude.track(event);
+    await amplitude.track(event);
 
     print("📊 Tracked event: login");
   } else if (eventType == 'home') {
@@ -457,16 +527,16 @@ Future facebookEventClass(
       "timestamp": DateTime.now().toString(),
       "user_id": varientID
     });
-    // final event = BaseEvent(
-    //   'Home Viewed',
-    //   eventProperties: {
-    //     'platform': Platform.isIOS ? 'iOS' : 'Android',
-    //     'user_id': varientID,
-    //     "screen": "home",
-    //   },
-    // );
+    final event = BaseEvent(
+      'Home Viewed',
+      eventProperties: {
+        'platform': Platform.isIOS ? 'iOS' : 'Android',
+        'user_id': varientID,
+        "screen": "home",
+      },
+    );
 
-    // await amplitude.track(event);
+    await amplitude.track(event);
 
     print("📊 Tracked event: view_home");
   } else if (eventType == 'utmSource') {
@@ -502,19 +572,19 @@ Future facebookEventClass(
       "coupon_type": category
     });
 
-    // final event = BaseEvent(
-    //   'Coupon Applied',
-    //   eventProperties: {
-    //     'platform': Platform.isIOS ? 'iOS' : 'Android',
-    //     'coupon_code': itemName,
-    //     'coupon_name': category,
-    //     'discount_amount': price,
-    //     "user_id": varientID,
-    //     'currency': currency,
-    //   },
-    // );
+    final event = BaseEvent(
+      'Coupon Applied',
+      eventProperties: {
+        'platform': Platform.isIOS ? 'iOS' : 'Android',
+        'coupon_code': itemName,
+        'coupon_name': category,
+        'discount_amount': price,
+        "user_id": varientID,
+        'currency': currency,
+      },
+    );
 
-    // await amplitude.track(event);
+    await amplitude.track(event);
 
     print("📊 Tracked event: apply_coupon");
   } else if (eventType == 'orderCancel') {
@@ -529,19 +599,19 @@ Future facebookEventClass(
 
     await appsflyer.logEvent("order_cancelled", eventValues);
 
-    // final event = BaseEvent(
-    //   'Order Cancelled',
-    //   eventProperties: {
-    //     'platform': Platform.isIOS ? 'iOS' : 'Android',
-    //     'user_id': varientID,
-    //     'order_id': category,
-    //     "cancel_reason": itemName,
-    //     'amount': mrp,
-    //     'currency': currency,
-    //   },
-    // );
+    final event = BaseEvent(
+      'Order Cancelled',
+      eventProperties: {
+        'platform': Platform.isIOS ? 'iOS' : 'Android',
+        'user_id': varientID,
+        'order_id': category,
+        "cancel_reason": itemName,
+        'amount': mrp,
+        'currency': currency,
+      },
+    );
 
-    // await amplitude.track(event);
+    await amplitude.track(event);
 
     print("🛑 AppsFlyer order_cancelled event logged");
   } else if (eventType == 'cancelProduct') {
@@ -560,20 +630,20 @@ Future facebookEventClass(
     };
 
     await appsflyer.logEvent("product_cancelled", eventValues);
-    // final event = BaseEvent(
-    //   'Order Product Cancelled',
-    //   eventProperties: {
-    //     'platform': Platform.isIOS ? 'iOS' : 'Android',
-    //     'user_id': varientID,
-    //     'order_id': utmCampaign,
-    //     "cancel_reason": itemName,
-    //     'price': price,
-    //     'currency': currency,
-    //     "af_quantity": qty,
-    //   },
-    // );
+    final event = BaseEvent(
+      'Order Product Cancelled',
+      eventProperties: {
+        'platform': Platform.isIOS ? 'iOS' : 'Android',
+        'user_id': varientID,
+        'order_id': utmCampaign,
+        "cancel_reason": itemName,
+        'price': price,
+        'currency': currency,
+        "af_quantity": qty,
+      },
+    );
 
-    // await amplitude.track(event);
+    await amplitude.track(event);
 
     print("🛑 AppsFlyer product_cancelled event sent");
   } else if (eventType == 'location') {
@@ -592,6 +662,18 @@ Future facebookEventClass(
         "event_time": DateTime.now().toIso8601String(),
         "user_id": varientID,
       });
+      final event = BaseEvent(
+        'Location Permission',
+        eventProperties: {
+          'platform': Platform.isIOS ? 'iOS' : 'Android',
+          'permission_status': 'denied',
+          'source': 'location_permission',
+          "user_id": varientID,
+          "event_time": DateTime.now().toIso8601String(),
+        },
+      );
+      await amplitude.track(event);
+
       print("📍 Location permission permission_denied");
     }
 
@@ -602,6 +684,17 @@ Future facebookEventClass(
         "event_time": DateTime.now().toIso8601String(),
         "user_id": varientID,
       });
+      final event = BaseEvent(
+        'Location Permission',
+        eventProperties: {
+          'platform': Platform.isIOS ? 'iOS' : 'Android',
+          'permission_status': 'permission_permanently_denied',
+          'source': 'location_permission',
+          "user_id": varientID,
+          "event_time": DateTime.now().toIso8601String(),
+        },
+      );
+      await amplitude.track(event);
       print("📍 Location permission permission_permanently_denied");
     }
 
@@ -613,6 +706,18 @@ Future facebookEventClass(
         "event_time": DateTime.now().toIso8601String(),
         "user_id": varientID,
       });
+      final event = BaseEvent(
+        'Location Permission',
+        eventProperties: {
+          'platform': Platform.isIOS ? 'iOS' : 'Android',
+          'permission_status': 'location_enabled',
+          'source': 'location_permission',
+          "user_id": varientID,
+          "event_time": DateTime.now().toIso8601String(),
+        },
+      );
+      await amplitude.track(event);
+
       print("📍 Location permission location_enabled");
     }
 
@@ -626,6 +731,16 @@ Future facebookEventClass(
         "event_time": DateTime.now().toIso8601String(),
         "user_id": varientID,
       });
+      final event = BaseEvent(
+        'notification status',
+        eventProperties: {
+          'platform': Platform.isIOS ? 'iOS' : 'Android',
+          'permission_status': 'enabled',
+          "user_id": varientID,
+          "event_time": DateTime.now().toIso8601String(),
+        },
+      );
+      await amplitude.track(event);
 
       print("📡 AppsFlyer event sent → notification_status: enabled");
     } else if (settings.authorizationStatus == AuthorizationStatus.denied) {
@@ -635,6 +750,16 @@ Future facebookEventClass(
         "event_time": DateTime.now().toIso8601String(),
         "user_id": varientID,
       });
+      final event = BaseEvent(
+        'notification status',
+        eventProperties: {
+          'platform': Platform.isIOS ? 'iOS' : 'Android',
+          'permission_status': 'disabled',
+          "user_id": varientID,
+          "event_time": DateTime.now().toIso8601String(),
+        },
+      );
+      await amplitude.track(event);
 
       print("📡 AppsFlyer event sent → notification_status: disabled");
     } else if (settings.authorizationStatus ==
@@ -645,6 +770,16 @@ Future facebookEventClass(
         "event_time": DateTime.now().toIso8601String(),
         "user_id": varientID,
       });
+      final event = BaseEvent(
+        'notification status',
+        eventProperties: {
+          'platform': Platform.isIOS ? 'iOS' : 'Android',
+          'permission_status': 'not_requested',
+          "user_id": varientID,
+          "event_time": DateTime.now().toIso8601String(),
+        },
+      );
+      await amplitude.track(event);
 
       print("📡 AppsFlyer event sent → notification_status: not_requested");
     } else if (settings.authorizationStatus ==
@@ -655,6 +790,16 @@ Future facebookEventClass(
         "event_time": DateTime.now().toIso8601String(),
         "user_id": varientID,
       });
+      final event = BaseEvent(
+        'notification status',
+        eventProperties: {
+          'platform': Platform.isIOS ? 'iOS' : 'Android',
+          'permission_status': 'provisional',
+          "user_id": varientID,
+          "event_time": DateTime.now().toIso8601String(),
+        },
+      );
+      await amplitude.track(event);
 
       print("📡 AppsFlyer event sent → notification_status: provisional");
     }
@@ -685,347 +830,578 @@ Future facebookEventClass(
 
     /// Amplitude event pass for appOpen...G1
   } else if (eventType == 'appOpen') {
-    // final event = BaseEvent(
-    //   'App Opened',
-    //   eventProperties: {
-    //     'platform': Platform.isIOS ? 'iOS' : 'Android',
-    //     'version': varientID,
-    //     'user_id': itemName,
-    //     'fcm_token': category
-    //   },
-    // );
-    // await amplitude.track(event);
-    // print('📊 Amplitude Event: App Opened');
+    final event = BaseEvent(
+      'App Opened',
+      eventProperties: {
+        'platform': Platform.isIOS ? 'iOS' : 'Android',
+        'version': varientID,
+        'user_id': itemName,
+        'fcm_token': category
+      },
+    );
+    await amplitude.track(event);
+    print('📊 Amplitude Event: App Opened');
   } else if (eventType == 'registerrr') {
-    // final event = BaseEvent(
-    //   'Login Completed',
-    //   eventProperties: {
-    //     'platform': Platform.isIOS ? 'iOS' : 'Android',
-    //     'login_method': varientID,
-    //     'user_id': orderType,
-    //   },
-    // );
-    // await amplitude.track(event);
+    final event = BaseEvent(
+      'Login Completed',
+      eventProperties: {
+        'platform': Platform.isIOS ? 'iOS' : 'Android',
+        'login_method': varientID,
+        'user_id': orderType,
+      },
+    );
+    await amplitude.track(event);
     print('📊 Amplitude Event: Login Completed');
   } else if (eventType == 'logout') {
-    // final event = BaseEvent(
-    //   'Logout',
-    //   eventProperties: {
-    //     'platform': Platform.isIOS ? 'iOS' : 'Android',
-    //     'user_id': itemName,
-    //   },
-    // );
+    final event = BaseEvent(
+      'Logout',
+      eventProperties: {
+        'platform': Platform.isIOS ? 'iOS' : 'Android',
+        'user_id': itemName,
+      },
+    );
 
-    // await amplitude.track(event);
+    await amplitude.track(event);
 
     print('📊 Amplitude Event: Logout');
   } else if (eventType == 'loginFailed') {
-    // final event = BaseEvent(
-    //   'Login Failed',
-    //   eventProperties: {
-    //     'platform': Platform.isIOS ? 'iOS' : 'Android',
-    //     'login_method': varientID,
-    //     'user_id': itemName,
-    //     'failure_reason': category,
-    //   },
-    // );
+    final event = BaseEvent(
+      'Login Failed',
+      eventProperties: {
+        'platform': Platform.isIOS ? 'iOS' : 'Android',
+        'login_method': varientID,
+        'user_id': itemName,
+        'failure_reason': category,
+      },
+    );
 
-    // await amplitude.track(event);
+    await amplitude.track(event);
 
     print('📊 Amplitude Event: Login Failed');
   } else if (eventType == 'registerStart') {
-    // final event = BaseEvent(
-    //   'Sign Up Started ',
-    //   eventProperties: {
-    //     'platform': Platform.isIOS ? 'iOS' : 'Android',
-    //     'name_provided': itemName.trim().isNotEmpty == true,
-    //     'phone_number_provided': utmSource?.trim().isNotEmpty == true,
-    //     'email_provided': varientID.trim().isNotEmpty == true,
-    //     'referral_code':
-    //         category.trim().isNotEmpty == true ? category.trim() : null,
-    //   },
-    // );
-    // await amplitude.track(event);
+    final event = BaseEvent(
+      'Sign Up Started ',
+      eventProperties: {
+        'platform': Platform.isIOS ? 'iOS' : 'Android',
+        'name_provided': itemName.trim().isNotEmpty == true,
+        'phone_number_provided': utmSource?.trim().isNotEmpty == true,
+        'email_provided': varientID.trim().isNotEmpty == true,
+        'referral_code':
+            category.trim().isNotEmpty == true ? category.trim() : null,
+      },
+    );
+    await amplitude.track(event);
     print('📊 Amplitude Event: Sign Up Started');
   } else if (eventType == 'accountDeleted') {
-    // final event = BaseEvent(
-    //   'Account Deleted',
-    //   eventProperties: {
-    //     'platform': Platform.isIOS ? 'iOS' : 'Android',
-    //     'deletion_reason': "Deleted By customer",
-    //     'account_age_days': varientID,
-    //     'referral_code':
-    //         category.trim().isNotEmpty == true ? category.trim() : null,
-    //   },
-    // );
+    final event = BaseEvent(
+      'Account Deleted',
+      eventProperties: {
+        'platform': Platform.isIOS ? 'iOS' : 'Android',
+        'deletion_reason': "Deleted By customer",
+        'account_age_days': varientID,
+        'referral_code':
+            category.trim().isNotEmpty == true ? category.trim() : null,
+      },
+    );
 
-    // await amplitude.track(event);
+    await amplitude.track(event);
 
     print('📊 Amplitude Event: Account Deleted');
   } else if (eventType == 'guestToRegister') {
-    // final event = BaseEvent(
-    //   'Guest to Register',
-    //   eventProperties: {
-    //     'platform': Platform.isIOS ? 'iOS' : 'Android',
-    //     'user_id': varientID
-    //   },
-    // );
+    final event = BaseEvent(
+      'Guest to Register',
+      eventProperties: {
+        'platform': Platform.isIOS ? 'iOS' : 'Android',
+        'user_id': varientID
+      },
+    );
 
-    // await amplitude.track(event);
+    await amplitude.track(event);
 
     print('📊 Amplitude Event: guestToRegister');
   } else if (eventType == 'searchStart') {
-    // final event = BaseEvent(
-    //   'Search Started',
-    //   eventProperties: {
-    //     'platform': Platform.isIOS ? 'iOS' : 'Android',
-    //     'search_query': itemName,
-    //     'user_id': varientID
-    //   },
-    // );
+    final event = BaseEvent(
+      'Search Started',
+      eventProperties: {
+        'platform': Platform.isIOS ? 'iOS' : 'Android',
+        'search_query': itemName,
+        'user_id': varientID
+      },
+    );
 
-    // await amplitude.track(event);
+    await amplitude.track(event);
 
     print("🔍 AppsFlyer Event: af_search → ");
   } else if (eventType == 'wishlistViewed') {
-    // final event = BaseEvent(
-    //   'Wishlist Viewed',
-    //   eventProperties: {
-    //     'platform': Platform.isIOS ? 'iOS' : 'Android',
-    //     'user_id': varientID
-    //   },
-    // );
+    final event = BaseEvent(
+      'Wishlist Viewed',
+      eventProperties: {
+        'platform': Platform.isIOS ? 'iOS' : 'Android',
+        'user_id': varientID
+      },
+    );
 
-    // await amplitude.track(event);
+    await amplitude.track(event);
 
     print('📊 Amplitude Event: Wishlist Viewed');
   } else if (eventType == 'couponViewed') {
-    // final event = BaseEvent(
-    //   'Coupon Viewed',
-    //   eventProperties: {
-    //     'platform': Platform.isIOS ? 'iOS' : 'Android',
-    //     'user_id': varientID
-    //   },
-    // );
+    final event = BaseEvent(
+      'Coupon Viewed',
+      eventProperties: {
+        'platform': Platform.isIOS ? 'iOS' : 'Android',
+        'user_id': varientID
+      },
+    );
 
-    // await amplitude.track(event);
+    await amplitude.track(event);
 
     print('📊 Amplitude Event: Coupon Viewed');
   } else if (eventType == 'couponRemoved') {
-    // final event = BaseEvent(
-    //   'Coupon Removed',
-    //   eventProperties: {
-    //     'platform': Platform.isIOS ? 'iOS' : 'Android',
-    //     'coupon_code': itemName,
-    //     'coupon_name': category,
-    //     'discount_amount': price,
-    //     "user_id": varientID,
-    //     'currency': currency,
-    //   },
-    // );
+    final event = BaseEvent(
+      'Coupon Removed',
+      eventProperties: {
+        'platform': Platform.isIOS ? 'iOS' : 'Android',
+        'coupon_code': itemName,
+        'coupon_name': category,
+        'discount_amount': price,
+        "user_id": varientID,
+        'currency': currency,
+      },
+    );
 
-    // await amplitude.track(event);
+    await amplitude.track(event);
 
     print("📊 Tracked event: apply_coupon");
   } else if (eventType == 'cartViewed') {
-    // final event = BaseEvent(
-    //   'Cart Viewed Daily',
-    //   eventProperties: {
-    //     'platform': Platform.isIOS ? 'iOS' : 'Android',
-    //     "user_id": varientID,
-    //   },
-    // );
+    final event = BaseEvent(
+      'Cart Viewed Daily',
+      eventProperties: {
+        'platform': Platform.isIOS ? 'iOS' : 'Android',
+        "user_id": varientID,
+      },
+    );
 
-    // await amplitude.track(event);
+    await amplitude.track(event);
 
     print('📊 Amplitude Event: Cart Viewed Daily');
   } else if (eventType == 'cartViewedS') {
-    // final event = BaseEvent(
-    //   'Cart Viewed Subscription',
-    //   eventProperties: {
-    //     'platform': Platform.isIOS ? 'iOS' : 'Android',
-    //     "user_id": varientID,
-    //   },
-    // );
+    final event = BaseEvent(
+      'Cart Viewed Subscription',
+      eventProperties: {
+        'platform': Platform.isIOS ? 'iOS' : 'Android',
+        "user_id": varientID,
+      },
+    );
 
-    // await amplitude.track(event);
+    await amplitude.track(event);
 
     print('📊 Amplitude Event: Cart Viewed Daily');
   } else if (eventType == 'addAddress') {
-    // final event = BaseEvent(
-    //   'Delivery Address Added',
-    //   eventProperties: {
-    //     'platform': Platform.isIOS ? 'iOS' : 'Android',
-    //     'user_id': varientID,
-    //     'address_id': itemName,
-    //     'address_type': category,
-    //     'address': utmSource,
-    //   },
-    // );
+    final event = BaseEvent(
+      'Delivery Address Added',
+      eventProperties: {
+        'platform': Platform.isIOS ? 'iOS' : 'Android',
+        'user_id': varientID,
+        'address_id': itemName,
+        'address_type': category,
+        'address': utmSource,
+      },
+    );
 
-    // await amplitude.track(event);
+    await amplitude.track(event);
   } else if (eventType == 'editAddress') {
-    // final event = BaseEvent(
-    //   'Delivery Address Updated',
-    //   eventProperties: {
-    //     'platform': Platform.isIOS ? 'iOS' : 'Android',
-    //     'user_id': varientID,
-    //     'address_id': itemName,
-    //     'address_type': category,
-    //     'address': utmSource,
-    //   },
-    // );
+    final event = BaseEvent(
+      'Delivery Address Updated',
+      eventProperties: {
+        'platform': Platform.isIOS ? 'iOS' : 'Android',
+        'user_id': varientID,
+        'address_id': itemName,
+        'address_type': category,
+        'address': utmSource,
+      },
+    );
 
-    // await amplitude.track(event);
+    await amplitude.track(event);
   } else if (eventType == 'addressSelected') {
-    // final event = BaseEvent(
-    //   'Delivery Address Selected',
-    //   eventProperties: {
-    //     'platform': Platform.isIOS ? 'iOS' : 'Android',
-    //     'user_id': varientID,
-    //     'address_id': itemName,
-    //     'address_type': category,
-    //     'address': utmSource,
-    //   },
-    // );
+    final event = BaseEvent(
+      'Delivery Address Selected',
+      eventProperties: {
+        'platform': Platform.isIOS ? 'iOS' : 'Android',
+        'user_id': varientID,
+        'address_id': itemName,
+        'address_type': category,
+        'address': utmSource,
+      },
+    );
 
-    // await amplitude.track(event);
+    await amplitude.track(event);
+  } else if (eventType == 'addressView') {
+    final event = BaseEvent(
+      'Address Selection Viewed',
+      eventProperties: {
+        'platform': Platform.isIOS ? 'iOS' : 'Android',
+        'user_id': varientID,
+      },
+    );
+
+    await amplitude.track(event);
   } else if (eventType == 'timeSlotView') {
-    // final event = BaseEvent(
-    //   'Delivery Slot Viewed',
-    //   eventProperties: {
-    //     'platform': Platform.isIOS ? 'iOS' : 'Android',
-    //     'user_id': varientID,
-    //     'type': utmSource,
-    //   },
-    // );
-    // await amplitude.track(event);
+    final event = BaseEvent(
+      'Delivery Slot Viewed',
+      eventProperties: {
+        'platform': Platform.isIOS ? 'iOS' : 'Android',
+        'user_id': varientID,
+        'type': utmSource,
+      },
+    );
+    await amplitude.track(event);
   } else if (eventType == 'timeSlotSelected') {
-    // final event = BaseEvent(
-    //   'Delivery Slot Selected',
-    //   eventProperties: {
-    //     'platform': Platform.isIOS ? 'iOS' : 'Android',
-    //     'user_id': varientID,
-    //     'delivery_date': itemName,
-    //     'delivery_slot': category,
-    //     'type': utmSource,
-    //   },
-    // );
+    final event = BaseEvent(
+      'Delivery Slot Selected',
+      eventProperties: {
+        'platform': Platform.isIOS ? 'iOS' : 'Android',
+        'user_id': varientID,
+        'delivery_date': itemName,
+        'delivery_slot': category,
+        'type': utmSource,
+      },
+    );
 
-    // await amplitude.track(event);
+    await amplitude.track(event);
   } else if (eventType == 'timeSlotChanges') {
-    // final event = BaseEvent(
-    //   'Delivery Slot Changed',
-    //   eventProperties: {
-    //     'platform': Platform.isIOS ? 'iOS' : 'Android',
-    //     'user_id': varientID,
-    //     'type': utmSource,
-    //     'delivery_date': itemName,
-    //     'delivery_slot': category,
-    //   },
-    // );
+    final event = BaseEvent(
+      'Delivery Slot Changed',
+      eventProperties: {
+        'platform': Platform.isIOS ? 'iOS' : 'Android',
+        'user_id': varientID,
+        'type': utmSource,
+        'delivery_date': itemName,
+        'delivery_slot': category,
+      },
+    );
 
-    // await amplitude.track(event);
+    await amplitude.track(event);
   } else if (eventType == 'paymentStarted') {
-    // final event = BaseEvent(
-    //   'Payment Method Selected',
-    //   eventProperties: {
-    //     'platform': Platform.isIOS ? 'iOS' : 'Android',
-    //     'user_id': itemName,
-    //     'order_type': category,
-    //     'amount': mrp,
-    //     'payment_method': orderType,
-    //     'currency': currency,
-    //   },
-    // );
+    final event = BaseEvent(
+      'Payment Method Selected',
+      eventProperties: {
+        'platform': Platform.isIOS ? 'iOS' : 'Android',
+        'user_id': itemName,
+        'order_type': category,
+        'amount': mrp,
+        'payment_method': orderType,
+        'currency': currency,
+      },
+    );
 
-    // await amplitude.track(event);
+    await amplitude.track(event);
 
-    // final eventN = BaseEvent(
-    //   'Payment Method Started',
-    //   eventProperties: {
-    //     'platform': Platform.isIOS ? 'iOS' : 'Android',
-    //     'user_id': itemName,
-    //     'amount': mrp,
-    //     'variant_id': varientID,
-    //     'currency': currency,
-    //     'payment_method': orderType,
-    //   },
-    // );
-    // await amplitude.track(eventN);
+    final eventN = BaseEvent(
+      'Payment Method Started',
+      eventProperties: {
+        'platform': Platform.isIOS ? 'iOS' : 'Android',
+        'user_id': itemName,
+        'amount': mrp,
+        'variant_id': varientID,
+        'currency': currency,
+        'payment_method': orderType,
+      },
+    );
+    await amplitude.track(eventN);
   } else if (eventType == 'paymentFailed') {
-    // final event = BaseEvent(
-    //   'Payment Failed',
-    //   eventProperties: {
-    //     'platform': Platform.isIOS ? 'iOS' : 'Android',
-    //     'user_id': itemName,
-    //     'payment_method': orderType,
-    //     'amount': mrp,
-    //     'currency': currency,
-    //     'order_id': varientID,
-    //     'failed error': utmCampaign
-    //   },
-    // );
+    final event = BaseEvent(
+      'Payment Failed',
+      eventProperties: {
+        'platform': Platform.isIOS ? 'iOS' : 'Android',
+        'user_id': itemName,
+        'payment_method': orderType,
+        'amount': mrp,
+        'currency': currency,
+        'order_id': varientID,
+        'failed error': utmCampaign
+      },
+    );
 
-    // await amplitude.track(event);
+    await amplitude.track(event);
+    final event1 = BaseEvent(
+      'Checkout Failed',
+      eventProperties: {
+        'platform': Platform.isIOS ? 'iOS' : 'Android',
+        'user_id': itemName,
+        'payment_method': orderType,
+        'amount': mrp,
+        'currency': currency,
+        'order_id': varientID,
+        'failed error': utmCampaign
+      },
+    );
+
+    await amplitude.track(event1);
 
     print('📊 Amplitude Event: Payment Failed');
   } else if (eventType == 'walletSelected') {
-    // final event = BaseEvent(
-    //   'Wallet Selected',
-    //   eventProperties: {
-    //     'platform': Platform.isIOS ? 'iOS' : 'Android',
-    //     'user_id': itemName,
-    //     'payment_method': varientID,
-    //     'amount': mrp,
-    //     'currency': currency,
-    //   },
-    // );
+    final event = BaseEvent(
+      'Wallet Selected',
+      eventProperties: {
+        'platform': Platform.isIOS ? 'iOS' : 'Android',
+        'user_id': itemName,
+        'payment_method': varientID,
+        'amount': mrp,
+        'currency': currency,
+      },
+    );
 
-    // await amplitude.track(event);
+    await amplitude.track(event);
 
     print('📊 Amplitude Event: Wallet Selected');
   } else if (eventType == 'pushNotificationOpened') {
-    // final event = BaseEvent(
-    //   'Push Notification Opened',
-    //   eventProperties: {
-    //     'platform': Platform.isIOS ? 'iOS' : 'Android',
-    //     'screen_name': varientID,
-    //     'param': products,
-    //   },
-    // );
+    final event = BaseEvent(
+      'Push Notification Opened',
+      eventProperties: {
+        'platform': Platform.isIOS ? 'iOS' : 'Android',
+        'screen_name': varientID,
+        'param': products,
+      },
+    );
 
-    // await amplitude.track(event);
+    await amplitude.track(event);
 
     print('📊 Amplitude Event: Push Notification Opened');
   } else if (eventType == 'appShare') {
-    // final event = BaseEvent(
-    //   'Referral Shared',
-    //   eventProperties: {
-    //     'platform': Platform.isIOS ? 'iOS' : 'Android',
-    //     'user_id': itemName,
-    //     'referral_code': varientID,
-    //   },
-    // );
+    final event = BaseEvent(
+      'Referral Shared',
+      eventProperties: {
+        'platform': Platform.isIOS ? 'iOS' : 'Android',
+        'user_id': itemName,
+        'referral_code': varientID,
+      },
+    );
 
-    // await amplitude.track(event);
+    await amplitude.track(event);
 
     print('📊 Amplitude Event: Referral Shared');
-  } else if (eventType == 'appShare') {
-    // final event = BaseEvent(
-    //   'Review Submitted',
-    //   eventProperties: {
-    //     'platform': Platform.isIOS ? 'iOS' : 'Android',
-    //     'user_id': itemName,
-    //     'product_id': varientID,
-    //     'rating': price,
-    //     'review_type': category,
-    //   },
-    // );
+  } else if (eventType == 'productRating') {
+    final event = BaseEvent(
+      'Review Submitted',
+      eventProperties: {
+        'platform': Platform.isIOS ? 'iOS' : 'Android',
+        'user_id': itemName,
+        'product_id': varientID,
+        'rating': price,
+        'review_type': category,
+      },
+    );
 
-    // await amplitude.track(event);
+    await amplitude.track(event);
 
     print('📊 Amplitude Event: Review Submitted');
+  } else if (eventType == 'support') {
+    final event = BaseEvent(
+      'Support Connected',
+      eventProperties: {
+        'platform': Platform.isIOS ? 'iOS' : 'Android',
+        'user_id': itemName,
+        'support_type': varientID,
+        'connection_status': 'connected',
+      },
+    );
+    await amplitude.track(event);
+  } else if (eventType == 'phoneNumberEnter') {
+    final event = BaseEvent(
+      'Phone Number Entered',
+      eventProperties: {
+        'platform': Platform.isIOS ? 'iOS' : 'Android',
+        'phone_number_entered': true,
+        'country_code': varientID,
+        'source': 'login_screen',
+      },
+    );
+    await amplitude.track(event);
+  } else if (eventType == 'locationSelected') {
+    final event = BaseEvent(
+      'Location Added',
+      eventProperties: {
+        'platform': Platform.isIOS ? 'iOS' : 'Android',
+        'user_id': itemName,
+        'location_type': 'G map address',
+        'source': varientID,
+      },
+    );
+    await amplitude.track(event);
+  } else if (eventType == 'serviceability') {
+    final event = BaseEvent(
+      'Serviceability Checked',
+      eventProperties: {
+        'platform': Platform.isIOS ? 'iOS' : 'Android',
+        'user_id': itemName,
+        'serviceability_status': qty == 0 ? 'serviceable' : 'not_serviceable',
+        'source': 'location_check',
+        'location_type': 'g mapp address',
+        'service_area': varientID,
+        'service_latlng': category,
+      },
+    );
+
+    await amplitude.track(event);
+  } else if (eventType == 'bannerClick') {
+    final event = BaseEvent(
+      'Banner Clicked',
+      eventProperties: {
+        'platform': Platform.isIOS ? 'iOS' : 'Android',
+        'user_id': itemName,
+        'banner_id': varientID,
+        'banner_type': category,
+        'source': orderType,
+      },
+    );
+    await amplitude.track(event);
+  } else if (eventType == 'productList') {
+    final event1 = BaseEvent(
+      'Product Listing Viewed',
+      eventProperties: {
+        'category_name': category,
+        'subcategory_id': varientID,
+        'subcategory_name': itemName,
+        'listing_type': orderType,
+        'user_id': utmSource,
+        'platform': Platform.isIOS ? 'iOS' : 'Android',
+      },
+    );
+
+    await amplitude.track(event1);
+
+    print('📊 Amplitude Event: Product Listing Viewed');
+  } else if (eventType == 'productShare') {
+    final event = BaseEvent(
+      'Product Shared',
+      eventProperties: {
+        'product_id': varientID,
+        'product_name': itemName,
+        'user_id': utmSource,
+        'price': price,
+        'mrp': mrp,
+        'platform': Platform.isIOS ? 'iOS' : 'Android',
+      },
+    );
+
+    await amplitude.track(event);
+
+    print('📊 Amplitude Event: Product Shared');
+  } else if (eventType == 'couponFailed') {
+    final event = BaseEvent(
+      'Coupon Failed',
+      eventProperties: {
+        'coupon_code': varientID,
+        'failure_reason': itemName,
+        'user_id': utmSource,
+        'platform': Platform.isIOS ? 'iOS' : 'Android',
+      },
+    );
+
+    await amplitude.track(event);
+
+    print('📊 Amplitude Event: Coupon Failed');
+  } else if (eventType == 'orderView') {
+    final event = BaseEvent(
+      'Place Order Clicked',
+      eventProperties: {
+        'order_id': varientID,
+        'user_id': utmSource,
+        'platform': Platform.isIOS ? 'iOS' : 'Android',
+      },
+    );
+
+    await amplitude.track(event);
+
+    print('📊 Amplitude Event: Place Order Clicked');
+  } else if (eventType == 'orderAbanded') {
+    final event = BaseEvent(
+      'Checkout Abandoned',
+      eventProperties: {
+        'order_id': varientID,
+        'user_id': utmSource,
+        'platform': Platform.isIOS ? 'iOS' : 'Android',
+      },
+    );
+
+    await amplitude.track(event);
+
+    print('📊 Amplitude Event: Checkout Abandoned');
+  } else if (eventType == 'subscriptionPause') {
+    final event = BaseEvent(
+      'Subscription Paused',
+      eventProperties: {
+        'subscription_id': varientID,
+        'subscription_cart_id': itemName,
+        'store_order_id': category,
+        'pause_reason': "pause by customer",
+        'pause_start_date': orderType,
+        'delivery_date': utmCampaign,
+        'user_id': utmSource,
+        'platform': Platform.isIOS ? 'iOS' : 'Android',
+      },
+    );
+
+    await amplitude.track(event);
+
+    print('📊 Amplitude Event: Subscription Paused');
+  } else if (eventType == 'subscriptionResume') {
+    final event = BaseEvent(
+      'Subscription Resume',
+      eventProperties: {
+        'subscription_id': varientID,
+        'subscription_cart_id': itemName,
+        'order_datetime': category,
+        'pause_reason': "resume by customer",
+        'resume_start_date': orderType,
+        'delivery_date': utmCampaign,
+        'user_id': utmSource,
+        'platform': Platform.isIOS ? 'iOS' : 'Android',
+      },
+    );
+
+    await amplitude.track(event);
+
+    print('📊 Amplitude Event: Subscription Resume');
+  } else if (eventType == 'profile') {
+    final event = BaseEvent(
+      'Profile Viewed',
+      eventProperties: {
+        'profile_user_id': varientID,
+        'profile_name': itemName,
+        'platform': Platform.isIOS ? 'iOS' : 'Android',
+      },
+    );
+
+    await amplitude.track(event);
+    print('📊 Amplitude Event: Profile Viewed');
+  } else if (eventType == 'profileUpdate') {
+    final event = BaseEvent(
+      'Profile Updated',
+      eventProperties: {
+        'profile_user_id': varientID,
+        'updated_fields': itemName,
+        'source': 'profile',
+        'platform': Platform.isIOS ? 'iOS' : 'Android',
+      },
+    );
+
+    await amplitude.track(event);
+    print('📊 Amplitude Event: Profile Updated');
+  } else if (eventType == 'apiError') {
+    final event = BaseEvent(
+      'API Error',
+      eventProperties: {
+        'api_name': varientID,
+        'http_status_code': itemName,
+        'screen_name': category,
+        'user_id': utmSource,
+        'platform': Platform.isIOS ? 'iOS' : 'Android',
+      },
+    );
+
+    await amplitude.track(event);
+    print('📊 Amplitude Event: API Error');
   }
 
   /// Facebook event pass...G1

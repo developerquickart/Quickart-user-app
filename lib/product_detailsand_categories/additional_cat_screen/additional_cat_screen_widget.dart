@@ -61,6 +61,7 @@ class _AdditionalCatScreenWidgetState extends State<AdditionalCatScreenWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => AdditionalCatScreenModel());
+    _model.setOnUpdate(onUpdate: () => safeSetState(() {}));
 
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'AdditionalCatScreen'});
@@ -129,6 +130,26 @@ class _AdditionalCatScreenWidgetState extends State<AdditionalCatScreenWidget> {
           );
         }
       }
+      logFirebaseEvent('AdditionalCatScreen_custom_action');
+      await actions.facebookEventClass(
+        '0',
+        widget.name != null && widget.name != ''
+            ? ((String var1) {
+                return var1.replaceAll(RegExp('_'), ' ');
+              }(widget.name!))
+            : FFAppState().categoryName,
+        'additonal category',
+        0.0,
+        0,
+        0.0,
+        'productList',
+        FFAppState().emptyJson,
+        'additonal category',
+        FFAppState().userID,
+        '0',
+        '0',
+        '0',
+      );
     });
 
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));

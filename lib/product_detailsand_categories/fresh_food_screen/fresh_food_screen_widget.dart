@@ -15,6 +15,7 @@ import '/flutter_flow/custom_functions.dart' as functions;
 import '/index.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -46,6 +47,27 @@ class _FreshFoodScreenWidgetState extends State<FreshFoodScreenWidget> {
 
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'FreshFoodScreen'});
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      logFirebaseEvent('FRESH_FOOD_SCREEN_FreshFoodScreen_ON_INI');
+      logFirebaseEvent('FreshFoodScreen_custom_action');
+      await actions.facebookEventClass(
+        '0',
+        'Subscription product list',
+        'additonal category',
+        0.0,
+        0,
+        0.0,
+        'productList',
+        FFAppState().emptyJson,
+        'subscription category',
+        FFAppState().userID,
+        '0',
+        '0',
+        '0',
+      );
+    });
+
     if (!isWeb) {
       _keyboardVisibilitySubscription =
           KeyboardVisibilityController().onChange.listen((bool visible) {

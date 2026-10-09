@@ -14,3 +14,4 @@ export '/custom_code/widgets/web_view_widgetin_app.dart'
 export '/custom_code/widgets/lifecycle_wrapper.dart' show LifecycleWrapper;
 export '/custom_code/widgets/total_pay_checkout_web_view.dart'
     show TotalPayCheckoutWebView;
+export '/custom_code/widgets/splash_gif_widget.dart' show SplashGifWidget;

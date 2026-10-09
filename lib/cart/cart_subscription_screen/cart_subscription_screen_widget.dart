@@ -1438,7 +1438,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                         ).toString()),
                                                                                                                         'remove',
                                                                                                                         FFAppState().emptyJson,
-                                                                                                                        'emptyjons',
+                                                                                                                        'subscription',
                                                                                                                         ' ',
                                                                                                                         ' ',
                                                                                                                         ' ',
@@ -1673,14 +1673,19 @@ class _CartSubscriptionScreenWidgetState
                                                                                                                                 productSubModelItem,
                                                                                                                                 r'''$.price''',
                                                                                                                               ).toString()),
-                                                                                                                              1,
+                                                                                                                              functions.setIngeterValue(functions.addRemoveQTY(
+                                                                                                                                  getJsonField(
+                                                                                                                                    productSubModelItem,
+                                                                                                                                    r'''$.cart_qty''',
+                                                                                                                                  ),
+                                                                                                                                  'add')!),
                                                                                                                               functions.stringToDouble(getJsonField(
                                                                                                                                 productSubModelItem,
                                                                                                                                 r'''$.mrp''',
                                                                                                                               ).toString()),
                                                                                                                               'add',
                                                                                                                               FFAppState().emptyJson,
-                                                                                                                              'emptyjons',
+                                                                                                                              'subscription',
                                                                                                                               ' ',
                                                                                                                               ' ',
                                                                                                                               ' ',
@@ -3784,23 +3789,6 @@ class _CartSubscriptionScreenWidgetState
                                                                               mainAxisSize: MainAxisSize.max,
                                                                               children: [
                                                                                 Padding(
-                                                                                  padding: EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
-                                                                                  child: Text(
-                                                                                    '-',
-                                                                                    style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                          font: GoogleFonts.montserrat(
-                                                                                            fontWeight: FontWeight.w500,
-                                                                                            fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                                                                                          ),
-                                                                                          color: FFAppConstants.darkGreen,
-                                                                                          fontSize: 12.0,
-                                                                                          letterSpacing: 0.0,
-                                                                                          fontWeight: FontWeight.w500,
-                                                                                          fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                                                                                        ),
-                                                                                  ),
-                                                                                ),
-                                                                                Padding(
                                                                                   padding: EdgeInsetsDirectional.fromSTEB(2.0, 0.0, 0.0, 0.0),
                                                                                   child: Text(
                                                                                     FFAppConstants.currancyAED,
@@ -3889,23 +3877,6 @@ class _CartSubscriptionScreenWidgetState
                                                                             Row(
                                                                               mainAxisSize: MainAxisSize.max,
                                                                               children: [
-                                                                                Padding(
-                                                                                  padding: EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
-                                                                                  child: Text(
-                                                                                    '+',
-                                                                                    style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                          font: GoogleFonts.montserrat(
-                                                                                            fontWeight: FontWeight.w600,
-                                                                                            fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                                                                                          ),
-                                                                                          color: FFAppConstants.primaryPurple2,
-                                                                                          fontSize: 12.0,
-                                                                                          letterSpacing: 0.0,
-                                                                                          fontWeight: FontWeight.w600,
-                                                                                          fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                                                                                        ),
-                                                                                  ),
-                                                                                ),
                                                                                 Padding(
                                                                                   padding: EdgeInsetsDirectional.fromSTEB(2.0, 0.0, 0.0, 0.0),
                                                                                   child: Text(
@@ -4013,23 +3984,6 @@ class _CartSubscriptionScreenWidgetState
                                                                                   mainAxisSize: MainAxisSize.max,
                                                                                   children: [
                                                                                     Padding(
-                                                                                      padding: EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
-                                                                                      child: Text(
-                                                                                        '+',
-                                                                                        style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                              font: GoogleFonts.montserrat(
-                                                                                                fontWeight: FontWeight.w600,
-                                                                                                fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                                                                                              ),
-                                                                                              color: FFAppConstants.primaryPurple2,
-                                                                                              fontSize: 12.0,
-                                                                                              letterSpacing: 0.0,
-                                                                                              fontWeight: FontWeight.w600,
-                                                                                              fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                                                                                            ),
-                                                                                      ),
-                                                                                    ),
-                                                                                    Padding(
                                                                                       padding: EdgeInsetsDirectional.fromSTEB(2.0, 0.0, 0.0, 0.0),
                                                                                       child: Text(
                                                                                         FFAppConstants.currancyAED,
@@ -4056,7 +4010,7 @@ class _CartSubscriptionScreenWidgetState
                                                                                                   true,
                                                                                                 )!,
                                                                                                 'min_order'),
-                                                                                            r'''$.zone_rule_value''',
+                                                                                            r'''$.zone_price_effect''',
                                                                                           ).toString(),
                                                                                           2,
                                                                                           false),
@@ -4172,23 +4126,6 @@ class _CartSubscriptionScreenWidgetState
                                                                                     Row(
                                                                                       mainAxisSize: MainAxisSize.max,
                                                                                       children: [
-                                                                                        Padding(
-                                                                                          padding: EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
-                                                                                          child: Text(
-                                                                                            '+',
-                                                                                            style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                                  font: GoogleFonts.montserrat(
-                                                                                                    fontWeight: FontWeight.w600,
-                                                                                                    fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                                                                                                  ),
-                                                                                                  color: FFAppConstants.primaryPurple2,
-                                                                                                  fontSize: 12.0,
-                                                                                                  letterSpacing: 0.0,
-                                                                                                  fontWeight: FontWeight.w600,
-                                                                                                  fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                                                                                                ),
-                                                                                          ),
-                                                                                        ),
                                                                                         Padding(
                                                                                           padding: EdgeInsetsDirectional.fromSTEB(2.0, 0.0, 0.0, 0.0),
                                                                                           child: Text(
@@ -14779,7 +14716,18 @@ class _CartSubscriptionScreenWidgetState
                                                                                         safeSetState(() {});
                                                                                         logFirebaseEvent('PaymentContainer_navigate_to');
 
-                                                                                        context.pushNamed(OrderSuccessFailScreenWidget.routeName);
+                                                                                        context.pushNamed(
+                                                                                          OrderSuccessFailScreenWidget.routeName,
+                                                                                          queryParameters: {
+                                                                                            'groupID': serializeParam(
+                                                                                              getJsonField(
+                                                                                                (_model.apiResultSUBC1?.jsonBody ?? ''),
+                                                                                                r'''$.group_id''',
+                                                                                              ).toString(),
+                                                                                              ParamType.String,
+                                                                                            ),
+                                                                                          }.withoutNulls,
+                                                                                        );
 
                                                                                         logFirebaseEvent('PaymentContainer_update_app_state');
                                                                                         FFAppState().screenName = 'subscription';

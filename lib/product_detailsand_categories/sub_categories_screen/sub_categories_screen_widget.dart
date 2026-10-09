@@ -1006,7 +1006,8 @@ class _SubCategoriesScreenWidgetState extends State<SubCategoriesScreenWidget> {
                                                               FFAppState()
                                                                   .emptyJson,
                                                               'c',
-                                                              ' ',
+                                                              FFAppState()
+                                                                  .userID,
                                                               ' ',
                                                               ' ',
                                                               ' ',

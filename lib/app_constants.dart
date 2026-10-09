@@ -101,8 +101,8 @@ abstract class FFAppConstants {
   static const String errorMessage = 'c';
   static const String forcefullyUpdate = '0';
   static const String appVersion = '1.0.20';
-  static const String appVersioniOS = '3.4';
-  static const String appVersionAndroid = '3.4';
+  static const String appVersioniOS = '3.5';
+  static const String appVersionAndroid = '3.5';
   static const Color textFieldBorderColor = Color(4292927712);
   static const String isOrderConfirmed = 'Confirmed';
   static const String productNotFound =

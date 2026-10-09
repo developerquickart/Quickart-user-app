@@ -996,6 +996,22 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                   FFAppConstants.primaryPurpleE4D8F5,
                             ),
                           );
+                          logFirebaseEvent('Button_custom_action');
+                          await actions.facebookEventClass(
+                            FFAppState().userID,
+                            _model.userName!,
+                            '0',
+                            0.0,
+                            0,
+                            0.0,
+                            'profileUpdate',
+                            FFAppState().emptyJson,
+                            '0',
+                            '0',
+                            '0',
+                            '0',
+                            '0',
+                          );
                           logFirebaseEvent('Button_navigate_to');
 
                           context.pushNamed(ProfilePageWidget.routeName);

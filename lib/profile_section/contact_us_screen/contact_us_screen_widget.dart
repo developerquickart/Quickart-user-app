@@ -1,9 +1,11 @@
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/custom_code/actions/index.dart' as actions;
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'contact_us_screen_model.dart';
 export 'contact_us_screen_model.dart';
@@ -42,6 +44,8 @@ class _ContactUsScreenWidgetState extends State<ContactUsScreenWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus();
@@ -160,6 +164,22 @@ class _ContactUsScreenWidgetState extends State<ContactUsScreenWidget> {
                               scheme: 'tel',
                               path: FFAppConstants.customersupportphone,
                             ));
+                            logFirebaseEvent('Row_custom_action');
+                            await actions.facebookEventClass(
+                              'call',
+                              FFAppState().userID,
+                              '0',
+                              0.0,
+                              0,
+                              0.0,
+                              'support',
+                              FFAppState().emptyJson,
+                              '0',
+                              '0',
+                              '0',
+                              '0',
+                              '0',
+                            );
                           },
                           child: Row(
                             mainAxisSize: MainAxisSize.max,
@@ -221,6 +241,22 @@ class _ContactUsScreenWidgetState extends State<ContactUsScreenWidget> {
                                     .map((MapEntry<String, String> e) =>
                                         '${Uri.encodeComponent(e.key)}=${Uri.encodeComponent(e.value)}')
                                     .join('&')));
+                            logFirebaseEvent('Row_custom_action');
+                            await actions.facebookEventClass(
+                              'email',
+                              FFAppState().userID,
+                              '0',
+                              0.0,
+                              0,
+                              0.0,
+                              'support',
+                              FFAppState().emptyJson,
+                              '0',
+                              '0',
+                              '0',
+                              '0',
+                              '0',
+                            );
                           },
                           child: Row(
                             mainAxisSize: MainAxisSize.max,
@@ -272,13 +308,29 @@ class _ContactUsScreenWidgetState extends State<ContactUsScreenWidget> {
                                 'CONTACT_US_SCREEN_Row_53uk6hg0_ON_TAP');
                             logFirebaseEvent('Row_launch_u_r_l');
                             await launchURL('https://wa.me/+97142390322');
+                            logFirebaseEvent('Row_custom_action');
+                            await actions.facebookEventClass(
+                              'whatsApp',
+                              FFAppState().userID,
+                              '0',
+                              0.0,
+                              0,
+                              0.0,
+                              'support',
+                              FFAppState().emptyJson,
+                              '0',
+                              '0',
+                              '0',
+                              '0',
+                              '0',
+                            );
                           },
                           child: Row(
                             mainAxisSize: MainAxisSize.max,
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               FaIcon(
-                                FontAwesomeIcons.whatsapp,
+                                FaIconData(FontAwesomeIcons.whatsapp.data),
                                 color: Color(0xFF25D366),
                                 size: 24.0,
                               ),

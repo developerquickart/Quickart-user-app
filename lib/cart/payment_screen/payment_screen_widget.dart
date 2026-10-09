@@ -113,6 +113,9 @@ class _PaymentScreenWidgetState extends State<PaymentScreenWidget> {
                                   logFirebaseEvent('_navigate_back');
                                   context.pop();
                                 } else {
+                                  logFirebaseEvent('_update_page_state');
+                                  _model.isLoading = true;
+                                  safeSetState(() {});
                                   logFirebaseEvent('_custom_action');
                                   _model.myconnectivityResult =
                                       await actions.checkInternetConnection();
@@ -129,9 +132,31 @@ class _PaymentScreenWidgetState extends State<PaymentScreenWidget> {
 
                                     if ((_model.apiResultco2Copy?.succeeded ??
                                         true)) {
+                                      logFirebaseEvent('_update_page_state');
+                                      _model.isLoading = false;
+                                      safeSetState(() {});
+                                      logFirebaseEvent('_custom_action');
+                                      await actions.facebookEventClass(
+                                        widget.groupID!,
+                                        '0',
+                                        '0',
+                                        0.0,
+                                        0,
+                                        0.0,
+                                        'orderAbanded',
+                                        FFAppState().emptyJson,
+                                        '0',
+                                        FFAppState().userID,
+                                        '0',
+                                        '0',
+                                        '0',
+                                      );
                                       logFirebaseEvent('_navigate_back');
                                       context.pop();
                                     } else {
+                                      logFirebaseEvent('_update_page_state');
+                                      _model.isLoading = false;
+                                      safeSetState(() {});
                                       logFirebaseEvent('_show_snack_bar');
                                       ScaffoldMessenger.of(context)
                                           .showSnackBar(
@@ -175,6 +200,9 @@ class _PaymentScreenWidgetState extends State<PaymentScreenWidget> {
                                             FFAppConstants.NeutralBlack50Color,
                                       ),
                                     );
+                                    logFirebaseEvent('_update_page_state');
+                                    _model.isLoading = false;
+                                    safeSetState(() {});
                                   }
                                 }
                               },
@@ -251,151 +279,206 @@ class _PaymentScreenWidgetState extends State<PaymentScreenWidget> {
             child: Column(
               mainAxisSize: MainAxisSize.max,
               children: [
-                Container(
-                  width: double.infinity,
-                  height: MediaQuery.sizeOf(context).height * 1.0,
-                  child: custom_widgets.WebViewWithUrlChangeHandler(
-                    width: double.infinity,
-                    height: MediaQuery.sizeOf(context).height * 1.0,
-                    initialUrl: widget.redirectURl!,
-                    reloadPage: () async {
-                      logFirebaseEvent(
-                          'PAYMENT_SCREEN_Container_1u92jr6z_CALLBA');
-                      if (widget.screenPName == 'addCard') {
-                        logFirebaseEvent(
-                            'WebViewWithUrlChangeHandler_wait__delay');
-                        await Future.delayed(
-                          Duration(
-                            milliseconds: 5000,
-                          ),
-                        );
-                        if (FFAppState().cardScreenNavigation == 'dailyCart') {
+                Stack(
+                  alignment: AlignmentDirectional(0.0, 0.0),
+                  children: [
+                    Container(
+                      width: double.infinity,
+                      height: MediaQuery.sizeOf(context).height * 1.0,
+                      child: custom_widgets.WebViewWithUrlChangeHandler(
+                        width: double.infinity,
+                        height: MediaQuery.sizeOf(context).height * 1.0,
+                        initialUrl: widget.redirectURl!,
+                        reloadPage: () async {
                           logFirebaseEvent(
-                              'WebViewWithUrlChangeHandler_navigate_to');
-
-                          context.goNamed(DailyCartScreenWidget.routeName);
-
-                          logFirebaseEvent(
-                              'WebViewWithUrlChangeHandler_update_app_s');
-                          FFAppState().cardScreenNavigation = '';
-                          FFAppState().screenName = 'addCard';
-                          safeSetState(() {});
-                        } else {
-                          if (FFAppState().cardScreenNavigation ==
-                              'subscriptionCart') {
-                            logFirebaseEvent(
-                                'WebViewWithUrlChangeHandler_navigate_to');
-
-                            context.goNamed(
-                                CartSubscriptionScreenWidget.routeName);
-
-                            logFirebaseEvent(
-                                'WebViewWithUrlChangeHandler_update_app_s');
-                            FFAppState().isCardChange = true;
-                            FFAppState().cardScreenNavigation = '';
-                            FFAppState().screenName = 'addCard';
-                            safeSetState(() {});
-                          } else {
+                              'PAYMENT_SCREEN_Container_1u92jr6z_CALLBA');
+                          if (widget.screenPName == 'addCard') {
                             logFirebaseEvent(
                                 'WebViewWithUrlChangeHandler_wait__delay');
                             await Future.delayed(
                               Duration(
-                                milliseconds: 1000,
+                                milliseconds: 5000,
                               ),
                             );
-                            logFirebaseEvent(
-                                'WebViewWithUrlChangeHandler_navigate_to');
+                            if (FFAppState().cardScreenNavigation ==
+                                'dailyCart') {
+                              logFirebaseEvent(
+                                  'WebViewWithUrlChangeHandler_navigate_to');
 
-                            context.goNamed(CardScreenWidget.routeName);
-                          }
-                        }
-                      } else {
-                        if (FFAppState().isPaymentSuccess == true) {
-                          logFirebaseEvent(
-                              'WebViewWithUrlChangeHandler_navigate_to');
-                          if (Navigator.of(context).canPop()) {
-                            context.pop();
-                          }
-                          context.pushNamed(
-                              OrderSuccessFailScreenWidget.routeName);
+                              context.goNamed(DailyCartScreenWidget.routeName);
 
-                          logFirebaseEvent(
-                              'WebViewWithUrlChangeHandler_custom_actio');
-                          await actions.facebookEventClass(
-                            FFAppState().groupID,
-                            FFAppState().userID,
-                            'product',
-                            0.0,
-                            0,
-                            widget.mrp!,
-                            'purchase',
-                            FFAppState().emptyJson,
-                            widget.orderType,
-                            FFAppState().groupID,
-                            ' ',
-                            ' ',
-                            ' ',
-                          );
-                          logFirebaseEvent(
-                              'WebViewWithUrlChangeHandler_update_app_s');
-                          FFAppState().deliveryPartnerInstructionAvoid = '';
-                          FFAppState().cartTotalCount = 0;
-                          FFAppState().cartTotalPrice = 0.0;
-                          FFAppState().cartSavingPrice = 0.0;
-                          FFAppState().isCouponApplied = false;
-                          FFAppState().screenName = widget.screenPName!;
-                          FFAppState().selectedCardID = '';
-                          FFAppState().deleteSelectedAddresID();
-                          FFAppState().selectedAddresID = '';
+                              logFirebaseEvent(
+                                  'WebViewWithUrlChangeHandler_update_app_s');
+                              FFAppState().cardScreenNavigation = '';
+                              FFAppState().screenName = 'addCard';
+                              safeSetState(() {});
+                            } else {
+                              if (FFAppState().cardScreenNavigation ==
+                                  'subscriptionCart') {
+                                logFirebaseEvent(
+                                    'WebViewWithUrlChangeHandler_navigate_to');
 
-                          FFAppState().selectedCardNumber = '';
-                          FFAppState().selectedAddress1 = '';
-                          FFAppState().couponDiscount = 0.0;
-                          FFAppState().update(() {});
-                        } else {
-                          logFirebaseEvent(
-                              'WebViewWithUrlChangeHandler_alert_dialog');
-                          await showDialog(
-                            context: context,
-                            builder: (alertDialogContext) {
-                              return AlertDialog(
-                                title: Text(FFAppState().AppName),
-                                content: Text(
-                                    'Your payment could not be processed. Please try again or use a different payment method.'),
-                                actions: [
-                                  TextButton(
-                                    onPressed: () =>
-                                        Navigator.pop(alertDialogContext),
-                                    child: Text('Ok'),
+                                context.goNamed(
+                                    CartSubscriptionScreenWidget.routeName);
+
+                                logFirebaseEvent(
+                                    'WebViewWithUrlChangeHandler_update_app_s');
+                                FFAppState().isCardChange = true;
+                                FFAppState().cardScreenNavigation = '';
+                                FFAppState().screenName = 'addCard';
+                                safeSetState(() {});
+                              } else {
+                                logFirebaseEvent(
+                                    'WebViewWithUrlChangeHandler_wait__delay');
+                                await Future.delayed(
+                                  Duration(
+                                    milliseconds: 1000,
                                   ),
-                                ],
+                                );
+                                logFirebaseEvent(
+                                    'WebViewWithUrlChangeHandler_navigate_to');
+
+                                context.goNamed(CardScreenWidget.routeName);
+                              }
+                            }
+                          } else {
+                            if (FFAppState().isPaymentSuccess == true) {
+                              logFirebaseEvent(
+                                  'WebViewWithUrlChangeHandler_navigate_to');
+                              if (Navigator.of(context).canPop()) {
+                                context.pop();
+                              }
+                              context.pushNamed(
+                                OrderSuccessFailScreenWidget.routeName,
+                                queryParameters: {
+                                  'groupID': serializeParam(
+                                    FFAppState().groupID,
+                                    ParamType.String,
+                                  ),
+                                }.withoutNulls,
                               );
-                            },
-                          );
-                          logFirebaseEvent(
-                              'WebViewWithUrlChangeHandler_custom_actio');
-                          await actions.facebookEventClass(
-                            FFAppState().groupID,
-                            FFAppState().userID,
-                            'product',
-                            0.0,
-                            0,
-                            widget.mrp!,
-                            'paymentFailed',
-                            FFAppState().emptyJson,
-                            widget.orderType,
-                            FFAppState().groupID,
-                            ' Your payment could not be processed. Please try again or use a different payment method.',
-                            ' ',
-                            ' ',
-                          );
-                          logFirebaseEvent(
-                              'WebViewWithUrlChangeHandler_navigate_bac');
-                          context.safePop();
-                        }
-                      }
-                    },
-                  ),
+
+                              logFirebaseEvent(
+                                  'WebViewWithUrlChangeHandler_custom_actio');
+                              await actions.facebookEventClass(
+                                FFAppState().groupID,
+                                FFAppState().userID,
+                                'product',
+                                0.0,
+                                0,
+                                widget.mrp!,
+                                'purchase',
+                                FFAppState().emptyJson,
+                                widget.orderType,
+                                FFAppState().groupID,
+                                ' ',
+                                ' ',
+                                ' ',
+                              );
+                              logFirebaseEvent(
+                                  'WebViewWithUrlChangeHandler_update_app_s');
+                              FFAppState().deliveryPartnerInstructionAvoid = '';
+                              FFAppState().cartTotalCount = 0;
+                              FFAppState().cartTotalPrice = 0.0;
+                              FFAppState().cartSavingPrice = 0.0;
+                              FFAppState().isCouponApplied = false;
+                              FFAppState().screenName = widget.screenPName!;
+                              FFAppState().selectedCardID = '';
+                              FFAppState().deleteSelectedAddresID();
+                              FFAppState().selectedAddresID = '';
+
+                              FFAppState().selectedCardNumber = '';
+                              FFAppState().selectedAddress1 = '';
+                              FFAppState().couponDiscount = 0.0;
+                              FFAppState().update(() {});
+                            } else {
+                              logFirebaseEvent(
+                                  'WebViewWithUrlChangeHandler_alert_dialog');
+                              await showDialog(
+                                context: context,
+                                builder: (alertDialogContext) {
+                                  return AlertDialog(
+                                    title: Text(FFAppState().AppName),
+                                    content: Text(
+                                        'Your payment could not be processed. Please try again or use a different payment method.'),
+                                    actions: [
+                                      TextButton(
+                                        onPressed: () =>
+                                            Navigator.pop(alertDialogContext),
+                                        child: Text('Ok'),
+                                      ),
+                                    ],
+                                  );
+                                },
+                              );
+                              logFirebaseEvent(
+                                  'WebViewWithUrlChangeHandler_custom_actio');
+                              await actions.facebookEventClass(
+                                FFAppState().groupID,
+                                FFAppState().userID,
+                                'product',
+                                0.0,
+                                0,
+                                widget.mrp!,
+                                'paymentFailed',
+                                FFAppState().emptyJson,
+                                widget.orderType,
+                                FFAppState().groupID,
+                                ' Your payment could not be processed. Please try again or use a different payment method.',
+                                ' ',
+                                ' ',
+                              );
+                              logFirebaseEvent(
+                                  'WebViewWithUrlChangeHandler_custom_actio');
+                              await actions.facebookEventClass(
+                                widget.groupID!,
+                                '0',
+                                '0',
+                                0.0,
+                                0,
+                                0.0,
+                                'orderAbanded',
+                                FFAppState().emptyJson,
+                                '0',
+                                FFAppState().userID,
+                                '0',
+                                '0',
+                                '0',
+                              );
+                              logFirebaseEvent(
+                                  'WebViewWithUrlChangeHandler_navigate_bac');
+                              context.safePop();
+                            }
+                          }
+                        },
+                      ),
+                    ),
+                    if (_model.isLoading == true)
+                      Container(
+                        width: double.infinity,
+                        height: MediaQuery.sizeOf(context).height * 1.0,
+                        decoration: BoxDecoration(
+                          color: Color(0x5114181B),
+                        ),
+                        child: Align(
+                          alignment: AlignmentDirectional(0.0, 0.0),
+                          child: Container(
+                            width: 100.0,
+                            height: 100.0,
+                            decoration: BoxDecoration(),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(8.0),
+                              child: Image.asset(
+                                'assets/images/new_loader.gif',
+                                width: 100.0,
+                                height: 100.0,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                  ],
                 ),
               ],
             ),

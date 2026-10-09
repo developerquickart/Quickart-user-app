@@ -6828,9 +6828,19 @@ class _TrialProductCartScreenWidgetState
                                                                       logFirebaseEvent(
                                                                           'Container_navigate_to');
 
-                                                                      context.pushNamed(
-                                                                          OrderSuccessFailScreenWidget
-                                                                              .routeName);
+                                                                      context
+                                                                          .pushNamed(
+                                                                        OrderSuccessFailScreenWidget
+                                                                            .routeName,
+                                                                        queryParameters:
+                                                                            {
+                                                                          'groupID':
+                                                                              serializeParam(
+                                                                            '0',
+                                                                            ParamType.String,
+                                                                          ),
+                                                                        }.withoutNulls,
+                                                                      );
 
                                                                       logFirebaseEvent(
                                                                           'Container_update_app_state');
@@ -7015,8 +7025,19 @@ class _TrialProductCartScreenWidgetState
                                                                         logFirebaseEvent(
                                                                             'Container_navigate_to');
 
-                                                                        context.pushNamed(
-                                                                            OrderSuccessFailScreenWidget.routeName);
+                                                                        context
+                                                                            .pushNamed(
+                                                                          OrderSuccessFailScreenWidget
+                                                                              .routeName,
+                                                                          queryParameters:
+                                                                              {
+                                                                            'groupID':
+                                                                                serializeParam(
+                                                                              '0',
+                                                                              ParamType.String,
+                                                                            ),
+                                                                          }.withoutNulls,
+                                                                        );
 
                                                                         logFirebaseEvent(
                                                                             'Container_update_app_state');

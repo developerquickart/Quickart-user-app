@@ -378,6 +378,26 @@ class _CouponsandOffersWidgetState extends State<CouponsandOffersWidget> {
                                             'Text_update_app_state');
                                         FFAppState().isCouponApplied = false;
                                         safeSetState(() {});
+                                        logFirebaseEvent('Text_custom_action');
+                                        await actions.facebookEventClass(
+                                          _model.textController.text,
+                                          getJsonField(
+                                            (_model.apiResultrm2?.jsonBody ??
+                                                ''),
+                                            r'''$.message''',
+                                          ).toString(),
+                                          FFAppState().couponType,
+                                          0.0,
+                                          0,
+                                          0.0,
+                                          'couponFailed',
+                                          FFAppState().emptyJson,
+                                          '0 ',
+                                          FFAppState().userID,
+                                          '0 ',
+                                          '0 ',
+                                          '0',
+                                        );
                                       }
                                     } else {
                                       logFirebaseEvent('Text_show_snack_bar');
@@ -407,6 +427,25 @@ class _CouponsandOffersWidgetState extends State<CouponsandOffersWidget> {
                                           'Text_update_page_state');
                                       _model.isLoadingIndicator = false;
                                       safeSetState(() {});
+                                      logFirebaseEvent('Text_custom_action');
+                                      await actions.facebookEventClass(
+                                        _model.textController.text,
+                                        getJsonField(
+                                          (_model.apiResultrm2?.jsonBody ?? ''),
+                                          r'''$.message''',
+                                        ).toString(),
+                                        FFAppState().couponType,
+                                        0.0,
+                                        0,
+                                        0.0,
+                                        'couponFailed',
+                                        FFAppState().emptyJson,
+                                        '0 ',
+                                        FFAppState().userID,
+                                        '0 ',
+                                        '0 ',
+                                        '0',
+                                      );
                                     }
 
                                     safeSetState(() {});
@@ -885,6 +924,28 @@ class _CouponsandOffersWidgetState extends State<CouponsandOffersWidget> {
                                                                             _model.isLoadingIndicator =
                                                                                 false;
                                                                             safeSetState(() {});
+                                                                            logFirebaseEvent('Text_custom_action');
+                                                                            await actions.facebookEventClass(
+                                                                              getJsonField(
+                                                                                couponDataItem,
+                                                                                r'''$.coupon_code''',
+                                                                              ).toString(),
+                                                                              getJsonField(
+                                                                                (_model.apiResulth77?.jsonBody ?? ''),
+                                                                                r'''$.message''',
+                                                                              ).toString(),
+                                                                              FFAppState().couponType,
+                                                                              0.0,
+                                                                              0,
+                                                                              0.0,
+                                                                              'couponFailed',
+                                                                              FFAppState().emptyJson,
+                                                                              '0 ',
+                                                                              FFAppState().userID,
+                                                                              '0 ',
+                                                                              '0 ',
+                                                                              '0',
+                                                                            );
                                                                           }
                                                                         } else {
                                                                           logFirebaseEvent(
@@ -915,6 +976,30 @@ class _CouponsandOffersWidgetState extends State<CouponsandOffersWidget> {
                                                                               false;
                                                                           safeSetState(
                                                                               () {});
+                                                                          logFirebaseEvent(
+                                                                              'Text_custom_action');
+                                                                          await actions
+                                                                              .facebookEventClass(
+                                                                            getJsonField(
+                                                                              couponDataItem,
+                                                                              r'''$.coupon_code''',
+                                                                            ).toString(),
+                                                                            getJsonField(
+                                                                              (_model.apiResulth77?.jsonBody ?? ''),
+                                                                              r'''$.message''',
+                                                                            ).toString(),
+                                                                            FFAppState().couponType,
+                                                                            0.0,
+                                                                            0,
+                                                                            0.0,
+                                                                            'couponFailed',
+                                                                            FFAppState().emptyJson,
+                                                                            '0 ',
+                                                                            FFAppState().userID,
+                                                                            '0 ',
+                                                                            '0 ',
+                                                                            '0',
+                                                                          );
                                                                         }
 
                                                                         safeSetState(

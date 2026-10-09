@@ -1378,6 +1378,27 @@ class _DashboardScreenWidgetState extends State<DashboardScreenWidget> {
                                                                             context),
                                                                   );
                                                                   logFirebaseEvent(
+                                                                      'Image_custom_action');
+                                                                  await actions
+                                                                      .facebookEventClass(
+                                                                    _model
+                                                                        .refCodew!,
+                                                                    FFAppState()
+                                                                        .userID,
+                                                                    '0',
+                                                                    0.0,
+                                                                    0,
+                                                                    0.0,
+                                                                    'appShare',
+                                                                    FFAppState()
+                                                                        .emptyJson,
+                                                                    '0',
+                                                                    '0',
+                                                                    '0',
+                                                                    '0',
+                                                                    '0',
+                                                                  );
+                                                                  logFirebaseEvent(
                                                                       'Image_google_analytics_event');
                                                                   logFirebaseEvent(
                                                                     'Share',
@@ -1434,6 +1455,29 @@ class _DashboardScreenWidgetState extends State<DashboardScreenWidget> {
                                                                     SearchbyBannerWidget
                                                                         .routeName);
 
+                                                                logFirebaseEvent(
+                                                                    'Image_custom_action');
+                                                                await actions
+                                                                    .facebookEventClass(
+                                                                  getJsonField(
+                                                                    imageSliderItem,
+                                                                    r'''$.banner_id''',
+                                                                  ).toString(),
+                                                                  FFAppState()
+                                                                      .userID,
+                                                                  'store',
+                                                                  0.0,
+                                                                  0,
+                                                                  0.0,
+                                                                  'bannerClick',
+                                                                  FFAppState()
+                                                                      .emptyJson,
+                                                                  'Category banner',
+                                                                  '0',
+                                                                  '0',
+                                                                  '0',
+                                                                  '0',
+                                                                );
                                                                 logFirebaseEvent(
                                                                     'Image_update_app_state');
                                                                 FFAppState()
@@ -3307,6 +3351,27 @@ class _DashboardScreenWidgetState extends State<DashboardScreenWidget> {
                                                                               context),
                                                                     );
                                                                     logFirebaseEvent(
+                                                                        'Image_custom_action');
+                                                                    await actions
+                                                                        .facebookEventClass(
+                                                                      _model
+                                                                          .refCodew!,
+                                                                      FFAppState()
+                                                                          .userID,
+                                                                      '0',
+                                                                      0.0,
+                                                                      0,
+                                                                      0.0,
+                                                                      'appShare',
+                                                                      FFAppState()
+                                                                          .emptyJson,
+                                                                      '0',
+                                                                      '0',
+                                                                      '0',
+                                                                      '0',
+                                                                      '0',
+                                                                    );
+                                                                    logFirebaseEvent(
                                                                         'Image_google_analytics_event');
                                                                     logFirebaseEvent(
                                                                       'Share',
@@ -3391,6 +3456,29 @@ class _DashboardScreenWidgetState extends State<DashboardScreenWidget> {
                                                                       SearchbyBannerWidget
                                                                           .routeName);
 
+                                                                  logFirebaseEvent(
+                                                                      'Image_custom_action');
+                                                                  await actions
+                                                                      .facebookEventClass(
+                                                                    getJsonField(
+                                                                      imageSliderSecondItem,
+                                                                      r'''$.banner_id''',
+                                                                    ).toString(),
+                                                                    FFAppState()
+                                                                        .userID,
+                                                                    'product',
+                                                                    0.0,
+                                                                    0,
+                                                                    0.0,
+                                                                    'bannerClick',
+                                                                    FFAppState()
+                                                                        .emptyJson,
+                                                                    'Product banner',
+                                                                    '0',
+                                                                    '0',
+                                                                    '0',
+                                                                    '0',
+                                                                  );
                                                                   logFirebaseEvent(
                                                                       'Image_google_analytics_event');
                                                                   logFirebaseEvent(
@@ -5256,6 +5344,27 @@ class _DashboardScreenWidgetState extends State<DashboardScreenWidget> {
                                           onTap: () async {
                                             logFirebaseEvent(
                                                 'DASHBOARD_SCREEN_Image_vypich07_ON_TAP');
+                                            logFirebaseEvent(
+                                                'Image_custom_action');
+                                            await actions.facebookEventClass(
+                                              getJsonField(
+                                                dashboardScreenOneAPIResponse
+                                                    .jsonBody,
+                                                r'''$.popup_banner.type''',
+                                              ).toString(),
+                                              FFAppState().userID,
+                                              'store',
+                                              0.0,
+                                              0,
+                                              0.0,
+                                              'bannerClick',
+                                              FFAppState().emptyJson,
+                                              'Popup banner',
+                                              '0',
+                                              '0',
+                                              '0',
+                                              '0',
+                                            );
                                             if (_model.searchType ==
                                                 getJsonField(
                                                   dashboardScreenOneAPIResponse
@@ -5307,13 +5416,39 @@ class _DashboardScreenWidgetState extends State<DashboardScreenWidget> {
                                                       '${getJsonField(
                                                         FFAppState().appInfo,
                                                         r'''$.referral_message''',
-                                                      ).toString()}  https://www.quickart.ae/SignUpScreen?refCode=${getJsonField(
-                                                        FFAppState().appInfo,
-                                                        r'''$.referral_code''',
-                                                      ).toString()}',
+                                                      ).toString()}  ${_model.refCodew}',
                                                       sharePositionOrigin:
                                                           getWidgetBoundingBox(
                                                               context),
+                                                    );
+                                                    logFirebaseEvent(
+                                                        'Image_custom_action');
+                                                    await actions
+                                                        .facebookEventClass(
+                                                      _model.refCodew!,
+                                                      FFAppState().userID,
+                                                      '0',
+                                                      0.0,
+                                                      0,
+                                                      0.0,
+                                                      'appShare',
+                                                      FFAppState().emptyJson,
+                                                      '0',
+                                                      '0',
+                                                      '0',
+                                                      '0',
+                                                      '0',
+                                                    );
+                                                    logFirebaseEvent(
+                                                        'Image_google_analytics_event');
+                                                    logFirebaseEvent(
+                                                      'Share',
+                                                      parameters: {
+                                                        'Screen Name':
+                                                            'Profile',
+                                                        'Share To':
+                                                            'Refer a Friend',
+                                                      },
                                                     );
                                                   } else {
                                                     logFirebaseEvent(

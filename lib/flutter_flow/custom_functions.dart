@@ -103,3 +103,4 @@ export '/custom_code/functions/get_grand_prize_message.dart';
 export '/custom_code/functions/get_zone_rule_by_type.dart';
 export '/custom_code/functions/calculate_time_slot_pricing_total.dart';
 export '/custom_code/functions/remove_cashback_from_charges.dart';
+export '/custom_code/functions/remove_html_tags.dart';

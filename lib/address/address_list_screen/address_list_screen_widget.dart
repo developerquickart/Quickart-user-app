@@ -43,6 +43,22 @@ class _AddressListScreenWidgetState extends State<AddressListScreenWidget> {
       logFirebaseEvent('AddressListScreen_update_app_state');
       FFAppState().isAddressChange = true;
       FFAppState().update(() {});
+      logFirebaseEvent('AddressListScreen_custom_action');
+      await actions.facebookEventClass(
+        FFAppState().userID,
+        '0',
+        '0',
+        0.0,
+        0,
+        0.0,
+        'addressView',
+        FFAppState().emptyJson,
+        '0',
+        '0',
+        '0',
+        '0',
+        '0',
+      );
     });
 
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
@@ -1380,6 +1396,13 @@ class _AddressListScreenWidgetState extends State<AddressListScreenWidget> {
                                                                             },
                                                                           );
                                                                         }
+                                                                        logFirebaseEvent(
+                                                                            'IconButton_refresh_database_request');
+                                                                        safeSetState(() =>
+                                                                            _model.apiRequestCompleter =
+                                                                                null);
+                                                                        await _model
+                                                                            .waitForApiRequestCompleted();
                                                                       } else {
                                                                         logFirebaseEvent(
                                                                             'IconButton_show_snack_bar');

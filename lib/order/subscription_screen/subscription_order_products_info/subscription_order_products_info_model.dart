@@ -26,9 +26,9 @@ class SubscriptionOrderProductsInfoModel
 
   ///  State fields for stateful widgets in this page.
 
+  Completer<ApiCallResponse>? apiRequestCompleter;
   // Stores action output result for [Backend Call - API (subscriptionOrderPause)] action in Container widget.
   ApiCallResponse? apiResultOrderPause1;
-  Completer<ApiCallResponse>? apiRequestCompleter;
   // Stores action output result for [Backend Call - API (subscriptionOrderResume)] action in Button widget.
   ApiCallResponse? subscriptionOrderResumeAPI1;
 

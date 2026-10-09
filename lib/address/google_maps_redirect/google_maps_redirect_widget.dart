@@ -403,6 +403,23 @@ class _GoogleMapsRedirectWidgetState extends State<GoogleMapsRedirectWidget> {
                                           (_model.apiResultic8?.jsonBody ?? ''),
                                         );
                                         safeSetState(() {});
+                                        logFirebaseEvent(
+                                            'Button_custom_action');
+                                        await actions.facebookEventClass(
+                                          _model.getAddressfromMap!,
+                                          FFAppState().userID,
+                                          _model.googleMapsCenter!.toString(),
+                                          0.0,
+                                          0,
+                                          0.0,
+                                          'serviceability',
+                                          FFAppState().emptyJson,
+                                          '0',
+                                          '0',
+                                          '0',
+                                          '0',
+                                          '0',
+                                        );
                                       } else {
                                         logFirebaseEvent('Button_alert_dialog');
                                         await showDialog(
@@ -441,6 +458,23 @@ class _GoogleMapsRedirectWidgetState extends State<GoogleMapsRedirectWidget> {
                                             'Button_update_app_state');
                                         FFAppState().selectedMapAddress = '';
                                         safeSetState(() {});
+                                        logFirebaseEvent(
+                                            'Button_custom_action');
+                                        await actions.facebookEventClass(
+                                          _model.getAddressfromMap!,
+                                          FFAppState().userID,
+                                          _model.googleMapsCenter!.toString(),
+                                          0.0,
+                                          1,
+                                          0.0,
+                                          'serviceability',
+                                          FFAppState().emptyJson,
+                                          '0',
+                                          '0',
+                                          '0',
+                                          '0',
+                                          '0',
+                                        );
                                       }
                                     } else {
                                       logFirebaseEvent('Button_alert_dialog');
@@ -478,6 +512,22 @@ class _GoogleMapsRedirectWidgetState extends State<GoogleMapsRedirectWidget> {
                                           'Button_update_app_state');
                                       FFAppState().selectedMapAddress = '';
                                       safeSetState(() {});
+                                      logFirebaseEvent('Button_custom_action');
+                                      await actions.facebookEventClass(
+                                        _model.getAddressfromMap!,
+                                        FFAppState().userID,
+                                        _model.googleMapsCenter!.toString(),
+                                        0.0,
+                                        1,
+                                        0.0,
+                                        'serviceability',
+                                        FFAppState().emptyJson,
+                                        '0',
+                                        '0',
+                                        '0',
+                                        '0',
+                                        '0',
+                                      );
                                     }
                                   } else {
                                     logFirebaseEvent('Button_alert_dialog');
@@ -513,6 +563,22 @@ class _GoogleMapsRedirectWidgetState extends State<GoogleMapsRedirectWidget> {
                                     logFirebaseEvent('Button_update_app_state');
                                     FFAppState().selectedMapAddress = '';
                                     safeSetState(() {});
+                                    logFirebaseEvent('Button_custom_action');
+                                    await actions.facebookEventClass(
+                                      _model.getAddressfromMap!,
+                                      FFAppState().userID,
+                                      _model.googleMapsCenter!.toString(),
+                                      0.0,
+                                      1,
+                                      0.0,
+                                      'serviceability',
+                                      FFAppState().emptyJson,
+                                      '0',
+                                      '0',
+                                      '0',
+                                      '0',
+                                      '0',
+                                    );
                                   }
 
                                   safeSetState(() {});
@@ -801,6 +867,24 @@ class _GoogleMapsRedirectWidgetState extends State<GoogleMapsRedirectWidget> {
                                                   FFAppState().latLang =
                                                       _model.googleMapsCenter;
                                                   safeSetState(() {});
+                                                  logFirebaseEvent(
+                                                      'Button_custom_action');
+                                                  await actions
+                                                      .facebookEventClass(
+                                                    FFAppState().categoryName,
+                                                    FFAppState().userID,
+                                                    '0',
+                                                    0.0,
+                                                    0,
+                                                    0.0,
+                                                    'locationSelected',
+                                                    FFAppState().emptyJson,
+                                                    '0',
+                                                    '0',
+                                                    '0',
+                                                    '0',
+                                                    '0',
+                                                  );
                                                   if ((FFAppState()
                                                               .screenName ==
                                                           'dashboard') &&

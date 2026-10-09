@@ -57,7 +57,7 @@ class _NoteAndroidNotesWidgetState extends State<NoteAndroidNotesWidget> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'ALWAYS CHANGE IOS AND ANDROID VERSION BEFORE LIVE\nios : 2.16\nandroid : 2.16',
+                    'ALWAYS CHANGE IOS AND ANDROID VERSION BEFORE LIVE\nios : 3.0.4\nandroid : 3.0.4',
                     style: FlutterFlowTheme.of(context).bodyMedium.override(
                           font: GoogleFonts.readexPro(
                             fontWeight: FontWeight.w800,
@@ -121,7 +121,7 @@ class _NoteAndroidNotesWidgetState extends State<NoteAndroidNotesWidget> {
                     padding:
                         EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
                     child: Text(
-                      'Base URL demo:\n\nhttps://api.quickart.ae/testnodejsapp/\nhttps://demoapi.quickart.ae/testnodejsapp/\nhttps://zoneapi-production.up.railway.app/testnodejsapp/\n',
+                      'Base URL live:\n\nhttps://zoneapi.quickart.ae/testnodejsapp/\n Demo:\nhttps://web-production-31cac.up.railway.app/testnodejsapp/\n',
                       style: FlutterFlowTheme.of(context).bodyMedium.override(
                             font: GoogleFonts.readexPro(
                               fontWeight: FontWeight.w600,
@@ -143,7 +143,7 @@ class _NoteAndroidNotesWidgetState extends State<NoteAndroidNotesWidget> {
                     padding:
                         EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
                     child: Text(
-                      'Base URL demo:\nproduct-search demo:--->https://zoneapi-production.up.railway.app/testnodejsapp/\n product-search zone :--->https://fipunwrfngwnoaersvlb.supabase.co/functions/v1/product-search',
+                      'Base URL demo:\nproduct-search demo:--->https://joxuekpahnwqfhpwpyky.supabase.co/functions/v1/product-search\n product-search zone live :--->https://ckxrmeapgvkllpxjgheg.supabase.co/functions/v1/product-search',
                       style: FlutterFlowTheme.of(context).bodyMedium.override(
                             font: GoogleFonts.readexPro(
                               fontWeight: FontWeight.w600,
