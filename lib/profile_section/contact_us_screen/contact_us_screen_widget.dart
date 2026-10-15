@@ -330,7 +330,9 @@ class _ContactUsScreenWidgetState extends State<ContactUsScreenWidget> {
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               FaIcon(
-                                FaIconData(FontAwesomeIcons.whatsapp.data),
+                                FaIconData(const IconData(/* whatsapp */ 0xf232,
+                                    fontFamily: 'FontAwesomeBrands',
+                                    fontPackage: 'font_awesome_flutter')),
                                 color: Color(0xFF25D366),
                                 size: 24.0,
                               ),

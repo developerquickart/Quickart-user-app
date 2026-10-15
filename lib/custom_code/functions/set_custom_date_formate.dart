@@ -20,6 +20,14 @@ String? setCustomDateFormate(
   String? getDateF,
   String? setDateF,
 ) {
+  if (date == null ||
+      date.trim().isEmpty ||
+      getDateF == null ||
+      getDateF.isEmpty ||
+      setDateF == null ||
+      setDateF.isEmpty) {
+    return "";
+  }
   if (date != null && date.isNotEmpty) {
     var inputFormat = DateFormat(getDateF);
     var inputDate = inputFormat.parse(date);

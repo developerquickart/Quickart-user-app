@@ -13226,7 +13226,7 @@ class _CartSubscriptionScreenWidgetState
 
                                                                                       logFirebaseEvent('Text_update_app_state');
                                                                                       FFAppState().isAddressChange = false;
-                                                                                      FFAppState().screenName = '';
+                                                                                      FFAppState().screenName = 'subscription';
                                                                                       safeSetState(() {});
                                                                                       logFirebaseEvent('Text_google_analytics_event');
                                                                                       logFirebaseEvent(

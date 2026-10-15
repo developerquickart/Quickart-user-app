@@ -14821,15 +14821,15 @@ class _DailyCartScreenWidgetState extends State<DailyCartScreenWidget>
                                                                                 onTap: () async {
                                                                                   logFirebaseEvent('DAILY_CART_SCREEN_ApplePayContainer_ON_T');
                                                                                   if (_model.isPaymentDone == true) {
+                                                                                    logFirebaseEvent('ApplePayContainer_update_page_state');
+                                                                                    _model.isPaymentDone = false;
+                                                                                    safeSetState(() {});
                                                                                     logFirebaseEvent('ApplePayContainer_wait__delay');
                                                                                     await Future.delayed(
                                                                                       Duration(
                                                                                         milliseconds: 200,
                                                                                       ),
                                                                                     );
-                                                                                    logFirebaseEvent('ApplePayContainer_update_page_state');
-                                                                                    _model.isPaymentDone = false;
-                                                                                    safeSetState(() {});
                                                                                     logFirebaseEvent('ApplePayContainer_update_app_state');
                                                                                     FFAppState().paymentMethod = FFAppState().isCardChange == true ? FFAppState().paymentMethod : 'card';
                                                                                     FFAppState().selectedCardID = FFAppState().isCardSelected != ''
@@ -29146,6 +29146,23 @@ class _DailyCartScreenWidgetState extends State<DailyCartScreenWidget>
                                                                               onTap: () async {
                                                                                 logFirebaseEvent('DAILY_CART_SCREEN_Container_mu8tdrgp_ON_');
                                                                                 if (_model.isPaymentDone == true) {
+                                                                                  logFirebaseEvent('Container_update_page_state');
+                                                                                  _model.isPaymentDone = false;
+                                                                                  _model.checkRestriction = functions.checkRestrictions(
+                                                                                      getJsonField(
+                                                                                        dailyCartScreenShowspcatcartResponse.jsonBody,
+                                                                                        r'''$.data.restricted_city''',
+                                                                                      ).toString(),
+                                                                                      FFAppState().socityName,
+                                                                                      getJsonField(
+                                                                                        dailyCartScreenShowspcatcartResponse.jsonBody,
+                                                                                        r'''$.data.total_price''',
+                                                                                      ).toString(),
+                                                                                      getJsonField(
+                                                                                        dailyCartScreenShowspcatcartResponse.jsonBody,
+                                                                                        r'''$.data.quickminorderamount''',
+                                                                                      ).toString());
+                                                                                  safeSetState(() {});
                                                                                   logFirebaseEvent('Container_wait__delay');
                                                                                   await Future.delayed(
                                                                                     Duration(
@@ -29192,23 +29209,6 @@ class _DailyCartScreenWidgetState extends State<DailyCartScreenWidget>
                                                                                           r'''$.data.lastadd[0].society''',
                                                                                         ).toString()
                                                                                       : FFAppState().socityName;
-                                                                                  safeSetState(() {});
-                                                                                  logFirebaseEvent('Container_update_page_state');
-                                                                                  _model.isPaymentDone = false;
-                                                                                  _model.checkRestriction = functions.checkRestrictions(
-                                                                                      getJsonField(
-                                                                                        dailyCartScreenShowspcatcartResponse.jsonBody,
-                                                                                        r'''$.data.restricted_city''',
-                                                                                      ).toString(),
-                                                                                      FFAppState().socityName,
-                                                                                      getJsonField(
-                                                                                        dailyCartScreenShowspcatcartResponse.jsonBody,
-                                                                                        r'''$.data.total_price''',
-                                                                                      ).toString(),
-                                                                                      getJsonField(
-                                                                                        dailyCartScreenShowspcatcartResponse.jsonBody,
-                                                                                        r'''$.data.quickminorderamount''',
-                                                                                      ).toString());
                                                                                   safeSetState(() {});
                                                                                   logFirebaseEvent('Container_custom_action');
                                                                                   _model.connectivityResult1Copy = await actions.checkInternetConnection();
@@ -41910,6 +41910,23 @@ class _DailyCartScreenWidgetState extends State<DailyCartScreenWidget>
                                                                             logFirebaseEvent('DAILY_CART_SCREEN_Container_d4o6pp6x_ON_');
                                                                             if (_model.isPaymentDone ==
                                                                                 true) {
+                                                                              logFirebaseEvent('Container_update_page_state');
+                                                                              _model.isPaymentDone = false;
+                                                                              _model.checkRestriction = functions.checkRestrictions(
+                                                                                  getJsonField(
+                                                                                    dailyCartScreenShowspcatcartResponse.jsonBody,
+                                                                                    r'''$.data.restricted_city''',
+                                                                                  ).toString(),
+                                                                                  FFAppState().socityName,
+                                                                                  getJsonField(
+                                                                                    dailyCartScreenShowspcatcartResponse.jsonBody,
+                                                                                    r'''$.data.total_price''',
+                                                                                  ).toString(),
+                                                                                  getJsonField(
+                                                                                    dailyCartScreenShowspcatcartResponse.jsonBody,
+                                                                                    r'''$.data.quickminorderamount''',
+                                                                                  ).toString());
+                                                                              safeSetState(() {});
                                                                               logFirebaseEvent('Container_wait__delay');
                                                                               await Future.delayed(
                                                                                 Duration(
@@ -42059,23 +42076,6 @@ class _DailyCartScreenWidgetState extends State<DailyCartScreenWidget>
                                                                                       r'''$.data.lastadd[0].society''',
                                                                                     ).toString()
                                                                                   : FFAppState().socityName;
-                                                                              safeSetState(() {});
-                                                                              logFirebaseEvent('Container_update_page_state');
-                                                                              _model.isPaymentDone = false;
-                                                                              _model.checkRestriction = functions.checkRestrictions(
-                                                                                  getJsonField(
-                                                                                    dailyCartScreenShowspcatcartResponse.jsonBody,
-                                                                                    r'''$.data.restricted_city''',
-                                                                                  ).toString(),
-                                                                                  FFAppState().socityName,
-                                                                                  getJsonField(
-                                                                                    dailyCartScreenShowspcatcartResponse.jsonBody,
-                                                                                    r'''$.data.total_price''',
-                                                                                  ).toString(),
-                                                                                  getJsonField(
-                                                                                    dailyCartScreenShowspcatcartResponse.jsonBody,
-                                                                                    r'''$.data.quickminorderamount''',
-                                                                                  ).toString());
                                                                               safeSetState(() {});
                                                                               logFirebaseEvent('Container_wait__delay');
                                                                               await Future.delayed(

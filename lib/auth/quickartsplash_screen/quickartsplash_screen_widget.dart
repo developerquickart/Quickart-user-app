@@ -298,7 +298,7 @@ class _QuickartsplashScreenWidgetState
               ).toString(),
               platform: FFAppState().platform,
               deviceid: FFAppState().deviceID,
-              fcmToken: FFAppState().fcmToken,
+              fcmToken: _model.fcmTokenNew,
             );
 
             if ((_model.apiResultAppInfo3?.succeeded ?? true)) {
@@ -447,7 +447,7 @@ class _QuickartsplashScreenWidgetState
             stroreid: FFAppState().storeID,
             platform: isiOS == true ? 'ios' : 'android',
             deviceid: FFAppState().deviceID,
-            fcmToken: FFAppState().fcmToken,
+            fcmToken: _model.fcmTokenNew,
           );
 
           if ((_model.apiResultAppInfo4?.succeeded ?? true)) {
@@ -661,18 +661,6 @@ class _QuickartsplashScreenWidgetState
                   ],
                 ),
               ),
-              Align(
-                alignment: AlignmentDirectional(0.0, 0.0),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(8.0),
-                  child: Image.network(
-                    'https://quickart.b-cdn.net/images/app-home-splash-screeneid1.gif',
-                    width: MediaQuery.sizeOf(context).width * 1.0,
-                    height: MediaQuery.sizeOf(context).height * 1.0,
-                    fit: BoxFit.fill,
-                  ),
-                ),
-              ),
               Container(
                 width: MediaQuery.sizeOf(context).width * 1.0,
                 height: MediaQuery.sizeOf(context).height * 1.0,
@@ -687,7 +675,7 @@ class _QuickartsplashScreenWidgetState
                     height: MediaQuery.sizeOf(context).height * 1.0,
                     imageUrl:
                         'https://quickart.b-cdn.net/images/app-home-splash-screeneid1.gif',
-                    version: getCurrentTimestamp.toString(),
+                    version: dateTimeFormat("dm", getCurrentTimestamp),
                   ),
                 ),
               ),

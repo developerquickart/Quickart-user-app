@@ -1449,6 +1449,34 @@ class _DashboardScreenWidgetState extends State<DashboardScreenWidget> {
                                                                 }
                                                               } else {
                                                                 logFirebaseEvent(
+                                                                    'Image_update_app_state');
+                                                                FFAppState()
+                                                                        .keyword =
+                                                                    getJsonField(
+                                                                  imageSliderItem,
+                                                                  r'''$.banner_name''',
+                                                                ).toString();
+                                                                FFAppState()
+                                                                        .categoryName =
+                                                                    getJsonField(
+                                                                  imageSliderItem,
+                                                                  r'''$.banner_name''',
+                                                                ).toString();
+                                                                FFAppState()
+                                                                        .catID =
+                                                                    getJsonField(
+                                                                  imageSliderItem,
+                                                                  r'''$.banner_id''',
+                                                                ).toString();
+                                                                FFAppState()
+                                                                        .brandID =
+                                                                    ' ';
+                                                                FFAppState()
+                                                                        .orderType =
+                                                                    'store';
+                                                                safeSetState(
+                                                                    () {});
+                                                                logFirebaseEvent(
                                                                     'Image_navigate_to');
 
                                                                 context.pushNamed(
@@ -1478,34 +1506,6 @@ class _DashboardScreenWidgetState extends State<DashboardScreenWidget> {
                                                                   '0',
                                                                   '0',
                                                                 );
-                                                                logFirebaseEvent(
-                                                                    'Image_update_app_state');
-                                                                FFAppState()
-                                                                        .keyword =
-                                                                    getJsonField(
-                                                                  imageSliderItem,
-                                                                  r'''$.banner_name''',
-                                                                ).toString();
-                                                                FFAppState()
-                                                                        .categoryName =
-                                                                    getJsonField(
-                                                                  imageSliderItem,
-                                                                  r'''$.banner_name''',
-                                                                ).toString();
-                                                                FFAppState()
-                                                                        .catID =
-                                                                    getJsonField(
-                                                                  imageSliderItem,
-                                                                  r'''$.banner_id''',
-                                                                ).toString();
-                                                                FFAppState()
-                                                                        .brandID =
-                                                                    ' ';
-                                                                FFAppState()
-                                                                        .orderType =
-                                                                    'store';
-                                                                safeSetState(
-                                                                    () {});
                                                                 logFirebaseEvent(
                                                                     'Image_google_analytics_event');
                                                                 logFirebaseEvent(

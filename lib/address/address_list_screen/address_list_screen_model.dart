@@ -12,6 +12,8 @@ class AddressListScreenModel extends FlutterFlowModel<AddressListScreenWidget> {
 
   String nullValue = 'Null';
 
+  bool isLoaderLoading = false;
+
   ///  State fields for stateful widgets in this page.
 
   // Stores action output result for [Backend Call - API (getZoneID)] action in Container widget.

@@ -11,13 +11,13 @@ import 'package:flutter/material.dart' hide RepeatMode;
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
 // create a custom action to initializeAmplitude for name and use that code Future initializeAmplitude() async {  const apiKey = 'YOUR_AMPLITUDE_API_KEY';  final amplitude = Amplitude(apiKey);  await amplitude.isBuilt();} not add log event
-// import 'package:amplitude_flutter/amplitude.dart';
-// import 'package:amplitude_flutter/configuration.dart';
+import 'package:amplitude_flutter/amplitude.dart';
+import 'package:amplitude_flutter/configuration.dart';
 
-// late Amplitude amplitude;
+late Amplitude amplitude;
 
 Future initializeAmplitude() async {
   const apiKey = '5bab9ae8180662bd0a11b398f95af646';
-  // amplitude = Amplitude(Configuration(apiKey: apiKey));
-  // await amplitude.isBuilt;
+  amplitude = Amplitude(Configuration(apiKey: apiKey));
+  await amplitude.isBuilt;
 }
