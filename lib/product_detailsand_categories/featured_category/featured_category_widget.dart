@@ -3479,7 +3479,12 @@ class _FeaturedCategoryWidgetState extends State<FeaturedCategoryWidget> {
                                 onTap: () async {
                                   logFirebaseEvent(
                                       'FEATURED_CATEGORY_Row_izybqwbi_ON_TAP');
-                                  if (FFAppState().cartTotalCount < 1) {
+                                  if ((FFAppState().cartTotalCount < 1) &&
+                                      (getJsonField(
+                                            FFAppState().appInfo,
+                                            r'''$.user_type''',
+                                          ) ==
+                                          null)) {
                                     logFirebaseEvent('Row_navigate_to');
 
                                     context.pushNamed(

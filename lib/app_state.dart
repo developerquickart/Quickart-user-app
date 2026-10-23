@@ -139,7 +139,10 @@ class FFAppState extends ChangeNotifier {
     secureStorage.setString('ff_phoneNo', value);
   }
 
-  void deletePhoneNo() {
+  void deletePhoneNo({bool resetState = false}) {
+    if (resetState) {
+      _phoneNo = '';
+    }
     secureStorage.delete(key: 'ff_phoneNo');
   }
 
@@ -150,7 +153,10 @@ class FFAppState extends ChangeNotifier {
     secureStorage.setString('ff_deviceID', value);
   }
 
-  void deleteDeviceID() {
+  void deleteDeviceID({bool resetState = false}) {
+    if (resetState) {
+      _deviceID = '';
+    }
     secureStorage.delete(key: 'ff_deviceID');
   }
 
@@ -167,7 +173,10 @@ class FFAppState extends ChangeNotifier {
     secureStorage.setString('ff_userName', value);
   }
 
-  void deleteUserName() {
+  void deleteUserName({bool resetState = false}) {
+    if (resetState) {
+      _userName = '';
+    }
     secureStorage.delete(key: 'ff_userName');
   }
 
@@ -178,7 +187,10 @@ class FFAppState extends ChangeNotifier {
     secureStorage.setString('ff_userEmail', value);
   }
 
-  void deleteUserEmail() {
+  void deleteUserEmail({bool resetState = false}) {
+    if (resetState) {
+      _userEmail = '';
+    }
     secureStorage.delete(key: 'ff_userEmail');
   }
 
@@ -201,7 +213,10 @@ class FFAppState extends ChangeNotifier {
     secureStorage.setString('ff_storeID', value);
   }
 
-  void deleteStoreID() {
+  void deleteStoreID({bool resetState = false}) {
+    if (resetState) {
+      _storeID = '7';
+    }
     secureStorage.delete(key: 'ff_storeID');
   }
 
@@ -212,7 +227,10 @@ class FFAppState extends ChangeNotifier {
     secureStorage.setString('ff_userID', value);
   }
 
-  void deleteUserID() {
+  void deleteUserID({bool resetState = false}) {
+    if (resetState) {
+      _userID = '';
+    }
     secureStorage.delete(key: 'ff_userID');
   }
 
@@ -319,7 +337,10 @@ class FFAppState extends ChangeNotifier {
     secureStorage.setBool('ff_isUserLogin', value);
   }
 
-  void deleteIsUserLogin() {
+  void deleteIsUserLogin({bool resetState = false}) {
+    if (resetState) {
+      _isUserLogin = false;
+    }
     secureStorage.delete(key: 'ff_isUserLogin');
   }
 
@@ -330,7 +351,10 @@ class FFAppState extends ChangeNotifier {
     secureStorage.setInt('ff_isverified', value);
   }
 
-  void deleteIsverified() {
+  void deleteIsverified({bool resetState = false}) {
+    if (resetState) {
+      _isverified = 1;
+    }
     secureStorage.delete(key: 'ff_isverified');
   }
 
@@ -353,7 +377,10 @@ class FFAppState extends ChangeNotifier {
     secureStorage.setString('ff_checkArray', jsonEncode(value));
   }
 
-  void deleteCheckArray() {
+  void deleteCheckArray({bool resetState = false}) {
+    if (resetState) {
+      _checkArray = jsonDecode('[]');
+    }
     secureStorage.delete(key: 'ff_checkArray');
   }
 
@@ -514,7 +541,10 @@ class FFAppState extends ChangeNotifier {
     secureStorage.setString('ff_dialCode', value);
   }
 
-  void deleteDialCode() {
+  void deleteDialCode({bool resetState = false}) {
+    if (resetState) {
+      _dialCode = 'AE';
+    }
     secureStorage.delete(key: 'ff_dialCode');
   }
 
@@ -674,7 +704,10 @@ class FFAppState extends ChangeNotifier {
     secureStorage.setString('ff_selectedAddresID', value);
   }
 
-  void deleteSelectedAddresID() {
+  void deleteSelectedAddresID({bool resetState = false}) {
+    if (resetState) {
+      _selectedAddresID = '';
+    }
     secureStorage.delete(key: 'ff_selectedAddresID');
   }
 
@@ -775,7 +808,10 @@ class FFAppState extends ChangeNotifier {
     secureStorage.setString('ff_userPhoneNo', value);
   }
 
-  void deleteUserPhoneNo() {
+  void deleteUserPhoneNo({bool resetState = false}) {
+    if (resetState) {
+      _userPhoneNo = '';
+    }
     secureStorage.delete(key: 'ff_userPhoneNo');
   }
 
@@ -786,7 +822,10 @@ class FFAppState extends ChangeNotifier {
     secureStorage.setString('ff_userCountryCode', value);
   }
 
-  void deleteUserCountryCode() {
+  void deleteUserCountryCode({bool resetState = false}) {
+    if (resetState) {
+      _userCountryCode = '';
+    }
     secureStorage.delete(key: 'ff_userCountryCode');
   }
 
@@ -1142,7 +1181,10 @@ class FFAppState extends ChangeNotifier {
     secureStorage.setString('ff_profileImage', value);
   }
 
-  void deleteProfileImage() {
+  void deleteProfileImage({bool resetState = false}) {
+    if (resetState) {
+      _profileImage = '';
+    }
     secureStorage.delete(key: 'ff_profileImage');
   }
 
@@ -1154,7 +1196,11 @@ class FFAppState extends ChangeNotifier {
     secureStorage.setString('ff_profileImageBytes', value);
   }
 
-  void deleteProfileImageBytes() {
+  void deleteProfileImageBytes({bool resetState = false}) {
+    if (resetState) {
+      _profileImageBytes =
+          'https://media.istockphoto.com/id/1916685823/photo/businesswoman-using-laptop-with-banking-applications-via-internet-network.jpg?s=612x612&w=0&k=20&c=L9wQekG3TJ-6fSFlUCUelo5xOCYkm9SVE5ER5J8QiK0=';
+    }
     secureStorage.delete(key: 'ff_profileImageBytes');
   }
 
@@ -1267,7 +1313,10 @@ class FFAppState extends ChangeNotifier {
     secureStorage.setString('ff_userPhoneEP', value);
   }
 
-  void deleteUserPhoneEP() {
+  void deleteUserPhoneEP({bool resetState = false}) {
+    if (resetState) {
+      _userPhoneEP = '';
+    }
     secureStorage.delete(key: 'ff_userPhoneEP');
   }
 
@@ -1278,7 +1327,10 @@ class FFAppState extends ChangeNotifier {
     secureStorage.setString('ff_userCountryCodeEP', value);
   }
 
-  void deleteUserCountryCodeEP() {
+  void deleteUserCountryCodeEP({bool resetState = false}) {
+    if (resetState) {
+      _userCountryCodeEP = '';
+    }
     secureStorage.delete(key: 'ff_userCountryCodeEP');
   }
 
@@ -1289,7 +1341,10 @@ class FFAppState extends ChangeNotifier {
     secureStorage.setString('ff_userPhoneProfile', value);
   }
 
-  void deleteUserPhoneProfile() {
+  void deleteUserPhoneProfile({bool resetState = false}) {
+    if (resetState) {
+      _userPhoneProfile = '';
+    }
     secureStorage.delete(key: 'ff_userPhoneProfile');
   }
 
@@ -1366,7 +1421,10 @@ class FFAppState extends ChangeNotifier {
     secureStorage.setString('ff_usserType', value);
   }
 
-  void deleteUsserType() {
+  void deleteUsserType({bool resetState = false}) {
+    if (resetState) {
+      _usserType = '';
+    }
     secureStorage.delete(key: 'ff_usserType');
   }
 
@@ -1431,7 +1489,10 @@ class FFAppState extends ChangeNotifier {
     secureStorage.setString('ff_userDialCode', value);
   }
 
-  void deleteUserDialCode() {
+  void deleteUserDialCode({bool resetState = false}) {
+    if (resetState) {
+      _userDialCode = '';
+    }
     secureStorage.delete(key: 'ff_userDialCode');
   }
 
@@ -1538,7 +1599,10 @@ class FFAppState extends ChangeNotifier {
     secureStorage.setString('ff_userGUUID', value);
   }
 
-  void deleteUserGUUID() {
+  void deleteUserGUUID({bool resetState = false}) {
+    if (resetState) {
+      _userGUUID = '';
+    }
     secureStorage.delete(key: 'ff_userGUUID');
   }
 

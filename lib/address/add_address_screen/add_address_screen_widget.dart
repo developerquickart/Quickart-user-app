@@ -2260,9 +2260,8 @@ class _AddAddressScreenWidgetState extends State<AddAddressScreenWidget> {
                                                       logFirebaseEvent(
                                                           'Button_update_app_state');
                                                       FFAppState()
-                                                          .deletePhoneNo();
-                                                      FFAppState().phoneNo = '';
-
+                                                          .deletePhoneNo(
+                                                              resetState: true);
                                                       FFAppState()
                                                           .selectedMapAddress = '';
                                                       FFAppState()

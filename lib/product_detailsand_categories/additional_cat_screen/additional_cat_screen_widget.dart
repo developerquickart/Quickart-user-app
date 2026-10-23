@@ -3356,7 +3356,12 @@ class _AdditionalCatScreenWidgetState extends State<AdditionalCatScreenWidget> {
                                   onTap: () async {
                                     logFirebaseEvent(
                                         'ADDITIONAL_CAT_SCREEN_Row_mdnekl98_ON_TA');
-                                    if (FFAppState().cartTotalCount < 1) {
+                                    if ((FFAppState().cartTotalCount < 1) &&
+                                        (getJsonField(
+                                              FFAppState().appInfo,
+                                              r'''$.user_type''',
+                                            ) ==
+                                            null)) {
                                       logFirebaseEvent('Row_navigate_to');
 
                                       context.pushNamed(

@@ -6,21 +6,27 @@ import '/components/empty_data_two_line_component/empty_data_two_line_component_
 import '/components/products_list_view/products_list_view_widget.dart';
 import '/components/save_letterproducts_list/save_letterproducts_list_widget.dart';
 import '/components/varient_botttom_sheet/varient_botttom_sheet_widget.dart';
+import '/flutter_flow/ff_builtin_enums.dart';
 import '/flutter_flow/flutter_flow_button_tabbar.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_radio_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
+import '/flutter_flow/flutter_flow_timer.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
 import 'dart:async';
 import '/custom_code/actions/index.dart' as actions;
+import '/custom_code/widgets/index.dart' as custom_widgets;
 import '/flutter_flow/custom_functions.dart' as functions;
 import '/index.dart';
+import 'package:flutter/services.dart';
+import 'package:pin_code_fields/pin_code_fields.dart';
+import 'package:stop_watch_timer/stop_watch_timer.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -160,8 +166,16 @@ class _DailyCartScreenWidgetState extends State<DailyCartScreenWidget>
       initialIndex: 0,
     )..addListener(() => safeSetState(() {}));
 
-    _model.textController ??= TextEditingController();
-    _model.textFieldFocusNode ??= FocusNode();
+    _model.textController1 ??= TextEditingController();
+    _model.textFieldFocusNode1 ??= FocusNode();
+
+    _model.pinCodeFocusNode ??= FocusNode();
+
+    _model.textController2 ??= TextEditingController();
+    _model.textFieldFocusNode2 ??= FocusNode();
+
+    _model.txtEmailTextController ??= TextEditingController();
+    _model.txtEmailFocusNode ??= FocusNode();
 
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
@@ -249,15 +263,34 @@ class _DailyCartScreenWidgetState extends State<DailyCartScreenWidget>
                       FFAppState().couponDiscount = 0.0;
                       FFAppState().isDeliveryPartnerTipSelected = '0';
                       FFAppState().screenName = '';
-                      FFAppState().deleteSelectedAddresID();
-                      FFAppState().selectedAddresID = '';
-
+                      FFAppState().deleteSelectedAddresID(resetState: true);
                       FFAppState().selectedAddress1 = '';
                       FFAppState().selectedCardID = '';
                       FFAppState().selectedCardNumber = '';
                       FFAppState().isCardChange = false;
                       FFAppState().selectedDeliveryDate = '';
                       FFAppState().selectedDeliveryTimeSlot = '';
+                      FFAppState().phoneNo = getJsonField(
+                                dailyCartScreenShowspcatcartResponse.jsonBody,
+                                r'''$.data.user_type''',
+                              ) !=
+                              null
+                          ? ' '
+                          : FFAppState().phoneNo;
+                      FFAppState().dialCode = getJsonField(
+                                dailyCartScreenShowspcatcartResponse.jsonBody,
+                                r'''$.data.user_type''',
+                              ) !=
+                              null
+                          ? ' AE'
+                          : FFAppState().dialCode;
+                      FFAppState().countryCode = getJsonField(
+                                dailyCartScreenShowspcatcartResponse.jsonBody,
+                                r'''$.data.user_type''',
+                              ) !=
+                              null
+                          ? '971'
+                          : FFAppState().countryCode;
                       safeSetState(() {});
                     } else {
                       if (FFAppState().screenName == 'subscription') {
@@ -272,15 +305,34 @@ class _DailyCartScreenWidgetState extends State<DailyCartScreenWidget>
                         FFAppState().couponDiscount = 0.0;
                         FFAppState().isDeliveryPartnerTipSelected = '0';
                         FFAppState().screenName = '';
-                        FFAppState().deleteSelectedAddresID();
-                        FFAppState().selectedAddresID = '';
-
+                        FFAppState().deleteSelectedAddresID(resetState: true);
                         FFAppState().selectedAddress1 = '';
                         FFAppState().selectedCardID = '';
                         FFAppState().selectedCardNumber = '';
                         FFAppState().isCardChange = false;
                         FFAppState().selectedDeliveryDate = '';
                         FFAppState().selectedDeliveryTimeSlot = '';
+                        FFAppState().phoneNo = getJsonField(
+                                  dailyCartScreenShowspcatcartResponse.jsonBody,
+                                  r'''$.data.user_type''',
+                                ) !=
+                                null
+                            ? ' '
+                            : FFAppState().phoneNo;
+                        FFAppState().dialCode = getJsonField(
+                                  dailyCartScreenShowspcatcartResponse.jsonBody,
+                                  r'''$.data.user_type''',
+                                ) !=
+                                null
+                            ? ' AE'
+                            : FFAppState().dialCode;
+                        FFAppState().countryCode = getJsonField(
+                                  dailyCartScreenShowspcatcartResponse.jsonBody,
+                                  r'''$.data.user_type''',
+                                ) !=
+                                null
+                            ? '971'
+                            : FFAppState().countryCode;
                         safeSetState(() {});
                       } else {
                         if ((FFAppState().screenName == 'dailyCart') &&
@@ -296,15 +348,37 @@ class _DailyCartScreenWidgetState extends State<DailyCartScreenWidget>
                           FFAppState().couponDiscount = 0.0;
                           FFAppState().isDeliveryPartnerTipSelected = '0';
                           FFAppState().screenName = '';
-                          FFAppState().deleteSelectedAddresID();
-                          FFAppState().selectedAddresID = '';
-
+                          FFAppState().deleteSelectedAddresID(resetState: true);
                           FFAppState().selectedAddress1 = '';
                           FFAppState().selectedCardID = '';
                           FFAppState().selectedCardNumber = '';
                           FFAppState().isCardChange = false;
                           FFAppState().selectedDeliveryDate = '';
                           FFAppState().selectedDeliveryTimeSlot = '';
+                          FFAppState().phoneNo = getJsonField(
+                                    dailyCartScreenShowspcatcartResponse
+                                        .jsonBody,
+                                    r'''$.data.user_type''',
+                                  ) !=
+                                  null
+                              ? ' '
+                              : FFAppState().phoneNo;
+                          FFAppState().dialCode = getJsonField(
+                                    dailyCartScreenShowspcatcartResponse
+                                        .jsonBody,
+                                    r'''$.data.user_type''',
+                                  ) !=
+                                  null
+                              ? ' AE'
+                              : FFAppState().dialCode;
+                          FFAppState().countryCode = getJsonField(
+                                    dailyCartScreenShowspcatcartResponse
+                                        .jsonBody,
+                                    r'''$.data.user_type''',
+                                  ) !=
+                                  null
+                              ? '971'
+                              : FFAppState().countryCode;
                           safeSetState(() {});
                         } else {
                           logFirebaseEvent('IconButton_update_app_state');
@@ -314,15 +388,37 @@ class _DailyCartScreenWidgetState extends State<DailyCartScreenWidget>
                           FFAppState().couponDiscount = 0.0;
                           FFAppState().isDeliveryPartnerTipSelected = '0';
                           FFAppState().screenName = '';
-                          FFAppState().deleteSelectedAddresID();
-                          FFAppState().selectedAddresID = '';
-
+                          FFAppState().deleteSelectedAddresID(resetState: true);
                           FFAppState().selectedAddress1 = '';
                           FFAppState().selectedCardID = '';
                           FFAppState().selectedCardNumber = '';
                           FFAppState().isCardChange = false;
                           FFAppState().selectedDeliveryDate = '';
                           FFAppState().selectedDeliveryTimeSlot = '';
+                          FFAppState().phoneNo = getJsonField(
+                                    dailyCartScreenShowspcatcartResponse
+                                        .jsonBody,
+                                    r'''$.data.user_type''',
+                                  ) !=
+                                  null
+                              ? ' '
+                              : FFAppState().phoneNo;
+                          FFAppState().dialCode = getJsonField(
+                                    dailyCartScreenShowspcatcartResponse
+                                        .jsonBody,
+                                    r'''$.data.user_type''',
+                                  ) !=
+                                  null
+                              ? ' AE'
+                              : FFAppState().dialCode;
+                          FFAppState().countryCode = getJsonField(
+                                    dailyCartScreenShowspcatcartResponse
+                                        .jsonBody,
+                                    r'''$.data.user_type''',
+                                  ) !=
+                                  null
+                              ? '971'
+                              : FFAppState().countryCode;
                           safeSetState(() {});
                           logFirebaseEvent('IconButton_navigate_back');
                           context.safePop();
@@ -450,9 +546,8 @@ class _DailyCartScreenWidgetState extends State<DailyCartScreenWidget>
                                       FFAppState().selectedCardID = '';
                                       FFAppState().selectedCardNumber = '';
                                       FFAppState().selectedAddress1 = '';
-                                      FFAppState().deleteSelectedAddresID();
-                                      FFAppState().selectedAddresID = '';
-
+                                      FFAppState().deleteSelectedAddresID(
+                                          resetState: true);
                                       FFAppState().selectedDeliveryDate = '';
                                       FFAppState().selectedDeliveryTimeSlot =
                                           '';
@@ -14476,8 +14571,8 @@ class _DailyCartScreenWidgetState extends State<DailyCartScreenWidget>
                                                                                 Container(
                                                                               width: 200.0,
                                                                               child: TextFormField(
-                                                                                controller: _model.textController,
-                                                                                focusNode: _model.textFieldFocusNode,
+                                                                                controller: _model.textController1,
+                                                                                focusNode: _model.textFieldFocusNode1,
                                                                                 autofocus: false,
                                                                                 obscureText: false,
                                                                                 decoration: InputDecoration(
@@ -14537,7 +14632,7 @@ class _DailyCartScreenWidgetState extends State<DailyCartScreenWidget>
                                                                                 textAlign: TextAlign.start,
                                                                                 maxLines: null,
                                                                                 cursorColor: FlutterFlowTheme.of(context).primaryText,
-                                                                                validator: _model.textControllerValidator.asValidator(context),
+                                                                                validator: _model.textController1Validator.asValidator(context),
                                                                               ),
                                                                             ),
                                                                           ),
@@ -18427,7 +18522,7 @@ class _DailyCartScreenWidgetState extends State<DailyCartScreenWidget>
                                                                                                           ),
                                                                                                           orderInstruction: (String var1) {
                                                                                                             return var1.trim().replaceAll('\\', '\\\\').replaceAll('"', '\\"').replaceAll('\r', '\\r').replaceAll('\n', '\\n') ?? '';
-                                                                                                          }(_model.textController.text),
+                                                                                                          }(_model.textController1.text),
                                                                                                           platform: isiOS ? 'ios' : 'android',
                                                                                                           totalrefwalletamt: (_model.isRefWalletCheckBoxSelected == 'add'
                                                                                                                   ? functions.checkWalletWithAction(
@@ -23297,7 +23392,7 @@ class _DailyCartScreenWidgetState extends State<DailyCartScreenWidget>
                                                                                                         ),
                                                                                                         orderInstruction: (String var1) {
                                                                                                           return var1.trim().replaceAll('\\', '\\\\').replaceAll('"', '\\"').replaceAll('\r', '\\r').replaceAll('\n', '\\n') ?? '';
-                                                                                                        }(_model.textController.text),
+                                                                                                        }(_model.textController1.text),
                                                                                                         platform: isiOS ? 'ios' : 'android',
                                                                                                         totalrefwalletamt: (_model.isRefWalletCheckBoxSelected == 'add'
                                                                                                                 ? functions.checkWalletWithAction(
@@ -26936,9 +27031,7 @@ class _DailyCartScreenWidgetState extends State<DailyCartScreenWidget>
                                                                                                 );
                                                                                                 logFirebaseEvent('ApplePayContainer_update_app_state');
                                                                                                 FFAppState().selectedAddress1 = '';
-                                                                                                FFAppState().deleteSelectedAddresID();
-                                                                                                FFAppState().selectedAddresID = '';
-
+                                                                                                FFAppState().deleteSelectedAddresID(resetState: true);
                                                                                                 safeSetState(() {});
                                                                                                 logFirebaseEvent('ApplePayContainer_update_page_state');
                                                                                                 _model.isPaymentDone = true;
@@ -32753,7 +32846,7 @@ class _DailyCartScreenWidgetState extends State<DailyCartScreenWidget>
                                                                                                         ),
                                                                                                         orderInstruction: (String var1) {
                                                                                                           return var1.trim().replaceAll('\\', '\\\\').replaceAll('"', '\\"').replaceAll('\r', '\\r').replaceAll('\n', '\\n') ?? '';
-                                                                                                        }(_model.textController.text),
+                                                                                                        }(_model.textController1.text),
                                                                                                         platform: isiOS ? 'ios' : 'android',
                                                                                                         totalrefwalletamt: (_model.isRefWalletCheckBoxSelected == 'add'
                                                                                                                 ? functions.checkWalletWithAction(
@@ -37623,7 +37716,7 @@ class _DailyCartScreenWidgetState extends State<DailyCartScreenWidget>
                                                                                                       ),
                                                                                                       orderInstruction: (String var1) {
                                                                                                         return var1.trim().replaceAll('\\', '\\\\').replaceAll('"', '\\"').replaceAll('\r', '\\r').replaceAll('\n', '\\n') ?? '';
-                                                                                                      }(_model.textController.text),
+                                                                                                      }(_model.textController1.text),
                                                                                                       platform: isiOS ? 'ios' : 'android',
                                                                                                       totalrefwalletamt: (_model.isRefWalletCheckBoxSelected == 'add'
                                                                                                               ? functions.checkWalletWithAction(
@@ -41262,9 +41355,7 @@ class _DailyCartScreenWidgetState extends State<DailyCartScreenWidget>
                                                                                               );
                                                                                               logFirebaseEvent('Container_update_app_state');
                                                                                               FFAppState().selectedAddress1 = '';
-                                                                                              FFAppState().deleteSelectedAddresID();
-                                                                                              FFAppState().selectedAddresID = '';
-
+                                                                                              FFAppState().deleteSelectedAddresID(resetState: true);
                                                                                               FFAppState().socityName = '';
                                                                                               safeSetState(() {});
                                                                                               logFirebaseEvent('Container_update_page_state');
@@ -41310,9 +41401,7 @@ class _DailyCartScreenWidgetState extends State<DailyCartScreenWidget>
                                                                                             safeSetState(() {});
                                                                                             logFirebaseEvent('Container_update_app_state');
                                                                                             FFAppState().selectedAddress1 = '';
-                                                                                            FFAppState().deleteSelectedAddresID();
-                                                                                            FFAppState().selectedAddresID = '';
-
+                                                                                            FFAppState().deleteSelectedAddresID(resetState: true);
                                                                                             FFAppState().socityName = '';
                                                                                             safeSetState(() {});
                                                                                           }
@@ -41355,9 +41444,7 @@ class _DailyCartScreenWidgetState extends State<DailyCartScreenWidget>
                                                                                           safeSetState(() {});
                                                                                           logFirebaseEvent('Container_update_app_state');
                                                                                           FFAppState().selectedAddress1 = '';
-                                                                                          FFAppState().deleteSelectedAddresID();
-                                                                                          FFAppState().selectedAddresID = '';
-
+                                                                                          FFAppState().deleteSelectedAddresID(resetState: true);
                                                                                           FFAppState().socityName = '';
                                                                                           safeSetState(() {});
                                                                                         }
@@ -44533,7 +44620,7 @@ class _DailyCartScreenWidgetState extends State<DailyCartScreenWidget>
                                                                                                   ),
                                                                                                   orderInstruction: (String var1) {
                                                                                                     return var1.trim().replaceAll('\\', '\\\\').replaceAll('"', '\\"').replaceAll('\r', '\\r').replaceAll('\n', '\\n') ?? '';
-                                                                                                  }(_model.textController.text),
+                                                                                                  }(_model.textController1.text),
                                                                                                   platform: isiOS ? 'ios' : 'android',
                                                                                                   totalrefwalletamt: (_model.isRefWalletCheckBoxSelected == 'add'
                                                                                                           ? functions.checkWalletWithAction(
@@ -44686,9 +44773,7 @@ class _DailyCartScreenWidgetState extends State<DailyCartScreenWidget>
                                                                                                   FFAppState().couponDiscount = 0.0;
                                                                                                   FFAppState().countryCode = '971';
                                                                                                   FFAppState().selectedAddress1 = '';
-                                                                                                  FFAppState().deleteSelectedAddresID();
-                                                                                                  FFAppState().selectedAddresID = '';
-
+                                                                                                  FFAppState().deleteSelectedAddresID(resetState: true);
                                                                                                   FFAppState().selectedCardID = '';
                                                                                                   FFAppState().selectedDeliveryDate = '';
                                                                                                   FFAppState().selectedDeliveryTimeSlot = '';
@@ -49386,7 +49471,7 @@ class _DailyCartScreenWidgetState extends State<DailyCartScreenWidget>
                                                                                                     ),
                                                                                                     orderInstruction: (String var1) {
                                                                                                       return var1.trim().replaceAll('\\', '\\\\').replaceAll('"', '\\"').replaceAll('\r', '\\r').replaceAll('\n', '\\n') ?? '';
-                                                                                                    }(_model.textController.text),
+                                                                                                    }(_model.textController1.text),
                                                                                                     platform: isiOS ? 'ios' : 'android',
                                                                                                     totalrefwalletamt: (_model.isRefWalletCheckBoxSelected == 'add'
                                                                                                             ? functions.checkWalletWithAction(
@@ -49542,9 +49627,7 @@ class _DailyCartScreenWidgetState extends State<DailyCartScreenWidget>
                                                                                                     FFAppState().couponDiscount = 0.0;
                                                                                                     FFAppState().countryCode = '971';
                                                                                                     FFAppState().selectedAddress1 = '';
-                                                                                                    FFAppState().deleteSelectedAddresID();
-                                                                                                    FFAppState().selectedAddresID = '';
-
+                                                                                                    FFAppState().deleteSelectedAddresID(resetState: true);
                                                                                                     FFAppState().selectedDeliveryDate = '';
                                                                                                     FFAppState().selectedDeliveryTimeSlot = '';
                                                                                                     FFAppState().socityName = '';
@@ -54298,7 +54381,7 @@ class _DailyCartScreenWidgetState extends State<DailyCartScreenWidget>
                                                                                                 ),
                                                                                                 orderInstruction: (String var1) {
                                                                                                   return var1.trim().replaceAll('\\', '\\\\').replaceAll('"', '\\"').replaceAll('\r', '\\r').replaceAll('\n', '\\n') ?? '';
-                                                                                                }(_model.textController.text),
+                                                                                                }(_model.textController1.text),
                                                                                                 platform: isiOS ? 'ios' : 'android',
                                                                                                 totalrefwalletamt: (_model.isRefWalletCheckBoxSelected == 'add'
                                                                                                         ? functions.checkWalletWithAction(
@@ -54457,9 +54540,7 @@ class _DailyCartScreenWidgetState extends State<DailyCartScreenWidget>
                                                                                                 FFAppState().couponDiscount = 0.0;
                                                                                                 FFAppState().countryCode = '971';
                                                                                                 FFAppState().selectedAddress1 = '';
-                                                                                                FFAppState().deleteSelectedAddresID();
-                                                                                                FFAppState().selectedAddresID = '';
-
+                                                                                                FFAppState().deleteSelectedAddresID(resetState: true);
                                                                                                 FFAppState().selectedCardID = '';
                                                                                                 FFAppState().selectedDeliveryDate = '';
                                                                                                 FFAppState().selectedDeliveryTimeSlot = '';
@@ -59157,7 +59238,7 @@ class _DailyCartScreenWidgetState extends State<DailyCartScreenWidget>
                                                                                                   ),
                                                                                                   orderInstruction: (String var1) {
                                                                                                     return var1.trim().replaceAll('\\', '\\\\').replaceAll('"', '\\"').replaceAll('\r', '\\r').replaceAll('\n', '\\n') ?? '';
-                                                                                                  }(_model.textController.text),
+                                                                                                  }(_model.textController1.text),
                                                                                                   platform: isiOS ? 'ios' : 'android',
                                                                                                   totalrefwalletamt: (_model.isRefWalletCheckBoxSelected == 'add'
                                                                                                           ? functions.checkWalletWithAction(
@@ -59316,9 +59397,7 @@ class _DailyCartScreenWidgetState extends State<DailyCartScreenWidget>
                                                                                                   FFAppState().couponDiscount = 0.0;
                                                                                                   FFAppState().countryCode = '971';
                                                                                                   FFAppState().selectedAddress1 = '';
-                                                                                                  FFAppState().deleteSelectedAddresID();
-                                                                                                  FFAppState().selectedAddresID = '';
-
+                                                                                                  FFAppState().deleteSelectedAddresID(resetState: true);
                                                                                                   FFAppState().selectedDeliveryDate = '';
                                                                                                   FFAppState().selectedDeliveryTimeSlot = '';
                                                                                                   FFAppState().socityName = '';
@@ -61696,9 +61775,7 @@ class _DailyCartScreenWidgetState extends State<DailyCartScreenWidget>
                                                                                         );
                                                                                         logFirebaseEvent('Container_update_app_state');
                                                                                         FFAppState().selectedAddress1 = '';
-                                                                                        FFAppState().deleteSelectedAddresID();
-                                                                                        FFAppState().selectedAddresID = '';
-
+                                                                                        FFAppState().deleteSelectedAddresID(resetState: true);
                                                                                         safeSetState(() {});
                                                                                         logFirebaseEvent('Container_update_page_state');
                                                                                         _model.isPaymentDone = true;
@@ -61743,9 +61820,7 @@ class _DailyCartScreenWidgetState extends State<DailyCartScreenWidget>
                                                                                       safeSetState(() {});
                                                                                       logFirebaseEvent('Container_update_app_state');
                                                                                       FFAppState().selectedAddress1 = '';
-                                                                                      FFAppState().deleteSelectedAddresID();
-                                                                                      FFAppState().selectedAddresID = '';
-
+                                                                                      FFAppState().deleteSelectedAddresID(resetState: true);
                                                                                       safeSetState(() {});
                                                                                     }
                                                                                   } else {
@@ -61787,9 +61862,7 @@ class _DailyCartScreenWidgetState extends State<DailyCartScreenWidget>
                                                                                     safeSetState(() {});
                                                                                     logFirebaseEvent('Container_update_app_state');
                                                                                     FFAppState().selectedAddress1 = '';
-                                                                                    FFAppState().deleteSelectedAddresID();
-                                                                                    FFAppState().selectedAddresID = '';
-
+                                                                                    FFAppState().deleteSelectedAddresID(resetState: true);
                                                                                     safeSetState(() {});
                                                                                   }
                                                                                 } else {
@@ -63144,565 +63217,272 @@ class _DailyCartScreenWidgetState extends State<DailyCartScreenWidget>
                                                           ),
                                                         ),
                                                       ),
-                                                      Padding(
-                                                        padding:
-                                                            EdgeInsetsDirectional
-                                                                .fromSTEB(
-                                                                    20.0,
-                                                                    10.0,
-                                                                    20.0,
-                                                                    0.0),
-                                                        child: Container(
-                                                          width:
-                                                              MediaQuery.sizeOf(
-                                                                          context)
-                                                                      .width *
-                                                                  1.0,
-                                                          height: 268.0,
-                                                          decoration:
-                                                              BoxDecoration(
-                                                            color: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .secondaryBackground,
-                                                          ),
-                                                          child: FutureBuilder<
-                                                              ApiCallResponse>(
-                                                            future: QuickartGroup
-                                                                .mightHaveMissedCall
-                                                                .call(
-                                                              storeId:
-                                                                  getJsonField(
-                                                                FFAppState()
-                                                                    .zoneInfo,
-                                                                r'''$.store_id''',
-                                                              ).toString(),
-                                                              userId:
-                                                                  FFAppState()
-                                                                      .userID,
-                                                              deviceId:
-                                                                  FFAppState()
-                                                                      .deviceID,
-                                                              orderType:
-                                                                  'quick',
-                                                              platform: isiOS
-                                                                  ? 'ios'
-                                                                  : 'android',
-                                                              zoneID:
-                                                                  getJsonField(
-                                                                FFAppState()
-                                                                    .zoneInfo,
-                                                                r'''$.zone_id''',
-                                                              ).toString(),
+                                                      if (getJsonField(
+                                                            FFAppState()
+                                                                .appInfo,
+                                                            r'''$.user_type''',
+                                                          ) ==
+                                                          null)
+                                                        Padding(
+                                                          padding:
+                                                              EdgeInsetsDirectional
+                                                                  .fromSTEB(
+                                                                      20.0,
+                                                                      10.0,
+                                                                      20.0,
+                                                                      0.0),
+                                                          child: Container(
+                                                            width: MediaQuery
+                                                                        .sizeOf(
+                                                                            context)
+                                                                    .width *
+                                                                1.0,
+                                                            height: 268.0,
+                                                            decoration:
+                                                                BoxDecoration(
+                                                              color: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .secondaryBackground,
                                                             ),
-                                                            builder: (context,
-                                                                snapshot) {
-                                                              // Customize what your widget looks like when it's loading.
-                                                              if (!snapshot
-                                                                  .hasData) {
-                                                                return Center(
-                                                                  child:
-                                                                      SizedBox(
-                                                                    width: 60.0,
-                                                                    height:
-                                                                        60.0,
+                                                            child: FutureBuilder<
+                                                                ApiCallResponse>(
+                                                              future: QuickartGroup
+                                                                  .mightHaveMissedCall
+                                                                  .call(
+                                                                storeId:
+                                                                    getJsonField(
+                                                                  FFAppState()
+                                                                      .zoneInfo,
+                                                                  r'''$.store_id''',
+                                                                ).toString(),
+                                                                userId:
+                                                                    FFAppState()
+                                                                        .userID,
+                                                                deviceId:
+                                                                    FFAppState()
+                                                                        .deviceID,
+                                                                orderType:
+                                                                    'quick',
+                                                                platform: isiOS
+                                                                    ? 'ios'
+                                                                    : 'android',
+                                                                zoneID:
+                                                                    getJsonField(
+                                                                  FFAppState()
+                                                                      .zoneInfo,
+                                                                  r'''$.zone_id''',
+                                                                ).toString(),
+                                                              ),
+                                                              builder: (context,
+                                                                  snapshot) {
+                                                                // Customize what your widget looks like when it's loading.
+                                                                if (!snapshot
+                                                                    .hasData) {
+                                                                  return Center(
                                                                     child:
-                                                                        CircularProgressIndicator(
-                                                                      valueColor:
-                                                                          AlwaysStoppedAnimation<
-                                                                              Color>(
-                                                                        Color(
-                                                                            0xFF2E317E),
+                                                                        SizedBox(
+                                                                      width:
+                                                                          60.0,
+                                                                      height:
+                                                                          60.0,
+                                                                      child:
+                                                                          CircularProgressIndicator(
+                                                                        valueColor:
+                                                                            AlwaysStoppedAnimation<Color>(
+                                                                          Color(
+                                                                              0xFF2E317E),
+                                                                        ),
                                                                       ),
                                                                     ),
-                                                                  ),
-                                                                );
-                                                              }
-                                                              final listViewMightHaveMissedResponse =
-                                                                  snapshot
-                                                                      .data!;
+                                                                  );
+                                                                }
+                                                                final listViewMightHaveMissedResponse =
+                                                                    snapshot
+                                                                        .data!;
 
-                                                              return Builder(
-                                                                builder:
-                                                                    (context) {
-                                                                  final productModelMM =
-                                                                      getJsonField(
-                                                                    listViewMightHaveMissedResponse
-                                                                        .jsonBody,
-                                                                    r'''$.data''',
-                                                                  ).toList();
+                                                                return Builder(
+                                                                  builder:
+                                                                      (context) {
+                                                                    final productModelMM =
+                                                                        getJsonField(
+                                                                      listViewMightHaveMissedResponse
+                                                                          .jsonBody,
+                                                                      r'''$.data''',
+                                                                    ).toList();
 
-                                                                  return ListView
-                                                                      .separated(
-                                                                    padding:
-                                                                        EdgeInsets
-                                                                            .fromLTRB(
-                                                                      2.0,
-                                                                      0,
-                                                                      0,
-                                                                      0,
-                                                                    ),
-                                                                    scrollDirection:
-                                                                        Axis.horizontal,
-                                                                    itemCount:
-                                                                        productModelMM
-                                                                            .length,
-                                                                    separatorBuilder: (_,
-                                                                            __) =>
-                                                                        SizedBox(
-                                                                            width:
-                                                                                5.0),
-                                                                    itemBuilder:
-                                                                        (context,
-                                                                            productModelMMIndex) {
-                                                                      final productModelMMItem =
-                                                                          productModelMM[
-                                                                              productModelMMIndex];
-                                                                      return InkWell(
-                                                                        splashColor:
-                                                                            Colors.transparent,
-                                                                        focusColor:
-                                                                            Colors.transparent,
-                                                                        hoverColor:
-                                                                            Colors.transparent,
-                                                                        highlightColor:
-                                                                            Colors.transparent,
-                                                                        onTap:
-                                                                            () async {
-                                                                          logFirebaseEvent(
-                                                                              'DAILY_CART_SCREEN_Container_yxcu8d69_ON_');
-                                                                          logFirebaseEvent(
-                                                                              'Container_navigate_to');
+                                                                    return ListView
+                                                                        .separated(
+                                                                      padding:
+                                                                          EdgeInsets
+                                                                              .fromLTRB(
+                                                                        2.0,
+                                                                        0,
+                                                                        0,
+                                                                        0,
+                                                                      ),
+                                                                      scrollDirection:
+                                                                          Axis.horizontal,
+                                                                      itemCount:
+                                                                          productModelMM
+                                                                              .length,
+                                                                      separatorBuilder: (_,
+                                                                              __) =>
+                                                                          SizedBox(
+                                                                              width: 5.0),
+                                                                      itemBuilder:
+                                                                          (context,
+                                                                              productModelMMIndex) {
+                                                                        final productModelMMItem =
+                                                                            productModelMM[productModelMMIndex];
+                                                                        return InkWell(
+                                                                          splashColor:
+                                                                              Colors.transparent,
+                                                                          focusColor:
+                                                                              Colors.transparent,
+                                                                          hoverColor:
+                                                                              Colors.transparent,
+                                                                          highlightColor:
+                                                                              Colors.transparent,
+                                                                          onTap:
+                                                                              () async {
+                                                                            logFirebaseEvent('DAILY_CART_SCREEN_Container_yxcu8d69_ON_');
+                                                                            logFirebaseEvent('Container_navigate_to');
 
-                                                                          context
-                                                                              .pushNamed(ProductDetailsScreenWidget.routeName);
+                                                                            context.pushNamed(ProductDetailsScreenWidget.routeName);
 
-                                                                          logFirebaseEvent(
-                                                                              'Container_update_app_state');
-                                                                          FFAppState().productID =
-                                                                              getJsonField(
-                                                                            productModelMMItem,
-                                                                            r'''$.product_id''',
-                                                                          ).toString();
-                                                                          FFAppState().storeID =
-                                                                              FFAppState().storeID;
-                                                                          FFAppState().userID =
-                                                                              FFAppState().userID;
-                                                                          FFAppState().productName =
-                                                                              getJsonField(
-                                                                            productModelMMItem,
-                                                                            r'''$.product_name''',
-                                                                          ).toString();
-                                                                          safeSetState(
-                                                                              () {});
-                                                                          logFirebaseEvent(
-                                                                              'Container_custom_action');
-                                                                          await actions
-                                                                              .facebookEventClass(
-                                                                            getJsonField(
+                                                                            logFirebaseEvent('Container_update_app_state');
+                                                                            FFAppState().productID =
+                                                                                getJsonField(
                                                                               productModelMMItem,
                                                                               r'''$.product_id''',
-                                                                            ).toString(),
-                                                                            getJsonField(
+                                                                            ).toString();
+                                                                            FFAppState().storeID =
+                                                                                FFAppState().storeID;
+                                                                            FFAppState().userID =
+                                                                                FFAppState().userID;
+                                                                            FFAppState().productName =
+                                                                                getJsonField(
                                                                               productModelMMItem,
                                                                               r'''$.product_name''',
-                                                                            ).toString(),
-                                                                            'product detail',
-                                                                            getJsonField(
-                                                                              productModelMMItem,
-                                                                              r'''$.price''',
-                                                                            ),
-                                                                            0,
-                                                                            getJsonField(
-                                                                              productModelMMItem,
-                                                                              r'''$.mrp''',
-                                                                            ),
-                                                                            'productdetail',
-                                                                            FFAppState().emptyJson,
-                                                                            ' ',
-                                                                            ' ',
-                                                                            ' ',
-                                                                            ' ',
-                                                                            ' ',
-                                                                          );
-                                                                          logFirebaseEvent(
-                                                                              'Container_google_analytics_event');
-                                                                          logFirebaseEvent(
-                                                                            'Navigation',
-                                                                            parameters: {
-                                                                              'Navigate To': 'Product Detail Screen',
-                                                                            },
-                                                                          );
-                                                                        },
-                                                                        child:
-                                                                            Container(
-                                                                          width:
-                                                                              170.0,
-                                                                          height:
-                                                                              267.0,
-                                                                          decoration:
-                                                                              BoxDecoration(
-                                                                            color:
-                                                                                Colors.white,
-                                                                            borderRadius:
-                                                                                BorderRadius.only(
-                                                                              topLeft: Radius.circular(8.0),
-                                                                              topRight: Radius.circular(8.0),
-                                                                              bottomLeft: Radius.circular(8.0),
-                                                                              bottomRight: Radius.circular(8.0),
-                                                                            ),
-                                                                            border:
-                                                                                Border.all(
-                                                                              color: FFAppConstants.neutralWhiteF5F5F5,
-                                                                              width: 1.0,
-                                                                            ),
-                                                                          ),
+                                                                            ).toString();
+                                                                            safeSetState(() {});
+                                                                            logFirebaseEvent('Container_custom_action');
+                                                                            await actions.facebookEventClass(
+                                                                              getJsonField(
+                                                                                productModelMMItem,
+                                                                                r'''$.product_id''',
+                                                                              ).toString(),
+                                                                              getJsonField(
+                                                                                productModelMMItem,
+                                                                                r'''$.product_name''',
+                                                                              ).toString(),
+                                                                              'product detail',
+                                                                              getJsonField(
+                                                                                productModelMMItem,
+                                                                                r'''$.price''',
+                                                                              ),
+                                                                              0,
+                                                                              getJsonField(
+                                                                                productModelMMItem,
+                                                                                r'''$.mrp''',
+                                                                              ),
+                                                                              'productdetail',
+                                                                              FFAppState().emptyJson,
+                                                                              ' ',
+                                                                              ' ',
+                                                                              ' ',
+                                                                              ' ',
+                                                                              ' ',
+                                                                            );
+                                                                            logFirebaseEvent('Container_google_analytics_event');
+                                                                            logFirebaseEvent(
+                                                                              'Navigation',
+                                                                              parameters: {
+                                                                                'Navigate To': 'Product Detail Screen',
+                                                                              },
+                                                                            );
+                                                                          },
                                                                           child:
-                                                                              Stack(
-                                                                            children: [
-                                                                              Column(
-                                                                                mainAxisSize: MainAxisSize.max,
-                                                                                mainAxisAlignment: MainAxisAlignment.start,
-                                                                                children: [
-                                                                                  Container(
-                                                                                    width: MediaQuery.sizeOf(context).width * 1.0,
-                                                                                    child: Stack(
-                                                                                      children: [
-                                                                                        Align(
-                                                                                          alignment: AlignmentDirectional(-0.16, -0.9),
-                                                                                          child: Container(
-                                                                                            width: 170.0,
-                                                                                            height: 170.0,
-                                                                                            decoration: BoxDecoration(
-                                                                                              color: FFAppConstants.productBgClr,
-                                                                                              borderRadius: BorderRadius.only(
-                                                                                                topLeft: Radius.circular(8.0),
-                                                                                                topRight: Radius.circular(8.0),
+                                                                              Container(
+                                                                            width:
+                                                                                170.0,
+                                                                            height:
+                                                                                267.0,
+                                                                            decoration:
+                                                                                BoxDecoration(
+                                                                              color: Colors.white,
+                                                                              borderRadius: BorderRadius.only(
+                                                                                topLeft: Radius.circular(8.0),
+                                                                                topRight: Radius.circular(8.0),
+                                                                                bottomLeft: Radius.circular(8.0),
+                                                                                bottomRight: Radius.circular(8.0),
+                                                                              ),
+                                                                              border: Border.all(
+                                                                                color: FFAppConstants.neutralWhiteF5F5F5,
+                                                                                width: 1.0,
+                                                                              ),
+                                                                            ),
+                                                                            child:
+                                                                                Stack(
+                                                                              children: [
+                                                                                Column(
+                                                                                  mainAxisSize: MainAxisSize.max,
+                                                                                  mainAxisAlignment: MainAxisAlignment.start,
+                                                                                  children: [
+                                                                                    Container(
+                                                                                      width: MediaQuery.sizeOf(context).width * 1.0,
+                                                                                      child: Stack(
+                                                                                        children: [
+                                                                                          Align(
+                                                                                            alignment: AlignmentDirectional(-0.16, -0.9),
+                                                                                            child: Container(
+                                                                                              width: 170.0,
+                                                                                              height: 170.0,
+                                                                                              decoration: BoxDecoration(
+                                                                                                color: FFAppConstants.productBgClr,
+                                                                                                borderRadius: BorderRadius.only(
+                                                                                                  topLeft: Radius.circular(8.0),
+                                                                                                  topRight: Radius.circular(8.0),
+                                                                                                ),
                                                                                               ),
-                                                                                            ),
-                                                                                            child: ClipRRect(
-                                                                                              borderRadius: BorderRadius.circular(8.0),
-                                                                                              child: Image.network(
-                                                                                                getJsonField(
-                                                                                                  productModelMMItem,
-                                                                                                  r'''$.varient_image''',
-                                                                                                ).toString(),
-                                                                                                width: 100.0,
-                                                                                                height: 100.0,
-                                                                                                fit: BoxFit.contain,
-                                                                                                errorBuilder: (context, error, stackTrace) => Image.asset(
-                                                                                                  'assets/images/error_image.png',
+                                                                                              child: ClipRRect(
+                                                                                                borderRadius: BorderRadius.circular(8.0),
+                                                                                                child: Image.network(
+                                                                                                  getJsonField(
+                                                                                                    productModelMMItem,
+                                                                                                    r'''$.varient_image''',
+                                                                                                  ).toString(),
                                                                                                   width: 100.0,
                                                                                                   height: 100.0,
                                                                                                   fit: BoxFit.contain,
+                                                                                                  errorBuilder: (context, error, stackTrace) => Image.asset(
+                                                                                                    'assets/images/error_image.png',
+                                                                                                    width: 100.0,
+                                                                                                    height: 100.0,
+                                                                                                    fit: BoxFit.contain,
+                                                                                                  ),
                                                                                                 ),
                                                                                               ),
                                                                                             ),
                                                                                           ),
-                                                                                        ),
-                                                                                        if (functions.checkVariantsWithStock(getJsonField(
-                                                                                              productModelMMItem,
-                                                                                              r'''$.varients''',
-                                                                                            )) ==
-                                                                                            true)
-                                                                                          Align(
-                                                                                            alignment: AlignmentDirectional(1.0, 1.0),
-                                                                                            child: Padding(
-                                                                                              padding: EdgeInsetsDirectional.fromSTEB(0.0, 135.0, 10.0, 2.0),
-                                                                                              child: FFButtonWidget(
-                                                                                                onPressed: () async {
-                                                                                                  logFirebaseEvent('DAILY_CART_SCREEN_PAGE_ADD_BTN_ON_TAP');
-                                                                                                  if (functions.checkVariantFeatureCondition(productModelMMItem) == true) {
-                                                                                                    logFirebaseEvent('Button_bottom_sheet');
-                                                                                                    await showModalBottomSheet(
-                                                                                                      isScrollControlled: true,
-                                                                                                      backgroundColor: Colors.transparent,
-                                                                                                      enableDrag: false,
-                                                                                                      context: context,
-                                                                                                      builder: (context) {
-                                                                                                        return GestureDetector(
-                                                                                                          onTap: () {
-                                                                                                            FocusScope.of(context).unfocus();
-                                                                                                            FocusManager.instance.primaryFocus?.unfocus();
-                                                                                                          },
-                                                                                                          child: Padding(
-                                                                                                            padding: MediaQuery.viewInsetsOf(context),
-                                                                                                            child: VarientBotttomSheetWidget(
-                                                                                                              productModel: productModelMMItem,
-                                                                                                              cartType: 'daily',
-                                                                                                            ),
-                                                                                                          ),
-                                                                                                        );
-                                                                                                      },
-                                                                                                    ).then((value) => safeSetState(() {}));
-
-                                                                                                    logFirebaseEvent('Button_refresh_database_request');
-                                                                                                    safeSetState(() => _model.apiRequestCompleter = null);
-                                                                                                    await _model.waitForApiRequestCompleted(maxWait: 5000);
-                                                                                                  } else {
-                                                                                                    logFirebaseEvent('Button_custom_action');
-                                                                                                    _model.networkCheck = await actions.checkInternetConnection();
-                                                                                                    if (_model.networkCheck == true) {
-                                                                                                      logFirebaseEvent('Button_haptic_feedback');
-                                                                                                      HapticFeedback.heavyImpact();
-                                                                                                      logFirebaseEvent('Button_backend_call');
-                                                                                                      _model.addtoCartMM = await QuickartGroup.addToCartCall.call(
-                                                                                                        userid: FFAppState().userID,
-                                                                                                        qty: '1',
-                                                                                                        storeid: getJsonField(
-                                                                                                          FFAppState().zoneInfo,
-                                                                                                          r'''$.store_id''',
-                                                                                                        ).toString(),
-                                                                                                        varientid: getJsonField(
-                                                                                                          productModelMMItem,
-                                                                                                          r'''$.varient_id''',
-                                                                                                        ).toString(),
-                                                                                                        deviceid: FFAppState().deviceID,
-                                                                                                        itemPrice: getJsonField(
-                                                                                                          productModelMMItem,
-                                                                                                          r'''$.price''',
-                                                                                                        ).toString(),
-                                                                                                        itemName: getJsonField(
-                                                                                                          productModelMMItem,
-                                                                                                          r'''$.product_name''',
-                                                                                                        ).toString(),
-                                                                                                        platform: isiOS ? 'ios' : 'android',
-                                                                                                      );
-
-                                                                                                      if ((_model.addtoCartMM?.succeeded ?? true)) {
-                                                                                                        logFirebaseEvent('Button_update_app_state');
-                                                                                                        FFAppState().isCartShow = false;
-                                                                                                        FFAppState().cartTotalCount = QuickartGroup.addToCartCall.totalItems(
-                                                                                                          (_model.addtoCartMM?.jsonBody ?? ''),
-                                                                                                        )!;
-                                                                                                        FFAppState().cartSavingPrice = functions.stringToDouble(QuickartGroup.addToCartCall
-                                                                                                            .savingPrice(
-                                                                                                              (_model.addtoCartMM?.jsonBody ?? ''),
-                                                                                                            )!
-                                                                                                            .toString());
-                                                                                                        FFAppState().cartTotalPrice = functions.stringToDouble(QuickartGroup.addToCartCall
-                                                                                                            .totalPrice(
-                                                                                                              (_model.addtoCartMM?.jsonBody ?? ''),
-                                                                                                            )!
-                                                                                                            .toString());
-                                                                                                        FFAppState().selectedDeliveryTimeSlot = '';
-                                                                                                        FFAppState().update(() {});
-                                                                                                        logFirebaseEvent('Button_refresh_database_request');
-                                                                                                        safeSetState(() => _model.apiRequestCompleter = null);
-                                                                                                        await _model.waitForApiRequestCompleted();
-                                                                                                        logFirebaseEvent('Button_custom_action');
-                                                                                                        await actions.facebookEventClass(
-                                                                                                          getJsonField(
-                                                                                                            productModelMMItem,
-                                                                                                            r'''$.varient_id''',
-                                                                                                          ).toString(),
-                                                                                                          getJsonField(
-                                                                                                            productModelMMItem,
-                                                                                                            r'''$.product_name''',
-                                                                                                          ).toString(),
-                                                                                                          'product',
-                                                                                                          getJsonField(
-                                                                                                            productModelMMItem,
-                                                                                                            r'''$.price''',
-                                                                                                          ),
-                                                                                                          1,
-                                                                                                          getJsonField(
-                                                                                                            productModelMMItem,
-                                                                                                            r'''$.mrp''',
-                                                                                                          ),
-                                                                                                          'add',
-                                                                                                          FFAppState().emptyJson,
-                                                                                                          'emptyjons',
-                                                                                                          ' ',
-                                                                                                          ' ',
-                                                                                                          ' ',
-                                                                                                          ' ',
-                                                                                                        );
-                                                                                                        logFirebaseEvent('Button_google_analytics_event');
-                                                                                                        logFirebaseEvent(
-                                                                                                          'Add To Cart',
-                                                                                                          parameters: {
-                                                                                                            'API Name': 'Add To Cart',
-                                                                                                          },
-                                                                                                        );
-                                                                                                      } else {
-                                                                                                        logFirebaseEvent('Button_show_snack_bar');
-                                                                                                        ScaffoldMessenger.of(context).showSnackBar(
-                                                                                                          SnackBar(
-                                                                                                            content: Text(
-                                                                                                              QuickartGroup.addToCartCall.message(
-                                                                                                                (_model.addtoCartMM?.jsonBody ?? ''),
-                                                                                                              )!,
-                                                                                                              style: GoogleFonts.montserrat(
-                                                                                                                color: FFAppConstants.indigoColor,
-                                                                                                                fontWeight: FontWeight.w500,
-                                                                                                                fontSize: 15.0,
-                                                                                                              ),
-                                                                                                            ),
-                                                                                                            duration: Duration(milliseconds: 1500),
-                                                                                                            backgroundColor: FFAppConstants.primaryPurpleE4D8F5,
-                                                                                                          ),
-                                                                                                        );
-                                                                                                      }
-                                                                                                    } else {
-                                                                                                      logFirebaseEvent('Button_show_snack_bar');
-                                                                                                      ScaffoldMessenger.of(context).showSnackBar(
-                                                                                                        SnackBar(
-                                                                                                          content: Text(
-                                                                                                            FFAppConstants.internetString,
-                                                                                                            style: GoogleFonts.montserrat(
-                                                                                                              color: FFAppConstants.blackColor0A0A0A,
-                                                                                                              fontSize: 12.0,
-                                                                                                            ),
-                                                                                                          ),
-                                                                                                          duration: Duration(milliseconds: 4000),
-                                                                                                          backgroundColor: FFAppConstants.NeutralBlack50Color,
-                                                                                                        ),
-                                                                                                      );
-                                                                                                    }
-                                                                                                  }
-
-                                                                                                  safeSetState(() {});
-                                                                                                },
-                                                                                                text: 'ADD',
-                                                                                                options: FFButtonOptions(
-                                                                                                  width: 50.0,
-                                                                                                  height: 25.0,
-                                                                                                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                                                                                                  iconPadding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                                                                                                  color: FFAppConstants.calculatorColor,
-                                                                                                  textStyle: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                                        font: GoogleFonts.montserrat(
-                                                                                                          fontWeight: FontWeight.w600,
-                                                                                                          fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                                                                                                        ),
-                                                                                                        color: FFAppConstants.whiteColor,
-                                                                                                        fontSize: 12.0,
-                                                                                                        letterSpacing: 0.0,
-                                                                                                        fontWeight: FontWeight.w600,
-                                                                                                        fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                                                                                                      ),
-                                                                                                  elevation: 0.0,
-                                                                                                  borderSide: BorderSide(
-                                                                                                    color: Colors.transparent,
-                                                                                                  ),
-                                                                                                  borderRadius: BorderRadius.circular(8.0),
-                                                                                                ),
-                                                                                              ),
-                                                                                            ),
-                                                                                          ),
-                                                                                      ],
-                                                                                    ),
-                                                                                  ),
-                                                                                  if (functions.checkVariantsWithStock(getJsonField(
-                                                                                        productModelMMItem,
-                                                                                        r'''$.varients''',
-                                                                                      )) ==
-                                                                                      true)
-                                                                                    Align(
-                                                                                      alignment: AlignmentDirectional(-1.0, 0.0),
-                                                                                      child: Container(
-                                                                                        decoration: BoxDecoration(),
-                                                                                        child: Column(
-                                                                                          mainAxisSize: MainAxisSize.max,
-                                                                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                                                                          children: [
-                                                                                            Padding(
-                                                                                              padding: EdgeInsetsDirectional.fromSTEB(5.0, 4.0, 5.0, 0.0),
-                                                                                              child: Text(
-                                                                                                getJsonField(
-                                                                                                  productModelMMItem,
-                                                                                                  r'''$.product_name''',
-                                                                                                ).toString().maybeHandleOverflow(
-                                                                                                      maxChars: 60,
-                                                                                                      replacement: '…',
-                                                                                                    ),
-                                                                                                textAlign: TextAlign.start,
-                                                                                                maxLines: 2,
-                                                                                                style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                                      font: GoogleFonts.montserrat(
-                                                                                                        fontWeight: FontWeight.w600,
-                                                                                                        fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                                                                                                      ),
-                                                                                                      color: FFAppConstants.blackColor0A0A0A,
-                                                                                                      fontSize: 13.0,
-                                                                                                      letterSpacing: 0.0,
-                                                                                                      fontWeight: FontWeight.w600,
-                                                                                                      fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                                                                                                    ),
-                                                                                              ),
-                                                                                            ),
-                                                                                            Row(
-                                                                                              mainAxisSize: MainAxisSize.max,
-                                                                                              children: [
-                                                                                                Padding(
-                                                                                                  padding: EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 5.0, 0.0),
-                                                                                                  child: Row(
-                                                                                                    mainAxisSize: MainAxisSize.max,
-                                                                                                    children: [
-                                                                                                      Padding(
-                                                                                                        padding: EdgeInsetsDirectional.fromSTEB(0.0, 2.0, 3.0, 0.0),
-                                                                                                        child: Text(
-                                                                                                          getJsonField(
-                                                                                                            productModelMMItem,
-                                                                                                            r'''$.quantity''',
-                                                                                                          ).toString(),
-                                                                                                          textAlign: TextAlign.start,
-                                                                                                          style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                                                font: GoogleFonts.montserrat(
-                                                                                                                  fontWeight: FontWeight.w600,
-                                                                                                                  fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                                                                                                                ),
-                                                                                                                color: FFAppConstants.lightBlack7a7a7a,
-                                                                                                                fontSize: 10.0,
-                                                                                                                letterSpacing: 0.0,
-                                                                                                                fontWeight: FontWeight.w600,
-                                                                                                                fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                                                                                                              ),
-                                                                                                        ),
-                                                                                                      ),
-                                                                                                      Padding(
-                                                                                                        padding: EdgeInsetsDirectional.fromSTEB(0.0, 2.0, 0.0, 0.0),
-                                                                                                        child: Text(
-                                                                                                          getJsonField(
-                                                                                                            productModelMMItem,
-                                                                                                            r'''$.unit''',
-                                                                                                          ).toString(),
-                                                                                                          textAlign: TextAlign.start,
-                                                                                                          style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                                                font: GoogleFonts.montserrat(
-                                                                                                                  fontWeight: FontWeight.w600,
-                                                                                                                  fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                                                                                                                ),
-                                                                                                                color: FFAppConstants.lightBlack7a7a7a,
-                                                                                                                fontSize: 10.0,
-                                                                                                                letterSpacing: 0.0,
-                                                                                                                fontWeight: FontWeight.w600,
-                                                                                                                fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                                                                                                              ),
-                                                                                                        ),
-                                                                                                      ),
-                                                                                                    ],
-                                                                                                  ),
-                                                                                                ),
-                                                                                                if ((getJsonField(
-                                                                                                      productModelMMItem,
-                                                                                                      r'''$.varients''',
-                                                                                                    ).toList().map<ProductCountStruct?>(ProductCountStruct.maybeFromMap).toList() as Iterable<ProductCountStruct?>)
-                                                                                                        .withoutNulls
-                                                                                                        .length >=
-                                                                                                    2)
-                                                                                                  InkWell(
-                                                                                                    splashColor: Colors.transparent,
-                                                                                                    focusColor: Colors.transparent,
-                                                                                                    hoverColor: Colors.transparent,
-                                                                                                    highlightColor: Colors.transparent,
-                                                                                                    onTap: () async {
-                                                                                                      logFirebaseEvent('DAILY_CART_SCREEN_Row_1udpejh3_ON_TAP');
-                                                                                                      logFirebaseEvent('Row_bottom_sheet');
+                                                                                          if (functions.checkVariantsWithStock(getJsonField(
+                                                                                                productModelMMItem,
+                                                                                                r'''$.varients''',
+                                                                                              )) ==
+                                                                                              true)
+                                                                                            Align(
+                                                                                              alignment: AlignmentDirectional(1.0, 1.0),
+                                                                                              child: Padding(
+                                                                                                padding: EdgeInsetsDirectional.fromSTEB(0.0, 135.0, 10.0, 2.0),
+                                                                                                child: FFButtonWidget(
+                                                                                                  onPressed: () async {
+                                                                                                    logFirebaseEvent('DAILY_CART_SCREEN_PAGE_ADD_BTN_ON_TAP');
+                                                                                                    if (functions.checkVariantFeatureCondition(productModelMMItem) == true) {
+                                                                                                      logFirebaseEvent('Button_bottom_sheet');
                                                                                                       await showModalBottomSheet(
                                                                                                         isScrollControlled: true,
                                                                                                         backgroundColor: Colors.transparent,
-                                                                                                        useSafeArea: true,
+                                                                                                        enableDrag: false,
                                                                                                         context: context,
                                                                                                         builder: (context) {
                                                                                                           return GestureDetector(
@@ -63719,394 +63499,697 @@ class _DailyCartScreenWidgetState extends State<DailyCartScreenWidget>
                                                                                                             ),
                                                                                                           );
                                                                                                         },
-                                                                                                      ).then((value) => safeSetState(() => _model.returnJson10 = value));
+                                                                                                      ).then((value) => safeSetState(() {}));
 
-                                                                                                      logFirebaseEvent('Row_refresh_database_request');
+                                                                                                      logFirebaseEvent('Button_refresh_database_request');
                                                                                                       safeSetState(() => _model.apiRequestCompleter = null);
                                                                                                       await _model.waitForApiRequestCompleted(maxWait: 5000);
+                                                                                                    } else {
+                                                                                                      logFirebaseEvent('Button_custom_action');
+                                                                                                      _model.networkCheck = await actions.checkInternetConnection();
+                                                                                                      if (_model.networkCheck == true) {
+                                                                                                        logFirebaseEvent('Button_haptic_feedback');
+                                                                                                        HapticFeedback.heavyImpact();
+                                                                                                        logFirebaseEvent('Button_backend_call');
+                                                                                                        _model.addtoCartMM = await QuickartGroup.addToCartCall.call(
+                                                                                                          userid: FFAppState().userID,
+                                                                                                          qty: '1',
+                                                                                                          storeid: getJsonField(
+                                                                                                            FFAppState().zoneInfo,
+                                                                                                            r'''$.store_id''',
+                                                                                                          ).toString(),
+                                                                                                          varientid: getJsonField(
+                                                                                                            productModelMMItem,
+                                                                                                            r'''$.varient_id''',
+                                                                                                          ).toString(),
+                                                                                                          deviceid: FFAppState().deviceID,
+                                                                                                          itemPrice: getJsonField(
+                                                                                                            productModelMMItem,
+                                                                                                            r'''$.price''',
+                                                                                                          ).toString(),
+                                                                                                          itemName: getJsonField(
+                                                                                                            productModelMMItem,
+                                                                                                            r'''$.product_name''',
+                                                                                                          ).toString(),
+                                                                                                          platform: isiOS ? 'ios' : 'android',
+                                                                                                        );
 
-                                                                                                      safeSetState(() {});
-                                                                                                    },
-                                                                                                    child: Row(
-                                                                                                      mainAxisSize: MainAxisSize.max,
-                                                                                                      mainAxisAlignment: MainAxisAlignment.end,
-                                                                                                      children: [
-                                                                                                        if ((getJsonField(
+                                                                                                        if ((_model.addtoCartMM?.succeeded ?? true)) {
+                                                                                                          logFirebaseEvent('Button_update_app_state');
+                                                                                                          FFAppState().isCartShow = false;
+                                                                                                          FFAppState().cartTotalCount = QuickartGroup.addToCartCall.totalItems(
+                                                                                                            (_model.addtoCartMM?.jsonBody ?? ''),
+                                                                                                          )!;
+                                                                                                          FFAppState().cartSavingPrice = functions.stringToDouble(QuickartGroup.addToCartCall
+                                                                                                              .savingPrice(
+                                                                                                                (_model.addtoCartMM?.jsonBody ?? ''),
+                                                                                                              )!
+                                                                                                              .toString());
+                                                                                                          FFAppState().cartTotalPrice = functions.stringToDouble(QuickartGroup.addToCartCall
+                                                                                                              .totalPrice(
+                                                                                                                (_model.addtoCartMM?.jsonBody ?? ''),
+                                                                                                              )!
+                                                                                                              .toString());
+                                                                                                          FFAppState().selectedDeliveryTimeSlot = '';
+                                                                                                          FFAppState().update(() {});
+                                                                                                          logFirebaseEvent('Button_refresh_database_request');
+                                                                                                          safeSetState(() => _model.apiRequestCompleter = null);
+                                                                                                          await _model.waitForApiRequestCompleted();
+                                                                                                          logFirebaseEvent('Button_custom_action');
+                                                                                                          await actions.facebookEventClass(
+                                                                                                            getJsonField(
                                                                                                               productModelMMItem,
-                                                                                                              r'''$.varients''',
-                                                                                                            ).toList().map<ProductCountStruct?>(ProductCountStruct.maybeFromMap).toList() as Iterable<ProductCountStruct?>)
-                                                                                                                .withoutNulls
-                                                                                                                .length >=
-                                                                                                            2)
-                                                                                                          Align(
-                                                                                                            alignment: AlignmentDirectional(-1.0, 0.0),
-                                                                                                            child: Padding(
-                                                                                                              padding: EdgeInsetsDirectional.fromSTEB(1.0, 0.0, 0.0, 0.0),
-                                                                                                              child: Text(
-                                                                                                                '${(getJsonField(
-                                                                                                                  productModelMMItem,
-                                                                                                                  r'''$.varients''',
-                                                                                                                ).toList().map<ProductCountStruct?>(ProductCountStruct.maybeFromMap).toList() as Iterable<ProductCountStruct?>).withoutNulls.length.toString()} options',
-                                                                                                                textAlign: TextAlign.start,
-                                                                                                                style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                                                      font: GoogleFonts.montserrat(
-                                                                                                                        fontWeight: FontWeight.bold,
-                                                                                                                        fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                                                                                                                      ),
-                                                                                                                      color: FFAppConstants.indigoColor,
-                                                                                                                      fontSize: 10.0,
-                                                                                                                      letterSpacing: 0.0,
-                                                                                                                      fontWeight: FontWeight.bold,
-                                                                                                                      fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                                                                                                                    ),
+                                                                                                              r'''$.varient_id''',
+                                                                                                            ).toString(),
+                                                                                                            getJsonField(
+                                                                                                              productModelMMItem,
+                                                                                                              r'''$.product_name''',
+                                                                                                            ).toString(),
+                                                                                                            'product',
+                                                                                                            getJsonField(
+                                                                                                              productModelMMItem,
+                                                                                                              r'''$.price''',
+                                                                                                            ),
+                                                                                                            1,
+                                                                                                            getJsonField(
+                                                                                                              productModelMMItem,
+                                                                                                              r'''$.mrp''',
+                                                                                                            ),
+                                                                                                            'add',
+                                                                                                            FFAppState().emptyJson,
+                                                                                                            'emptyjons',
+                                                                                                            ' ',
+                                                                                                            ' ',
+                                                                                                            ' ',
+                                                                                                            ' ',
+                                                                                                          );
+                                                                                                          logFirebaseEvent('Button_google_analytics_event');
+                                                                                                          logFirebaseEvent(
+                                                                                                            'Add To Cart',
+                                                                                                            parameters: {
+                                                                                                              'API Name': 'Add To Cart',
+                                                                                                            },
+                                                                                                          );
+                                                                                                        } else {
+                                                                                                          logFirebaseEvent('Button_show_snack_bar');
+                                                                                                          ScaffoldMessenger.of(context).showSnackBar(
+                                                                                                            SnackBar(
+                                                                                                              content: Text(
+                                                                                                                QuickartGroup.addToCartCall.message(
+                                                                                                                  (_model.addtoCartMM?.jsonBody ?? ''),
+                                                                                                                )!,
+                                                                                                                style: GoogleFonts.montserrat(
+                                                                                                                  color: FFAppConstants.indigoColor,
+                                                                                                                  fontWeight: FontWeight.w500,
+                                                                                                                  fontSize: 15.0,
+                                                                                                                ),
+                                                                                                              ),
+                                                                                                              duration: Duration(milliseconds: 1500),
+                                                                                                              backgroundColor: FFAppConstants.primaryPurpleE4D8F5,
+                                                                                                            ),
+                                                                                                          );
+                                                                                                        }
+                                                                                                      } else {
+                                                                                                        logFirebaseEvent('Button_show_snack_bar');
+                                                                                                        ScaffoldMessenger.of(context).showSnackBar(
+                                                                                                          SnackBar(
+                                                                                                            content: Text(
+                                                                                                              FFAppConstants.internetString,
+                                                                                                              style: GoogleFonts.montserrat(
+                                                                                                                color: FFAppConstants.blackColor0A0A0A,
+                                                                                                                fontSize: 12.0,
                                                                                                               ),
                                                                                                             ),
+                                                                                                            duration: Duration(milliseconds: 4000),
+                                                                                                            backgroundColor: FFAppConstants.NeutralBlack50Color,
                                                                                                           ),
+                                                                                                        );
+                                                                                                      }
+                                                                                                    }
+
+                                                                                                    safeSetState(() {});
+                                                                                                  },
+                                                                                                  text: 'ADD',
+                                                                                                  options: FFButtonOptions(
+                                                                                                    width: 50.0,
+                                                                                                    height: 25.0,
+                                                                                                    padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                                                                                                    iconPadding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                                                                                                    color: FFAppConstants.calculatorColor,
+                                                                                                    textStyle: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                                          font: GoogleFonts.montserrat(
+                                                                                                            fontWeight: FontWeight.w600,
+                                                                                                            fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                                                          ),
+                                                                                                          color: FFAppConstants.whiteColor,
+                                                                                                          fontSize: 12.0,
+                                                                                                          letterSpacing: 0.0,
+                                                                                                          fontWeight: FontWeight.w600,
+                                                                                                          fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                                                        ),
+                                                                                                    elevation: 0.0,
+                                                                                                    borderSide: BorderSide(
+                                                                                                      color: Colors.transparent,
+                                                                                                    ),
+                                                                                                    borderRadius: BorderRadius.circular(8.0),
+                                                                                                  ),
+                                                                                                ),
+                                                                                              ),
+                                                                                            ),
+                                                                                        ],
+                                                                                      ),
+                                                                                    ),
+                                                                                    if (functions.checkVariantsWithStock(getJsonField(
+                                                                                          productModelMMItem,
+                                                                                          r'''$.varients''',
+                                                                                        )) ==
+                                                                                        true)
+                                                                                      Align(
+                                                                                        alignment: AlignmentDirectional(-1.0, 0.0),
+                                                                                        child: Container(
+                                                                                          decoration: BoxDecoration(),
+                                                                                          child: Column(
+                                                                                            mainAxisSize: MainAxisSize.max,
+                                                                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                                                                            children: [
+                                                                                              Padding(
+                                                                                                padding: EdgeInsetsDirectional.fromSTEB(5.0, 4.0, 5.0, 0.0),
+                                                                                                child: Text(
+                                                                                                  getJsonField(
+                                                                                                    productModelMMItem,
+                                                                                                    r'''$.product_name''',
+                                                                                                  ).toString().maybeHandleOverflow(
+                                                                                                        maxChars: 60,
+                                                                                                        replacement: '…',
+                                                                                                      ),
+                                                                                                  textAlign: TextAlign.start,
+                                                                                                  maxLines: 2,
+                                                                                                  style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                                        font: GoogleFonts.montserrat(
+                                                                                                          fontWeight: FontWeight.w600,
+                                                                                                          fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                                                        ),
+                                                                                                        color: FFAppConstants.blackColor0A0A0A,
+                                                                                                        fontSize: 13.0,
+                                                                                                        letterSpacing: 0.0,
+                                                                                                        fontWeight: FontWeight.w600,
+                                                                                                        fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                                                      ),
+                                                                                                ),
+                                                                                              ),
+                                                                                              Row(
+                                                                                                mainAxisSize: MainAxisSize.max,
+                                                                                                children: [
+                                                                                                  Padding(
+                                                                                                    padding: EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 5.0, 0.0),
+                                                                                                    child: Row(
+                                                                                                      mainAxisSize: MainAxisSize.max,
+                                                                                                      children: [
                                                                                                         Padding(
-                                                                                                          padding: EdgeInsetsDirectional.fromSTEB(1.0, 0.0, 0.0, 0.0),
-                                                                                                          child: Icon(
-                                                                                                            Icons.keyboard_arrow_down,
-                                                                                                            color: FFAppConstants.indigoColor,
-                                                                                                            size: 24.0,
+                                                                                                          padding: EdgeInsetsDirectional.fromSTEB(0.0, 2.0, 3.0, 0.0),
+                                                                                                          child: Text(
+                                                                                                            getJsonField(
+                                                                                                              productModelMMItem,
+                                                                                                              r'''$.quantity''',
+                                                                                                            ).toString(),
+                                                                                                            textAlign: TextAlign.start,
+                                                                                                            style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                                                  font: GoogleFonts.montserrat(
+                                                                                                                    fontWeight: FontWeight.w600,
+                                                                                                                    fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                                                                  ),
+                                                                                                                  color: FFAppConstants.lightBlack7a7a7a,
+                                                                                                                  fontSize: 10.0,
+                                                                                                                  letterSpacing: 0.0,
+                                                                                                                  fontWeight: FontWeight.w600,
+                                                                                                                  fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                                                                ),
+                                                                                                          ),
+                                                                                                        ),
+                                                                                                        Padding(
+                                                                                                          padding: EdgeInsetsDirectional.fromSTEB(0.0, 2.0, 0.0, 0.0),
+                                                                                                          child: Text(
+                                                                                                            getJsonField(
+                                                                                                              productModelMMItem,
+                                                                                                              r'''$.unit''',
+                                                                                                            ).toString(),
+                                                                                                            textAlign: TextAlign.start,
+                                                                                                            style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                                                  font: GoogleFonts.montserrat(
+                                                                                                                    fontWeight: FontWeight.w600,
+                                                                                                                    fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                                                                  ),
+                                                                                                                  color: FFAppConstants.lightBlack7a7a7a,
+                                                                                                                  fontSize: 10.0,
+                                                                                                                  letterSpacing: 0.0,
+                                                                                                                  fontWeight: FontWeight.w600,
+                                                                                                                  fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                                                                ),
                                                                                                           ),
                                                                                                         ),
                                                                                                       ],
                                                                                                     ),
                                                                                                   ),
-                                                                                              ],
-                                                                                            ),
-                                                                                            Padding(
-                                                                                              padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 2.0),
-                                                                                              child: Container(
-                                                                                                decoration: BoxDecoration(),
-                                                                                                child: Column(
-                                                                                                  mainAxisSize: MainAxisSize.max,
-                                                                                                  mainAxisAlignment: MainAxisAlignment.center,
-                                                                                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                                                                                  children: [
-                                                                                                    Padding(
-                                                                                                      padding: EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
+                                                                                                  if ((getJsonField(
+                                                                                                        productModelMMItem,
+                                                                                                        r'''$.varients''',
+                                                                                                      ).toList().map<ProductCountStruct?>(ProductCountStruct.maybeFromMap).toList() as Iterable<ProductCountStruct?>)
+                                                                                                          .withoutNulls
+                                                                                                          .length >=
+                                                                                                      2)
+                                                                                                    InkWell(
+                                                                                                      splashColor: Colors.transparent,
+                                                                                                      focusColor: Colors.transparent,
+                                                                                                      hoverColor: Colors.transparent,
+                                                                                                      highlightColor: Colors.transparent,
+                                                                                                      onTap: () async {
+                                                                                                        logFirebaseEvent('DAILY_CART_SCREEN_Row_1udpejh3_ON_TAP');
+                                                                                                        logFirebaseEvent('Row_bottom_sheet');
+                                                                                                        await showModalBottomSheet(
+                                                                                                          isScrollControlled: true,
+                                                                                                          backgroundColor: Colors.transparent,
+                                                                                                          useSafeArea: true,
+                                                                                                          context: context,
+                                                                                                          builder: (context) {
+                                                                                                            return GestureDetector(
+                                                                                                              onTap: () {
+                                                                                                                FocusScope.of(context).unfocus();
+                                                                                                                FocusManager.instance.primaryFocus?.unfocus();
+                                                                                                              },
+                                                                                                              child: Padding(
+                                                                                                                padding: MediaQuery.viewInsetsOf(context),
+                                                                                                                child: VarientBotttomSheetWidget(
+                                                                                                                  productModel: productModelMMItem,
+                                                                                                                  cartType: 'daily',
+                                                                                                                ),
+                                                                                                              ),
+                                                                                                            );
+                                                                                                          },
+                                                                                                        ).then((value) => safeSetState(() => _model.returnJson10 = value));
+
+                                                                                                        logFirebaseEvent('Row_refresh_database_request');
+                                                                                                        safeSetState(() => _model.apiRequestCompleter = null);
+                                                                                                        await _model.waitForApiRequestCompleted(maxWait: 5000);
+
+                                                                                                        safeSetState(() {});
+                                                                                                      },
                                                                                                       child: Row(
                                                                                                         mainAxisSize: MainAxisSize.max,
-                                                                                                        mainAxisAlignment: MainAxisAlignment.start,
+                                                                                                        mainAxisAlignment: MainAxisAlignment.end,
                                                                                                         children: [
-                                                                                                          Align(
-                                                                                                            alignment: AlignmentDirectional(-0.79, -0.97),
-                                                                                                            child: Padding(
-                                                                                                              padding: EdgeInsetsDirectional.fromSTEB(5.0, 3.0, 5.0, 0.0),
-                                                                                                              child: RichText(
-                                                                                                                textScaler: MediaQuery.of(context).textScaler,
-                                                                                                                text: TextSpan(
-                                                                                                                  children: [
-                                                                                                                    TextSpan(
-                                                                                                                      text: 'AED ',
-                                                                                                                      style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                                                            font: GoogleFonts.montserrat(
-                                                                                                                              fontWeight: FontWeight.w600,
-                                                                                                                              fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                                                                                                                            ),
-                                                                                                                            color: FFAppConstants.blackColor0A0A0A,
-                                                                                                                            fontSize: 12.0,
-                                                                                                                            letterSpacing: 0.0,
-                                                                                                                            fontWeight: FontWeight.w600,
-                                                                                                                            fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                                                                                                                          ),
-                                                                                                                    ),
-                                                                                                                    TextSpan(
-                                                                                                                      text: valueOrDefault<String>(
-                                                                                                                        functions.setDecimalValue(getJsonField(
-                                                                                                                          productModelMMItem,
-                                                                                                                          r'''$.price''',
-                                                                                                                        ).toString()),
-                                                                                                                        '0',
-                                                                                                                      ),
-                                                                                                                      style: GoogleFonts.montserrat(
-                                                                                                                        color: FFAppConstants.blackColor0A0A0A,
-                                                                                                                        fontWeight: FontWeight.w600,
-                                                                                                                        fontSize: 12.0,
-                                                                                                                      ),
-                                                                                                                    )
-                                                                                                                  ],
+                                                                                                          if ((getJsonField(
+                                                                                                                productModelMMItem,
+                                                                                                                r'''$.varients''',
+                                                                                                              ).toList().map<ProductCountStruct?>(ProductCountStruct.maybeFromMap).toList() as Iterable<ProductCountStruct?>)
+                                                                                                                  .withoutNulls
+                                                                                                                  .length >=
+                                                                                                              2)
+                                                                                                            Align(
+                                                                                                              alignment: AlignmentDirectional(-1.0, 0.0),
+                                                                                                              child: Padding(
+                                                                                                                padding: EdgeInsetsDirectional.fromSTEB(1.0, 0.0, 0.0, 0.0),
+                                                                                                                child: Text(
+                                                                                                                  '${(getJsonField(
+                                                                                                                    productModelMMItem,
+                                                                                                                    r'''$.varients''',
+                                                                                                                  ).toList().map<ProductCountStruct?>(ProductCountStruct.maybeFromMap).toList() as Iterable<ProductCountStruct?>).withoutNulls.length.toString()} options',
+                                                                                                                  textAlign: TextAlign.start,
                                                                                                                   style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                                                        font: GoogleFonts.readexPro(
-                                                                                                                          fontWeight: FontWeight.w600,
+                                                                                                                        font: GoogleFonts.montserrat(
+                                                                                                                          fontWeight: FontWeight.bold,
                                                                                                                           fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
                                                                                                                         ),
-                                                                                                                        color: Color(0xFF0A0A0A),
-                                                                                                                        fontSize: 13.0,
+                                                                                                                        color: FFAppConstants.indigoColor,
+                                                                                                                        fontSize: 10.0,
                                                                                                                         letterSpacing: 0.0,
-                                                                                                                        fontWeight: FontWeight.w600,
+                                                                                                                        fontWeight: FontWeight.bold,
                                                                                                                         fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
                                                                                                                       ),
                                                                                                                 ),
                                                                                                               ),
                                                                                                             ),
-                                                                                                          ),
                                                                                                           Padding(
-                                                                                                            padding: EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 0.0, 0.0),
-                                                                                                            child: Builder(
-                                                                                                              builder: (context) {
-                                                                                                                if (getJsonField(
-                                                                                                                      productModelMMItem,
-                                                                                                                      r'''$.price''',
-                                                                                                                    ) !=
-                                                                                                                    getJsonField(
-                                                                                                                      productModelMMItem,
-                                                                                                                      r'''$.mrp''',
-                                                                                                                    )) {
-                                                                                                                  return Row(
-                                                                                                                    mainAxisSize: MainAxisSize.max,
-                                                                                                                    children: [
-                                                                                                                      Text(
-                                                                                                                        'AED ',
-                                                                                                                        textAlign: TextAlign.start,
-                                                                                                                        style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                                                              font: GoogleFonts.montserrat(
-                                                                                                                                fontWeight: FontWeight.w600,
-                                                                                                                                fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                                                                                                                              ),
-                                                                                                                              color: FFAppConstants.lightBlack7a7a7a,
-                                                                                                                              fontSize: 10.0,
-                                                                                                                              letterSpacing: 0.0,
-                                                                                                                              fontWeight: FontWeight.w600,
-                                                                                                                              fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                                                                                                                              decoration: TextDecoration.lineThrough,
-                                                                                                                            ),
-                                                                                                                      ),
-                                                                                                                      Text(
-                                                                                                                        functions.setDecimalValue(getJsonField(
-                                                                                                                          productModelMMItem,
-                                                                                                                          r'''$.mrp''',
-                                                                                                                        ).toString())!,
-                                                                                                                        textAlign: TextAlign.start,
-                                                                                                                        style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                                                              font: GoogleFonts.montserrat(
-                                                                                                                                fontWeight: FontWeight.w600,
-                                                                                                                                fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                                                                                                                              ),
-                                                                                                                              color: FFAppConstants.lightBlack7a7a7a,
-                                                                                                                              fontSize: 10.0,
-                                                                                                                              letterSpacing: 0.0,
-                                                                                                                              fontWeight: FontWeight.w600,
-                                                                                                                              fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                                                                                                                              decoration: TextDecoration.lineThrough,
-                                                                                                                            ),
-                                                                                                                      ),
-                                                                                                                    ],
-                                                                                                                  );
-                                                                                                                } else {
-                                                                                                                  return Text(
-                                                                                                                    ' ',
-                                                                                                                    style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                                                          font: GoogleFonts.readexPro(
-                                                                                                                            fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
-                                                                                                                            fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                                                                                                                          ),
-                                                                                                                          fontSize: 15.0,
-                                                                                                                          letterSpacing: 0.0,
-                                                                                                                          fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
-                                                                                                                          fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                                                                                                                        ),
-                                                                                                                  );
-                                                                                                                }
-                                                                                                              },
+                                                                                                            padding: EdgeInsetsDirectional.fromSTEB(1.0, 0.0, 0.0, 0.0),
+                                                                                                            child: Icon(
+                                                                                                              Icons.keyboard_arrow_down,
+                                                                                                              color: FFAppConstants.indigoColor,
+                                                                                                              size: 24.0,
                                                                                                             ),
                                                                                                           ),
                                                                                                         ],
                                                                                                       ),
                                                                                                     ),
-                                                                                                  ],
+                                                                                                ],
+                                                                                              ),
+                                                                                              Padding(
+                                                                                                padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 2.0),
+                                                                                                child: Container(
+                                                                                                  decoration: BoxDecoration(),
+                                                                                                  child: Column(
+                                                                                                    mainAxisSize: MainAxisSize.max,
+                                                                                                    mainAxisAlignment: MainAxisAlignment.center,
+                                                                                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                                                                                    children: [
+                                                                                                      Padding(
+                                                                                                        padding: EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
+                                                                                                        child: Row(
+                                                                                                          mainAxisSize: MainAxisSize.max,
+                                                                                                          mainAxisAlignment: MainAxisAlignment.start,
+                                                                                                          children: [
+                                                                                                            Align(
+                                                                                                              alignment: AlignmentDirectional(-0.79, -0.97),
+                                                                                                              child: Padding(
+                                                                                                                padding: EdgeInsetsDirectional.fromSTEB(5.0, 3.0, 5.0, 0.0),
+                                                                                                                child: RichText(
+                                                                                                                  textScaler: MediaQuery.of(context).textScaler,
+                                                                                                                  text: TextSpan(
+                                                                                                                    children: [
+                                                                                                                      TextSpan(
+                                                                                                                        text: 'AED ',
+                                                                                                                        style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                                                              font: GoogleFonts.montserrat(
+                                                                                                                                fontWeight: FontWeight.w600,
+                                                                                                                                fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                                                                              ),
+                                                                                                                              color: FFAppConstants.blackColor0A0A0A,
+                                                                                                                              fontSize: 12.0,
+                                                                                                                              letterSpacing: 0.0,
+                                                                                                                              fontWeight: FontWeight.w600,
+                                                                                                                              fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                                                                            ),
+                                                                                                                      ),
+                                                                                                                      TextSpan(
+                                                                                                                        text: valueOrDefault<String>(
+                                                                                                                          functions.setDecimalValue(getJsonField(
+                                                                                                                            productModelMMItem,
+                                                                                                                            r'''$.price''',
+                                                                                                                          ).toString()),
+                                                                                                                          '0',
+                                                                                                                        ),
+                                                                                                                        style: GoogleFonts.montserrat(
+                                                                                                                          color: FFAppConstants.blackColor0A0A0A,
+                                                                                                                          fontWeight: FontWeight.w600,
+                                                                                                                          fontSize: 12.0,
+                                                                                                                        ),
+                                                                                                                      )
+                                                                                                                    ],
+                                                                                                                    style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                                                          font: GoogleFonts.readexPro(
+                                                                                                                            fontWeight: FontWeight.w600,
+                                                                                                                            fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                                                                          ),
+                                                                                                                          color: Color(0xFF0A0A0A),
+                                                                                                                          fontSize: 13.0,
+                                                                                                                          letterSpacing: 0.0,
+                                                                                                                          fontWeight: FontWeight.w600,
+                                                                                                                          fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                                                                        ),
+                                                                                                                  ),
+                                                                                                                ),
+                                                                                                              ),
+                                                                                                            ),
+                                                                                                            Padding(
+                                                                                                              padding: EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 0.0, 0.0),
+                                                                                                              child: Builder(
+                                                                                                                builder: (context) {
+                                                                                                                  if (getJsonField(
+                                                                                                                        productModelMMItem,
+                                                                                                                        r'''$.price''',
+                                                                                                                      ) !=
+                                                                                                                      getJsonField(
+                                                                                                                        productModelMMItem,
+                                                                                                                        r'''$.mrp''',
+                                                                                                                      )) {
+                                                                                                                    return Row(
+                                                                                                                      mainAxisSize: MainAxisSize.max,
+                                                                                                                      children: [
+                                                                                                                        Text(
+                                                                                                                          'AED ',
+                                                                                                                          textAlign: TextAlign.start,
+                                                                                                                          style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                                                                font: GoogleFonts.montserrat(
+                                                                                                                                  fontWeight: FontWeight.w600,
+                                                                                                                                  fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                                                                                ),
+                                                                                                                                color: FFAppConstants.lightBlack7a7a7a,
+                                                                                                                                fontSize: 10.0,
+                                                                                                                                letterSpacing: 0.0,
+                                                                                                                                fontWeight: FontWeight.w600,
+                                                                                                                                fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                                                                                decoration: TextDecoration.lineThrough,
+                                                                                                                              ),
+                                                                                                                        ),
+                                                                                                                        Text(
+                                                                                                                          functions.setDecimalValue(getJsonField(
+                                                                                                                            productModelMMItem,
+                                                                                                                            r'''$.mrp''',
+                                                                                                                          ).toString())!,
+                                                                                                                          textAlign: TextAlign.start,
+                                                                                                                          style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                                                                font: GoogleFonts.montserrat(
+                                                                                                                                  fontWeight: FontWeight.w600,
+                                                                                                                                  fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                                                                                ),
+                                                                                                                                color: FFAppConstants.lightBlack7a7a7a,
+                                                                                                                                fontSize: 10.0,
+                                                                                                                                letterSpacing: 0.0,
+                                                                                                                                fontWeight: FontWeight.w600,
+                                                                                                                                fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                                                                                decoration: TextDecoration.lineThrough,
+                                                                                                                              ),
+                                                                                                                        ),
+                                                                                                                      ],
+                                                                                                                    );
+                                                                                                                  } else {
+                                                                                                                    return Text(
+                                                                                                                      ' ',
+                                                                                                                      style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                                                            font: GoogleFonts.readexPro(
+                                                                                                                              fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
+                                                                                                                              fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                                                                            ),
+                                                                                                                            fontSize: 15.0,
+                                                                                                                            letterSpacing: 0.0,
+                                                                                                                            fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
+                                                                                                                            fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                                                                          ),
+                                                                                                                    );
+                                                                                                                  }
+                                                                                                                },
+                                                                                                              ),
+                                                                                                            ),
+                                                                                                          ],
+                                                                                                        ),
+                                                                                                      ),
+                                                                                                    ],
+                                                                                                  ),
                                                                                                 ),
                                                                                               ),
-                                                                                            ),
-                                                                                          ],
+                                                                                            ],
+                                                                                          ),
                                                                                         ),
                                                                                       ),
-                                                                                    ),
-                                                                                ],
-                                                                              ),
-                                                                              Align(
-                                                                                alignment: AlignmentDirectional(1.0, -1.0),
-                                                                                child: Builder(
-                                                                                  builder: (context) {
-                                                                                    if (FFAppConstants.isFavourite ==
-                                                                                        getJsonField(
-                                                                                          productModelMMItem,
-                                                                                          r'''$.isFavourite''',
-                                                                                        ).toString()) {
-                                                                                      return Container(
-                                                                                        width: 30.0,
-                                                                                        height: 30.0,
-                                                                                        decoration: BoxDecoration(
-                                                                                          color: Color(0xFFF4F6F4),
-                                                                                          borderRadius: BorderRadius.only(
-                                                                                            topRight: Radius.circular(8.0),
-                                                                                            bottomLeft: Radius.circular(8.0),
+                                                                                  ],
+                                                                                ),
+                                                                                Align(
+                                                                                  alignment: AlignmentDirectional(1.0, -1.0),
+                                                                                  child: Builder(
+                                                                                    builder: (context) {
+                                                                                      if (FFAppConstants.isFavourite ==
+                                                                                          getJsonField(
+                                                                                            productModelMMItem,
+                                                                                            r'''$.isFavourite''',
+                                                                                          ).toString()) {
+                                                                                        return Container(
+                                                                                          width: 30.0,
+                                                                                          height: 30.0,
+                                                                                          decoration: BoxDecoration(
+                                                                                            color: Color(0xFFF4F6F4),
+                                                                                            borderRadius: BorderRadius.only(
+                                                                                              topRight: Radius.circular(8.0),
+                                                                                              bottomLeft: Radius.circular(8.0),
+                                                                                            ),
+                                                                                            border: Border.all(
+                                                                                              color: Color(0xFFDCE9D8),
+                                                                                              width: 1.0,
+                                                                                            ),
                                                                                           ),
-                                                                                          border: Border.all(
-                                                                                            color: Color(0xFFDCE9D8),
-                                                                                            width: 1.0,
-                                                                                          ),
-                                                                                        ),
-                                                                                        child: InkWell(
-                                                                                          splashColor: Colors.transparent,
-                                                                                          focusColor: Colors.transparent,
-                                                                                          hoverColor: Colors.transparent,
-                                                                                          highlightColor: Colors.transparent,
-                                                                                          onTap: () async {
-                                                                                            logFirebaseEvent('DAILY_CART_SCREEN_PAGE_Icon1_ON_TAP');
-                                                                                            logFirebaseEvent('Icon1_custom_action');
-                                                                                            _model.connectivityResult = await actions.checkInternetConnection();
-                                                                                            if (_model.connectivityResult == true) {
-                                                                                              logFirebaseEvent('Icon1_backend_call');
-                                                                                              _model.addRemoveAPIResponse = await QuickartGroup.addremwishlistCall.call(
-                                                                                                userid: FFAppState().userID,
-                                                                                                storeID: getJsonField(
-                                                                                                  FFAppState().zoneInfo,
-                                                                                                  r'''$.store_id''',
-                                                                                                ).toString(),
-                                                                                                varientID: getJsonField(
-                                                                                                  productModelMMItem,
-                                                                                                  r'''$.varient_id''',
-                                                                                                ).toString(),
-                                                                                                deviceid: FFAppState().deviceID,
-                                                                                                platform: isiOS ? 'ios' : 'android',
-                                                                                              );
-
-                                                                                              logFirebaseEvent('Icon1_haptic_feedback');
-                                                                                              HapticFeedback.mediumImpact();
-                                                                                              if ((_model.addRemoveAPIResponse?.succeeded ?? true)) {
-                                                                                                logFirebaseEvent('Icon1_update_app_state');
-
-                                                                                                FFAppState().update(() {});
-                                                                                                logFirebaseEvent('Icon1_refresh_database_request');
-                                                                                                safeSetState(() => _model.apiRequestCompleter = null);
-                                                                                                await _model.waitForApiRequestCompleted();
-                                                                                                logFirebaseEvent('Icon1_google_analytics_event');
-                                                                                                logFirebaseEvent(
-                                                                                                  'Remove From Wishlist',
-                                                                                                  parameters: {
-                                                                                                    'API Name': 'Add Remove Wishlist',
-                                                                                                  },
+                                                                                          child: InkWell(
+                                                                                            splashColor: Colors.transparent,
+                                                                                            focusColor: Colors.transparent,
+                                                                                            hoverColor: Colors.transparent,
+                                                                                            highlightColor: Colors.transparent,
+                                                                                            onTap: () async {
+                                                                                              logFirebaseEvent('DAILY_CART_SCREEN_PAGE_Icon1_ON_TAP');
+                                                                                              logFirebaseEvent('Icon1_custom_action');
+                                                                                              _model.connectivityResult = await actions.checkInternetConnection();
+                                                                                              if (_model.connectivityResult == true) {
+                                                                                                logFirebaseEvent('Icon1_backend_call');
+                                                                                                _model.addRemoveAPIResponse = await QuickartGroup.addremwishlistCall.call(
+                                                                                                  userid: FFAppState().userID,
+                                                                                                  storeID: getJsonField(
+                                                                                                    FFAppState().zoneInfo,
+                                                                                                    r'''$.store_id''',
+                                                                                                  ).toString(),
+                                                                                                  varientID: getJsonField(
+                                                                                                    productModelMMItem,
+                                                                                                    r'''$.varient_id''',
+                                                                                                  ).toString(),
+                                                                                                  deviceid: FFAppState().deviceID,
+                                                                                                  platform: isiOS ? 'ios' : 'android',
                                                                                                 );
+
+                                                                                                logFirebaseEvent('Icon1_haptic_feedback');
+                                                                                                HapticFeedback.mediumImpact();
+                                                                                                if ((_model.addRemoveAPIResponse?.succeeded ?? true)) {
+                                                                                                  logFirebaseEvent('Icon1_update_app_state');
+
+                                                                                                  FFAppState().update(() {});
+                                                                                                  logFirebaseEvent('Icon1_refresh_database_request');
+                                                                                                  safeSetState(() => _model.apiRequestCompleter = null);
+                                                                                                  await _model.waitForApiRequestCompleted();
+                                                                                                  logFirebaseEvent('Icon1_google_analytics_event');
+                                                                                                  logFirebaseEvent(
+                                                                                                    'Remove From Wishlist',
+                                                                                                    parameters: {
+                                                                                                      'API Name': 'Add Remove Wishlist',
+                                                                                                    },
+                                                                                                  );
+                                                                                                } else {
+                                                                                                  logFirebaseEvent('Icon1_show_snack_bar');
+                                                                                                  ScaffoldMessenger.of(context).showSnackBar(
+                                                                                                    SnackBar(
+                                                                                                      content: Text(
+                                                                                                        getJsonField(
+                                                                                                          (_model.addRemoveAPIResponse?.jsonBody ?? ''),
+                                                                                                          r'''$.message''',
+                                                                                                        ).toString(),
+                                                                                                        style: GoogleFonts.montserrat(
+                                                                                                          color: FFAppConstants.indigoColor,
+                                                                                                          fontWeight: FontWeight.w500,
+                                                                                                          fontSize: 12.0,
+                                                                                                        ),
+                                                                                                        textAlign: TextAlign.start,
+                                                                                                      ),
+                                                                                                      duration: Duration(milliseconds: 1000),
+                                                                                                      backgroundColor: FFAppConstants.primaryPurpleE4D8F5,
+                                                                                                    ),
+                                                                                                  );
+                                                                                                }
                                                                                               } else {
                                                                                                 logFirebaseEvent('Icon1_show_snack_bar');
                                                                                                 ScaffoldMessenger.of(context).showSnackBar(
                                                                                                   SnackBar(
                                                                                                     content: Text(
-                                                                                                      getJsonField(
-                                                                                                        (_model.addRemoveAPIResponse?.jsonBody ?? ''),
-                                                                                                        r'''$.message''',
-                                                                                                      ).toString(),
+                                                                                                      FFAppConstants.internetString,
                                                                                                       style: GoogleFonts.montserrat(
                                                                                                         color: FFAppConstants.indigoColor,
                                                                                                         fontWeight: FontWeight.w500,
                                                                                                         fontSize: 12.0,
                                                                                                       ),
-                                                                                                      textAlign: TextAlign.start,
                                                                                                     ),
-                                                                                                    duration: Duration(milliseconds: 1000),
+                                                                                                    duration: Duration(milliseconds: 2000),
                                                                                                     backgroundColor: FFAppConstants.primaryPurpleE4D8F5,
                                                                                                   ),
                                                                                                 );
                                                                                               }
-                                                                                            } else {
-                                                                                              logFirebaseEvent('Icon1_show_snack_bar');
-                                                                                              ScaffoldMessenger.of(context).showSnackBar(
-                                                                                                SnackBar(
-                                                                                                  content: Text(
-                                                                                                    FFAppConstants.internetString,
-                                                                                                    style: GoogleFonts.montserrat(
-                                                                                                      color: FFAppConstants.indigoColor,
-                                                                                                      fontWeight: FontWeight.w500,
-                                                                                                      fontSize: 12.0,
-                                                                                                    ),
-                                                                                                  ),
-                                                                                                  duration: Duration(milliseconds: 2000),
-                                                                                                  backgroundColor: FFAppConstants.primaryPurpleE4D8F5,
-                                                                                                ),
-                                                                                              );
-                                                                                            }
 
-                                                                                            safeSetState(() {});
-                                                                                          },
-                                                                                          child: Icon(
-                                                                                            Icons.favorite_sharp,
-                                                                                            color: FlutterFlowTheme.of(context).error,
-                                                                                            size: 25.0,
-                                                                                          ),
-                                                                                        ),
-                                                                                      );
-                                                                                    } else {
-                                                                                      return Column(
-                                                                                        mainAxisSize: MainAxisSize.max,
-                                                                                        children: [
-                                                                                          Container(
-                                                                                            width: 30.0,
-                                                                                            height: 30.0,
-                                                                                            decoration: BoxDecoration(
-                                                                                              color: Color(0xFFF4F6F4),
-                                                                                              borderRadius: BorderRadius.only(
-                                                                                                topRight: Radius.circular(8.0),
-                                                                                                bottomLeft: Radius.circular(8.0),
-                                                                                              ),
-                                                                                              border: Border.all(
-                                                                                                color: Color(0xFFDCE9D8),
-                                                                                                width: 1.0,
-                                                                                              ),
+                                                                                              safeSetState(() {});
+                                                                                            },
+                                                                                            child: Icon(
+                                                                                              Icons.favorite_sharp,
+                                                                                              color: FlutterFlowTheme.of(context).error,
+                                                                                              size: 25.0,
                                                                                             ),
-                                                                                            child: InkWell(
-                                                                                              splashColor: Colors.transparent,
-                                                                                              focusColor: Colors.transparent,
-                                                                                              hoverColor: Colors.transparent,
-                                                                                              highlightColor: Colors.transparent,
-                                                                                              onTap: () async {
-                                                                                                logFirebaseEvent('DAILY_CART_SCREEN_PAGE_Icon2_ON_TAP');
-                                                                                                logFirebaseEvent('Icon2_custom_action');
-                                                                                                _model.connectivityResult1 = await actions.checkInternetConnection();
-                                                                                                if (_model.connectivityResult1 == true) {
-                                                                                                  logFirebaseEvent('Icon2_backend_call');
-                                                                                                  _model.addRemoveAPIResult = await QuickartGroup.addremwishlistCall.call(
-                                                                                                    userid: FFAppState().userID,
-                                                                                                    storeID: getJsonField(
-                                                                                                      FFAppState().zoneInfo,
-                                                                                                      r'''$.store_id''',
-                                                                                                    ).toString(),
-                                                                                                    varientID: getJsonField(
-                                                                                                      productModelMMItem,
-                                                                                                      r'''$.varient_id''',
-                                                                                                    ).toString(),
-                                                                                                    deviceid: FFAppState().deviceID,
-                                                                                                    platform: isiOS ? 'ios' : 'android',
-                                                                                                  );
-
-                                                                                                  logFirebaseEvent('Icon2_haptic_feedback');
-                                                                                                  HapticFeedback.mediumImpact();
-                                                                                                  if ((_model.addRemoveAPIResult?.succeeded ?? true)) {
-                                                                                                    logFirebaseEvent('Icon2_update_app_state');
-
-                                                                                                    FFAppState().update(() {});
-                                                                                                    logFirebaseEvent('Icon2_refresh_database_request');
-                                                                                                    safeSetState(() => _model.apiRequestCompleter = null);
-                                                                                                    await _model.waitForApiRequestCompleted();
-                                                                                                    logFirebaseEvent('Icon2_google_analytics_event');
-                                                                                                    logFirebaseEvent(
-                                                                                                      'Add To Wishlist',
-                                                                                                      parameters: {
-                                                                                                        'API Name': 'Add Remove Wishlist',
-                                                                                                      },
+                                                                                          ),
+                                                                                        );
+                                                                                      } else {
+                                                                                        return Column(
+                                                                                          mainAxisSize: MainAxisSize.max,
+                                                                                          children: [
+                                                                                            Container(
+                                                                                              width: 30.0,
+                                                                                              height: 30.0,
+                                                                                              decoration: BoxDecoration(
+                                                                                                color: Color(0xFFF4F6F4),
+                                                                                                borderRadius: BorderRadius.only(
+                                                                                                  topRight: Radius.circular(8.0),
+                                                                                                  bottomLeft: Radius.circular(8.0),
+                                                                                                ),
+                                                                                                border: Border.all(
+                                                                                                  color: Color(0xFFDCE9D8),
+                                                                                                  width: 1.0,
+                                                                                                ),
+                                                                                              ),
+                                                                                              child: InkWell(
+                                                                                                splashColor: Colors.transparent,
+                                                                                                focusColor: Colors.transparent,
+                                                                                                hoverColor: Colors.transparent,
+                                                                                                highlightColor: Colors.transparent,
+                                                                                                onTap: () async {
+                                                                                                  logFirebaseEvent('DAILY_CART_SCREEN_PAGE_Icon2_ON_TAP');
+                                                                                                  logFirebaseEvent('Icon2_custom_action');
+                                                                                                  _model.connectivityResult1 = await actions.checkInternetConnection();
+                                                                                                  if (_model.connectivityResult1 == true) {
+                                                                                                    logFirebaseEvent('Icon2_backend_call');
+                                                                                                    _model.addRemoveAPIResult = await QuickartGroup.addremwishlistCall.call(
+                                                                                                      userid: FFAppState().userID,
+                                                                                                      storeID: getJsonField(
+                                                                                                        FFAppState().zoneInfo,
+                                                                                                        r'''$.store_id''',
+                                                                                                      ).toString(),
+                                                                                                      varientID: getJsonField(
+                                                                                                        productModelMMItem,
+                                                                                                        r'''$.varient_id''',
+                                                                                                      ).toString(),
+                                                                                                      deviceid: FFAppState().deviceID,
+                                                                                                      platform: isiOS ? 'ios' : 'android',
                                                                                                     );
+
+                                                                                                    logFirebaseEvent('Icon2_haptic_feedback');
+                                                                                                    HapticFeedback.mediumImpact();
+                                                                                                    if ((_model.addRemoveAPIResult?.succeeded ?? true)) {
+                                                                                                      logFirebaseEvent('Icon2_update_app_state');
+
+                                                                                                      FFAppState().update(() {});
+                                                                                                      logFirebaseEvent('Icon2_refresh_database_request');
+                                                                                                      safeSetState(() => _model.apiRequestCompleter = null);
+                                                                                                      await _model.waitForApiRequestCompleted();
+                                                                                                      logFirebaseEvent('Icon2_google_analytics_event');
+                                                                                                      logFirebaseEvent(
+                                                                                                        'Add To Wishlist',
+                                                                                                        parameters: {
+                                                                                                          'API Name': 'Add Remove Wishlist',
+                                                                                                        },
+                                                                                                      );
+                                                                                                    } else {
+                                                                                                      logFirebaseEvent('Icon2_show_snack_bar');
+                                                                                                      ScaffoldMessenger.of(context).showSnackBar(
+                                                                                                        SnackBar(
+                                                                                                          content: Text(
+                                                                                                            getJsonField(
+                                                                                                              (_model.addRemoveAPIResult?.jsonBody ?? ''),
+                                                                                                              r'''$.message''',
+                                                                                                            ).toString(),
+                                                                                                            style: GoogleFonts.montserrat(
+                                                                                                              color: FFAppConstants.primaryPurpleE4D8F5,
+                                                                                                              fontWeight: FontWeight.w500,
+                                                                                                              fontSize: 12.0,
+                                                                                                            ),
+                                                                                                          ),
+                                                                                                          duration: Duration(milliseconds: 4000),
+                                                                                                          backgroundColor: FFAppConstants.NeutralBlack50Color,
+                                                                                                        ),
+                                                                                                      );
+                                                                                                    }
                                                                                                   } else {
                                                                                                     logFirebaseEvent('Icon2_show_snack_bar');
                                                                                                     ScaffoldMessenger.of(context).showSnackBar(
                                                                                                       SnackBar(
                                                                                                         content: Text(
-                                                                                                          getJsonField(
-                                                                                                            (_model.addRemoveAPIResult?.jsonBody ?? ''),
-                                                                                                            r'''$.message''',
-                                                                                                          ).toString(),
+                                                                                                          FFAppConstants.internetString,
                                                                                                           style: GoogleFonts.montserrat(
-                                                                                                            color: FFAppConstants.primaryPurpleE4D8F5,
+                                                                                                            color: FFAppConstants.indigoColor,
                                                                                                             fontWeight: FontWeight.w500,
                                                                                                             fontSize: 12.0,
                                                                                                           ),
@@ -64116,397 +64199,397 @@ class _DailyCartScreenWidgetState extends State<DailyCartScreenWidget>
                                                                                                       ),
                                                                                                     );
                                                                                                   }
-                                                                                                } else {
-                                                                                                  logFirebaseEvent('Icon2_show_snack_bar');
-                                                                                                  ScaffoldMessenger.of(context).showSnackBar(
-                                                                                                    SnackBar(
-                                                                                                      content: Text(
-                                                                                                        FFAppConstants.internetString,
-                                                                                                        style: GoogleFonts.montserrat(
-                                                                                                          color: FFAppConstants.indigoColor,
-                                                                                                          fontWeight: FontWeight.w500,
-                                                                                                          fontSize: 12.0,
-                                                                                                        ),
-                                                                                                      ),
-                                                                                                      duration: Duration(milliseconds: 4000),
-                                                                                                      backgroundColor: FFAppConstants.NeutralBlack50Color,
-                                                                                                    ),
-                                                                                                  );
-                                                                                                }
 
-                                                                                                safeSetState(() {});
-                                                                                              },
-                                                                                              child: Icon(
-                                                                                                Icons.favorite_border,
-                                                                                                color: FlutterFlowTheme.of(context).error,
-                                                                                                size: 25.0,
+                                                                                                  safeSetState(() {});
+                                                                                                },
+                                                                                                child: Icon(
+                                                                                                  Icons.favorite_border,
+                                                                                                  color: FlutterFlowTheme.of(context).error,
+                                                                                                  size: 25.0,
+                                                                                                ),
                                                                                               ),
                                                                                             ),
-                                                                                          ),
-                                                                                        ],
-                                                                                      );
-                                                                                    }
-                                                                                  },
-                                                                                ),
-                                                                              ),
-                                                                              Container(
-                                                                                height: 20.0,
-                                                                                decoration: BoxDecoration(
-                                                                                  borderRadius: BorderRadius.only(
-                                                                                    topLeft: Radius.circular(8.0),
-                                                                                    bottomRight: Radius.circular(8.0),
+                                                                                          ],
+                                                                                        );
+                                                                                      }
+                                                                                    },
                                                                                   ),
                                                                                 ),
-                                                                                child: Row(
-                                                                                  mainAxisSize: MainAxisSize.max,
-                                                                                  children: [
-                                                                                    Builder(
-                                                                                      builder: (context) {
-                                                                                        if (FFAppConstants.percentageCheck <
-                                                                                            getJsonField(
-                                                                                              productModelMMItem,
-                                                                                              r'''$.discountper''',
-                                                                                            )) {
-                                                                                          return Container(
-                                                                                            height: 20.0,
-                                                                                            decoration: BoxDecoration(
-                                                                                              color: FFAppConstants.green44AC20,
-                                                                                              borderRadius: BorderRadius.only(
-                                                                                                topLeft: Radius.circular(8.0),
+                                                                                Container(
+                                                                                  height: 20.0,
+                                                                                  decoration: BoxDecoration(
+                                                                                    borderRadius: BorderRadius.only(
+                                                                                      topLeft: Radius.circular(8.0),
+                                                                                      bottomRight: Radius.circular(8.0),
+                                                                                    ),
+                                                                                  ),
+                                                                                  child: Row(
+                                                                                    mainAxisSize: MainAxisSize.max,
+                                                                                    children: [
+                                                                                      Builder(
+                                                                                        builder: (context) {
+                                                                                          if (FFAppConstants.percentageCheck <
+                                                                                              getJsonField(
+                                                                                                productModelMMItem,
+                                                                                                r'''$.discountper''',
+                                                                                              )) {
+                                                                                            return Container(
+                                                                                              height: 20.0,
+                                                                                              decoration: BoxDecoration(
+                                                                                                color: FFAppConstants.green44AC20,
+                                                                                                borderRadius: BorderRadius.only(
+                                                                                                  topLeft: Radius.circular(8.0),
+                                                                                                ),
                                                                                               ),
-                                                                                            ),
-                                                                                            child: Align(
-                                                                                              alignment: AlignmentDirectional(0.0, 0.0),
-                                                                                              child: Padding(
-                                                                                                padding: EdgeInsetsDirectional.fromSTEB(2.0, 0.0, 2.0, 0.0),
-                                                                                                child: RichText(
-                                                                                                  textScaler: MediaQuery.of(context).textScaler,
-                                                                                                  text: TextSpan(
-                                                                                                    children: [
-                                                                                                      TextSpan(
-                                                                                                        text: FFAppConstants.discountperdouble >
-                                                                                                                getJsonField(
-                                                                                                                  productModelMMItem,
-                                                                                                                  r'''$.discountper''',
-                                                                                                                )
-                                                                                                            ? functions.setDecimalValueWithCount(
-                                                                                                                getJsonField(
-                                                                                                                  productModelMMItem,
-                                                                                                                  r'''$.discountper''',
-                                                                                                                ).toString(),
-                                                                                                                0,
-                                                                                                                true)
-                                                                                                            : functions.setDecimalValueWithCount(
-                                                                                                                getJsonField(
-                                                                                                                  productModelMMItem,
-                                                                                                                  r'''$.discountper''',
-                                                                                                                ).toString(),
-                                                                                                                0,
-                                                                                                                true),
-                                                                                                        style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                                              font: GoogleFonts.montserrat(
+                                                                                              child: Align(
+                                                                                                alignment: AlignmentDirectional(0.0, 0.0),
+                                                                                                child: Padding(
+                                                                                                  padding: EdgeInsetsDirectional.fromSTEB(2.0, 0.0, 2.0, 0.0),
+                                                                                                  child: RichText(
+                                                                                                    textScaler: MediaQuery.of(context).textScaler,
+                                                                                                    text: TextSpan(
+                                                                                                      children: [
+                                                                                                        TextSpan(
+                                                                                                          text: FFAppConstants.discountperdouble >
+                                                                                                                  getJsonField(
+                                                                                                                    productModelMMItem,
+                                                                                                                    r'''$.discountper''',
+                                                                                                                  )
+                                                                                                              ? functions.setDecimalValueWithCount(
+                                                                                                                  getJsonField(
+                                                                                                                    productModelMMItem,
+                                                                                                                    r'''$.discountper''',
+                                                                                                                  ).toString(),
+                                                                                                                  0,
+                                                                                                                  true)
+                                                                                                              : functions.setDecimalValueWithCount(
+                                                                                                                  getJsonField(
+                                                                                                                    productModelMMItem,
+                                                                                                                    r'''$.discountper''',
+                                                                                                                  ).toString(),
+                                                                                                                  0,
+                                                                                                                  true),
+                                                                                                          style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                                                font: GoogleFonts.montserrat(
+                                                                                                                  fontWeight: FontWeight.w600,
+                                                                                                                  fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                                                                ),
+                                                                                                                color: Colors.white,
+                                                                                                                fontSize: 10.0,
+                                                                                                                letterSpacing: 0.0,
                                                                                                                 fontWeight: FontWeight.w600,
                                                                                                                 fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
                                                                                                               ),
-                                                                                                              color: Colors.white,
-                                                                                                              fontSize: 10.0,
-                                                                                                              letterSpacing: 0.0,
-                                                                                                              fontWeight: FontWeight.w600,
+                                                                                                        ),
+                                                                                                        TextSpan(
+                                                                                                          text: ' % Off',
+                                                                                                          style: GoogleFonts.montserrat(
+                                                                                                            color: Colors.white,
+                                                                                                            fontWeight: FontWeight.w600,
+                                                                                                            fontSize: 8.0,
+                                                                                                          ),
+                                                                                                        )
+                                                                                                      ],
+                                                                                                      style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                                            font: GoogleFonts.montserrat(
+                                                                                                              fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
                                                                                                               fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
                                                                                                             ),
-                                                                                                      ),
-                                                                                                      TextSpan(
-                                                                                                        text: ' % Off',
-                                                                                                        style: GoogleFonts.montserrat(
-                                                                                                          color: Colors.white,
-                                                                                                          fontWeight: FontWeight.w600,
-                                                                                                          fontSize: 8.0,
-                                                                                                        ),
-                                                                                                      )
-                                                                                                    ],
-                                                                                                    style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                                          font: GoogleFonts.montserrat(
+                                                                                                            letterSpacing: 0.0,
                                                                                                             fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
                                                                                                             fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
                                                                                                           ),
+                                                                                                    ),
+                                                                                                  ),
+                                                                                                ),
+                                                                                              ),
+                                                                                            );
+                                                                                          } else {
+                                                                                            return Text(
+                                                                                              '\n',
+                                                                                              style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                                    font: GoogleFonts.readexPro(
+                                                                                                      fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
+                                                                                                      fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                                                    ),
+                                                                                                    fontSize: 15.0,
+                                                                                                    letterSpacing: 0.0,
+                                                                                                    fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
+                                                                                                    fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                                                  ),
+                                                                                            );
+                                                                                          }
+                                                                                        },
+                                                                                      ),
+                                                                                      if (FFAppState().nullValue !=
+                                                                                          getJsonField(
+                                                                                            productModelMMItem,
+                                                                                            r'''$.country_icon''',
+                                                                                          ).toString())
+                                                                                        Container(
+                                                                                          width: 29.0,
+                                                                                          height: 100.0,
+                                                                                          decoration: BoxDecoration(
+                                                                                            color: Color(0xFFF4F6F4),
+                                                                                            borderRadius: BorderRadius.only(
+                                                                                              topLeft: Radius.circular(valueOrDefault<double>(
+                                                                                                FFAppConstants.percentageCheck <
+                                                                                                        getJsonField(
+                                                                                                          productModelMMItem,
+                                                                                                          r'''$.discountper''',
+                                                                                                        )
+                                                                                                    ? 0.0
+                                                                                                    : 8.0,
+                                                                                                0.0,
+                                                                                              )),
+                                                                                              bottomRight: Radius.circular(8.0),
+                                                                                            ),
+                                                                                            border: Border.all(
+                                                                                              color: Color(0xFFDCE9D8),
+                                                                                              width: 1.0,
+                                                                                            ),
+                                                                                          ),
+                                                                                          child: Align(
+                                                                                            alignment: AlignmentDirectional(0.0, 0.0),
+                                                                                            child: ClipRRect(
+                                                                                              borderRadius: BorderRadius.circular(0.0),
+                                                                                              child: CachedNetworkImage(
+                                                                                                fadeInDuration: Duration(milliseconds: 500),
+                                                                                                fadeOutDuration: Duration(milliseconds: 500),
+                                                                                                imageUrl: getJsonField(
+                                                                                                  productModelMMItem,
+                                                                                                  r'''$.country_icon''',
+                                                                                                ).toString(),
+                                                                                                width: 25.0,
+                                                                                                height: 25.0,
+                                                                                                fit: BoxFit.contain,
+                                                                                              ),
+                                                                                            ),
+                                                                                          ),
+                                                                                        ),
+                                                                                    ],
+                                                                                  ),
+                                                                                ),
+                                                                                if (FFAppConstants.stockNotify ==
+                                                                                    getJsonField(
+                                                                                      productModelMMItem,
+                                                                                      r'''$.stock''',
+                                                                                    ).toString())
+                                                                                  Align(
+                                                                                    alignment: AlignmentDirectional(0.0, 1.0),
+                                                                                    child: Container(
+                                                                                      width: MediaQuery.sizeOf(context).width * 1.0,
+                                                                                      height: 70.0,
+                                                                                      decoration: BoxDecoration(
+                                                                                        color: Color(0xFFFFF3F5),
+                                                                                        borderRadius: BorderRadius.only(
+                                                                                          bottomLeft: Radius.circular(8.0),
+                                                                                          bottomRight: Radius.circular(8.0),
+                                                                                        ),
+                                                                                      ),
+                                                                                      child: Column(
+                                                                                        mainAxisSize: MainAxisSize.min,
+                                                                                        mainAxisAlignment: MainAxisAlignment.center,
+                                                                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                                                                        children: [
+                                                                                          Align(
+                                                                                            alignment: AlignmentDirectional(-1.0, 0.0),
+                                                                                            child: Padding(
+                                                                                              padding: EdgeInsetsDirectional.fromSTEB(5.0, 2.0, 5.0, 0.0),
+                                                                                              child: Text(
+                                                                                                getJsonField(
+                                                                                                  productModelMMItem,
+                                                                                                  r'''$.product_name''',
+                                                                                                ).toString().maybeHandleOverflow(
+                                                                                                      maxChars: 30,
+                                                                                                      replacement: '…',
+                                                                                                    ),
+                                                                                                maxLines: 1,
+                                                                                                style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                                      font: GoogleFonts.montserrat(
+                                                                                                        fontWeight: FontWeight.w600,
+                                                                                                        fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                                                      ),
+                                                                                                      color: FFAppConstants.blackColor0A0A0A,
+                                                                                                      fontSize: 13.0,
+                                                                                                      letterSpacing: 0.0,
+                                                                                                      fontWeight: FontWeight.w600,
+                                                                                                      fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                                                    ),
+                                                                                              ),
+                                                                                            ),
+                                                                                          ),
+                                                                                          Padding(
+                                                                                            padding: EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 5.0, 0.0),
+                                                                                            child: Row(
+                                                                                              mainAxisSize: MainAxisSize.max,
+                                                                                              children: [
+                                                                                                Padding(
+                                                                                                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 3.0, 0.0),
+                                                                                                  child: Text(
+                                                                                                    getJsonField(
+                                                                                                      productModelMMItem,
+                                                                                                      r'''$.quantity''',
+                                                                                                    ).toString(),
+                                                                                                    textAlign: TextAlign.start,
+                                                                                                    style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                                          font: GoogleFonts.montserrat(
+                                                                                                            fontWeight: FontWeight.w600,
+                                                                                                            fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                                                          ),
+                                                                                                          color: Color(0xFF7A7A7A),
+                                                                                                          fontSize: 10.0,
                                                                                                           letterSpacing: 0.0,
-                                                                                                          fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
+                                                                                                          fontWeight: FontWeight.w600,
                                                                                                           fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
                                                                                                         ),
                                                                                                   ),
                                                                                                 ),
+                                                                                                Padding(
+                                                                                                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 0.0),
+                                                                                                  child: Text(
+                                                                                                    getJsonField(
+                                                                                                      productModelMMItem,
+                                                                                                      r'''$.unit''',
+                                                                                                    ).toString(),
+                                                                                                    textAlign: TextAlign.start,
+                                                                                                    style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                                          font: GoogleFonts.montserrat(
+                                                                                                            fontWeight: FontWeight.w600,
+                                                                                                            fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                                                          ),
+                                                                                                          color: Color(0xFF7A7A7A),
+                                                                                                          fontSize: 10.0,
+                                                                                                          letterSpacing: 0.0,
+                                                                                                          fontWeight: FontWeight.w600,
+                                                                                                          fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                                                        ),
+                                                                                                  ),
+                                                                                                ),
+                                                                                              ],
+                                                                                            ),
+                                                                                          ),
+                                                                                          Align(
+                                                                                            alignment: AlignmentDirectional(-1.0, 0.0),
+                                                                                            child: Padding(
+                                                                                              padding: EdgeInsetsDirectional.fromSTEB(5.0, 2.0, 0.0, 0.0),
+                                                                                              child: Text(
+                                                                                                'Product Unavailable',
+                                                                                                style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                                      font: GoogleFonts.montserrat(
+                                                                                                        fontWeight: FontWeight.bold,
+                                                                                                        fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                                                      ),
+                                                                                                      color: Color(0xFFC82038),
+                                                                                                      fontSize: 10.0,
+                                                                                                      letterSpacing: 0.0,
+                                                                                                      fontWeight: FontWeight.bold,
+                                                                                                      fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                                                    ),
                                                                                               ),
                                                                                             ),
-                                                                                          );
-                                                                                        } else {
-                                                                                          return Text(
-                                                                                            '\n',
-                                                                                            style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                                  font: GoogleFonts.readexPro(
-                                                                                                    fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
-                                                                                                    fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                                                                                                  ),
-                                                                                                  fontSize: 15.0,
-                                                                                                  letterSpacing: 0.0,
-                                                                                                  fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
-                                                                                                  fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                                                                                                ),
-                                                                                          );
-                                                                                        }
-                                                                                      },
-                                                                                    ),
-                                                                                    if (FFAppState().nullValue !=
-                                                                                        getJsonField(
-                                                                                          productModelMMItem,
-                                                                                          r'''$.country_icon''',
-                                                                                        ).toString())
-                                                                                      Container(
-                                                                                        width: 29.0,
-                                                                                        height: 100.0,
-                                                                                        decoration: BoxDecoration(
-                                                                                          color: Color(0xFFF4F6F4),
-                                                                                          borderRadius: BorderRadius.only(
-                                                                                            topLeft: Radius.circular(valueOrDefault<double>(
-                                                                                              FFAppConstants.percentageCheck <
+                                                                                          ),
+                                                                                          Padding(
+                                                                                            padding: EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
+                                                                                            child: Text(
+                                                                                              FFAppConstants.notifyMe ==
                                                                                                       getJsonField(
                                                                                                         productModelMMItem,
-                                                                                                        r'''$.discountper''',
-                                                                                                      )
-                                                                                                  ? 0.0
-                                                                                                  : 8.0,
-                                                                                              0.0,
-                                                                                            )),
-                                                                                            bottomRight: Radius.circular(8.0),
-                                                                                          ),
-                                                                                          border: Border.all(
-                                                                                            color: Color(0xFFDCE9D8),
-                                                                                            width: 1.0,
-                                                                                          ),
-                                                                                        ),
-                                                                                        child: Align(
-                                                                                          alignment: AlignmentDirectional(0.0, 0.0),
-                                                                                          child: ClipRRect(
-                                                                                            borderRadius: BorderRadius.circular(0.0),
-                                                                                            child: CachedNetworkImage(
-                                                                                              fadeInDuration: Duration(milliseconds: 500),
-                                                                                              fadeOutDuration: Duration(milliseconds: 500),
-                                                                                              imageUrl: getJsonField(
-                                                                                                productModelMMItem,
-                                                                                                r'''$.country_icon''',
-                                                                                              ).toString(),
-                                                                                              width: 25.0,
-                                                                                              height: 25.0,
-                                                                                              fit: BoxFit.contain,
-                                                                                            ),
-                                                                                          ),
-                                                                                        ),
-                                                                                      ),
-                                                                                  ],
-                                                                                ),
-                                                                              ),
-                                                                              if (FFAppConstants.stockNotify ==
-                                                                                  getJsonField(
-                                                                                    productModelMMItem,
-                                                                                    r'''$.stock''',
-                                                                                  ).toString())
-                                                                                Align(
-                                                                                  alignment: AlignmentDirectional(0.0, 1.0),
-                                                                                  child: Container(
-                                                                                    width: MediaQuery.sizeOf(context).width * 1.0,
-                                                                                    height: 70.0,
-                                                                                    decoration: BoxDecoration(
-                                                                                      color: Color(0xFFFFF3F5),
-                                                                                      borderRadius: BorderRadius.only(
-                                                                                        bottomLeft: Radius.circular(8.0),
-                                                                                        bottomRight: Radius.circular(8.0),
-                                                                                      ),
-                                                                                    ),
-                                                                                    child: Column(
-                                                                                      mainAxisSize: MainAxisSize.min,
-                                                                                      mainAxisAlignment: MainAxisAlignment.center,
-                                                                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                                                                      children: [
-                                                                                        Align(
-                                                                                          alignment: AlignmentDirectional(-1.0, 0.0),
-                                                                                          child: Padding(
-                                                                                            padding: EdgeInsetsDirectional.fromSTEB(5.0, 2.0, 5.0, 0.0),
-                                                                                            child: Text(
-                                                                                              getJsonField(
-                                                                                                productModelMMItem,
-                                                                                                r'''$.product_name''',
-                                                                                              ).toString().maybeHandleOverflow(
-                                                                                                    maxChars: 30,
-                                                                                                    replacement: '…',
-                                                                                                  ),
-                                                                                              maxLines: 1,
+                                                                                                        r'''$.notify_me''',
+                                                                                                      ).toString()
+                                                                                                  ? 'Click on the bell to get notified.'
+                                                                                                  : 'You will be notified.',
                                                                                               style: FlutterFlowTheme.of(context).bodyMedium.override(
                                                                                                     font: GoogleFonts.montserrat(
                                                                                                       fontWeight: FontWeight.w600,
                                                                                                       fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
                                                                                                     ),
-                                                                                                    color: FFAppConstants.blackColor0A0A0A,
-                                                                                                    fontSize: 13.0,
+                                                                                                    fontSize: 8.0,
                                                                                                     letterSpacing: 0.0,
                                                                                                     fontWeight: FontWeight.w600,
                                                                                                     fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
                                                                                                   ),
                                                                                             ),
                                                                                           ),
-                                                                                        ),
-                                                                                        Padding(
-                                                                                          padding: EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 5.0, 0.0),
-                                                                                          child: Row(
-                                                                                            mainAxisSize: MainAxisSize.max,
-                                                                                            children: [
-                                                                                              Padding(
-                                                                                                padding: EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 3.0, 0.0),
-                                                                                                child: Text(
-                                                                                                  getJsonField(
-                                                                                                    productModelMMItem,
-                                                                                                    r'''$.quantity''',
-                                                                                                  ).toString(),
-                                                                                                  textAlign: TextAlign.start,
-                                                                                                  style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                                        font: GoogleFonts.montserrat(
-                                                                                                          fontWeight: FontWeight.w600,
-                                                                                                          fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                                                                                                        ),
-                                                                                                        color: Color(0xFF7A7A7A),
-                                                                                                        fontSize: 10.0,
-                                                                                                        letterSpacing: 0.0,
-                                                                                                        fontWeight: FontWeight.w600,
-                                                                                                        fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                                                                                                      ),
-                                                                                                ),
-                                                                                              ),
-                                                                                              Padding(
-                                                                                                padding: EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 0.0),
-                                                                                                child: Text(
-                                                                                                  getJsonField(
-                                                                                                    productModelMMItem,
-                                                                                                    r'''$.unit''',
-                                                                                                  ).toString(),
-                                                                                                  textAlign: TextAlign.start,
-                                                                                                  style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                                        font: GoogleFonts.montserrat(
-                                                                                                          fontWeight: FontWeight.w600,
-                                                                                                          fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                                                                                                        ),
-                                                                                                        color: Color(0xFF7A7A7A),
-                                                                                                        fontSize: 10.0,
-                                                                                                        letterSpacing: 0.0,
-                                                                                                        fontWeight: FontWeight.w600,
-                                                                                                        fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                                                                                                      ),
-                                                                                                ),
-                                                                                              ),
-                                                                                            ],
-                                                                                          ),
-                                                                                        ),
-                                                                                        Align(
-                                                                                          alignment: AlignmentDirectional(-1.0, 0.0),
-                                                                                          child: Padding(
-                                                                                            padding: EdgeInsetsDirectional.fromSTEB(5.0, 2.0, 0.0, 0.0),
-                                                                                            child: Text(
-                                                                                              'Product Unavailable',
-                                                                                              style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                                    font: GoogleFonts.montserrat(
-                                                                                                      fontWeight: FontWeight.bold,
-                                                                                                      fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                                                                                                    ),
-                                                                                                    color: Color(0xFFC82038),
-                                                                                                    fontSize: 10.0,
-                                                                                                    letterSpacing: 0.0,
-                                                                                                    fontWeight: FontWeight.bold,
-                                                                                                    fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                                                                                                  ),
-                                                                                            ),
-                                                                                          ),
-                                                                                        ),
-                                                                                        Padding(
-                                                                                          padding: EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
-                                                                                          child: Text(
-                                                                                            FFAppConstants.notifyMe ==
-                                                                                                    getJsonField(
-                                                                                                      productModelMMItem,
-                                                                                                      r'''$.notify_me''',
-                                                                                                    ).toString()
-                                                                                                ? 'Click on the bell to get notified.'
-                                                                                                : 'You will be notified.',
-                                                                                            style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                                  font: GoogleFonts.montserrat(
-                                                                                                    fontWeight: FontWeight.w600,
-                                                                                                    fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                                                                                                  ),
-                                                                                                  fontSize: 8.0,
-                                                                                                  letterSpacing: 0.0,
-                                                                                                  fontWeight: FontWeight.w600,
-                                                                                                  fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                                                                                                ),
-                                                                                          ),
-                                                                                        ),
-                                                                                      ],
+                                                                                        ],
+                                                                                      ),
                                                                                     ),
                                                                                   ),
-                                                                                ),
-                                                                              if (FFAppConstants.stockNotify ==
-                                                                                  getJsonField(
-                                                                                    productModelMMItem,
-                                                                                    r'''$.stock''',
-                                                                                  ).toString())
-                                                                                Align(
-                                                                                  alignment: AlignmentDirectional(1.0, -1.0),
-                                                                                  child: Padding(
-                                                                                    padding: EdgeInsetsDirectional.fromSTEB(0.0, 35.0, 0.0, 0.0),
-                                                                                    child: Builder(
-                                                                                      builder: (context) {
-                                                                                        if (FFAppConstants.notifyMe ==
-                                                                                            getJsonField(
-                                                                                              productModelMMItem,
-                                                                                              r'''$.notify_me''',
-                                                                                            ).toString()) {
-                                                                                          return FlutterFlowIconButton(
-                                                                                            icon: Icon(
-                                                                                              Icons.notifications_sharp,
-                                                                                              color: FFAppConstants.notifyMeUnSelectedColor,
-                                                                                              size: 25.0,
-                                                                                            ),
-                                                                                            showLoadingIndicator: true,
-                                                                                            onPressed: () async {
-                                                                                              logFirebaseEvent('DAILY_CART_SCREEN_notifications_sharp_IC');
-                                                                                              logFirebaseEvent('IconButton_custom_action');
-                                                                                              _model.connnectivtyC = await actions.checkInternetConnection();
-                                                                                              if (_model.connnectivtyC == true) {
-                                                                                                logFirebaseEvent('IconButton_haptic_feedback');
-                                                                                                HapticFeedback.mediumImpact();
-                                                                                                logFirebaseEvent('IconButton_backend_call');
-                                                                                                _model.apiResultb11 = await QuickartGroup.addnotifymeCall.call(
-                                                                                                  productID: getJsonField(
-                                                                                                    productModelMMItem,
-                                                                                                    r'''$.product_id''',
-                                                                                                  ).toString(),
-                                                                                                  varientID: getJsonField(
-                                                                                                    productModelMMItem,
-                                                                                                    r'''$.varient_id''',
-                                                                                                  ).toString(),
-                                                                                                  userID: FFAppState().userID,
-                                                                                                  platform: FFAppState().platform,
-                                                                                                  fcmToken: FFAppState().fcmToken,
-                                                                                                );
+                                                                                if (FFAppConstants.stockNotify ==
+                                                                                    getJsonField(
+                                                                                      productModelMMItem,
+                                                                                      r'''$.stock''',
+                                                                                    ).toString())
+                                                                                  Align(
+                                                                                    alignment: AlignmentDirectional(1.0, -1.0),
+                                                                                    child: Padding(
+                                                                                      padding: EdgeInsetsDirectional.fromSTEB(0.0, 35.0, 0.0, 0.0),
+                                                                                      child: Builder(
+                                                                                        builder: (context) {
+                                                                                          if (FFAppConstants.notifyMe ==
+                                                                                              getJsonField(
+                                                                                                productModelMMItem,
+                                                                                                r'''$.notify_me''',
+                                                                                              ).toString()) {
+                                                                                            return FlutterFlowIconButton(
+                                                                                              icon: Icon(
+                                                                                                Icons.notifications_sharp,
+                                                                                                color: FFAppConstants.notifyMeUnSelectedColor,
+                                                                                                size: 25.0,
+                                                                                              ),
+                                                                                              showLoadingIndicator: true,
+                                                                                              onPressed: () async {
+                                                                                                logFirebaseEvent('DAILY_CART_SCREEN_notifications_sharp_IC');
+                                                                                                logFirebaseEvent('IconButton_custom_action');
+                                                                                                _model.connnectivtyC = await actions.checkInternetConnection();
+                                                                                                if (_model.connnectivtyC == true) {
+                                                                                                  logFirebaseEvent('IconButton_haptic_feedback');
+                                                                                                  HapticFeedback.mediumImpact();
+                                                                                                  logFirebaseEvent('IconButton_backend_call');
+                                                                                                  _model.apiResultb11 = await QuickartGroup.addnotifymeCall.call(
+                                                                                                    productID: getJsonField(
+                                                                                                      productModelMMItem,
+                                                                                                      r'''$.product_id''',
+                                                                                                    ).toString(),
+                                                                                                    varientID: getJsonField(
+                                                                                                      productModelMMItem,
+                                                                                                      r'''$.varient_id''',
+                                                                                                    ).toString(),
+                                                                                                    userID: FFAppState().userID,
+                                                                                                    platform: FFAppState().platform,
+                                                                                                    fcmToken: FFAppState().fcmToken,
+                                                                                                  );
 
-                                                                                                if ((_model.apiResultb11?.succeeded ?? true)) {
-                                                                                                  logFirebaseEvent('IconButton_update_app_state');
+                                                                                                  if ((_model.apiResultb11?.succeeded ?? true)) {
+                                                                                                    logFirebaseEvent('IconButton_update_app_state');
 
-                                                                                                  FFAppState().update(() {});
+                                                                                                    FFAppState().update(() {});
+                                                                                                  } else {
+                                                                                                    logFirebaseEvent('IconButton_show_snack_bar');
+                                                                                                    ScaffoldMessenger.of(context).showSnackBar(
+                                                                                                      SnackBar(
+                                                                                                        content: Text(
+                                                                                                          getJsonField(
+                                                                                                            (_model.apiResultb11?.jsonBody ?? ''),
+                                                                                                            r'''$.message''',
+                                                                                                          ).toString(),
+                                                                                                          style: GoogleFonts.montserrat(
+                                                                                                            color: FlutterFlowTheme.of(context).primaryText,
+                                                                                                            fontWeight: FontWeight.w500,
+                                                                                                            fontSize: 12.0,
+                                                                                                          ),
+                                                                                                        ),
+                                                                                                        duration: Duration(milliseconds: 1000),
+                                                                                                        backgroundColor: FFAppConstants.blackColor666666,
+                                                                                                      ),
+                                                                                                    );
+                                                                                                  }
                                                                                                 } else {
                                                                                                   logFirebaseEvent('IconButton_show_snack_bar');
                                                                                                   ScaffoldMessenger.of(context).showSnackBar(
                                                                                                     SnackBar(
                                                                                                       content: Text(
-                                                                                                        getJsonField(
-                                                                                                          (_model.apiResultb11?.jsonBody ?? ''),
-                                                                                                          r'''$.message''',
-                                                                                                        ).toString(),
+                                                                                                        FFAppConstants.internetString,
                                                                                                         style: GoogleFonts.montserrat(
                                                                                                           color: FlutterFlowTheme.of(context).primaryText,
                                                                                                           fontWeight: FontWeight.w500,
@@ -64518,139 +64601,122 @@ class _DailyCartScreenWidgetState extends State<DailyCartScreenWidget>
                                                                                                     ),
                                                                                                   );
                                                                                                 }
-                                                                                              } else {
-                                                                                                logFirebaseEvent('IconButton_show_snack_bar');
-                                                                                                ScaffoldMessenger.of(context).showSnackBar(
-                                                                                                  SnackBar(
-                                                                                                    content: Text(
-                                                                                                      FFAppConstants.internetString,
-                                                                                                      style: GoogleFonts.montserrat(
-                                                                                                        color: FlutterFlowTheme.of(context).primaryText,
-                                                                                                        fontWeight: FontWeight.w500,
-                                                                                                        fontSize: 12.0,
-                                                                                                      ),
-                                                                                                    ),
-                                                                                                    duration: Duration(milliseconds: 1000),
-                                                                                                    backgroundColor: FFAppConstants.blackColor666666,
-                                                                                                  ),
-                                                                                                );
-                                                                                              }
 
-                                                                                              safeSetState(() {});
-                                                                                            },
+                                                                                                safeSetState(() {});
+                                                                                              },
+                                                                                            );
+                                                                                          } else {
+                                                                                            return Padding(
+                                                                                              padding: EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 10.0, 0.0),
+                                                                                              child: InkWell(
+                                                                                                splashColor: Colors.transparent,
+                                                                                                focusColor: Colors.transparent,
+                                                                                                hoverColor: Colors.transparent,
+                                                                                                highlightColor: Colors.transparent,
+                                                                                                onTap: () async {
+                                                                                                  logFirebaseEvent('DAILY_CART_SCREEN_PAGE_Icon2_ON_TAP');
+                                                                                                  logFirebaseEvent('Icon2_navigate_to');
+
+                                                                                                  context.pushNamed(NotifyProductsListScreenWidget.routeName);
+                                                                                                },
+                                                                                                child: Icon(
+                                                                                                  Icons.notifications_rounded,
+                                                                                                  color: FFAppConstants.notifyMeSelectedColor,
+                                                                                                  size: 25.0,
+                                                                                                ),
+                                                                                              ),
+                                                                                            );
+                                                                                          }
+                                                                                        },
+                                                                                      ),
+                                                                                    ),
+                                                                                  ),
+                                                                                Align(
+                                                                                  alignment: AlignmentDirectional(-1.0, -1.0),
+                                                                                  child: Padding(
+                                                                                    padding: EdgeInsetsDirectional.fromSTEB(2.0, 25.0, 3.0, 0.0),
+                                                                                    child: Builder(
+                                                                                      builder: (context) {
+                                                                                        if (FFAppConstants.stockNotify !=
+                                                                                            getJsonField(
+                                                                                              productModelMMItem,
+                                                                                              r'''$.stock''',
+                                                                                            ).toString()) {
+                                                                                          return Container(
+                                                                                            width: 25.0,
+                                                                                            height: 80.0,
+                                                                                            decoration: BoxDecoration(),
+                                                                                            child: Builder(
+                                                                                              builder: (context) {
+                                                                                                final featureTag = getJsonField(
+                                                                                                  productModelMMItem,
+                                                                                                  r'''$.feature_tags''',
+                                                                                                ).toList();
+
+                                                                                                return ListView.builder(
+                                                                                                  padding: EdgeInsets.zero,
+                                                                                                  reverse: true,
+                                                                                                  shrinkWrap: true,
+                                                                                                  scrollDirection: Axis.vertical,
+                                                                                                  itemCount: featureTag.length,
+                                                                                                  itemBuilder: (context, featureTagIndex) {
+                                                                                                    final featureTagItem = featureTag[featureTagIndex];
+                                                                                                    return Align(
+                                                                                                      alignment: AlignmentDirectional(0.0, 0.0),
+                                                                                                      child: Padding(
+                                                                                                        padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 2.0),
+                                                                                                        child: Container(
+                                                                                                          width: 23.0,
+                                                                                                          height: 23.0,
+                                                                                                          clipBehavior: Clip.antiAlias,
+                                                                                                          decoration: BoxDecoration(
+                                                                                                            shape: BoxShape.circle,
+                                                                                                          ),
+                                                                                                          child: Image.network(
+                                                                                                            getJsonField(
+                                                                                                              featureTagItem,
+                                                                                                              r'''$.image''',
+                                                                                                            ).toString(),
+                                                                                                            fit: BoxFit.cover,
+                                                                                                          ),
+                                                                                                        ),
+                                                                                                      ),
+                                                                                                    );
+                                                                                                  },
+                                                                                                );
+                                                                                              },
+                                                                                            ),
                                                                                           );
                                                                                         } else {
-                                                                                          return Padding(
-                                                                                            padding: EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 10.0, 0.0),
-                                                                                            child: InkWell(
-                                                                                              splashColor: Colors.transparent,
-                                                                                              focusColor: Colors.transparent,
-                                                                                              hoverColor: Colors.transparent,
-                                                                                              highlightColor: Colors.transparent,
-                                                                                              onTap: () async {
-                                                                                                logFirebaseEvent('DAILY_CART_SCREEN_PAGE_Icon2_ON_TAP');
-                                                                                                logFirebaseEvent('Icon2_navigate_to');
-
-                                                                                                context.pushNamed(NotifyProductsListScreenWidget.routeName);
-                                                                                              },
-                                                                                              child: Icon(
-                                                                                                Icons.notifications_rounded,
-                                                                                                color: FFAppConstants.notifyMeSelectedColor,
-                                                                                                size: 25.0,
-                                                                                              ),
-                                                                                            ),
+                                                                                          return Text(
+                                                                                            ' ',
+                                                                                            style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                                  font: GoogleFonts.readexPro(
+                                                                                                    fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
+                                                                                                    fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                                                  ),
+                                                                                                  letterSpacing: 0.0,
+                                                                                                  fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
+                                                                                                  fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                                                ),
                                                                                           );
                                                                                         }
                                                                                       },
                                                                                     ),
                                                                                   ),
                                                                                 ),
-                                                                              Align(
-                                                                                alignment: AlignmentDirectional(-1.0, -1.0),
-                                                                                child: Padding(
-                                                                                  padding: EdgeInsetsDirectional.fromSTEB(2.0, 25.0, 3.0, 0.0),
-                                                                                  child: Builder(
-                                                                                    builder: (context) {
-                                                                                      if (FFAppConstants.stockNotify !=
-                                                                                          getJsonField(
-                                                                                            productModelMMItem,
-                                                                                            r'''$.stock''',
-                                                                                          ).toString()) {
-                                                                                        return Container(
-                                                                                          width: 25.0,
-                                                                                          height: 80.0,
-                                                                                          decoration: BoxDecoration(),
-                                                                                          child: Builder(
-                                                                                            builder: (context) {
-                                                                                              final featureTag = getJsonField(
-                                                                                                productModelMMItem,
-                                                                                                r'''$.feature_tags''',
-                                                                                              ).toList();
-
-                                                                                              return ListView.builder(
-                                                                                                padding: EdgeInsets.zero,
-                                                                                                reverse: true,
-                                                                                                shrinkWrap: true,
-                                                                                                scrollDirection: Axis.vertical,
-                                                                                                itemCount: featureTag.length,
-                                                                                                itemBuilder: (context, featureTagIndex) {
-                                                                                                  final featureTagItem = featureTag[featureTagIndex];
-                                                                                                  return Align(
-                                                                                                    alignment: AlignmentDirectional(0.0, 0.0),
-                                                                                                    child: Padding(
-                                                                                                      padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 2.0),
-                                                                                                      child: Container(
-                                                                                                        width: 23.0,
-                                                                                                        height: 23.0,
-                                                                                                        clipBehavior: Clip.antiAlias,
-                                                                                                        decoration: BoxDecoration(
-                                                                                                          shape: BoxShape.circle,
-                                                                                                        ),
-                                                                                                        child: Image.network(
-                                                                                                          getJsonField(
-                                                                                                            featureTagItem,
-                                                                                                            r'''$.image''',
-                                                                                                          ).toString(),
-                                                                                                          fit: BoxFit.cover,
-                                                                                                        ),
-                                                                                                      ),
-                                                                                                    ),
-                                                                                                  );
-                                                                                                },
-                                                                                              );
-                                                                                            },
-                                                                                          ),
-                                                                                        );
-                                                                                      } else {
-                                                                                        return Text(
-                                                                                          ' ',
-                                                                                          style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                                font: GoogleFonts.readexPro(
-                                                                                                  fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
-                                                                                                  fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                                                                                                ),
-                                                                                                letterSpacing: 0.0,
-                                                                                                fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
-                                                                                                fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                                                                                              ),
-                                                                                        );
-                                                                                      }
-                                                                                    },
-                                                                                  ),
-                                                                                ),
-                                                                              ),
-                                                                            ],
+                                                                              ],
+                                                                            ),
                                                                           ),
-                                                                        ),
-                                                                      );
-                                                                    },
-                                                                  );
-                                                                },
-                                                              );
-                                                            },
+                                                                        );
+                                                                      },
+                                                                    );
+                                                                  },
+                                                                );
+                                                              },
+                                                            ),
                                                           ),
                                                         ),
-                                                      ),
                                                     ],
                                                   ),
                                                 ),
@@ -64669,31 +64735,6 @@ class _DailyCartScreenWidgetState extends State<DailyCartScreenWidget>
                         ),
                       ),
                     ),
-                    if (_model.isLoadingIndicator == true)
-                      Container(
-                        width: double.infinity,
-                        height: double.infinity,
-                        decoration: BoxDecoration(
-                          color: Color(0x5114181B),
-                        ),
-                        child: Align(
-                          alignment: AlignmentDirectional(0.0, 0.0),
-                          child: Container(
-                            width: 100.0,
-                            height: 100.0,
-                            decoration: BoxDecoration(),
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(8.0),
-                              child: Image.asset(
-                                'assets/images/new_loader.gif',
-                                width: 100.0,
-                                height: 100.0,
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
                     if (_model.doorImage == true)
                       InkWell(
                         splashColor: Colors.transparent,
@@ -64749,6 +64790,2732 @@ class _DailyCartScreenWidgetState extends State<DailyCartScreenWidget>
                                       MediaQuery.sizeOf(context).height * 0.5,
                                   fit: BoxFit.cover,
                                 ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    if (getJsonField(
+                          dailyCartScreenShowspcatcartResponse.jsonBody,
+                          r'''$.data.user_type''',
+                        ) !=
+                        null)
+                      Container(
+                        width: MediaQuery.sizeOf(context).width * 1.0,
+                        height: MediaQuery.sizeOf(context).height * 1.0,
+                        decoration: BoxDecoration(
+                          color: Color(0xAD14181B),
+                        ),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment:
+                              (FFMainAxisAlignment.center).flutterValue,
+                          children: [
+                            if (_model.isOTPSend == false)
+                              Container(
+                                width: MediaQuery.sizeOf(context).width * 0.9,
+                                height: MediaQuery.sizeOf(context).height * 0.4,
+                                decoration: BoxDecoration(
+                                  color: FlutterFlowTheme.of(context)
+                                      .secondaryBackground,
+                                  borderRadius: BorderRadius.circular(20.0),
+                                ),
+                                child: SingleChildScrollView(
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment:
+                                        (FFMainAxisAlignment.center)
+                                            .flutterValue,
+                                    children: [
+                                      Align(
+                                        alignment:
+                                            AlignmentDirectional(-1.0, 0.0),
+                                        child: Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  25.0, 20.0, 0.0, 0.0),
+                                          child: Text(
+                                            'Login / SignUp',
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyMedium
+                                                .override(
+                                                  font: GoogleFonts.montserrat(
+                                                    fontWeight: FontWeight.bold,
+                                                    fontStyle:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .bodyMedium
+                                                            .fontStyle,
+                                                  ),
+                                                  color: FFAppConstants
+                                                      .blackColor0A0A0A,
+                                                  fontSize: 20.0,
+                                                  letterSpacing: 0.0,
+                                                  fontWeight: FontWeight.bold,
+                                                  fontStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyMedium
+                                                          .fontStyle,
+                                                ),
+                                          ),
+                                        ),
+                                      ),
+                                      Align(
+                                        alignment:
+                                            AlignmentDirectional(-1.0, 0.0),
+                                        child: Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  25.0, 20.0, 0.0, 0.0),
+                                          child: RichText(
+                                            textScaler: MediaQuery.of(context)
+                                                .textScaler,
+                                            text: TextSpan(
+                                              children: [
+                                                TextSpan(
+                                                  text: 'Mobile Number',
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodyMedium
+                                                      .override(
+                                                        font: GoogleFonts
+                                                            .montserrat(
+                                                          fontWeight:
+                                                              FontWeight.w600,
+                                                          fontStyle:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodyMedium
+                                                                  .fontStyle,
+                                                        ),
+                                                        color:
+                                                            Color(0xFF3D3D3D),
+                                                        fontSize: 13.0,
+                                                        letterSpacing: 0.0,
+                                                        fontWeight:
+                                                            FontWeight.w600,
+                                                        fontStyle:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyMedium
+                                                                .fontStyle,
+                                                      ),
+                                                ),
+                                                TextSpan(
+                                                  text: '*',
+                                                  style: TextStyle(
+                                                    color: FFAppConstants
+                                                        .redDF3F56,
+                                                    fontWeight: FontWeight.w500,
+                                                    fontSize: 14.0,
+                                                  ),
+                                                )
+                                              ],
+                                              style: FlutterFlowTheme.of(
+                                                      context)
+                                                  .bodyMedium
+                                                  .override(
+                                                    font:
+                                                        GoogleFonts.montserrat(
+                                                      fontWeight:
+                                                          FontWeight.w600,
+                                                      fontStyle:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyMedium
+                                                              .fontStyle,
+                                                    ),
+                                                    color: Color(0xFF3D3D3D),
+                                                    fontSize: 13.0,
+                                                    letterSpacing: 0.0,
+                                                    fontWeight: FontWeight.w600,
+                                                    fontStyle:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .bodyMedium
+                                                            .fontStyle,
+                                                  ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            20.0, 3.0, 20.0, 0.0),
+                                        child: Container(
+                                          width:
+                                              MediaQuery.sizeOf(context).width *
+                                                  1.0,
+                                          decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.only(
+                                              topLeft: Radius.circular(8.0),
+                                              topRight: Radius.circular(8.0),
+                                              bottomLeft: Radius.circular(8.0),
+                                              bottomRight: Radius.circular(8.0),
+                                            ),
+                                          ),
+                                          child: Align(
+                                            alignment:
+                                                AlignmentDirectional(1.0, 0.0),
+                                            child: Container(
+                                              width: double.infinity,
+                                              height: 60.0,
+                                              child: custom_widgets
+                                                  .CountryCodeWidget(
+                                                width: double.infinity,
+                                                height: 60.0,
+                                                dialCode: 'AE',
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      Align(
+                                        alignment:
+                                            AlignmentDirectional(-1.0, 0.0),
+                                        child: Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  25.0, 45.0, 25.0, 10.0),
+                                          child: MouseRegion(
+                                            opaque: false,
+                                            cursor: MouseCursor.defer ??
+                                                MouseCursor.defer,
+                                            child: Builder(
+                                              builder: (context) =>
+                                                  FFButtonWidget(
+                                                onPressed: () async {
+                                                  logFirebaseEvent(
+                                                      'DAILY_CART_SCREEN_CONTINUE_BTN_ON_TAP');
+                                                  logFirebaseEvent(
+                                                      'Button_custom_action');
+                                                  _model.connectivityResult11 =
+                                                      await actions
+                                                          .checkInternetConnection();
+                                                  if (_model
+                                                          .connectivityResult11 ==
+                                                      true) {
+                                                    if (FFAppState().phoneNo !=
+                                                            '') {
+                                                      logFirebaseEvent(
+                                                          'Button_backend_call');
+                                                      _model.apiGuestOTP =
+                                                          await QuickartGroup
+                                                              .guestotpsendCall
+                                                              .call(
+                                                        phoneNo: FFAppState()
+                                                            .phoneNo,
+                                                        dialCode: FFAppState()
+                                                            .dialCode,
+                                                        countryCode:
+                                                            FFAppState()
+                                                                .countryCode,
+                                                      );
+
+                                                      if ((_model.apiGuestOTP
+                                                              ?.succeeded ??
+                                                          true)) {
+                                                        if (FFAppConstants
+                                                                .statusAPI1 ==
+                                                            getJsonField(
+                                                              (_model.apiGuestOTP
+                                                                      ?.jsonBody ??
+                                                                  ''),
+                                                              r'''$.status''',
+                                                            ).toString()) {
+                                                          logFirebaseEvent(
+                                                              'Button_update_page_state');
+                                                          _model.isOTPSend =
+                                                              true;
+                                                          safeSetState(() {});
+                                                          logFirebaseEvent(
+                                                              'Button_google_analytics_event');
+                                                          logFirebaseEvent(
+                                                            'OtpFromLoginTrueAnalytics',
+                                                            parameters: {
+                                                              'Screen Name':
+                                                                  'OTP Screen',
+                                                              'API Name':
+                                                                  'Login API',
+                                                            },
+                                                          );
+                                                          logFirebaseEvent(
+                                                              'Button_custom_action');
+                                                          await actions
+                                                              .facebookEventClass(
+                                                            FFAppState()
+                                                                .phoneNo,
+                                                            getJsonField(
+                                                              (_model.apiGuestOTP
+                                                                      ?.jsonBody ??
+                                                                  ''),
+                                                              r'''$.data.user_id''',
+                                                            ).toString(),
+                                                            'user',
+                                                            0.0,
+                                                            0,
+                                                            0.0,
+                                                            'login',
+                                                            FFAppState()
+                                                                .emptyJson,
+                                                            ' 0',
+                                                            ' 0',
+                                                            '0 ',
+                                                            ' 0',
+                                                            ' 0',
+                                                          );
+                                                          logFirebaseEvent(
+                                                              'Button_update_app_state');
+                                                          FFAppState()
+                                                                  .isOTPResend =
+                                                              false;
+                                                          safeSetState(() {});
+                                                          logFirebaseEvent(
+                                                              'Button_timer');
+                                                          _model.timerController
+                                                              .onStartTimer();
+                                                        } else {
+                                                          logFirebaseEvent(
+                                                              'Button_alert_dialog');
+                                                          await showDialog(
+                                                            context: context,
+                                                            builder:
+                                                                (dialogContext) {
+                                                              return Dialog(
+                                                                elevation: 0,
+                                                                insetPadding:
+                                                                    EdgeInsets
+                                                                        .zero,
+                                                                backgroundColor:
+                                                                    Colors
+                                                                        .transparent,
+                                                                alignment: AlignmentDirectional(
+                                                                        0.0,
+                                                                        0.0)
+                                                                    .resolve(
+                                                                        Directionality.of(
+                                                                            context)),
+                                                                child:
+                                                                    GestureDetector(
+                                                                  onTap: () {
+                                                                    FocusScope.of(
+                                                                            dialogContext)
+                                                                        .unfocus();
+                                                                    FocusManager
+                                                                        .instance
+                                                                        .primaryFocus
+                                                                        ?.unfocus();
+                                                                  },
+                                                                  child:
+                                                                      CustomAlertDailogWidget(
+                                                                    des: QuickartGroup
+                                                                        .guestotpsendCall
+                                                                        .message(
+                                                                      (_model.apiGuestOTP
+                                                                              ?.jsonBody ??
+                                                                          ''),
+                                                                    )!,
+                                                                    height:
+                                                                        150.0,
+                                                                    title: ' ',
+                                                                  ),
+                                                                ),
+                                                              );
+                                                            },
+                                                          );
+                                                        }
+                                                      } else {
+                                                        logFirebaseEvent(
+                                                            'Button_alert_dialog');
+                                                        await showDialog(
+                                                          context: context,
+                                                          builder:
+                                                              (dialogContext) {
+                                                            return Dialog(
+                                                              elevation: 0,
+                                                              insetPadding:
+                                                                  EdgeInsets
+                                                                      .zero,
+                                                              backgroundColor:
+                                                                  Colors
+                                                                      .transparent,
+                                                              alignment: AlignmentDirectional(
+                                                                      0.0, 0.0)
+                                                                  .resolve(
+                                                                      Directionality.of(
+                                                                          context)),
+                                                              child:
+                                                                  GestureDetector(
+                                                                onTap: () {
+                                                                  FocusScope.of(
+                                                                          dialogContext)
+                                                                      .unfocus();
+                                                                  FocusManager
+                                                                      .instance
+                                                                      .primaryFocus
+                                                                      ?.unfocus();
+                                                                },
+                                                                child:
+                                                                    CustomAlertDailogWidget(
+                                                                  des: QuickartGroup
+                                                                      .guestotpsendCall
+                                                                      .message(
+                                                                    (_model.apiGuestOTP
+                                                                            ?.jsonBody ??
+                                                                        ''),
+                                                                  )!,
+                                                                  height: 150.0,
+                                                                  title: ' ',
+                                                                ),
+                                                              ),
+                                                            );
+                                                          },
+                                                        );
+                                                      }
+                                                    } else {
+                                                      logFirebaseEvent(
+                                                          'Button_show_snack_bar');
+                                                      ScaffoldMessenger.of(
+                                                              context)
+                                                          .showSnackBar(
+                                                        SnackBar(
+                                                          content: Text(
+                                                            'Please enter mobile number',
+                                                            style: GoogleFonts
+                                                                .montserrat(
+                                                              color: FFAppConstants
+                                                                  .indigoColor,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w500,
+                                                              fontSize: 14.0,
+                                                            ),
+                                                            textAlign: TextAlign
+                                                                .center,
+                                                          ),
+                                                          duration: Duration(
+                                                              milliseconds:
+                                                                  12000),
+                                                          backgroundColor:
+                                                              FFAppConstants
+                                                                  .primaryPurpleE4D8F5,
+                                                        ),
+                                                      );
+                                                    }
+                                                  } else {
+                                                    logFirebaseEvent(
+                                                        'Button_show_snack_bar');
+                                                    ScaffoldMessenger.of(
+                                                            context)
+                                                        .showSnackBar(
+                                                      SnackBar(
+                                                        content: Text(
+                                                          FFAppConstants
+                                                              .internetString,
+                                                          style: GoogleFonts
+                                                              .montserrat(
+                                                            color: FFAppConstants
+                                                                .indigoColor,
+                                                            fontWeight:
+                                                                FontWeight.w500,
+                                                            fontSize: 14.0,
+                                                          ),
+                                                        ),
+                                                        duration: Duration(
+                                                            milliseconds: 1200),
+                                                        backgroundColor:
+                                                            FFAppConstants
+                                                                .primaryPurpleE4D8F5,
+                                                      ),
+                                                    );
+                                                  }
+
+                                                  safeSetState(() {});
+                                                },
+                                                text: 'Continue',
+                                                options: FFButtonOptions(
+                                                  width: double.infinity,
+                                                  height: 48.0,
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                          0.0, 0.0, 0.0, 0.0),
+                                                  iconPadding:
+                                                      EdgeInsetsDirectional
+                                                          .fromSTEB(0.0, 0.0,
+                                                              0.0, 0.0),
+                                                  color: FFAppConstants
+                                                      .indigoColor,
+                                                  textStyle: FlutterFlowTheme
+                                                          .of(context)
+                                                      .titleSmall
+                                                      .override(
+                                                        font: GoogleFonts
+                                                            .montserrat(
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          fontStyle:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .titleSmall
+                                                                  .fontStyle,
+                                                        ),
+                                                        color: FFAppConstants
+                                                            .whiteColor,
+                                                        letterSpacing: 0.0,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        fontStyle:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .titleSmall
+                                                                .fontStyle,
+                                                      ),
+                                                  elevation: 3.0,
+                                                  borderSide: BorderSide(
+                                                    color: Colors.transparent,
+                                                    width: 1.0,
+                                                  ),
+                                                  borderRadius:
+                                                      BorderRadius.only(
+                                                    topLeft:
+                                                        Radius.circular(6.0),
+                                                    topRight:
+                                                        Radius.circular(6.0),
+                                                    bottomLeft:
+                                                        Radius.circular(6.0),
+                                                    bottomRight:
+                                                        Radius.circular(6.0),
+                                                  ),
+                                                  hoverColor: FFAppConstants
+                                                      .indigoColor,
+                                                  hoverTextColor: FFAppConstants
+                                                      .yellowColor,
+                                                ),
+                                              ),
+                                            ),
+                                            onEnter: ((event) async {
+                                              safeSetState(() => _model
+                                                  .mouseRegionHovered = true);
+                                            }),
+                                            onExit: ((event) async {
+                                              safeSetState(() => _model
+                                                  .mouseRegionHovered = false);
+                                            }),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            if (_model.isOTPSend == true)
+                              Container(
+                                width: MediaQuery.sizeOf(context).width * 0.9,
+                                height:
+                                    MediaQuery.sizeOf(context).height * 0.45,
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(20.0),
+                                ),
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment:
+                                      (FFMainAxisAlignment.center).flutterValue,
+                                  children: [
+                                    if (_model.isOTPVerified == false)
+                                      Container(
+                                        decoration: BoxDecoration(),
+                                        child: SingleChildScrollView(
+                                          child: Column(
+                                            mainAxisSize: MainAxisSize.max,
+                                            children: [
+                                              Align(
+                                                alignment: AlignmentDirectional(
+                                                    -1.0, 0.0),
+                                                child: Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                          30.0, 40.0, 0.0, 0.0),
+                                                  child: Text(
+                                                    'Verify your details',
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          font: GoogleFonts
+                                                              .montserrat(
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                            fontStyle:
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyMedium
+                                                                    .fontStyle,
+                                                          ),
+                                                          color: FFAppConstants
+                                                              .blackColor0A0A0A,
+                                                          fontSize: 20.0,
+                                                          letterSpacing: 0.0,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          fontStyle:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodyMedium
+                                                                  .fontStyle,
+                                                        ),
+                                                  ),
+                                                ),
+                                              ),
+                                              Align(
+                                                alignment: AlignmentDirectional(
+                                                    -1.0, 0.0),
+                                                child: Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                          30.0, 15.0, 5.0, 0.0),
+                                                  child: RichText(
+                                                    textScaler:
+                                                        MediaQuery.of(context)
+                                                            .textScaler,
+                                                    text: TextSpan(
+                                                      children: [
+                                                        TextSpan(
+                                                          text:
+                                                              'Your OTP has been sent to  ',
+                                                          style: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .bodyMedium
+                                                              .override(
+                                                                font: GoogleFonts
+                                                                    .montserrat(
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w500,
+                                                                  fontStyle: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMedium
+                                                                      .fontStyle,
+                                                                ),
+                                                                color: FFAppConstants
+                                                                    .neutralBlack8F8F8F,
+                                                                fontSize: 13.0,
+                                                                letterSpacing:
+                                                                    0.0,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w500,
+                                                                fontStyle: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyMedium
+                                                                    .fontStyle,
+                                                              ),
+                                                        ),
+                                                        TextSpan(
+                                                          text: FFAppState()
+                                                              .countryCode,
+                                                          style: GoogleFonts
+                                                              .montserrat(
+                                                            color: FFAppConstants
+                                                                .indigoColor,
+                                                            fontWeight:
+                                                                FontWeight.w500,
+                                                            fontSize: 13.0,
+                                                          ),
+                                                        ),
+                                                        TextSpan(
+                                                          text: ' ',
+                                                          style: GoogleFonts
+                                                              .montserrat(
+                                                            color: FFAppConstants
+                                                                .indigoColor,
+                                                            fontWeight:
+                                                                FontWeight.w500,
+                                                            fontSize: 13.0,
+                                                          ),
+                                                        ),
+                                                        TextSpan(
+                                                          text: FFAppState()
+                                                              .phoneNo,
+                                                          style: GoogleFonts
+                                                              .montserrat(
+                                                            color: FFAppConstants
+                                                                .indigoColor,
+                                                            fontWeight:
+                                                                FontWeight.w500,
+                                                            fontSize: 13.0,
+                                                          ),
+                                                        ),
+                                                        TextSpan(
+                                                          text:
+                                                              ' through SMS & WhatsApp.',
+                                                          style: GoogleFonts
+                                                              .montserrat(
+                                                            color: FFAppConstants
+                                                                .neutralBlack8F8F8F,
+                                                            fontWeight:
+                                                                FontWeight.w500,
+                                                            fontSize: 13.0,
+                                                          ),
+                                                        )
+                                                      ],
+                                                      style: FlutterFlowTheme
+                                                              .of(context)
+                                                          .bodyMedium
+                                                          .override(
+                                                            font: GoogleFonts
+                                                                .montserrat(
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w600,
+                                                              fontStyle:
+                                                                  FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMedium
+                                                                      .fontStyle,
+                                                            ),
+                                                            color: Color(
+                                                                0xFF8F8F8F),
+                                                            letterSpacing: 0.0,
+                                                            fontWeight:
+                                                                FontWeight.w600,
+                                                            fontStyle:
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyMedium
+                                                                    .fontStyle,
+                                                          ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                              Container(
+                                                width:
+                                                    MediaQuery.sizeOf(context)
+                                                            .width *
+                                                        1.0,
+                                                decoration: BoxDecoration(),
+                                                child: Builder(
+                                                  builder: (context) => Padding(
+                                                    padding:
+                                                        EdgeInsetsDirectional
+                                                            .fromSTEB(
+                                                                30.0,
+                                                                30.0,
+                                                                30.0,
+                                                                0.0),
+                                                    child: PinCodeTextField(
+                                                      autoDisposeControllers:
+                                                          false,
+                                                      appContext: context,
+                                                      length: 4,
+                                                      textStyle:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyLarge
+                                                              .override(
+                                                                font: GoogleFonts
+                                                                    .montserrat(
+                                                                  fontWeight: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyLarge
+                                                                      .fontWeight,
+                                                                  fontStyle: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyLarge
+                                                                      .fontStyle,
+                                                                ),
+                                                                color: FFAppConstants
+                                                                    .indigoColor,
+                                                                letterSpacing:
+                                                                    0.0,
+                                                                fontWeight: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyLarge
+                                                                    .fontWeight,
+                                                                fontStyle: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyLarge
+                                                                    .fontStyle,
+                                                              ),
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceEvenly,
+                                                      enableActiveFill: true,
+                                                      autoFocus: true,
+                                                      focusNode: _model
+                                                          .pinCodeFocusNode,
+                                                      enablePinAutofill: true,
+                                                      errorTextSpace: 16.0,
+                                                      showCursor: true,
+                                                      cursorColor:
+                                                          Color(0xFF2E317E),
+                                                      obscureText: false,
+                                                      hintCharacter: '●',
+                                                      keyboardType:
+                                                          TextInputType.number,
+                                                      inputFormatters: [
+                                                        FilteringTextInputFormatter
+                                                            .digitsOnly
+                                                      ],
+                                                      pinTheme: PinTheme(
+                                                        fieldHeight: 44.0,
+                                                        fieldWidth: 44.0,
+                                                        borderWidth: 0.5,
+                                                        borderRadius:
+                                                            BorderRadius.only(
+                                                          bottomLeft:
+                                                              Radius.circular(
+                                                                  6.0),
+                                                          bottomRight:
+                                                              Radius.circular(
+                                                                  6.0),
+                                                          topLeft:
+                                                              Radius.circular(
+                                                                  6.0),
+                                                          topRight:
+                                                              Radius.circular(
+                                                                  6.0),
+                                                        ),
+                                                        shape: PinCodeFieldShape
+                                                            .box,
+                                                        activeColor:
+                                                            Color(0xFF3D3D3D),
+                                                        inactiveColor:
+                                                            Color(0xFFE0E0E0),
+                                                        selectedColor:
+                                                            Color(0xFF3D3D3D),
+                                                        activeFillColor:
+                                                            FFAppConstants
+                                                                .primaryPurpleE4D8F5,
+                                                        inactiveFillColor:
+                                                            Color(0xFFE0E0E0),
+                                                        selectedFillColor:
+                                                            Colors.white,
+                                                      ),
+                                                      controller: _model
+                                                          .pinCodeController,
+                                                      onChanged: (_) {},
+                                                      onCompleted: (_) async {
+                                                        logFirebaseEvent(
+                                                            'DAILY_CART_SCREEN_PinCode_75db3vgn_ON_PI');
+                                                        logFirebaseEvent(
+                                                            'PinCode_custom_action');
+                                                        _model.connectivityOtpResultbutton1 =
+                                                            await actions
+                                                                .checkInternetConnection();
+                                                        if (_model.pinCodeController!
+                                                                    .text !=
+                                                                '') {
+                                                          if (_model
+                                                                  .connectivityOtpResultbutton1 ==
+                                                              true) {
+                                                            logFirebaseEvent(
+                                                                'PinCode_backend_call');
+                                                            _model.apiResultVerifyOTPGuest =
+                                                                await QuickartGroup
+                                                                    .guestverifyotpCall
+                                                                    .call(
+                                                              step: '0',
+                                                              userId: (String
+                                                                  var1) {
+                                                                return int.tryParse(
+                                                                        var1 ??
+                                                                            '') ??
+                                                                    0;
+                                                              }(FFAppState()
+                                                                  .userID),
+                                                              userPhone:
+                                                                  FFAppState()
+                                                                      .phoneNo,
+                                                              otp: _model
+                                                                  .pinCodeController!
+                                                                  .text,
+                                                              dailCode:
+                                                                  FFAppState()
+                                                                      .dialCode,
+                                                              countryCode:
+                                                                  FFAppState()
+                                                                      .countryCode,
+                                                            );
+
+                                                            if ((_model
+                                                                    .apiResultVerifyOTPGuest
+                                                                    ?.succeeded ??
+                                                                true)) {
+                                                              logFirebaseEvent(
+                                                                  'PinCode_google_analytics_event');
+                                                              logFirebaseEvent(
+                                                                  'DashboardFromVerifyOtpAnalytics');
+                                                              logFirebaseEvent(
+                                                                  'PinCode_update_app_state');
+                                                              FFAppState()
+                                                                      .userID =
+                                                                  getJsonField(
+                                                                (_model.apiResultVerifyOTPGuest
+                                                                        ?.jsonBody ??
+                                                                    ''),
+                                                                r'''$.data.id''',
+                                                              ).toString();
+                                                              FFAppState()
+                                                                      .isUserLogin =
+                                                                  true;
+                                                              FFAppState()
+                                                                      .isOTPResend =
+                                                                  false;
+                                                              FFAppState()
+                                                                      .dialCode =
+                                                                  FFAppState()
+                                                                      .dialCode;
+                                                              FFAppState()
+                                                                      .userPhoneNo =
+                                                                  FFAppState()
+                                                                      .phoneNo;
+                                                              FFAppState()
+                                                                      .userCountryCode =
+                                                                  FFAppState()
+                                                                      .countryCode;
+                                                              FFAppState()
+                                                                      .countryCode =
+                                                                  FFAppState()
+                                                                      .countryCode;
+                                                              FFAppState()
+                                                                      .phoneNo =
+                                                                  FFAppState()
+                                                                      .phoneNo;
+                                                              FFAppState()
+                                                                      .userPhoneEP =
+                                                                  FFAppState()
+                                                                      .phoneNo;
+                                                              FFAppState()
+                                                                      .userCountryCodeEP =
+                                                                  FFAppState()
+                                                                      .countryCode;
+                                                              FFAppState()
+                                                                  .deleteUsserType(
+                                                                      resetState:
+                                                                          true);
+                                                              FFAppState()
+                                                                      .userDialCode =
+                                                                  FFAppState()
+                                                                      .dialCode;
+                                                              FFAppState()
+                                                                      .userPhoneProfile =
+                                                                  FFAppState()
+                                                                      .phoneNo;
+                                                              FFAppState()
+                                                                      .fcmToken =
+                                                                  FFAppState()
+                                                                      .fcmToken;
+                                                              safeSetState(
+                                                                  () {});
+                                                              logFirebaseEvent(
+                                                                  'PinCode_backend_call');
+                                                              _model.apiResultzwxIOS1buttonCopy1 =
+                                                                  await QuickartGroup
+                                                                      .appinfoCall
+                                                                      .call(
+                                                                userid:
+                                                                    FFAppState()
+                                                                        .userID,
+                                                                stroreid:
+                                                                    FFAppState()
+                                                                        .storeID,
+                                                                platform:
+                                                                    FFAppState()
+                                                                        .platform,
+                                                                fcmToken:
+                                                                    FFAppState()
+                                                                        .fcmToken,
+                                                                deviceid:
+                                                                    FFAppState()
+                                                                        .deviceID,
+                                                              );
+
+                                                              if ((_model
+                                                                      .apiResultzwxIOS1buttonCopy1
+                                                                      ?.succeeded ??
+                                                                  true)) {
+                                                                logFirebaseEvent(
+                                                                    'PinCode_update_app_state');
+                                                                FFAppState()
+                                                                        .appInfo =
+                                                                    QuickartGroup
+                                                                        .appinfoCall
+                                                                        .data(
+                                                                  (_model.apiResultzwxIOS1buttonCopy1
+                                                                          ?.jsonBody ??
+                                                                      ''),
+                                                                );
+                                                                FFAppState()
+                                                                        .userWalletstr =
+                                                                    getJsonField(
+                                                                  (_model.apiResultzwxIOS1buttonCopy1
+                                                                          ?.jsonBody ??
+                                                                      ''),
+                                                                  r'''$.data.userwallet''',
+                                                                ).toString();
+                                                                FFAppState()
+                                                                        .dashboardBanner =
+                                                                    getJsonField(
+                                                                  (_model.apiResultzwxIOS1buttonCopy1
+                                                                          ?.jsonBody ??
+                                                                      ''),
+                                                                  r'''$.data.oneapi_bg_first_image''',
+                                                                ).toString();
+                                                                FFAppState()
+                                                                    .update(
+                                                                        () {});
+                                                                logFirebaseEvent(
+                                                                    'PinCode_custom_action');
+                                                                await actions
+                                                                    .saveLoginData(
+                                                                  getJsonField(
+                                                                    (_model.apiResultVerifyOTPGuest
+                                                                            ?.jsonBody ??
+                                                                        ''),
+                                                                    r'''$.data.id''',
+                                                                  ).toString(),
+                                                                  true,
+                                                                  'yes',
+                                                                  getJsonField(
+                                                                    FFAppState()
+                                                                        .zoneInfo,
+                                                                    r'''$.store_id''',
+                                                                  ).toString(),
+                                                                  QuickartGroup
+                                                                      .appinfoCall
+                                                                      .data(
+                                                                    (_model.apiResultzwxIOS1buttonCopy1
+                                                                            ?.jsonBody ??
+                                                                        ''),
+                                                                  ),
+                                                                  getJsonField(
+                                                                    (_model.apiResultzwxIOS1buttonCopy1
+                                                                            ?.jsonBody ??
+                                                                        ''),
+                                                                    r'''$.data.userwallet''',
+                                                                  ).toString(),
+                                                                  getJsonField(
+                                                                    (_model.apiResultzwxIOS1buttonCopy1
+                                                                            ?.jsonBody ??
+                                                                        ''),
+                                                                    r'''$.oneapi_bg_first_image''',
+                                                                  ).toString(),
+                                                                  '0',
+                                                                  ' ',
+                                                                );
+                                                              } else {
+                                                                logFirebaseEvent(
+                                                                    'PinCode_show_snack_bar');
+                                                                ScaffoldMessenger.of(
+                                                                        context)
+                                                                    .showSnackBar(
+                                                                  SnackBar(
+                                                                    content:
+                                                                        Text(
+                                                                      QuickartGroup
+                                                                          .appinfoCall
+                                                                          .message(
+                                                                        (_model.apiResultzwxIOS1buttonCopy1?.jsonBody ??
+                                                                            ''),
+                                                                      )!,
+                                                                      style: GoogleFonts
+                                                                          .montserrat(
+                                                                        color: FFAppConstants
+                                                                            .indigoColor,
+                                                                        fontWeight:
+                                                                            FontWeight.w500,
+                                                                      ),
+                                                                    ),
+                                                                    duration: Duration(
+                                                                        milliseconds:
+                                                                            1000),
+                                                                    backgroundColor:
+                                                                        FFAppConstants
+                                                                            .primaryPurpleE4D8F5,
+                                                                  ),
+                                                                );
+                                                              }
+                                                            } else {
+                                                              logFirebaseEvent(
+                                                                  'PinCode_alert_dialog');
+                                                              await showDialog(
+                                                                context:
+                                                                    context,
+                                                                builder:
+                                                                    (dialogContext) {
+                                                                  return Dialog(
+                                                                    elevation:
+                                                                        0,
+                                                                    insetPadding:
+                                                                        EdgeInsets
+                                                                            .zero,
+                                                                    backgroundColor:
+                                                                        Colors
+                                                                            .transparent,
+                                                                    alignment: AlignmentDirectional(
+                                                                            0.0,
+                                                                            0.0)
+                                                                        .resolve(
+                                                                            Directionality.of(context)),
+                                                                    child:
+                                                                        GestureDetector(
+                                                                      onTap:
+                                                                          () {
+                                                                        FocusScope.of(dialogContext)
+                                                                            .unfocus();
+                                                                        FocusManager
+                                                                            .instance
+                                                                            .primaryFocus
+                                                                            ?.unfocus();
+                                                                      },
+                                                                      child:
+                                                                          CustomAlertDailogWidget(
+                                                                        des: QuickartGroup
+                                                                            .guestverifyotpCall
+                                                                            .message(
+                                                                          (_model.apiResultVerifyOTPGuest?.jsonBody ??
+                                                                              ''),
+                                                                        )!,
+                                                                        height:
+                                                                            150.0,
+                                                                        title:
+                                                                            ' ',
+                                                                      ),
+                                                                    ),
+                                                                  );
+                                                                },
+                                                              );
+                                                            }
+                                                          } else {
+                                                            logFirebaseEvent(
+                                                                'PinCode_show_snack_bar');
+                                                            ScaffoldMessenger
+                                                                    .of(context)
+                                                                .showSnackBar(
+                                                              SnackBar(
+                                                                content: Text(
+                                                                  FFAppConstants
+                                                                      .internetString,
+                                                                  style:
+                                                                      TextStyle(
+                                                                    color: FFAppConstants
+                                                                        .indigoColor,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w500,
+                                                                    fontSize:
+                                                                        14.0,
+                                                                  ),
+                                                                ),
+                                                                duration: Duration(
+                                                                    milliseconds:
+                                                                        4000),
+                                                                backgroundColor:
+                                                                    FFAppConstants
+                                                                        .primaryPurpleE4D8F5,
+                                                              ),
+                                                            );
+                                                          }
+                                                        } else {
+                                                          logFirebaseEvent(
+                                                              'PinCode_show_snack_bar');
+                                                          ScaffoldMessenger.of(
+                                                                  context)
+                                                              .showSnackBar(
+                                                            SnackBar(
+                                                              content: Text(
+                                                                'Plese enter OTP',
+                                                                style:
+                                                                    TextStyle(
+                                                                  color: FFAppConstants
+                                                                      .indigoColor,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w500,
+                                                                  fontSize:
+                                                                      14.0,
+                                                                ),
+                                                              ),
+                                                              duration: Duration(
+                                                                  milliseconds:
+                                                                      1200),
+                                                              backgroundColor:
+                                                                  FFAppConstants
+                                                                      .primaryPurpleE4D8F5,
+                                                            ),
+                                                          );
+                                                        }
+
+                                                        safeSetState(() {});
+                                                      },
+                                                      autovalidateMode:
+                                                          AutovalidateMode
+                                                              .onUserInteraction,
+                                                      validator: _model
+                                                          .pinCodeControllerValidator
+                                                          .asValidator(context),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                              Padding(
+                                                padding: EdgeInsetsDirectional
+                                                    .fromSTEB(
+                                                        0.0, 0.0, 30.0, 0.0),
+                                                child: Row(
+                                                  mainAxisSize:
+                                                      MainAxisSize.max,
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.end,
+                                                  children: [
+                                                    Padding(
+                                                      padding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  20.0,
+                                                                  0.0,
+                                                                  0.0,
+                                                                  0.0),
+                                                      child: Text(
+                                                        'Didn’t receive OTP?',
+                                                        style: FlutterFlowTheme
+                                                                .of(context)
+                                                            .bodyMedium
+                                                            .override(
+                                                              font: GoogleFonts
+                                                                  .montserrat(
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold,
+                                                                fontStyle: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyMedium
+                                                                    .fontStyle,
+                                                              ),
+                                                              color: FFAppConstants
+                                                                  .neutralBlack8F8F8F,
+                                                              fontSize: 13.0,
+                                                              letterSpacing:
+                                                                  0.0,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold,
+                                                              fontStyle:
+                                                                  FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMedium
+                                                                      .fontStyle,
+                                                            ),
+                                                      ),
+                                                    ),
+                                                    Builder(
+                                                      builder: (context) {
+                                                        if (FFAppState()
+                                                            .isOTPResend) {
+                                                          return InkWell(
+                                                            splashColor: Colors
+                                                                .transparent,
+                                                            focusColor: Colors
+                                                                .transparent,
+                                                            hoverColor: Colors
+                                                                .transparent,
+                                                            highlightColor:
+                                                                Colors
+                                                                    .transparent,
+                                                            onTap: () async {
+                                                              logFirebaseEvent(
+                                                                  'DAILY_CART_SCREEN_Text_kr520x3r_ON_TAP');
+                                                              logFirebaseEvent(
+                                                                  'Text_custom_action');
+                                                              _model.connectivityResultResendOTPWA =
+                                                                  await actions
+                                                                      .checkInternetConnection();
+                                                              if (_model
+                                                                      .connectivityResultResendOTPWA ==
+                                                                  true) {
+                                                                logFirebaseEvent(
+                                                                    'Text_update_page_state');
+                                                                _model.isLoadingIndicator =
+                                                                    true;
+                                                                safeSetState(
+                                                                    () {});
+                                                                logFirebaseEvent(
+                                                                    'Text_backend_call');
+                                                                _model.resendOTPResponse1 =
+                                                                    await QuickartGroup
+                                                                        .resendOTPCall
+                                                                        .call(
+                                                                  countryCode:
+                                                                      FFAppState()
+                                                                          .countryCode,
+                                                                  phonoNo:
+                                                                      FFAppState()
+                                                                          .phoneNo,
+                                                                  platform:
+                                                                      FFAppState()
+                                                                          .platform,
+                                                                );
+
+                                                                if ((_model
+                                                                        .resendOTPResponse1
+                                                                        ?.succeeded ??
+                                                                    true)) {
+                                                                  logFirebaseEvent(
+                                                                      'Text_update_app_state');
+                                                                  FFAppState()
+                                                                          .isOTPResend =
+                                                                      true;
+                                                                  FFAppState()
+                                                                          .otpContainer =
+                                                                      false;
+                                                                  safeSetState(
+                                                                      () {});
+                                                                  logFirebaseEvent(
+                                                                      'Text_update_page_state');
+                                                                  _model.isLoadingIndicator =
+                                                                      false;
+                                                                  safeSetState(
+                                                                      () {});
+                                                                  logFirebaseEvent(
+                                                                      'Text_show_snack_bar');
+                                                                  ScaffoldMessenger.of(
+                                                                          context)
+                                                                      .showSnackBar(
+                                                                    SnackBar(
+                                                                      content:
+                                                                          Text(
+                                                                        getJsonField(
+                                                                          (_model.resendOTPResponse1?.jsonBody ??
+                                                                              ''),
+                                                                          r'''$.message''',
+                                                                        ).toString(),
+                                                                        style:
+                                                                            TextStyle(
+                                                                          color:
+                                                                              FFAppConstants.indigoColor,
+                                                                          fontWeight:
+                                                                              FontWeight.w500,
+                                                                          fontSize:
+                                                                              14.0,
+                                                                        ),
+                                                                        textAlign:
+                                                                            TextAlign.start,
+                                                                      ),
+                                                                      duration: Duration(
+                                                                          milliseconds:
+                                                                              4000),
+                                                                      backgroundColor:
+                                                                          FFAppConstants
+                                                                              .primaryPurpleE4D8F5,
+                                                                    ),
+                                                                  );
+                                                                } else {
+                                                                  logFirebaseEvent(
+                                                                      'Text_show_snack_bar');
+                                                                  ScaffoldMessenger.of(
+                                                                          context)
+                                                                      .showSnackBar(
+                                                                    SnackBar(
+                                                                      content:
+                                                                          Text(
+                                                                        getJsonField(
+                                                                          (_model.resendOTPResponse1?.jsonBody ??
+                                                                              ''),
+                                                                          r'''$.message''',
+                                                                        ).toString(),
+                                                                        style:
+                                                                            TextStyle(
+                                                                          color:
+                                                                              FFAppConstants.indigoColor,
+                                                                          fontWeight:
+                                                                              FontWeight.w500,
+                                                                          fontSize:
+                                                                              14.0,
+                                                                        ),
+                                                                        textAlign:
+                                                                            TextAlign.start,
+                                                                      ),
+                                                                      duration: Duration(
+                                                                          milliseconds:
+                                                                              2050),
+                                                                      backgroundColor:
+                                                                          FFAppConstants
+                                                                              .primaryPurpleE4D8F5,
+                                                                    ),
+                                                                  );
+                                                                  logFirebaseEvent(
+                                                                      'Text_update_page_state');
+                                                                  _model.isLoadingIndicator =
+                                                                      false;
+                                                                  safeSetState(
+                                                                      () {});
+                                                                }
+                                                              } else {
+                                                                logFirebaseEvent(
+                                                                    'Text_show_snack_bar');
+                                                                ScaffoldMessenger.of(
+                                                                        context)
+                                                                    .showSnackBar(
+                                                                  SnackBar(
+                                                                    content:
+                                                                        Text(
+                                                                      FFAppConstants
+                                                                          .internetString,
+                                                                      style: GoogleFonts
+                                                                          .montserrat(
+                                                                        color: FFAppConstants
+                                                                            .indigoColor,
+                                                                      ),
+                                                                    ),
+                                                                    duration: Duration(
+                                                                        milliseconds:
+                                                                            1200),
+                                                                    backgroundColor:
+                                                                        FFAppConstants
+                                                                            .primaryPurpleE4D8F5,
+                                                                  ),
+                                                                );
+                                                              }
+
+                                                              safeSetState(
+                                                                  () {});
+                                                            },
+                                                            child: Text(
+                                                              'Resend',
+                                                              style: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .bodyMedium
+                                                                  .override(
+                                                                    font: GoogleFonts
+                                                                        .montserrat(
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold,
+                                                                      fontStyle: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .bodyMedium
+                                                                          .fontStyle,
+                                                                    ),
+                                                                    color: FFAppConstants
+                                                                        .neutralBlack8F8F8F,
+                                                                    fontSize:
+                                                                        13.0,
+                                                                    letterSpacing:
+                                                                        0.0,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .bold,
+                                                                    fontStyle: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .bodyMedium
+                                                                        .fontStyle,
+                                                                  ),
+                                                            ),
+                                                          );
+                                                        } else {
+                                                          return Align(
+                                                            alignment:
+                                                                AlignmentDirectional(
+                                                                    -1.0, 0.0),
+                                                            child: Padding(
+                                                              padding:
+                                                                  EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          0.0,
+                                                                          2.0,
+                                                                          0.0,
+                                                                          0.0),
+                                                              child:
+                                                                  FlutterFlowTimer(
+                                                                initialTime: _model
+                                                                    .timerInitialTimeMs,
+                                                                getDisplayTime:
+                                                                    (value) =>
+                                                                        StopWatchTimer
+                                                                            .getDisplayTime(
+                                                                  value,
+                                                                  hours: false,
+                                                                  milliSecond:
+                                                                      false,
+                                                                ),
+                                                                controller: _model
+                                                                    .timerController,
+                                                                updateStateInterval:
+                                                                    Duration(
+                                                                        milliseconds:
+                                                                            1000),
+                                                                onChanged: (value,
+                                                                    displayTime,
+                                                                    shouldUpdate) {
+                                                                  _model.timerMilliseconds =
+                                                                      value;
+                                                                  _model.timerValue =
+                                                                      displayTime;
+                                                                  if (shouldUpdate)
+                                                                    safeSetState(
+                                                                        () {});
+                                                                },
+                                                                onEnded:
+                                                                    () async {
+                                                                  logFirebaseEvent(
+                                                                      'DAILY_CART_SCREEN_Timer_2cvck79c_ON_TIME');
+                                                                  logFirebaseEvent(
+                                                                      'Timer_show_snack_bar');
+                                                                  ScaffoldMessenger.of(
+                                                                          context)
+                                                                      .showSnackBar(
+                                                                    SnackBar(
+                                                                      content:
+                                                                          Text(
+                                                                        'OTP has been expired. Please click resend to get new OTP',
+                                                                        style: GoogleFonts
+                                                                            .montserrat(
+                                                                          color:
+                                                                              FFAppConstants.indigoColor,
+                                                                          fontWeight:
+                                                                              FontWeight.w500,
+                                                                          fontSize:
+                                                                              14.0,
+                                                                        ),
+                                                                      ),
+                                                                      duration: Duration(
+                                                                          milliseconds:
+                                                                              1500),
+                                                                      backgroundColor:
+                                                                          FFAppConstants
+                                                                              .primaryPurpleE4D8F5,
+                                                                    ),
+                                                                  );
+                                                                  logFirebaseEvent(
+                                                                      'Timer_update_app_state');
+                                                                  FFAppState()
+                                                                          .isOTPResend =
+                                                                      true;
+                                                                  safeSetState(
+                                                                      () {});
+                                                                },
+                                                                textAlign:
+                                                                    TextAlign
+                                                                        .start,
+                                                                style: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .headlineSmall
+                                                                    .override(
+                                                                      font: GoogleFonts
+                                                                          .montserrat(
+                                                                        fontWeight: FlutterFlowTheme.of(context)
+                                                                            .headlineSmall
+                                                                            .fontWeight,
+                                                                        fontStyle: FlutterFlowTheme.of(context)
+                                                                            .headlineSmall
+                                                                            .fontStyle,
+                                                                      ),
+                                                                      color: Color(
+                                                                          0xFF8F8F8F),
+                                                                      fontSize:
+                                                                          13.0,
+                                                                      letterSpacing:
+                                                                          0.0,
+                                                                      fontWeight: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .headlineSmall
+                                                                          .fontWeight,
+                                                                      fontStyle: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .headlineSmall
+                                                                          .fontStyle,
+                                                                    ),
+                                                              ),
+                                                            ),
+                                                          );
+                                                        }
+                                                      },
+                                                    ),
+                                                  ].divide(
+                                                      SizedBox(width: 20.0)),
+                                                ),
+                                              ),
+                                              Builder(
+                                                builder: (context) => Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                          0.0, 50.0, 0.0, 0.0),
+                                                  child: FFButtonWidget(
+                                                    onPressed: () async {
+                                                      logFirebaseEvent(
+                                                          'DAILY_CART_SCREEN_VERIFY__CONTINUE_BTN_O');
+                                                      logFirebaseEvent(
+                                                          'Button_custom_action');
+                                                      _model.connectivityOtpResultbutton =
+                                                          await actions
+                                                              .checkInternetConnection();
+                                                      if (_model.pinCodeController!
+                                                                  .text !=
+                                                              '') {
+                                                        if (_model
+                                                                .connectivityOtpResultbutton ==
+                                                            true) {
+                                                          logFirebaseEvent(
+                                                              'Button_backend_call');
+                                                          _model.apiResultVerifyOTPbutton =
+                                                              await QuickartGroup
+                                                                  .guestverifyotpCall
+                                                                  .call(
+                                                            step: '0',
+                                                            userId:
+                                                                (String var1) {
+                                                              return int.tryParse(
+                                                                      var1 ??
+                                                                          '') ??
+                                                                  0;
+                                                            }(FFAppState()
+                                                                    .userID),
+                                                            userPhone:
+                                                                FFAppState()
+                                                                    .phoneNo,
+                                                            otp: _model
+                                                                .pinCodeController!
+                                                                .text,
+                                                            dailCode:
+                                                                FFAppState()
+                                                                    .dialCode,
+                                                            countryCode:
+                                                                FFAppState()
+                                                                    .countryCode,
+                                                          );
+
+                                                          if ((_model
+                                                                  .apiResultVerifyOTPbutton
+                                                                  ?.succeeded ??
+                                                              true)) {
+                                                            logFirebaseEvent(
+                                                                'Button_google_analytics_event');
+                                                            logFirebaseEvent(
+                                                                'DashboardFromVerifyOtpAnalytics');
+                                                            logFirebaseEvent(
+                                                                'Button_update_app_state');
+                                                            FFAppState()
+                                                                    .userID =
+                                                                getJsonField(
+                                                              (_model.apiResultVerifyOTPbutton
+                                                                      ?.jsonBody ??
+                                                                  ''),
+                                                              r'''$.data.id''',
+                                                            ).toString();
+                                                            FFAppState()
+                                                                    .isUserLogin =
+                                                                true;
+                                                            FFAppState()
+                                                                    .isOTPResend =
+                                                                false;
+                                                            FFAppState()
+                                                                    .dialCode =
+                                                                getJsonField(
+                                                              (_model.apiResultVerifyOTPbutton
+                                                                      ?.jsonBody ??
+                                                                  ''),
+                                                              r'''$.data.dial_code''',
+                                                            ).toString();
+                                                            FFAppState()
+                                                                    .userPhoneNo =
+                                                                getJsonField(
+                                                              (_model.apiResultVerifyOTPbutton
+                                                                      ?.jsonBody ??
+                                                                  ''),
+                                                              r'''$.data.user_phone''',
+                                                            ).toString();
+                                                            FFAppState()
+                                                                    .userCountryCode =
+                                                                getJsonField(
+                                                              (_model.apiResultVerifyOTPbutton
+                                                                      ?.jsonBody ??
+                                                                  ''),
+                                                              r'''$.data.country_code''',
+                                                            ).toString();
+                                                            FFAppState()
+                                                                    .countryCode =
+                                                                getJsonField(
+                                                              (_model.apiResultVerifyOTPbutton
+                                                                      ?.jsonBody ??
+                                                                  ''),
+                                                              r'''$.data.country_code''',
+                                                            ).toString();
+                                                            FFAppState()
+                                                                    .phoneNo =
+                                                                getJsonField(
+                                                              (_model.apiResultVerifyOTPbutton
+                                                                      ?.jsonBody ??
+                                                                  ''),
+                                                              r'''$.data.user_phone''',
+                                                            ).toString();
+                                                            FFAppState()
+                                                                    .userPhoneEP =
+                                                                getJsonField(
+                                                              (_model.apiResultVerifyOTPbutton
+                                                                      ?.jsonBody ??
+                                                                  ''),
+                                                              r'''$.data.user_phone''',
+                                                            ).toString();
+                                                            FFAppState()
+                                                                    .userCountryCodeEP =
+                                                                getJsonField(
+                                                              (_model.apiResultVerifyOTPbutton
+                                                                      ?.jsonBody ??
+                                                                  ''),
+                                                              r'''$.data.country_code''',
+                                                            ).toString();
+                                                            FFAppState()
+                                                                .deleteUsserType(
+                                                                    resetState:
+                                                                        true);
+                                                            FFAppState()
+                                                                    .userDialCode =
+                                                                getJsonField(
+                                                              (_model.apiResultVerifyOTPbutton
+                                                                      ?.jsonBody ??
+                                                                  ''),
+                                                              r'''$.data.dial_code''',
+                                                            ).toString();
+                                                            FFAppState()
+                                                                    .userPhoneProfile =
+                                                                getJsonField(
+                                                              (_model.apiResultVerifyOTPbutton
+                                                                      ?.jsonBody ??
+                                                                  ''),
+                                                              r'''$.data.user_phone''',
+                                                            ).toString();
+                                                            FFAppState()
+                                                                    .fcmToken =
+                                                                FFAppState()
+                                                                    .fcmToken;
+                                                            safeSetState(() {});
+                                                            logFirebaseEvent(
+                                                                'Button_update_page_state');
+                                                            _model.isOTPVerified =
+                                                                true;
+                                                            safeSetState(() {});
+                                                            logFirebaseEvent(
+                                                                'Button_backend_call');
+                                                            _model.apiResultzwxIOS1button =
+                                                                await QuickartGroup
+                                                                    .appinfoCall
+                                                                    .call(
+                                                              userid:
+                                                                  FFAppState()
+                                                                      .userID,
+                                                              stroreid:
+                                                                  FFAppState()
+                                                                      .storeID,
+                                                              platform:
+                                                                  FFAppState()
+                                                                      .platform,
+                                                              fcmToken:
+                                                                  FFAppState()
+                                                                      .fcmToken,
+                                                              deviceid:
+                                                                  FFAppState()
+                                                                      .deviceID,
+                                                            );
+
+                                                            if ((_model
+                                                                    .apiResultzwxIOS1button
+                                                                    ?.succeeded ??
+                                                                true)) {
+                                                              logFirebaseEvent(
+                                                                  'Button_update_app_state');
+                                                              FFAppState()
+                                                                      .appInfo =
+                                                                  getJsonField(
+                                                                (_model.apiResultzwxIOS1button
+                                                                        ?.jsonBody ??
+                                                                    ''),
+                                                                r'''$.data''',
+                                                              );
+                                                              FFAppState()
+                                                                      .userWalletstr =
+                                                                  getJsonField(
+                                                                (_model.apiResultzwxIOS1button
+                                                                        ?.jsonBody ??
+                                                                    ''),
+                                                                r'''$.data.userwallet''',
+                                                              ).toString();
+                                                              FFAppState()
+                                                                      .dashboardBanner =
+                                                                  getJsonField(
+                                                                (_model.apiResultzwxIOS1button
+                                                                        ?.jsonBody ??
+                                                                    ''),
+                                                                r'''$.oneapi_bg_first_image''',
+                                                              ).toString();
+                                                              FFAppState()
+                                                                  .update(
+                                                                      () {});
+                                                              logFirebaseEvent(
+                                                                  'Button_custom_action');
+                                                              await actions
+                                                                  .saveLoginData(
+                                                                getJsonField(
+                                                                  (_model.apiResultVerifyOTPbutton
+                                                                          ?.jsonBody ??
+                                                                      ''),
+                                                                  r'''$.data.id''',
+                                                                ).toString(),
+                                                                true,
+                                                                'yes',
+                                                                '7',
+                                                                getJsonField(
+                                                                  (_model.apiResultzwxIOS1button
+                                                                          ?.jsonBody ??
+                                                                      ''),
+                                                                  r'''$.data''',
+                                                                ),
+                                                                getJsonField(
+                                                                  (_model.apiResultzwxIOS1button
+                                                                          ?.jsonBody ??
+                                                                      ''),
+                                                                  r'''$.data.userwallet''',
+                                                                ).toString(),
+                                                                getJsonField(
+                                                                  (_model.apiResultzwxIOS1button
+                                                                          ?.jsonBody ??
+                                                                      ''),
+                                                                  r'''$.oneapi_bg_first_image''',
+                                                                ).toString(),
+                                                                '0',
+                                                                ' ',
+                                                              );
+                                                            } else {
+                                                              logFirebaseEvent(
+                                                                  'Button_show_snack_bar');
+                                                              ScaffoldMessenger
+                                                                      .of(context)
+                                                                  .showSnackBar(
+                                                                SnackBar(
+                                                                  content: Text(
+                                                                    getJsonField(
+                                                                      (_model.apiResultzwxIOS1button
+                                                                              ?.jsonBody ??
+                                                                          ''),
+                                                                      r'''$.message''',
+                                                                    ).toString(),
+                                                                    style: GoogleFonts
+                                                                        .montserrat(
+                                                                      color: FFAppConstants
+                                                                          .indigoColor,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w500,
+                                                                    ),
+                                                                  ),
+                                                                  duration: Duration(
+                                                                      milliseconds:
+                                                                          1000),
+                                                                  backgroundColor:
+                                                                      FFAppConstants
+                                                                          .primaryPurpleE4D8F5,
+                                                                ),
+                                                              );
+                                                            }
+                                                          } else {
+                                                            logFirebaseEvent(
+                                                                'Button_alert_dialog');
+                                                            await showDialog(
+                                                              context: context,
+                                                              builder:
+                                                                  (dialogContext) {
+                                                                return Dialog(
+                                                                  elevation: 0,
+                                                                  insetPadding:
+                                                                      EdgeInsets
+                                                                          .zero,
+                                                                  backgroundColor:
+                                                                      Colors
+                                                                          .transparent,
+                                                                  alignment: AlignmentDirectional(
+                                                                          0.0,
+                                                                          0.0)
+                                                                      .resolve(
+                                                                          Directionality.of(
+                                                                              context)),
+                                                                  child:
+                                                                      GestureDetector(
+                                                                    onTap: () {
+                                                                      FocusScope.of(
+                                                                              dialogContext)
+                                                                          .unfocus();
+                                                                      FocusManager
+                                                                          .instance
+                                                                          .primaryFocus
+                                                                          ?.unfocus();
+                                                                    },
+                                                                    child:
+                                                                        CustomAlertDailogWidget(
+                                                                      des:
+                                                                          getJsonField(
+                                                                        (_model.apiResultVerifyOTPbutton?.jsonBody ??
+                                                                            ''),
+                                                                        r'''$.message''',
+                                                                      ).toString(),
+                                                                      height:
+                                                                          150.0,
+                                                                      title:
+                                                                          ' ',
+                                                                    ),
+                                                                  ),
+                                                                );
+                                                              },
+                                                            );
+                                                          }
+                                                        } else {
+                                                          logFirebaseEvent(
+                                                              'Button_show_snack_bar');
+                                                          ScaffoldMessenger.of(
+                                                                  context)
+                                                              .showSnackBar(
+                                                            SnackBar(
+                                                              content: Text(
+                                                                FFAppConstants
+                                                                    .internetString,
+                                                                style:
+                                                                    TextStyle(
+                                                                  color: FFAppConstants
+                                                                      .indigoColor,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w500,
+                                                                  fontSize:
+                                                                      14.0,
+                                                                ),
+                                                              ),
+                                                              duration: Duration(
+                                                                  milliseconds:
+                                                                      4000),
+                                                              backgroundColor:
+                                                                  FFAppConstants
+                                                                      .primaryPurpleE4D8F5,
+                                                            ),
+                                                          );
+                                                        }
+                                                      } else {
+                                                        logFirebaseEvent(
+                                                            'Button_show_snack_bar');
+                                                        ScaffoldMessenger.of(
+                                                                context)
+                                                            .showSnackBar(
+                                                          SnackBar(
+                                                            content: Text(
+                                                              'Plese enter OTP',
+                                                              style: TextStyle(
+                                                                color: FFAppConstants
+                                                                    .indigoColor,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w500,
+                                                                fontSize: 14.0,
+                                                              ),
+                                                            ),
+                                                            duration: Duration(
+                                                                milliseconds:
+                                                                    1200),
+                                                            backgroundColor:
+                                                                FFAppConstants
+                                                                    .primaryPurpleE4D8F5,
+                                                          ),
+                                                        );
+                                                      }
+
+                                                      safeSetState(() {});
+                                                    },
+                                                    text: 'Verify & Continue',
+                                                    options: FFButtonOptions(
+                                                      width: 320.0,
+                                                      height: 48.0,
+                                                      padding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  24.0,
+                                                                  0.0,
+                                                                  24.0,
+                                                                  0.0),
+                                                      iconPadding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  0.0,
+                                                                  0.0,
+                                                                  0.0,
+                                                                  0.0),
+                                                      color: FFAppConstants
+                                                          .indigoColor,
+                                                      textStyle:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .titleSmall
+                                                              .override(
+                                                                font: GoogleFonts
+                                                                    .montserrat(
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
+                                                                  fontStyle: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .titleSmall
+                                                                      .fontStyle,
+                                                                ),
+                                                                color: FFAppConstants
+                                                                    .whiteColor,
+                                                                letterSpacing:
+                                                                    0.0,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold,
+                                                                fontStyle: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .titleSmall
+                                                                    .fontStyle,
+                                                              ),
+                                                      elevation: 3.0,
+                                                      borderSide: BorderSide(
+                                                        color:
+                                                            Colors.transparent,
+                                                        width: 1.0,
+                                                      ),
+                                                      borderRadius:
+                                                          BorderRadius.only(
+                                                        topLeft:
+                                                            Radius.circular(
+                                                                6.0),
+                                                        topRight:
+                                                            Radius.circular(
+                                                                6.0),
+                                                        bottomLeft:
+                                                            Radius.circular(
+                                                                6.0),
+                                                        bottomRight:
+                                                            Radius.circular(
+                                                                6.0),
+                                                      ),
+                                                      hoverColor: FFAppConstants
+                                                          .indigoColor,
+                                                      hoverTextColor:
+                                                          FFAppConstants
+                                                              .yellowColor,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    if (_model.isOTPVerified == true)
+                                      Container(
+                                        decoration: BoxDecoration(),
+                                        child: SingleChildScrollView(
+                                          child: Column(
+                                            mainAxisSize: MainAxisSize.max,
+                                            children: [
+                                              Align(
+                                                alignment: AlignmentDirectional(
+                                                    -1.0, 0.0),
+                                                child: Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                          30.0, 0.0, 0.0, 15.0),
+                                                  child: Text(
+                                                    'Add your details',
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          font: GoogleFonts
+                                                              .montserrat(
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                            fontStyle:
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyMedium
+                                                                    .fontStyle,
+                                                          ),
+                                                          color: FFAppConstants
+                                                              .blackColor0A0A0A,
+                                                          fontSize: 20.0,
+                                                          letterSpacing: 0.0,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          fontStyle:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodyMedium
+                                                                  .fontStyle,
+                                                        ),
+                                                  ),
+                                                ),
+                                              ),
+                                              Padding(
+                                                padding: EdgeInsetsDirectional
+                                                    .fromSTEB(
+                                                        20.0, 15.0, 20.0, 0.0),
+                                                child: Container(
+                                                  width:
+                                                      MediaQuery.sizeOf(context)
+                                                              .width *
+                                                          1.0,
+                                                  height: 36.0,
+                                                  decoration: BoxDecoration(
+                                                    color: FFAppConstants
+                                                        .neutralWhiteF5F5F5,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            8.0),
+                                                    border: Border.all(
+                                                      color: FFAppConstants
+                                                          .neutralBlackE0E0E0,
+                                                      width: 1.0,
+                                                    ),
+                                                  ),
+                                                  child: Container(
+                                                    width: MediaQuery.sizeOf(
+                                                                context)
+                                                            .width *
+                                                        1.0,
+                                                    child: TextFormField(
+                                                      controller: _model
+                                                          .textController2,
+                                                      focusNode: _model
+                                                          .textFieldFocusNode2,
+                                                      autofocus: false,
+                                                      obscureText: false,
+                                                      decoration:
+                                                          InputDecoration(
+                                                        labelStyle:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .labelMedium
+                                                                .override(
+                                                                  font: GoogleFonts
+                                                                      .montserrat(
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w500,
+                                                                    fontStyle: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .labelMedium
+                                                                        .fontStyle,
+                                                                  ),
+                                                                  color: FFAppConstants
+                                                                      .blackColor0A0A0A,
+                                                                  letterSpacing:
+                                                                      0.0,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w500,
+                                                                  fontStyle: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .labelMedium
+                                                                      .fontStyle,
+                                                                ),
+                                                        hintText: 'Enter Name',
+                                                        hintStyle:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .labelMedium
+                                                                .override(
+                                                                  font: GoogleFonts
+                                                                      .montserrat(
+                                                                    fontWeight: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .labelMedium
+                                                                        .fontWeight,
+                                                                    fontStyle: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .labelMedium
+                                                                        .fontStyle,
+                                                                  ),
+                                                                  letterSpacing:
+                                                                      0.0,
+                                                                  fontWeight: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .labelMedium
+                                                                      .fontWeight,
+                                                                  fontStyle: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .labelMedium
+                                                                      .fontStyle,
+                                                                ),
+                                                        enabledBorder:
+                                                            OutlineInputBorder(
+                                                          borderSide:
+                                                              BorderSide(
+                                                            color: Color(
+                                                                0x00000000),
+                                                            width: 0.0,
+                                                          ),
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      8.0),
+                                                        ),
+                                                        focusedBorder:
+                                                            OutlineInputBorder(
+                                                          borderSide:
+                                                              BorderSide(
+                                                            color: Color(
+                                                                0x00000000),
+                                                            width: 0.0,
+                                                          ),
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      8.0),
+                                                        ),
+                                                        errorBorder:
+                                                            OutlineInputBorder(
+                                                          borderSide:
+                                                              BorderSide(
+                                                            color: Color(
+                                                                0x00000000),
+                                                            width: 0.0,
+                                                          ),
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      8.0),
+                                                        ),
+                                                        focusedErrorBorder:
+                                                            OutlineInputBorder(
+                                                          borderSide:
+                                                              BorderSide(
+                                                            color: Color(
+                                                                0x00000000),
+                                                            width: 0.0,
+                                                          ),
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      8.0),
+                                                        ),
+                                                        contentPadding:
+                                                            EdgeInsetsDirectional
+                                                                .fromSTEB(
+                                                                    5.0,
+                                                                    5.0,
+                                                                    5.0,
+                                                                    0.0),
+                                                      ),
+                                                      style: FlutterFlowTheme
+                                                              .of(context)
+                                                          .bodyMedium
+                                                          .override(
+                                                            font: GoogleFonts
+                                                                .montserrat(
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w500,
+                                                              fontStyle:
+                                                                  FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMedium
+                                                                      .fontStyle,
+                                                            ),
+                                                            color: FFAppConstants
+                                                                .blackColor0A0A0A,
+                                                            letterSpacing: 0.0,
+                                                            fontWeight:
+                                                                FontWeight.w500,
+                                                            fontStyle:
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyMedium
+                                                                    .fontStyle,
+                                                          ),
+                                                      keyboardType:
+                                                          TextInputType.name,
+                                                      validator: _model
+                                                          .textController2Validator
+                                                          .asValidator(context),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                              Align(
+                                                alignment: AlignmentDirectional(
+                                                    0.0, 0.0),
+                                                child: Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                          0.0, 15.0, 0.0, 0.0),
+                                                  child: Container(
+                                                    width: MediaQuery.sizeOf(
+                                                                context)
+                                                            .width *
+                                                        1.0,
+                                                    decoration: BoxDecoration(
+                                                      color: FFAppConstants
+                                                          .whiteColor,
+                                                    ),
+                                                    child:
+                                                        SingleChildScrollView(
+                                                      child: Column(
+                                                        mainAxisSize:
+                                                            MainAxisSize.max,
+                                                        children: [
+                                                          Align(
+                                                            alignment:
+                                                                AlignmentDirectional(
+                                                                    -1.0, 0.0),
+                                                            child: Form(
+                                                              key: _model
+                                                                  .formKey,
+                                                              autovalidateMode:
+                                                                  AutovalidateMode
+                                                                      .disabled,
+                                                              child: Column(
+                                                                mainAxisSize:
+                                                                    MainAxisSize
+                                                                        .max,
+                                                                children: [
+                                                                  Padding(
+                                                                    padding: EdgeInsetsDirectional
+                                                                        .fromSTEB(
+                                                                            20.0,
+                                                                            10.0,
+                                                                            20.0,
+                                                                            0.0),
+                                                                    child:
+                                                                        Container(
+                                                                      height:
+                                                                          40.0,
+                                                                      decoration:
+                                                                          BoxDecoration(
+                                                                        color: FFAppConstants
+                                                                            .neutralWhiteF5F5F5,
+                                                                        borderRadius:
+                                                                            BorderRadius.only(
+                                                                          topLeft:
+                                                                              Radius.circular(5.0),
+                                                                          topRight:
+                                                                              Radius.circular(5.0),
+                                                                          bottomLeft:
+                                                                              Radius.circular(5.0),
+                                                                          bottomRight:
+                                                                              Radius.circular(5.0),
+                                                                        ),
+                                                                        border:
+                                                                            Border.all(
+                                                                          color:
+                                                                              FFAppConstants.neutralBlackE0E0E0,
+                                                                          width:
+                                                                              1.0,
+                                                                        ),
+                                                                      ),
+                                                                      child:
+                                                                          TextFormField(
+                                                                        controller:
+                                                                            _model.txtEmailTextController,
+                                                                        focusNode:
+                                                                            _model.txtEmailFocusNode,
+                                                                        onChanged:
+                                                                            (_) =>
+                                                                                EasyDebounce.debounce(
+                                                                          '_model.txtEmailTextController',
+                                                                          Duration(
+                                                                              milliseconds: 2000),
+                                                                          () async {
+                                                                            logFirebaseEvent('DAILY_CART_SCREEN_txtEmail_ON_TEXTFIELD_');
+                                                                            logFirebaseEvent('txtEmail_update_page_state');
+
+                                                                            safeSetState(() {});
+                                                                          },
+                                                                        ),
+                                                                        autofocus:
+                                                                            true,
+                                                                        obscureText:
+                                                                            false,
+                                                                        decoration:
+                                                                            InputDecoration(
+                                                                          labelStyle: FlutterFlowTheme.of(context)
+                                                                              .labelMedium
+                                                                              .override(
+                                                                                font: GoogleFonts.montserrat(
+                                                                                  fontWeight: FontWeight.w500,
+                                                                                  fontStyle: FlutterFlowTheme.of(context).labelMedium.fontStyle,
+                                                                                ),
+                                                                                color: FlutterFlowTheme.of(context).secondaryText,
+                                                                                letterSpacing: 0.0,
+                                                                                fontWeight: FontWeight.w500,
+                                                                                fontStyle: FlutterFlowTheme.of(context).labelMedium.fontStyle,
+                                                                              ),
+                                                                          hintText:
+                                                                              'Enter  Email',
+                                                                          enabledBorder:
+                                                                              OutlineInputBorder(
+                                                                            borderSide:
+                                                                                BorderSide(
+                                                                              color: Color(0x00000000),
+                                                                              width: 1.0,
+                                                                            ),
+                                                                            borderRadius:
+                                                                                BorderRadius.circular(0.0),
+                                                                          ),
+                                                                          focusedBorder:
+                                                                              OutlineInputBorder(
+                                                                            borderSide:
+                                                                                BorderSide(
+                                                                              color: Color(0x00000000),
+                                                                              width: 1.0,
+                                                                            ),
+                                                                            borderRadius:
+                                                                                BorderRadius.circular(0.0),
+                                                                          ),
+                                                                          errorBorder:
+                                                                              OutlineInputBorder(
+                                                                            borderSide:
+                                                                                BorderSide(
+                                                                              color: Color(0x00000000),
+                                                                              width: 1.0,
+                                                                            ),
+                                                                            borderRadius:
+                                                                                BorderRadius.circular(0.0),
+                                                                          ),
+                                                                          focusedErrorBorder:
+                                                                              OutlineInputBorder(
+                                                                            borderSide:
+                                                                                BorderSide(
+                                                                              color: Color(0x00000000),
+                                                                              width: 1.0,
+                                                                            ),
+                                                                            borderRadius:
+                                                                                BorderRadius.circular(0.0),
+                                                                          ),
+                                                                          contentPadding: EdgeInsetsDirectional.fromSTEB(
+                                                                              5.0,
+                                                                              0.0,
+                                                                              0.0,
+                                                                              20.0),
+                                                                        ),
+                                                                        style: FlutterFlowTheme.of(context)
+                                                                            .bodyMedium
+                                                                            .override(
+                                                                              font: GoogleFonts.montserrat(
+                                                                                fontWeight: FontWeight.w500,
+                                                                                fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                              ),
+                                                                              color: FFAppConstants.blackColor0A0A0A,
+                                                                              letterSpacing: 0.0,
+                                                                              fontWeight: FontWeight.w500,
+                                                                              fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                            ),
+                                                                        textAlign:
+                                                                            TextAlign.start,
+                                                                        validator: _model
+                                                                            .txtEmailTextControllerValidator
+                                                                            .asValidator(context),
+                                                                      ),
+                                                                    ),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                            ),
+                                                          ),
+                                                          Builder(
+                                                            builder:
+                                                                (context) =>
+                                                                    Padding(
+                                                              padding:
+                                                                  EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          20.0,
+                                                                          40.0,
+                                                                          20.0,
+                                                                          0.0),
+                                                              child:
+                                                                  FFButtonWidget(
+                                                                onPressed:
+                                                                    () async {
+                                                                  logFirebaseEvent(
+                                                                      'DAILY_CART_SCREEN_PAGE_SAVE_BTN_ON_TAP');
+                                                                  logFirebaseEvent(
+                                                                      'Button_custom_action');
+                                                                  _model.connectivity1 =
+                                                                      await actions
+                                                                          .checkInternetConnection();
+                                                                  if (_model
+                                                                      .connectivity1!) {
+                                                                    if (_model.textController2.text !=
+                                                                            '') {
+                                                                      logFirebaseEvent(
+                                                                          'Button_validate_form');
+                                                                      if (_model.formKey.currentState ==
+                                                                              null ||
+                                                                          !_model
+                                                                              .formKey
+                                                                              .currentState!
+                                                                              .validate()) {
+                                                                        return;
+                                                                      }
+                                                                      logFirebaseEvent(
+                                                                          'Button_backend_call');
+                                                                      _model.apiResultvjw = await QuickartGroup
+                                                                          .guestverifyotpNameCall
+                                                                          .call(
+                                                                        step:
+                                                                            '1',
+                                                                        userId: (String
+                                                                            var1) {
+                                                                          return int.tryParse(var1 ?? '') ??
+                                                                              0;
+                                                                        }(FFAppState()
+                                                                            .userID),
+                                                                        name: _model
+                                                                            .textController2
+                                                                            .text,
+                                                                        email: (_model.txtEmailFocusNode?.hasFocus ??
+                                                                                false)
+                                                                            .toString(),
+                                                                      );
+
+                                                                      if ((_model
+                                                                              .apiResultvjw
+                                                                              ?.succeeded ??
+                                                                          true)) {
+                                                                        if (FFAppConstants.statusAPI1 ==
+                                                                            getJsonField(
+                                                                              (_model.apiResultvjw?.jsonBody ?? ''),
+                                                                              r'''$.status''',
+                                                                            ).toString()) {
+                                                                          logFirebaseEvent(
+                                                                              'Button_update_app_state');
+                                                                          FFAppState().userName = _model
+                                                                              .textController2
+                                                                              .text;
+                                                                          FFAppState().userEmail =
+                                                                              (_model.textFieldFocusNode2?.hasFocus ?? false).toString();
+                                                                          safeSetState(
+                                                                              () {});
+                                                                          logFirebaseEvent(
+                                                                              'Button_update_page_state');
+                                                                          _model.isOTPVerified =
+                                                                              true;
+                                                                          safeSetState(
+                                                                              () {});
+                                                                          logFirebaseEvent(
+                                                                              'Button_refresh_database_request');
+                                                                          safeSetState(() =>
+                                                                              _model.apiRequestCompleter = null);
+                                                                          await _model
+                                                                              .waitForApiRequestCompleted();
+                                                                        } else {
+                                                                          logFirebaseEvent(
+                                                                              'Button_alert_dialog');
+                                                                          await showDialog(
+                                                                            context:
+                                                                                context,
+                                                                            builder:
+                                                                                (dialogContext) {
+                                                                              return Dialog(
+                                                                                elevation: 0,
+                                                                                insetPadding: EdgeInsets.zero,
+                                                                                backgroundColor: Colors.transparent,
+                                                                                alignment: AlignmentDirectional(0.0, 0.0).resolve(Directionality.of(context)),
+                                                                                child: GestureDetector(
+                                                                                  onTap: () {
+                                                                                    FocusScope.of(dialogContext).unfocus();
+                                                                                    FocusManager.instance.primaryFocus?.unfocus();
+                                                                                  },
+                                                                                  child: CustomAlertDailogWidget(
+                                                                                    des: QuickartGroup.guestverifyotpNameCall.message(
+                                                                                      (_model.apiResultvjw?.jsonBody ?? ''),
+                                                                                    )!,
+                                                                                    height: 0.0,
+                                                                                    title: '',
+                                                                                  ),
+                                                                                ),
+                                                                              );
+                                                                            },
+                                                                          );
+                                                                        }
+                                                                      } else {
+                                                                        logFirebaseEvent(
+                                                                            'Button_alert_dialog');
+                                                                        await showDialog(
+                                                                          context:
+                                                                              context,
+                                                                          builder:
+                                                                              (dialogContext) {
+                                                                            return Dialog(
+                                                                              elevation: 0,
+                                                                              insetPadding: EdgeInsets.zero,
+                                                                              backgroundColor: Colors.transparent,
+                                                                              alignment: AlignmentDirectional(0.0, 0.0).resolve(Directionality.of(context)),
+                                                                              child: GestureDetector(
+                                                                                onTap: () {
+                                                                                  FocusScope.of(dialogContext).unfocus();
+                                                                                  FocusManager.instance.primaryFocus?.unfocus();
+                                                                                },
+                                                                                child: CustomAlertDailogWidget(
+                                                                                  des: QuickartGroup.guestverifyotpNameCall.message(
+                                                                                    (_model.apiResultvjw?.jsonBody ?? ''),
+                                                                                  )!,
+                                                                                  height: 0.0,
+                                                                                  title: '',
+                                                                                ),
+                                                                              ),
+                                                                            );
+                                                                          },
+                                                                        );
+                                                                      }
+                                                                    } else {
+                                                                      logFirebaseEvent(
+                                                                          'Button_show_snack_bar');
+                                                                      ScaffoldMessenger.of(
+                                                                              context)
+                                                                          .showSnackBar(
+                                                                        SnackBar(
+                                                                          content:
+                                                                              Text(
+                                                                            'Please enter name',
+                                                                            style:
+                                                                                TextStyle(
+                                                                              color: FFAppConstants.indigoColor,
+                                                                            ),
+                                                                          ),
+                                                                          duration:
+                                                                              Duration(milliseconds: 1000),
+                                                                          backgroundColor:
+                                                                              FFAppConstants.primaryPurpleE4D8F5,
+                                                                        ),
+                                                                      );
+                                                                    }
+                                                                  } else {
+                                                                    logFirebaseEvent(
+                                                                        'Button_show_snack_bar');
+                                                                    ScaffoldMessenger.of(
+                                                                            context)
+                                                                        .showSnackBar(
+                                                                      SnackBar(
+                                                                        content:
+                                                                            Text(
+                                                                          FFAppConstants
+                                                                              .internetString,
+                                                                          style:
+                                                                              TextStyle(
+                                                                            color:
+                                                                                FFAppConstants.indigoColor,
+                                                                          ),
+                                                                        ),
+                                                                        duration:
+                                                                            Duration(milliseconds: 1000),
+                                                                        backgroundColor:
+                                                                            FFAppConstants.primaryPurpleE4D8F5,
+                                                                      ),
+                                                                    );
+                                                                  }
+
+                                                                  safeSetState(
+                                                                      () {});
+                                                                },
+                                                                text: 'Save ',
+                                                                options:
+                                                                    FFButtonOptions(
+                                                                  width: MediaQuery.sizeOf(
+                                                                              context)
+                                                                          .width *
+                                                                      1.0,
+                                                                  height: 48.0,
+                                                                  padding: EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          24.0,
+                                                                          0.0,
+                                                                          24.0,
+                                                                          0.0),
+                                                                  iconPadding: EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          0.0,
+                                                                          0.0,
+                                                                          0.0,
+                                                                          0.0),
+                                                                  color: FFAppConstants
+                                                                      .indigoColor,
+                                                                  textStyle: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .titleSmall
+                                                                      .override(
+                                                                        font: GoogleFonts
+                                                                            .montserrat(
+                                                                          fontWeight:
+                                                                              FontWeight.w600,
+                                                                          fontStyle: FlutterFlowTheme.of(context)
+                                                                              .titleSmall
+                                                                              .fontStyle,
+                                                                        ),
+                                                                        color: FFAppConstants
+                                                                            .whiteColor,
+                                                                        fontSize:
+                                                                            18.0,
+                                                                        letterSpacing:
+                                                                            0.0,
+                                                                        fontWeight:
+                                                                            FontWeight.w600,
+                                                                        fontStyle: FlutterFlowTheme.of(context)
+                                                                            .titleSmall
+                                                                            .fontStyle,
+                                                                      ),
+                                                                  elevation:
+                                                                      3.0,
+                                                                  borderSide:
+                                                                      BorderSide(
+                                                                    color: Colors
+                                                                        .transparent,
+                                                                    width: 1.0,
+                                                                  ),
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              8.0),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                  ],
+                                ),
+                              ),
+                          ],
+                        ),
+                      ),
+                    if (_model.isLoadingIndicator == true)
+                      Container(
+                        width: double.infinity,
+                        height: double.infinity,
+                        decoration: BoxDecoration(
+                          color: Color(0x5114181B),
+                        ),
+                        child: Align(
+                          alignment: AlignmentDirectional(0.0, 0.0),
+                          child: Container(
+                            width: 100.0,
+                            height: 100.0,
+                            decoration: BoxDecoration(),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(8.0),
+                              child: Image.asset(
+                                'assets/images/new_loader.gif',
+                                width: 100.0,
+                                height: 100.0,
+                                fit: BoxFit.cover,
                               ),
                             ),
                           ),

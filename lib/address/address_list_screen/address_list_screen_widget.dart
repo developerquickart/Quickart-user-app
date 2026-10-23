@@ -1441,9 +1441,7 @@ class _AddressListScreenWidgetState extends State<AddressListScreenWidget> {
                                                                                       r'''$.house_no''',
                                                                                     ).toString())) {
                                                                               logFirebaseEvent('IconButton_update_app_state');
-                                                                              FFAppState().deleteSelectedAddresID();
-                                                                              FFAppState().selectedAddresID = '';
-
+                                                                              FFAppState().deleteSelectedAddresID(resetState: true);
                                                                               FFAppState().selectedAddress1 = '';
                                                                               FFAppState().selectedAddress = 'Dubai';
                                                                               FFAppState().update(() {});

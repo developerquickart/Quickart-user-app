@@ -4443,48 +4443,31 @@ class _DashboardScreenWidgetState extends State<DashboardScreenWidget> {
                                   );
                                   logFirebaseEvent('Button_update_app_state');
                                   FFAppState().isUserLogin = false;
-                                  FFAppState().deletePhoneNo();
-                                  FFAppState().phoneNo = '';
-
-                                  FFAppState().deleteUserID();
-                                  FFAppState().userID = '';
-
-                                  FFAppState().deleteUserEmail();
-                                  FFAppState().userEmail = '';
-
-                                  FFAppState().deleteUserName();
-                                  FFAppState().userName = '';
-
-                                  FFAppState().deleteIsverified();
-                                  FFAppState().isverified = 1;
-
+                                  FFAppState().deletePhoneNo(resetState: true);
+                                  FFAppState().deleteUserID(resetState: true);
+                                  FFAppState()
+                                      .deleteUserEmail(resetState: true);
+                                  FFAppState().deleteUserName(resetState: true);
+                                  FFAppState()
+                                      .deleteIsverified(resetState: true);
                                   FFAppState().countryCode = '971';
                                   FFAppState().categoryName = '';
-                                  FFAppState().deleteProfileImage();
-                                  FFAppState().profileImage = '';
-
-                                  FFAppState().deleteProfileImageBytes();
-                                  FFAppState().profileImageBytes =
-                                      'https://media.istockphoto.com/id/1916685823/photo/businesswoman-using-laptop-with-banking-applications-via-internet-network.jpg?s=612x612&w=0&k=20&c=L9wQekG3TJ-6fSFlUCUelo5xOCYkm9SVE5ER5J8QiK0=';
-
-                                  FFAppState().deleteUserPhoneNo();
-                                  FFAppState().userPhoneNo = '';
-
-                                  FFAppState().deleteUserCountryCode();
-                                  FFAppState().userCountryCode = '';
-
-                                  FFAppState().deleteUserPhoneEP();
-                                  FFAppState().userPhoneEP = '';
-
-                                  FFAppState().deleteUserPhoneProfile();
-                                  FFAppState().userPhoneProfile = '';
-
-                                  FFAppState().deleteUserCountryCodeEP();
-                                  FFAppState().userCountryCodeEP = '';
-
-                                  FFAppState().deleteUsserType();
-                                  FFAppState().usserType = '';
-
+                                  FFAppState()
+                                      .deleteProfileImage(resetState: true);
+                                  FFAppState().deleteProfileImageBytes(
+                                      resetState: true);
+                                  FFAppState()
+                                      .deleteUserPhoneNo(resetState: true);
+                                  FFAppState()
+                                      .deleteUserCountryCode(resetState: true);
+                                  FFAppState()
+                                      .deleteUserPhoneEP(resetState: true);
+                                  FFAppState()
+                                      .deleteUserPhoneProfile(resetState: true);
+                                  FFAppState().deleteUserCountryCodeEP(
+                                      resetState: true);
+                                  FFAppState()
+                                      .deleteUsserType(resetState: true);
                                   FFAppState().subCartSavingAmount = 0.0;
                                   FFAppState().subCartTotalPrice = 0.0;
                                   FFAppState().subCartTotalItem = 0;
@@ -4497,16 +4480,13 @@ class _DashboardScreenWidgetState extends State<DashboardScreenWidget> {
                                   FFAppState().cartSavingPrice = 0.0;
                                   FFAppState().selectedCardNumber = '';
                                   FFAppState().selectedCardID = '';
-                                  FFAppState().deleteSelectedAddresID();
-                                  FFAppState().selectedAddresID = '';
-
+                                  FFAppState()
+                                      .deleteSelectedAddresID(resetState: true);
                                   FFAppState().selectedAddress1 = '';
                                   FFAppState().selectedAddress = 'Dubai';
                                   FFAppState().selectedAddressType = '';
                                   FFAppState().selectedCartAddress = '';
-                                  FFAppState().deleteDialCode();
-                                  FFAppState().dialCode = 'AE';
-
+                                  FFAppState().deleteDialCode(resetState: true);
                                   safeSetState(() {});
                                   logFirebaseEvent(
                                       'Button_google_analytics_event');
@@ -4729,7 +4709,12 @@ class _DashboardScreenWidgetState extends State<DashboardScreenWidget> {
                                 onTap: () async {
                                   logFirebaseEvent(
                                       'DASHBOARD_SCREEN_Row_gyyu0n9j_ON_TAP');
-                                  if (FFAppState().cartTotalCount < 1) {
+                                  if ((FFAppState().cartTotalCount < 1) &&
+                                      (getJsonField(
+                                            FFAppState().appInfo,
+                                            r'''$.user_type''',
+                                          ) ==
+                                          null)) {
                                     logFirebaseEvent('Row_navigate_to');
 
                                     context.pushNamed(

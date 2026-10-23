@@ -6855,7 +6855,12 @@ class _SubCategoriesScreenWidgetState extends State<SubCategoriesScreenWidget> {
                               onTap: () async {
                                 logFirebaseEvent(
                                     'SUB_CATEGORIES_SCREEN_Row_wjg1azek_ON_TA');
-                                if (FFAppState().cartTotalCount < 1) {
+                                if ((FFAppState().cartTotalCount < 1) &&
+                                    (getJsonField(
+                                          FFAppState().appInfo,
+                                          r'''$.user_type''',
+                                        ) ==
+                                        null)) {
                                   logFirebaseEvent('Row_navigate_to');
 
                                   context.pushNamed(

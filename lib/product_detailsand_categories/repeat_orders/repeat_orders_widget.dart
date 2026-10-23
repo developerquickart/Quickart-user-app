@@ -2373,7 +2373,12 @@ class _RepeatOrdersWidgetState extends State<RepeatOrdersWidget> {
                           onTap: () async {
                             logFirebaseEvent(
                                 'REPEAT_ORDERS_PAGE_Row_6lidxk01_ON_TAP');
-                            if (FFAppState().cartTotalCount < 1) {
+                            if ((FFAppState().cartTotalCount < 1) &&
+                                (getJsonField(
+                                      FFAppState().appInfo,
+                                      r'''$.user_type''',
+                                    ) ==
+                                    null)) {
                               logFirebaseEvent('Row_navigate_to');
 
                               context.pushNamed(

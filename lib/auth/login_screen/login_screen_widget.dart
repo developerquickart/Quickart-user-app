@@ -41,9 +41,7 @@ class _LoginScreenWidgetState extends State<LoginScreenWidget> {
       _model.deviceID = await actions.getDeviceID();
       logFirebaseEvent('loginScreen_update_app_state');
       FFAppState().deviceID = FFAppState().deviceID;
-      FFAppState().deletePhoneNo();
-      FFAppState().phoneNo = '';
-
+      FFAppState().deletePhoneNo(resetState: true);
       safeSetState(() {});
     });
 
@@ -342,9 +340,8 @@ class _LoginScreenWidgetState extends State<LoginScreenWidget> {
                                     (_model.apiResultqrg?.jsonBody ?? ''),
                                     r'''$.data.country_code''',
                                   ).toString();
-                                  FFAppState().deleteUsserType();
-                                  FFAppState().usserType = '';
-
+                                  FFAppState()
+                                      .deleteUsserType(resetState: true);
                                   safeSetState(() {});
                                   logFirebaseEvent('Button_custom_action');
                                   await actions.facebookEventClass(
@@ -429,9 +426,8 @@ class _LoginScreenWidgetState extends State<LoginScreenWidget> {
                                     (_model.apiResultqrg?.jsonBody ?? ''),
                                     r'''$.data.country_code''',
                                   ).toString();
-                                  FFAppState().deleteUsserType();
-                                  FFAppState().usserType = '';
-
+                                  FFAppState()
+                                      .deleteUsserType(resetState: true);
                                   safeSetState(() {});
                                 }
                               } else {
@@ -457,9 +453,8 @@ class _LoginScreenWidgetState extends State<LoginScreenWidget> {
                                   FFAppState().countryCode =
                                       FFAppState().countryCode;
                                   FFAppState().phoneNo = FFAppState().phoneNo;
-                                  FFAppState().deleteUsserType();
-                                  FFAppState().usserType = '';
-
+                                  FFAppState()
+                                      .deleteUsserType(resetState: true);
                                   safeSetState(() {});
                                 } else {
                                   logFirebaseEvent('Button_show_snack_bar');
@@ -524,9 +519,7 @@ class _LoginScreenWidgetState extends State<LoginScreenWidget> {
                                 FFAppState().countryCode =
                                     FFAppState().countryCode;
                                 FFAppState().phoneNo = FFAppState().phoneNo;
-                                FFAppState().deleteUsserType();
-                                FFAppState().usserType = '';
-
+                                FFAppState().deleteUsserType(resetState: true);
                                 safeSetState(() {});
                               } else {
                                 logFirebaseEvent('Button_show_snack_bar');

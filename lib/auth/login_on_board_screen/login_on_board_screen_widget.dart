@@ -295,17 +295,15 @@ class _LoginOnBoardScreenWidgetState extends State<LoginOnBoardScreenWidget> {
 
                                 if ((_model.apiResulte9m?.succeeded ?? true)) {
                                   logFirebaseEvent('Button_update_app_state');
-                                  FFAppState().deleteUserGUUID();
-                                  FFAppState().userGUUID = '';
-
+                                  FFAppState()
+                                      .deleteUserGUUID(resetState: true);
                                   safeSetState(() {});
                                   logFirebaseEvent('Button_update_app_state');
                                   FFAppState().userName = 'Guest';
                                   FFAppState().countryCode = '971';
                                   FFAppState().isUserLogin = true;
-                                  FFAppState().deleteUserEmail();
-                                  FFAppState().userEmail = '';
-
+                                  FFAppState()
+                                      .deleteUserEmail(resetState: true);
                                   FFAppState().userID = getJsonField(
                                     (_model.apiResulte9m?.jsonBody ?? ''),
                                     r'''$.data.id''',

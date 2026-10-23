@@ -37,7 +37,9 @@ class _CountryCodeWidgetState extends State<CountryCodeWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (FFAppState().phoneNo == null || FFAppState().phoneNo == "null") {
+    if (FFAppState().phoneNo == null ||
+        FFAppState().phoneNo == "null" ||
+        FFAppState().phoneNo == " ") {
       txtNumberC.text = "";
     } else {
       txtNumberC.text = FFAppState().phoneNo;

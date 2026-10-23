@@ -1490,31 +1490,27 @@ class _TopDealsScreenWidgetState extends State<TopDealsScreenWidget> {
                                                                               BorderRadius.circular(24.0),
                                                                         ),
                                                                         child:
-                                                                            Visibility(
-                                                                          visible:
-                                                                              FFAppState().nullValue == 'ji',
+                                                                            Padding(
+                                                                          padding: EdgeInsetsDirectional.fromSTEB(
+                                                                              5.0,
+                                                                              2.0,
+                                                                              5.0,
+                                                                              2.0),
                                                                           child:
-                                                                              Padding(
-                                                                            padding: EdgeInsetsDirectional.fromSTEB(
-                                                                                5.0,
-                                                                                2.0,
-                                                                                5.0,
-                                                                                2.0),
-                                                                            child:
-                                                                                Text(
-                                                                              'Low Shelf Life',
-                                                                              textAlign: TextAlign.center,
-                                                                              style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                    font: GoogleFonts.montserrat(
-                                                                                      fontWeight: FontWeight.w500,
-                                                                                      fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                                                                                    ),
-                                                                                    fontSize: 10.0,
-                                                                                    letterSpacing: 0.0,
+                                                                              Text(
+                                                                            'Low Shelf Life',
+                                                                            textAlign:
+                                                                                TextAlign.center,
+                                                                            style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                  font: GoogleFonts.montserrat(
                                                                                     fontWeight: FontWeight.w500,
                                                                                     fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
                                                                                   ),
-                                                                            ),
+                                                                                  fontSize: 10.0,
+                                                                                  letterSpacing: 0.0,
+                                                                                  fontWeight: FontWeight.w500,
+                                                                                  fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                                ),
                                                                           ),
                                                                         ),
                                                                       ),
@@ -3371,7 +3367,12 @@ class _TopDealsScreenWidgetState extends State<TopDealsScreenWidget> {
                                     onTap: () async {
                                       logFirebaseEvent(
                                           'TOP_DEALS_SCREEN_Row_0zhu21oo_ON_TAP');
-                                      if (FFAppState().cartTotalCount < 1) {
+                                      if ((FFAppState().cartTotalCount < 1) &&
+                                          (getJsonField(
+                                                FFAppState().appInfo,
+                                                r'''$.user_type''',
+                                              ) ==
+                                              null)) {
                                         logFirebaseEvent('Row_navigate_to');
 
                                         context.pushNamed(

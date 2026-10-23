@@ -271,7 +271,7 @@ class _OtpScreenWidgetState extends State<OtpScreenWidget> {
                                           .fontStyle,
                                     ),
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            enableActiveFill: false,
+                            enableActiveFill: true,
                             autoFocus: false,
                             focusNode: _model.pinCodeFocusNode,
                             enablePinAutofill: false,
@@ -298,6 +298,10 @@ class _OtpScreenWidgetState extends State<OtpScreenWidget> {
                               activeColor: Color(0xFF3D3D3D),
                               inactiveColor: Color(0xFFE0E0E0),
                               selectedColor: FFAppConstants.primaryPurpleE4D8F5,
+                              activeFillColor:
+                                  FFAppConstants.primaryPurpleE4D8F5,
+                              inactiveFillColor: Color(0xFFE0E0E0),
+                              selectedFillColor: Colors.white,
                             ),
                             controller: _model.pinCodeController,
                             onChanged: (_) {},
@@ -694,20 +698,15 @@ class _OtpScreenWidgetState extends State<OtpScreenWidget> {
                                       );
                                     }
                                     logFirebaseEvent('Button_update_app_state');
-                                    FFAppState().deleteUserName();
-                                    FFAppState().userName = '';
-
+                                    FFAppState()
+                                        .deleteUserName(resetState: true);
                                     FFAppState().countryCode = '971';
                                     FFAppState().isUserLogin = true;
-                                    FFAppState().deleteUserEmail();
-                                    FFAppState().userEmail = '';
-
-                                    FFAppState().deleteUserID();
-                                    FFAppState().userID = '';
-
-                                    FFAppState().deleteUsserType();
-                                    FFAppState().usserType = '';
-
+                                    FFAppState()
+                                        .deleteUserEmail(resetState: true);
+                                    FFAppState().deleteUserID(resetState: true);
+                                    FFAppState()
+                                        .deleteUsserType(resetState: true);
                                     FFAppState().zoneInfo =
                                         QuickartZoneGroup.getZoneIDCall.data(
                                       (_model.getZoneIDResult?.jsonBody ?? ''),
@@ -811,9 +810,8 @@ class _OtpScreenWidgetState extends State<OtpScreenWidget> {
                                             ''),
                                         r'''$.data.country_code''',
                                       ).toString();
-                                      FFAppState().deleteUsserType();
-                                      FFAppState().usserType = '';
-
+                                      FFAppState()
+                                          .deleteUsserType(resetState: true);
                                       FFAppState().userDialCode = getJsonField(
                                         (_model.apiResultVerifyOTPbutton
                                                 ?.jsonBody ??
@@ -1135,9 +1133,8 @@ class _OtpScreenWidgetState extends State<OtpScreenWidget> {
                                             ''),
                                         r'''$.data.country_code''',
                                       ).toString();
-                                      FFAppState().deleteUsserType();
-                                      FFAppState().usserType = '';
-
+                                      FFAppState()
+                                          .deleteUsserType(resetState: true);
                                       FFAppState().userDialCode = getJsonField(
                                         (_model.apiResultVerifyOTPbutton
                                                 ?.jsonBody ??

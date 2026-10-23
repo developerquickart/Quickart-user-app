@@ -3224,7 +3224,12 @@ class _OccasionalCategoryWidgetState extends State<OccasionalCategoryWidget> {
                                     onTap: () async {
                                       logFirebaseEvent(
                                           'OCCASIONAL_CATEGORY_Row_85tbog1q_ON_TAP');
-                                      if (FFAppState().cartTotalCount < 1) {
+                                      if ((FFAppState().cartTotalCount < 1) &&
+                                          (getJsonField(
+                                                FFAppState().appInfo,
+                                                r'''$.user_type''',
+                                              ) ==
+                                              null)) {
                                         logFirebaseEvent('Row_navigate_to');
 
                                         context.pushNamed(

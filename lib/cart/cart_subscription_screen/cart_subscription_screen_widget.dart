@@ -206,9 +206,7 @@ class _CartSubscriptionScreenWidgetState
                   FFAppState().selectedCardID = '';
                   FFAppState().selectedCardNumber = '';
                   FFAppState().selectedAddress1 = '';
-                  FFAppState().deleteSelectedAddresID();
-                  FFAppState().selectedAddresID = '';
-
+                  FFAppState().deleteSelectedAddresID(resetState: true);
                   FFAppState().isCardChange = false;
                   safeSetState(() {});
                 } else {
@@ -218,9 +216,7 @@ class _CartSubscriptionScreenWidgetState
                   FFAppState().selectedCardID = '';
                   FFAppState().selectedCardNumber = '';
                   FFAppState().selectedAddress1 = '';
-                  FFAppState().deleteSelectedAddresID();
-                  FFAppState().selectedAddresID = '';
-
+                  FFAppState().deleteSelectedAddresID(resetState: true);
                   FFAppState().isCardChange = false;
                   safeSetState(() {});
                 }
@@ -345,9 +341,8 @@ class _CartSubscriptionScreenWidgetState
                                       FFAppState().selectedCardID = '';
                                       FFAppState().selectedCardNumber = '';
                                       FFAppState().selectedAddress1 = '';
-                                      FFAppState().deleteSelectedAddresID();
-                                      FFAppState().selectedAddresID = '';
-
+                                      FFAppState().deleteSelectedAddresID(
+                                          resetState: true);
                                       FFAppState().isCardChange = false;
                                       safeSetState(() {});
                                       logFirebaseEvent('Tab_navigate_to');
@@ -3607,142 +3602,133 @@ class _CartSubscriptionScreenWidgetState
                                                                         ),
                                                                       ],
                                                                     ),
-                                                                    if ((getJsonField(
-                                                                              tabBarShowsubcartResponse.jsonBody,
-                                                                              r'''$.data.zone_permanent_charges''',
-                                                                            ) !=
-                                                                            null) ||
-                                                                        ((getJsonField(
-                                                                                  tabBarShowsubcartResponse.jsonBody,
-                                                                                  r'''$.data.zone_delivery_addons''',
-                                                                                ) ==
-                                                                                null) ==
-                                                                            false))
-                                                                      Padding(
-                                                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                                                            0.0,
-                                                                            5.0,
-                                                                            0.0,
-                                                                            0.0),
-                                                                        child:
-                                                                            Row(
-                                                                          mainAxisSize:
-                                                                              MainAxisSize.max,
-                                                                          mainAxisAlignment:
-                                                                              MainAxisAlignment.spaceBetween,
-                                                                          children: [
-                                                                            Row(
-                                                                              mainAxisSize: MainAxisSize.max,
-                                                                              children: [
+                                                                    Padding(
+                                                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                                                          0.0,
+                                                                          5.0,
+                                                                          0.0,
+                                                                          0.0),
+                                                                      child:
+                                                                          Row(
+                                                                        mainAxisSize:
+                                                                            MainAxisSize.max,
+                                                                        mainAxisAlignment:
+                                                                            MainAxisAlignment.spaceBetween,
+                                                                        children: [
+                                                                          Row(
+                                                                            mainAxisSize:
+                                                                                MainAxisSize.max,
+                                                                            children: [
+                                                                              Text(
+                                                                                'Item Total',
+                                                                                style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                      font: GoogleFonts.montserrat(
+                                                                                        fontWeight: FontWeight.w500,
+                                                                                        fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                                      ),
+                                                                                      fontSize: 13.0,
+                                                                                      letterSpacing: 0.0,
+                                                                                      fontWeight: FontWeight.w500,
+                                                                                      fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                                    ),
+                                                                              ),
+                                                                            ],
+                                                                          ),
+                                                                          Row(
+                                                                            mainAxisSize:
+                                                                                MainAxisSize.max,
+                                                                            children: [
+                                                                              if (getJsonField(
+                                                                                    tabBarShowsubcartResponse.jsonBody,
+                                                                                    r'''$.data.total_mrp''',
+                                                                                  ) !=
+                                                                                  getJsonField(
+                                                                                    tabBarShowsubcartResponse.jsonBody,
+                                                                                    r'''$.data.total_price''',
+                                                                                  ))
                                                                                 Text(
-                                                                                  'Item Total',
+                                                                                  FFAppConstants.currancyAED,
+                                                                                  style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                        font: GoogleFonts.montserrat(
+                                                                                          fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
+                                                                                          fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                                        ),
+                                                                                        color: FFAppConstants.neutralBlack8F8F8F,
+                                                                                        fontSize: 13.0,
+                                                                                        letterSpacing: 0.0,
+                                                                                        fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
+                                                                                        fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                                        decoration: TextDecoration.lineThrough,
+                                                                                      ),
+                                                                                ),
+                                                                              if (getJsonField(
+                                                                                    tabBarShowsubcartResponse.jsonBody,
+                                                                                    r'''$.data.total_mrp''',
+                                                                                  ) !=
+                                                                                  getJsonField(
+                                                                                    tabBarShowsubcartResponse.jsonBody,
+                                                                                    r'''$.data.total_price''',
+                                                                                  ))
+                                                                                Text(
+                                                                                  functions.setDecimalValue(getJsonField(
+                                                                                    tabBarShowsubcartResponse.jsonBody,
+                                                                                    r'''$.data.total_mrp''',
+                                                                                  ).toString())!,
+                                                                                  style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                        font: GoogleFonts.montserrat(
+                                                                                          fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
+                                                                                          fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                                        ),
+                                                                                        color: FFAppConstants.neutralBlack8F8F8F,
+                                                                                        fontSize: 13.0,
+                                                                                        letterSpacing: 0.0,
+                                                                                        fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
+                                                                                        fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                                        decoration: TextDecoration.lineThrough,
+                                                                                      ),
+                                                                                ),
+                                                                              Padding(
+                                                                                padding: EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
+                                                                                child: Text(
+                                                                                  FFAppConstants.currancyAED,
                                                                                   style: FlutterFlowTheme.of(context).bodyMedium.override(
                                                                                         font: GoogleFonts.montserrat(
                                                                                           fontWeight: FontWeight.w500,
                                                                                           fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
                                                                                         ),
+                                                                                        color: FFAppConstants.blackColor0A0A0A,
                                                                                         fontSize: 13.0,
                                                                                         letterSpacing: 0.0,
                                                                                         fontWeight: FontWeight.w500,
                                                                                         fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
                                                                                       ),
                                                                                 ),
-                                                                              ],
-                                                                            ),
-                                                                            Row(
-                                                                              mainAxisSize: MainAxisSize.max,
-                                                                              children: [
-                                                                                if (getJsonField(
-                                                                                      tabBarShowsubcartResponse.jsonBody,
-                                                                                      r'''$.data.total_mrp''',
-                                                                                    ) !=
-                                                                                    getJsonField(
-                                                                                      tabBarShowsubcartResponse.jsonBody,
-                                                                                      r'''$.data.total_price''',
-                                                                                    ))
-                                                                                  Text(
-                                                                                    FFAppConstants.currancyAED,
-                                                                                    style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                          font: GoogleFonts.montserrat(
-                                                                                            fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
-                                                                                            fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                                                                                          ),
-                                                                                          color: FFAppConstants.neutralBlack8F8F8F,
-                                                                                          fontSize: 13.0,
-                                                                                          letterSpacing: 0.0,
-                                                                                          fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
-                                                                                          fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                                                                                          decoration: TextDecoration.lineThrough,
-                                                                                        ),
-                                                                                  ),
-                                                                                if (getJsonField(
-                                                                                      tabBarShowsubcartResponse.jsonBody,
-                                                                                      r'''$.data.total_mrp''',
-                                                                                    ) !=
-                                                                                    getJsonField(
-                                                                                      tabBarShowsubcartResponse.jsonBody,
-                                                                                      r'''$.data.total_price''',
-                                                                                    ))
-                                                                                  Text(
-                                                                                    functions.setDecimalValue(getJsonField(
-                                                                                      tabBarShowsubcartResponse.jsonBody,
-                                                                                      r'''$.data.total_mrp''',
-                                                                                    ).toString())!,
-                                                                                    style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                          font: GoogleFonts.montserrat(
-                                                                                            fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
-                                                                                            fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                                                                                          ),
-                                                                                          color: FFAppConstants.neutralBlack8F8F8F,
-                                                                                          fontSize: 13.0,
-                                                                                          letterSpacing: 0.0,
-                                                                                          fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
-                                                                                          fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                                                                                          decoration: TextDecoration.lineThrough,
-                                                                                        ),
-                                                                                  ),
-                                                                                Padding(
-                                                                                  padding: EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
-                                                                                  child: Text(
-                                                                                    FFAppConstants.currancyAED,
-                                                                                    style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                          font: GoogleFonts.montserrat(
-                                                                                            fontWeight: FontWeight.w500,
-                                                                                            fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                                                                                          ),
-                                                                                          color: FFAppConstants.blackColor0A0A0A,
-                                                                                          fontSize: 13.0,
-                                                                                          letterSpacing: 0.0,
+                                                                              ),
+                                                                              Padding(
+                                                                                padding: EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
+                                                                                child: Text(
+                                                                                  functions.setDecimalValue(getJsonField(
+                                                                                    tabBarShowsubcartResponse.jsonBody,
+                                                                                    r'''$.data.total_price''',
+                                                                                  ).toString())!,
+                                                                                  style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                        font: GoogleFonts.montserrat(
                                                                                           fontWeight: FontWeight.w500,
                                                                                           fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
                                                                                         ),
-                                                                                  ),
+                                                                                        color: FFAppConstants.blackColor0A0A0A,
+                                                                                        fontSize: 13.0,
+                                                                                        letterSpacing: 0.0,
+                                                                                        fontWeight: FontWeight.w500,
+                                                                                        fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                                      ),
                                                                                 ),
-                                                                                Padding(
-                                                                                  padding: EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
-                                                                                  child: Text(
-                                                                                    functions.setDecimalValue(getJsonField(
-                                                                                      tabBarShowsubcartResponse.jsonBody,
-                                                                                      r'''$.data.total_price''',
-                                                                                    ).toString())!,
-                                                                                    style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                          font: GoogleFonts.montserrat(
-                                                                                            fontWeight: FontWeight.w500,
-                                                                                            fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                                                                                          ),
-                                                                                          color: FFAppConstants.blackColor0A0A0A,
-                                                                                          fontSize: 13.0,
-                                                                                          letterSpacing: 0.0,
-                                                                                          fontWeight: FontWeight.w500,
-                                                                                          fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                                                                                        ),
-                                                                                  ),
-                                                                                ),
-                                                                              ],
-                                                                            ),
-                                                                          ],
-                                                                        ),
+                                                                              ),
+                                                                            ],
+                                                                          ),
+                                                                        ],
                                                                       ),
+                                                                    ),
                                                                     if (functions.stringToDouble(functions
                                                                             .calculateTimeSlotPricingTotal(
                                                                                 QuickartGroup.showsubcartCall

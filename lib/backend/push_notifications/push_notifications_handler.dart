@@ -412,16 +412,6 @@ final parametersBuilderMap =
         },
       ),
   'dailyCartScreenCopy': ParameterData.none(),
-  'cartSubscriptionScreenCopy': ParameterData.none(),
-  'RatingOrderScreenCopy1': (data) async => ParameterData(
-        allParams: {
-          'cartId': getParameter<String>(data, 'cartId'),
-          'subscriptionID': getParameter<String>(data, 'subscriptionID'),
-          'screenName': getParameter<String>(data, 'screenName'),
-          'rating': getParameter<int>(data, 'rating'),
-          'reviewStr': getParameter<String>(data, 'reviewStr'),
-        },
-      ),
 };
 
 Map<String, dynamic> getInitialParameterData(Map<String, dynamic> data) {

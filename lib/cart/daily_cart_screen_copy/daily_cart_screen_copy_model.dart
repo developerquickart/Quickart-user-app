@@ -69,6 +69,8 @@ class DailyCartScreenCopyModel
 
   String? isRefWalletCheckBoxSelected = 'remove';
 
+  double totalValue = 0.0;
+
   ///  State fields for stateful widgets in this page.
 
   // Stores action output result for [Backend Call - API (userbankdetails)] action in dailyCartScreenCopy widget.
@@ -91,10 +93,18 @@ class DailyCartScreenCopyModel
   bool? internetCheckdc;
   // Stores action output result for [Backend Call - API (Add to Cart)] action in Button widget.
   ApiCallResponse? addtoCartAPIDC;
+  // Stores action output result for [Backend Call - API (addtrailpack)] action in Button widget.
+  ApiCallResponse? apiResultp09;
   // Stores action output result for [Custom Action - checkInternetConnection] action in Button widget.
   bool? internetCheckcp;
   // Stores action output result for [Backend Call - API (Add to Cart)] action in Button widget.
-  ApiCallResponse? addtoCartAPIDCP;
+  ApiCallResponse? addtoCartAPIDCP1;
+  // Stores action output result for [Custom Action - checkInternetConnection] action in Button widget.
+  bool? internetCheckdcC;
+  // Stores action output result for [Backend Call - API (Add to Cart)] action in Button widget.
+  ApiCallResponse? remoevtoCartAPIDC;
+  // Stores action output result for [Backend Call - API (addtrailpack)] action in Button widget.
+  ApiCallResponse? apiResultp099;
   // Stores action output result for [Custom Action - checkInternetConnection] action in Container widget.
   bool? isInternet4;
   // Stores action output result for [Backend Call - API (updatecart)] action in Container widget.

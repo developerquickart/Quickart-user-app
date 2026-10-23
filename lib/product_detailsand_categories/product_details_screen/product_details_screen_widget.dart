@@ -2114,53 +2114,101 @@ class _ProductDetailsScreenWidgetState
                                                                       () async {
                                                                     logFirebaseEvent(
                                                                         'PRODUCT_DETAILS_SCREEN_Container_n8y2nz4');
-                                                                    logFirebaseEvent(
-                                                                        'Container_navigate_to');
+                                                                    if (getJsonField(
+                                                                          FFAppState()
+                                                                              .appInfo,
+                                                                          r'''$.user_type''',
+                                                                        ) ==
+                                                                        null) {
+                                                                      logFirebaseEvent(
+                                                                          'Container_navigate_to');
 
-                                                                    context.pushNamed(
-                                                                        CartSubscriptionScreenWidget
-                                                                            .routeName);
+                                                                      context.pushNamed(
+                                                                          CartSubscriptionScreenWidget
+                                                                              .routeName);
 
-                                                                    logFirebaseEvent(
-                                                                        'Container_update_app_state');
-                                                                    FFAppState()
-                                                                            .categoryName =
-                                                                        'sub';
-                                                                    safeSetState(
-                                                                        () {});
-                                                                    logFirebaseEvent(
-                                                                        'Container_custom_action');
-                                                                    await actions
-                                                                        .facebookEventClass(
+                                                                      logFirebaseEvent(
+                                                                          'Container_update_app_state');
                                                                       FFAppState()
-                                                                          .userID,
-                                                                      ' ',
-                                                                      ' ',
-                                                                      FFAppState()
-                                                                          .cartTotalPrice,
-                                                                      FFAppState()
-                                                                          .cartTotalCount,
-                                                                      0.0,
-                                                                      'cart',
-                                                                      FFAppState()
-                                                                          .emptyJson,
-                                                                      'subscription cart',
-                                                                      ' ',
-                                                                      ' ',
-                                                                      ' ',
-                                                                      ' ',
-                                                                    );
-                                                                    logFirebaseEvent(
-                                                                        'Container_google_analytics_event');
-                                                                    logFirebaseEvent(
-                                                                      'Navigation',
-                                                                      parameters: {
-                                                                        'Screen Name':
-                                                                            'Product Detail Screen',
-                                                                        'Navigate To':
-                                                                            'Subscription Cart Screen',
-                                                                      },
-                                                                    );
+                                                                              .categoryName =
+                                                                          'sub';
+                                                                      safeSetState(
+                                                                          () {});
+                                                                      logFirebaseEvent(
+                                                                          'Container_custom_action');
+                                                                      await actions
+                                                                          .facebookEventClass(
+                                                                        FFAppState()
+                                                                            .userID,
+                                                                        ' ',
+                                                                        ' ',
+                                                                        FFAppState()
+                                                                            .cartTotalPrice,
+                                                                        FFAppState()
+                                                                            .cartTotalCount,
+                                                                        0.0,
+                                                                        'cart',
+                                                                        FFAppState()
+                                                                            .emptyJson,
+                                                                        'subscription cart',
+                                                                        ' ',
+                                                                        ' ',
+                                                                        ' ',
+                                                                        ' ',
+                                                                      );
+                                                                      logFirebaseEvent(
+                                                                          'Container_google_analytics_event');
+                                                                      logFirebaseEvent(
+                                                                        'Navigation',
+                                                                        parameters: {
+                                                                          'Screen Name':
+                                                                              'Product Detail Screen',
+                                                                          'Navigate To':
+                                                                              'Subscription Cart Screen',
+                                                                        },
+                                                                      );
+                                                                    } else {
+                                                                      logFirebaseEvent(
+                                                                          'Container_navigate_to');
+
+                                                                      context.pushNamed(
+                                                                          DailyCartScreenWidget
+                                                                              .routeName);
+
+                                                                      logFirebaseEvent(
+                                                                          'Container_google_analytics_event');
+                                                                      logFirebaseEvent(
+                                                                        'Navigation',
+                                                                        parameters: {
+                                                                          'Screen Name':
+                                                                              'Product Detail Screen',
+                                                                          'Navigate To':
+                                                                              'Daily Cart Screen',
+                                                                        },
+                                                                      );
+                                                                      logFirebaseEvent(
+                                                                          'Container_custom_action');
+                                                                      await actions
+                                                                          .facebookEventClass(
+                                                                        FFAppState()
+                                                                            .userID,
+                                                                        ' ',
+                                                                        ' ',
+                                                                        FFAppState()
+                                                                            .cartTotalPrice,
+                                                                        FFAppState()
+                                                                            .cartTotalCount,
+                                                                        0.0,
+                                                                        'cart',
+                                                                        FFAppState()
+                                                                            .emptyJson,
+                                                                        'daily cart',
+                                                                        ' ',
+                                                                        ' ',
+                                                                        ' ',
+                                                                        ' ',
+                                                                      );
+                                                                    }
                                                                   },
                                                                   child:
                                                                       Container(
@@ -2473,10 +2521,12 @@ class _ProductDetailsScreenWidgetState
                                                                                       ).toString()) {
                                                                                     return ' ';
                                                                                   } else if (FFAppState().qtyZeroCheck ==
-                                                                                      getJsonField(
+                                                                                      ((String var1) {
+                                                                                        return int.tryParse(var1 ?? '') ?? 0;
+                                                                                      }(getJsonField(
                                                                                         productDetailsScreenProductDetailResponse.jsonBody,
                                                                                         r'''$.detail.percentage''',
-                                                                                      )) {
+                                                                                      ).toString()))) {
                                                                                     return ' ';
                                                                                   } else {
                                                                                     return '& SAVE ${getJsonField(
@@ -6607,133 +6657,181 @@ class _ProductDetailsScreenWidgetState
                                                                       .primaryPurpleE4D8F5,
                                                             ),
                                                           );
-                                                          logFirebaseEvent(
-                                                              'Button_navigate_to');
+                                                          if (getJsonField(
+                                                                FFAppState()
+                                                                    .appInfo,
+                                                                r'''$.user_type''',
+                                                              ) ==
+                                                              null) {
+                                                            logFirebaseEvent(
+                                                                'Button_navigate_to');
 
-                                                          context.pushNamed(
-                                                              CartSubscriptionScreenWidget
-                                                                  .routeName);
+                                                            context.pushNamed(
+                                                                CartSubscriptionScreenWidget
+                                                                    .routeName);
 
-                                                          logFirebaseEvent(
-                                                              'Button_update_app_state');
-                                                          FFAppState()
-                                                                  .isWedSelected =
-                                                              false;
-                                                          FFAppState()
-                                                                  .isSunSelected =
-                                                              false;
-                                                          FFAppState()
-                                                                  .isMonSelected =
-                                                              false;
-                                                          FFAppState()
-                                                                  .isTueSelected =
-                                                              false;
-                                                          FFAppState()
-                                                                  .isThuSelected =
-                                                              false;
-                                                          FFAppState()
-                                                                  .isFriSelected =
-                                                              false;
-                                                          FFAppState()
-                                                                  .isSatSelected =
-                                                              false;
-                                                          FFAppState()
-                                                                  .categoryName =
-                                                              'sub';
-                                                          FFAppState()
-                                                              .isWeekSelected = 0;
-                                                          FFAppState()
-                                                                  .isSubcribeCartVisible =
-                                                              false;
-                                                          FFAppState()
-                                                                  .isDeliveryTimeSlotSelected =
-                                                              'no';
-                                                          FFAppState()
-                                                                  .subCartTotalItem =
-                                                              QuickartGroup
-                                                                  .addtosubcartCall
-                                                                  .totalItems(
-                                                            (_model.apiResultco2
-                                                                    ?.jsonBody ??
-                                                                ''),
-                                                          )!;
-                                                          FFAppState()
-                                                                  .subCartTotalPrice =
-                                                              QuickartGroup
-                                                                  .addtosubcartCall
-                                                                  .totalPrice(
-                                                            (_model.apiResultco2
-                                                                    ?.jsonBody ??
-                                                                ''),
-                                                          )!;
-                                                          FFAppState()
-                                                                  .subCartSavingAmount =
-                                                              QuickartGroup
-                                                                  .addtosubcartCall
-                                                                  .savingPrice(
-                                                            (_model.apiResultco2
-                                                                    ?.jsonBody ??
-                                                                ''),
-                                                          )!;
-                                                          FFAppState()
-                                                                  .refreshTrigger =
-                                                              true;
-                                                          safeSetState(() {});
-                                                          logFirebaseEvent(
-                                                              'Button_custom_action');
-                                                          await actions
-                                                              .facebookEventClass(
-                                                            getJsonField(
-                                                              _model
-                                                                  .selectedVariantDataJson,
-                                                              r'''$.varient_id''',
-                                                            ).toString(),
-                                                            getJsonField(
-                                                              productDetailsScreenProductDetailResponse
-                                                                  .jsonBody,
-                                                              r'''$.product_name''',
-                                                            ).toString(),
-                                                            'subscription product',
-                                                            getJsonField(
-                                                              _model
-                                                                  .selectedVariantDataJson,
-                                                              r'''$.price''',
-                                                            ),
-                                                            getJsonField(
-                                                                  _model
-                                                                      .selectedVariantDataJson,
-                                                                  r'''$.subcartQty''',
-                                                                ) +
-                                                                1,
-                                                            getJsonField(
-                                                              _model
-                                                                  .selectedVariantDataJson,
-                                                              r'''$.mrp''',
-                                                            ),
-                                                            'add',
+                                                            logFirebaseEvent(
+                                                                'Button_update_app_state');
                                                             FFAppState()
-                                                                .emptyJson,
-                                                            'subscription',
-                                                            ' ',
-                                                            ' ',
-                                                            ' ',
-                                                            ' ',
-                                                          );
-                                                          logFirebaseEvent(
-                                                              'Button_google_analytics_event');
-                                                          logFirebaseEvent(
-                                                            'Navigation',
-                                                            parameters: {
-                                                              'Screen Name':
-                                                                  'Product Detail Screen',
-                                                              'Confirm':
-                                                                  'Confirm Subscription',
-                                                              'Navigate To':
-                                                                  'Subscription Cart Screen',
-                                                              'API Name':
-                                                                  'Add To SubCart',
-                                                            },
-                                                          );
+                                                                    .isWedSelected =
+                                                                false;
+                                                            FFAppState()
+                                                                    .isSunSelected =
+                                                                false;
+                                                            FFAppState()
+                                                                    .isMonSelected =
+                                                                false;
+                                                            FFAppState()
+                                                                    .isTueSelected =
+                                                                false;
+                                                            FFAppState()
+                                                                    .isThuSelected =
+                                                                false;
+                                                            FFAppState()
+                                                                    .isFriSelected =
+                                                                false;
+                                                            FFAppState()
+                                                                    .isSatSelected =
+                                                                false;
+                                                            FFAppState()
+                                                                    .categoryName =
+                                                                'sub';
+                                                            FFAppState()
+                                                                .isWeekSelected = 0;
+                                                            FFAppState()
+                                                                    .isSubcribeCartVisible =
+                                                                false;
+                                                            FFAppState()
+                                                                    .isDeliveryTimeSlotSelected =
+                                                                'no';
+                                                            FFAppState()
+                                                                    .subCartTotalItem =
+                                                                QuickartGroup
+                                                                    .addtosubcartCall
+                                                                    .totalItems(
+                                                              (_model.apiResultco2
+                                                                      ?.jsonBody ??
+                                                                  ''),
+                                                            )!;
+                                                            FFAppState()
+                                                                    .subCartTotalPrice =
+                                                                QuickartGroup
+                                                                    .addtosubcartCall
+                                                                    .totalPrice(
+                                                              (_model.apiResultco2
+                                                                      ?.jsonBody ??
+                                                                  ''),
+                                                            )!;
+                                                            FFAppState()
+                                                                    .subCartSavingAmount =
+                                                                QuickartGroup
+                                                                    .addtosubcartCall
+                                                                    .savingPrice(
+                                                              (_model.apiResultco2
+                                                                      ?.jsonBody ??
+                                                                  ''),
+                                                            )!;
+                                                            FFAppState()
+                                                                    .refreshTrigger =
+                                                                true;
+                                                            safeSetState(() {});
+                                                            logFirebaseEvent(
+                                                                'Button_custom_action');
+                                                            await actions
+                                                                .facebookEventClass(
+                                                              getJsonField(
+                                                                _model
+                                                                    .selectedVariantDataJson,
+                                                                r'''$.varient_id''',
+                                                              ).toString(),
+                                                              getJsonField(
+                                                                productDetailsScreenProductDetailResponse
+                                                                    .jsonBody,
+                                                                r'''$.product_name''',
+                                                              ).toString(),
+                                                              'subscription product',
+                                                              getJsonField(
+                                                                _model
+                                                                    .selectedVariantDataJson,
+                                                                r'''$.price''',
+                                                              ),
+                                                              getJsonField(
+                                                                    _model
+                                                                        .selectedVariantDataJson,
+                                                                    r'''$.subcartQty''',
+                                                                  ) +
+                                                                  1,
+                                                              getJsonField(
+                                                                _model
+                                                                    .selectedVariantDataJson,
+                                                                r'''$.mrp''',
+                                                              ),
+                                                              'add',
+                                                              FFAppState()
+                                                                  .emptyJson,
+                                                              'subscription',
+                                                              ' ',
+                                                              ' ',
+                                                              ' ',
+                                                              ' ',
+                                                            );
+                                                            logFirebaseEvent(
+                                                                'Button_google_analytics_event');
+                                                            logFirebaseEvent(
+                                                              'Navigation',
+                                                              parameters: {
+                                                                'Screen Name':
+                                                                    'Product Detail Screen',
+                                                                'Confirm':
+                                                                    'Confirm Subscription',
+                                                                'Navigate To':
+                                                                    'Subscription Cart Screen',
+                                                                'API Name':
+                                                                    'Add To SubCart',
+                                                              },
+                                                            );
+                                                          } else {
+                                                            logFirebaseEvent(
+                                                                'Button_navigate_to');
+
+                                                            context.pushNamed(
+                                                                DailyCartScreenWidget
+                                                                    .routeName);
+
+                                                            logFirebaseEvent(
+                                                                'Button_google_analytics_event');
+                                                            logFirebaseEvent(
+                                                              'Navigation',
+                                                              parameters: {
+                                                                'Screen Name':
+                                                                    'Product Detail Screen',
+                                                                'Navigate To':
+                                                                    'Daily Cart Screen',
+                                                              },
+                                                            );
+                                                            logFirebaseEvent(
+                                                                'Button_custom_action');
+                                                            await actions
+                                                                .facebookEventClass(
+                                                              FFAppState()
+                                                                  .userID,
+                                                              ' ',
+                                                              ' ',
+                                                              FFAppState()
+                                                                  .cartTotalPrice,
+                                                              FFAppState()
+                                                                  .cartTotalCount,
+                                                              0.0,
+                                                              'cart',
+                                                              FFAppState()
+                                                                  .emptyJson,
+                                                              'daily cart',
+                                                              ' ',
+                                                              ' ',
+                                                              ' ',
+                                                              ' ',
+                                                            );
+                                                          }
                                                         } else {
                                                           logFirebaseEvent(
                                                               'Button_show_snack_bar');

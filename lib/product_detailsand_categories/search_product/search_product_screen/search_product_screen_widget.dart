@@ -3681,7 +3681,13 @@ class _SearchProductScreenWidgetState extends State<SearchProductScreenWidget> {
                                         onTap: () async {
                                           logFirebaseEvent(
                                               'SEARCH_PRODUCT_SCREEN_Row_9xtnm34q_ON_TA');
-                                          if (FFAppState().cartTotalCount < 1) {
+                                          if ((FFAppState().cartTotalCount <
+                                                  1) &&
+                                              (getJsonField(
+                                                    FFAppState().appInfo,
+                                                    r'''$.user_type''',
+                                                  ) ==
+                                                  null)) {
                                             logFirebaseEvent('Row_navigate_to');
 
                                             context.pushNamed(

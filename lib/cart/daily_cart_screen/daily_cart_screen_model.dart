@@ -4,11 +4,13 @@ import '/backend/schema/structs/index.dart';
 import '/components/empty_data_two_line_component/empty_data_two_line_component_widget.dart';
 import '/components/products_list_view/products_list_view_widget.dart';
 import '/components/save_letterproducts_list/save_letterproducts_list_widget.dart';
+import '/flutter_flow/flutter_flow_timer.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/form_field_controller.dart';
 import 'dart:async';
 import '/index.dart';
 import 'daily_cart_screen_widget.dart' show DailyCartScreenWidget;
+import 'package:stop_watch_timer/stop_watch_timer.dart';
 import 'package:flutter/material.dart';
 
 class DailyCartScreenModel extends FlutterFlowModel<DailyCartScreenWidget> {
@@ -70,8 +72,13 @@ class DailyCartScreenModel extends FlutterFlowModel<DailyCartScreenWidget> {
 
   double totalValue = 0.0;
 
+  bool isOTPSend = false;
+
+  bool isOTPVerified = false;
+
   ///  State fields for stateful widgets in this page.
 
+  final formKey = GlobalKey<FormState>();
   // Stores action output result for [Backend Call - API (userbankdetails)] action in dailyCartScreen widget.
   ApiCallResponse? apiResultBankDetail;
   // State field(s) for TabBar widget.
@@ -119,9 +126,9 @@ class DailyCartScreenModel extends FlutterFlowModel<DailyCartScreenWidget> {
   // State field(s) for CheckboxWallet widget.
   bool? checkboxWalletValue2;
   // State field(s) for TextField widget.
-  FocusNode? textFieldFocusNode;
-  TextEditingController? textController;
-  String? Function(BuildContext, String?)? textControllerValidator;
+  FocusNode? textFieldFocusNode1;
+  TextEditingController? textController1;
+  String? Function(BuildContext, String?)? textController1Validator;
   // Model for saveLetterproductsList component.
   late SaveLetterproductsListModel saveLetterproductsListModel;
   // State field(s) for DailyCartPaymentRadioButton widget.
@@ -182,6 +189,66 @@ class DailyCartScreenModel extends FlutterFlowModel<DailyCartScreenWidget> {
   bool? connnectivtyC;
   // Stores action output result for [Backend Call - API (addnotifyme)] action in IconButton widget.
   ApiCallResponse? apiResultb11;
+  // State field(s) for MouseRegion widget.
+  bool mouseRegionHovered = false;
+  // Stores action output result for [Custom Action - checkInternetConnection] action in Button widget.
+  bool? connectivityResult11;
+  // Stores action output result for [Backend Call - API (guestotpsend)] action in Button widget.
+  ApiCallResponse? apiGuestOTP;
+  // State field(s) for PinCode widget.
+  TextEditingController? pinCodeController;
+  FocusNode? pinCodeFocusNode;
+  String? Function(BuildContext, String?)? pinCodeControllerValidator;
+  // Stores action output result for [Custom Action - checkInternetConnection] action in PinCode widget.
+  bool? connectivityOtpResultbutton1;
+  // Stores action output result for [Backend Call - API (guestverifyotp)] action in PinCode widget.
+  ApiCallResponse? apiResultVerifyOTPGuest;
+  // Stores action output result for [Backend Call - API (appinfo)] action in PinCode widget.
+  ApiCallResponse? apiResultzwxIOS1buttonCopy1;
+  // Stores action output result for [Custom Action - checkInternetConnection] action in Text widget.
+  bool? connectivityResultResendOTPWA;
+  // Stores action output result for [Backend Call - API (resendOTP)] action in Text widget.
+  ApiCallResponse? resendOTPResponse1;
+  // State field(s) for Timer widget.
+  final timerInitialTimeMs = 60000;
+  int timerMilliseconds = 60000;
+  String timerValue = StopWatchTimer.getDisplayTime(
+    60000,
+    hours: false,
+    milliSecond: false,
+  );
+  FlutterFlowTimerController timerController =
+      FlutterFlowTimerController(StopWatchTimer(mode: StopWatchMode.countDown));
+
+  // Stores action output result for [Custom Action - checkInternetConnection] action in Button widget.
+  bool? connectivityOtpResultbutton;
+  // Stores action output result for [Backend Call - API (guestverifyotp)] action in Button widget.
+  ApiCallResponse? apiResultVerifyOTPbutton;
+  // Stores action output result for [Backend Call - API (appinfo)] action in Button widget.
+  ApiCallResponse? apiResultzwxIOS1button;
+  // State field(s) for TextField widget.
+  FocusNode? textFieldFocusNode2;
+  TextEditingController? textController2;
+  String? Function(BuildContext, String?)? textController2Validator;
+  // State field(s) for txtEmail widget.
+  FocusNode? txtEmailFocusNode;
+  TextEditingController? txtEmailTextController;
+  String? Function(BuildContext, String?)? txtEmailTextControllerValidator;
+  String? _txtEmailTextControllerValidator(BuildContext context, String? val) {
+    if (val == null || val.isEmpty) {
+      return '\'Enter a valid email address\'';
+    }
+
+    if (!RegExp(kTextValidatorEmailRegex).hasMatch(val)) {
+      return '\'Enter a valid email address\'';
+    }
+    return null;
+  }
+
+  // Stores action output result for [Custom Action - checkInternetConnection] action in Button widget.
+  bool? connectivity1;
+  // Stores action output result for [Backend Call - API (guestverifyotp name)] action in Button widget.
+  ApiCallResponse? apiResultvjw;
 
   @override
   void initState(BuildContext context) {
@@ -190,17 +257,28 @@ class DailyCartScreenModel extends FlutterFlowModel<DailyCartScreenWidget> {
         createModel(context, () => SaveLetterproductsListModel());
     emptyDataTwoLineComponentModel =
         createModel(context, () => EmptyDataTwoLineComponentModel());
+    pinCodeController = TextEditingController();
+    txtEmailTextControllerValidator = _txtEmailTextControllerValidator;
   }
 
   @override
   void dispose() {
     tabBarController?.dispose();
     productsListViewModel.dispose();
-    textFieldFocusNode?.dispose();
-    textController?.dispose();
+    textFieldFocusNode1?.dispose();
+    textController1?.dispose();
 
     saveLetterproductsListModel.dispose();
     emptyDataTwoLineComponentModel.dispose();
+    pinCodeFocusNode?.dispose();
+    pinCodeController?.dispose();
+
+    timerController.dispose();
+    textFieldFocusNode2?.dispose();
+    textController2?.dispose();
+
+    txtEmailFocusNode?.dispose();
+    txtEmailTextController?.dispose();
   }
 
   /// Additional helper methods.

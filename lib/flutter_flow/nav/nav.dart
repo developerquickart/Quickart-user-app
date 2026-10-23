@@ -1001,41 +1001,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: DailyCartScreenCopyWidget.routeName,
           path: DailyCartScreenCopyWidget.routePath,
           builder: (context, params) => DailyCartScreenCopyWidget(),
-        ),
-        FFRoute(
-          name: CartSubscriptionScreenCopyWidget.routeName,
-          path: CartSubscriptionScreenCopyWidget.routePath,
-          builder: (context, params) => CartSubscriptionScreenCopyWidget(),
-        ),
-        FFRoute(
-          name: RatingOrderScreenCopy1Widget.routeName,
-          path: RatingOrderScreenCopy1Widget.routePath,
-          builder: (context, params) => RatingOrderScreenCopy1Widget(
-            productList: params.getParam(
-              'productList',
-              ParamType.JSON,
-            ),
-            cartId: params.getParam(
-              'cartId',
-              ParamType.String,
-            ),
-            subscriptionID: params.getParam(
-              'subscriptionID',
-              ParamType.String,
-            ),
-            screenName: params.getParam(
-              'screenName',
-              ParamType.String,
-            ),
-            rating: params.getParam(
-              'rating',
-              ParamType.int,
-            ),
-            reviewStr: params.getParam(
-              'reviewStr',
-              ParamType.String,
-            ),
-          ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

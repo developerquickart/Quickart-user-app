@@ -93,7 +93,6 @@ class FirebaseAuthManager extends AuthManager
         return;
       }
       await currentUser?.updateEmail(email);
-      await updateUserDocument(email: email);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'requires-recent-login') {
         ScaffoldMessenger.of(context).hideCurrentSnackBar();
@@ -339,7 +338,9 @@ class FirebaseAuthManager extends AuthManager
       final errorMsg = switch (e.code) {
         'email-already-in-use' =>
           'Error: The email is already in use by a different account',
-        'INVALID_LOGIN_CREDENTIALS' =>
+        'INVALID_LOGIN_CREDENTIALS' ||
+        'invalid-login-credentials' ||
+        'invalid-credential' =>
           'Error: The supplied auth credential is incorrect, malformed or has expired',
         _ => 'Error: ${e.message!}',
       };

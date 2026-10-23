@@ -3260,7 +3260,12 @@ class _TrendingProductsScreenWidgetState
                                   onTap: () async {
                                     logFirebaseEvent(
                                         'TRENDING_PRODUCTS_SCREEN_Row_3xmzeanb_ON');
-                                    if (FFAppState().cartTotalCount < 1) {
+                                    if ((FFAppState().cartTotalCount < 1) &&
+                                        (getJsonField(
+                                              FFAppState().appInfo,
+                                              r'''$.user_type''',
+                                            ) ==
+                                            null)) {
                                       logFirebaseEvent('Row_navigate_to');
 
                                       context.pushNamed(

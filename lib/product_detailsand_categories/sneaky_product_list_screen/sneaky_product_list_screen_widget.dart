@@ -3279,7 +3279,12 @@ class _SneakyProductListScreenWidgetState
                                   onTap: () async {
                                     logFirebaseEvent(
                                         'SNEAKY_PRODUCT_LIST_SCREEN_Row_9afjr1xv_');
-                                    if (FFAppState().cartTotalCount < 1) {
+                                    if ((FFAppState().cartTotalCount < 1) &&
+                                        (getJsonField(
+                                              FFAppState().appInfo,
+                                              r'''$.user_type''',
+                                            ) ==
+                                            null)) {
                                       logFirebaseEvent('Row_navigate_to');
 
                                       context.pushNamed(

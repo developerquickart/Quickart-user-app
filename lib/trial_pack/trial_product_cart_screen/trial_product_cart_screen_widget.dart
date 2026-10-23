@@ -6873,11 +6873,9 @@ class _TrialProductCartScreenWidgetState
                                                                           '971';
                                                                       FFAppState()
                                                                           .selectedAddress1 = '';
-                                                                      FFAppState()
-                                                                          .deleteSelectedAddresID();
-                                                                      FFAppState()
-                                                                          .selectedAddresID = '';
-
+                                                                      FFAppState().deleteSelectedAddresID(
+                                                                          resetState:
+                                                                              true);
                                                                       FFAppState()
                                                                           .selectedCardID = '';
                                                                       FFAppState()
@@ -7063,11 +7061,9 @@ class _TrialProductCartScreenWidgetState
                                                                             '971';
                                                                         FFAppState().selectedAddress1 =
                                                                             '';
-                                                                        FFAppState()
-                                                                            .deleteSelectedAddresID();
-                                                                        FFAppState().selectedAddresID =
-                                                                            '';
-
+                                                                        FFAppState().deleteSelectedAddresID(
+                                                                            resetState:
+                                                                                true);
                                                                         FFAppState().selectedCardID =
                                                                             '';
                                                                         FFAppState().selectedDeliveryDate =

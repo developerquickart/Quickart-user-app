@@ -3282,7 +3282,12 @@ class _BrandProductListScreenWidgetState
                                   onTap: () async {
                                     logFirebaseEvent(
                                         'BRAND_PRODUCT_LIST_SCREEN_Row_c1p6q7y2_O');
-                                    if (FFAppState().cartTotalCount < 1) {
+                                    if ((FFAppState().cartTotalCount < 1) &&
+                                        (getJsonField(
+                                              FFAppState().appInfo,
+                                              r'''$.user_type''',
+                                            ) ==
+                                            null)) {
                                       logFirebaseEvent('Row_navigate_to');
 
                                       context.pushNamed(

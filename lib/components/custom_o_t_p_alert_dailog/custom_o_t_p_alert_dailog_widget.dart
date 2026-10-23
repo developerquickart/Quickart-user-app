@@ -176,9 +176,7 @@ class _CustomOTPAlertDailogWidgetState
                             logFirebaseEvent(
                                 'CUSTOM_O_T_P_ALERT_DAILOG_NO_BTN_ON_TAP');
                             logFirebaseEvent('Button_update_app_state');
-                            FFAppState().deleteUserGUUID();
-                            FFAppState().userGUUID = '';
-
+                            FFAppState().deleteUserGUUID(resetState: true);
                             safeSetState(() {});
                             logFirebaseEvent('Button_backend_call');
                             _model.apiResultzwxIOS1button1 =
@@ -324,9 +322,7 @@ class _CustomOTPAlertDailogWidgetState
                                       ''),
                                   r'''$.oneapi_bg_first_image''',
                                 ).toString();
-                                FFAppState().deleteUserGUUID();
-                                FFAppState().userGUUID = '';
-
+                                FFAppState().deleteUserGUUID(resetState: true);
                                 FFAppState().update(() {});
                                 logFirebaseEvent('Button_navigate_to');
 

@@ -384,9 +384,8 @@ class _PaymentScreenWidgetState extends State<PaymentScreenWidget> {
                               FFAppState().isCouponApplied = false;
                               FFAppState().screenName = widget.screenPName!;
                               FFAppState().selectedCardID = '';
-                              FFAppState().deleteSelectedAddresID();
-                              FFAppState().selectedAddresID = '';
-
+                              FFAppState()
+                                  .deleteSelectedAddresID(resetState: true);
                               FFAppState().selectedCardNumber = '';
                               FFAppState().selectedAddress1 = '';
                               FFAppState().couponDiscount = 0.0;

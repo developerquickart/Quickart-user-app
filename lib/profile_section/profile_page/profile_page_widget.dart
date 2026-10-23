@@ -202,7 +202,12 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                         highlightColor: Colors.transparent,
                         onTap: () async {
                           logFirebaseEvent('PROFILE_cartbtnContainer_ON_TAP');
-                          if (FFAppState().cartTotalCount < 1) {
+                          if ((FFAppState().cartTotalCount < 1) &&
+                              (getJsonField(
+                                    FFAppState().appInfo,
+                                    r'''$.user_type''',
+                                  ) ==
+                                  null)) {
                             if (FFAppState().subCartTotalItem < 1) {
                               logFirebaseEvent('cartbtnContainer_navigate_to');
 
@@ -3309,76 +3314,62 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                                                                     .isUserLogin =
                                                                 false;
                                                             FFAppState()
-                                                                .deletePhoneNo();
+                                                                .deletePhoneNo(
+                                                                    resetState:
+                                                                        true);
                                                             FFAppState()
-                                                                .phoneNo = '';
-
+                                                                .deleteUserID(
+                                                                    resetState:
+                                                                        true);
                                                             FFAppState()
-                                                                .deleteUserID();
+                                                                .deleteUserEmail(
+                                                                    resetState:
+                                                                        true);
                                                             FFAppState()
-                                                                .userID = '';
-
+                                                                .deleteUserName(
+                                                                    resetState:
+                                                                        true);
                                                             FFAppState()
-                                                                .deleteUserEmail();
-                                                            FFAppState()
-                                                                .userEmail = '';
-
-                                                            FFAppState()
-                                                                .deleteUserName();
-                                                            FFAppState()
-                                                                .userName = '';
-
-                                                            FFAppState()
-                                                                .deleteIsverified();
-                                                            FFAppState()
-                                                                .isverified = 1;
-
+                                                                .deleteIsverified(
+                                                                    resetState:
+                                                                        true);
                                                             FFAppState()
                                                                     .countryCode =
                                                                 '971';
                                                             FFAppState()
                                                                 .categoryName = '';
                                                             FFAppState()
-                                                                .deleteProfileImage();
+                                                                .deleteProfileImage(
+                                                                    resetState:
+                                                                        true);
                                                             FFAppState()
-                                                                .profileImage = '';
-
+                                                                .deleteProfileImageBytes(
+                                                                    resetState:
+                                                                        true);
                                                             FFAppState()
-                                                                .deleteProfileImageBytes();
+                                                                .deleteUserPhoneNo(
+                                                                    resetState:
+                                                                        true);
                                                             FFAppState()
-                                                                    .profileImageBytes =
-                                                                'https://media.istockphoto.com/id/1916685823/photo/businesswoman-using-laptop-with-banking-applications-via-internet-network.jpg?s=612x612&w=0&k=20&c=L9wQekG3TJ-6fSFlUCUelo5xOCYkm9SVE5ER5J8QiK0=';
-
+                                                                .deleteUserCountryCode(
+                                                                    resetState:
+                                                                        true);
                                                             FFAppState()
-                                                                .deleteUserPhoneNo();
+                                                                .deleteUserPhoneEP(
+                                                                    resetState:
+                                                                        true);
                                                             FFAppState()
-                                                                .userPhoneNo = '';
-
+                                                                .deleteUserPhoneProfile(
+                                                                    resetState:
+                                                                        true);
                                                             FFAppState()
-                                                                .deleteUserCountryCode();
+                                                                .deleteUserCountryCodeEP(
+                                                                    resetState:
+                                                                        true);
                                                             FFAppState()
-                                                                .userCountryCode = '';
-
-                                                            FFAppState()
-                                                                .deleteUserPhoneEP();
-                                                            FFAppState()
-                                                                .userPhoneEP = '';
-
-                                                            FFAppState()
-                                                                .deleteUserPhoneProfile();
-                                                            FFAppState()
-                                                                .userPhoneProfile = '';
-
-                                                            FFAppState()
-                                                                .deleteUserCountryCodeEP();
-                                                            FFAppState()
-                                                                .userCountryCodeEP = '';
-
-                                                            FFAppState()
-                                                                .deleteUsserType();
-                                                            FFAppState()
-                                                                .usserType = '';
-
+                                                                .deleteUsserType(
+                                                                    resetState:
+                                                                        true);
                                                             FFAppState()
                                                                     .subCartSavingAmount =
                                                                 0.0;
@@ -3409,10 +3400,9 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                                                             FFAppState()
                                                                 .selectedCardID = '';
                                                             FFAppState()
-                                                                .deleteSelectedAddresID();
-                                                            FFAppState()
-                                                                .selectedAddresID = '';
-
+                                                                .deleteSelectedAddresID(
+                                                                    resetState:
+                                                                        true);
                                                             FFAppState()
                                                                 .selectedAddress1 = '';
                                                             FFAppState()
@@ -3423,11 +3413,9 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                                                             FFAppState()
                                                                 .selectedCartAddress = '';
                                                             FFAppState()
-                                                                .deleteDialCode();
-                                                            FFAppState()
-                                                                    .dialCode =
-                                                                'AE';
-
+                                                                .deleteDialCode(
+                                                                    resetState:
+                                                                        true);
                                                             safeSetState(() {});
                                                             logFirebaseEvent(
                                                                 'logoutRow_google_analytics_event');
@@ -3558,59 +3546,39 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                                                     'Row_update_app_state');
                                                 FFAppState().isUserLogin =
                                                     false;
-                                                FFAppState().deletePhoneNo();
-                                                FFAppState().phoneNo = '';
-
-                                                FFAppState().deleteUserID();
-                                                FFAppState().userID = '';
-
-                                                FFAppState().deleteUserEmail();
-                                                FFAppState().userEmail = '';
-
-                                                FFAppState().deleteUserName();
-                                                FFAppState().userName = '';
-
-                                                FFAppState().deleteIsverified();
-                                                FFAppState().isverified = 1;
-
+                                                FFAppState().deletePhoneNo(
+                                                    resetState: true);
+                                                FFAppState().deleteUserID(
+                                                    resetState: true);
+                                                FFAppState().deleteUserEmail(
+                                                    resetState: true);
+                                                FFAppState().deleteUserName(
+                                                    resetState: true);
+                                                FFAppState().deleteIsverified(
+                                                    resetState: true);
                                                 FFAppState().countryCode =
                                                     '971';
                                                 FFAppState().categoryName = '';
+                                                FFAppState().deleteProfileImage(
+                                                    resetState: true);
                                                 FFAppState()
-                                                    .deleteProfileImage();
-                                                FFAppState().profileImage = '';
-
+                                                    .deleteProfileImageBytes(
+                                                        resetState: true);
+                                                FFAppState().deleteUserPhoneNo(
+                                                    resetState: true);
                                                 FFAppState()
-                                                    .deleteProfileImageBytes();
-                                                FFAppState().profileImageBytes =
-                                                    'https://media.istockphoto.com/id/1916685823/photo/businesswoman-using-laptop-with-banking-applications-via-internet-network.jpg?s=612x612&w=0&k=20&c=L9wQekG3TJ-6fSFlUCUelo5xOCYkm9SVE5ER5J8QiK0=';
-
+                                                    .deleteUserCountryCode(
+                                                        resetState: true);
+                                                FFAppState().deleteUserPhoneEP(
+                                                    resetState: true);
                                                 FFAppState()
-                                                    .deleteUserPhoneNo();
-                                                FFAppState().userPhoneNo = '';
-
+                                                    .deleteUserPhoneProfile(
+                                                        resetState: true);
                                                 FFAppState()
-                                                    .deleteUserCountryCode();
-                                                FFAppState().userCountryCode =
-                                                    '';
-
-                                                FFAppState()
-                                                    .deleteUserPhoneEP();
-                                                FFAppState().userPhoneEP = '';
-
-                                                FFAppState()
-                                                    .deleteUserPhoneProfile();
-                                                FFAppState().userPhoneProfile =
-                                                    '';
-
-                                                FFAppState()
-                                                    .deleteUserCountryCodeEP();
-                                                FFAppState().userCountryCodeEP =
-                                                    '';
-
-                                                FFAppState().deleteUsserType();
-                                                FFAppState().usserType = '';
-
+                                                    .deleteUserCountryCodeEP(
+                                                        resetState: true);
+                                                FFAppState().deleteUsserType(
+                                                    resetState: true);
                                                 FFAppState()
                                                     .subCartSavingAmount = 0.0;
                                                 FFAppState().subCartTotalPrice =
@@ -3631,10 +3599,8 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                                                 FFAppState().selectedCardID =
                                                     '';
                                                 FFAppState()
-                                                    .deleteSelectedAddresID();
-                                                FFAppState().selectedAddresID =
-                                                    '';
-
+                                                    .deleteSelectedAddresID(
+                                                        resetState: true);
                                                 FFAppState().selectedAddress1 =
                                                     '';
                                                 FFAppState().selectedAddress =
@@ -3643,9 +3609,8 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                                                     .selectedAddressType = '';
                                                 FFAppState()
                                                     .selectedCartAddress = '';
-                                                FFAppState().deleteDialCode();
-                                                FFAppState().dialCode = 'AE';
-
+                                                FFAppState().deleteDialCode(
+                                                    resetState: true);
                                                 safeSetState(() {});
                                                 logFirebaseEvent(
                                                     'Row_google_analytics_event');

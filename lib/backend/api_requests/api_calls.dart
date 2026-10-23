@@ -145,6 +145,10 @@ class QuickartGroup {
   static AddtosavecartCall addtosavecartCall = AddtosavecartCall();
   static RemovesavecartCall removesavecartCall = RemovesavecartCall();
   static PaymentabandonCall paymentabandonCall = PaymentabandonCall();
+  static GuestotpsendCall guestotpsendCall = GuestotpsendCall();
+  static GuestverifyotpCall guestverifyotpCall = GuestverifyotpCall();
+  static GuestverifyotpNameCall guestverifyotpNameCall =
+      GuestverifyotpNameCall();
 }
 
 class LoginCall {
@@ -5525,6 +5529,149 @@ class PaymentabandonCall {
   }
 
   String? status(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.status''',
+      ));
+  String? message(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.message''',
+      ));
+  dynamic data(dynamic response) => getJsonField(
+        response,
+        r'''$.data''',
+      );
+}
+
+class GuestotpsendCall {
+  Future<ApiCallResponse> call({
+    String? phoneNo = '',
+    String? dialCode = '',
+    String? countryCode = '',
+  }) async {
+    final baseUrl = QuickartGroup.getBaseUrl();
+
+    final ffApiRequestBody = '''
+{
+  "user_phone": ${phoneNo == null ? 'null' : '"${escapeStringForJson(phoneNo)}"'},
+  "dial_code": ${dialCode == null ? 'null' : '"${escapeStringForJson(dialCode)}"'},
+  "country_code": ${countryCode == null ? 'null' : '"${escapeStringForJson(countryCode)}"'}
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'guestotpsend',
+      apiUrl: '${baseUrl}api/guest_otp_send',
+      callType: ApiCallType.POST,
+      headers: {},
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  int? status(dynamic response) => castToType<int>(getJsonField(
+        response,
+        r'''$.status''',
+      ));
+  String? message(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.message''',
+      ));
+  dynamic data(dynamic response) => getJsonField(
+        response,
+        r'''$.data''',
+      );
+}
+
+class GuestverifyotpCall {
+  Future<ApiCallResponse> call({
+    String? step = '',
+    int? userId,
+    String? userPhone = '',
+    String? otp = '',
+    String? dailCode = '',
+    String? countryCode = '',
+  }) async {
+    final baseUrl = QuickartGroup.getBaseUrl();
+
+    final ffApiRequestBody = '''
+{
+  "step": ${step == null ? 'null' : '"${escapeStringForJson(step)}"'},
+  "user_id": ${userId},
+  "user_phone": ${userPhone == null ? 'null' : '"${escapeStringForJson(userPhone)}"'},
+  "otp": ${otp == null ? 'null' : '"${escapeStringForJson(otp)}"'},
+  "dial_code": ${dailCode == null ? 'null' : '"${escapeStringForJson(dailCode)}"'},
+  "country_code": ${countryCode == null ? 'null' : '"${escapeStringForJson(countryCode)}"'}
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'guestverifyotp',
+      apiUrl: '${baseUrl}api/guest_verify_otp',
+      callType: ApiCallType.POST,
+      headers: {},
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  int? status(dynamic response) => castToType<int>(getJsonField(
+        response,
+        r'''$.status''',
+      ));
+  String? message(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.message''',
+      ));
+  dynamic data(dynamic response) => getJsonField(
+        response,
+        r'''$.data''',
+      );
+}
+
+class GuestverifyotpNameCall {
+  Future<ApiCallResponse> call({
+    String? step = '',
+    int? userId,
+    String? name = '',
+    String? email = '',
+  }) async {
+    final baseUrl = QuickartGroup.getBaseUrl();
+
+    final ffApiRequestBody = '''
+{
+  "step": ${step == null ? 'null' : '"${escapeStringForJson(step)}"'},
+  "user_id": ${userId},
+  "name": ${name == null ? 'null' : '"${escapeStringForJson(name)}"'},
+  "email": ${email == null ? 'null' : '"${escapeStringForJson(email)}"'}
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'guestverifyotp name',
+      apiUrl: '${baseUrl}api/guest_verify_otp',
+      callType: ApiCallType.POST,
+      headers: {},
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  int? status(dynamic response) => castToType<int>(getJsonField(
         response,
         r'''$.status''',
       ));

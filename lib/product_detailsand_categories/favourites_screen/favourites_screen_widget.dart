@@ -3148,7 +3148,12 @@ class _FavouritesScreenWidgetState extends State<FavouritesScreenWidget> {
                                   onTap: () async {
                                     logFirebaseEvent(
                                         'FAVOURITES_SCREEN_Row_tsr5futp_ON_TAP');
-                                    if (FFAppState().cartTotalCount < 1) {
+                                    if ((FFAppState().cartTotalCount < 1) &&
+                                        (getJsonField(
+                                              FFAppState().appInfo,
+                                              r'''$.user_type''',
+                                            ) ==
+                                            null)) {
                                       logFirebaseEvent('Row_navigate_to');
 
                                       context.pushNamed(
